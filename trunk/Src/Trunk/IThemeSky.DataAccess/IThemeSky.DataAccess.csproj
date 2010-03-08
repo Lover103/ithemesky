@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -46,8 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IThemeManageRepository.cs" />
+    <Compile Include="ThemeRepositoryFactory.cs" />
     <Compile Include="ThemeManageRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThemeRepositoryBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IThemeSky.Library\IThemeSky.Library.csproj">
