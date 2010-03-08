@@ -1,5 +1,0 @@
-E:\Svn\ithemesky\Src\Trunk\IThemeSky.Library\bin\Debug\IThemeSky.Library.dll
-E:\Svn\ithemesky\Src\Trunk\IThemeSky.Library\bin\Debug\IThemeSky.Library.pdb
-E:\Svn\ithemesky\Src\Trunk\IThemeSky.Library\obj\Debug\ResolveAssemblyReference.cache
-E:\Svn\ithemesky\Src\Trunk\IThemeSky.Library\obj\Debug\IThemeSky.Library.dll
-E:\Svn\ithemesky\Src\Trunk\IThemeSky.Library\obj\Debug\IThemeSky.Library.pdb
