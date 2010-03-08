@@ -1,0 +1,12 @@
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\bin\Debug\IThemeSky.DataAccessTest.dll.config
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\bin\Debug\IThemeSky.DataAccessTest.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\bin\Debug\IThemeSky.DataAccessTest.pdb
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\bin\Debug\IThemeSky.DataAccess.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\bin\Debug\IThemeSky.Library.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\bin\Debug\IThemeSky.Model.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\bin\Debug\IThemeSky.Model.pdb
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\bin\Debug\IThemeSky.DataAccess.pdb
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\bin\Debug\IThemeSky.Library.pdb
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\obj\Debug\ResolveAssemblyReference.cache
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\obj\Debug\IThemeSky.DataAccessTest.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\obj\Debug\IThemeSky.DataAccessTest.pdb

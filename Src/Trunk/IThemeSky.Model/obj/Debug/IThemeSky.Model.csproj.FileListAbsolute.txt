@@ -1,0 +1,5 @@
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.Model\bin\Debug\IThemeSky.Model.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.Model\bin\Debug\IThemeSky.Model.pdb
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.Model\obj\Debug\ResolveAssemblyReference.cache
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.Model\obj\Debug\IThemeSky.Model.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.Model\obj\Debug\IThemeSky.Model.pdb

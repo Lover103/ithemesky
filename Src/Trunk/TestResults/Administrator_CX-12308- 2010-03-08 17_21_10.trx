@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="a47d2bba-057c-4bb1-bc9f-faa2b60aae28" name="Administrator@CX-12308- 2010-03-08 17:21:10" runUser="CX-12308-\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Local Test Run" id="9417f248-f0b7-4379-9366-52d448395bb2">
+    <Description>This is a default test run configuration for a local test run.</Description>
+    <Deployment runDeploymentRoot="E:\Svn\ithemesky\Src\Trunk\TestResults\Administrator_CX-12308- 2010-03-08 17_21_10">
+      <DeploymentItem filename="E:\Svn\ithemesky\Src\Trunk\IThemeSky.Model\bin\Debug\IThemeSky.Model.dll" />
+      <DeploymentItem filename="E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\bin\Debug\IThemeSky.DataAccess.dll" />
+      <DeploymentItem filename="E:\Svn\ithemesky\Src\Trunk\IThemeSky.Library\bin\Debug\IThemeSky.Library.dll" />
+    </Deployment>
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2010-03-08T17:21:10.0312500+08:00" queuing="2010-03-08T17:21:12.6562500+08:00" start="2010-03-08T17:21:13.2812500+08:00" finish="2010-03-08T17:21:14.8593750+08:00" />
+  <TestDefinitions>
+    <UnitTest name="AddThemeTest" storage="e:\svn\ithemesky\src\trunk\ithemesky.dataaccesstest\bin\debug\ithemesky.dataaccesstest.dll" id="74de9028-c4a3-fc91-ccb3-c438ff717887">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="42f4732d-2311-4bbe-aba8-5650dc983eb3" />
+      <TestMethod codeBase="E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\bin\Debug\IThemeSky.DataAccessTest.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="IThemeSky.DataAccessTest.IThemeManageRepositoryTest, IThemeSky.DataAccessTest" name="AddThemeTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="74de9028-c4a3-fc91-ccb3-c438ff717887" executionId="42f4732d-2311-4bbe-aba8-5650dc983eb3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="42f4732d-2311-4bbe-aba8-5650dc983eb3" testId="74de9028-c4a3-fc91-ccb3-c438ff717887" testName="AddThemeTest" computerName="CX-12308-" duration="00:00:00.4721285" startTime="2010-03-08T17:21:13.3125000+08:00" endTime="2010-03-08T17:21:14.7656250+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method IThemeSky.DataAccessTest.IThemeManageRepositoryTest.AddThemeTest threw exception:  System.TypeInitializationException: “IThemeSky.DataAccess.ThemeRepositoryFactory”的类型初始值设定项引发异常。 ---&gt;  System.Configuration.ConfigurationErrorsException: 创建 IThemeSkyConnectionProvider 的配置节处理程序时出错: 未能加载文件或程序集“IThemeSky.Library.Data”或它的某一个依赖项。系统找不到指定的文件。 (E:\Svn\ithemesky\Src\Trunk\TestResults\Administrator_CX-12308- 2010-03-08 17_21_10\Out\IThemeSky.DataAccessTest.dll.config line 4) ---&gt;  System.IO.FileNotFoundException: 未能加载文件或程序集“IThemeSky.Library.Data”或它的某一个依赖项。系统找不到指定的文件。警告: 程序集绑定日志记录被关闭。
+要启用程序集绑定失败日志记录，请将注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD)设置为 1。
+注意: 会有一些与程序集绑定失败日志记录关联的性能损失。
+要关闭此功能，请移除注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog]。
+.</Message>
+          <StackTrace>    在 System.Configuration.TypeUtil.GetTypeWithReflectionPermission(IInternalConfigHost host, String typeString, Boolean throwOnError)
+   在 System.Configuration.RuntimeConfigurationRecord.RuntimeConfigurationFactory.Init(RuntimeConfigurationRecord configRecord, FactoryRecord factoryRecord)
+   在 System.Configuration.RuntimeConfigurationRecord.RuntimeConfigurationFactory.InitWithRestrictedPermissions(RuntimeConfigurationRecord configRecord, FactoryRecord factoryRecord)
+   在 System.Configuration.RuntimeConfigurationRecord.RuntimeConfigurationFactory..ctor(RuntimeConfigurationRecord configRecord, FactoryRecord factoryRecord)
+   在 System.Configuration.RuntimeConfigurationRecord.CreateSectionFactory(FactoryRecord factoryRecord)
+   在 System.Configuration.BaseConfigurationRecord.FindAndEnsureFactoryRecord(String configKey, Boolean&amp; isRootDeclaredHere)
+ --- End of inner exception stack trace ---
+    在 System.Configuration.BaseConfigurationRecord.FindAndEnsureFactoryRecord(String configKey, Boolean&amp; isRootDeclaredHere)
+   在 System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object&amp; result, Object&amp; resultRuntimeObject)
+   在 System.Configuration.BaseConfigurationRecord.GetSection(String configKey, Boolean getLkg, Boolean checkPermission)
+   在 System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   在 System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   在 System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   在 IThemeSky.DataAccess.ThemeRepositoryFactory..cctor() 位置 E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\ThemeRepositoryFactory.cs:行号 24
+ --- End of inner exception stack trace ---
+    在 IThemeSky.DataAccess.ThemeRepositoryFactory.get_Default()
+   在 IThemeSky.DataAccessTest.IThemeManageRepositoryTest.CreateIThemeManageRepository() 位置 E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\IThemeManageRepositoryTest.cs:行号 70
+   在 IThemeSky.DataAccessTest.IThemeManageRepositoryTest.AddThemeTest() 位置 E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccessTest\IThemeManageRepositoryTest.cs:行号 79
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

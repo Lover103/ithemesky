@@ -1,0 +1,9 @@
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\bin\Debug\IThemeSky.DataAccess.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\bin\Debug\IThemeSky.DataAccess.pdb
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\bin\Debug\IThemeSky.Library.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\bin\Debug\IThemeSky.Model.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\bin\Debug\IThemeSky.Model.pdb
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\bin\Debug\IThemeSky.Library.pdb
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\obj\Debug\IThemeSky.DataAccess.dll
+E:\Svn\ithemesky\Src\Trunk\IThemeSky.DataAccess\obj\Debug\IThemeSky.DataAccess.pdb
