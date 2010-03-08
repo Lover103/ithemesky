@@ -5,8 +5,6 @@ using System;
 
 namespace IThemeSky.DataAccessTest
 {
-    
-    
     /// <summary>
     ///This is a test class for IThemeManageRepositoryTest and is intended
     ///to contain all IThemeManageRepositoryTest Unit Tests
@@ -14,8 +12,6 @@ namespace IThemeSky.DataAccessTest
     [TestClass()]
     public class IThemeManageRepositoryTest
     {
-
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -114,13 +110,12 @@ namespace IThemeSky.DataAccessTest
         public void MappingThemeTagTest()
         {
             IThemeManageRepository target = CreateIThemeManageRepository(); // TODO: Initialize to an appropriate value
-            int themeId = 0; // TODO: Initialize to an appropriate value
-            string tagName = string.Empty; // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
+            int themeId = 1; // TODO: Initialize to an appropriate value
+            string tagName = "testtag"; // TODO: Initialize to an appropriate value
+            bool expected = true; // TODO: Initialize to an appropriate value
             bool actual;
             actual = target.MappingThemeTag(themeId, tagName);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -130,15 +125,14 @@ namespace IThemeSky.DataAccessTest
         public void AddThemeDownloadUrlTest()
         {
             IThemeManageRepository target = CreateIThemeManageRepository(); // TODO: Initialize to an appropriate value
-            int themeId = 0; // TODO: Initialize to an appropriate value
-            string url = string.Empty; // TODO: Initialize to an appropriate value
-            bool isDefault = false; // TODO: Initialize to an appropriate value
-            SourceOption source = new SourceOption(); // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
+            int themeId = 1; 
+            string url = "http://testurl";
+            bool isDefault = true; 
+            SourceOption source = SourceOption.IPhoneThemes;
+            bool expected = true; 
             bool actual;
             actual = target.AddThemeDownloadUrl(themeId, url, isDefault, source);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
     }
 }
