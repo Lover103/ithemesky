@@ -8,6 +8,7 @@ namespace IThemeSky.Model
     /// <summary>
     /// 主题Theme表完整映射实体
     /// </summary>
+    [Serializable]
     public class Theme
     {
         /// <summary>
