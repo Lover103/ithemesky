@@ -45,8 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MRobot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IThemeSky.Library\IThemeSky.Library.csproj">
+      <Project>{D3ED2D0D-0575-4135-923D-3EC8AD32CFB9}</Project>
+      <Name>IThemeSky.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IThemeSky.Model\IThemeSky.Model.csproj">
+      <Project>{7F4BD5DA-2315-4E2E-982D-8AF1D66D10BB}</Project>
+      <Name>IThemeSky.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
