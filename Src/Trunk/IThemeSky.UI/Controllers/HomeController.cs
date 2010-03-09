@@ -22,5 +22,10 @@ namespace IThemeSky.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult Test()
+        {
+            return Content("hello mvc");
+        }
     }
 }

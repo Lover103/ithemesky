@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IThemeSky.UI", "IThemeSky.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IThemeSky.UI.Tests", "IThemeSky.UI.Tests\IThemeSky.UI.Tests.csproj", "{DF379240-588B-442E-9E1F-77013D54232E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IThemeSky.Management.UI", "IThemeSky.Management.UI\IThemeSky.Management.UI.csproj", "{14956003-A4A7-43BD-AB17-9354A7B810F1}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = IThemeSky.vsmdi
@@ -60,10 +58,6 @@ Global
 		{DF379240-588B-442E-9E1F-77013D54232E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF379240-588B-442E-9E1F-77013D54232E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF379240-588B-442E-9E1F-77013D54232E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{14956003-A4A7-43BD-AB17-9354A7B810F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14956003-A4A7-43BD-AB17-9354A7B810F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14956003-A4A7-43BD-AB17-9354A7B810F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14956003-A4A7-43BD-AB17-9354A7B810F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
