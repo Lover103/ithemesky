@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0F038EDA-7B96-4462-BBAB-171249DB3C89}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IThemeSky.WebControls</RootNamespace>
+    <AssemblyName>IThemeSky.WebControls</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AspNetPager\aspnetpager.cs" />
+    <Compile Include="AspNetPager\Designer\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\CustomAttributes.cs" />
+    <Compile Include="AspNetPager\Designer\CustomInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\CustomInfoForm.Designer.cs">
+      <DependentUpon>CustomInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\NavTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\NavTextForm.Designer.cs">
+      <DependentUpon>NavTextForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\PageIndexBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\PageIndexBoxForm.Designer.cs">
+      <DependentUpon>PageIndexBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\PagerDesigner.cs" />
+    <Compile Include="AspNetPager\Designer\SPHelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\SPHelpForm.Designer.cs">
+      <DependentUpon>SPHelpForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\SPVarRegForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\SPVarRegForm.Designer.cs">
+      <DependentUpon>SPVarRegForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\StoredProcForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AspNetPager\Designer\StoredProcForm.Designer.cs">
+      <DependentUpon>StoredProcForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetPager\Enumerations.cs" />
+    <Compile Include="AspNetPager\Events.cs" />
+    <Compile Include="AspNetPager\Helper.cs" />
+    <Compile Include="AspNetPager\Methods.cs" />
+    <Compile Include="AspNetPager\PageChangingEventArgs.cs" />
+    <Compile Include="AspNetPager\PostBack.cs" />
+    <Compile Include="AspNetPager\Properties.cs" />
+    <Compile Include="FlashUpLoad.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AspNetPager\anp.gif" />
+    <Content Include="AspNetPager\AspNetPager.bmp" />
+    <Content Include="AspNetPager\AspNetPager.ico" />
+    <Content Include="Resources\FlashUpLoad.swf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AspNetPager\AspNetPager.en.resx">
+      <DependentUpon>aspnetpager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AspNetPager\AspNetPager.resx">
+      <DependentUpon>aspnetpager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AspNetPager\AspNetPager.zh-CHT.resx">
+      <DependentUpon>aspnetpager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AspNetPager\Designer\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AspNetPager\Designer\CustomInfoForm.resx">
+      <DependentUpon>CustomInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AspNetPager\Designer\NavTextForm.resx">
+      <DependentUpon>NavTextForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AspNetPager\Designer\PageIndexBoxForm.resx">
+      <DependentUpon>PageIndexBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AspNetPager\Designer\SPHelpForm.resx">
+      <DependentUpon>SPHelpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AspNetPager\Designer\SPVarRegForm.resx">
+      <DependentUpon>SPVarRegForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AspNetPager\Designer\StoredProcForm.resx">
+      <DependentUpon>StoredProcForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
