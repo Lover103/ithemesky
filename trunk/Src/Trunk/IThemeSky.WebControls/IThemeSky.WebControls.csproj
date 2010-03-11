@@ -109,6 +109,7 @@
     <Content Include="AspNetPager\AspNetPager.bmp" />
     <Content Include="AspNetPager\AspNetPager.ico" />
     <Content Include="Resources\FlashUpLoad.swf" />
+    <Content Include="Resources\FlashUploadFlexSrc\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AspNetPager\AspNetPager.en.resx">
@@ -141,6 +142,13 @@
     <EmbeddedResource Include="AspNetPager\Designer\StoredProcForm.resx">
       <DependentUpon>StoredProcForm.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlashUploadFlexSrc\components\ApplicationClass.as" />
+    <None Include="Resources\FlashUploadFlexSrc\components\FileUpload.as" />
+    <None Include="Resources\FlashUploadFlexSrc\components\FileUploadEvent.as" />
+    <None Include="Resources\FlashUploadFlexSrc\components\FileUploadProgressChangedEvent.as" />
+    <None Include="Resources\FlashUploadFlexSrc\FlashFileUpload.mxml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
