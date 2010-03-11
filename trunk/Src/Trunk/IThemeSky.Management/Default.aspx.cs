@@ -11,7 +11,7 @@ namespace IThemeSky.Management
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            aa.RecordCount = 100;
         }
     }
 }

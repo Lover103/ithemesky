@@ -84,6 +84,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IThemeSky.WebControls\IThemeSky.WebControls.csproj">
+      <Project>{0F038EDA-7B96-4462-BBAB-171249DB3C89}</Project>
+      <Name>IThemeSky.WebControls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
