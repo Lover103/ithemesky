@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Data\DefaultConnectionProvider.cs" />
     <Compile Include="Data\IConnectionProvider.cs" />
+    <Compile Include="Data\SqlConditionBuilder.cs" />
     <Compile Include="Data\SQLHelper.cs" />
     <Compile Include="Data\SqlParameterHelper.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />

@@ -16,16 +16,13 @@ namespace IThemeSky.DataAccess
     public class ThemeManageRepository : ThemeRepositoryBase, IThemeManageRepository
     {
         /// <summary>
-        /// 数据库连接串访问对象
-        /// </summary>
-        private IConnectionProvider _connection;
-        /// <summary>
         /// 初始化主题的管理数据访问类
         /// </summary>
         /// <param name="connection"></param>
         public ThemeManageRepository(IConnectionProvider connection)
+            : base(connection)
         {
-            _connection = connection;
+
         }
         #region IThemeManageRepository members
 
@@ -65,7 +62,7 @@ namespace IThemeSky.DataAccess
 				    (CategoryId,ParentCategoryId,Title,FileSize,Description,DisplayState,CheckState,AuthorId,CheckerId,CommendIndex,ThumbnailName,AddTime,UpdateTime,GoodComments,BadComments,Comments,Downloads,Views,LastWeekDownloads,LastMonthDownloads,Source)
 			    VALUES
 				    (@CategoryId,@ParentCategoryId,@Title,@FileSize,@Description,@DisplayState,@CheckState,@AuthorId,@CheckerId,@CommendIndex,@ThumbnailName,@AddTime,@UpdateTime,@GoodComments,@BadComments,@Comments,@Downloads,@Views,@LastWeekDownloads,@LastMonthDownloads,@Source);SELECT @@IDENTITY";
-            int themeId = Convert.ToInt32(SqlHelper.ExecuteScalar(_connection.GetWriteConnectionString(), CommandType.Text, cmdText, parameters));
+            int themeId = Convert.ToInt32(SqlHelper.ExecuteScalar(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters));
             if (themeId > 0)
             {
                 theme.ThemeId = themeId;
@@ -98,7 +95,7 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@Source",SqlDbType.SmallInt, 2, source),
 				SqlParameterHelper.BuildInputParameter("@AddTime",SqlDbType.DateTime, 8, DateTime.Now)
 			};
-            return SqlHelper.ExecuteNonQuery(_connection.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
         }
 
         /// <summary>
@@ -119,7 +116,7 @@ namespace IThemeSky.DataAccess
 			{
 				SqlParameterHelper.BuildInputParameter("@TagName", SqlDbType.VarChar, 40, tagName),
 			};
-            int tagId = Convert.ToInt32(SqlHelper.ExecuteScalar(_connection.GetWriteConnectionString(), CommandType.Text, cmdText, parameters));
+            int tagId = Convert.ToInt32(SqlHelper.ExecuteScalar(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters));
 
             //添加映射关系
             cmdText = @"
@@ -131,7 +128,7 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@ThemeId",SqlDbType.Int, 4, themeId),
 				SqlParameterHelper.BuildInputParameter("@TagId",SqlDbType.Int, 4, tagId),
 			};
-            SqlHelper.ExecuteNonQuery(_connection.GetWriteConnectionString(), CommandType.Text, cmdText, parameters);
+            SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters);
             return true;
         }        #endregion
     }

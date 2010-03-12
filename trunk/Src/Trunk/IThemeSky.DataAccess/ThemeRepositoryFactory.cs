@@ -58,5 +58,10 @@ namespace IThemeSky.DataAccess
         {
             return new ThemeManageRepository(_connectionProvider);
         }
+
+        //public IThemeViewRepository GetThemeRepository()
+        //{ 
+        //    //return new 
+        //}
     }
 }
