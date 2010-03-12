@@ -6,25 +6,21 @@ using System.Text;
 namespace IThemeSky.Model
 {
     /// <summary>
-    /// 主题审核状态
+    /// 布尔型的过滤条件枚举
     /// </summary>
-    public enum CheckStateOption
+    public enum BooleanFilterOption
     {
         /// <summary>
-        /// 所有状态
+        /// 不作过滤
         /// </summary>
-        All = -2,
+        NoFilter,
         /// <summary>
-        /// 审核不通过
+        /// 是
         /// </summary>
-        CheckFailure = -1,
+        True,
         /// <summary>
-        /// 等待审核
+        /// 否
         /// </summary>
-        Waitting = 0,
-        /// <summary>
-        /// 审核通过
-        /// </summary>
-        CheckSuccess = 1,
+        False
     }
 }

@@ -25,7 +25,7 @@ namespace IThemeSky.Library.Data
             return parameter;
         }
 
-        public static SqlParameter BuildOutputParameter(string parameterName, SqlDbType dbType, int size, ParameterDirection direction, object value)
+        public static SqlParameter BuildParameter(string parameterName, SqlDbType dbType, int size, ParameterDirection direction, object value)
         {
             SqlParameter parameter = new SqlParameter(parameterName, dbType, size);
             parameter.Value = value;

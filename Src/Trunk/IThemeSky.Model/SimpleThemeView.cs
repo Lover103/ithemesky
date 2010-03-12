@@ -21,6 +21,11 @@ namespace IThemeSky.Model
         public int CategoryId { get; set; }
 
         /// <summary>
+        /// 主题分类名称
+        /// </summary>
+        public string CategoryName { get; set; }
+
+        /// <summary>
         /// 标题
         /// </summary>
         public string Title { get; set; }
