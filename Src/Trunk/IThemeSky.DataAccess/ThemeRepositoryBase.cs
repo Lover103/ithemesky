@@ -16,6 +16,8 @@ namespace IThemeSky.DataAccess
         /// 简单实体对应的查询字段列表
         /// </summary>
         protected const string SIMPLE_THEME_FIELDS = "ThemeId,CategoryId,CategoryName,Title,Thumbnail,CommendIndex,Downloads";
+        protected const string VIEW_TAGTHEME = "View_TagTheme";
+        protected const string VIEW_THEME = "View_Theme";
         /// <summary>
         /// 数据库连接字符串提供对象
         /// </summary>
@@ -159,9 +161,9 @@ namespace IThemeSky.DataAccess
         {
             if (filter.TagIds.Count > 0 || sort == ThemeSortOption.TagSort)
             {
-                return "View_TagTheme";
+                return VIEW_TAGTHEME;
             }
-            return "View_Theme";
+            return VIEW_THEME;
         }
 
         /// <summary>

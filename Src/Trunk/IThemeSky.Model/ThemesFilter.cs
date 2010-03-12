@@ -39,6 +39,25 @@ namespace IThemeSky.Model
             CategoryIds = new List<int>();
             ParentCategoryIds = new List<int>();
             TagIds = new List<int>();
+            TagNames = new List<string>();
+        }
+        /// <summary>
+        /// 克隆过滤器
+        /// </summary>
+        /// <returns></returns>
+        public ThemesFilter Clone()
+        {
+            return new ThemesFilter() 
+            { 
+                DisplayState = this.DisplayState,
+                CheckState = this.CheckState,
+                IsCommend = this.IsCommend,
+                CategoryIds = new List<int>(this.CategoryIds),
+                ParentCategoryIds = new List<int>(this.ParentCategoryIds),
+                TagIds = new List<int>(this.TagIds),
+                TagNames = new List<string>(this.TagNames),
+                SearchKeyword = this.SearchKeyword,
+            };
         }
         /// <summary>
         /// 获取或设置显示状态过滤器，如果为all，则不过滤
@@ -64,6 +83,14 @@ namespace IThemeSky.Model
         /// 获取或设置主题所属的标签id过滤器,如果集合为空，则不作标签过滤(该属性的集合已在内部初始化)
         /// </summary>
         public List<int> TagIds { get; private set; }
+        /// <summary>
+        /// 获取或设置主题所属的标签名称过滤器,如果集合为空，则不作标签过滤(该属性的集合已在内部初始化)
+        /// </summary>
+        public List<string> TagNames { get; private set; }
+        /// <summary>
+        /// 获取或设置主题搜索关键字过滤器，如果为空(string.Empty)则不作搜索
+        /// </summary>
+        public string SearchKeyword { get; set; }
 
         /// <summary>
         /// 获取过滤器解析后的查询子句
@@ -82,26 +109,37 @@ namespace IThemeSky.Model
             }
             if (this.TagIds.Count > 0)
             {
-                conditions.Append(SqlConditionBuilder.GetMultiQueryValues("TagId", this.TagIds));
+                foreach (int tagId in this.TagIds)
+                {
+                    conditions.AppendFormat(" AND TagId={0}", tagId);
+                }
+            }
+            if (this.TagNames.Count > 0)
+            {
+                conditions.Append(SqlConditionBuilder.GetMultiQueryValues("TagName", this.TagNames));
             }
             if (this.CheckState != CheckStateOption.All)
             {
-                conditions.AppendFormat("CheckState={0}", this.CheckState.ToInt32());
+                conditions.AppendFormat(" AND CheckState={0}", this.CheckState.ToInt32());
             }
             if (this.DisplayState != DisplayStateOption.All)
             {
-                conditions.AppendFormat("DisplayState={0}", this.DisplayState.ToInt32());
+                conditions.AppendFormat(" AND DisplayState={0}", this.DisplayState.ToInt32());
             }
             if (this.IsCommend != BooleanFilterOption.NoFilter)
             {
                 if (this.IsCommend == BooleanFilterOption.True)
                 {
-                    conditions.Append("CommendIndex > 0");
+                    conditions.Append(" AND CommendIndex > 0");
                 }
                 else
                 {
-                    conditions.Append("CommendIndex <= 0");
+                    conditions.Append(" AND CommendIndex <= 0");
                 }
+            }
+            if (false == string.IsNullOrEmpty(this.SearchKeyword))
+            {
+                conditions.AppendFormat(" AND Title like '%{0}%'", this.SearchKeyword.Replace("'", "''"));
             }
             return conditions.ToString();
         }
