@@ -124,7 +124,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .mainColTab{ float:right; margin:8px 20px 0 0; height:25px; _display:inline;}
 .mainColTab li{ float:left; width:51px; text-align:center; padding:1px 0; height:23px;}
 .mainColTab li a{ display:block; height:23px; line-height:20px;}
-.mainColTab li.selected{ padding:1px 10px; background:url(../images/sprites_common.png) no-repeat -529px -150px;}
+.mainColTab li.selected{ padding:1px 10px; background:url(../images/sprites_common.png) no-repeat -709px -150px;}
 .mainColTab li a:link,.mainColTab li a:visited{ color:#9FBCBF;}
 .mainColTab li a:hover,.mainColTab li a:active,.mainColTab li.selected a{ color:#CCD3DC;}
 .subCol{ width:160px; background:url(../images/sprites_box.png) no-repeat -1760px bottom; padding-bottom:8px; margin-bottom:8px;}
@@ -133,6 +133,6 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 
 /*sub content*/
 .subHelp{ padding:5px 10px;}
-.subHelp li{ background:url(../images/sprites_common.png) no-repeat -591px -340px; padding:5px 0 0 12px;}
+.subHelp li{ background:url(../images/sprites_common.png) no-repeat -771px -340px; padding:5px 0 0 12px;}
 .subCol .themeList dl{ margin:0 auto; padding-bottom:7px;}
 .subCol .themeList{ padding:5px 0;}
