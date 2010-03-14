@@ -17,7 +17,7 @@ ul,ol,dl{ list-style:none;}
 /* End hide from IE Mac */
 
 /*common style*/
-body{ background:url(../images/bg_body.jpg) no-repeat center 0 #000807; font:normal 11px/1.5 "Lucida Grande", "Lucida Sans Unicode", sans-serif, Arial, Verdana; color:#769FA3;}
+body{ background:url(../images/bg_body.jpg) no-repeat center 0 #000807; font:normal 12px/1.5 "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif; color:#769FA3;}
 a:link,a:visited{ text-decoration:none; color:#769FA3;}
 a:hover,a:active{ text-decoration:none; color:#FFF;}
 
@@ -56,10 +56,10 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .searchPannel .input{ float:left; padding:2px 0 2px 24px; _padding:1px 0 1px 24px;}
 .searchPannel .input input{ border:none; background:none; width:98px; height:16px; line-height:16px; color:#000;}
 .searchResult{ position:absolute; top:44px; right:-4px; width:308px; background:url(../images/sprites_header.png) no-repeat -370px bottom; padding-bottom:7px;}
-.searchResult .searchHead,.searchResult .searchTip{ position:relative; z-index:1; margin:-9px 5px 0 5px; height:25px; color:#CCD2DC; font:bold 12px/25px "Lucida Grande"; }
+.searchResult .searchHead,.searchResult .searchTip{ position:relative; z-index:1; margin:-9px 5px 0 5px; height:25px; color:#CCD2DC; font-weight:bold; line-height:25px;}
 .searchResult .searchHead{ width:298px; text-indent:14px; background:url(../images/sprites_header.png) 0 -280px;}
 .searchResult .searchTip{ padding-right:32px; background:url(../images/sprites_header.png) no-repeat 0 -310px; text-align:right;}
-.searchResult .list{ padding:5px 14px 10px 14px; width:280px;}
+.searchResult .list{ padding:5px 14px 10px 14px; width:280px; font-size:11px;}
 .searchResult .list dl{ clear:both; margin:1px 0; height:102px;}
 .searchResult .list dt{ float:left; width:60px; height:90px; padding:6px; font:0/0 Arial; background:url(../images/sprites_header.png) no-repeat 0 -150px;}
 .searchResult .list dd{ float:left; margin:6px 0 0 8px; _display:inline;}
@@ -87,16 +87,16 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .sideCol{ width:200px; padding-bottom:8px; background:url(../images/sprites_box.png) no-repeat -200px bottom; margin-bottom:10px;}
 .sideColHead{ height:35px; background:url(../images/sprites_box.png) no-repeat; text-indent:18px; line-height:35px;}
 .sideColContent{ background:url(../images/sprites_box.png) no-repeat 0 -35px; min-height:200px; _height:300px;}
-.sideMenu{ width:182px; padding:5px 9px; font-size:12px;}
+.sideMenu{ width:182px; padding:5px 9px;}
 .sideMenu li{ height:24px; padding:1px 0;}
 .sideMenu a:link,.sideMenu a:visited{ display:block; height:24px; padding-left:20px; line-height:22px; background:url(../images/sprites_common.png) no-repeat 0 0;}
 .sideMenu a:hover,.sideMenu a:active{ background:url(../images/sprites_common.png) no-repeat -190px 0;}
-.sideTags{ width:180px; padding:5px 10px; font-size:12px;}
+.sideTags{ width:180px; padding:5px 10px;}
 .sideTags li{ float:left; white-space:nowrap; margin:3px 6px 0 6px; _display:inline;}
 
 /*theme list layout*/
 .themeList dl{ width:138px; height:260px; background:url(../images/sprites_common.png) no-repeat 0 -80px;}
-.themeList dt{ height:22px; text-align:center; font-size:12px; line-height:22px;}
+.themeList dt{ height:22px; text-align:center; line-height:22px;}
 .themeList .themeCut{ padding:10px 12px; width:114px; height:170px;}
 .themeList .themeCut a:link img,.themeList .themeCut a:visited img{ margin:1px; display:block; width:112px; height:168px;}
 .themeList .themeCut a:hover img,.themeList .themeCut a:active img{ margin:0px; display:block; width:112px; height:168px; border:1px solid #2D494B;}
