@@ -129,7 +129,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .mainColTab li a:hover,.mainColTab li a:active,.mainColTab li.selected a{ color:#CCD3DC;}
 .subCol{ width:160px; background:url(../images/sprites_box.png) no-repeat -1760px bottom; padding-bottom:8px; margin-bottom:8px;}
 .subColHead{ height:35px; background:url(../images/sprites_common.png) no-repeat 0 -350px; text-indent:18px; line-height:35px;}
-.subColContent{ background:url(../images/sprites_box.png) no-repeat repeat-y -1600px 0;}
+.subColContent{ background:url(../images/sprites_box.png) repeat-y -1600px 0;}
 
 /*sub content*/
 .subHelp{ padding:5px 10px;}
