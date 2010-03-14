@@ -98,8 +98,8 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .themeList dl{ width:138px; height:260px; background:url(../images/sprites_common.png) no-repeat 0 -80px;}
 .themeList dt{ height:22px; text-align:center; line-height:22px;}
 .themeList .themeCut{ padding:10px 12px; width:114px; height:170px;}
-.themeList .themeCut a:link img,.themeList .themeCut a:visited img{ margin:1px; display:block; width:112px; height:168px;}
-.themeList .themeCut a:hover img,.themeList .themeCut a:active img{ margin:0px; display:block; width:112px; height:168px; border:1px solid #2D494B;}
+.themeList .themeCut a:link,.themeList .themeCut a:visited{ padding:1px; display:block; width:112px; height:168px; font:0/0 Arial;}
+.themeList .themeCut a:hover,.themeList .themeCut a:active{ padding:0; border:1px solid #2D494B;}
 .themeList .rateResult{ display:block; width:92px; height:16px; margin:0 auto; text-indent:-999em; overflow:hidden; background:url(../images/sprites_common.png) no-repeat;}
 .themeList .star0{ background-position:-160px -100px;}
 .themeList .star1{ background-position:-160px -120px;}
