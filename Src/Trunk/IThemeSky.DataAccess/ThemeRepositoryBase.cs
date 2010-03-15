@@ -15,7 +15,7 @@ namespace IThemeSky.DataAccess
         /// <summary>
         /// 简单实体对应的查询字段列表
         /// </summary>
-        protected const string SIMPLE_THEME_FIELDS = "ThemeId,CategoryId,CategoryName,Title,Thumbnail,CommendIndex,Downloads";
+        protected const string SIMPLE_THEME_FIELDS = "ThemeId,CategoryId,CategoryName,Title,ThumbnailName,CommendIndex,Downloads";
         protected const string VIEW_TAGTHEME = "View_TagTheme";
         protected const string VIEW_THEME = "View_Theme";
         /// <summary>
@@ -244,9 +244,32 @@ namespace IThemeSky.DataAccess
         /// </summary>
         protected virtual FullThemeView BindFullThemeView(IDataReader dataReader)
         {
-            FullThemeView fullTheme = BindTheme(dataReader) as FullThemeView;
-            fullTheme.CategoryName = dataReader["CategoryName"].ToString();
-            return fullTheme;
+            return new FullThemeView()
+            {
+                ThemeId = Convert.ToInt32(dataReader["ThemeId"]),
+                CategoryId = Convert.ToInt32(dataReader["CategoryId"]),
+                ParentCategoryId = Convert.ToInt32(dataReader["ParentCategoryId"]),
+                Title = dataReader["Title"].ToString(),
+                FileSize = Convert.ToInt64(dataReader["FileSize"]),
+                Description = dataReader["Description"].ToString(),
+                DisplayState = Convert.ToInt32(dataReader["DisplayState"]).ToEnum<DisplayStateOption>(DisplayStateOption.Hidden),
+                CheckState = Convert.ToInt32(dataReader["CheckState"]).ToEnum<CheckStateOption>(CheckStateOption.Waitting),
+                AuthorId = Convert.ToInt32(dataReader["AuthorId"]),
+                CheckerId = Convert.ToInt32(dataReader["CheckerId"]),
+                CommendIndex = Convert.ToInt32(dataReader["CommendIndex"]),
+                ThumbnailName = dataReader["ThumbnailName"].ToString(),
+                AddTime = Convert.ToDateTime(dataReader["AddTime"]),
+                UpdateTime = Convert.ToDateTime(dataReader["UpdateTime"]),
+                GoodComments = Convert.ToInt32(dataReader["GoodComments"]),
+                BadComments = Convert.ToInt32(dataReader["BadComments"]),
+                Comments = Convert.ToInt32(dataReader["Comments"]),
+                Downloads = Convert.ToInt32(dataReader["Downloads"]),
+                Views = Convert.ToInt32(dataReader["Views"]),
+                LastWeekDownloads = Convert.ToInt32(dataReader["LastWeekDownloads"]),
+                LastMonthDownloads = Convert.ToInt32(dataReader["LastMonthDownloads"]),
+                Source = Convert.ToInt32(dataReader["Source"]).ToEnum<SourceOption>(SourceOption.IThemeSky),
+                CategoryName = dataReader["CategoryName"].ToString(),
+            };
         }
         #endregion
     }

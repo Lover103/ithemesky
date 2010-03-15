@@ -73,15 +73,8 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public int GetPrevThemeId(int themeId)
         {
-            string cmdText = "SELECT TOP 1 ThemeId FROM " + GetDataViewName(_filter, ThemeSortOption.New) + " WHERE ThemeId=" + themeId + " AND " + _filter.ToString();
-            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
-            {
-                if (reader.Read())
-                {
-                    return BindFullThemeView(reader);
-                }
-            }
-            return null;
+            string cmdText = "SELECT TOP 1 ThemeId FROM " + GetDataViewName(_filter, ThemeSortOption.New) + " WHERE ThemeId < " + themeId + " AND " + _filter.ToString() + " ORDER BY ThemeId DESC";
+            return Convert.ToInt32(SqlHelper.ExecuteScalar(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText));
         }
 
         /// <summary>
@@ -91,7 +84,8 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public int GetNextThemeId(int themeId)
         {
-            throw new NotImplementedException();
+            string cmdText = "SELECT TOP 1 ThemeId FROM " + GetDataViewName(_filter, ThemeSortOption.New) + " WHERE ThemeId > " + themeId + " AND " + _filter.ToString() + " ORDER BY ThemeId ASC";
+            return Convert.ToInt32(SqlHelper.ExecuteScalar(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText));
         }
 
         /// <summary>
@@ -102,7 +96,7 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemes(ThemeSortOption sort, int displayNumber)
         {
-            throw new NotImplementedException();
+            return base.GetSimpleThemes(_filter, sort, displayNumber);
         }
 
         /// <summary>
@@ -115,7 +109,7 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemes(ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
-            throw new NotImplementedException();
+            return base.GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -127,7 +121,9 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemesByCategoryId(int categoryId, ThemeSortOption sort, int displayNumber)
         {
-            throw new NotImplementedException();
+            ThemesFilter filter = _filter.Clone();
+            filter.CategoryIds.Add(categoryId);
+            return base.GetSimpleThemes(_filter, sort, displayNumber);
         }
 
         /// <summary>
@@ -141,7 +137,9 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemesByCategoryId(int categoryId, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
-            throw new NotImplementedException();
+            ThemesFilter filter = _filter.Clone();
+            filter.CategoryIds.Add(categoryId);
+            return base.GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -153,7 +151,9 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemesByParentCategoryId(int parentCategoryId, ThemeSortOption sort, int displayNumber)
         {
-            throw new NotImplementedException();
+            ThemesFilter filter = _filter.Clone();
+            filter.ParentCategoryIds.Add(parentCategoryId);
+            return base.GetSimpleThemes(_filter, sort, displayNumber);
         }
 
         /// <summary>
@@ -167,7 +167,9 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemesByParentCategoryId(int parentCategoryId, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
-            throw new NotImplementedException();
+            ThemesFilter filter = _filter.Clone();
+            filter.ParentCategoryIds.Add(parentCategoryId);
+            return base.GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -177,7 +179,16 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemesByIds(List<int> themeIds)
         {
-            throw new NotImplementedException();
+            List<SimpleThemeView> themes = new List<SimpleThemeView>();
+            string cmdText = "SELECT " + SIMPLE_THEME_FIELDS + " FROM " + GetDataViewName(_filter, ThemeSortOption.New) + " WHERE 1=1" + SqlConditionBuilder.GetMultiQueryValues("ThemeId", themeIds);
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                if (reader.Read())
+                {
+                    themes.Add(BindSimpleThemeView(reader));
+                }
+            }
+            return themes;
         }
 
         /// <summary>
@@ -189,7 +200,7 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int displayNumber)
         {
-            throw new NotImplementedException();
+            return base.GetSimpleThemes(filter, sort, displayNumber);
         }
 
         /// <summary>
@@ -203,7 +214,7 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
-            throw new NotImplementedException();
+            return base.GetSimpleThemes(filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -217,7 +228,9 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> SearchThemes(string keyword, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
-            throw new NotImplementedException();
+            ThemesFilter filter = _filter.Clone();
+            filter.SearchKeyword = keyword;
+            return base.GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -231,7 +244,7 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<FullThemeView> GetFullThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
-            throw new NotImplementedException();
+            return base.GetFullThemes(filter, sort, pageIndex, pageSize, ref recordCount);
         }        #endregion
     }
 }
