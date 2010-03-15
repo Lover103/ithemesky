@@ -75,9 +75,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\bg_body.jpg" />
+    <Content Include="Content\images\bg_footer.png" />
+    <Content Include="Content\images\bg_header.jpg" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\sprites_box.png" />
+    <Content Include="Content\images\sprites_common.png" />
+    <Content Include="Content\images\sprites_header.png" />
+    <Content Include="Content\images\temp\theme_normal01.jpg" />
+    <Content Include="Content\images\temp\theme_normal02.jpg" />
+    <Content Include="Content\images\temp\theme_normal03.jpg" />
+    <Content Include="Content\images\temp\theme_normal04.jpg" />
+    <Content Include="Content\images\temp\theme_normal05.jpg" />
+    <Content Include="Content\images\temp\theme_normal06.jpg" />
+    <Content Include="Content\images\temp\theme_normal07.jpg" />
+    <Content Include="Content\images\temp\theme_normal08.jpg" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Shared\HotTags.ascx" />
+    <Content Include="Views\Shared\NormalThemeRepeater.ascx" />
+    <Content Include="Views\Shared\ThemeCategories.ascx" />
     <Content Include="Web.config" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -95,7 +113,6 @@
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
-    <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
@@ -111,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\js\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
