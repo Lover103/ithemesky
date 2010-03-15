@@ -136,3 +136,56 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .subHelp li{ background:url(../images/sprites_common.png) no-repeat -771px -340px; padding:5px 0 0 12px;}
 .subCol .themeList dl{ margin:0 auto; padding-bottom:7px;}
 .subCol .themeList{ padding:5px 0;}
+
+/*breadcrumb*/
+.pageGuide{ width:770px; height:35px; background:url(../images/sprites_common.png) no-repeat 0 -400px;}
+.breadcrumb{ float:left;}
+.breadcrumb li{ float:left; margin:1px 0; padding:7px 5px 0 21px; height:26px; background:url(../images/sprites_common.png) no-repeat -767px -440px;}
+.breadcrumb li a:link,.breadcrumb li a:visited{ color:#CCD2DC;}
+.breadcrumb li a:hover,.breadcrumb li a:active{ color:#FFF;}
+.breadcrumb li.home{ padding:5px 0 0 8px; background:none;}
+.breadcrumb li.home a:link,.breadcrumb li.home a:visited{ display:block; width:23px; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_common.png) no-repeat 0 -440px;}
+.breadcrumb li.home a:hover,.breadcrumb li.home a:active{ background:url(../images/sprites_common.png) no-repeat -30px -440px;}
+.listSelect{ margin-top:10px; width:770px; padding-top:8px; background:url(../images/sprites_box_wide.png) no-repeat;}
+.selectedTags{ width:770px; background:url(../images/sprites_box_wide.png) no-repeat -770px 0; color:#CCD2DC;}
+.selectedTags dl,.selectedTags .tips{ width:756px; padding:4px 0 9px 0; background:url(../images/sprites_box_wide.png) no-repeat 0 bottom;}
+.selectedTags .tips{ padding-left:20px; width:736px;}
+.selectedTags dt{ float:left; width:126px; text-align:right; margin-top:5px;}
+.selectedTags dd{ margin-left:126px; _margin-left:123px;}
+.selectedTags dd a:link,.selectedTags dd a:visited{ float:left; display:block; margin:5px 0 0 5px; height:18px; line-height:18px; padding:0 20px 0 5px; white-space:nowrap; color:#9FBBBF; background:url(../images/sprites_common.png) no-repeat right -480px; border:1px solid #366061;}
+.selectedTags dd a:hover,.selectedTags dd a:active{ border:1px solid #56989A; color:#CCD2DC;}
+.selectTags{ width:756px; background:url(../images/sprites_box_wide.png) no-repeat -770px bottom; padding:0 7px 8px 7px;}
+.selectTags dl{ width:756px; padding:9px 0; background:url(../images/sprites_box_wide.png) no-repeat 0 bottom; line-height:20px;}
+.selectTags dl.last{ background:none;}
+.selectTags dt{ float:left; width:80px; text-align:right; color:#CCD2DC;}
+.selectTags dd{ float:left; width:676px;}
+.selectTags dd li{ float:left; background:url(../images/sprites_common.png) no-repeat right -500px; padding:0 12px; white-space:nowrap;}
+.selectTags dd a:link,.selectTags dd a:visited{ color:#91B1B5;}
+.selectTags dd a:hover,.selectTags dd a:active{ color:#FFF;}
+
+/*themes list*/
+.lists{ margin-top:10px; width:770px; background:url(../images/sprites_box_wide.png) no-repeat -1540px 0;}
+.listsSort{ padding:10px 20px 0 20px; height:24px; color:#9FBBBF;}
+.listsSort dt{ float:left; padding-right:5px;}
+.listsSort dd{ float:left; text-align:center; padding:0 3px 5px 3px;}
+.listsSort dd.selected{ width:36px; padding:0 0 5px 0; background:url(../images/sprites_common.png) no-repeat 14px -473px;}
+.listsSort dd.selected a{ color:#FFF;}
+.lists .themeList{ background:url(../images/sprites_box_wide.png) no-repeat -2310px bottom; padding:0 15px 20px 15px;}
+.lists .themeList dl{ float:left; _display:inline; margin:10px 5px 0 5px;}
+
+/*pageInfo*/
+.pageInfo{ margin-top:6px; width:770px; height:45px; background:url(../images/sprites_common.png) no-repeat 0 -530px;}
+.pageInfo .pageNumber{ float:left; padding-left:15px;}
+.pageInfo .pageNumber li{ float:left; padding:15px 7px 0 7px; height:30px;}
+.pageInfo .previous,.pageInfo .next{ height:20px; text-align:left;}
+.pageInfo .previous a:link,pageInfo .previous a:visited{ background:url(../images/sprites_common.png) no-repeat left -590px; padding-left:8px;}
+.pageInfo .previous a:hover,pageInfo .previous a:active{ background:url(../images/sprites_common.png) no-repeat left -610px;}
+.pageInfo .next a:link,.pageInfo .next a:visited{ background:url(../images/sprites_common.png) no-repeat right -590px; padding-right:8px;}
+.pageInfo .next a:hover,.pageInfo .next a:active{ background:url(../images/sprites_common.png) no-repeat right -610px;}
+.pageInfo .pageNumber .current{ width:24px; text-align:center; padding:15px 6px 0 4px; background:url(../images/sprites_common.png) no-repeat -200px -585px; color:#D7D9D9; letter-spacing:-1px;}
+.pageInfo .pageNumber .current a{ color:#D7D9D9;}
+.pageInfo .pageStat{ float:right; padding:15px 15px 0 0;}
+.pageInfo .pageStat li{ float:left; margin:0 5px; _display:inline;}
+.pageInfo .pageStat .inputNum{ width:25px; height:18px; background:url(../images/sprites_common.png) no-repeat -300px -590px;}
+.pageInfo .pageStat .inputNum input{ background:none; border:none; width:25px; padding:1px 0; _padding:0; line-height:16px; text-align:center; color:#D7D9D9;}
+.pageInfo .btnGo{ margin-top:1px; width:26px; height:16px; border:none; background:url(../images/sprites_common.png) no-repeat -390px -590px; color:#769FA3; font-size:11px; line-height:16px;}
