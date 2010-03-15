@@ -151,7 +151,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .selectedTags dl,.selectedTags .tips{ width:756px; padding:4px 0 9px 0; background:url(../images/sprites_box_wide.png) no-repeat 0 bottom;}
 .selectedTags .tips{ padding-left:20px; width:736px;}
 .selectedTags dt{ float:left; width:126px; text-align:right; margin-top:5px;}
-.selectedTags dd{ margin-left:126px; _margin-left:123px;}
+.selectedTags dd{ margin-left:126px; _margin-left:123px; padding-right:20px;}
 .selectedTags dd a:link,.selectedTags dd a:visited{ float:left; display:block; margin:5px 0 0 5px; height:18px; line-height:18px; padding:0 20px 0 5px; white-space:nowrap; color:#9FBBBF; background:url(../images/sprites_common.png) no-repeat right -480px; border:1px solid #366061;}
 .selectedTags dd a:hover,.selectedTags dd a:active{ border:1px solid #56989A; color:#CCD2DC;}
 .selectTags{ width:756px; background:url(../images/sprites_box_wide.png) no-repeat -770px bottom; padding:0 7px 8px 7px;}
