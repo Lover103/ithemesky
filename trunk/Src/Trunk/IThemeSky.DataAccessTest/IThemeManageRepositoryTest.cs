@@ -117,22 +117,5 @@ namespace IThemeSky.DataAccessTest
             actual = target.MappingThemeTag(themeId, tagName);
             Assert.AreEqual(expected, actual);
         }
-
-        /// <summary>
-        ///A test for AddThemeDownloadUrl
-        ///</summary>
-        [TestMethod()]
-        public void AddThemeDownloadUrlTest()
-        {
-            IThemeManageRepository target = CreateIThemeManageRepository(); // TODO: Initialize to an appropriate value
-            int themeId = 1; 
-            string url = "http://testurl";
-            bool isDefault = true; 
-            SourceOption source = SourceOption.IPhoneThemes;
-            bool expected = true; 
-            bool actual;
-            actual = target.AddThemeDownloadUrl(themeId, url, isDefault, source);
-            Assert.AreEqual(expected, actual);
-        }
     }
 }
