@@ -167,8 +167,8 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .lists{ margin-top:10px; width:770px; background:url(../images/sprites_box_wide.png) no-repeat -1540px 0;}
 .listsSort{ padding:10px 20px 0 20px; height:24px; color:#9FBBBF;}
 .listsSort dt{ float:left; padding-right:5px;}
-.listsSort dd{ float:left; text-align:center; padding:0 3px 5px 3px;}
-.listsSort dd.selected{ width:36px; padding:0 0 5px 0; background:url(../images/sprites_common.png) no-repeat 14px -473px;}
+.listsSort dd{ float:left; text-align:center; padding:0 3px 4px 3px;}
+.listsSort dd.selected{ background:url(../images/ico_arrow_sort.png) no-repeat center bottom;}
 .listsSort dd.selected a{ color:#FFF;}
 .lists .themeList{ background:url(../images/sprites_box_wide.png) no-repeat -2310px bottom; padding:0 15px 20px 15px;}
 .lists .themeList dl{ float:left; _display:inline; margin:10px 5px 0 5px;}
