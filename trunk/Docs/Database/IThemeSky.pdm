@@ -1615,7 +1615,7 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o12">
 <a:CreationDate>1267950561</a:CreationDate>
 <a:ModificationDate>1268205161</a:ModificationDate>
-<a:Rect>((-39725,-11577), (-28101,-2006))</a:Rect>
+<a:Rect>((-39726,-11577), (-28102,-2006))</a:Rect>
 <a:ListOfPoints>((-35575,-2006),(-31700,-11577))</a:ListOfPoints>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -1655,7 +1655,7 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o18">
 <a:CreationDate>1268192750</a:CreationDate>
 <a:ModificationDate>1268205162</a:ModificationDate>
-<a:Rect>((-39079,-23329), (-24455,-11779))</a:Rect>
+<a:Rect>((-39084,-23329), (-24460,-11779))</a:Rect>
 <a:ListOfPoints>((-29700,-11779),(-33900,-23329))</a:ListOfPoints>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -3078,14 +3078,14 @@ END
 <a:Code>View_Theme</a:Code>
 <a:CreationDate>1268373042</a:CreationDate>
 <a:Creator>Administrator</a:Creator>
-<a:ModificationDate>1268373298</a:ModificationDate>
+<a:ModificationDate>1268620181</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
 <a:View.SQLQuery>SELECT 
-    Theme.*, ThemeCategory.CategoryName
+    Theme.*, ISNULL(CategoryName, &#39;未知分类&#39;) CategoryName
     FROM Theme 
     LEFT JOIN ThemeCategory ON Theme.CategoryId = ThemeCategory.CategoryId</a:View.SQLQuery>
 <a:TaggedSQLQuery>SELECT 
-    Theme.*, ThemeCategory.CategoryName
+    Theme.*, ISNULL(CategoryName, &#39;未知分类&#39;) CategoryName
     FROM Theme 
     LEFT JOIN ThemeCategory ON Theme.CategoryId = ThemeCategory.CategoryId</a:TaggedSQLQuery>
 <a:UserDefinedSQL>1</a:UserDefinedSQL>
