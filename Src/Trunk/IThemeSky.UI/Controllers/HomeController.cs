@@ -13,7 +13,7 @@ namespace IThemeSky.UI.Controllers
     {
         public ActionResult Index()
         {
-            List<SimpleThemeView> themes = ThemeRepositoryFactory.Default.GetCachedThemeViewRepository().GetThemes(IThemeSky.Model.ThemeSortOption.New, 10);
+            List<SimpleThemeView> themes = ThemeRepositoryFactory.Default.GetCachedThemeViewRepository().GetThemes(IThemeSky.Model.ThemeSortOption.New, 8);
             ViewData["Message"] = "Welcome to ASP.NET MVC!";
             return View(themes);
         }
