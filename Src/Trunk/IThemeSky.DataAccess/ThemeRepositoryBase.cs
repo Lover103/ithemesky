@@ -236,6 +236,8 @@ namespace IThemeSky.DataAccess
                 CommendIndex = Convert.ToInt32(dataReader["CommendIndex"]),
                 Downloads = Convert.ToInt32(dataReader["Downloads"]),
                 CategoryName = dataReader["CategoryName"].ToString(),
+                Thumbnail = dataReader["Thumbnail"].ToString(),
+                Thumbnail_112x168 = dataReader["Thumbnail"].ToString(),
             };
         }
 

@@ -1,40 +1,75 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
-    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder>
+<link href="Content/css/style.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
-    <div class="page">
-
-        <div id="header">
-            <div id="title">
-                <h1>My MVC Application</h1>
-            </div>
-              
-            <div id="logindisplay">
-                <% Html.RenderPartial("LogOnUserControl"); %>
-            </div> 
-            
-            <div id="menucontainer">
-            
-                <ul id="menu">              
-                    <li><%= Html.ActionLink("Home", "Index", "Home")%></li>
-                    <li><%= Html.ActionLink("About", "About", "Home")%></li>
-                </ul>
-            
-            </div>
-        </div>
-
-        <div id="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-
-            <div id="footer">
-            </div>
-        </div>
-    </div>
+<!--header begin-->
+<div id="headerWrapper">
+	<div id="header">
+		<h2 class="logo"><a href="#" title="ithemesky.com provided themes for iphone"><img src="Content/images/logo.png" alt="ithemesky.com provided themes for iphone" width="200" height="62" /></a></h2>
+		<ul class="nav">
+			<li class="s1"><a href="#" title="ithemesky.com Homepage">ithemesky.com Homepage</a></li>
+			<li class="s2"><a href="#" title="All Categories">All Categories</a></li>
+			<li class="s3"><a href="#" title="Ranking">Ranking</a></li>
+			<li class="s4"><a href="#" title="Submit Themes">Submit Themes</a></li>
+			<li class="s5"><a href="#" title="isprite">isprite</a></li>
+			<li class="s6 last"><a href="#" title="Help">Help</a></li>
+		</ul>
+		<div class="searchPannel">
+			<div class="input"><input type="text" /></div>
+			<!--hot results begin-->
+			<div class="searchResult" style="display:none;">
+				<h3 class="searchHead">Hot Results</h3>
+				<div class="list">
+					<dl>
+						<dt><a href="#"><img src="Content/images/temp/theme_normal01.jpg" width="60" height="90" alt="Sexy Lady" /></a></dt>
+						<dd>
+							<span class="title"><a href="#">Japanese Sexy girl</a></span>
+							<span class="rateResult star3" title="3/5 stars">3/5 stars</span>
+							<span class="b">Downloads:</span> 1130
+							<a href="#" title="Download" class="btnDownload">Download</a>
+						</dd>
+					</dl>
+					<dl>
+						<dt><a href="#"><img src="Content/images/temp/theme_normal01.jpg" width="60" height="90" alt="Sexy Lady" /></a></dt>
+						<dd>
+							<span class="title"><a href="#">Japanese Sexy girl</a></span>
+							<span class="rateResult star3" title="3/5 stars">3/5 stars</span>
+							<span class="b">Downloads:</span> 1130
+							<a href="#" title="Download" class="btnDownload">Download</a>
+						</dd>
+					</dl>
+					<dl>
+						<dt><a href="#"><img src="Content/images/temp/theme_normal01.jpg" width="60" height="90" alt="Sexy Lady" /></a></dt>
+						<dd>
+							<span class="title"><a href="#">Japanese Sexy girl</a></span>
+							<span class="rateResult star3" title="3/5 stars">3/5 stars</span>
+							<span class="b">Downloads:</span> 1130
+							<a href="#" title="Download" class="btnDownload">Download</a>
+						</dd>
+					</dl>
+				</div>
+				<div class="searchTip">Total 236 results. <a href="#">View all results</a><!--No Result. Try another key word.--></div>
+			</div>
+			<!--hot results end-->
+		</div>
+	</div>
+</div>
+<!--header end-->
+<!--wrapper main begin-->
+<asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+<!--wrapper main end-->
+<!--footer begin-->
+<div id="footerWrapper">
+	<div id="footer">
+		Copyright &copy; 2010 ithemesky.com All rights reserved.<span class="footerNav"><a href="#">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Help</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Sitemap</a></span>
+	</div>
+</div>
+<!--footer end-->
 </body>
 </html>
