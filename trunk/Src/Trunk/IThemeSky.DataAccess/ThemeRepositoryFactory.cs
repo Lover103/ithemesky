@@ -58,10 +58,21 @@ namespace IThemeSky.DataAccess
         {
             return new ThemeManageRepository(_connectionProvider);
         }
-
-        //public IThemeViewRepository GetThemeRepository()
-        //{ 
-        //    //return new 
-        //}
+        /// <summary>
+        /// 获取主题视图数据查询的访问对象
+        /// </summary>
+        /// <returns></returns>
+        public IThemeViewRepository GetThemeViewRepository()
+        {
+            return new ThemeViewRepository(_connectionProvider);
+        }
+        /// <summary>
+        /// 获取审核过的主题视图数据查询的访问对象
+        /// </summary>
+        /// <returns></returns>
+        public IThemeViewRepository GetCheckedThemeViewRepository()
+        {
+            return new ThemeViewRepository(_connectionProvider, IThemeSky.Model.CheckStateOption.CheckSuccess, IThemeSky.Model.DisplayStateOption.Display);
+        }
     }
 }
