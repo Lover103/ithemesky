@@ -185,7 +185,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .pageInfo .pageNumber .current{ width:24px; text-align:center; padding:15px 6px 0 4px; background:url(../images/sprites_common.png) no-repeat -200px -585px; color:#D7D9D9; letter-spacing:-1px;}
 .pageInfo .pageNumber .current a{ color:#D7D9D9;}
 .pageInfo .pageStat{ float:right; padding:15px 15px 0 0;}
-.pageInfo .pageStat li{ float:left; margin:0 5px; _display:inline;}
-.pageInfo .pageStat .inputNum{ width:25px; height:18px; background:url(../images/sprites_common.png) no-repeat -300px -590px;}
+.pageInfo .pageStat li{ float:left; padding:0 5px;}
+.pageInfo .pageStat .inputNum{ width:25px; height:18px; background:url(../images/sprites_common.png) no-repeat -295px -590px;}
 .pageInfo .pageStat .inputNum input{ background:none; border:none; width:25px; padding:1px 0; _padding:0; line-height:16px; text-align:center; color:#D7D9D9;}
 .pageInfo .btnGo{ margin-top:1px; width:26px; height:16px; border:none; background:url(../images/sprites_common.png) no-repeat -390px -590px; color:#769FA3; font-size:11px; line-height:16px;}
