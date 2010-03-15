@@ -74,5 +74,13 @@ namespace IThemeSky.DataAccess
         {
             return new ThemeViewRepository(_connectionProvider, IThemeSky.Model.CheckStateOption.CheckSuccess, IThemeSky.Model.DisplayStateOption.Display);
         }
+        /// <summary>
+        /// 获取审核过的主题视图数据查询的访问对象(缓存接口)
+        /// </summary>
+        /// <returns></returns>
+        public ICacheThemeViewRepository GetCachedThemeViewRepository()
+        {
+            return new CacheThemeViewRepository(_connectionProvider, IThemeSky.Model.CheckStateOption.CheckSuccess, IThemeSky.Model.DisplayStateOption.Display);
+        }
     }
 }

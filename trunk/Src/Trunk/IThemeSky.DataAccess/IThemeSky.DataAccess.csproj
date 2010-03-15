@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheThemeViewRepository.cs" />
+    <Compile Include="ICacheThemeViewRepository.cs" />
     <Compile Include="IThemeManageRepository.cs" />
     <Compile Include="IThemeViewRepository.cs" />
     <Compile Include="ThemeRepositoryFactory.cs" />

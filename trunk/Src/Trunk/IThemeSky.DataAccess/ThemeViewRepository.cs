@@ -16,7 +16,7 @@ namespace IThemeSky.DataAccess
         /// <summary>
         /// 默认的过滤器
         /// </summary>
-        private ThemesFilter _filter = new ThemesFilter();
+        protected ThemesFilter _filter = new ThemesFilter();
         /// <summary>
         /// 初始化主题视图数据操作类
         /// </summary>
@@ -96,7 +96,7 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemes(ThemeSortOption sort, int displayNumber)
         {
-            return base.GetSimpleThemes(_filter, sort, displayNumber);
+            return GetSimpleThemes(_filter, sort, displayNumber);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemes(ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
-            return base.GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
+            return GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace IThemeSky.DataAccess
         {
             ThemesFilter filter = _filter.Clone();
             filter.CategoryIds.Add(categoryId);
-            return base.GetSimpleThemes(_filter, sort, displayNumber);
+            return GetSimpleThemes(_filter, sort, displayNumber);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace IThemeSky.DataAccess
         {
             ThemesFilter filter = _filter.Clone();
             filter.CategoryIds.Add(categoryId);
-            return base.GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
+            return GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace IThemeSky.DataAccess
         {
             ThemesFilter filter = _filter.Clone();
             filter.ParentCategoryIds.Add(parentCategoryId);
-            return base.GetSimpleThemes(_filter, sort, displayNumber);
+            return GetSimpleThemes(_filter, sort, displayNumber);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace IThemeSky.DataAccess
         {
             ThemesFilter filter = _filter.Clone();
             filter.ParentCategoryIds.Add(parentCategoryId);
-            return base.GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
+            return GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int displayNumber)
         {
-            return base.GetSimpleThemes(filter, sort, displayNumber);
+            return GetSimpleThemes(filter, sort, displayNumber);
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<SimpleThemeView> GetThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
-            return base.GetSimpleThemes(filter, sort, pageIndex, pageSize, ref recordCount);
+            return GetSimpleThemes(filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace IThemeSky.DataAccess
         {
             ThemesFilter filter = _filter.Clone();
             filter.SearchKeyword = keyword;
-            return base.GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
+            return GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public List<FullThemeView> GetFullThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
-            return base.GetFullThemes(filter, sort, pageIndex, pageSize, ref recordCount);
+            return GetFullThemes(filter, sort, pageIndex, pageSize, ref recordCount);
         }        #endregion
     }
 }

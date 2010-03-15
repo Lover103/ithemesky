@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using IThemeSky.UI.Models;
+using IThemeSky.DataAccess;
+using IThemeSky.Model;
 
 namespace IThemeSky.UI.Controllers
 {
     [HandleError]
     public class HomeController : Controller
     {
-        private IThemeSkyEntities _db = new IThemeSkyEntities(); 
         public ActionResult Index()
         {
+            List<SimpleThemeView> themes = ThemeRepositoryFactory.Default.GetCachedThemeViewRepository().GetThemes(IThemeSky.Model.ThemeSortOption.New, 10);
             ViewData["Message"] = "Welcome to ASP.NET MVC!";
-            var theme = (from t in _db.Theme where t.ThemeId < 2 select t).First();
-            return View(theme);
+            return View(themes);
         }
 
         public ActionResult About()
