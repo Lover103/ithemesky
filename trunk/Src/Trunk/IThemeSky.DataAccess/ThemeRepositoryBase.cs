@@ -184,7 +184,9 @@ namespace IThemeSky.DataAccess
                 case ThemeSortOption.Rank_Of_Week:
                     return "LastWeekDownloads DESC";
                 case ThemeSortOption.TagSort:
-                    return "TagSortNumber DESC";
+                    return "TagSortNumber DESC,AddTime DESC";
+                case ThemeSortOption.Recommended:
+                    return "CommendIndex DESC,AddTime DESC";
                 default:
                     return "ThemeId DESC";
             }

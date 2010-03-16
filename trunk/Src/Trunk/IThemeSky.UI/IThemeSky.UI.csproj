@@ -72,6 +72,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\IndexModel.cs" />
+    <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,8 +81,10 @@
     <Content Include="Content\images\bg_body.jpg" />
     <Content Include="Content\images\bg_footer.png" />
     <Content Include="Content\images\bg_header.jpg" />
+    <Content Include="Content\images\ico_arrow_sort.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\sprites_box.png" />
+    <Content Include="Content\images\sprites_box_wide.png" />
     <Content Include="Content\images\sprites_common.png" />
     <Content Include="Content\images\sprites_header.png" />
     <Content Include="Content\images\temp\theme_normal01.jpg" />
@@ -129,7 +133,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\js\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

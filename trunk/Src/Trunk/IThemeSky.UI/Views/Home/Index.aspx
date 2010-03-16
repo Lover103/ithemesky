@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<List<SimpleThemeView>>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IndexModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <title>iphone themes free download, ithemesky.com provided iphone themes</title>
@@ -24,7 +24,7 @@
 				    <span class="colMore"><a href="#">MORE</a></span>
 			    </div>
 			    <div class="mainColContent themeList clearfix">
-				    <% Html.RenderPartial("NormalThemeRepeater", ViewData.Model); %>
+				    <% Html.RenderPartial("NormalThemeRepeater", ViewData.Model.LastUpdateThemes); %>
 			    </div>
 		    </div>
 		    <!--last update end-->
@@ -34,54 +34,7 @@
 				    <h3 class="colTitle">Recommended</h3>
 			    </div>
 			    <div class="mainColContent themeList clearfix">
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal06.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star3" title="3/5 stars">3/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal07.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star2" title="2/5 stars">2/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal03.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star3" title="3/5 stars">3/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal04.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star5" title="5/5 stars">5/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal08.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star4" title="4/5 stars">4/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal01.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star3" title="3/5 stars">3/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal02.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star1" title="1/5 stars">1/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal05.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star4" title="4/5 stars">4/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
+				    <% Html.RenderPartial("NormalThemeRepeater", ViewData.Model.RecommendedThemes); %>
 			    </div>
 		    </div>
 		    <!--Recommended end-->
@@ -96,54 +49,7 @@
 				    </ul>
 			    </div>
 			    <div class="mainColContent themeList clearfix">
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal07.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star2" title="2/5 stars">2/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal03.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star3" title="3/5 stars">3/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal04.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star5" title="5/5 stars">5/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal08.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star4" title="4/5 stars">4/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal06.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star3" title="3/5 stars">3/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal01.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star3" title="3/5 stars">3/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal02.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star1" title="1/5 stars">1/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal05.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star4" title="4/5 stars">4/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
+				    <% Html.RenderPartial("NormalThemeRepeater", ViewData.Model.PopularThemes); %>
 			    </div>
 		    </div>
 		    <!--Most Popular end-->

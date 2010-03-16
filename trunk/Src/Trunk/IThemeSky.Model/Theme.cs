@@ -121,5 +121,9 @@ namespace IThemeSky.Model
         /// </summary>
         public SourceOption Source { get; set; }
 
+        /// <summary>
+        /// 下载地址
+        /// </summary>
+        public string DownloadUrl { get; set; }
     }
 }
