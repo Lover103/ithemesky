@@ -16,5 +16,7 @@ namespace IThemeSky.Model
         public string CategoryIcon { get; set; }
 
         public int SortNumber { get; set; }
+
+        public string BindTagCategories { get; set; }
     }
 }

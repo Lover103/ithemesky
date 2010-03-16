@@ -113,22 +113,22 @@ namespace IThemeSky.Management.Theme {
         protected global::System.Web.UI.WebControls.TextBox txtDownloadUrl;
         
         /// <summary>
-        /// txtGoodComments control.
+        /// txtRateScore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGoodComments;
+        protected global::System.Web.UI.WebControls.TextBox txtRateScore;
         
         /// <summary>
-        /// txtBadComments control.
+        /// txtRateNumbers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBadComments;
+        protected global::System.Web.UI.WebControls.TextBox txtRateNumbers;
         
         /// <summary>
         /// txtViews control.

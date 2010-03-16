@@ -31,6 +31,10 @@ namespace IThemeSky.Model
         /// </summary>
         Recommended,
         /// <summary>
+        /// 评价排行
+        /// </summary>
+        RateScore,
+        /// <summary>
         /// 标签排序
         /// </summary>
         TagSort,

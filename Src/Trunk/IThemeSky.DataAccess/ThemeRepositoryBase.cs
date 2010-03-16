@@ -187,6 +187,8 @@ namespace IThemeSky.DataAccess
                     return "TagSortNumber DESC,AddTime DESC";
                 case ThemeSortOption.Recommended:
                     return "CommendIndex DESC,AddTime DESC";
+                case ThemeSortOption.RateScore:
+                    return "RateScore DESC,AddTime DESC";
                 default:
                     return "ThemeId DESC";
             }
@@ -215,8 +217,8 @@ namespace IThemeSky.DataAccess
                 ThumbnailName = dataReader["ThumbnailName"].ToString(),
                 AddTime = Convert.ToDateTime(dataReader["AddTime"]),
                 UpdateTime = Convert.ToDateTime(dataReader["UpdateTime"]),
-                GoodComments = Convert.ToInt32(dataReader["GoodComments"]),
-                BadComments = Convert.ToInt32(dataReader["BadComments"]),
+                RateScore = Convert.ToInt32(dataReader["RateScore"]),
+                RateNumbers = Convert.ToInt32(dataReader["RateNumbers"]),
                 Comments = Convert.ToInt32(dataReader["Comments"]),
                 Downloads = Convert.ToInt32(dataReader["Downloads"]),
                 Views = Convert.ToInt32(dataReader["Views"]),
@@ -264,8 +266,8 @@ namespace IThemeSky.DataAccess
                 ThumbnailName = dataReader["ThumbnailName"].ToString(),
                 AddTime = Convert.ToDateTime(dataReader["AddTime"]),
                 UpdateTime = Convert.ToDateTime(dataReader["UpdateTime"]),
-                GoodComments = Convert.ToInt32(dataReader["GoodComments"]),
-                BadComments = Convert.ToInt32(dataReader["BadComments"]),
+                RateScore = Convert.ToInt32(dataReader["RateScore"]),
+                RateNumbers = Convert.ToInt32(dataReader["RateNumbers"]),
                 Comments = Convert.ToInt32(dataReader["Comments"]),
                 Downloads = Convert.ToInt32(dataReader["Downloads"]),
                 Views = Convert.ToInt32(dataReader["Views"]),
