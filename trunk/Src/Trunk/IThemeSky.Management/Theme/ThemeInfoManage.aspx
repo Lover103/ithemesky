@@ -62,7 +62,7 @@
             </tr>
             <tr>
                 <td class="InputName">评论设置</td>
-                <td>好评：<asp:TextBox ID="txtGoodComments" runat="server" CssClass="NumberInput"></asp:TextBox> &nbsp; &nbsp;差评：<asp:TextBox ID="txtBadComments" runat="server" CssClass="NumberInput"></asp:TextBox></td>
+                <td>好评：<asp:TextBox ID="txtRateScore" runat="server" CssClass="NumberInput"></asp:TextBox> &nbsp; &nbsp;差评：<asp:TextBox ID="txtRateNumbers" runat="server" CssClass="NumberInput"></asp:TextBox></td>
                 <td></td>
             </tr>
             <tr>

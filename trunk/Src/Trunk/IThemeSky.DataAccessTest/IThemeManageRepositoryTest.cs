@@ -77,7 +77,7 @@ namespace IThemeSky.DataAccessTest
             {
                 AddTime = DateTime.Now,
                 AuthorId = 007,
-                BadComments = 1,
+                RateNumbers = 1,
                 CategoryId = 0,
                 CheckerId = 007,
                 CheckState = CheckStateOption.Waitting,
@@ -87,7 +87,7 @@ namespace IThemeSky.DataAccessTest
                 DisplayState = DisplayStateOption.Deleted,
                 Downloads = 100,
                 FileSize = 100,
-                GoodComments = 2,
+                RateScore = 2,
                 LastMonthDownloads = 1,
                 LastWeekDownloads = 10,
                 ParentCategoryId = 0,

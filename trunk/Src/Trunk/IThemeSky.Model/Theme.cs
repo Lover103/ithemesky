@@ -82,14 +82,14 @@ namespace IThemeSky.Model
         public DateTime UpdateTime { get; set; }
 
         /// <summary>
-        /// 好评数
+        /// 评价总分值
         /// </summary>
-        public int GoodComments { get; set; }
+        public int RateScore { get; set; }
 
         /// <summary>
-        /// 差评数
+        /// 评价次数
         /// </summary>
-        public int BadComments { get; set; }
+        public int RateNumbers { get; set; }
 
         /// <summary>
         /// 评论总数
