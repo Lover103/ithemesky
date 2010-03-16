@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using IThemeSky.DataAccess;
 using IThemeSky.Model;
+using IThemeSky.UI.Models;
 
 namespace IThemeSky.UI.Controllers
 {
@@ -13,9 +14,8 @@ namespace IThemeSky.UI.Controllers
     {
         public ActionResult Index()
         {
-            List<SimpleThemeView> themes = ThemeRepositoryFactory.Default.GetCachedThemeViewRepository().GetThemes(IThemeSky.Model.ThemeSortOption.New, 8);
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
-            return View(themes);
+            IndexModel model = new IndexModel();
+            return View(model);
         }
 
         public ActionResult About()

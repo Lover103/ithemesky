@@ -21,13 +21,15 @@
 			<li class="s6 last"><a href="#" title="Help">Help</a></li>
 		</ul>
 		<div class="searchPannel">
+			<label class="label">Search</label>
 			<div class="input"><input type="text" /></div>
+			<div class="reset"><a href="#" class="btn">reset</a></div>
 			<!--hot results begin-->
 			<div class="searchResult" style="display:none;">
 				<h3 class="searchHead">Hot Results</h3>
 				<div class="list">
 					<dl>
-						<dt><a href="#"><img src="Content/images/temp/theme_normal01.jpg" width="60" height="90" alt="Sexy Lady" /></a></dt>
+						<dt><a href="#"><img src="images/temp/theme_normal01.jpg" width="60" height="90" alt="Sexy Lady" /></a></dt>
 						<dd>
 							<span class="title"><a href="#">Japanese Sexy girl</a></span>
 							<span class="rateResult star3" title="3/5 stars">3/5 stars</span>
@@ -36,7 +38,7 @@
 						</dd>
 					</dl>
 					<dl>
-						<dt><a href="#"><img src="Content/images/temp/theme_normal01.jpg" width="60" height="90" alt="Sexy Lady" /></a></dt>
+						<dt><a href="#"><img src="images/temp/theme_normal01.jpg" width="60" height="90" alt="Sexy Lady" /></a></dt>
 						<dd>
 							<span class="title"><a href="#">Japanese Sexy girl</a></span>
 							<span class="rateResult star3" title="3/5 stars">3/5 stars</span>
@@ -45,7 +47,7 @@
 						</dd>
 					</dl>
 					<dl>
-						<dt><a href="#"><img src="Content/images/temp/theme_normal01.jpg" width="60" height="90" alt="Sexy Lady" /></a></dt>
+						<dt><a href="#"><img src="images/temp/theme_normal01.jpg" width="60" height="90" alt="Sexy Lady" /></a></dt>
 						<dd>
 							<span class="title"><a href="#">Japanese Sexy girl</a></span>
 							<span class="rateResult star3" title="3/5 stars">3/5 stars</span>
