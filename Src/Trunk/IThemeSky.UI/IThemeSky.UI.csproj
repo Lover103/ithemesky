@@ -74,6 +74,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\IndexModel.cs" />
+    <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -97,6 +98,7 @@
     <Content Include="Content\images\temp\theme_normal07.jpg" />
     <Content Include="Content\images\temp\theme_normal08.jpg" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Home\List.aspx" />
     <Content Include="Views\Shared\HotTags.ascx" />
     <Content Include="Views\Shared\NormalThemeRepeater.ascx" />
     <Content Include="Views\Shared\ThemeCategories.ascx" />
@@ -125,6 +127,10 @@
     <ProjectReference Include="..\IThemeSky.DataAccess\IThemeSky.DataAccess.csproj">
       <Project>{6990CB04-9764-4BBC-94A5-F9E95DF41E30}</Project>
       <Name>IThemeSky.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IThemeSky.Library\IThemeSky.Library.csproj">
+      <Project>{D3ED2D0D-0575-4135-923D-3EC8AD32CFB9}</Project>
+      <Name>IThemeSky.Library</Name>
     </ProjectReference>
     <ProjectReference Include="..\IThemeSky.Model\IThemeSky.Model.csproj">
       <Project>{7F4BD5DA-2315-4E2E-982D-8AF1D66D10BB}</Project>

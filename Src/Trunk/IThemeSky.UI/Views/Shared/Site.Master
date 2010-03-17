@@ -11,7 +11,7 @@
 <!--header begin-->
 <div id="headerWrapper">
 	<div id="header">
-		<h2 class="logo"><a href="#" title="ithemesky.com provided themes for iphone"><img src="Content/images/logo.png" alt="ithemesky.com provided themes for iphone" width="200" height="62" /></a></h2>
+		<h2 class="logo"><a href="#" title="ithemesky.com provided themes for iphone"><img src="/Content/images/logo.png" alt="ithemesky.com provided themes for iphone" width="200" height="62" /></a></h2>
 		<ul class="nav">
 			<li class="s1"><a href="#" title="ithemesky.com Homepage">ithemesky.com Homepage</a></li>
 			<li class="s2"><a href="#" title="All Categories">All Categories</a></li>
