@@ -21,22 +21,13 @@ namespace IThemeSky.UI.Controllers
 
         public ActionResult List(string sort, int categoryId, string categoryName, string tags, int? pageIndex)
         {
-            List<string> lstTags;
-            if (string.IsNullOrEmpty(tags))
-            {
-                lstTags = new List<string>();
-            }
-            else
-            {
-                lstTags = tags.Split(',').ToList();
-            }
             int currPageIndex = 1;
             if (pageIndex.HasValue)
             {
                 currPageIndex = pageIndex.Value;
             }
             ThemeSortOption themeSort = sort.ToEnum<ThemeSortOption>(ThemeSortOption.New);
-            ListModel model = new ListModel(categoryId, categoryName, lstTags, themeSort, currPageIndex, 6); 
+            ListModel model = new ListModel(categoryId, categoryName, tags, themeSort, currPageIndex, 20); 
             return View(model);
         }
 

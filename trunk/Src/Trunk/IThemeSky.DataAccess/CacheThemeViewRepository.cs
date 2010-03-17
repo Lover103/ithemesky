@@ -60,17 +60,18 @@ namespace IThemeSky.DataAccess
         /// <summary>
         /// 获取符何指定过滤器条件的主题列表
         /// </summary>
-        /// <param name="filter">过滤器</param>
-        /// <param name="sort">排序方式</param>
+        /// <param name="viewName">视图名称</param>
+        /// <param name="searchCondition">查询条件</param>
+        /// <param name="sortExpression">排序方式</param>
         /// <param name="dispayNumber">提取条数</param>
         /// <returns></returns>
-        protected override List<SimpleThemeView> GetSimpleThemes(ThemesFilter filter, ThemeSortOption sort, int dispayNumber)
+        protected override List<SimpleThemeView> GetSimpleThemes(string viewName, string searchCondition, string sortExpression, int dispayNumber)
         {
             List<SimpleThemeView> themes;
-            string cacheKey = BuildCacheKey(filter.ToString(), sort.ToString(), dispayNumber);
+            string cacheKey = BuildCacheKey("GetSimpleThemes", viewName, searchCondition, sortExpression, dispayNumber);
             if (_enableCache == false)
             {
-                themes = base.GetSimpleThemes(filter, sort, dispayNumber);
+                themes = base.GetSimpleThemes(viewName, searchCondition, sortExpression, dispayNumber);
                 _enableCache = true;
             }
             else
@@ -81,7 +82,7 @@ namespace IThemeSky.DataAccess
                 }
                 else
                 {
-                    themes = base.GetSimpleThemes(filter, sort, dispayNumber);
+                    themes = base.GetSimpleThemes(viewName, searchCondition, sortExpression, dispayNumber);
                     CacheHelper.Set<List<SimpleThemeView>>(cacheKey, themes, _cacheTime);
                 }
             }
@@ -100,8 +101,8 @@ namespace IThemeSky.DataAccess
         protected override List<SimpleThemeView> GetSimpleThemes(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
             List<SimpleThemeView> themes;
-            string cacheKey = BuildCacheKey(filter.ToString(), sort.ToString(), pageIndex, pageSize);
-            string cacheKeyOfRecordCount = BuildCacheKey(filter.ToString(), sort.ToString(), pageSize);
+            string cacheKey = BuildCacheKey("GetSimpleThemes", filter.ToString(), sort.ToString(), pageIndex, pageSize);
+            string cacheKeyOfRecordCount = BuildCacheKey("GetSimpleThemes", filter.ToString(), sort.ToString(), pageSize);
             if (_enableCache == false)
             {
                 themes = base.GetSimpleThemes(filter, sort, pageIndex, pageSize, ref recordCount);
@@ -137,7 +138,7 @@ namespace IThemeSky.DataAccess
         protected override List<FullThemeView> GetFullThemes(ThemesFilter filter, ThemeSortOption sort, int dispayNumber)
         {
             List<FullThemeView> themes;
-            string cacheKey = BuildCacheKey(filter.ToString(), sort.ToString(), dispayNumber);
+            string cacheKey = BuildCacheKey("GetFullThemes", filter.ToString(), sort.ToString(), dispayNumber);
             if (_enableCache == false)
             {
                 themes = base.GetFullThemes(filter, sort, dispayNumber);
@@ -170,7 +171,7 @@ namespace IThemeSky.DataAccess
         protected override List<FullThemeView> GetFullThemes(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
             List<FullThemeView> themes;
-            string cacheKey = BuildCacheKey(filter.ToString(), sort.ToString(), pageIndex, pageSize);
+            string cacheKey = BuildCacheKey("GetFullThemes", filter.ToString(), sort.ToString(), pageIndex, pageSize);
             string cacheKeyOfRecordCount = BuildCacheKey(filter.ToString(), sort.ToString(), pageSize);
             if (_enableCache == false)
             {
@@ -195,6 +196,33 @@ namespace IThemeSky.DataAccess
                 }
             }
             return themes;
+        }
+        /// <summary>
+        /// 获取所有主题分类列表
+        /// </summary>
+        /// <returns></returns>
+        public List<ThemeCategory> GetThemeCategories()
+        {
+            List<ThemeCategory> categories;
+            string cacheKey = BuildCacheKey("GetThemeCategories");
+            if (_enableCache == false)
+            {
+                categories = base.GetThemeCategories();
+                _enableCache = true;
+            }
+            else
+            {
+                if (CacheHelper.Contains(cacheKey))
+                {
+                    categories = CacheHelper.Get<List<ThemeCategory>>(cacheKey);
+                }
+                else
+                {
+                    categories = base.GetThemeCategories();
+                    CacheHelper.Set<List<ThemeCategory>>(cacheKey, categories, _cacheTime);
+                }
+            }
+            return categories;
         }
         #endregion
 

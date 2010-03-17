@@ -41,6 +41,13 @@ namespace IThemeSky.UI
                 new { controller = "Home", action = "List", sort = "new", categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = 1 }
             );
 
+            //下载排行数据接口
+            routes.MapRoute(
+                "Service", // Route name
+                "Service/GetSortThemes/{sort},{displayNumber}", // URL with parameters
+                new { controller = "Service", action = "GetSortThemes", sort = "new", displayNumber = 8 } // Parameter defaults
+            );
+
             //默认Route
             routes.MapRoute(
                 "Default", // Route name

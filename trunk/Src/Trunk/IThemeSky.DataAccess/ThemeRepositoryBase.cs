@@ -37,13 +37,25 @@ namespace IThemeSky.DataAccess
         /// <param name="sort">排序方式</param>
         /// <param name="dispayNumber">提取条数</param>
         /// <returns></returns>
-        protected virtual List<SimpleThemeView> GetSimpleThemes(ThemesFilter filter, ThemeSortOption sort, int dispayNumber)
+        protected List<SimpleThemeView> GetSimpleThemes(ThemesFilter filter, ThemeSortOption sort, int dispayNumber)
+        {
+            return GetSimpleThemes(GetDataViewName(filter, sort), filter.ToString(), GetSortExpression(sort), dispayNumber);
+        }
+
+        /// <summary>
+        /// 获取符何指定过滤器条件的主题列表
+        /// </summary>
+        /// <param name="viewName">视图名称</param>
+        /// <param name="searchCondition">查询条件</param>
+        /// <param name="sortExpression">排序方式</param>
+        /// <param name="dispayNumber">提取条数</param>
+        /// <returns></returns>
+        protected virtual List<SimpleThemeView> GetSimpleThemes(string viewName, string searchCondition, string sortExpression, int dispayNumber)
         {
             List<SimpleThemeView> themes = new List<SimpleThemeView>();
-            string sortExpression = GetSortExpression(sort);
             string cmdText = string.Format("SELECT top {3} {4} FROM {0} Where {1} {2}"
-                , GetDataViewName(filter, sort)
-                , filter.ToString()
+                , viewName
+                , searchCondition
                 , sortExpression.Length > 0 ? " ORDER BY " + sortExpression : ""
                 , dispayNumber
                 , SIMPLE_THEME_FIELDS
@@ -187,7 +199,7 @@ namespace IThemeSky.DataAccess
                     return "TagSortNumber DESC,AddTime DESC";
                 case ThemeSortOption.Recommended:
                     return "CommendIndex DESC,AddTime DESC";
-                case ThemeSortOption.RateScore:
+                case ThemeSortOption.Rating:
                     return "RateScore DESC,AddTime DESC";
                 default:
                     return "ThemeId DESC";
@@ -275,6 +287,22 @@ namespace IThemeSky.DataAccess
                 LastMonthDownloads = Convert.ToInt32(dataReader["LastMonthDownloads"]),
                 Source = Convert.ToInt32(dataReader["Source"]).ToEnum<SourceOption>(SourceOption.IThemeSky),
                 CategoryName = dataReader["CategoryName"].ToString(),
+            };
+        }
+
+        /// <summary>
+        /// 对象实体绑定数据
+        /// </summary>
+        public ThemeCategory BindThemeCategory(IDataReader dataReader)
+        {
+            return new ThemeCategory()
+            {
+                CategoryId = Convert.ToInt32(dataReader["CategoryId"]),
+                CategoryName = dataReader["CategoryName"].ToString(),
+                ParentId = Convert.ToInt32(dataReader["ParentId"]),
+                CategoryIcon = dataReader["CategoryIcon"].ToString(),
+                SortNumber = Convert.ToInt32(dataReader["SortNumber"]),
+                BindTagCategories = dataReader["BindTagCategories"].ToString(),
             };
         }
         #endregion
