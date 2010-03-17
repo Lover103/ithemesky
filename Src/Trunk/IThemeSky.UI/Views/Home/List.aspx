@@ -10,23 +10,26 @@
     <div id="wrapper" class="clearfix">
 	<div id="sidebar">
 		<!--Categories begin-->
-		<% Html.RenderPartial("ThemeCategories"); %>
+		<% Html.RenderPartial("ThemeCategories", ViewData.Model.ThemeCategories); %>
 		<!--Categories end-->
 	</div>
 	<div id="main">
 		<!--breadcrumb begin-->
 		<div class="pageGuide">
 			<ul class="breadcrumb">
-				<li class="home"><a href="#" title="Homepage">ithemesky.com Homepage</a></li>
-				<li><a href="#">All Categories</a></li>
-				<li><a href="#">Cartoons</a></li>
+				<li class="home"><a href="/" title="Homepage">ithemesky.com Homepage</a></li>
+				<li><a href="/list/new">All Categories</a></li>
+				<% if (ViewData.Model.CategoryId > 0)
+                   { %>
+				<li><a href="/list/new/<%=ViewData.Model.CategoryName%>_<%=ViewData.Model.CategoryId%>"><%=ViewData.Model.CategoryName%></a></li>
+				<% } %>
 			</ul>
 		</div>
 		<!--breadcrumb end-->
 		<!--select tag begin-->
 		<div class="listSelect">
 			<!--has selected begin-->
-			<div class="selectedTags">
+			<%--<div class="selectedTags">
 				<!--<div class="tips">Choose anyone of the tags below, you may find the themes you like!</div>-->
 				<dl class="clearfix">
 					<dt>You have selected:</dt>
@@ -42,7 +45,7 @@
 						<a href="#">Man</a>
 					</dd>
 				</dl>
-			</div>
+			</div>--%>
 			<!--has selected end-->
 			<!--tags sort list begin-->
 			<div class="selectTags">
@@ -87,11 +90,11 @@
 		<div class="lists">
 			<dl class="listsSort">
 				<dt>Sort By:</dt>
-				<dd class="selected"><a href="#">Date</a></dd>
+				<dd <%=ViewData.Model.Sort == ThemeSortOption.New ? "class=\"selected\"" : "" %>><a href="<%=String.Format(ViewData.Model.UrlPatternWithoutSort, 1, "new") %>">Date</a></dd>
 				<dd>-</dd>
-				<dd><a href="#">Downloads</a></dd>
+				<dd <%=ViewData.Model.Sort == ThemeSortOption.Popular ? "class=\"selected\"" : "" %>><a href="<%=String.Format(ViewData.Model.UrlPatternWithoutSort, 1, "popular") %>">Downloads</a></dd>
 				<dd>-</dd>
-				<dd><a href="#">Rating</a></dd>
+				<dd <%=ViewData.Model.Sort == ThemeSortOption.Rating ? "class=\"selected\"" : "" %>><a href="<%=String.Format(ViewData.Model.UrlPatternWithoutSort, 1, "rating") %>">Rating</a></dd>
 			</dl>
 			<!--theme list begin-->
 			<div class="themeList clearfix">
@@ -102,7 +105,7 @@
 		<!--lists end-->
 		<!--pageinfo begin-->
 		<div class="pageInfo">
-			<% Html.RenderPagination("/list/popular/{0}", ViewData.Model.PageIndex, ViewData.Model.PageSize, ViewData.Model.RecordCount, 10); %>
+			<% Html.RenderPagination(ViewData.Model.UrlPatternWithoutPageIndex, ViewData.Model.PageIndex, ViewData.Model.PageSize, ViewData.Model.RecordCount, 10); %>
 		</div>
 		<!--pageinfo end-->
 	</div>

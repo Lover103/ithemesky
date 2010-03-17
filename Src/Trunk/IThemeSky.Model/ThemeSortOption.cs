@@ -33,7 +33,7 @@ namespace IThemeSky.Model
         /// <summary>
         /// 评价排行
         /// </summary>
-        RateScore,
+        Rating,
         /// <summary>
         /// 标签排序
         /// </summary>

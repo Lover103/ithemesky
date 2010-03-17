@@ -120,6 +120,13 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         List<SimpleThemeView> SearchThemes(string keyword, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount);
         /// <summary>
+        /// 获取随机主题
+        /// </summary>
+        /// <param name="sort">排序方式</param>
+        /// <param name="displayNumber">显示条数</param>
+        /// <returns></returns>
+        List<SimpleThemeView> GetRandomThemes(ThemeSortOption sort, int displayNumber);
+        /// <summary>
         /// 根据过滤器获取所有主题(完整实体)
         /// </summary>
         /// <param name="filter">过滤器</param>
@@ -129,5 +136,10 @@ namespace IThemeSky.DataAccess
         /// <param name="recordCount">总记录数(ref)</param>
         /// <returns></returns>
         List<FullThemeView> GetFullThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount);
+        /// <summary>
+        /// 获取所有主题分类列表
+        /// </summary>
+        /// <returns></returns>
+        List<ThemeCategory> GetThemeCategories();
     }
 }

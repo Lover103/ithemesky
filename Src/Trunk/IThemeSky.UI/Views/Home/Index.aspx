@@ -10,7 +10,7 @@
     <div id="wrapper" class="clearfix">
 	    <div id="sidebar">
 		    <!--Categories begin-->
-		    <% Html.RenderPartial("ThemeCategories"); %>
+		    <% Html.RenderPartial("ThemeCategories", ViewData.Model.ThemeCategories); %>
 		    <!--Categories end-->
 		    <!--Tags begin-->
 		    <% Html.RenderPartial("HotTags"); %>
@@ -21,7 +21,7 @@
 		    <div class="mainCol">
 			    <div class="mainColHead">
 				    <h3 class="colTitle">Last Update</h3>
-				    <span class="colMore"><a href="#">MORE</a></span>
+				    <span class="colMore"><a href="/list/new">MORE</a></span>
 			    </div>
 			    <div class="mainColContent themeList clearfix">
 				    <% Html.RenderPartial("NormalThemeRepeater", ViewData.Model.LastUpdateThemes); %>
@@ -43,12 +43,13 @@
 			    <div class="mainColHead">
 				    <h3 class="colTitle">Most Popular</h3>
 				    <ul class="mainColTab">
-					    <li><a href="#">Week</a></li>
-					    <li><a href="#">Month</a></li>
-					    <li class="selected"><a href="#">Total</a></li>
+					    <li><a href="javascript:;" sort="Rank_Of_Week">Week</a></li>
+					    <li><a href="javascript:;" sort="Rank_Of_Month">Month</a></li>
+					    <li class="selected"><a href="javascript:;" sort="Popular">Total</a></li>
 				    </ul>
+				    <script type="text/javascript">BindSortEvent();</script>
 			    </div>
-			    <div class="mainColContent themeList clearfix">
+			    <div id="divSortThemes" class="mainColContent themeList clearfix">
 				    <% Html.RenderPartial("NormalThemeRepeater", ViewData.Model.PopularThemes); %>
 			    </div>
 		    </div>
@@ -70,30 +71,7 @@
 		    <div class="subCol">
 			    <h3 class="subColHead colTitle">I’m Feeling Lucky</h3>
 			    <div class="subColContent themeList">
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal07.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star2" title="2/5 stars">2/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal03.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star3" title="3/5 stars">3/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal04.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star5" title="5/5 stars">5/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
-				    <dl>
-					    <dt><a href="#">Japanese Sexy girl</a></dt>
-					    <dd class="themeCut"><a href="#"><img src="Content/images/temp/theme_normal08.jpg" width="112" height="168" alt="Japanese Sexy girl" /></a></dd>
-					    <dd><span class="rateResult star4" title="4/5 stars">4/5 stars</span></dd>
-					    <dd class="btnDownload"><a href="#" title="Free Download">Free Download</a></dd>
-				    </dl>
+				    <% Html.RenderPartial("NormalThemeRepeater", ViewData.Model.LuckyThemes); %>
 			    </div>
 		    </div>
 		    <!--I’m Feeling Lucky end-->

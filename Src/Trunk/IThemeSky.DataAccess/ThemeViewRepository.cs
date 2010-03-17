@@ -234,6 +234,19 @@ namespace IThemeSky.DataAccess
         }
 
         /// <summary>
+        /// 获取随机主题
+        /// </summary>
+        /// <param name="sort">排序方式</param>
+        /// <param name="displayNumber">显示条数</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetRandomThemes(ThemeSortOption sort, int displayNumber)
+        {
+            string searchCondition = _filter.ToString();
+            searchCondition += " and 0.3 >= CAST(CHECKSUM(NEWID(), ThemeId) & 0x7fffffff AS float) / CAST (0x7fffffff AS int)";
+            return GetSimpleThemes(GetDataViewName(_filter, sort), searchCondition, GetSortExpression(sort), displayNumber); 
+        }
+
+        /// <summary>
         /// 根据过滤器获取所有主题(完整实体)
         /// </summary>
         /// <param name="filter">过滤器</param>
@@ -245,6 +258,21 @@ namespace IThemeSky.DataAccess
         public List<FullThemeView> GetFullThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
         {
             return GetFullThemes(filter, sort, pageIndex, pageSize, ref recordCount);
-        }        #endregion
+        }
+
+        /// <summary>
+        /// 获取所有主题分类列表
+        /// </summary>
+        /// <returns></returns>
+        public List<ThemeCategory> GetThemeCategories()
+        {
+            List<ThemeCategory> categories = new List<ThemeCategory>();
+            string cmdText = "SELECT * FROM ThemeCategory";
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                while (reader.Read())
+                {
+                    categories.Add(BindThemeCategory(reader));                }            }
+            return categories;        }        #endregion
     }
 }
