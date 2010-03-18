@@ -73,6 +73,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\ModelBase.cs" />
@@ -99,9 +100,11 @@
     <Content Include="Content\images\temp\theme_normal08.jpg" />
     <Content Include="Content\js\IThemeSky.js" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Home\Search.aspx" />
     <Content Include="Views\Home\List.aspx" />
     <Content Include="Views\Shared\HotTags.ascx" />
     <Content Include="Views\Shared\NormalThemeRepeater.ascx" />
+    <Content Include="Views\Shared\SuggestThemeRepeater.ascx" />
     <Content Include="Views\Shared\ThemeCategories.ascx" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.4.1.js" />

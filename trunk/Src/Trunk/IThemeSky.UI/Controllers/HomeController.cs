@@ -31,6 +31,18 @@ namespace IThemeSky.UI.Controllers
             return View(model);
         }
 
+        public ActionResult Search(string sort, string keyword, int? pageIndex)
+        {
+            int currPageIndex = 1;
+            if (pageIndex.HasValue)
+            {
+                currPageIndex = pageIndex.Value;
+            }
+            ThemeSortOption themeSort = sort.ToEnum<ThemeSortOption>(ThemeSortOption.New);
+            SearchModel model = new SearchModel(keyword, themeSort, currPageIndex, 20);
+            return View(model);
+        }
+
         public ActionResult About()
         {
             return View();

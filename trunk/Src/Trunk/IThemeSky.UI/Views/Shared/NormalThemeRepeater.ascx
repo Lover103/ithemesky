@@ -7,3 +7,5 @@
 	    <dd class="btnDownload"><a href="/Service/Download/122" title="Free Download">Free Download</a></dd>
     </dl>
 <%} %>
+<% if (ViewData.Model.Count < 1) { %>
+<%} %>

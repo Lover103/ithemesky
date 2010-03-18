@@ -230,7 +230,7 @@ namespace IThemeSky.DataAccess
         {
             ThemesFilter filter = _filter.Clone();
             filter.SearchKeyword = keyword;
-            return GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
+            return GetSimpleThemes(filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>

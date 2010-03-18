@@ -40,12 +40,22 @@ namespace IThemeSky.UI
                 "list/{sort}/{categoryName}_{categoryId}/{pageIndex}/{tags}",
                 new { controller = "Home", action = "List", sort = "new", categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = 1 }
             );
-
+            //*/search/排序方式/关键字/页码/
+            routes.MapRoute(
+                "Search",
+                "search/{sort}/{keyword}/{pageIndex}",
+                new { controller = "Home", action = "Search", sort = "new", keyword = "", pageIndex = 1 }
+            );
             //下载排行数据接口
             routes.MapRoute(
                 "Service", // Route name
                 "Service/GetSortThemes/{sort},{displayNumber}", // URL with parameters
                 new { controller = "Service", action = "GetSortThemes", sort = "new", displayNumber = 8 } // Parameter defaults
+            );
+            routes.MapRoute(
+                "Service2", // Route name
+                "Service/GetSuggestThemes/{keyword},{displayNumber}", // URL with parameters
+                new { controller = "Service", action = "GetSuggestThemes", keyword = "new", displayNumber = 3 } // Parameter defaults
             );
 
             //默认Route
