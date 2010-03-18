@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<SearchModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	<title>list - iphone themes free download, ithemesky.com provided iphone themes</title>
+	<title><%=ViewData.Model.Keyword%> - search results - iphone themes free download, ithemesky.com provided iphone themes</title>
     <meta name="description" content="ithemesky.com provided iphone themes, more than 2,000 iphone themes free download!" />
     <meta name="keywords" content="iphone theme, iphone themes, jailbroken iphone, install iphone themes, free download, iphone" />
 </asp:Content>

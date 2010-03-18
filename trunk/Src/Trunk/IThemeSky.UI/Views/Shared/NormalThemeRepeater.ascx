@@ -8,4 +8,5 @@
     </dl>
 <%} %>
 <% if (ViewData.Model.Count < 1) { %>
+No result.
 <%} %>
