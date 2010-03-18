@@ -82,5 +82,13 @@ namespace IThemeSky.DataAccess
         {
             return new CacheThemeViewRepository(_connectionProvider, IThemeSky.Model.CheckStateOption.CheckSuccess, IThemeSky.Model.DisplayStateOption.Display);
         }
+        /// <summary>
+        /// 获取主题的评论数据访问对象
+        /// </summary>
+        /// <returns></returns>
+        public IThemeCommentRepository GetThemeCommentRepository()
+        {
+            return new ThemeCommentRepository(_connectionProvider);
+        }
     }
 }
