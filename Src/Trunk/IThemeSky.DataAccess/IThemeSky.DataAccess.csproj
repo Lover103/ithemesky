@@ -48,8 +48,10 @@
   <ItemGroup>
     <Compile Include="CacheThemeViewRepository.cs" />
     <Compile Include="ICacheThemeViewRepository.cs" />
+    <Compile Include="IThemeCommentRepository.cs" />
     <Compile Include="IThemeManageRepository.cs" />
     <Compile Include="IThemeViewRepository.cs" />
+    <Compile Include="ThemeCommentRepository.cs" />
     <Compile Include="ThemeRepositoryFactory.cs" />
     <Compile Include="ThemeManageRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
