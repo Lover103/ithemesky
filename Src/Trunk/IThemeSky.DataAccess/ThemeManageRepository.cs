@@ -25,7 +25,27 @@ namespace IThemeSky.DataAccess
 
         }
         #region IThemeManageRepository members
-
+        /// <summary>
+        /// 获取一个主题实体
+        /// </summary>
+        /// <param name="themeId">主题id</param>
+        public Theme GetTheme(int themeId)
+        {
+            string cmdText = "select * from Theme where ThemeId=@ThemeId ";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				SqlParameterHelper.BuildInputParameter("@ThemeId",SqlDbType.Int, 4, themeId)
+			};
+            Theme model = null;
+            using (IDataReader dataReader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText, parameters))
+            {
+                if (dataReader.Read())
+                {
+                    model = BindTheme(dataReader);
+                }
+            }
+            return model;
+        }
         /// <summary>
         /// 添加新的主题
         /// </summary>
@@ -73,8 +93,9 @@ namespace IThemeSky.DataAccess
         }
 
         /// <summary>
-        /// 更新主题
+        /// 更新一条数据
         /// </summary>
+        /// <param name="theme">主题实体</param>
         public bool UpdateTheme(Theme theme)
         {
             string cmdText = @"
@@ -107,28 +128,28 @@ namespace IThemeSky.DataAccess
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				SqlParameterHelper.BuildInputParameter("@ThemeId", SqlDbType.Int, 4, theme.ThemeId),
-				SqlParameterHelper.BuildInputParameter("@CategoryId",SqlDbType.Int, 4, theme.CategoryId),
-				SqlParameterHelper.BuildInputParameter("@ParentCategoryId",SqlDbType.Int, 4, theme.ParentCategoryId),
-				SqlParameterHelper.BuildInputParameter("@Title",SqlDbType.VarChar, 300, theme.Title),
-				SqlParameterHelper.BuildInputParameter("@FileSize",SqlDbType.BigInt, 8, theme.FileSize),
-				SqlParameterHelper.BuildInputParameter("@Description",SqlDbType.VarChar, 1000, theme.Description),
-				SqlParameterHelper.BuildInputParameter("@DisplayState",SqlDbType.SmallInt, 2, theme.DisplayState.ToInt32()),
-				SqlParameterHelper.BuildInputParameter("@CheckState",SqlDbType.SmallInt, 2, theme.CheckState.ToInt32()),
-				SqlParameterHelper.BuildInputParameter("@AuthorId",SqlDbType.Int, 4, theme.AuthorId),
-				SqlParameterHelper.BuildInputParameter("@CheckerId",SqlDbType.Int, 4, theme.CheckerId),
-				SqlParameterHelper.BuildInputParameter("@CommendIndex",SqlDbType.Int, 4, theme.CommendIndex),
-				SqlParameterHelper.BuildInputParameter("@ThumbnailName",SqlDbType.VarChar, 40, theme.ThumbnailName),
-				SqlParameterHelper.BuildInputParameter("@AddTime",SqlDbType.DateTime, 8, theme.AddTime),
-				SqlParameterHelper.BuildInputParameter("@UpdateTime",SqlDbType.DateTime, 8, theme.UpdateTime),
-				SqlParameterHelper.BuildInputParameter("@RateScore",SqlDbType.Int, 4, theme.RateScore),
-				SqlParameterHelper.BuildInputParameter("@RateNumbers",SqlDbType.Int, 4, theme.RateNumbers),
-				SqlParameterHelper.BuildInputParameter("@Comments",SqlDbType.Int, 4, theme.Comments),
-				SqlParameterHelper.BuildInputParameter("@Downloads",SqlDbType.Int, 4, theme.Downloads),
-				SqlParameterHelper.BuildInputParameter("@Views",SqlDbType.Int, 4, theme.Views),
-				SqlParameterHelper.BuildInputParameter("@LastWeekDownloads",SqlDbType.Int, 4, theme.LastWeekDownloads),
-				SqlParameterHelper.BuildInputParameter("@LastMonthDownloads",SqlDbType.Int, 4, theme.LastMonthDownloads),
-				SqlParameterHelper.BuildInputParameter("@Source",SqlDbType.Int, 4, theme.Source.ToInt32()),
-                SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.VarChar, 300, theme.DownloadUrl)
+				SqlParameterHelper.BuildInputParameter("@CategoryId", SqlDbType.Int, 4, theme.CategoryId),
+				SqlParameterHelper.BuildInputParameter("@ParentCategoryId", SqlDbType.Int, 4, theme.ParentCategoryId),
+				SqlParameterHelper.BuildInputParameter("@Title", SqlDbType.VarChar, 300, theme.Title),
+				SqlParameterHelper.BuildInputParameter("@FileSize", SqlDbType.BigInt, 8, theme.FileSize),
+				SqlParameterHelper.BuildInputParameter("@Description", SqlDbType.VarChar, 1000, theme.Description),
+				SqlParameterHelper.BuildInputParameter("@DisplayState", SqlDbType.SmallInt, 2, theme.DisplayState),
+				SqlParameterHelper.BuildInputParameter("@CheckState", SqlDbType.SmallInt, 2, theme.CheckState),
+				SqlParameterHelper.BuildInputParameter("@AuthorId", SqlDbType.Int, 4, theme.AuthorId),
+				SqlParameterHelper.BuildInputParameter("@CheckerId", SqlDbType.Int, 4, theme.CheckerId),
+				SqlParameterHelper.BuildInputParameter("@CommendIndex", SqlDbType.Int, 4, theme.CommendIndex),
+				SqlParameterHelper.BuildInputParameter("@ThumbnailName", SqlDbType.VarChar, 40, theme.ThumbnailName),
+				SqlParameterHelper.BuildInputParameter("@AddTime", SqlDbType.DateTime, 8, theme.AddTime),
+				SqlParameterHelper.BuildInputParameter("@UpdateTime", SqlDbType.DateTime, 8, theme.UpdateTime),
+				SqlParameterHelper.BuildInputParameter("@RateScore", SqlDbType.Int, 4, theme.RateScore),
+				SqlParameterHelper.BuildInputParameter("@RateNumbers", SqlDbType.Int, 4, theme.RateNumbers),
+				SqlParameterHelper.BuildInputParameter("@Comments", SqlDbType.Int, 4, theme.Comments),
+				SqlParameterHelper.BuildInputParameter("@Downloads", SqlDbType.Int, 4, theme.Downloads),
+				SqlParameterHelper.BuildInputParameter("@Views", SqlDbType.Int, 4, theme.Views),
+				SqlParameterHelper.BuildInputParameter("@LastWeekDownloads", SqlDbType.Int, 4, theme.LastWeekDownloads),
+				SqlParameterHelper.BuildInputParameter("@LastMonthDownloads", SqlDbType.Int, 4, theme.LastMonthDownloads),
+				SqlParameterHelper.BuildInputParameter("@Source", SqlDbType.Int, 4, theme.Source),
+				SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.VarChar, 300, theme.DownloadUrl)
 			};
             return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
         }
@@ -198,7 +219,7 @@ namespace IThemeSky.DataAccess
         /// 增加主题分类
         /// </summary>
         /// <param name="category">主题分类实体</param>
-        public bool Add(ThemeCategory category)
+        public bool AddCategory(ThemeCategory category)
         {
             string cmdText = @"
 			insert into ThemeCategory
@@ -221,7 +242,7 @@ namespace IThemeSky.DataAccess
         /// 更新主题分类
         /// </summary>
         /// <param name="category">主题分类实体</param>
-        public int Update(ThemeCategory category)
+        public bool UpdateCategory(ThemeCategory category)
         {
             string cmdText = @"
 			update ThemeCategory set
@@ -242,21 +263,21 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@SortNumber", SqlDbType.Int, 4, category.SortNumber),
 				SqlParameterHelper.BuildInputParameter("@BindTagCategories", SqlDbType.VarChar, 500, category.BindTagCategories)
 			};
-            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters);
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
         }
 
         /// <summary>
         /// 删除一条数据
         /// </summary>
         /// <param name="categoryId">主题分类id</param>
-        public int Delete(int categoryId)
+        public bool DeleteCategory(int categoryId)
         {
             string cmdText = "delete from ThemeCategory where CategoryId=@CategoryId ";
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				SqlParameterHelper.BuildInputParameter("@CategoryId",SqlDbType.Int, 4, categoryId)
 			};
-            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters);
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
         }        #endregion
     }
 }

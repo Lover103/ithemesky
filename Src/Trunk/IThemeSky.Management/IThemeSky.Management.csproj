@@ -56,7 +56,9 @@
     <Content Include="Default.aspx" />
     <Content Include="LeftMenu.aspx" />
     <Content Include="Resources\Css\Content.css" />
+    <Content Include="Resources\Js\jquery-1.4.1.min.js" />
     <Content Include="Theme\ThemeInfoManage.aspx" />
+    <Content Include="Theme\ThemeListManage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -82,8 +84,27 @@
     <Compile Include="Theme\ThemeInfoManage.aspx.designer.cs">
       <DependentUpon>ThemeInfoManage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Theme\ThemeListManage.aspx.cs">
+      <DependentUpon>ThemeListManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Theme\ThemeListManage.aspx.designer.cs">
+      <DependentUpon>ThemeListManage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IThemeSky.DataAccess\IThemeSky.DataAccess.csproj">
+      <Project>{6990CB04-9764-4BBC-94A5-F9E95DF41E30}</Project>
+      <Name>IThemeSky.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IThemeSky.Library\IThemeSky.Library.csproj">
+      <Project>{D3ED2D0D-0575-4135-923D-3EC8AD32CFB9}</Project>
+      <Name>IThemeSky.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IThemeSky.Model\IThemeSky.Model.csproj">
+      <Project>{7F4BD5DA-2315-4E2E-982D-8AF1D66D10BB}</Project>
+      <Name>IThemeSky.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IThemeSky.WebControls\IThemeSky.WebControls.csproj">
       <Project>{0F038EDA-7B96-4462-BBAB-171249DB3C89}</Project>
       <Name>IThemeSky.WebControls</Name>

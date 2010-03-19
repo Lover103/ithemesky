@@ -12,11 +12,21 @@ namespace IThemeSky.DataAccess
     public interface IThemeManageRepository
     {
         /// <summary>
+        /// 获取一个主题实体
+        /// </summary>
+        /// <param name="themeId">主题id</param>
+        Theme GetTheme(int themeId);
+        /// <summary>
         /// 添加新的主题
         /// </summary>
         /// <param name="theme">主题对象</param>
         /// <returns></returns>
         bool AddTheme(Theme theme);
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        /// <param name="theme">主题实体</param>
+        bool UpdateTheme(Theme theme);
         /// <summary>
         /// 为指定的主题添加下载地址
         /// </summary>
@@ -33,5 +43,20 @@ namespace IThemeSky.DataAccess
         /// <param name="tagName"></param>
         /// <returns></returns>
         bool MappingThemeTag(int themeId, string tagName);
+        /// <summary>
+        /// 增加主题分类
+        /// </summary>
+        /// <param name="category">主题分类实体</param>
+        bool AddCategory(ThemeCategory category);
+        /// <summary>
+        /// 更新主题分类
+        /// </summary>
+        /// <param name="category">主题分类实体</param>
+        bool UpdateCategory(ThemeCategory category);
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        /// <param name="categoryId">主题分类id</param>
+        bool DeleteCategory(int categoryId);
     }
 }
