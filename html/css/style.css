@@ -5,7 +5,7 @@ h1, h2, h3, h4, h5, h6{ font-weight:normal; font-size:100%;}
 address,caption,cite,code,dfn,em,th,var { font-weight:normal; font-style:normal;} 
 table{ border-collapse:collapse; border-spacing:0;}
 fieldset,img,abbr,acronym{border:0;}
-input,textarea,select{ font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif; font-size:12px;}
+input,textarea,select,button{ font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif; font-size:12px; color:#769FA3;}
 caption,th{ text-align:left;}
 q:before, q:after{ content: '';}
 ul,ol,dl{ list-style:none;}
@@ -25,8 +25,8 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 #headerWrapper{ background:url(../images/bg_header.jpg) no-repeat center top;}
 #footerWrapper{ background:url(../images/bg_footer.png) no-repeat center top; height:110px;}
 #header{ height:100px;}
-#sidebar{ float:left; width:200px;}
-#mainContent{ float:left; width:600px; margin:0 10px; _display:inline;}
+#sidebar{ float:left; width:200px; margin-right:10px; _display:inline;}
+#mainContent{ float:left; width:600px;}
 #subContent{ float:right; width:160px;}
 #main{ float:right; width:770px;}
 
@@ -192,3 +192,112 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .pageInfo .pageStat .inputNum{ width:25px; height:18px; background:url(../images/sprites_common.png) no-repeat -295px -590px;}
 .pageInfo .pageStat .inputNum input{ background:none; border:none; width:25px; padding:1px 0; _padding:0; line-height:16px; text-align:center; color:#D7D9D9;}
 .pageInfo .btnGo{ margin-top:1px; width:26px; height:16px; border:none; background:url(../images/sprites_common.png) no-repeat -390px -590px; color:#769FA3; font-size:11px; line-height:16px;}
+
+/*theme detail*/
+.themeDetail{ margin-top:10px; background:url(../images/sprites_box.png) no-repeat -1920px 0;}
+.detailSide{ float:left; width:202px; margin:13px; _display:inline;}
+.detailSide .themeCut{ padding:15px; width:172px; height:257px; background:url(../images/sprites_detail.png) no-repeat 0 0;}
+.detailSide .themeCut a{ padding:1px; display:block; width:170px; height:255px; font:0/0 Arial;}
+.detailSide .themeCut a:hover{ padding:0; border:1px solid #2D494B;}
+.detailSide .btn li{ float:left; margin:8px 0 0 10px; _display:inline; width:86px; height:22px;}
+.detailSide .btn a{ display:block; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
+.detailSide .btn .previous a{ background-position:0 -290px;}
+.detailSide .btn .previous a:hover{ background-position:0 -315px;}
+.detailSide .btn .next a{ background-position:-90px -290px;}
+.detailSide .btn .next a:hover{ background-position:-90px -315px;}
+.detailInfo{ float:left; width:360px;}
+.detailInfo .title{ font-size:14px; font-weight:bold; color:#CCD3DC; margin:20px 0 5px 0;}
+.detailInfo .details{ padding-top:5px; width:360px;}
+.detailInfo .details dt{ float:left; color:#CCD2DC; font-weight:bold; text-align:right; width:85px; padding-right:5px;}
+.detailInfo .details dd{ float:left; width:270px;}
+.detailInfo .details dd a{ white-space:nowrap;}
+.detailInfo .btnDownload{ margin:15px 80px;}
+.detailInfo .btnDownload a{ display:block; width:190px; height:38px; background:url(../images/sprites_detail.png) no-repeat -210px 0; text-indent:-999em; overflow:hidden;}
+.detailInfo .btnDownload a:hover{ background:url(../images/sprites_detail.png) no-repeat -410px 0;}
+.detailRate{ position:relative; z-index:1; width:120px; height:22px; background:url(../images/sprites_detail.png) no-repeat -210px -50px;}
+.detailRate .rateResult{ display:block; width:118px; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
+.detailRate .star0{ background-position:-210px -50px;}
+.detailRate .star1{ background-position:-210px -75px;}
+.detailRate .star2{ background-position:-210px -100px;}
+.detailRate .star3{ background-position:-210px -125px;}
+.detailRate .star4{ background-position:-210px -150px;}
+.detailRate .star5{ background-position:-210px -175px;}
+.detailRate li{ float:left;}
+.detailRate li a{ display:block; height:22px; width:24px; text-indent:-999em; overflow:hidden; z-index:2; position:absolute; top:0;}
+.detailRate li a:hover{ background:url(../images/sprites_detail.png) no-repeat -210px -200px; z-index:1; left:0;}
+.detailRate a.rateS1{ left:0;}
+.detailRate a.rateS1:hover{ width:24px;}
+.detailRate a.rateS2{ left:24px;}
+.detailRate a.rateS2:hover{ width:48px;}
+.detailRate a.rateS3{ left:48px;}
+.detailRate a.rateS3:hover{ width:72px;}
+.detailRate a.rateS4{ left:72px;}
+.detailRate a.rateS4:hover{ width:96px;}
+.detailRate a.rateS5{ left:96px;}
+.detailRate a.rateS5:hover{ width:118px;}
+.detailInfo .installIip{ padding-left:24px; background:url(../images/sprites_detail.png) no-repeat -580px -60px;}
+.themeShare{ margin:10px 0; width:350px; height:20px; padding:5px; border:1px solid #102529;}
+.themeShare dt{ float:left; color:#CCD2DC; font-weight:bold; text-align:right; width:120px;}
+.themeShare dd{ float:left; margin-left:5px; _display:inline; width:20px; height:20px;}
+.themeShare dd a{ display:block; height:20px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat; filter:Alpha(opacity=70); -moz-opacity:.70; opacity:0.70;}
+.themeShare dd a:hover{ filter:Alpha(opacity=100); -moz-opacity:1.0; opacity:1.0;}
+.themeShare .shareTwitter a{ background-position:-360px -100px;}
+.themeShare .shareFacebook a{ background-position:-385px -100px;}
+.themeShare .shareDigg a{ background-position:-410px -100px;}
+.themeShare .shareStumbleUpon a{ background-position:-435px -100px;}
+.themeShare .shareReddit a{ background-position:-460px -100px;}
+.themeDetailCol .mainColHead{ margin:0 2px; background:url(../images/sprites_detail.png) no-repeat 0 -350px; height:31px;}
+.themeDetailCol .colTitle{ line-height:30px; padding:0 16px;}
+
+/*theme comments*/
+.themeComment{ clear:both; margin-top:10px; width:600px; background:url(../images/sprites_box.png) no-repeat -400px 0;}
+.commentHead{ padding:10px 0 0 20px; width:560px; font-weight:bold; font-size:13px; color:#CCD3DC;}
+.commentList{ width:570px; margin:0 auto;}
+.commentList .commentContent{ padding:15px 5px; width:560px; border-bottom:1px solid #283533;}
+.commentData{ padding-left:25px; height:36px; background:url(../images/sprites_detail.png) no-repeat -585px -387px;}
+.commentData cite{ float:left; font-weight:bold; color:#9FBCBF;}
+.commentMeta{ float:left; clear:left; font-size:11px; color:#4A6D71;}
+.commentNumber{ float:right; height:36px; color:#527679;}
+.commentEntry{ padding:5px 0 0 25px; width:535px;}
+.commentPage{ width:570px; margin:10px auto 0 auto;}
+.commentPage ul{ float:right;}
+.commentPage li{ float:left; margin:0 3px; _display:inline;}
+.commentPage li a{ background:#001B28; height:14px; line-height:14px; border:1px solid #224548; padding:0 3px;}
+.commentPage li a:hover{ background:#002437; border-color:#295457; color:#C9D8DA;}
+.commentPage li.current{ font-weight:bold; color:#CCD3DC; line-height:14px;}
+.commentAdd{ width:570px; padding:15px; background:url(../images/sprites_box.png) no-repeat -1000px bottom;}
+.commentForm{ clear:both; width:570px; padding-top:8px;}
+.commentForm .label{ float:left; width:115px; font-weight:bold; padding-right:5px; text-align:right; line-height:20px; color:#9FBABF;}
+.commentForm small{ font-size:11px; padding-left:5px;}
+.commentForm input{ float:left; padding:1px; height:16px; line-height:16px; width:160px;}
+.commentForm .inputNormal,.commentForm .textareaNormal{background:#000B0B; border:1px solid #253634;}
+.commentForm .inputFocus,.commentForm .textareaFocus{background:#001313; border:1px solid #304543;}
+.commentForm .textarea{ float:left; width:450px;}
+.commentForm textarea{ width:446px; height:96px; line-height:1.5; padding:1px; scrollbar-base-color:#000B0B; scrollbar-face-color:none; scrollbar-arrow-color:#9FBABF; scrollbar-track-color:#000B0B; scrollbar-3dlight-color:#000B0B; scrollbar-darkshadow-color:#000B0B; scrollbar-highlight-color:#304543; scrollbar-shadow-color:#253634;}
+.commentBtn{ clear:both; padding-top:10px; text-align:right;}
+.commentBtn button{ width:100px; height:24px; background:url(../images/sprites_detail.png) no-repeat 0 -400px; color:#D9DCDD; border:none; padding:0; margin:0;}
+
+/*detail page side*/
+.themeDetailSub{ margin-bottom:0;}
+.themeDetailSub .subColHead{ margin-top:10px; height:33px; background:url(../images/sprites_detail.png) no-repeat 0 -440px; text-indent:15px; line-height:32px;}
+.subRecommended,.subTopDownload{ padding:5px 10px;}
+.subRecommended li{ height:20px; background:url(../images/sprites_detail.png) no-repeat -591px -470px; padding:4px 0 0 15px;}
+.themeDetailSub .downloadNum{ float:right; color:#CCD2DC; font-size:11px; letter-spacing:-1px; line-height:18px;}
+.subTopDownload li{ clear:both;}
+.subTopDownload .normal{ float:left; width:140px; padding-top:4px; height:20px;}
+.subTopDownload .rankNum{ float:left; width:15px; height:13px; font-size:11px; line-height:13px; text-align:center; color:#CCD2DC; background:url(../images/sprites_detail.png) no-repeat -585px -440px; margin:3px 6px 0 0; _margin:3px 3px 0 0;}
+.subTopDownload .title{ float:left;}
+.subTopDownload .champion{ border-bottom:1px solid #2A3C39; padding:7px 0; width:140px;}
+.subTopDownload .champion dt{ float:left; width:36px; height:52px;}
+.subTopDownload .champion dt a{ display:block; width:34px; height:50px; border:1px solid #394848;}
+.subTopDownload .champion dt img{ display:block; border:1px solid #081C1D; width:32px; height:48px;}
+.subTopDownload .champion dd{ float:right; width:98px; line-height:16px;}
+.subTopDownload .champion small{ font-size:10px; font-weight:bold;}
+.subTopDownload .champion .downloadNum{ float:none; display:inline;}
+.subTopDownload .rateResult{ display:block; margin:5px 0 3px 0; height:11px; width:75px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_header.png) no-repeat;}
+.subTopDownload .star0{ background-position:-150px -150px;}
+.subTopDownload .star1{ background-position:-150px -170px;}
+.subTopDownload .star2{ background-position:-150px -190px;}
+.subTopDownload .star3{ background-position:-150px -210px;}
+.subTopDownload .star4{ background-position:-150px -230px;}
+.subTopDownload .star5{ background-position:-150px -250px;}
