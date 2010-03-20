@@ -73,6 +73,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetailModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\ListModel.cs" />
@@ -80,16 +81,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\fancybox.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\bg_body.jpg" />
     <Content Include="Content\images\bg_footer.png" />
     <Content Include="Content\images\bg_header.jpg" />
+    <Content Include="Content\images\fancy_bg.png" />
+    <Content Include="Content\images\fancy_close.png" />
+    <Content Include="Content\images\fancy_loading.png" />
     <Content Include="Content\images\ico_arrow_sort.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\sprites_box.png" />
     <Content Include="Content\images\sprites_box_wide.png" />
     <Content Include="Content\images\sprites_common.png" />
+    <Content Include="Content\images\sprites_detail.png" />
     <Content Include="Content\images\sprites_header.png" />
+    <Content Include="Content\images\temp\theme_cut01.jpg" />
+    <Content Include="Content\images\temp\theme_full_01.jpg" />
     <Content Include="Content\images\temp\theme_normal01.jpg" />
     <Content Include="Content\images\temp\theme_normal02.jpg" />
     <Content Include="Content\images\temp\theme_normal03.jpg" />
@@ -98,8 +106,10 @@
     <Content Include="Content\images\temp\theme_normal06.jpg" />
     <Content Include="Content\images\temp\theme_normal07.jpg" />
     <Content Include="Content\images\temp\theme_normal08.jpg" />
+    <Content Include="Content\js\fancybox.js" />
     <Content Include="Content\js\IThemeSky.js" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Home\Detail.aspx" />
     <Content Include="Views\Home\Search.aspx" />
     <Content Include="Views\Home\List.aspx" />
     <Content Include="Views\Shared\HotTags.ascx" />

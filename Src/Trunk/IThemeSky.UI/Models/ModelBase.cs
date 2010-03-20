@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using IThemeSky.Model;
 using IThemeSky.DataAccess;
+using System.Globalization;
 
 namespace IThemeSky.UI.Models
 {
@@ -15,6 +16,14 @@ namespace IThemeSky.UI.Models
             get
             {
                 return _themeRepository.GetThemeCategories();
+            }
+        }
+
+        public CultureInfo USACultureInfo
+        {
+            get
+            {
+                return new CultureInfo("en-US");
             }
         }
     }
