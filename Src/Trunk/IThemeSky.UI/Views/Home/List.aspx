@@ -29,7 +29,7 @@
 		<!--select tag begin-->
 		<div class="listSelect">
 			<!--has selected begin-->
-			<%--<div class="selectedTags">
+			<div class="selectedTags">
 				<!--<div class="tips">Choose anyone of the tags below, you may find the themes you like!</div>-->
 				<dl class="clearfix">
 					<dt>You have selected:</dt>
@@ -45,7 +45,7 @@
 						<a href="#">Man</a>
 					</dd>
 				</dl>
-			</div>--%>
+			</div>
 			<!--has selected end-->
 			<!--tags sort list begin-->
 			<div class="selectTags">
@@ -53,6 +53,7 @@
 					<dt>Color:</dt>
 					<dd>
 						<ul class="clearfix">
+						    <li><a href="#">All</a></li>
 							<li><a href="#">Blue</a></li>
 							<li><a href="#">White</a></li>
 							<li><a href="#">Orange</a></li>
@@ -69,6 +70,7 @@
 					<dt>Holiday:</dt>
 					<dd>
 						<ul class="clearfix">
+						    <li><a href="#">All</a></li>
 							<li><a href="#">New Year’s Day</a></li>
 							<li><a href="#">Valentines Day</a></li>
 							<li><a href="#">Easter Day</a></li>

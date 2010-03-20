@@ -73,7 +73,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommentListModel.cs" />
     <Compile Include="Models\DetailModel.cs" />
+    <Compile Include="Models\PostCommentModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\ListModel.cs" />
@@ -114,8 +116,10 @@
     <Content Include="Views\Home\List.aspx" />
     <Content Include="Views\Shared\HotTags.ascx" />
     <Content Include="Views\Shared\NormalThemeRepeater.ascx" />
+    <Content Include="Views\Shared\PostCommentForm.ascx" />
     <Content Include="Views\Shared\SuggestThemeRepeater.ascx" />
     <Content Include="Views\Shared\ThemeCategories.ascx" />
+    <Content Include="Views\Shared\ThemeCommentRepeater.ascx" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />

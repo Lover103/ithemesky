@@ -36,6 +36,16 @@ namespace IThemeSky.Model
         public string Content { get; set; }
 
         /// <summary>
+        /// UserName
+        /// </summary>
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// UserMail
+        /// </summary>
+        public string UserMail { get; set; }
+
+        /// <summary>
         /// UserId
         /// </summary>
         public int UserId { get; set; }

@@ -11,6 +11,11 @@ namespace IThemeSky.Library.Extensions
     {
         public static void RenderPagination(this HtmlHelper helper, string urlPattern, int pageIndex, int pageSize, int recordCount, int displayPageLinkNumber)
         {
+            RenderPagination(helper, urlPattern, pageIndex, pageSize, recordCount, displayPageLinkNumber, true, true);
+        }
+
+        public static void RenderPagination(this HtmlHelper helper, string urlPattern, int pageIndex, int pageSize, int recordCount, int displayPageLinkNumber, bool displayGoLink, bool displayPageSTAT)
+        {
             HttpResponse response = HttpContext.Current.Response;
             if (recordCount > pageSize)
             {
@@ -47,31 +52,37 @@ namespace IThemeSky.Library.Extensions
                     response.Write(string.Format("<li class=\"next\"><a href=\"{0}\">Next</a></li>", string.Format(urlPattern, pageIndex + 1)));
                 }
                 response.Write("</ul>");
-                response.Write("<ul class=\"pageStat\">");
-                response.Write(string.Format("<li>{0}/{1} page(s)</li>", pageIndex, pageCount));
-                string textBoxId = Guid.NewGuid().ToString();
-                response.Write("<li>Go to</li>");
-                response.Write(string.Format("<li class=\"inputNum\"><input id=\"{0}\" value=\"{1}\" type=\"text\" onkeydown=\"__PageSearchKeyDown('{0}', false, event)\" /></li>", textBoxId, pageIndex));
-                response.Write(string.Format("<li><input type=\"button\" value=\"GO\" class=\"btnGo\" onclick=\"__PageSearchKeyDown('{0}', true, event)\" /></li>", textBoxId));
-                response.Write(string.Format(@"
-                    <script type=""text/javascript"">
-                        function __PageSearchKeyDown(objId, flag, evt) {{
-                            evt = window.event ? window.event : evt;
-                            if (flag || evt.keyCode == 13) {{
-                                var pageIndex = document.getElementById(objId).value;
-                                if (pageIndex > {1}) {{
-                                    pageIndex = {1};
+
+                if (displayPageSTAT)
+                {
+                    response.Write("<ul class=\"pageStat\">");
+                    response.Write(string.Format("<li>{0}/{1} page(s)</li>", pageIndex, pageCount));
+                    if (displayGoLink)
+                    {
+                        string textBoxId = Guid.NewGuid().ToString();
+                        response.Write("<li>Go to</li>");
+                        response.Write(string.Format("<li class=\"inputNum\"><input id=\"{0}\" value=\"{1}\" type=\"text\" onkeydown=\"__PageSearchKeyDown('{0}', false, event)\" /></li>", textBoxId, pageIndex));
+                        response.Write(string.Format("<li><input type=\"button\" value=\"GO\" class=\"btnGo\" onclick=\"__PageSearchKeyDown('{0}', true, event)\" /></li>", textBoxId));
+                        response.Write(string.Format(@"
+                        <script type=""text/javascript"">
+                            function __PageSearchKeyDown(objId, flag, evt) {{
+                                evt = window.event ? window.event : evt;
+                                if (flag || evt.keyCode == 13) {{
+                                    var pageIndex = document.getElementById(objId).value;
+                                    if (pageIndex > {1}) {{
+                                        pageIndex = {1};
+                                    }}
+                                    window.location.href = '{0}'.replace('{{0}}', pageIndex);
                                 }}
-                                window.location.href = '{0}'.replace('{{0}}', pageIndex);
                             }}
-                        }}
-                    </script>"
-                    , urlPattern
-                    , pageCount
-                    ));
-                response.Write("</ul>");
+                        </script>"
+                            , urlPattern
+                            , pageCount
+                            ));
+                    }
+                    response.Write("</ul>");
+                }
             }
         }
-
     }
 }

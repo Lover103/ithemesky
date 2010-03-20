@@ -35,9 +35,9 @@ namespace IThemeSky.DataAccess
         {
             string cmdText = @"
 			insert into ThemeComment
-				(ThemeId,RateType,Title,Content,UserId,UserIp,AddTime,UpdateTime,DiggNumber,BuryNumber)
+				(ThemeId,RateType,Title,Content,UserName,UserMail,UserId,UserIp,AddTime,UpdateTime,DiggNumber,BuryNumber)
 			values
-				(@ThemeId,@RateType,@Title,@Content,@UserId,@UserIp,@AddTime,@UpdateTime,@DiggNumber,@BuryNumber)
+				(@ThemeId,@RateType,@Title,@Content,@UserName,@UserMail,@UserId,@UserIp,@AddTime,@UpdateTime,@DiggNumber,@BuryNumber)
 			";
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -45,6 +45,8 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@RateType",SqlDbType.Int, 4, comment.RateType),
 				SqlParameterHelper.BuildInputParameter("@Title",SqlDbType.VarChar, 300, comment.Title),
 				SqlParameterHelper.BuildInputParameter("@Content",SqlDbType.VarChar, 16, comment.Content),
+                SqlParameterHelper.BuildInputParameter("@UserName",SqlDbType.VarChar, 100, comment.UserName),
+                SqlParameterHelper.BuildInputParameter("@UserMail",SqlDbType.VarChar, 300, comment.UserMail),
 				SqlParameterHelper.BuildInputParameter("@UserId",SqlDbType.Int, 4, comment.UserId),
 				SqlParameterHelper.BuildInputParameter("@UserIp",SqlDbType.VarChar, 40, comment.UserIp),
 				SqlParameterHelper.BuildInputParameter("@AddTime",SqlDbType.DateTime, 8, comment.AddTime),
@@ -83,9 +85,9 @@ namespace IThemeSky.DataAccess
             SqlParameter[] parameters = new SqlParameter[] 
 			{
 				SqlParameterHelper.BuildParameter("@RecordNum",SqlDbType.Int,4, ParameterDirection.InputOutput, recordCount),
-				SqlParameterHelper.BuildInputParameter("@SelectList",SqlDbType.VarChar,2000,"CommentId,ThemeId,RateType,Title,Content,UserId,UserIp,AddTime,UpdateTime,DiggNumber,BuryNumber"),
+				SqlParameterHelper.BuildInputParameter("@SelectList",SqlDbType.VarChar,2000,"*"),
 				SqlParameterHelper.BuildInputParameter("@TableSource",SqlDbType.VarChar,100,"ThemeComment"),
-				SqlParameterHelper.BuildInputParameter("@SearchCondition",SqlDbType.VarChar,2000, ""),
+				SqlParameterHelper.BuildInputParameter("@SearchCondition",SqlDbType.VarChar,2000, "ThemeId=" + themeId),
 				SqlParameterHelper.BuildInputParameter("@OrderExpression",SqlDbType.VarChar,1000, "AddTime DESC"),
 				SqlParameterHelper.BuildInputParameter("@PageSize",SqlDbType.Int,4,pageSize),
 				SqlParameterHelper.BuildInputParameter("@PageIndex",SqlDbType.Int,4,pageIndex)
@@ -98,7 +100,7 @@ namespace IThemeSky.DataAccess
                     list.Add(BindThemeComment(dataReader));
                 }
             }
-            recordCount = Convert.ToInt32(parameters[0]);
+            recordCount = Convert.ToInt32(parameters[0].Value);
             return list;
         }        #endregion
 
@@ -114,6 +116,8 @@ namespace IThemeSky.DataAccess
                 RateType = Convert.ToInt32(dataReader["RateType"]),
                 Title = dataReader["Title"].ToString(),
                 Content = dataReader["Content"].ToString(),
+                UserName = dataReader["UserName"].ToString(),
+                UserMail = dataReader["UserMail"].ToString(),
                 UserId = Convert.ToInt32(dataReader["UserId"]),
                 UserIp = dataReader["UserIp"].ToString(),
                 AddTime = Convert.ToDateTime(dataReader["AddTime"]),
