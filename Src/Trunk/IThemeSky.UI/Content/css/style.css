@@ -33,6 +33,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .b{ font-weight:bold;}
 .u{ text-decoration:underline;}
 .orange{ color:#FC0;}
+.scrollbar{ scrollbar-base-color:#000B0B; scrollbar-face-color:none; scrollbar-arrow-color:#9FBABF; scrollbar-track-color:#000B0B; scrollbar-3dlight-color:#000B0B; scrollbar-darkshadow-color:#000B0B; scrollbar-highlight-color:#304543; scrollbar-shadow-color:#253634;}
 
 /*header*/
 .logo{ float:left; width:230px; margin-top:8px; font:0/0 Arial;}
@@ -203,8 +204,10 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .detailSide .btn a{ display:block; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
 .detailSide .btn .previous a{ background-position:0 -290px;}
 .detailSide .btn .previous a:hover{ background-position:0 -315px;}
+.detailSide .btn .previous a.none{ background-position:-190px -290px;}
 .detailSide .btn .next a{ background-position:-90px -290px;}
 .detailSide .btn .next a:hover{ background-position:-90px -315px;}
+.detailSide .btn .next a.none{ background-position:-285px -290px;}
 .detailInfo{ float:left; width:360px;}
 .detailInfo .title{ font-size:14px; font-weight:bold; color:#CCD3DC; margin:20px 0 5px 0;}
 .detailInfo .details{ padding-top:5px; width:360px;}
