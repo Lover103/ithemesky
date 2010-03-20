@@ -246,6 +246,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .themeShare .shareDigg a{ background-position:-410px -100px;}
 .themeShare .shareStumbleUpon a{ background-position:-435px -100px;}
 .themeShare .shareReddit a{ background-position:-460px -100px;}
+.themeShare .shareDelicious a{ background-position:-485px -100px;}
 .themeDetailCol .mainColHead{ margin:0 2px; background:url(../images/sprites_detail.png) no-repeat 0 -350px; height:31px;}
 .themeDetailCol .colTitle{ line-height:30px; padding:0 16px;}
 
