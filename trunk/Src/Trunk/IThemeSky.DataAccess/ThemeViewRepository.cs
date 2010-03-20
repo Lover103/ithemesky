@@ -282,7 +282,7 @@ namespace IThemeSky.DataAccess
                 filter.CategoryIds.Add(categoryId);
             }
             string searchCondition = filter.ToString();
-            searchCondition += " and 0.3 >= CAST(CHECKSUM(NEWID(), ThemeId) & 0x7fffffff AS float) / CAST (0x7fffffff AS int)";
+            searchCondition += " and 0.6 >= CAST(CHECKSUM(NEWID(), ThemeId) & 0x7fffffff AS float) / CAST (0x7fffffff AS int)";
             return GetSimpleThemes(GetDataViewName(_filter, sort), searchCondition, GetSortExpression(sort), displayNumber); 
         }
 

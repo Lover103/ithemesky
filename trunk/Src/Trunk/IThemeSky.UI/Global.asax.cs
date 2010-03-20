@@ -47,23 +47,34 @@ namespace IThemeSky.UI
                 "search/{sort}/{keyword}/{pageIndex}",
                 new { controller = "Home", action = "Search", sort = "new", keyword = "", pageIndex = 1 }
             );
-            //下载排行数据接口
-            routes.MapRoute(
-                "Service", // Route name
-                "Service/GetSortThemes/{sort},{displayNumber}", // URL with parameters
-                new { controller = "Service", action = "GetSortThemes", sort = "new", displayNumber = 8 } // Parameter defaults
-            );
-            routes.MapRoute(
-                "Service2", // Route name
-                "Service/GetSuggestThemes/{keyword},{displayNumber}", // URL with parameters
-                new { controller = "Service", action = "GetSuggestThemes", keyword = "new", displayNumber = 3 } // Parameter defaults
-            );
-
+            
             //详细页
             routes.MapRoute(
                 "Detail", // Route name
                 "iphone-themes/{themeName}/{themeId}", // URL with parameters
                 new { controller = "Home", action = "Detail" } // Parameter defaults
+            );
+
+            //接口服务
+            routes.MapRoute(
+                "GetSortThemesService", // Route name
+                "Service/GetSortThemes/{sort},{displayNumber}", // URL with parameters
+                new { controller = "Service", action = "GetSortThemes", sort = "new", displayNumber = 8 } // Parameter defaults
+            );
+            routes.MapRoute(
+                "GetSuggestThemesService", // Route name
+                "Service/GetSuggestThemes/{keyword},{displayNumber}", // URL with parameters
+                new { controller = "Service", action = "GetSuggestThemes", keyword = "new", displayNumber = 3 } // Parameter defaults
+            );
+            routes.MapRoute(
+                "GetThemeCommentsService", // Route name
+                "Service/GetThemeComments/{themeId},{pageIndex},{pageSize}", // URL with parameters
+                new { controller = "Service", action = "GetThemeComments", pageIndex=1, pageSize = 5 } // Parameter defaults
+            );
+            routes.MapRoute(
+                "AddThemeCommentsService", // Route name
+                "Service/AddThemeComment", // URL with parameters
+                new { controller = "Service", action = "AddThemeComment" } // Parameter defaults
             );
 
             //默认Route
@@ -72,7 +83,6 @@ namespace IThemeSky.UI
                 "{controller}/{action}/{themeId}", // URL with parameters
                 new { controller = "Home", action = "Index", themeId = UrlParameter.Optional } // Parameter defaults
             );
-
         }
 
         protected void Application_Start()

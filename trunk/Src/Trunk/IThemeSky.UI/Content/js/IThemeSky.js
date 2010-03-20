@@ -17,8 +17,13 @@ function BindSuggestEvent() {
 
             }
             else {
-                $('.searchPannel .searchResult').show('slow');
-                $('.searchPannel .searchResult').load('/Service/GetSuggestThemes/' + $(this).val() + ',3');
+                if ($(this).val() != '') {
+                    $('.searchPannel .searchResult').show('slow');
+                    $('.searchPannel .searchResult').load('/Service/GetSuggestThemes/' + $(this).val() + ',3');
+                }
+                else {
+                    $('.searchPannel .searchResult').hide();
+                }
             }
         }
     );

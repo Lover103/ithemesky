@@ -14,5 +14,19 @@ namespace IThemeSky.Model
         /// 主题分类名称
         /// </summary>
         public string CategoryName { get; set; }
+
+        /// <summary>
+        /// 主题详细页地址
+        /// </summary>
+        public string ThemeDetailUrl
+        {
+            get
+            {
+                return string.Format("/iphone-themes/{0}/{1}"
+                    , Title.Replace(" ", "-")
+                    , ThemeId
+                    );
+            }
+        }
     }
 }
