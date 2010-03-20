@@ -59,6 +59,13 @@ namespace IThemeSky.UI
                 new { controller = "Service", action = "GetSuggestThemes", keyword = "new", displayNumber = 3 } // Parameter defaults
             );
 
+            //详细页
+            routes.MapRoute(
+                "Detail", // Route name
+                "iphone-themes/{themeName}/{themeId}", // URL with parameters
+                new { controller = "Home", action = "Detail" } // Parameter defaults
+            );
+
             //默认Route
             routes.MapRoute(
                 "Default", // Route name

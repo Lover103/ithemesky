@@ -24,15 +24,19 @@ namespace IThemeSky.DataAccess
         /// <summary>
         /// 根据指定主题的上一个主题id
         /// </summary>
+        /// <param name="categoryId">所属分类id</param>
         /// <param name="themeId">主题id</param>
+        /// <param name="themeName">主题名称(out)</param>
         /// <returns></returns>
-        int GetPrevThemeId(int themeId);
+        int GetPrevThemeId(int categoryId, int themeId, out string themeName);
         /// <summary>
         /// 根据指定主题的下一个主题id
         /// </summary>
+        /// <param name="categoryId">所属分类id</param>
         /// <param name="themeId">主题id</param>
+        /// <param name="themeName">主题名称(out)</param>
         /// <returns></returns>
-        int GetNextThemeId(int themeId);
+        int GetNextThemeId(int categoryId, int themeId, out string themeName);
         /// <summary>
         /// 获取主题列表
         /// </summary>
@@ -122,10 +126,11 @@ namespace IThemeSky.DataAccess
         /// <summary>
         /// 获取随机主题
         /// </summary>
+        /// <param name="categoryId">所属分类id</param>
         /// <param name="sort">排序方式</param>
         /// <param name="displayNumber">显示条数</param>
         /// <returns></returns>
-        List<SimpleThemeView> GetRandomThemes(ThemeSortOption sort, int displayNumber);
+        List<SimpleThemeView> GetRandomThemes(int categoryId, ThemeSortOption sort, int displayNumber);
         /// <summary>
         /// 根据过滤器获取所有主题(完整实体)
         /// </summary>

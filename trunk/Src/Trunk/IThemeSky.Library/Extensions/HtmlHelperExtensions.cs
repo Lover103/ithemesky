@@ -39,7 +39,7 @@ namespace IThemeSky.Library.Extensions
                 //输出每页的页码
                 for (int i = beginIndex; i <= endIndex; i++)
                 {
-                    response.Write(string.Format("<li><a href=\"{0}\"{2}>{1}</a></li>", string.Format(urlPattern, i), i, i == pageIndex ? " class=\"current\"" : ""));
+                    response.Write(string.Format("<li{2}><a href=\"{0}\">{1}</a></li>", string.Format(urlPattern, i), i, i == pageIndex ? " class=\"current\"" : ""));
                 }
                 //判断是否输出向后翻页链接
                 if (pageIndex < pageCount)

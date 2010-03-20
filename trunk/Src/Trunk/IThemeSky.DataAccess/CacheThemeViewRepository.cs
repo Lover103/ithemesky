@@ -201,7 +201,7 @@ namespace IThemeSky.DataAccess
         /// 获取所有主题分类列表
         /// </summary>
         /// <returns></returns>
-        public List<ThemeCategory> GetThemeCategories()
+        public override List<ThemeCategory> GetThemeCategories()
         {
             List<ThemeCategory> categories;
             string cacheKey = BuildCacheKey("GetThemeCategories");

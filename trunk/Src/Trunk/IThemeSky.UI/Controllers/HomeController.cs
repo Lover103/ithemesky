@@ -43,6 +43,11 @@ namespace IThemeSky.UI.Controllers
             return View(model);
         }
 
+        public ActionResult Detail(int themeId)
+        {
+            return View(new DetailModel(themeId));
+        }
+
         public ActionResult About()
         {
             return View();
