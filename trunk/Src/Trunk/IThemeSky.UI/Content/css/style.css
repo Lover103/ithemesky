@@ -268,7 +268,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .commentPage li{ float:left; margin:0 3px; _display:inline;}
 .commentPage li a{ background:#001B28; height:14px; line-height:14px; border:1px solid #224548; padding:0 3px;}
 .commentPage li a:hover{ background:#002437; border-color:#295457; color:#C9D8DA;}
-.commentPage li.current{ font-weight:bold; color:#CCD3DC; line-height:14px;}
+.commentPage li.current a{ border:none; background:none; font-weight:bold; color:#CCD3DC; line-height:16px;}
 .commentAdd{ width:570px; padding:15px; background:url(../images/sprites_box.png) no-repeat -1000px bottom;}
 .commentForm{ clear:both; width:570px; padding-top:8px;}
 .commentForm .label{ float:left; width:115px; font-weight:bold; padding-right:5px; text-align:right; line-height:20px; color:#9FBABF;}
