@@ -203,8 +203,10 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .detailSide .btn a{ display:block; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
 .detailSide .btn .previous a{ background-position:0 -290px;}
 .detailSide .btn .previous a:hover{ background-position:0 -315px;}
+.detailSide .btn .previous a.none{ background-position:-190px -290px;}
 .detailSide .btn .next a{ background-position:-90px -290px;}
 .detailSide .btn .next a:hover{ background-position:-90px -315px;}
+.detailSide .btn .next a.none{ background-position:-285px -290px;}
 .detailInfo{ float:left; width:360px;}
 .detailInfo .title{ font-size:14px; font-weight:bold; color:#CCD3DC; margin:20px 0 5px 0;}
 .detailInfo .details{ padding-top:5px; width:360px;}
