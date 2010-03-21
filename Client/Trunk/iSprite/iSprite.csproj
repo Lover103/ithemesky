@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{26BA56D1-219B-4FC3-B1FA-515BCDD26BF7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iSprite</RootNamespace>
+    <AssemblyName>iSprite</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\iProgress.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\iProgress.Designer.cs">
+      <DependentUpon>iProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileDevice\IFileDevice.cs" />
+    <Compile Include="FileDevice\iPhoneFileDevice.cs" />
+    <Compile Include="Library\iSpriteContext.cs" />
+    <Compile Include="FileDevice\LoaclDiskFileDevice.cs" />
+    <Compile Include="Controls\FilePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FilePanel.Designer.cs">
+      <DependentUpon>FilePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Library\Options.cs" />
+    <Compile Include="Controls\Favourites.cs" />
+    <Compile Include="Library\IconHelper.cs" />
+    <Compile Include="Library\iPhonePNG.cs" />
+    <Compile Include="Controls\iTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\iListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\iPathBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\iPathBar.Designer.cs">
+      <DependentUpon>iPathBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Library\MessageHelper.cs" />
+    <Compile Include="Library\Others.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\FilePanel.resx">
+      <DependentUpon>FilePanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\iProgress.resx">
+      <DependentUpon>iProgress.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\iPathBar.resx">
+      <DependentUpon>iPathBar.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ThirdControl\FATabStrip\BaseClasses\BaseStyledPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ThirdControl\FATabStrip\Design\FATabStripDesigner.cs" />
+    <Compile Include="ThirdControl\FATabStrip\Design\FATabStripItemDesigner.cs" />
+    <Compile Include="ThirdControl\FATabStrip\Design\ICaptionSupport.cs" />
+    <Compile Include="ThirdControl\FATabStrip\FATabStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ThirdControl\FATabStrip\FATabStripCloseButton.cs" />
+    <Compile Include="ThirdControl\FATabStrip\FATabStripItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ThirdControl\FATabStrip\FATabStripItemCollection.cs" />
+    <Compile Include="ThirdControl\FATabStrip\FATabStripMenuGlyph.cs" />
+    <Compile Include="ThirdControl\FATabStrip\Helpers\CollectionChange.cs" />
+    <Compile Include="ThirdControl\FATabStrip\Helpers\CollectionClear.cs" />
+    <Compile Include="ThirdControl\FATabStrip\Helpers\CollectionWithEvents.cs" />
+    <Compile Include="Library\Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\f_goto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\f_newfolder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\f_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disselect.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Manzana\Manzana.csproj">
+      <Project>{8C260F85-65AC-40A6-85BF-D89C49052F64}</Project>
+      <Name>Manzana</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PList\PList.csproj">
+      <Project>{C1154025-FCAB-40AF-A715-91D10420C321}</Project>
+      <Name>PList</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ThirdControl\JFiler\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

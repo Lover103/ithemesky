@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="label4.Text" xml:space="preserve">
+    <value>This program allows to host several open windows in one parent window so that you can easily access and navigate between them, as well as clean up space in taskbar. To add existing open windows to host window click the 'Add open windows to this window' button above. To automatically open files in new tabs either click the 'Open file in new tab' button or just drag and drop them below. You can navigate between tabs by clicking ctrl+1, ctrl+2, etc or you can just simply hover mouse over the tab and it will be selected automatically. If you want to tab all open windows, just click the tab all windows in the context menu</value>
+  </data>
+  <metadata name="timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1070, 17</value>
+  </metadata>
+  <metadata name="Filetoolmenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>969, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tsbtnTileVertical.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAANFJREFUOE9jZCAT
+        /AcCuNbuVa/+w3Dbslf/6xe+/F82+8V/y6JHYPGkvmf/I9qf/vdrfPLfrfrJf7uyx2A5uCEgRVfvf/2/
+        6ND//9N2/vk/Yevv/90bfsENAMmVL/r2v3Du1/9ZM7/+T536GdMAkCEtS1/+r5r/8n/e9OdgW2Eu8Kp9
+        /N8BaitIDIbhLpi8YBfYBejY1DP5Pz45uAFdM7fgNACfHNyA5slrcRqATw5uQHnHYpwG4JMDGwAiRg0Y
+        LGEASnXYMCiGcMnBoxGcrcgEAGOy90jjx38zAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="tsbtnTileHorizontal.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAATJJREFUOE/tk88r
+        g3Ecx/dPObjISXFwlDO5SIrDVrQka2QlNT9aEiYUKQcOHB0cSBEahrXt2Y9nxtj2fZ49z/PdXmzssOYi
+        Lsqn3sfP6/X59u5rs/3GeDZTVONeTzGyomJfSNI3k6BrKk7neIz2UYWWYYUme5TGwQg13vJyCfAfwty+
+        ZHrPwrNj4toycG4UcPg1BhYFvT5Bz2zua0AZ4lpTGVpS6Z//MHe4Y7Q5ozR/Wsvmamou8C4fVC6wJOhG
+        kbwmyeQkqYyJ8mgQSujcRHQuHgSnt3kaWrtrnzDp20UWSxhmEaFLXvOS9ItFPG0QThYIKhpXIcFZUHAc
+        yNUDxrzbmFYJ7d2eFZKnrEXy2SSiGtzFdAJhjfN7wcl1jqPLLwCOidUK9Tupa+G/xj9f409+9Bvkdi1/
+        LEufyAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="tsbtnSinglePane.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAMpJREFUOE9jYKAG
+        6F716j8Mty179b9+4cv/ZbNf/M+Z8vx/Ut+z/xHtT//7NT7571b95L9d2eP/lkWP/qPYC9L85sPv/4sO
+        /f8/beef/xO2/v7fveHX/5bVP//XLv/xv3zRt/+Fc7/+z5r59X/q1M/YDQAZ0rL05f+q+S//502H2BzW
+        9vS/V+3j/w5QW0E2wzCKCyYv2AV2AbHY1DMZ1QtdM7cQrRlkCYYBzZPXUmZAecdiygyAxQLZYTDwBgyT
+        aAQlDlIwNTIx2AwANGxhb+mNKXIAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="tsbtnFlipPanes.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAidJREFUOE+V0V9I
+        U2EYBvDTZdfdx0IzZ10EFWgWDrxYYi4sq2mN5VjlxuoUNglhfadirZy52pa1P251MdBMhQorhwWmnCTY
+        8qKiHI71xy0KVnZRbHqezmcgjTNrffDcve/Dy/djmAJeG+kVGs9F1hYwmn+klYSEnW0TzzZp7q5etsTs
+        S3LstQR39PIbTmudyslxdxwHL85gvXrAVaoZXJW3ZHvLKCy3UjB73+GYMwbT1RiMV2IwOGJgu9/D5P2B
+        zbowyvYNHChv6FspKSmrdSA0lkHg8Ty84QW4Hyyg654A25CAs/0C2J6fqD//UbxiEPLGO9L/KFXaxIUs
+        jN4M9O7vaHbOQdP1DU2dX9FgTaHOMg3lqQgqdPch39PrkVxQUk0gV/mWsmF3EBvV/diiHUbFkTGozsRR
+        qX8Iu38ExXXB8v8SKVHdFMtugxBOKGixw+UXWr2zYIAVdKG45rq4bP33Mh+Ny0hnj3A68Anb2CmYnMk1
+        WkdStt+Wmyo2KpNcwkenFcQaELjQF1Ehi5r2tzhx4zNanClo7R+W0mRLgJJLCkIjM7jQl4YnPA8isrWH
+        smB9czA4Z6G79HoxzbaX2GuJgpJLCjxDr2CwR3DSn4a+OwN1Rxr1XAI7zC9QZXyCysOPsFU/vBhKLikY
+        n5w8RAgRKBUlo3SUkFJS0j+JKXlejaf8cwWlomSUbt2uoKKo1qcoUrpyU00Uy3LyPC+jZJSOYX4z/u39
+        Ah2KYaTw7ft4AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="tsbtnInfo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAqFJREFUOE+tk91P
+        0lEYx/1b9M5LO7+buigvymU2UJZeWFZYJmYtXUXpwMp38g1RwIZgEGWiZkJJQpi8SEQoKObLLwdm0tZW
+        N5K1LL8daMHanBetZ/vcne/3eb7nOScl5X8XV7mcdlQeFGVL/exBiWcjk3JA4mH3S9yivRJn2q79OPIF
+        3mFpIFLW50ffRBjDrrU4GmsIfMVLMCJrhIgsvB1NcuRzvKxWV7RldAlmXwS942HUGxZw6+EbSI1LMNhX
+        0TAcBFM6FCUXR/82OSKfTc1qm16PiY2vIhBR0XV9AP3Od+h3rOKq1g/hvQC0z1dQP+gHU2JYJ6cHUxOT
+        HJJOi0tVPpi8H1ClD0JII1xWz+DLt604FWovKnq9EN71Qf8ihELJM5BCnThhkNnmYTXWMGRGFlf6ZlCp
+        9qFC5YVuYgVayvke12+UThorAMX4Iph8NZsw2Fdj3hzxvEeVzk87vUb5HTc97EKstikCuQOlXZMUOy4o
+        HTC4Qkg/1L2ZMEgXmzcfudfiWWOdyhROKnIiGP6M6NctlHRM4Gy7DWcogk4bBqZiBp1JA6bawqqsLJqH
+        5lGudEPQ7cA52STmQp+owXcU37agmObmS8y41uuCzDwLJrcjGYEIzeIi6QT67WGUy10QSO0we1fx4+d2
+        PIL/7UcU1ZsoRvQ8CSK/ehiE2568RHJpMDW2mpsDM9Bal1EitYHfMo6TzWMoqjPiRO1jHK8dQeuAj653
+        iorr1kleY3KNscsgfD1vT648KnrghcayCKHKQUd+ilMNJlTKbVAYAxDqXGA4NVHCkez8Gkm+hkeOySIF
+        N0YhG5vHfQdLWUaHaRZ5VQaQnIYI4TTuLP6zkowCZVoGr0tEcqUsyZZskOymDYbbzDKcJlEGt3b3z/Qv
+        P/sXP/3QD/urpN4AAAAASUVORK5CYII=
+</value>
+  </data>
+</root>
