@@ -151,5 +151,25 @@ namespace IThemeSky.DataAccessTest
             actual = target.GetThemesByFilter(filter, sort, pageIndex, pageSize, ref recordCount);
             Assert.IsNotNull(actual);
         }
+
+        /// <summary>
+        ///A test for GetThemesByMultiTags
+        ///</summary>
+        [TestMethod()]
+        public void GetThemesByMultiTagsTest()
+        {
+            IThemeViewRepository target = CreateIThemeViewRepository(); // TODO: Initialize to an appropriate value
+            List<List<string>> tags = new List<List<string>>();
+            tags.Add(new List<string>() { "testtag", "aa" });
+            tags.Add(new List<string>() { "fdsafsafs" });
+            ThemesFilter filter = target.Filter;
+            ThemeSortOption sort = ThemeSortOption.Popular;
+            int pageIndex = 1;
+            int pageSize = 10;
+            int recordCount = 0;
+            List<SimpleThemeView> actual;
+            actual = target.GetThemesByMultiTags(tags, filter, sort, pageIndex, pageSize, ref recordCount);
+            Assert.IsNotNull(actual);
+        }
     }
 }
