@@ -1,0 +1,318 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using IThemeSky.Model;
+using IThemeSky.Library.Data;
+using System.Data;
+
+namespace IThemeSky.DataAccess
+{
+    /// <summary>
+    /// 主题视图数据操作类
+    /// </summary>
+    public class ThemeViewRepository : ThemeRepositoryBase,IThemeViewRepository
+    {
+        /// <summary>
+        /// 默认的过滤器
+        /// </summary>
+        protected ThemesFilter _filter = new ThemesFilter();
+        /// <summary>
+        /// 初始化主题视图数据操作类
+        /// </summary>
+        /// <param name="connectionProvider">数据库连接串提供对象</param>
+        public ThemeViewRepository(IConnectionProvider connectionProvider)
+            : base(connectionProvider)
+        { 
+        }
+        /// <summary>
+        /// 初始化主题视图数据操作类
+        /// </summary>
+        /// <param name="connectionProvider">数据库连接串提供对象</param>
+        /// <param name="checkState">默认审核状态</param>
+        /// <param name="displayState">默认显示状态</param>
+        public ThemeViewRepository(IConnectionProvider connectionProvider, CheckStateOption checkState, DisplayStateOption displayState)
+            : base(connectionProvider)
+        {
+            _filter.CheckState = checkState;
+            _filter.DisplayState = displayState;
+        }
+
+        #region IThemeViewRepository members
+
+        /// <summary>
+        /// 获取默认的过滤器
+        /// </summary>
+        public ThemesFilter Filter
+        {
+            get { return _filter; }
+        }
+
+        /// <summary>
+        /// 根据主题id获取主题完整实体
+        /// </summary>
+        /// <param name="themeId">主题id</param>
+        /// <returns></returns>
+        public FullThemeView GetTheme(int themeId)
+        {
+            string cmdText = "SELECT TOP 1 * FROM " + GetDataViewName(_filter, ThemeSortOption.New) + " WHERE ThemeId=" + themeId + " AND " + _filter.ToString();
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                if (reader.Read())
+                {
+                    return BindFullThemeView(reader);
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 根据指定主题的上一个主题id
+        /// </summary>
+        /// <param name="categoryId">所属分类id</param>
+        /// <param name="themeId">主题id</param>
+        /// <param name="themeName">主题名称(out)</param>
+        /// <returns></returns>
+        public int GetPrevThemeId(int categoryId, int themeId, out string themeName)
+        {
+            ThemesFilter filter = _filter.Clone();
+            if (categoryId > 0)
+            {
+                filter.CategoryIds.Add(categoryId);
+            }
+            int prevThemeId = 0;
+            themeName = "";
+            string cmdText = "SELECT TOP 1 ThemeId,Title FROM " + GetDataViewName(_filter, ThemeSortOption.New) + " WHERE ThemeId < " + themeId + " AND " + filter.ToString() + " ORDER BY ThemeId DESC";
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                if (reader.Read())
+                {
+                    prevThemeId = Convert.ToInt32(reader["ThemeId"]);
+                    themeName = reader["Title"].ToString();
+                }
+            }
+            return prevThemeId;
+        }
+
+        /// <summary>
+        /// 根据指定主题的下一个主题id
+        /// </summary>
+        /// <param name="categoryId">所属分类id</param>
+        /// <param name="themeId">主题id</param>
+        /// <param name="themeName">主题名称(out)</param>
+        /// <returns></returns>
+        public int GetNextThemeId(int categoryId, int themeId, out string themeName)
+        {
+            ThemesFilter filter = _filter.Clone();
+            if (categoryId > 0)
+            {
+                filter.CategoryIds.Add(categoryId);
+            }
+            int nextThemeId = 0;
+            themeName = "";
+            string cmdText = "SELECT TOP 1 ThemeId,Title FROM " + GetDataViewName(_filter, ThemeSortOption.New) + " WHERE ThemeId > " + themeId + " AND " + filter.ToString() + " ORDER BY ThemeId ASC";
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                if (reader.Read())
+                {
+                    nextThemeId = Convert.ToInt32(reader["ThemeId"]);
+                    themeName = reader["Title"].ToString();
+                }
+            }
+            return nextThemeId;
+        }
+
+        /// <summary>
+        /// 获取主题列表
+        /// </summary>
+        /// <param name="sort">排序方式</param>
+        /// <param name="displayNumber">显示条数</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetThemes(ThemeSortOption sort, int displayNumber)
+        {
+            return GetSimpleThemes(_filter, sort, displayNumber);
+        }
+
+        /// <summary>
+        /// 获取主题列表
+        /// </summary>
+        /// <param name="sort">排序方式</param>
+        /// <param name="pageIndex">显示的页码，从1开始计数</param>
+        /// <param name="pageSize">每页显示的记录数</param>
+        /// <param name="recordCount">总记录数(ref)</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetThemes(ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
+        {
+            return GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
+        }
+
+        /// <summary>
+        /// 根据分类id获取主题列表
+        /// </summary>
+        /// <param name="categoryId">分类id</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="displayNumber">显示条数</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetThemesByCategoryId(int categoryId, ThemeSortOption sort, int displayNumber)
+        {
+            ThemesFilter filter = _filter.Clone();
+            filter.CategoryIds.Add(categoryId);
+            return GetSimpleThemes(_filter, sort, displayNumber);
+        }
+
+        /// <summary>
+        /// 根据分类id获取主题列表
+        /// </summary>
+        /// <param name="categoryId">分类id</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="pageIndex">显示的页码，从1开始计数</param>
+        /// <param name="pageSize">每页显示的记录数</param>
+        /// <param name="recordCount">总记录数(ref)</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetThemesByCategoryId(int categoryId, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
+        {
+            ThemesFilter filter = _filter.Clone();
+            filter.CategoryIds.Add(categoryId);
+            return GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
+        }
+
+        /// <summary>
+        /// 根据分类id获取主题列表
+        /// </summary>
+        /// <param name="parentCategoryId">父级分类id</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="displayNumber">显示条数</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetThemesByParentCategoryId(int parentCategoryId, ThemeSortOption sort, int displayNumber)
+        {
+            ThemesFilter filter = _filter.Clone();
+            filter.ParentCategoryIds.Add(parentCategoryId);
+            return GetSimpleThemes(_filter, sort, displayNumber);
+        }
+
+        /// <summary>
+        /// 根据分类id获取主题列表
+        /// </summary>
+        /// <param name="parentCategoryId">父级分类id</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="pageIndex">显示的页码，从1开始计数</param>
+        /// <param name="pageSize">每页显示的记录数</param>
+        /// <param name="recordCount">总记录数(ref)</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetThemesByParentCategoryId(int parentCategoryId, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
+        {
+            ThemesFilter filter = _filter.Clone();
+            filter.ParentCategoryIds.Add(parentCategoryId);
+            return GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
+        }
+
+        /// <summary>
+        /// 根据多个主题id获取主题列表
+        /// </summary>
+        /// <param name="themeIds">主题id列表</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetThemesByIds(List<int> themeIds)
+        {
+            List<SimpleThemeView> themes = new List<SimpleThemeView>();
+            string cmdText = "SELECT " + SIMPLE_THEME_FIELDS + " FROM " + GetDataViewName(_filter, ThemeSortOption.New) + " WHERE 1=1" + SqlConditionBuilder.GetMultiQueryValues("ThemeId", themeIds);
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                if (reader.Read())
+                {
+                    themes.Add(BindSimpleThemeView(reader));
+                }
+            }
+            return themes;
+        }
+
+        /// <summary>
+        /// 根据过滤器获取所有主题
+        /// </summary>
+        /// <param name="filter">过滤器</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="displayNumber">显示条数</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int displayNumber)
+        {
+            return GetSimpleThemes(filter, sort, displayNumber);
+        }
+
+        /// <summary>
+        /// 根据过滤器获取所有主题
+        /// </summary>
+        /// <param name="filter">过滤器</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="pageIndex">显示的页码，从1开始计数</param>
+        /// <param name="pageSize">每页显示的记录数</param>
+        /// <param name="recordCount">总记录数(ref)</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
+        {
+            return GetSimpleThemes(filter, sort, pageIndex, pageSize, ref recordCount);
+        }
+
+        /// <summary>
+        /// 搜索主题
+        /// </summary>
+        /// <param name="keyword">主题名称关键字</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="pageIndex">显示的页码，从1开始计数</param>
+        /// <param name="pageSize">每页显示的记录数</param>
+        /// <param name="recordCount">总记录数(ref)</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> SearchThemes(string keyword, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
+        {
+            ThemesFilter filter = _filter.Clone();
+            filter.SearchKeyword = keyword;
+            return GetSimpleThemes(filter, sort, pageIndex, pageSize, ref recordCount);
+        }
+
+        /// <summary>
+        /// 获取随机主题
+        /// </summary>
+        /// <param name="categoryId">所属分类id</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="displayNumber">显示条数</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetRandomThemes(int categoryId, ThemeSortOption sort, int displayNumber)
+        {
+            ThemesFilter filter = _filter.Clone();
+            if (categoryId > 0)
+            {
+                filter.CategoryIds.Add(categoryId);
+            }
+            string searchCondition = filter.ToString();
+            searchCondition += " and 0.6 >= CAST(CHECKSUM(NEWID(), ThemeId) & 0x7fffffff AS float) / CAST (0x7fffffff AS int)";
+            return GetSimpleThemes(GetDataViewName(_filter, sort), searchCondition, GetSortExpression(sort), displayNumber); 
+        }
+
+        /// <summary>
+        /// 根据过滤器获取所有主题(完整实体)
+        /// </summary>
+        /// <param name="filter">过滤器</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="pageIndex">显示的页码，从1开始计数</param>
+        /// <param name="pageSize">每页显示的记录数</param>
+        /// <param name="recordCount">总记录数(ref)</param>
+        /// <returns></returns>
+        public List<FullThemeView> GetFullThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
+        {
+            return GetFullThemes(filter, sort, pageIndex, pageSize, ref recordCount);
+        }
+
+        /// <summary>
+        /// 获取所有主题分类列表
+        /// </summary>
+        /// <returns></returns>
+        public virtual List<ThemeCategory> GetThemeCategories()
+        {
+            List<ThemeCategory> categories = new List<ThemeCategory>();
+            string cmdText = "SELECT * FROM ThemeCategory";
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                while (reader.Read())
+                {
+                    categories.Add(BindThemeCategory(reader));                }            }
+            return categories;        }        #endregion
+    }
+}
