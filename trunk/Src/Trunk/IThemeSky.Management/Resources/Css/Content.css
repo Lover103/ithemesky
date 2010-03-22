@@ -1,8 +1,0 @@
-﻿body { margin:0; font-size:12px; color:#333; }
-table.InputGrid { background-color:#ccc; }
-table.InputGrid tr { background-color:#fff; }
-table.InputGrid tr td.InputName { text-align:right; }
-table.InputGrid tr td input.TextInput { width:300px; border:solid 1px #999; height:20px; padding-top:3px; }
-table.InputGrid tr td input.NumberInput { width:50px; border:solid 1px #999;  }
-.ImportantText { color:Red; font-weight:bold; }
-.message { background-color:#99CCFF; text-align:center; padding:5px; font-size:14px; }
