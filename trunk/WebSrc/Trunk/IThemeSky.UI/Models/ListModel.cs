@@ -25,7 +25,26 @@ namespace IThemeSky.UI.Models
                 filter.CategoryIds.Add(categoryId);
             }
             int recordCount = 0;
-            Themes = _themeRepository.GetThemesByFilter(filter, sort, pageIndex, pageSize, ref recordCount);
+            if (!string.IsNullOrEmpty(tagNames))
+            {
+                List<List<string>> tagsFilter = new List<List<string>>();
+                string[] arrAndTags = tagNames.Split('+');
+                foreach (string andTags in arrAndTags)
+                {
+                    List<string> tags = new List<string>();
+                    string[] arrOrTags = andTags.Split(',');
+                    foreach (string orTag in arrOrTags)
+                    {
+                        tags.Add(orTag);
+                    }
+                    tagsFilter.Add(tags);
+                }
+                Themes = _themeRepository.GetThemesByMultiTags(tagsFilter, filter, sort, pageIndex, pageSize, ref recordCount);
+            }
+            else
+            {
+                Themes = _themeRepository.GetThemesByFilter(filter, sort, pageIndex, pageSize, ref recordCount);
+            }
             RecordCount = recordCount;
 
             //计算当前的页面地址

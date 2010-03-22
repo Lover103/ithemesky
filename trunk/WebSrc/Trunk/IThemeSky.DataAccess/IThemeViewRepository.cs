@@ -132,6 +132,17 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         List<SimpleThemeView> GetRandomThemes(int categoryId, ThemeSortOption sort, int displayNumber);
         /// <summary>
+        /// 根据多种组合的标签名称获取主题列表
+        /// </summary>
+        /// <param name="tags">组合的标签列表</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="pageIndex">显示的页码，从1开始计数</param>
+        /// <param name="pageSize">每页显示的记录数</param>
+        /// <param name="recordCount">总记录数(ref)</param>
+        /// <returns></returns>
+        List<SimpleThemeView> GetThemesByMultiTags(List<List<string>> tags, ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount);
+        /// <summary>
         /// 根据过滤器获取所有主题(完整实体)
         /// </summary>
         /// <param name="filter">过滤器</param>

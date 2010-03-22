@@ -5,6 +5,7 @@ using System.Text;
 using IThemeSky.Model;
 using IThemeSky.Library.Data;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace IThemeSky.DataAccess
 {
@@ -284,6 +285,58 @@ namespace IThemeSky.DataAccess
             string searchCondition = filter.ToString();
             searchCondition += " and 0.6 >= CAST(CHECKSUM(NEWID(), ThemeId) & 0x7fffffff AS float) / CAST (0x7fffffff AS int)";
             return GetSimpleThemes(GetDataViewName(_filter, sort), searchCondition, GetSortExpression(sort), displayNumber); 
+        }
+
+        /// <summary>
+        /// 根据多种组合的标签名称获取主题列表
+        /// </summary>
+        /// <param name="tags">组合的标签列表</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="sort">排序方式</param>
+        /// <param name="pageIndex">显示的页码，从1开始计数</param>
+        /// <param name="pageSize">每页显示的记录数</param>
+        /// <param name="recordCount">总记录数(ref)</param>
+        /// <returns></returns>
+        public List<SimpleThemeView> GetThemesByMultiTags(List<List<string>> tags, ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount)
+        {
+            if (tags.Count > 0)
+            {
+                StringBuilder sbInnerSql = new StringBuilder();
+                for (int i = 0; i < tags.Count; i++)
+                {
+                    if (i > 0)
+                    {
+                        sbInnerSql.Append(" INNER JOIN ");
+                    }
+                    sbInnerSql.AppendFormat("(SELECT ThemeId FROM dbo.View_TagTheme WHERE 1=1 {0} GROUP BY ThemeId) T{1}", SqlConditionBuilder.GetMultiQueryValues("TagName", tags[i]), i+1);
+                    if (i > 0)
+                    {
+                        sbInnerSql.AppendFormat(" ON T{0}.ThemeId = T{1}.ThemeId", i, i+1);
+                    }
+                }
+                string searchCondition = string.Format("{0} AND ThemeId in (SELECT T1.ThemeId FROM {1})", filter.ToString(), sbInnerSql.ToString());
+                SqlParameter[] parameters = new SqlParameter[] 
+			    {
+				    SqlParameterHelper.BuildParameter("@RecordNum",SqlDbType.Int, 4, ParameterDirection.InputOutput, recordCount),
+				    SqlParameterHelper.BuildInputParameter("@SelectList",SqlDbType.VarChar,2000, SIMPLE_THEME_FIELDS),
+				    SqlParameterHelper.BuildInputParameter("@TableSource",SqlDbType.VarChar,300, "View_Theme"),
+				    SqlParameterHelper.BuildInputParameter("@SearchCondition",SqlDbType.VarChar,2000, searchCondition),
+				    SqlParameterHelper.BuildInputParameter("@OrderExpression",SqlDbType.VarChar,1000, GetSortExpression(sort)),
+				    SqlParameterHelper.BuildInputParameter("@PageSize",SqlDbType.Int,4,pageSize),
+				    SqlParameterHelper.BuildInputParameter("@PageIndex",SqlDbType.Int,4,pageIndex)
+			    };
+                List<SimpleThemeView> themes = new List<SimpleThemeView>();
+                using (IDataReader dataReader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.StoredProcedure, "PR_GetDataByPageIndex", parameters))
+                {
+                    while (dataReader.Read())
+                    {
+                        themes.Add(BindSimpleThemeView(dataReader));
+                    }
+                }
+                recordCount = Convert.ToInt32(parameters[0].Value);
+                return themes;
+            }
+            return new List<SimpleThemeView>();
         }
 
         /// <summary>
