@@ -101,11 +101,11 @@ namespace iSprite
         void FavItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem;
-            if (item.Text == m_FavMaintainString && item.Tag == "system")
+            if (item.Text == m_FavMaintainString && item.Tag.ToString() == "system")
             {
                 MaintainFavourites();
             }
-            else if (item.Text == m_Add2FavouritesString && item.Tag == "system")
+            else if (item.Text == m_Add2FavouritesString && item.Tag.ToString() == "system")
             {
                 RaiseMessageHandler(this, string.Empty, MessageTypeOption.AddtoFavorites);
             }
@@ -175,6 +175,7 @@ namespace iSprite
             Dictionary<string, string> SysFavPaths = new Dictionary<string, string>();
             if (m_FileDevice.DeviceType == DeviceTypeOption.LocalDisk)
             {
+                #region 本地
                 SysFavPaths.Add(
                     "Desktop",
                     Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
@@ -192,10 +193,11 @@ namespace iSprite
                     "My Pictures",
                     Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
                     );
-
+                #endregion
             }
             else if (m_FileDevice.DeviceType == DeviceTypeOption.iPhone)
             {
+                #region iPhone
                 SysFavPaths.Add(
                       "My Documents",
                       iSpriteContext.Current.iPhone_MyDocuments_Path
@@ -215,6 +217,7 @@ namespace iSprite
                       "Wallpaper",
                       iSpriteContext.Current.iPhone_Wallpaper_Path
                       );
+                #endregion
             }
 
             foreach (KeyValuePair<string, string> current in SysFavPaths)

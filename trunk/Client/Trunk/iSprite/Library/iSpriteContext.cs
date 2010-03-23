@@ -62,6 +62,11 @@ namespace iSprite
         internal string iPhone_ScreenShot_Path { private set; get; }
 
         /// <summary>
+        /// iPhone GlobalPreferences路径
+        /// </summary>
+        internal string iPhone_GlobalPreferences_Path { private set; get; }
+
+        /// <summary>
         /// 静态构造器
         /// </summary>
         static iSpriteContext()
@@ -90,6 +95,7 @@ namespace iSprite
             iPhone_WinterBoardSetting_Path = "/private/var/mobile/Library/Preferences/com.saurik.WinterBoard.plist";
             iPhone_WinterBoardSetting_Path = "/System/Library/CoreServices/SpringBoard.app/{0}/LocalizedApplicationNames.strings";
             iPhone_ScreenShot_Path = "/private/var/mobile/Media/DCIM/100APPLE/";
+            iPhone_GlobalPreferences_Path = "/private/var/root/Library/Preferences/.GlobalPreferences.plist";
 
             iSpriteApplicationDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles).TrimEnd('\\')
                    + @"\iSprite\";
@@ -116,7 +122,7 @@ namespace iSprite
 
                 foreach (string name in Directory.GetDirectories(iSpriteTempPath))
                 {
-                    Directory.Delete(name);
+                    Directory.Delete(name,true);
                 }
             }
         }
@@ -130,15 +136,18 @@ namespace iSprite
         }
 
         /// <summary>
-        /// 根据iPhone版本号替换相关配置
+        /// AfterDeviceFinishConnected
         /// </summary>
         /// <param name="ver"></param>
-        public void ReplaceByVersion(iPhone iphone)
+        public void AfterDeviceFinishConnected(iPhone iphone)
         {
             if (!iphone.IsConnected)
             {
                 return;
             }
+
+            Reload();
+
             string ver = iphone.DeviceVersion;
 
             ver = ver.Trim();
@@ -152,6 +161,7 @@ namespace iSprite
                 _context.iPhone_PhotosLibrary_Path = _context.iPhone_PhotosLibrary_Path.Replace("/root/", "/mobile/");
                 _context.iPhone_LockBackground_Path = _context.iPhone_LockBackground_Path.Replace("/root/", "/mobile/");
                 _context.iPhone_MyDocuments_Path = _context.iPhone_MyDocuments_Path.Replace("/root/", "/mobile/");
+                _context.iPhone_GlobalPreferences_Path = _context.iPhone_GlobalPreferences_Path.Replace("/root/", "/mobile/");
 
             }
             if (!iphone.Exists(_context.iPhone_MyDocuments_Path))

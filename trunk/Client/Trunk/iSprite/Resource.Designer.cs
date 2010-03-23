@@ -67,6 +67,20 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap Folder_16 {
+            get {
+                object obj = ResourceManager.GetObject("Folder_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Folder_32 {
+            get {
+                object obj = ResourceManager.GetObject("Folder_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap img_NewFolder {
             get {
                 object obj = ResourceManager.GetObject("img_NewFolder", resourceCulture);
@@ -77,6 +91,20 @@ namespace iSprite {
         internal static System.Drawing.Bitmap img_Remove {
             get {
                 object obj = ResourceManager.GetObject("img_Remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap zip_16 {
+            get {
+                object obj = ResourceManager.GetObject("zip_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap zip_32 {
+            get {
+                object obj = ResourceManager.GetObject("zip_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

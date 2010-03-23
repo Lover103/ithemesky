@@ -36,5 +36,15 @@ namespace iSprite
         {
             return MessageBox.Show(message, title, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
         }
+
+        public static DialogResult ShowWarning(string message)
+        {
+            return ShowWarning("Error", message);
+        }
+
+        public static DialogResult ShowWarning(string title, string message)
+        {
+            return MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
     }
 }

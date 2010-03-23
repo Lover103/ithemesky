@@ -55,6 +55,9 @@ namespace iSprite
         /// 显示视图
         /// </summary>
         private ViewModeOption m_ViewMode = ViewModeOption.DUALVERTICAL;
+        iThemeBrowser m_themeManage;
+        IFileDevice iphonedriver;
+        IFileDevice localdiskdriver;
         #endregion
 
         #region 构造函数
@@ -89,7 +92,7 @@ namespace iSprite
             //	iPhone操作面板
             iphone.Connect += new ConnectEventHandler(iphone_Connect);
             iphone.Disconnect += new ConnectEventHandler(iphone_Disconnect);
-            IFileDevice iphonedriver = new iPhoneFileDevice(iphone);
+            iphonedriver = new iPhoneFileDevice(iphone);
 
             iphonedriver.OnCompleteHandler += new FileCompletedHandler(iphonedriver_OnCompleteHandler);
             iphonedriver.OnProgressHandler += new FileProgressHandler(iphonedriver_OnProgressHandler);
@@ -97,14 +100,14 @@ namespace iSprite
             mainsplitcontainer.Panel1.Controls.Add(m_iPhonePanel);
             m_iPhonePanel.Dock = DockStyle.Fill;
             m_iPhonePanel.Enabled = false;
-            m_iPhonePanel.OnMessage += new MessageHandler(FilePanel_OnMessage);
+            m_iPhonePanel.OnMessage += new MessageHandler(ShowMessage);
 
             //	本地磁盘操作面板
-            IFileDevice localdiskdriver = new LoaclDiskFileDevice();
+            localdiskdriver = new LoaclDiskFileDevice();
             m_LoaclDiskPanel = new FilePanel(localdiskdriver);
             mainsplitcontainer.Panel2.Controls.Add(m_LoaclDiskPanel);
             m_LoaclDiskPanel.Dock = DockStyle.Fill;
-            m_LoaclDiskPanel.OnMessage += new MessageHandler(FilePanel_OnMessage);
+            m_LoaclDiskPanel.OnMessage += new MessageHandler(ShowMessage);
 
             m_SourcePanel = m_iPhonePanel;
             m_DestPanel = m_LoaclDiskPanel;
@@ -117,22 +120,9 @@ namespace iSprite
                 }
             }
 
-            InitThemeTab();
-        }
-
-        void InitThemeTab()
-        {
-            WebBrowser themeBrowser = new WebBrowser();
-            this.tabTheme.Controls.Add(themeBrowser);
-
-            themeBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            themeBrowser.Location = new System.Drawing.Point(0, 0);
-            themeBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            themeBrowser.Name = "webBrowser1";
-            themeBrowser.Size = new System.Drawing.Size(990, 652);
-            themeBrowser.TabIndex = 0;
-            themeBrowser.Url = new System.Uri("http://www.ithemesky.com/", System.UriKind.Absolute);
-        }
+            m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme);
+            m_themeManage.OnMessage += new MessageHandler(ShowMessage);
+        }      
 
 
         /// <summary>
@@ -206,8 +196,11 @@ namespace iSprite
                         m_iPhonePanel.Enabled = enable;
                         if (enable)
                         {
-                            iSpriteContext.Current.ReplaceByVersion(iphone);
+                            iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
                             m_iPhonePanel.AfterDeviceFinishConnected();
+                            m_themeManage.AfterDeviceFinishConnected();
+                            iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
+                            ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
                         }
                     }
                 ));
@@ -217,7 +210,11 @@ namespace iSprite
                 m_iPhonePanel.Enabled = enable;
                 if (enable)
                 {
+                    iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
                     m_iPhonePanel.AfterDeviceFinishConnected();
+                    m_themeManage.AfterDeviceFinishConnected();
+                    iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
+                    ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
                 }
             }
         }
@@ -229,8 +226,22 @@ namespace iSprite
         /// <param name="sender"></param>
         /// <param name="Message"></param>
         /// <param name="messagetype"></param>
-        void FilePanel_OnMessage(object sender, string Message, MessageTypeOption messagetype)
+        void ShowMessage(object sender, string Message, MessageTypeOption messagetype)
         {
+            switch (messagetype)
+            {
+                case MessageTypeOption.Info:
+                    MessageHelper.ShowInfo(Message);
+                    break;
+
+                case MessageTypeOption.Warning:
+                    MessageHelper.ShowWarning(Message);
+                    break;
+
+                case MessageTypeOption.Error:
+                    MessageHelper.ShowError(Message);
+                    break;
+            }
         }
 
         /// <summary>
@@ -323,8 +334,6 @@ namespace iSprite
         #endregion
 
         #endregion
-
-        
 
         #region  设置展示视图
         /// <summary>
