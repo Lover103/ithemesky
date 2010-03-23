@@ -7,14 +7,17 @@ using Manzana;
 using System.Threading;
 using CE.iPhone.PList;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace iSprite
 {
-    public class iPhoneFileDevice : IFileDevice
+    internal class iPhoneFileDevice : IFileDevice
     {
         Manzana.iPhone iPhoneInterface;
         public event FileCompletedHandler OnCompleteHandler;
         public event FileProgressHandler OnProgressHandler;
+
+        internal string CurrentLang { private set;get;}
 
         private iPhoneFileDevice()
         {
@@ -23,6 +26,42 @@ namespace iSprite
         public iPhoneFileDevice(Manzana.iPhone iphone)
         {
             this.iPhoneInterface = iphone;
+        }
+
+        internal void AfterDeviceFinishConnected()
+        {
+            if (IsConnected)
+            {
+                string iphonecfgpath = iSpriteContext.Current.iPhone_GlobalPreferences_Path;
+                string conten = GetFileText(iphonecfgpath);
+                Match match = new Regex("<key>AppleLanguages</key>(?<B>[\\s]*?)<string>(?<Lan>[\\S]*?)</string>", RegexOptions.IgnoreCase | RegexOptions.Compiled).Match(conten);
+                if (match.Success)
+                {
+                    CurrentLang = match.Result("${Lan}");
+                }
+                else
+                {
+                    CurrentLang = "en";
+                }
+            }
+        }
+
+        private string GetFileText(string iPhonePath)
+        {
+            string localpath = iSpriteContext.Current.iSpriteApplicationDataPath + Path.GetFileName(iPhonePath);
+            if (Downlod2PC(iPhonePath, localpath))
+            {
+                if (Utility.GetFileType(localpath) == iPhoneFileTypeOption.FILE_PList)
+                {
+                    PListRoot root = PListRoot.Load(localpath);
+                    root.Save(localpath, PListFormat.Xml);
+                }
+                return File.ReadAllText(localpath, Encoding.UTF8);
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         public bool IsConnected
