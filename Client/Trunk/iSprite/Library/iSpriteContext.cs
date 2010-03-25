@@ -9,6 +9,11 @@ namespace iSprite
 {
     internal class iSpriteContext
     {
+        /// <summary>
+        /// 当前软件版本
+        /// </summary>
+        internal string CurrentVersion { private set; get; }
+
         private static iSpriteContext _context;
 
         /// <summary>
@@ -67,6 +72,19 @@ namespace iSprite
         internal string iPhone_GlobalPreferences_Path { private set; get; }
 
         /// <summary>
+        /// 主题入口
+        /// </summary>
+        internal string ThemeHomePage { private set; get; }
+        /// <summary>
+        /// 帮助
+        /// </summary>
+        internal string HelpUrl { private set; get; }
+        /// <summary>
+        /// 更新地址
+        /// </summary>
+        internal string UpdateUrl { private set; get; }
+
+        /// <summary>
         /// 静态构造器
         /// </summary>
         static iSpriteContext()
@@ -86,6 +104,11 @@ namespace iSprite
         /// </summary>
         public void Reload()
         {
+            CurrentVersion = "1.0";
+
+            ThemeHomePage = "http://www.ithemesky.com/";
+            HelpUrl = "http://www.ithemesky.com/help/";
+            UpdateUrl = "http://update.ithemesky.com/update/update.xml";
             iPhone_PhotosLibrary_Path = "/private/var/root/Media/Photos/";
             iPhone_Wallpaper_Path = "/Library/Wallpaper/";
             iPhone_LockBackground_Path = "/private/var/root/Library/";
@@ -93,7 +116,7 @@ namespace iSprite
             iPhone_MyDocuments_Path = "/private/var/root/Media/My Documents/";
             iPhone_WinterBoardApp_Path = "/Applications/WinterBoard.app/";
             iPhone_WinterBoardSetting_Path = "/private/var/mobile/Library/Preferences/com.saurik.WinterBoard.plist";
-            iPhone_WinterBoardSetting_Path = "/System/Library/CoreServices/SpringBoard.app/{0}/LocalizedApplicationNames.strings";
+            iPhone_LocalizedApplicationNames_Path = "/System/Library/CoreServices/SpringBoard.app/{0}/LocalizedApplicationNames.strings";
             iPhone_ScreenShot_Path = "/private/var/mobile/Media/DCIM/100APPLE/";
             iPhone_GlobalPreferences_Path = "/private/var/root/Library/Preferences/.GlobalPreferences.plist";
 
@@ -115,14 +138,20 @@ namespace iSprite
             else
             {
                 //清除文件和文件夹
-                foreach (string name in Directory.GetFiles(iSpriteTempPath))
+                try
                 {
-                    File.Delete(name);
-                }
+                    foreach (string name in Directory.GetFiles(iSpriteTempPath))
+                    {
+                        File.Delete(name);
+                    }
 
-                foreach (string name in Directory.GetDirectories(iSpriteTempPath))
-                {
-                    Directory.Delete(name,true);
+                    foreach (string name in Directory.GetDirectories(iSpriteTempPath))
+                    {
+                        Directory.Delete(name, true);
+                    }
+                }
+                catch
+                { 
                 }
             }
         }

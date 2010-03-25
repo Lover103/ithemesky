@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Net;
+using Manzana;
 
 namespace iSprite
 {
@@ -11,7 +13,7 @@ namespace iSprite
         static Utility()
         {
         }
-        public static bool IsDriver(string path)
+        internal static bool IsDriver(string path)
         {
             if (path.Length <= 3)
             {
@@ -21,6 +23,78 @@ namespace iSprite
             {
                 return false;
             }
+        }
+
+        internal static bool DownloadFile(string url, string destFilePath)
+        { 
+            return DownloadFile(url, destFilePath, null);
+        }
+
+        internal static bool DownloadFile(string url, string destFilePath, FileProgressHandler progresshandler)
+        {
+            bool returnCode = false;
+            Stream inStream = null;
+            FileStream filestream = null;
+            bool cancelDownload = false;
+            try
+            {
+                HttpWebRequest req = (HttpWebRequest)System.Net.WebRequest.Create(url);
+                req.Referer = "http://" + new Uri(url).Host;
+                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+
+                inStream = resp.GetResponseStream();
+                long filesizeBytes = resp.ContentLength;
+                filestream = new FileStream(destFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+
+
+                int length = 10240;
+                ulong totalfileSize = (ulong)filestream.Length;
+                ulong finishSize = 0;
+                byte[] buffer = new byte[length];
+                int bytesread = 0;
+                DateTime lasttime = DateTime.Now;
+                int speed = 0;
+
+                while ((bytesread = inStream.Read(buffer, 0, length)) > 0)
+                {
+                    filestream.Write(buffer, 0, bytesread);
+                    finishSize += (ulong)bytesread;
+
+                    if (progresshandler != null)
+                    {
+                        double dblTimePast = (lasttime - DateTime.Now).TotalSeconds;
+                        if (dblTimePast >= 1.0)
+                        {
+                            speed = (int)Math.Round((double)(finishSize * 1.0 / dblTimePast));
+                            lasttime = DateTime.Now;
+                        }
+
+                        progresshandler(totalfileSize, finishSize, 0, Path.GetFileName(destFilePath), ref cancelDownload);
+                        if (cancelDownload)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                returnCode = true;
+            }
+            catch //(Exception ex)
+            {
+                returnCode = false;
+            }
+            finally
+            {
+                if (inStream != null)
+                {
+                    inStream.Close();
+                }
+                if (filestream != null)
+                {
+                    filestream.Close();
+                }
+            }
+            return returnCode;
         }
 
         public static iPhoneFileTypeOption GetFileType(string path)

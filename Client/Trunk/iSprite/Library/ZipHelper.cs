@@ -9,58 +9,72 @@ namespace iSprite
 {
     internal class ZipHelper
     {
-        public static int UnZip(string zipfilename, string directory)
+        public static int UnZip(string fileToUpZip, string destZipedFolder)
         {
-            int filecount = 0;
-            if (!Directory.Exists(directory))
+            int count = 0;
+            if (!File.Exists(fileToUpZip))
             {
-                //生成解压目录
-                Directory.CreateDirectory(directory);
+                return count;
             }
-            using (ZipInputStream s = new ZipInputStream(File.OpenRead(zipfilename)))
-            {
-                try
-                {
-                    ZipEntry theEntry;
-                    while ((theEntry = s.GetNextEntry()) != null)
-                    {
-                        string fileName = Path.GetFileName(theEntry.Name);                       
 
-                        if (fileName != String.Empty)
+            if (!Directory.Exists(destZipedFolder))
+            {
+                Directory.CreateDirectory(destZipedFolder);
+            }
+
+            ZipInputStream s = null;
+            ZipEntry theEntry = null;
+
+            string fileName;
+            try
+            {
+                s = new ZipInputStream(File.OpenRead(fileToUpZip));
+                while ((theEntry = s.GetNextEntry()) != null)
+                {
+                    if (theEntry.Name != String.Empty)
+                    {
+                        fileName = Path.Combine(destZipedFolder, theEntry.Name);
+                        //判断文件路径是否是文件夹
+                        if (fileName.EndsWith("/") || fileName.EndsWith("\\"))
                         {
-                            filecount++;
-                            //解压文件到指定的目录
-                            using (FileStream streamWriter = File.Create(Path.Combine(directory, fileName)))
+                            Directory.CreateDirectory(fileName);
+                            continue;
+                        }
+                        using (FileStream streamWriter = File.Create(fileName))
+                        {
+                            int size = 2048;
+                            byte[] data = new byte[2048];
+                            while (true)
                             {
-                                byte[] data = new byte[2048];
-                                while (true)
+                                size = s.Read(data, 0, data.Length);
+                                if (size > 0)
                                 {
-                                    int size = s.Read(data, 0, data.Length);
-                                    if (size > 0)
-                                    {
-                                        streamWriter.Write(data, 0, size);
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
+                                    streamWriter.Write(data, 0, size);
                                 }
-                                streamWriter.Close();
+                                else
+                                {
+                                    break;
+                                }
                             }
                         }
+                        count++;
                     }
-                    s.Close();
-                }
-                catch
-                {
-                    filecount = 0;
-                }
-                finally
-                {
-                    s.Close();
                 }
             }
-            return filecount;
-        }
+            finally
+            {
+                if (theEntry != null)
+                {
+                    theEntry = null;
+                }
+                if (s != null)
+                {
+                    s.Close();
+                    s = null;
+                }
+            }
+
+            return count;
+        }        
     }
 }

@@ -69,6 +69,26 @@ namespace iSprite
             
         }
 
+        public new bool Visible
+        {
+            set
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new ThreadInvokeDelegate(
+                        delegate()
+                        {
+                            base.Visible = value;
+                        }
+                    ));
+                }
+                else
+                {
+                    base.Visible = value;
+                }
+            }
+        }
+
         public string Percent
         {
             set

@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using System.Data;
 using iSprite.ThirdControl.FarsiLibrary;
 using CE.iPhone.PList;
+using System.Text.RegularExpressions;
+using Manzana;
 
 namespace iSprite
 {
@@ -14,10 +16,15 @@ namespace iSprite
     {
         #region 变量定义
         iPhoneFileDevice m_iPhoneDevice;
-        public event PathChanged OnPathChanged;
+        internal event PathChanged OnPathChanged;
         internal event MessageHandler OnMessage;
-        Dictionary<string, string> m_icondic;
+        Dictionary<string, string> m_DefaultIconDic;
         FATabStripItem m_tabTheme;
+        const string DefaultLanage = "en";
+
+
+        internal event FileProgressHandler OnProgressHandler;
+
         #endregion
 
         #region 消息处理
@@ -47,7 +54,7 @@ namespace iSprite
         {
             m_iPhoneDevice = filedevice;
             this.m_tabTheme = tabTheme;
-            m_icondic = new Dictionary<string, string>(); 
+            m_DefaultIconDic = new Dictionary<string, string>(); 
             InitThemeTab();
         }
 
@@ -80,7 +87,26 @@ namespace iSprite
             themeBrowser.Name = "themeBrowser";
             themeBrowser.Size = new System.Drawing.Size(990, 652);
             themeBrowser.TabIndex = 0;
-            themeBrowser.Url = new System.Uri("http://www.ithemesky.com/", System.UriKind.Absolute);
+            themeBrowser.Url = new System.Uri(iSpriteContext.Current.ThemeHomePage, System.UriKind.Absolute);
+
+            themeBrowser.Navigating += new WebBrowserNavigatingEventHandler(themeBrowser_Navigating);
+        }
+
+        void themeBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            string action = string.Empty;
+            if (action.Equals("download", StringComparison.CurrentCultureIgnoreCase))
+            {
+                string url = string.Empty;
+                string themeName = string.Empty;
+
+                string filepath = iSpriteContext.Current.iSpriteTempPath + "/" + Path.GetFileNameWithoutExtension(themeName) + ".zip";
+
+                if (Utility.DownloadFile(url, filepath, OnProgressHandler))
+                {
+                    InstallFromZIP(filepath);
+                }
+            }
         }
 
         #endregion
@@ -120,11 +146,26 @@ namespace iSprite
             dialog.Multiselect = false;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                themepath = iSpriteContext.Current.iSpriteTempPath+"\\"+Guid.NewGuid().ToString()+"\\";
-                if (ZipHelper.UnZip(dialog.FileName, themepath) > 0)
+                InstallFromZIP(dialog.FileName);
+            }
+        }
+        void InstallFromZIP(string zippath)
+        {
+            string themepath = iSpriteContext.Current.iSpriteTempPath + "\\" + Path.GetRandomFileName() + "\\";
+
+            if (ZipHelper.UnZip(zippath, themepath) > 0)
+            {
+                string[] dirs = Directory.GetDirectories(themepath);
+                if (dirs.Length == 1
+                    && !dirs[0].EndsWith("\\Icons\\", true, null))
                 {
-                    InstallFromFolder(themepath);
+                    themepath = dirs[0];
                 }
+
+                InstallFromFolder(
+                    Path.GetFileNameWithoutExtension(zippath),
+                    themepath
+                    );
             }
         }
         #endregion
@@ -140,7 +181,8 @@ namespace iSprite
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 themepath = fbd.SelectedPath;
-                InstallFromFolder(themepath);
+                string themeName = Path.GetFileName(themepath.TrimEnd('\\'));
+                InstallFromFolder(themeName,themepath);
             }
         }
 
@@ -148,32 +190,106 @@ namespace iSprite
         /// 从文件夹安装主题
         /// </summary>
         /// <param name="themepath"></param>
-        void InstallFromFolder(string themepath)
+        void InstallFromFolder(string themeName,string themepath)
         {
             if (m_iPhoneDevice.IsConnected)
             {
+                SetTheme(themeName, themepath);
             }
             else
             {
                 RaiseMessageHandler(this, "Fail to operate ! iPhone is disconnected .", MessageTypeOption.Error);
             }
         }
-        bool CheckThemePacket(string themepath)
+
+        #region 检查主题是否合法
+        /// <summary>
+        /// 检查主题是否合法
+        /// </summary>
+        /// <param name="themepath"></param>
+        /// <returns></returns>
+        bool CheckThemePacket(string themePath)
         {
-            return true;
+            int iconnum = 0;
+
+            foreach (KeyValuePair<string, string> item in m_DefaultIconDic)
+            {
+                if (File.Exists(themePath + "/Icons/" + item.Value + ".png"))
+                {
+                    iconnum++;
+                }
+            }
+            return iconnum > 0;
         }
+        #endregion
+
         #endregion
 
         internal void AfterDeviceFinishConnected()
         {
-            m_icondic = GetLocalizedApplicationNames();
+            m_DefaultIconDic = GetLocalizedApplicationNamesByLan(DefaultLanage);
         }
 
-        void RenameThemeIconByLocalized(string themePath)
-        { 
-        }
-        void SetTheme(string themeName,string themePath)
+        #region 重命名图标（根据用户语言）
+        /// <summary>
+        /// 重命名图标（根据用户语言）
+        /// </summary>
+        /// <param name="themePath"></param>
+        bool RenameThemeIconByLocalized(string themePath)
         {
+            try
+            {
+                if (m_iPhoneDevice.CurrentLang != DefaultLanage)
+                {
+                    Dictionary<string, string> currenticondic = GetLocalizedApplicationNamesByLan(m_iPhoneDevice.CurrentLang);
+
+                    foreach (KeyValuePair<string, string> item in m_DefaultIconDic)
+                    {
+                        if (currenticondic.ContainsKey(item.Key) && currenticondic[item.Key] != item.Value)
+                        {
+                            if (File.Exists(themePath + "/Icons/" + item.Value + ".png"))
+                            {
+                                File.Move(themePath + "/Icons/" + item.Value + ".png", themePath + "/Icons/" + currenticondic[item.Key] + ".png");
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region 设置主题
+        /// <summary>
+        /// 设置主题
+        /// </summary>
+        /// <param name="themeName"></param>
+        /// <param name="themePath"></param>
+        void SetTheme(string themeName, string themePath)
+        {
+            if (!CheckThemePacket(themePath))
+            {
+                RaiseMessageHandler(this, "Invalid theme !", MessageTypeOption.Error);
+                return;
+            }
+
+            //if (!RenameThemeIconByLocalized(themePath))
+            //{
+            //    RaiseMessageHandler(this, "Can't convert theme for your current lang !", MessageTypeOption.Error);
+            //    return;
+            //}
+
+            if (!m_iPhoneDevice.Copy2iPhone(themePath, iSpriteContext.Current.iPhone_WinterBoardFile_Path))
+            {
+                RaiseMessageHandler(this, "Fail to copy the theme file to iPhone .", MessageTypeOption.Error);
+                return;
+            }
+            return;
+
             string iPhoneThemeSetting = iSpriteContext.Current.iPhone_WinterBoardSetting_Path;
             string localThemeSetting = iSpriteContext.Current.iSpriteTempPath + Path.GetFileName(iPhoneThemeSetting);
             if (m_iPhoneDevice.Downlod2PC(iPhoneThemeSetting, localThemeSetting))
@@ -204,19 +320,103 @@ namespace iSprite
                 RaiseMessageHandler(this, "Fail to copy the theme setting file to pc .", MessageTypeOption.Error);
             }
         }
+        #endregion
 
-        Dictionary<string, string> GetLocalizedApplicationNames()
+        #region 获取在不同语言下系统应用程序名称
+        /// <summary>
+        /// 获取在不同语言下系统应用程序名称
+        /// </summary>
+        /// <param name="lanage"></param>
+        /// <returns></returns>
+        Dictionary<string, string> GetLocalizedApplicationNamesByLan(string lanage)
         {
-            Dictionary<string, string>  icondic = new Dictionary<string, string>(); 
-            string iphonecfgpath = string.Format(iSpriteContext.Current.iPhone_LocalizedApplicationNames_Path, "English.lproj");
-            string localcfgpath = iSpriteContext.Current.iSpriteApplicationDataPath + "\\LocalizedApplicationNames.strings";
-            if (m_iPhoneDevice.Downlod2PC(iphonecfgpath, localcfgpath))
+            string localizedPath = "English.lproj";
+            switch (lanage.ToLower())
             {
-                PListRoot root = PListRoot.Load(localcfgpath);
+                case "en":
+                    localizedPath = "English.lproj";
+                    break;
+                case "zh-hans":
+                    localizedPath = "zh_CN.lproj";
+                    break;
+                case "zh-hant":
+                    localizedPath = "zh_TW.lproj";
+                    break;
+                case "ja":
+                    localizedPath = "Japanese.lproj";
+                    break;
+                case "fr":
+                    localizedPath = "French.lproj";
+                    break;
+                case "it":
+                    localizedPath = "Italian.lproj";
+                    break;
+                case "de":
+                    localizedPath = "German.lproj";
+                    break;
+                case "es":
+                    localizedPath = "Spanish.lproj";
+                    break;
+                case "nl":
+                    localizedPath = "Dutch.lproj";
+                    break;
+                case "pt-pt":
+                    localizedPath = "pt_PT.lproj";
+                    break;
+                case "da":
+                    localizedPath = "da.lproj";
+                    break;
+                case "fi":
+                    localizedPath = "fi.lproj";
+                    break;
+                case "sv":
+                    localizedPath = "sv.lproj";
+                    break;
+                case "ko":
+                    localizedPath = "ko.lproj";
+                    break;
+                case "ru":
+                    localizedPath = "ru.lproj";
+                    break;
+                case "pl":
+                    localizedPath = "pl.lproj";
+                    break;
+                default:
+                    localizedPath = "English.lproj";
+                    break;
+            }
+            return GetLocalizedApplicationNames(localizedPath);
+        }
+        /// <summary>
+        /// 获取在不同语言下系统应用程序名称
+        /// </summary>
+        /// <param name="localizedPath"></param>
+        /// <returns></returns>
+        Dictionary<string, string> GetLocalizedApplicationNames(string localizedPath)
+        {
+            Dictionary<string, string>  icondic = new Dictionary<string, string>();
+            string iphonecfgpath = string.Format(iSpriteContext.Current.iPhone_LocalizedApplicationNames_Path, localizedPath);
+
+            string content = m_iPhoneDevice.GetFileText(iphonecfgpath);
+            Match match = new Regex("<key>(?<Appkey>[\\S]*?)</key>(?<B>[\\s]*?)<string>(?<AppValue>[\\S]*?)</string>", 
+                RegexOptions.IgnoreCase | RegexOptions.Compiled).Match(content);
+            while (match.Success)
+            {
+                icondic.Add(match.Result("${Appkey}"), match.Result("${AppValue}"));
+                match = match.NextMatch();
+            }
+
+            match = new Regex("<key>(?<Appkey>[\\S]*?)</key>(?<B>[\\s]*?)<ustring>(?<AppValue>[\\S]*?)</ustring>",
+                RegexOptions.IgnoreCase | RegexOptions.Compiled).Match(content);
+            while (match.Success)
+            {
+                icondic.Add(match.Result("${Appkey}"), match.Result("${AppValue}"));
+                match = match.NextMatch();
             }
 
             return icondic;
         }
+        #endregion
 
         #region 创建新按钮
         /// <summary>
