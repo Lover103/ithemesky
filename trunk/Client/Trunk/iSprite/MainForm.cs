@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 
 using Manzana;
+using System.Threading;
 
 namespace iSprite
 {
@@ -58,6 +59,7 @@ namespace iSprite
         iThemeBrowser m_themeManage;
         IFileDevice iphonedriver;
         IFileDevice localdiskdriver;
+        Updater m_Updater;
         #endregion
 
         #region 构造函数
@@ -68,6 +70,8 @@ namespace iSprite
         {
             InitializeComponent();
             iphone = new iPhone();
+
+            this.Text = "iSprite (V" + iSpriteContext.Current.CurrentVersion+")";
             this.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
         }
         /// <summary>
@@ -95,7 +99,7 @@ namespace iSprite
             iphonedriver = new iPhoneFileDevice(iphone);
 
             iphonedriver.OnCompleteHandler += new FileCompletedHandler(iphonedriver_OnCompleteHandler);
-            iphonedriver.OnProgressHandler += new FileProgressHandler(iphonedriver_OnProgressHandler);
+            iphonedriver.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
             m_iPhonePanel = new FilePanel(iphonedriver);
             mainsplitcontainer.Panel1.Controls.Add(m_iPhonePanel);
             m_iPhonePanel.Dock = DockStyle.Fill;
@@ -122,6 +126,13 @@ namespace iSprite
 
             m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme);
             m_themeManage.OnMessage += new MessageHandler(ShowMessage);
+            m_themeManage.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
+
+            //检查更新
+            m_Updater = new Updater();
+            m_Updater.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
+            m_Updater.OnMessage += new MessageHandler(ShowMessage);
+            new Thread(new ThreadStart(m_Updater.CheckNewVer)).Start();
         }      
 
 
@@ -197,10 +208,11 @@ namespace iSprite
                         if (enable)
                         {
                             iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
+                            ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
+
+                            iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
                             m_iPhonePanel.AfterDeviceFinishConnected();
                             m_themeManage.AfterDeviceFinishConnected();
-                            iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
-                            ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
                         }
                     }
                 ));
@@ -241,6 +253,13 @@ namespace iSprite
                 case MessageTypeOption.Error:
                     MessageHelper.ShowError(Message);
                     break;
+                case MessageTypeOption.Upgrade:
+                    if (MessageHelper.ShowConfirm(Message) == DialogResult.OK)
+                    {
+                        m_Updater.DoUpdate();
+                    }
+                    break;
+
             }
         }
 
@@ -261,7 +280,7 @@ namespace iSprite
         /// <param name="speed"></param>
         /// <param name="file"></param>
         /// <param name="cancel"></param>
-        void iphonedriver_OnProgressHandler(ulong totalSize, ulong completeSize, int speed, string file, ref bool cancel)
+        void DoProgressHandler(ulong totalSize, ulong completeSize, int speed, string file, ref bool cancel)
         {
             if (m_stoptransfer)
             {
@@ -273,6 +292,10 @@ namespace iSprite
             else
             {
                 progressBar.SetProgress(totalSize, completeSize);
+                if(totalSize<=completeSize)
+                {
+                    progressBar.Visible = false;
+                }
             }
         }
         /// <summary>

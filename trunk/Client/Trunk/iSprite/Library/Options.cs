@@ -104,7 +104,11 @@ namespace iSprite
         /// <summary>
         /// 加入收藏夹
         /// </summary>
-        AddtoFavorites
+        AddtoFavorites,
+        /// <summary>
+        /// 更新
+        /// </summary>
+        Upgrade
     }
     #endregion
 

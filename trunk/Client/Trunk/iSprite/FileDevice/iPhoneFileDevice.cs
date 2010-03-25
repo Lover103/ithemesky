@@ -33,22 +33,31 @@ namespace iSprite
             if (IsConnected)
             {
                 string iphonecfgpath = iSpriteContext.Current.iPhone_GlobalPreferences_Path;
-                string conten = GetFileText(iphonecfgpath);
-                Match match = new Regex("<key>AppleLanguages</key>(?<B>[\\s]*?)<string>(?<Lan>[\\S]*?)</string>", RegexOptions.IgnoreCase | RegexOptions.Compiled).Match(conten);
-                if (match.Success)
+                string content = GetFileText(iphonecfgpath);
+                int fromindex = content.IndexOf("<key>AppleLanguages</key>");
+                if (fromindex != -1)
                 {
-                    CurrentLang = match.Result("${Lan}");
+                    fromindex = content.IndexOf("<string>", fromindex);
+                    if (fromindex != -1)
+                    {
+                        fromindex += 8;
+                        int endindex = content.IndexOf("</string>", fromindex);
+                        if (endindex != -1)
+                        {
+                            CurrentLang = content.Substring(fromindex, endindex - fromindex);
+                        }
+                    }
                 }
-                else
+                if (string.IsNullOrEmpty(CurrentLang))
                 {
                     CurrentLang = "en";
                 }
             }
         }
 
-        private string GetFileText(string iPhonePath)
+        internal string GetFileText(string iPhonePath)
         {
-            string localpath = iSpriteContext.Current.iSpriteApplicationDataPath + Path.GetFileName(iPhonePath);
+            string localpath = iSpriteContext.Current.iSpriteTempPath + Path.GetFileName(iPhonePath);
             if (Downlod2PC(iPhonePath, localpath))
             {
                 if (Utility.GetFileType(localpath) == iPhoneFileTypeOption.FILE_PList)

@@ -85,7 +85,7 @@ namespace iSprite
             }
 
             ToolStripMenuItem item = new ToolStripMenuItem(text);
-            item.Tag = fullName;
+            item.Name = fullName;
             item.Click += new EventHandler(FavItem_Click);
 
             return item;
@@ -111,7 +111,7 @@ namespace iSprite
             }
             else
             {
-                RaisePathChanged(this, item.Tag.ToString());
+                RaisePathChanged(this, item.Name);
             }
         }
         #endregion

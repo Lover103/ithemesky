@@ -554,7 +554,7 @@ namespace iSprite
                         else
                         {
                             //ÎÄ¼þ¼Ð
-                            m_FileDevice.DeleteDirectory(item.Name);
+                            m_FileDevice.DeleteDirectory(item.Name,true);
                         }
                         this.Items.RemoveByKey(item.Name);
                     }
