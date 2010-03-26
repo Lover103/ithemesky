@@ -22,8 +22,8 @@ a:link,a:visited{ text-decoration:none; color:#769FA3;}
 a:hover,a:active{ text-decoration:none; color:#FFF;}
 
 #header,#wrapper,#footer{ width:980px; margin:0 auto;}
-#headerWrapper{ background:url(../images/bg_header.jpg) no-repeat center top;}
-#footerWrapper{ background:url(../images/bg_footer.png) no-repeat center top; height:110px;}
+#headerWrapper{ background:url(../images/bg_header.jpg) no-repeat center top; min-width:980px;}
+#footerWrapper{ background:url(../images/bg_footer.png) no-repeat center top; min-width:980px; height:110px;}
 #header{ height:100px;}
 #sidebar{ float:left; width:200px; margin-right:10px; _display:inline;}
 #mainContent{ float:left; width:600px;}
@@ -144,7 +144,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 /*breadcrumb*/
 .pageGuide{ width:770px; height:35px; background:url(../images/sprites_common.png) no-repeat 0 -400px;}
 .breadcrumb{ float:left;}
-.breadcrumb li{ float:left; margin:1px 0; padding:7px 5px 0 21px; height:26px; background:url(../images/sprites_common.png) no-repeat -767px -440px;}
+.breadcrumb li{ float:left; margin:1px 0; padding:7px 5px 0 21px; height:26px; background:url(../images/sprites_common.png) no-repeat -767px -440px; color:#CCD2DC;}
 .breadcrumb li a:link,.breadcrumb li a:visited{ color:#CCD2DC;}
 .breadcrumb li a:hover,.breadcrumb li a:active{ color:#FFF;}
 .breadcrumb li.home{ padding:5px 0 0 8px; background:none;}
@@ -305,3 +305,40 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .subTopDownload .star3{ background-position:-150px -210px;}
 .subTopDownload .star4{ background-position:-150px -230px;}
 .subTopDownload .star5{ background-position:-150px -250px;}
+
+/*common page*/
+.commonPage{  background:url(../images/sprites_box.png) no-repeat -1920px 0; margin-top:10px;}
+.commonContent{ background:url(../images/sprites_box.png) no-repeat -1000px bottom; padding:15px; width:570px;}
+.commonContent p{ padding:8px 0;}
+.commonContent ol{ list-style:decimal outside none; padding-left:15px;}
+.commonContent ol li{ list-style:decimal outside none; margin-left:5px;}
+
+/*FAQ*/
+.faqList{ width:560px; margin:0 5px;}
+.faqList li{ padding:3px 0 7px 15px; background:url(../images/sprites_subpages.png) no-repeat -593px 10px; font-weight:bold; overflow:hidden;}
+.faqList a{ float:left; padding-bottom:2px; background:url(../images/bg_dot_line.png) repeat-x left bottom;}
+.faqContent .title{ width:545px; height:25px; padding-left:25px; background:url(../images/sprites_subpages.png) no-repeat; margin:20px 0 10px 0;}
+.faqContent .title .text{ float:left; font-weight:bold; line-height:25px; color:#9FBBBF;}
+.faqContent .title .goTop{ float:right; width:25px; height:25px; background:url(../images/sprites_subpages.png) no-repeat 6px -32px; text-indent:-999em; overflow:hidden;}
+.faqContent .title .goTop:hover{ background-position:-34px -32px;}
+.faqEntry{ padding:0 10px; width:550px; overflow:hidden;}
+
+.normalTitle{ background:url(../images/sprites_subpages.png) no-repeat 0 -70px; padding-left:25px; font-weight:bold; line-height:28px; font-size:13px; color:#9FBBBF;}
+.normalEntry{ padding:10px; width:550px; overflow:hidden;}
+
+/*submit themes*/
+.submitTips{ padding:5px 0 10px 20px; background:url(../images/sprites_subpages.png) -589px -105px; width:550px;}
+.submitThemes{ padding:5px 0;}
+.submitForm{ clear:both; width:570px; padding-top:10px;}
+.submitForm .label{ float:left; width:115px; font-weight:bold; padding-right:5px; text-align:right; line-height:20px; color:#9FBABF;}
+.submitForm .select{ float:left; background:#000B0B; border:1px solid #253634;}
+.submitForm small{ font-size:11px; padding-left:5px;}
+.submitForm input{ float:left; padding:1px; height:16px; line-height:16px;}
+.submitForm .inputNormal,.submitForm .inputFocus{ width:190px;}
+.submitForm .inputNormal,.submitForm .textareaNormal{background:#000B0B; border:1px solid #253634;}
+.submitForm .inputFocus,.submitForm .textareaFocus{background:#001313; border:1px solid #304543;}
+.submitForm .inputFile{background:#000B0B; border:1px solid #253634; height:18px; width:auto;}
+.submitForm .textarea{ float:left; width:420px;}
+.submitForm textarea{ width:416px; height:96px; line-height:1.5; padding:1px; scrollbar-base-color:#000B0B; scrollbar-face-color:none; scrollbar-arrow-color:#9FBABF; scrollbar-track-color:#000B0B; scrollbar-3dlight-color:#000B0B; scrollbar-darkshadow-color:#000B0B; scrollbar-highlight-color:#304543; scrollbar-shadow-color:#253634;}
+.submitBtn{ clear:both; padding:10px 0 0 120px;}
+.submitBtn button{ width:100px; height:24px; background:url(../images/sprites_detail.png) no-repeat 0 -400px; color:#D9DCDD; border:none; padding:0; margin:0;}
