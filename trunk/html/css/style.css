@@ -79,11 +79,14 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .searchResult .btnDownload:hover,.searchResult .btnDownload:active{ background:url(../images/sprites_header.png) no-repeat 0 -380px;}
 
 /*footer*/
-#footer{ padding-top:35px; text-align:center; color:#527679;}
+#footer{ padding:35px 160px 0 200px; width:620px; text-align:center; color:#527679;}
 #footer a:link,#footer a:visited{ color:#527679;}
 #footer a:hover,#footer a:active{ color:#769FA3;}
 .footerNav{ padding-left:100px;}
 .copyright{ float:left;}
+.footNav{ float:right;}
+.footNav li{ float:left; padding:0 14px 0 15px; background:url(../images/sprites_header.png) no-repeat 0 -485px;}
+.footNav li.first{ background:none;}
 
 /*sidebar*/
 #sidebar a:link,#sidebar a:visited{ color:#9FBCBF;}
