@@ -67,6 +67,34 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap Calculator {
+            get {
+                object obj = ResourceManager.GetObject("Calculator", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Calendar {
+            get {
+                object obj = ResourceManager.GetObject("Calendar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Camera {
+            get {
+                object obj = ResourceManager.GetObject("Camera", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Clock {
+            get {
+                object obj = ResourceManager.GetObject("Clock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Folder_16 {
             get {
                 object obj = ResourceManager.GetObject("Folder_16", resourceCulture);
@@ -91,6 +119,104 @@ namespace iSprite {
         internal static System.Drawing.Bitmap img_Remove {
             get {
                 object obj = ResourceManager.GetObject("img_Remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap iPod {
+            get {
+                object obj = ResourceManager.GetObject("iPod", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap iTunes {
+            get {
+                object obj = ResourceManager.GetObject("iTunes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Mail {
+            get {
+                object obj = ResourceManager.GetObject("Mail", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Maps {
+            get {
+                object obj = ResourceManager.GetObject("Maps", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Notes {
+            get {
+                object obj = ResourceManager.GetObject("Notes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Phone {
+            get {
+                object obj = ResourceManager.GetObject("Phone", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Photos {
+            get {
+                object obj = ResourceManager.GetObject("Photos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Safari {
+            get {
+                object obj = ResourceManager.GetObject("Safari", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Settings {
+            get {
+                object obj = ResourceManager.GetObject("Settings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Stocks {
+            get {
+                object obj = ResourceManager.GetObject("Stocks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Text {
+            get {
+                object obj = ResourceManager.GetObject("Text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap WB_Text {
+            get {
+                object obj = ResourceManager.GetObject("WB_Text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Weather {
+            get {
+                object obj = ResourceManager.GetObject("Weather", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap YouTube {
+            get {
+                object obj = ResourceManager.GetObject("YouTube", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

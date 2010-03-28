@@ -127,6 +127,22 @@ namespace iSprite
                 }
             }
         }
+
+        public string DeviceVersion
+        {
+            get
+            {
+                if (IsConnected)
+                {
+                    return iPhoneInterface.DeviceVersion;
+                }
+                else
+                {
+                    return "none iPhone";
+                }
+            }
+        }
+
         /// <summary>
         /// 文件重命名
         /// </summary>

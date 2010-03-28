@@ -153,7 +153,12 @@ namespace iSprite
             //显示单位为KB
              if (FileSize <= 1048576)
             {
-                return string.Format("{0:F0} KB", FileSize / 1024);
+                ulong k = (FileSize / 1024);
+                if (k <= 0)
+                {
+                    k = 1;
+                }
+                return string.Format("{0:F0} KB", k);
             }
                 //大于1M，则显示单位为MB
             else if ((FileSize >= 1048576) && (FileSize <= 1073741824))
