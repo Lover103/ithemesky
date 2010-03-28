@@ -112,6 +112,23 @@ namespace iSprite
     }
     #endregion
 
+    #region 消息类型
+    /// <summary>
+    /// 消息类型
+    /// </summary>
+    public enum ThemePriviewMessageTypeOption
+    {
+        /// <summary>
+        /// 应用
+        /// </summary>
+        Apply,
+        /// <summary>
+        /// 取消
+        /// </summary>
+        Cancel
+    }
+    #endregion
+
     #region iPhone文件类型
     /// <summary>
     /// iPhone文件类型

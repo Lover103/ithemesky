@@ -110,6 +110,7 @@
             this.tabs.Size = new System.Drawing.Size(992, 673);
             this.tabs.TabIndex = 2;
             this.tabs.Text = "faTabStrip1";
+            this.tabs.TabStripItemSelectionChanged += new iSprite.ThirdControl.FarsiLibrary.FATabStrip.TabStripItemChangedHandler(this.TabStripItemSelectionChanged);
             // 
             // tabFile
             // 
@@ -139,14 +140,6 @@
             // Filetoolmenu
             // 
             this.Filetoolmenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.Filetoolmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbtnTileVertical,
-            this.tsbtnTileHorizontal,
-            this.tsbtnSinglePane,
-            this.toolStripSeparator1,
-            this.tsbtnFlipPanes,
-            this.toolStripSeparator4,
-            this.tsbtnInfo});
             this.Filetoolmenu.Location = new System.Drawing.Point(0, 0);
             this.Filetoolmenu.Name = "Filetoolmenu";
             this.Filetoolmenu.Size = new System.Drawing.Size(990, 25);

@@ -36,6 +36,14 @@ namespace iSprite
     public delegate void MessageHandler(object sender, string Message, MessageTypeOption messagetype);
 
     /// <summary>
+    /// 消息传送委托
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="Message"></param>
+    /// <param name="messagetype"></param>
+    public delegate void ThemePriviewMessageHandler(List<string> themeInfo, ThemePriviewMessageTypeOption messagetype);
+
+    /// <summary>
     /// 文件信息
     /// </summary>
     public class iFileInfo

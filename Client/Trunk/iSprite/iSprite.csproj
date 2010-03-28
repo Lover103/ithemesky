@@ -57,6 +57,12 @@
       <DependentUpon>iProgress.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\iThemeBrowser.cs" />
+    <Compile Include="Controls\ThemePriview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ThemePriview.Designer.cs">
+      <DependentUpon>ThemePriview.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileDevice\IFileDevice.cs" />
     <Compile Include="FileDevice\iPhoneFileDevice.cs" />
     <Compile Include="Library\iSpriteContext.cs" />
@@ -101,6 +107,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\iProgress.resx">
       <DependentUpon>iProgress.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ThemePriview.resx">
+      <DependentUpon>ThemePriview.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -187,6 +197,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dlls\ICSharpCode.SharpZipLib.dll" />
+    <None Include="Resources\calculator.png" />
+    <None Include="Resources\settings.png" />
+    <None Include="Resources\calendar.png" />
+    <None Include="Resources\clock.png" />
+    <None Include="Resources\WB_Text.png" />
+    <None Include="Resources\camera.png" />
+    <None Include="Resources\youtube.png" />
+    <None Include="Resources\weather.png" />
+    <None Include="Resources\text.png" />
+    <None Include="Resources\stocks.png" />
+    <None Include="Resources\safari.png" />
+    <None Include="Resources\photos.png" />
+    <None Include="Resources\phone.png" />
+    <None Include="Resources\notes.png" />
+    <None Include="Resources\maps.png" />
+    <None Include="Resources\mail.png" />
+    <None Include="Resources\itunes.png" />
+    <None Include="Resources\ipod.png" />
     <None Include="Resources\zip_32.png" />
     <None Include="Resources\zip_16.png" />
     <None Include="Resources\Folder_32.png" />

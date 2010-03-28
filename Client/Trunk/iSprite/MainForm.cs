@@ -124,7 +124,7 @@ namespace iSprite
                 }
             }
 
-            m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme);
+            m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme,this);
             m_themeManage.OnMessage += new MessageHandler(ShowMessage);
             m_themeManage.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
 
@@ -212,8 +212,8 @@ namespace iSprite
 
                             iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
                             m_iPhonePanel.AfterDeviceFinishConnected();
-                            m_themeManage.AfterDeviceFinishConnected();
                         }
+                        m_themeManage.AfterDeviceFinishConnected(enable);
                     }
                 ));
             }
@@ -224,10 +224,10 @@ namespace iSprite
                 {
                     iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
                     m_iPhonePanel.AfterDeviceFinishConnected();
-                    m_themeManage.AfterDeviceFinishConnected();
                     iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
                     ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
                 }
+                m_themeManage.AfterDeviceFinishConnected(enable);
             }
         }
         #endregion        
@@ -439,5 +439,20 @@ namespace iSprite
             }
         }
         #endregion
+
+        private void TabStripItemSelectionChanged(iSprite.ThirdControl.FarsiLibrary.TabStripItemChangedEventArgs e)
+        {
+            if (m_themeManage != null)
+            {
+                if (e.Item.Name == "tabTheme")
+                {
+                    m_themeManage.SetPreviewVisable(true);
+                }
+                else
+                {
+                    m_themeManage.SetPreviewVisable(false);
+                }
+            }
+        }
     }
 }

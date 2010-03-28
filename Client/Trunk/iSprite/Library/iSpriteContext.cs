@@ -83,6 +83,14 @@ namespace iSprite
         /// 更新地址
         /// </summary>
         internal string UpdateUrl { private set; get; }
+        /// <summary>
+        /// WinterBoard
+        /// </summary>
+        internal string WinterBoardXML { private set; get; }
+        /// <summary>
+        /// CydiaAutoInstallPath
+        /// </summary>
+        internal string iPhone_CydiaAutoInstallPath { private set; get; }
 
         /// <summary>
         /// 静态构造器
@@ -104,11 +112,12 @@ namespace iSprite
         /// </summary>
         public void Reload()
         {
-            CurrentVersion = "1.0";
+            CurrentVersion = "2.0";
 
             ThemeHomePage = "http://www.ithemesky.com/";
             HelpUrl = "http://www.ithemesky.com/help/";
             UpdateUrl = "http://update.ithemesky.com/update/update.xml";
+            WinterBoardXML = "http://www.ithemesky.com/winterboard/update.xml";
             iPhone_PhotosLibrary_Path = "/private/var/root/Media/Photos/";
             iPhone_Wallpaper_Path = "/Library/Wallpaper/";
             iPhone_LockBackground_Path = "/private/var/root/Library/";
@@ -119,6 +128,7 @@ namespace iSprite
             iPhone_LocalizedApplicationNames_Path = "/System/Library/CoreServices/SpringBoard.app/{0}/LocalizedApplicationNames.strings";
             iPhone_ScreenShot_Path = "/private/var/mobile/Media/DCIM/100APPLE/";
             iPhone_GlobalPreferences_Path = "/private/var/root/Library/Preferences/.GlobalPreferences.plist";
+            iPhone_CydiaAutoInstallPath = "/private/var/root/Media/Cydia/AutoInstall/";
 
             iSpriteApplicationDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles).TrimEnd('\\')
                    + @"\iSprite\";
