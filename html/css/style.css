@@ -157,6 +157,8 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .selectedTags{ width:770px; background:url(../images/sprites_box_wide.png) no-repeat -770px 0; color:#CCD2DC;}
 .selectedTags dl,.selectedTags .tips{ width:756px; padding:4px 0 9px 0; background:url(../images/sprites_box_wide.png) no-repeat 0 bottom;}
 .selectedTags .tips{ padding-left:20px; width:736px;}
+.selectedTags .tips small{ font-size:12px; float:left; padding-right:10px;}
+.selectedTags .tips .close{ float:left; width:70px; height:18px; text-indent:8px; background:url(../images/sprites_common.png) no-repeat -710px -650px; line-height:16px; font-size:13px;}
 .selectedTags dt{ float:left; width:126px; text-align:right; margin-top:5px;}
 .selectedTags dd{ margin-left:126px; _margin-left:123px; padding-right:20px;}
 .selectedTags dd a:link,.selectedTags dd a:visited{ float:left; display:block; margin:5px 0 0 5px; height:18px; line-height:18px; padding:0 20px 0 5px; white-space:nowrap; color:#9FBBBF; background:url(../images/sprites_common.png) no-repeat right -480px; border:1px solid #366061;}
@@ -169,6 +171,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .selectTags dd li{ float:left; background:url(../images/sprites_common.png) no-repeat right -500px; padding:0 12px; white-space:nowrap;}
 .selectTags dd a:link,.selectTags dd a:visited{ color:#91B1B5;}
 .selectTags dd a:hover,.selectTags dd a:active{ color:#FFF;}
+.selectTags dd a.selected{ background:url(../images/sprites_common.png) no-repeat 0 -647px; padding-left:16px; color:#FFF;}
 
 /*themes list*/
 .lists{ margin-top:10px; width:770px; background:url(../images/sprites_box_wide.png) no-repeat -1540px 0;}
@@ -185,7 +188,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .pageInfo .pageNumber{ float:left; padding-left:15px;}
 .pageInfo .pageNumber li{ float:left; padding:15px 7px 0 7px; height:30px;}
 .pageInfo .previous,.pageInfo .next{ height:20px; text-align:left;}
-.pageInfo .previous a:link,pageInfo .previous a:visited{ background:url(../images/sprites_common.png) no-repeat left -590px; padding-left:8px;}
+.pageInfo .previous a:link,.pageInfo .previous a:visited{ background:url(../images/sprites_common.png) no-repeat left -590px; padding-left:8px;}
 .pageInfo .previous a:hover,pageInfo .previous a:active{ background:url(../images/sprites_common.png) no-repeat left -610px;}
 .pageInfo .next a:link,.pageInfo .next a:visited{ background:url(../images/sprites_common.png) no-repeat right -590px; padding-right:8px;}
 .pageInfo .next a:hover,.pageInfo .next a:active{ background:url(../images/sprites_common.png) no-repeat right -610px;}
