@@ -114,11 +114,13 @@ namespace IThemeSky.ThemesRobot
 
                 m = Regex.Match(downPageContent, @"""(?<ThemeFileUrl>[^""]+)""");
                 themeFileUrl = BASE_URL + m.Groups["ThemeFileUrl"].Value;
-
+                
                 _webClient.DownloadFile(themeFileUrl, Path.Combine(SAVE_PATH, theme.DownloadUrl));
                 _webClient.DownloadFile(imageUrl, Path.Combine(SAVE_PATH, theme.ThumbnailName));
                 //生成缩略图
                 ImageHelper.MakeThumbnail(Path.Combine(SAVE_PATH, theme.ThumbnailName), Path.Combine(SAVE_PATH, theme.ThumbnailName.Replace(".jpg", "_112x168.jpg")), 112, 168, "wh");
+
+                theme.FileSize = new FileInfo(Path.Combine(SAVE_PATH, theme.DownloadUrl)).Length;
 
                 IThemeManageRepository repository = ThemeRepositoryFactory.Default.GetThemeManageRepository();
                 repository.AddTheme(theme);
