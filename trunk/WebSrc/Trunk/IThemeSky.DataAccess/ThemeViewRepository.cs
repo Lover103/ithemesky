@@ -352,7 +352,24 @@ namespace IThemeSky.DataAccess
         {
             return GetFullThemes(filter, sort, pageIndex, pageSize, ref recordCount);
         }
-
+        /// <summary>
+        /// 获取指定主题的标签列表
+        /// </summary>
+        /// <param name="themeId">主题id</param>
+        /// <returns></returns>
+        public List<string> GetTagsByThemeId(int themeId)
+        {
+            List<string> tags = new List<string>();
+            string cmdText = "SELECT TagName FROM ThemeTagMap INNER JOIN ThemeTag ON ThemeTagMap.TagId = ThemeTag.TagId WHERE ThemeId=" + themeId;
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                while (reader.Read())
+                {
+                    tags.Add(reader["TagName"].ToString());
+                }
+            }
+            return tags;
+        }
         /// <summary>
         /// 获取所有主题分类列表
         /// </summary>

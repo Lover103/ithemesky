@@ -58,7 +58,7 @@ namespace IThemeSky.Model
             get
             {
                 return string.Format("/iphone-themes/{0}/{1}"
-                    , Title.Replace(" ", "-")
+                    , Title.Trim().Replace(" ", "-")
                     , ThemeId
                     );
             }

@@ -44,7 +44,7 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@ThemeId",SqlDbType.Int, 4, comment.ThemeId),
 				SqlParameterHelper.BuildInputParameter("@RateType",SqlDbType.Int, 4, comment.RateType),
 				SqlParameterHelper.BuildInputParameter("@Title",SqlDbType.VarChar, 300, comment.Title),
-				SqlParameterHelper.BuildInputParameter("@Content",SqlDbType.VarChar, 16, comment.Content),
+				SqlParameterHelper.BuildInputParameter("@Content",SqlDbType.Text, 0, comment.Content),
                 SqlParameterHelper.BuildInputParameter("@UserName",SqlDbType.VarChar, 100, comment.UserName),
                 SqlParameterHelper.BuildInputParameter("@UserMail",SqlDbType.VarChar, 300, comment.UserMail),
 				SqlParameterHelper.BuildInputParameter("@UserId",SqlDbType.Int, 4, comment.UserId),

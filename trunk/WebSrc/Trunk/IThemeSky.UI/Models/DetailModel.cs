@@ -12,6 +12,7 @@ namespace IThemeSky.UI.Models
         public DetailModel(int themeId)
         {
             CurrentTheme = _themeRepository.GetTheme(themeId);
+            Tags = _themeRepository.GetTagsByThemeId(themeId);
             string themeName;
             PrevThemeId = _themeRepository.GetPrevThemeId(CurrentTheme.CheckerId, themeId, out themeName);
             PrevThemeName = themeName;
@@ -28,6 +29,7 @@ namespace IThemeSky.UI.Models
             };
         }
         public FullThemeView CurrentTheme { get; private set; }
+        public List<string> Tags { get; private set; }
         public int PrevThemeId { get; private set; }
         public string PrevThemeName { get; private set; }
         public int NextThemeId { get; private set; }
