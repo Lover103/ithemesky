@@ -153,6 +153,12 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         List<FullThemeView> GetFullThemesByFilter(ThemesFilter filter, ThemeSortOption sort, int pageIndex, int pageSize, ref int recordCount);
         /// <summary>
+        /// 获取指定主题的标签列表
+        /// </summary>
+        /// <param name="themeId">主题id</param>
+        /// <returns></returns>
+        List<string> GetTagsByThemeId(int themeId);
+        /// <summary>
         /// 获取所有主题分类列表
         /// </summary>
         /// <returns></returns>

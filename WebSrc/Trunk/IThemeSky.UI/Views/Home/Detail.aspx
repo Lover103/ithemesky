@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<DetailModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	<title>iphone themes free download, ithemesky.com provided iphone themes</title>
+	<title><%=ViewData.Model.CurrentTheme.Title %> iphone theme - iphone themes free download, ithemesky.com provided iphone themes</title>
     <meta name="description" content="ithemesky.com provided iphone themes, more than 2,000 iphone themes free download!" />
-    <meta name="keywords" content="iphone theme, iphone themes, jailbroken iphone, install iphone themes, free download, iphone" />
+    <meta name="keywords" content="<% foreach (string tag in ViewData.Model.Tags){ %><%=tag %>,<%} %>,<%=ViewData.Model.CurrentTheme.CategoryName %>,iphone theme, iphone themes, jailbroken iphone, install iphone themes, free download, iphone" />
     <link rel="stylesheet" href="/Content/css/fancybox.css" type="text/css" />
     <script type="text/javascript" src="/Content/js/fancybox.js"></script>
     <script type="text/javascript">
@@ -51,8 +51,8 @@
 				<div class="detailSide">
 					<div class="themeCut"><a href="/<%=ViewData.Model.CurrentTheme.ThumbnailName %>" title="<%=ViewData.Model.CurrentTheme.Title %>"><img src="/<%=ViewData.Model.CurrentTheme.ThumbnailName %>" width="170" height="255" alt="<%=ViewData.Model.CurrentTheme.Title %>" id="themeCut" /></a></div>
 					<ul class="btn">
-						<li class="previous"><a <%=ViewData.Model.PrevThemeId <=0 ? "class=\"none\" onclick=\"return false;\"" : "" %> href="/iphone-themes/<%=ViewData.Model.PrevThemeName.Trim() %>/<%=ViewData.Model.PrevThemeId %>" title="Previous: <%=ViewData.Model.PrevThemeName %>">Previous</a></li>
-						<li class="next"><a <%=ViewData.Model.NextThemeId <=0 ? "class=\"none\" onclick=\"return false;\"" : "" %> href="/iphone-themes/<%=ViewData.Model.NextThemeName.Trim() %>/<%=ViewData.Model.NextThemeId %>" title="Next: <%=ViewData.Model.PrevThemeName %>">Next</a></li>
+						<li class="previous"><a <%=ViewData.Model.PrevThemeId <=0 ? "class=\"none\" onclick=\"return false;\"" : "" %> href="/iphone-themes/<%=ViewData.Model.PrevThemeName.Trim().Replace(" ", "-") %>/<%=ViewData.Model.PrevThemeId %>" title="Previous: <%=ViewData.Model.PrevThemeName %>">Previous</a></li>
+						<li class="next"><a <%=ViewData.Model.NextThemeId <=0 ? "class=\"none\" onclick=\"return false;\"" : "" %> href="/iphone-themes/<%=ViewData.Model.NextThemeName.Trim().Replace(" ", "-") %>/<%=ViewData.Model.NextThemeId %>" title="Next: <%=ViewData.Model.NextThemeName %>">Next</a></li>
 					</ul>
 				</div>
 				<div class="detailInfo">
@@ -63,7 +63,12 @@
 					</dl>
 					<dl class="details clearfix"> 
            				<dt>Tags:</dt>
-						<dd><a href="#">dock</a>, <a href="#">Icons</a>, <a href="#">psd</a>, <a href="#">status bar</a>, <a href="#">wallpaper</a>, <a href="#">sexy girl</a>, <a href="#">pink</a></dd>
+						<dd>
+						    <% for (int i = 0; i < ViewData.Model.Tags.Count; i++)
+                            { %>
+                                <%= i > 0 ? ", " : ""%><a href="#<%=ViewData.Model.Tags[i] %>"><%=ViewData.Model.Tags[i] %></a>
+						    <%} %>
+						</dd>
 					</dl>
 					<dl class="details clearfix"> 
            				<dt>Time:</dt>
@@ -139,7 +144,7 @@
 					    <li class="champion">
 						    <dl class="clearfix">
 							    <dt><a href="<%=theme.ThemeDetailUrl %>"><img src="/<%=theme.Thumbnail_112x168 %>" width="32" height="48" alt="<%=theme.Title %>" /></a></dt>
-							    <dd class="title"><a href="<%=theme.ThemeDetailUrl %>"><%=theme.Title %></a></dd>
+							    <dd class="title"><a href="<%=theme.ThemeDetailUrl %>"><%=theme.Title.SubStr(12) %></a></dd>
 							    <dd><span class="rateResult star<%=theme.CommendIndex %>" title="<%=theme.CommendIndex %>/5 stars"><%=theme.CommendIndex %>/5 stars</span></dd>
 							    <dd><small>Downloads:</small><span class="downloadNum"><%=theme.Downloads %></span></dd>
 						    </dl>
@@ -147,7 +152,7 @@
 					<%  }
                        else
                        {%>
-					    <li class="normal"><span class="rankNum"><%=index+1%></span><a href="<%=theme.ThemeDetailUrl %>" class="title" title="<%=theme.Title %>"><%=theme.Title %></a><span class="downloadNum"><%=theme.Downloads %></span></li>
+					    <li class="normal"><span class="rankNum"><%=index+1%></span><a href="<%=theme.ThemeDetailUrl %>" class="title" title="<%=theme.Title %>"><%=theme.Title.SubStr(12) %></a><span class="downloadNum"><%=theme.Downloads %></span></li>
 					<%
                         }
                         index++;
@@ -159,7 +164,7 @@
 				<ul class="subColContent subRecommended">
 				    <% foreach (SimpleThemeView theme in ViewData.Model.CommendThemes)
                     { %>
-					<li><span class="downloadNum"><%=theme.Downloads %></span><a href="<%=theme.ThemeDetailUrl %>" title="<%=theme.Title %>"><%=theme.Title %></a></li>
+					<li><span class="downloadNum"><%=theme.Downloads %></span><a href="<%=theme.ThemeDetailUrl %>" title="<%=theme.Title %>"><%=theme.Title.SubStr(12) %></a></li>
 					<%} %>
 				</ul>
 			</div>

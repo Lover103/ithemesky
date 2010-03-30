@@ -253,7 +253,7 @@ namespace IThemeSky.DataAccess
                 Downloads = Convert.ToInt32(dataReader["Downloads"]),
                 CategoryName = dataReader["CategoryName"].ToString(),
                 Thumbnail = dataReader["ThumbnailName"].ToString(),
-                Thumbnail_112x168 = dataReader["ThumbnailName"].ToString(),
+                Thumbnail_112x168 = dataReader["ThumbnailName"].ToString().Replace(".jpg", "_112x168.jpg"),
             };
         }
 
