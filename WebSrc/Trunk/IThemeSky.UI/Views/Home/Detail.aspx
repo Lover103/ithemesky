@@ -49,7 +49,7 @@
 			<!--theme detail begin-->
 			<div class="themeDetail clearfix">
 				<div class="detailSide">
-					<div class="themeCut"><a href="/<%=ViewData.Model.CurrentTheme.ThumbnailName %>" title="<%=ViewData.Model.CurrentTheme.Title %>"><img src="/<%=ViewData.Model.CurrentTheme.ThumbnailName %>" width="170" height="255" alt="<%=ViewData.Model.CurrentTheme.Title %>" id="themeCut" /></a></div>
+					<div class="themeCut"><a href="/<%=ViewData.Model.CurrentTheme.ThumbnailName %>" title="<%=ViewData.Model.CurrentTheme.Title %>"><img src="/<%=ViewData.Model.CurrentTheme.ThumbnailName.Replace(".jpg", "_112x168.jpg") %>" width="170" height="255" alt="<%=ViewData.Model.CurrentTheme.Title %>" id="themeCut" /></a></div>
 					<ul class="btn">
 						<li class="previous"><a <%=ViewData.Model.PrevThemeId <=0 ? "class=\"none\" onclick=\"return false;\"" : "" %> href="/iphone-themes/<%=ViewData.Model.PrevThemeName.Trim().Replace(" ", "-") %>/<%=ViewData.Model.PrevThemeId %>" title="Previous: <%=ViewData.Model.PrevThemeName %>">Previous</a></li>
 						<li class="next"><a <%=ViewData.Model.NextThemeId <=0 ? "class=\"none\" onclick=\"return false;\"" : "" %> href="/iphone-themes/<%=ViewData.Model.NextThemeName.Trim().Replace(" ", "-") %>/<%=ViewData.Model.NextThemeId %>" title="Next: <%=ViewData.Model.NextThemeName %>">Next</a></li>
