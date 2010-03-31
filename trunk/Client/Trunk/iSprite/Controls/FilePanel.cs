@@ -120,9 +120,6 @@ namespace iSprite
 			m_DirectoryDetailList.Font = this.Font;
             m_DirectoryDetailList.OnPathChanged += new PathChanged(OnPathChanged);
 
-			tslblDrive.ForeColor = Color.Black;
-			tslblObjects.ForeColor = Color.Black;
-			tslblSelected.ForeColor = Color.Black;
 			tsbtnLVFilter.ForeColor = Color.Black;
 
 			m_SplitDistance = (int)splitContainer1.Width / 3;
@@ -283,7 +280,7 @@ namespace iSprite
         /// </summary>
         internal void LoadFavourites()
         {
-            m_Favourites.Load(m_FileDevice.DeviceName);
+            m_Favourites.Load(m_FileDevice.UserIdentity);
         }
         #endregion   
 

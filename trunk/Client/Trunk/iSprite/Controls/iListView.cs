@@ -109,6 +109,9 @@ namespace iSprite
             }
 
 			Initialise();
+
+            //this.BackgroundImage = global::iSprite.Resource.BackgroundImage;
+            //this.BackgroundImageTiled = true;
         }
         private iListView()
         { 

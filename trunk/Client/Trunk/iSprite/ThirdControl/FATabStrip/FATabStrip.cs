@@ -1005,6 +1005,13 @@ namespace iSprite.ThirdControl.FarsiLibrary
         }
 
         #endregion
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            this.ResumeLayout(false);
+
+        }
     }
 
     public enum HitTestResult

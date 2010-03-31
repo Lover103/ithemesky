@@ -6,13 +6,15 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Manzana;
+using System.IO;
 
 namespace iSprite
 {
-    public delegate void CancelHandler(object sender, bool cancel);
+    internal delegate void CancelHandler(object sender, bool cancel);
 
 
-    public partial class iProgress : UserControl
+    internal partial class iProgress : iUserControl
     {
 
         /// <summary>
@@ -33,40 +35,69 @@ namespace iSprite
         public iProgress()
         {
             InitializeComponent();
-            this.progressbar.Value = 0;
+            this.progressbar.Position = 0;
             this.Visible = true;
         }
 
-        public void SetProgress(ulong total, ulong currentValue)
+        public void SetProgress(FileProgressMode mode, ulong totalSize, ulong completeSize, int speed, double timeElapse, string file)
         {
             this.Visible = true;
-            if (total > Int32.MaxValue)
+            if (totalSize > Int32.MaxValue)
             {
-                total = Int32.MaxValue;
-                currentValue = (ulong)(currentValue * (Int32.MaxValue * 1.0 / total));
+                totalSize = Int32.MaxValue;
+                completeSize = (ulong)(completeSize * (Int32.MaxValue * 1.0 / totalSize));
             }
 
-            if (currentValue > total)
+            if (completeSize > totalSize)
             {
-                currentValue = total;
+                completeSize = totalSize;
             }
 
             double perent = 0;
-            if (total > 0)
+            if (totalSize > 0)
             {
-                perent = currentValue * 1.0 / total;
+                perent = completeSize * 1.0 / totalSize;
             }
 
-            if (perent.ToString("P") == this.lblpercent.Text)
+            if (perent.ToString("P") == this.progressbar.Text)
             {
                 return;
             }
 
             Percent = perent.ToString("P");
-            this.Maximum = Convert.ToInt32(total);
-            this.Value = Convert.ToInt32(currentValue);
+            this.Maximum = Convert.ToInt32(totalSize);
+            this.Value = Convert.ToInt32(completeSize);
             Application.DoEvents();
-            
+            switch (mode)
+            {
+                case FileProgressMode.PC2iPhone:
+                    this.Title = string.Format("Copy file({0}) to iPhone...", Path.GetFileName(file));
+                    break;
+                case FileProgressMode.iPhone2PC:
+                    this.Title = string.Format("Copy file({0}) from iPhone...", Path.GetFileName(file));
+                    break;
+                case FileProgressMode.Internet2PC:
+                    this.Title = string.Format("Download file({0}) from Internet...", Path.GetFileName(file));
+                    break;
+            }
+            if (perent > 0 && timeElapse > 0)
+            {
+                int timeleft = (int)(timeElapse * ((1 - perent) / perent));
+                this.Status = string.Format(
+                    "Transmited {0}, Speed {1}, Time Left {2}",
+                    Utility.FormatFileSize(completeSize),
+                    Utility.FormatFileSize((ulong)speed),
+                    string.Format("{0:00}:{1:00}",timeleft/60,timeleft%60)
+                    );
+            }
+            else
+            {
+                this.Status = string.Format(
+                    "Transmited {0}, Speed {1}",
+                    Utility.FormatFileSize(completeSize),
+                    Utility.FormatFileSize((ulong)speed)
+                    );
+            }
         }
 
         public new bool Visible
@@ -89,6 +120,46 @@ namespace iSprite
             }
         }
 
+        public string Title
+        {
+            set
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new ThreadInvokeDelegate(
+                        delegate()
+                        {
+                            this.lblTitle.Text = value;
+                        }
+                    ));
+                }
+                else
+                {
+                    this.lblTitle.Text = value;
+                }
+            }
+        }
+        public string Status
+        {
+            set
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new ThreadInvokeDelegate(
+                        delegate()
+                        {
+                            this.lblStatus.Text = value;
+                        }
+                    ));
+                }
+                else
+                {
+                    this.lblStatus.Text = value;
+                }
+            }
+        }
+
+
         public string Percent
         {
             set
@@ -98,13 +169,13 @@ namespace iSprite
                     this.Invoke(new ThreadInvokeDelegate(
                         delegate()
                         {
-                            this.lblpercent.Text = value;
+                            this.progressbar.Text = value;
                         }
                     ));
                 }
                 else
                 {
-                    this.lblpercent.Text = value;
+                    this.progressbar.Text = value;
                 }
             }
         }
@@ -113,7 +184,7 @@ namespace iSprite
         {
             get 
             {
-                return this.progressbar.Maximum;
+                return this.progressbar.PositionMax;
             }
             set 
             {
@@ -122,13 +193,13 @@ namespace iSprite
                     this.Invoke(new ThreadInvokeDelegate(
                         delegate()
                         {
-                            this.progressbar.Maximum = value; 
+                            this.progressbar.PositionMax = value; 
                         }
                     ));
                 }
                 else
                 {
-                    this.progressbar.Maximum = value; 
+                    this.progressbar.PositionMax = value; 
                 }
             }
         }
@@ -138,7 +209,7 @@ namespace iSprite
         {
             get
             {
-                return this.progressbar.Minimum;
+                return this.progressbar.PositionMin;
             }
             set
             {
@@ -147,13 +218,13 @@ namespace iSprite
                     this.Invoke(new ThreadInvokeDelegate(
                         delegate()
                         {
-                            this.progressbar.Minimum = value;
+                            this.progressbar.PositionMin = value;
                         }
                     ));
                 }
                 else
                 {
-                    this.progressbar.Minimum = value;
+                    this.progressbar.PositionMin = value;
                 }
             }
         }
@@ -162,7 +233,7 @@ namespace iSprite
         {
             get
             {
-                return this.progressbar.Value;
+                return this.progressbar.Position;
             }
             set
             {
@@ -171,13 +242,13 @@ namespace iSprite
                     this.Invoke(new ThreadInvokeDelegate(
                         delegate()
                         {
-                            this.progressbar.Value = value;
+                            this.progressbar.Position = value;
                         }
                     ));
                 }
                 else
                 {
-                    this.progressbar.Value = value;
+                    this.progressbar.Position = value;
                 }
             }
         }

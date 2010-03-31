@@ -56,7 +56,13 @@
     <Compile Include="Controls\iProgress.Designer.cs">
       <DependentUpon>iProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\iSpriteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Controls\iThemeBrowser.cs" />
+    <Compile Include="Controls\iUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ThemePriview.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,6 +71,7 @@
     </Compile>
     <Compile Include="FileDevice\IFileDevice.cs" />
     <Compile Include="FileDevice\iPhoneFileDevice.cs" />
+    <Compile Include="Library\Area9Helper.cs" />
     <Compile Include="Library\iSpriteContext.cs" />
     <Compile Include="FileDevice\LoaclDiskFileDevice.cs" />
     <Compile Include="Controls\FilePanel.cs">
@@ -84,6 +91,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Library\Updater.cs" />
+    <Compile Include="ThirdControl\XpProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Library\ZipHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -111,6 +121,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ThemePriview.resx">
       <DependentUpon>ThemePriview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThirdControl\FATabStrip\FATabStrip.resx">
+      <DependentUpon>FATabStrip.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThirdControl\XpProgressBar.resx">
+      <DependentUpon>XpProgressBar.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -150,6 +168,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <None Include="Resources\ndBaseForm.cs" />
     <Compile Include="ThirdControl\FATabStrip\BaseClasses\BaseStyledPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -197,6 +216,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dlls\ICSharpCode.SharpZipLib.dll" />
+    <None Include="Resources\BackgroundImage.bmp" />
+    <None Include="Resources\form_bg.png" />
     <None Include="Resources\calculator.png" />
     <None Include="Resources\settings.png" />
     <None Include="Resources\calendar.png" />

@@ -117,7 +117,7 @@ namespace iSprite
             ThemeHomePage = "http://www.ithemesky.com/";
             HelpUrl = "http://www.ithemesky.com/help/";
             UpdateUrl = "http://update.ithemesky.com/update/update.xml";
-            WinterBoardXML = "http://www.ithemesky.com/winterboard/update.xml";
+            WinterBoardXML = "http://update.ithemesky.com/winterboard/update.xml";
             iPhone_PhotosLibrary_Path = "/private/var/root/Media/Photos/";
             iPhone_Wallpaper_Path = "/Library/Wallpaper/";
             iPhone_LockBackground_Path = "/private/var/root/Library/";
@@ -206,6 +206,10 @@ namespace iSprite
             if (!iphone.Exists(_context.iPhone_MyDocuments_Path))
             {
                 iphone.CreateDirectory(_context.iPhone_MyDocuments_Path);
+            }
+            if (!iphone.Exists(_context.iPhone_CydiaAutoInstallPath))
+            {
+                iphone.CreateDirectory(_context.iPhone_CydiaAutoInstallPath);
             }
 
             foreach (string path in iphone.GetDirectories("/private/var/stash/"))

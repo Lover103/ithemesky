@@ -44,7 +44,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnFlipPanes = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbtnInfo = new System.Windows.Forms.ToolStripButton();
             this.tabTheme = new iSprite.ThirdControl.FarsiLibrary.FATabStripItem();
             this.faTabStrip1 = new iSprite.ThirdControl.FarsiLibrary.FATabStrip();
             this.panel2.SuspendLayout();
@@ -104,10 +103,10 @@
             this.tabs.Items.AddRange(new iSprite.ThirdControl.FarsiLibrary.FATabStripItem[] {
             this.tabFile,
             this.tabTheme});
-            this.tabs.Location = new System.Drawing.Point(0, 0);
+            this.tabs.Location = new System.Drawing.Point(3, 30);
             this.tabs.Name = "tabs";
             this.tabs.SelectedItem = this.tabFile;
-            this.tabs.Size = new System.Drawing.Size(992, 673);
+            this.tabs.Size = new System.Drawing.Size(986, 640);
             this.tabs.TabIndex = 2;
             this.tabs.Text = "faTabStrip1";
             this.tabs.TabStripItemSelectionChanged += new iSprite.ThirdControl.FarsiLibrary.FATabStrip.TabStripItemChangedHandler(this.TabStripItemSelectionChanged);
@@ -120,7 +119,7 @@
             this.tabFile.IsDrawn = true;
             this.tabFile.Name = "tabFile";
             this.tabFile.Selected = true;
-            this.tabFile.Size = new System.Drawing.Size(990, 652);
+            this.tabFile.Size = new System.Drawing.Size(984, 619);
             this.tabFile.TabIndex = 0;
             this.tabFile.Title = "File Manage";
             // 
@@ -132,29 +131,26 @@
             this.mainsplitcontainer.Name = "mainsplitcontainer";
             this.mainsplitcontainer.Panel1MinSize = 0;
             this.mainsplitcontainer.Panel2MinSize = 0;
-            this.mainsplitcontainer.Size = new System.Drawing.Size(990, 627);
-            this.mainsplitcontainer.SplitterDistance = 517;
+            this.mainsplitcontainer.Size = new System.Drawing.Size(984, 594);
+            this.mainsplitcontainer.SplitterDistance = 513;
             this.mainsplitcontainer.SplitterWidth = 1;
             this.mainsplitcontainer.TabIndex = 13;
             // 
             // Filetoolmenu
             // 
             this.Filetoolmenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.Filetoolmenu.Location = new System.Drawing.Point(0, 0);
-            this.Filetoolmenu.Name = "Filetoolmenu";
-            this.Filetoolmenu.Size = new System.Drawing.Size(990, 25);
-            this.Filetoolmenu.TabIndex = 12;
-            this.Filetoolmenu.Text = "toolStrip3";
-
             this.Filetoolmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbtnTileVertical,
             this.tsbtnTileHorizontal,
             this.tsbtnSinglePane,
             this.toolStripSeparator1,
             this.tsbtnFlipPanes,
-            this.toolStripSeparator4,
-            this.tsbtnInfo});
-
+            this.toolStripSeparator4});
+            this.Filetoolmenu.Location = new System.Drawing.Point(0, 0);
+            this.Filetoolmenu.Name = "Filetoolmenu";
+            this.Filetoolmenu.Size = new System.Drawing.Size(984, 25);
+            this.Filetoolmenu.TabIndex = 12;
+            this.Filetoolmenu.Text = "toolStrip3";
             // 
             // tsbtnTileVertical
             // 
@@ -204,16 +200,6 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
-            // tsbtnInfo
-            // 
-            this.tsbtnInfo.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbtnInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtnInfo.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnInfo.Image")));
-            this.tsbtnInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtnInfo.Name = "tsbtnInfo";
-            this.tsbtnInfo.Size = new System.Drawing.Size(23, 22);
-            this.tsbtnInfo.ToolTipText = "About Jeff\'s File Manager";
-            // 
             // tabTheme
             // 
             this.tabTheme.IsDrawn = true;
@@ -226,9 +212,9 @@
             // 
             this.faTabStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.faTabStrip1.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.faTabStrip1.Location = new System.Drawing.Point(0, 0);
+            this.faTabStrip1.Location = new System.Drawing.Point(3, 30);
             this.faTabStrip1.Name = "faTabStrip1";
-            this.faTabStrip1.Size = new System.Drawing.Size(992, 673);
+            this.faTabStrip1.Size = new System.Drawing.Size(986, 640);
             this.faTabStrip1.TabIndex = 1;
             this.faTabStrip1.Text = "faTabStrip1";
             // 
@@ -236,12 +222,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::iSprite.Resource.form_bg;
             this.ClientSize = new System.Drawing.Size(992, 673);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.faTabStrip1);
             this.Name = "MainForm";
+            this.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.Text = "iSprite";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Controls.SetChildIndex(this.faTabStrip1, 0);
+            this.Controls.SetChildIndex(this.tabs, 0);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabs)).EndInit();
             this.tabs.ResumeLayout(false);
@@ -272,7 +262,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton tsbtnFlipPanes;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripButton tsbtnInfo;
         private System.Windows.Forms.Timer timer;
 
 

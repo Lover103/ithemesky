@@ -324,7 +324,7 @@ namespace iSprite
         /// </summary>
         internal void LoadFavourites()
         {
-            m_Favourites.Load(m_FileDevice.DeviceName);
+            m_Favourites.Load(m_FileDevice.UserIdentity);
         }
         #endregion
 
