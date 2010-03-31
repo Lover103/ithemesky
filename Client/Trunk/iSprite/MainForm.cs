@@ -10,13 +10,14 @@ using System.Windows.Forms;
 
 using Manzana;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace iSprite
 {
     /// <summary>
     /// 主窗体
     /// </summary>
-    public partial class MainForm : Form
+    internal partial class MainForm : iSpriteForm
     {
         #region 变量定义
         /// <summary>
@@ -71,8 +72,12 @@ namespace iSprite
             InitializeComponent();
             iphone = new iPhone();
 
-            this.Text = "iSprite (V" + iSpriteContext.Current.CurrentVersion+")";
+            this.Text = "iSprite (V" + iSpriteContext.Current.CurrentVersion + ")";
             this.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
+
+
+            this.ChangeControlsLocation();
+            Utility.SetWindow(this);
         }
         /// <summary>
         /// 加载进度条
@@ -124,7 +129,7 @@ namespace iSprite
                 }
             }
 
-            m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme,this);
+            m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme, this);
             m_themeManage.OnMessage += new MessageHandler(ShowMessage);
             m_themeManage.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
 
@@ -133,7 +138,10 @@ namespace iSprite
             m_Updater.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
             m_Updater.OnMessage += new MessageHandler(ShowMessage);
             new Thread(new ThreadStart(m_Updater.CheckNewVer)).Start();
-        }      
+
+            this.tabs.BackgroundImage = global::iSprite.Resource.BackgroundImage;
+            this.tabFile.BackgroundImage = global::iSprite.Resource.BackgroundImage;
+        }
 
 
         /// <summary>
@@ -159,8 +167,8 @@ namespace iSprite
                 //iphone.Disconnect -= new ConnectEventHandler(iphone_Disconnect);
             }
         }
-        #endregion       
-        
+        #endregion
+
         #region 事件处理
 
         #region iPhone连接与断开事件处理
@@ -209,8 +217,6 @@ namespace iSprite
                         {
                             iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
                             ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
-
-                            iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
                             m_iPhonePanel.AfterDeviceFinishConnected();
                         }
                         m_themeManage.AfterDeviceFinishConnected(enable);
@@ -230,7 +236,7 @@ namespace iSprite
                 m_themeManage.AfterDeviceFinishConnected(enable);
             }
         }
-        #endregion        
+        #endregion
 
         /// <summary>
         /// 消息处理
@@ -275,12 +281,14 @@ namespace iSprite
         /// <summary>
         /// 文件传输进度处理
         /// </summary>
+        /// <param name="mode"></param>
         /// <param name="totalSize"></param>
         /// <param name="completeSize"></param>
         /// <param name="speed"></param>
+        /// <param name="timeElapse"></param>
         /// <param name="file"></param>
         /// <param name="cancel"></param>
-        void DoProgressHandler(ulong totalSize, ulong completeSize, int speed, string file, ref bool cancel)
+        void DoProgressHandler(FileProgressMode mode, ulong totalSize, ulong completeSize, int speed, double timeElapse, string file, ref bool cancel)
         {
             if (m_stoptransfer)
             {
@@ -291,10 +299,13 @@ namespace iSprite
             }
             else
             {
-                progressBar.SetProgress(totalSize, completeSize);
-                if(totalSize<=completeSize)
+                if (totalSize <= completeSize)
                 {
                     progressBar.Visible = false;
+                }
+                else
+                {
+                    progressBar.SetProgress(mode, totalSize, completeSize, speed, timeElapse, file);
                 }
             }
         }
@@ -316,9 +327,9 @@ namespace iSprite
         /// <param name="e"></param>
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (null != m_iPhonePanel) 
-            { 
-                m_iPhonePanel.UpdateMenuStatus(); 
+            if (null != m_iPhonePanel)
+            {
+                m_iPhonePanel.UpdateMenuStatus();
             }
             if (null != m_LoaclDiskPanel)
             {
@@ -407,7 +418,7 @@ namespace iSprite
                     break;
             }
         }
-        #endregion        
+        #endregion
 
         #region 面板交换
         /// <summary>

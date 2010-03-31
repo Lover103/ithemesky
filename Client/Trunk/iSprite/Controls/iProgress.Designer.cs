@@ -28,40 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.progressbar = new System.Windows.Forms.ProgressBar();
-            this.lblpercent = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.progressbar = new iSprite.ThirdControl.XpProgressBar();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // progressbar
-            // 
-            this.progressbar.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.progressbar.Location = new System.Drawing.Point(3, 3);
-            this.progressbar.Name = "progressbar";
-            this.progressbar.Size = new System.Drawing.Size(425, 33);
-            this.progressbar.TabIndex = 0;
-            this.progressbar.Value = 50;
-            // 
-            // lblpercent
-            // 
-            this.lblpercent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblpercent.AutoSize = true;
-            this.lblpercent.BackColor = System.Drawing.Color.Transparent;
-            this.lblpercent.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblpercent.Location = new System.Drawing.Point(164, 8);
-            this.lblpercent.Name = "lblpercent";
-            this.lblpercent.Size = new System.Drawing.Size(46, 24);
-            this.lblpercent.TabIndex = 1;
-            this.lblpercent.Text = "50%";
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.BackColor = System.Drawing.SystemColors.Control;
-            this.lblStatus.Location = new System.Drawing.Point(3, 47);
+            this.lblStatus.BackColor = System.Drawing.Color.Transparent;
+            this.lblStatus.Location = new System.Drawing.Point(10, 91);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(47, 12);
             this.lblStatus.TabIndex = 2;
@@ -70,7 +47,7 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(353, 42);
+            this.btnCancel.Location = new System.Drawing.Point(341, 91);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 3;
@@ -78,17 +55,43 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // progressbar
+            // 
+            this.progressbar.ColorBackGround = System.Drawing.Color.White;
+            this.progressbar.ColorBarBorder = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(240)))), ((int)(((byte)(170)))));
+            this.progressbar.ColorBarCenter = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(150)))), ((int)(((byte)(10)))));
+            this.progressbar.ColorText = System.Drawing.Color.Black;
+            this.progressbar.Location = new System.Drawing.Point(12, 40);
+            this.progressbar.Name = "progressbar";
+            this.progressbar.Position = 50;
+            this.progressbar.PositionMax = 100;
+            this.progressbar.PositionMin = 0;
+            this.progressbar.Size = new System.Drawing.Size(406, 36);
+            this.progressbar.TabIndex = 4;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblTitle.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(9, 2);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(30, 15);
+            this.lblTitle.TabIndex = 5;
+            this.lblTitle.Text = "Title";
+            // 
             // iProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkRed;
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackgroundImage = global::iSprite.Resource.form_bg;
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.progressbar);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.lblpercent);
-            this.Controls.Add(this.progressbar);
             this.Name = "iProgress";
-            this.Size = new System.Drawing.Size(432, 72);
+            this.Size = new System.Drawing.Size(432, 129);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,9 +99,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar progressbar;
-        private System.Windows.Forms.Label lblpercent;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnCancel;
+        private iSprite.ThirdControl.XpProgressBar progressbar;
+        private System.Windows.Forms.Label lblTitle;
     }
 }

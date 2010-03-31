@@ -16,6 +16,7 @@ namespace iSprite
         Manzana.iPhone iPhoneInterface;
         public event FileCompletedHandler OnCompleteHandler;
         public event FileProgressHandler OnProgressHandler;
+        string m_deviceName = "none iPhone";
 
         internal string CurrentLang { private set;get;}
 
@@ -52,6 +53,22 @@ namespace iSprite
                 {
                     CurrentLang = "en";
                 }
+                iphonecfgpath = "/private/var/root/Library/Lockdown/data_ark.plist";
+                content = GetFileText(iphonecfgpath);
+                Match match = new Regex("<key>-DeviceName</key>[\\s]+<[u]*string>(?<NameValue>[\\S ]*?)</[u]*string>",
+                    RegexOptions.IgnoreCase | RegexOptions.Compiled).Match(content);
+                if (match.Success)
+                {
+                    m_deviceName = match.Result("${NameValue}");
+                }
+                else
+                {
+                    m_deviceName = "no named";
+                }
+            }
+            else
+            {
+                m_deviceName = "none iPhone";
             }
         }
 
@@ -116,14 +133,21 @@ namespace iSprite
         {
             get
             {
+                return m_deviceName;
+            }
+        }
+
+        public string UserIdentity
+        {
+            get
+            {
                 if (IsConnected)
                 {
-                    //AFCDeviceInfo info = iPhoneInterface.QueryDeviceInfo();
-                    return iPhoneInterface.DeviceName;
+                    return iPhoneInterface.DeviceId;
                 }
                 else
                 {
-                    return "none iPhone";
+                    return "";
                 }
             }
         }
@@ -138,7 +162,7 @@ namespace iSprite
                 }
                 else
                 {
-                    return "none iPhone";
+                    return "";
                 }
             }
         }
@@ -420,7 +444,7 @@ namespace iSprite
                 return false;
             }
 
-            iPhoneInterface.StartSync();
+            //iPhoneInterface.StartSync();
 
             bool returnCode = iPhoneInterface.Copy2iPhone(
                 srcpath_Computer,
@@ -428,7 +452,7 @@ namespace iSprite
                 this.OnProgressHandler, 
                 this.OnCompleteHandler
                 );
-            iPhoneInterface.EndSync();
+            //iPhoneInterface.EndSync();
 
             return returnCode;
         }

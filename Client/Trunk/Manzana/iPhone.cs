@@ -40,6 +40,24 @@ using System.Threading;
 
 namespace Manzana {
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum FileProgressMode
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        iPhone2PC = 0,
+        /// <summary>
+        /// 
+        /// </summary>
+        PC2iPhone = 1,
+        /// <summary>
+        /// 
+        /// </summary>
+        Internet2PC = 2
+    }
 
     /// <summary>
     /// 文件传输进度委托
@@ -49,16 +67,19 @@ namespace Manzana {
     /// <param name="lastErr"></param>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void FileCompletedHandler(bool success, string file, string lastErr);
+    
     /// <summary>
     /// 文件传输完成委托
     /// </summary>
+    /// <param name="mode"></param>
     /// <param name="totalSize"></param>
     /// <param name="completeSize"></param>
     /// <param name="speed"></param>
+    /// <param name="timeElapse"></param>
     /// <param name="file"></param>
     /// <param name="cancel"></param>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void FileProgressHandler(ulong totalSize, ulong completeSize, int speed, string file, ref bool cancel);
+    public delegate void FileProgressHandler(FileProgressMode mode, ulong totalSize, ulong completeSize, int speed, double timeElapse, string file, ref bool cancel);
 
 	/// <summary>
 	/// Exposes access to the Apple iPhone
@@ -716,7 +737,7 @@ namespace Manzana {
 			}
 		}
 
-        int DataTransfer_Buffer_Size= 10240;
+        int DataTransfer_Buffer_Size= 102400;
 
 
         #region 从iPhone拷贝文件到PC
@@ -781,30 +802,22 @@ namespace Manzana {
                 {
                     ulong finishSize = 0;
                     bool cancelDownload = false;//取消
-                    if (progresshandler != null)
-                    {
-                        progresshandler(ulong.MaxValue, finishSize, 0, srcpath_iPhone, ref cancelDownload);
-
-                        if (cancelDownload)
-                        {
-                            return false;
-                        }
-                    }
                     using (FileStream stream = File.OpenWrite(destpath_Computer))
                     {
                         iPhoneFile file = iPhoneFile.OpenRead(this, srcpath_iPhone);
                         int readCount = file.Read(buffer, 0, buffer.Length);
-                        DateTime lasttime = DateTime.Now;
+                        DateTime begintime = DateTime.Now;
                         int speed = 0;
                         ulong totalfileSize = this.FileSize(srcpath_iPhone);
                         finishSize = Convert.ToUInt64(readCount);
+                        double timeElapse=0;
                         try
                         {
                             while (readCount > 0)
                             {
                                 if (progresshandler != null)
                                 {
-                                    progresshandler(totalfileSize, finishSize, speed, srcpath_iPhone, ref cancelDownload);
+                                    progresshandler(FileProgressMode.iPhone2PC, totalfileSize, finishSize, speed, timeElapse, srcpath_iPhone, ref cancelDownload);
                                     if (cancelDownload)
                                     {
                                         break;
@@ -815,11 +828,10 @@ namespace Manzana {
 
                                 finishSize += Convert.ToUInt64(readCount);
 
-                                double dblTimePast = (lasttime - DateTime.Now).TotalSeconds;
-                                if (dblTimePast >= 1.0)
+                                timeElapse = (DateTime.Now - begintime).TotalSeconds;
+                                if (timeElapse > 0)
                                 {
-                                    speed = (int)Math.Round((double)(finishSize * 1.0 / dblTimePast));
-                                    lasttime = DateTime.Now;
+                                    speed = (int)Math.Round((double)(finishSize * 1.0 / timeElapse));
                                 }
                             }
                             finishSize = totalfileSize;
@@ -956,30 +968,23 @@ namespace Manzana {
 
                 ulong finishSize = 0L;
                 bool cancalUpload = false;
-                if (progresshandler != null)
-                {
-                    progresshandler(UInt64.MaxValue, finishSize, 0, srcpath_Computer, ref cancalUpload);
-                    if (cancalUpload)
-                    {
-                        return false;
-                    }
-                }
                 using (FileStream stream = File.OpenRead(srcpath_Computer))
                 {
                     iPhoneFile file = iPhoneFile.OpenWrite(this, destpath_iPhone);
                     int readCount = stream.Read(buffer, 0, buffer.Length);
                     string strfilename = Path.GetFileName(srcpath_Computer);
-                    DateTime lasttime = DateTime.Now;
+                    DateTime begintime = DateTime.Now;
                     int speed = 0;
                     ulong totalfileSize = Convert.ToUInt64(stream.Length);
                     finishSize = Convert.ToUInt64(readCount);
+                    double timeElapse = 0;
                     try
                     {
                         while (readCount > 0)
                         {
                             if (progresshandler != null)
                             {
-                                progresshandler(totalfileSize, finishSize, speed, srcpath_Computer, ref cancalUpload);
+                                progresshandler(FileProgressMode.PC2iPhone, totalfileSize, finishSize, speed, timeElapse, srcpath_Computer, ref cancalUpload);
                                 if (cancalUpload)
                                 {
                                     break;
@@ -989,11 +994,10 @@ namespace Manzana {
                             readCount = stream.Read(buffer, 0, buffer.Length);
                             finishSize += Convert.ToUInt64(readCount);
 
-                            double dblTimePast = (lasttime - DateTime.Now).TotalSeconds;
-                            if (dblTimePast >= 1.0)
+                            timeElapse = (DateTime.Now - begintime).TotalSeconds;
+                            if (timeElapse > 0)
                             {
-                                speed = (int)Math.Round((double)(finishSize * 1.0 / dblTimePast));
-                                lasttime = DateTime.Now;
+                                speed = (int)Math.Round((double)(finishSize * 1.0 / timeElapse));
                             }
                         }
                         stream.Close();

@@ -146,5 +146,6 @@ namespace iSprite
         /// 文件传输进度事件
         /// </summary>
         event FileProgressHandler OnProgressHandler;
+        string UserIdentity{ get; }
     }
 }

@@ -5,6 +5,8 @@ using System.Text;
 using System.IO;
 using System.Net;
 using Manzana;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace iSprite
 {
@@ -54,7 +56,7 @@ namespace iSprite
                 int bytesread = 0;
                 DateTime lasttime = DateTime.Now;
                 int speed = 0;
-
+                double timeElapse = 0;
                 while ((bytesread = inStream.Read(buffer, 0, length)) > 0)
                 {
                     filestream.Write(buffer, 0, bytesread);
@@ -62,14 +64,14 @@ namespace iSprite
 
                     if (progresshandler != null)
                     {
-                        double dblTimePast = (lasttime - DateTime.Now).TotalSeconds;
-                        if (dblTimePast >= 1.0)
+                        timeElapse = (lasttime - DateTime.Now).TotalSeconds;
+                        if (timeElapse >= 1.0)
                         {
-                            speed = (int)Math.Round((double)(finishSize * 1.0 / dblTimePast));
+                            speed = (int)Math.Round((double)(finishSize * 1.0 / timeElapse));
                             lasttime = DateTime.Now;
                         }
 
-                        progresshandler(totalfileSize, finishSize, 0, Path.GetFileName(destFilePath), ref cancelDownload);
+                        progresshandler(FileProgressMode.Internet2PC, totalfileSize, finishSize, speed, timeElapse, Path.GetFileName(destFilePath), ref cancelDownload);
                         if (cancelDownload)
                         {
                             break;
@@ -171,6 +173,19 @@ namespace iSprite
                 return string.Format("{0:F0} GB", FileSize / 1073741824);
             }
             return "";
+        }
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowLong", CharSet = CharSet.Auto)]
+        public static extern int GetWindowLong(HandleRef hWnd, int nIndex);
+        [DllImport("user32.dll", EntryPoint = "SetWindowLong", CharSet = CharSet.Auto)]
+        public static extern IntPtr SetWindowLong(HandleRef hWnd, int nIndex, int dwNewLong);
+
+        public static void SetWindow(Form frm)
+        {
+            int WS_SYSMENU = 0x00080000; // 系统菜单
+            int WS_MINIMIZEBOX = 0x20000; // 最大最小化按钮
+            int windowLong = GetWindowLong(new HandleRef(frm, frm.Handle), -16);
+            SetWindowLong(new HandleRef(frm, frm.Handle), -16, windowLong | WS_MINIMIZEBOX | WS_SYSMENU);
         }
     }
 }

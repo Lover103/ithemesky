@@ -188,7 +188,9 @@ namespace iSprite
             this.BeforeLabelEdit += new NodeLabelEditEventHandler(iTreeView_BeforeLabelEdit);
             this.AfterLabelEdit += new NodeLabelEditEventHandler(iTreeView_AfterLabelEdit);
             #endregion
+
             this.KeyDown += new KeyEventHandler(iTreeView_KeyDown);
+
         }
         private iTreeView()
         { 

@@ -334,6 +334,7 @@ namespace Manzana {
 
 		unsafe public static string AMDeviceCopyValue(void* device, string name) {
 			IntPtr result = AMDeviceCopyValue_IntPtr(device, 0, CFStringMakeConstantString(name));
+
 			if (result != IntPtr.Zero) {
 				byte length = Marshal.ReadByte(result, 8);
 				if (length > 0) {

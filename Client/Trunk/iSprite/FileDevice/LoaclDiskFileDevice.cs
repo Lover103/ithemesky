@@ -42,6 +42,15 @@ namespace iSprite
             }
         }
 
+        public string UserIdentity
+        {
+            get
+            {
+                return DeviceName;
+            }
+        }
+
+
 
         public DeviceTypeOption DeviceType
         {

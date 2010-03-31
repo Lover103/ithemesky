@@ -60,6 +60,13 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap BackgroundImage {
+            get {
+                object obj = ResourceManager.GetObject("BackgroundImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap btn_go {
             get {
                 object obj = ResourceManager.GetObject("btn_go", resourceCulture);
@@ -105,6 +112,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap Folder_32 {
             get {
                 object obj = ResourceManager.GetObject("Folder_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap form_bg {
+            get {
+                object obj = ResourceManager.GetObject("form_bg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -30,10 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilePanel));
-            this.staStatus = new System.Windows.Forms.StatusStrip();
-            this.tslblDrive = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tslblObjects = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tslblSelected = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tsTV = new System.Windows.Forms.ToolStrip();
             this.tsbtnTVTools = new System.Windows.Forms.ToolStripDropDownButton();
@@ -99,7 +95,6 @@
             this.panPathBar = new System.Windows.Forms.Panel();
             this.gbxMain = new System.Windows.Forms.GroupBox();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.staStatus.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -110,57 +105,6 @@
             this.ctxViews.SuspendLayout();
             this.gbxMain.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // staStatus
-            // 
-            this.staStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tslblDrive,
-            this.tslblObjects,
-            this.tslblSelected});
-            this.staStatus.Location = new System.Drawing.Point(3, 360);
-            this.staStatus.Name = "staStatus";
-            this.staStatus.Size = new System.Drawing.Size(641, 22);
-            this.staStatus.SizingGrip = false;
-            this.staStatus.TabIndex = 1;
-            // 
-            // tslblDrive
-            // 
-            this.tslblDrive.AutoSize = false;
-            this.tslblDrive.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.tslblDrive.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
-            this.tslblDrive.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tslblDrive.Name = "tslblDrive";
-            this.tslblDrive.Size = new System.Drawing.Size(208, 17);
-            this.tslblDrive.Spring = true;
-            this.tslblDrive.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tslblObjects
-            // 
-            this.tslblObjects.AutoSize = false;
-            this.tslblObjects.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.tslblObjects.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
-            this.tslblObjects.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tslblObjects.Name = "tslblObjects";
-            this.tslblObjects.Size = new System.Drawing.Size(208, 17);
-            this.tslblObjects.Spring = true;
-            this.tslblObjects.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tslblSelected
-            // 
-            this.tslblSelected.AutoSize = false;
-            this.tslblSelected.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.tslblSelected.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
-            this.tslblSelected.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tslblSelected.Name = "tslblSelected";
-            this.tslblSelected.Size = new System.Drawing.Size(208, 17);
-            this.tslblSelected.Spring = true;
-            this.tslblSelected.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // splitContainer1
             // 
@@ -177,7 +121,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.tsListView);
-            this.splitContainer1.Size = new System.Drawing.Size(641, 318);
+            this.splitContainer1.Size = new System.Drawing.Size(641, 340);
             this.splitContainer1.SplitterDistance = 242;
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 2;
@@ -225,6 +169,7 @@
             this.toolStripSeparator6,
             this.mnuTVCancel});
             this.ctxTVTools.Name = "ctxTools";
+            this.ctxTVTools.OwnerItem = this.tsbtnTVTools;
             this.ctxTVTools.Size = new System.Drawing.Size(190, 166);
             // 
             // mnuTVRefresh
@@ -405,7 +350,8 @@
             this.toolStripMenuItem13,
             this.mnuLVCancel});
             this.ctxLVTools.Name = "ctxTools";
-            this.ctxLVTools.Size = new System.Drawing.Size(190, 238);
+            this.ctxLVTools.OwnerItem = this.tsbtnLVTools;
+            this.ctxLVTools.Size = new System.Drawing.Size(190, 216);
             // 
             // mnuLVRefresh
             // 
@@ -568,6 +514,7 @@
             // ctxFavourites
             // 
             this.ctxFavourites.Name = "ctxFavourites";
+            this.ctxFavourites.OwnerItem = this.tsbtnFavourites;
             this.ctxFavourites.Size = new System.Drawing.Size(61, 4);
             // 
             // ctxViews
@@ -700,9 +647,9 @@
             // 
             // gbxMain
             // 
+            this.gbxMain.BackColor = System.Drawing.Color.Transparent;
             this.gbxMain.Controls.Add(this.splitContainer1);
             this.gbxMain.Controls.Add(this.panPathBar);
-            this.gbxMain.Controls.Add(this.staStatus);
             this.gbxMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbxMain.Location = new System.Drawing.Point(0, 0);
             this.gbxMain.Name = "gbxMain";
@@ -727,8 +674,6 @@
             this.Controls.Add(this.gbxMain);
             this.Name = "FilePanel";
             this.Size = new System.Drawing.Size(647, 385);
-            this.staStatus.ResumeLayout(false);
-            this.staStatus.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -742,17 +687,12 @@
             this.ctxLVTools.ResumeLayout(false);
             this.ctxViews.ResumeLayout(false);
             this.gbxMain.ResumeLayout(false);
-            this.gbxMain.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.StatusStrip staStatus;
-        private System.Windows.Forms.ToolStripStatusLabel tslblDrive;
-        private System.Windows.Forms.ToolStripStatusLabel tslblObjects;
-        private System.Windows.Forms.ToolStripStatusLabel tslblSelected;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStrip tsListView;
         private System.Windows.Forms.ToolStripDropDownButton tsbtnLVTools;

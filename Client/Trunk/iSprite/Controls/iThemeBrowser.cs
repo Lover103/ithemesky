@@ -121,8 +121,8 @@ namespace iSprite
             WebBrowser themeBrowser = new WebBrowser();
             this.m_tabTheme.Controls.Add(themeBrowser);
 
-            themeBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            themeBrowser.Location = new System.Drawing.Point(0, 0);
+            //themeBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            themeBrowser.Location = new System.Drawing.Point(m_Toolmenu.Location.X, m_Toolmenu.Location.Y + m_Toolmenu.Height);
             themeBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             themeBrowser.Name = "themeBrowser";
             themeBrowser.Size = new System.Drawing.Size(990, 652);
