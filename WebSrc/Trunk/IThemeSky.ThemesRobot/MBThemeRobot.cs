@@ -44,6 +44,7 @@ namespace IThemeSky.ThemesRobot
                 {
                     AnalyseThemeInfo(match);
                 }
+                File.AppendAllText(SAVE_PATH + "Log.txt", "抓取第" + pageIndex + "完成\r\n\r\n");
             }
             catch (Exception ex)
             {
@@ -70,7 +71,16 @@ namespace IThemeSky.ThemesRobot
                 watch.Start();
                 string detailContent = _webClient.DownloadString(BASE_URL + match.Groups["DetailUrl"].Value);
                 Match m = Regex.Match(detailContent, @"uploads/userup/\d+/[^.]+\.jpg");
-                string imageUrl = BASE_URL + m.Value;
+                string imageUrl = "";
+                if (m.Success)
+                {
+                    imageUrl = BASE_URL + m.Value;
+                }
+                else
+                {
+                    m = Regex.Match(detailContent, @"/theme//[^.]+\.(jpg|png)", RegexOptions.IgnoreCase);
+                    imageUrl = BASE_URL + m.Value;
+                }
 
                 m = Regex.Match(detailContent, @"<p>(?<Content>[^<]*)</p>");
                 string content = m.Groups["Content"].Value;
@@ -113,7 +123,15 @@ namespace IThemeSky.ThemesRobot
                 downPageContent = _webClient.DownloadString(themeFileUrl);
 
                 m = Regex.Match(downPageContent, @"""(?<ThemeFileUrl>[^""]+)""");
-                themeFileUrl = BASE_URL + m.Groups["ThemeFileUrl"].Value;
+                themeFileUrl = m.Groups["ThemeFileUrl"].Value;
+                if (!themeFileUrl.StartsWith("http://", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    themeFileUrl = BASE_URL + themeFileUrl;
+                }
+                if (themeFileUrl.EndsWith(".zip", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    theme.DownloadUrl.Replace(".rar", ".zip");
+                }
                 
                 _webClient.DownloadFile(themeFileUrl, Path.Combine(SAVE_PATH, theme.DownloadUrl));
                 _webClient.DownloadFile(imageUrl, Path.Combine(SAVE_PATH, theme.ThumbnailName));

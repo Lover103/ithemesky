@@ -11,7 +11,7 @@ namespace IThemeSky.ThemesRobot
         static void Main(string[] args)
         {
             MBThemeRobot robot = new MBThemeRobot();
-            for (int i = 6; i <= 34; i++)
+            for (int i = 28; i <= 34; i++)       //34
             {
                 robot.AnalyseList(i);
             }
