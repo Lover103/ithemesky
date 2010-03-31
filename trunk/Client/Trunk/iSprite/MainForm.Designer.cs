@@ -145,6 +145,16 @@
             this.Filetoolmenu.Size = new System.Drawing.Size(990, 25);
             this.Filetoolmenu.TabIndex = 12;
             this.Filetoolmenu.Text = "toolStrip3";
+
+            this.Filetoolmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbtnTileVertical,
+            this.tsbtnTileHorizontal,
+            this.tsbtnSinglePane,
+            this.toolStripSeparator1,
+            this.tsbtnFlipPanes,
+            this.toolStripSeparator4,
+            this.tsbtnInfo});
+
             // 
             // tsbtnTileVertical
             // 
