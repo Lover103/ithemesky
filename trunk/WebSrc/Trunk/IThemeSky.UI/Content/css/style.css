@@ -157,15 +157,10 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .breadcrumb li.home a:link,.breadcrumb li.home a:visited{ display:block; width:23px; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_common.png) no-repeat 0 -440px;}
 .breadcrumb li.home a:hover,.breadcrumb li.home a:active{ background:url(../images/sprites_common.png) no-repeat -30px -440px;}
 .listSelect{ margin-top:10px; width:770px; padding-top:8px; background:url(../images/sprites_box_wide.png) no-repeat;}
-.selectedTags{ width:770px; background:url(../images/sprites_box_wide.png) no-repeat -770px 0; color:#CCD2DC;}
-.selectedTags dl,.selectedTags .tips{ width:756px; padding:4px 0 9px 0; background:url(../images/sprites_box_wide.png) no-repeat 0 bottom;}
-.selectedTags .tips{ padding-left:20px; width:736px;}
-.selectedTags .tips small{ font-size:12px; float:left; padding-right:10px;}
-.selectedTags .tips .close{ float:left; width:70px; height:18px; text-indent:8px; background:url(../images/sprites_common.png) no-repeat -710px -650px; line-height:16px; font-size:13px;}
-.selectedTags dt{ float:left; width:126px; text-align:right; margin-top:5px;}
-.selectedTags dd{ margin-left:126px; _margin-left:123px; padding-right:20px;}
-.selectedTags dd a:link,.selectedTags dd a:visited{ float:left; display:block; margin:5px 0 0 5px; height:18px; line-height:18px; padding:0 20px 0 5px; white-space:nowrap; color:#9FBBBF; background:url(../images/sprites_common.png) no-repeat right -480px; border:1px solid #366061;}
-.selectedTags dd a:hover,.selectedTags dd a:active{ border:1px solid #56989A; color:#CCD2DC;}
+.selectedTips{ width:770px; background:url(../images/sprites_box_wide.png) no-repeat -770px 0; color:#CCD2DC;}
+.selectedTips p{ width:736px; padding:4px 0 9px 20px; background:url(../images/sprites_box_wide.png) no-repeat 0 bottom;}
+.selectedTips .tips{ font-size:12px; float:left; padding-right:10px;}
+.selectedTips .close{ float:right; width:70px; height:18px; text-indent:8px; background:url(../images/sprites_common.png) no-repeat -710px -650px; line-height:16px; font-size:13px;}
 .selectTags{ width:756px; background:url(../images/sprites_box_wide.png) no-repeat -770px bottom; padding:0 7px 8px 7px;}
 .selectTags dl{ width:756px; padding:9px 0; background:url(../images/sprites_box_wide.png) no-repeat 0 bottom; line-height:20px;}
 .selectTags dl.last{ background:none;}
