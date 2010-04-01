@@ -28,37 +28,25 @@
 		<!--breadcrumb end-->
 		<!--select tag begin-->
 		<div class="listSelect">
-			<!--has selected begin-->
-			<div class="selectedTags">
-				<!--<div class="tips">Choose anyone of the tags below, you may find the themes you like!</div>-->
-				<dl class="clearfix">
-					<dt>You have selected:</dt>
-					<dd class="clearfix">
-						<a href="#">Yellow</a>
-						<a href="#">New Year’s Day</a>
-						<a href="#">Man</a>
-						<a href="#">Yellow</a>
-						<a href="#">New Year’s Day</a>
-						<a href="#">Man</a>
-						<a href="#">Yellow</a>
-						<a href="#">New Year’s Day</a>
-						<a href="#">Man</a>
-					</dd>
-				</dl>
+			<!--tips begin-->
+			<div class="selectedTips">
+				<p class="clearfix">
+					<span class="tips">Please choose anyone of the tags or any tags together below. (e.g. blue, red, and Christmas.)</span>
+					<a href="#" class="close">I got it</a>
+				</p>
 			</div>
-			<!--has selected end-->
+			<!--tips end-->
 			<!--tags sort list begin-->
 			<div class="selectTags">
 				<dl class="clearfix">
 					<dt>Color:</dt>
 					<dd>
 						<ul class="clearfix">
-						    <li><a href="#">All</a></li>
 							<li><a href="#">Blue</a></li>
 							<li><a href="#">White</a></li>
-							<li><a href="#">Orange</a></li>
+							<li><a href="#" class="selected">Orange</a></li>
 							<li><a href="#">Pink</a></li>
-							<li><a href="#">Gray</a></li>
+							<li><a href="#" class="selected">Gray</a></li>
 							<li><a href="#">Green</a></li>
 							<li><a href="#">Red</a></li>
 							<li><a href="#">Black</a></li>
@@ -70,9 +58,8 @@
 					<dt>Holiday:</dt>
 					<dd>
 						<ul class="clearfix">
-						    <li><a href="#">All</a></li>
 							<li><a href="#">New Year’s Day</a></li>
-							<li><a href="#">Valentines Day</a></li>
+							<li><a href="#" class="selected">Valentines Day</a></li>
 							<li><a href="#">Easter Day</a></li>
 							<li><a href="#">Halloween</a></li>
 							<li><a href="#">Thanksgiving Day</a></li>
