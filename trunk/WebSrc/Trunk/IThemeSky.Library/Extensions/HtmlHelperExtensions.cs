@@ -24,11 +24,11 @@ namespace IThemeSky.Library.Extensions
                 int beginIndex = 1;
                 if (pageIndex % displayPageLinkNumber == 0)
                 {
-                    beginIndex = ((pageIndex / displayPageLinkNumber) - 1) * pageSize + 1;
+                    beginIndex = ((pageIndex / displayPageLinkNumber) - 1) * displayPageLinkNumber + 1;
                 }
                 else
                 {
-                    beginIndex = (pageIndex / displayPageLinkNumber) * pageSize + 1;
+                    beginIndex = (pageIndex / displayPageLinkNumber) * displayPageLinkNumber + 1;
                 }
                 int endIndex = beginIndex + displayPageLinkNumber;
                 if (endIndex > pageCount)

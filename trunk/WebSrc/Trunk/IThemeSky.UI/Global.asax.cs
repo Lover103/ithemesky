@@ -28,7 +28,7 @@ namespace IThemeSky.UI
                 "list/{sort}/{categoryName}_{categoryId}/{pageIndex}",
                 new { controller = "Home", action = "List", sort = "new", categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = UrlParameter.Optional }
             );
-            //*/list/排序方式/页码/标签名称1,标签名称2
+            //*/list/排序方式/页码/标签名称1,标签名称2+标签名称3,标签名称4+...
             routes.MapRoute(
                 "List3",
                 "list/{sort}/{pageIndex}/{tags}",
