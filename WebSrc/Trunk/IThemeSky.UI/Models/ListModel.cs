@@ -5,6 +5,7 @@ using System.Web;
 using IThemeSky.Model;
 using IThemeSky.DataAccess;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace IThemeSky.UI.Models
 {
@@ -28,7 +29,7 @@ namespace IThemeSky.UI.Models
             if (!string.IsNullOrEmpty(tagNames))
             {
                 List<List<string>> tagsFilter = new List<List<string>>();
-                string[] arrAndTags = tagNames.Split('+');
+                string[] arrAndTags = Regex.Split(tagNames, " and ");
                 foreach (string andTags in arrAndTags)
                 {
                     List<string> tags = new List<string>();
@@ -57,8 +58,10 @@ namespace IThemeSky.UI.Models
                 sbUrlPattern.AppendFormat("{0}_{1}/", CategoryName, CategoryId);
             }
             sbUrlPattern.Append("{0}");
+            UrlPatternWithouTags = string.Format(sbUrlPattern.ToString(), pageIndex, Sort.ToString().ToLower()) + "/";
             if (!string.IsNullOrEmpty(TagNames))
             {
+                sbUrlPattern.Append("/");
                 sbUrlPattern.Append(tagNames);
             }
             UrlPatternWithoutSort = sbUrlPattern.ToString();
@@ -68,6 +71,8 @@ namespace IThemeSky.UI.Models
         public string UrlPatternWithoutPageIndex { get; private set; }
 
         public string UrlPatternWithoutSort { get; set; }
+
+        public string UrlPatternWithouTags { get; set; }
 
         public int CategoryId { get; private set; }
 

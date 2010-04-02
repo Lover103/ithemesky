@@ -4,6 +4,13 @@
 	<title><%=ViewData.Model.CategoryId > 0 ? ViewData.Model.CategoryName : "All Categories"%> - <%=ViewData.Model.Sort%> iphone themes free download, ithemesky.com provided iphone themes</title>
     <meta name="description" content="ithemesky.com provided iphone themes, more than 2,000 iphone themes free download!" />
     <meta name="keywords" content="iphone theme, iphone themes, jailbroken iphone, install iphone themes, free download, iphone" />
+    <script type="text/javascript">
+        $(document).ready(
+            function() {
+                InitTagsEvent('<%=ViewData.Model.UrlPatternWithouTags %>', '<%=ViewData.Model.TagNames %>');
+            }
+        );
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -32,7 +39,7 @@
 			<div class="selectedTips">
 				<p class="clearfix">
 					<span class="tips">Please choose anyone of the tags or any tags together below. (e.g. blue, red, and Christmas.)</span>
-					<a href="#" class="close">I got it</a>
+					<a href="#" class="close" onclick="$('div.selectedTips').hide()">I got it</a>
 				</p>
 			</div>
 			<!--tips end-->
@@ -44,9 +51,9 @@
 						<ul class="clearfix">
 							<li><a href="#">Blue</a></li>
 							<li><a href="#">White</a></li>
-							<li><a href="#" class="selected">Orange</a></li>
+							<li><a href="#">Orange</a></li>
 							<li><a href="#">Pink</a></li>
-							<li><a href="#" class="selected">Gray</a></li>
+							<li><a href="#">Gray</a></li>
 							<li><a href="#">Green</a></li>
 							<li><a href="#">Red</a></li>
 							<li><a href="#">Black</a></li>
@@ -59,7 +66,7 @@
 					<dd>
 						<ul class="clearfix">
 							<li><a href="#">New Year’s Day</a></li>
-							<li><a href="#" class="selected">Valentines Day</a></li>
+							<li><a href="#">Valentines Day</a></li>
 							<li><a href="#">Easter Day</a></li>
 							<li><a href="#">Halloween</a></li>
 							<li><a href="#">Thanksgiving Day</a></li>

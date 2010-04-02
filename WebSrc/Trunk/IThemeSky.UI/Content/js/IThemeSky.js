@@ -35,6 +35,42 @@ function BindSuggestEvent() {
     );
 }
 
+function ChangeTags(urlWithoutTags) {
+    var tags = '';
+    $('.selectTags dl').each(
+        function(i) {
+            if (i > 0 && tags != '') {
+                tags += ' and ';
+            }
+            $(this).find('li a.selected').each(
+                function(j) {
+                    if (j > 0) {
+                        tags += ',';
+                    }
+                    tags += $(this).text();
+                }
+            );
+        }
+    );
+    window.location.href = urlWithoutTags + tags;
+}
+
+function InitTagsEvent(urlWithoutTags, currentTagNames) {
+    $('.selectTags li a').each(
+        function(i) {
+            $(this).click(
+                function() {
+                    $(this).toggleClass('selected');
+                    ChangeTags(urlWithoutTags);
+                }
+            );
+            if (currentTagNames.indexOf($(this).text()) >= 0) {
+                $(this).addClass('selected');
+            }
+        }
+    );
+}
+
 $(document).ready(
     function() {
         BindSuggestEvent();
