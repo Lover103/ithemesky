@@ -39,17 +39,19 @@ function ChangeTags(urlWithoutTags) {
     var tags = '';
     $('.selectTags dl').each(
         function(i) {
-            if (i > 0 && tags != '') {
-                tags += ' and ';
-            }
+            var tmpTags = '';
             $(this).find('li a.selected').each(
                 function(j) {
                     if (j > 0) {
-                        tags += ',';
+                        tmpTags += ',';
                     }
-                    tags += $(this).text();
+                    tmpTags += $(this).text();
                 }
             );
+            if (i > 0 && tmpTags != '') {
+                tags += ' and ';
+            }
+            tags += tmpTags;
         }
     );
     window.location.href = urlWithoutTags + tags;
