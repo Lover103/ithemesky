@@ -220,6 +220,7 @@ namespace iSprite
                     break;
                 }
             }
+            _context.iPhone_WinterBoardFile_Path = "/Library/Themes/";
         }
     }
 }

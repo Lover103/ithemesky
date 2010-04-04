@@ -37,6 +37,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Design" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -56,8 +57,17 @@
     <Compile Include="Controls\iProgress.Designer.cs">
       <DependentUpon>iProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\iSpriteButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\iSpriteForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\iSpriteMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\iSpriteMessageBox.Designer.cs">
+      <DependentUpon>iSpriteMessageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\iThemeBrowser.cs" />
     <Compile Include="Controls\iUserControl.cs">
@@ -119,6 +129,10 @@
       <DependentUpon>iProgress.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\iSpriteMessageBox.resx">
+      <DependentUpon>iSpriteMessageBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ThemePriview.resx">
       <DependentUpon>ThemePriview.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -168,7 +182,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <None Include="Resources\ndBaseForm.cs" />
     <Compile Include="ThirdControl\FATabStrip\BaseClasses\BaseStyledPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -216,6 +229,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dlls\ICSharpCode.SharpZipLib.dll" />
+    <None Include="Resources\enlarge.png" />
+    <None Include="Resources\shrink.png" />
+    <None Include="Resources\Img_button_down.png" />
+    <None Include="Resources\Img_button.png" />
+    <None Include="Resources\button.png" />
+    <None Include="Resources\close.png" />
     <None Include="Resources\BackgroundImage.bmp" />
     <None Include="Resources\form_bg.png" />
     <None Include="Resources\calculator.png" />

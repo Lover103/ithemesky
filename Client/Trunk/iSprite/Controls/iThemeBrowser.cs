@@ -9,6 +9,7 @@ using iSprite.ThirdControl.FarsiLibrary;
 using CE.iPhone.PList;
 using System.Text.RegularExpressions;
 using Manzana;
+using System.Web;
 
 namespace iSprite
 {
@@ -142,8 +143,8 @@ namespace iSprite
         /// <param name="e"></param>
         void themeBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            string action = string.Empty;
-            if (action.Equals("download", StringComparison.CurrentCultureIgnoreCase))
+            string url = e.Url.ToString();
+            if (url.Contains("/Service/Download/"))
             {
                 e.Cancel = true;
 
@@ -153,8 +154,8 @@ namespace iSprite
                     return;
                 }
 
-                string url = string.Empty;
-                string themeName = string.Empty;
+                string themeName = url.Substring(url.LastIndexOf(",") + 1);
+                themeName = HttpUtility.UrlDecode(themeName,Encoding.UTF8);
 
                 string filepath = iSpriteContext.Current.iSpriteTempPath + "/" + Path.GetFileNameWithoutExtension(themeName) + ".zip";
 
@@ -279,6 +280,7 @@ namespace iSprite
         /// <returns></returns>
         bool CheckThemePacket(string themePath)
         {
+            return true;
             int iconnum = 0;
 
             foreach (KeyValuePair<string, string> item in m_DefaultIconDic)
@@ -514,6 +516,15 @@ namespace iSprite
         /// <returns></returns>
         string SelectRightThemePath(string dir)
         {
+            string[] subfiles = Directory.GetFiles(dir);
+            foreach (string file in subfiles)
+            {
+                if (file.EndsWith("\\LockBackground.png", true, null))
+                {
+                    return dir;
+                }
+            }
+
             string[] subdirs = Directory.GetDirectories(dir);
             if (subdirs.Length == 1)
             {

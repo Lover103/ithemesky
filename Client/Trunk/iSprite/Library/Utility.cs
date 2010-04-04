@@ -45,16 +45,16 @@ namespace iSprite
                 HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
 
                 inStream = resp.GetResponseStream();
-                long filesizeBytes = resp.ContentLength;
+
                 filestream = new FileStream(destFilePath, FileMode.OpenOrCreate, FileAccess.Write);
 
 
-                int length = 10240;
-                ulong totalfileSize = (ulong)filestream.Length;
+                int length = 102400;
+                ulong totalfileSize = (ulong)resp.ContentLength;
                 ulong finishSize = 0;
                 byte[] buffer = new byte[length];
                 int bytesread = 0;
-                DateTime lasttime = DateTime.Now;
+                DateTime begintime = DateTime.Now;
                 int speed = 0;
                 double timeElapse = 0;
                 while ((bytesread = inStream.Read(buffer, 0, length)) > 0)
@@ -64,11 +64,10 @@ namespace iSprite
 
                     if (progresshandler != null)
                     {
-                        timeElapse = (lasttime - DateTime.Now).TotalSeconds;
+                        timeElapse = (DateTime.Now - begintime).TotalSeconds;
                         if (timeElapse >= 1.0)
                         {
                             speed = (int)Math.Round((double)(finishSize * 1.0 / timeElapse));
-                            lasttime = DateTime.Now;
                         }
 
                         progresshandler(FileProgressMode.Internet2PC, totalfileSize, finishSize, speed, timeElapse, Path.GetFileName(destFilePath), ref cancelDownload);
@@ -150,6 +149,7 @@ namespace iSprite
         {
             return path1.TrimEnd(DirectorySeparatorChar)+DirectorySeparatorChar+path2;
         }
+
         public static string FormatFileSize(ulong FileSize)
         {
             //显示单位为KB
@@ -171,6 +171,26 @@ namespace iSprite
             else if (FileSize >= 1073741824)
             {
                 return string.Format("{0:F0} GB", FileSize / 1073741824);
+            }
+            return "";
+        }
+
+        public static string FormatFileSizeFloat(ulong FileSize)
+        {
+            //显示单位为KB
+            if (FileSize <= 1048576)
+            {
+                return string.Format("{0:F2} KB", FileSize * 1.0 / 1024);
+            }
+            //大于1M，则显示单位为MB
+            else if ((FileSize >= 1048576) && (FileSize <= 1073741824))
+            {
+                return string.Format("{0:F2} MB", FileSize * 1.0 / 1048576);
+            }
+            //大于1G，则显示单位为G
+            else if (FileSize >= 1073741824)
+            {
+                return string.Format("{0:F2} GB", FileSize * 1.0 / 1073741824);
             }
             return "";
         }
