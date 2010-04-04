@@ -76,8 +76,16 @@ namespace IThemeSky.UI
                 "Service/AddThemeComment", // URL with parameters
                 new { controller = "Service", action = "AddThemeComment" } // Parameter defaults
             );
-
-            //默认Route
+            routes.MapRoute(
+                "DownloadThemeService", // Route name
+                "Service/Download/{themeId},{themeName}", // URL with parameters
+                new { controller = "Service", action = "DownloadTheme" } // Parameter defaults
+            );
+            routes.MapRoute(
+                "RateThemeService", // Route name
+                "Service/RateTheme/{themeId},{score}", // URL with parameters
+                new { controller = "Service", action = "RateTheme" } // Parameter defaults
+            );
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{themeId}", // URL with parameters

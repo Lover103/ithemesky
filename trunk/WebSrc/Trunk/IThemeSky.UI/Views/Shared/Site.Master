@@ -18,9 +18,9 @@
 			<li class="s1"><a href="/" title="ithemesky.com Homepage">ithemesky.com Homepage</a></li>
 			<li class="s2"><a href="/list/new" title="All Categories">All Categories</a></li>
 			<li class="s3"><a href="/list/popular" title="Ranking">Ranking</a></li>
-			<li class="s4"><a href="#" title="Submit Themes">Submit Themes</a></li>
+			<li class="s4"><a href="/home/submitTheme" title="Submit Themes">Submit Themes</a></li>
 			<li class="s5"><a href="#" title="isprite">isprite</a></li>
-			<li class="s6 last"><a href="#" title="Help">Help</a></li>
+			<li class="s6 last"><a href="/home/help" title="Help">Help</a></li>
 		</ul>
 		<div class="searchPannel">
 			<label class="label">Search</label>

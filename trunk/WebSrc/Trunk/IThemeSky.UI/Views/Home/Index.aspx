@@ -60,7 +60,7 @@
 		    <div class="subCol">
 			    <h3 class="subColHead colTitle">Help</h3>
 			    <ul class="subColContent subHelp">
-				    <li><a href="#"><span class="orange">How to install themes on jailbroken iPhone?</span></a></li>
+				    <li><a href="/Home/FAQ#faqContent1"><span class="orange">How to install themes on jailbroken iPhone?</span></a></li>
 				    <li><a href="#">How to design an iphone theme?</a></li>
 				    <li><a href="#">isprite can not be found?</a></li>
 				    <li><a href="#">My iphone is not jailbroken.</a></li>

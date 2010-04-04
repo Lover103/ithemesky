@@ -11,6 +11,7 @@
             function() {
                 $("img#themeCut").parent().fancybox({});
                 LoadComments(1);
+                BindRateEvent();
             });
         function LoadComments(pageIndex) {
             $("#commentListContainer").html('loading comments ...');
@@ -20,6 +21,24 @@
             alert('post comment success.');
             $('#Content').html('');
             LoadComments(1);
+        }
+        function BindRateEvent() {
+            $('.detailRate li a').click(
+                function() {
+                    $.get('/Service/RateTheme/<%=ViewData.Model.CurrentTheme.ThemeId %>,' + $(this).attr('value')
+                    , function(data) {
+                        if (data == '1') {
+                            alert('thanks for your rating');
+                        }
+                        else if (data == '-1') {
+                            alert('you have rated.');
+                        }
+                        else {
+                            alert('ratting error. please try again later.');
+                        }
+                    });
+                }
+            );
         }
     </script>
 </asp:Content>
@@ -87,15 +106,15 @@
 						<dd class="detailRate">
 							<span class="rateResult star<%=ViewData.Model.CurrentTheme.CommendIndex %>"><%=ViewData.Model.CurrentTheme.CommendIndex %>/5 stars</span>
 							<ul>
-								<li><a href="javascript:;" class="rateS1" title="1 Star">1 Star</a></li>
-								<li><a href="javascript:;" class="rateS2" title="2 Stars">2 Stars</a></li>
-								<li><a href="javascript:;" class="rateS3" title="3 Stars">3 Stars</a></li>
-								<li><a href="javascript:;" class="rateS4" title="4 Stars">4 Stars</a></li>
-								<li><a href="javascript:;" class="rateS5" title="5 Stars">5 Stars</a></li>
+								<li><a href="javascript:;" class="rateS1" value="1" title="1 Star">1 Star</a></li>
+								<li><a href="javascript:;" class="rateS2" value="2" title="2 Stars">2 Stars</a></li>
+								<li><a href="javascript:;" class="rateS3" value="3" title="3 Stars">3 Stars</a></li>
+								<li><a href="javascript:;" class="rateS4" value="4" title="4 Stars">4 Stars</a></li>
+								<li><a href="javascript:;" class="rateS5" value="5" title="5 Stars">5 Stars</a></li>
 							</ul>
 						</dd>
 					</dl>
-					<div class="btnDownload"><a href="#" title="Download Now">Download Now</a></div>
+					<div class="btnDownload"><a href="/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>" title="Download Now">Download Now</a></div>
 					<div class="installIip">
 						<a href="#"><span class="orange">Tutorial of installing iphone themes!</span></a> Install the theme to iphone with isprite, <a href="#">click here to download isprite</a>. 
 					</div>
