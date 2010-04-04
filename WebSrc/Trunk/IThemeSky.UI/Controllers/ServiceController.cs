@@ -8,18 +8,51 @@ using IThemeSky.Model;
 using IThemeSky.DataAccess;
 using IThemeSky.UI.Models;
 using System.Web.UI;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace IThemeSky.UI.Controllers
 {
     public class ServiceController : Controller
     {
         private ICacheThemeViewRepository _themeRepository = ThemeRepositoryFactory.Default.GetCachedThemeViewRepository();
-
-        public ActionResult Download(int themeId)
+        private IThemeManageRepository _themeManageRepository = ThemeRepositoryFactory.Default.GetThemeManageRepository();
+        public ActionResult DownloadTheme(int themeId, string themeName)
         {
-            return Content("下载了" + themeId);
+            Theme theme = _themeRepository.GetTheme(themeId);
+            if (theme != null)
+            {
+                theme.Downloads++;
+                _themeManageRepository.IncreaseDownloads(themeId, 1);
+                return Redirect("/" + theme.DownloadUrl);
+            }
+            else
+            {
+                return Redirect("/404.html");
+            }
         }
-
+        [OutputCache(Location = OutputCacheLocation.None)]
+        public ActionResult RateTheme(int themeId, int score)
+        {
+            Theme theme = _themeRepository.GetTheme(themeId);
+            if (theme != null)
+            {
+                theme.RateScore += score;
+                theme.RateNumbers++;
+                if (_themeManageRepository.RateTheme(themeId, score, -1, Request.UserHostAddress))
+                {
+                    return Content("1");
+                }
+                else
+                {
+                    return Content("-1");
+                }
+            }
+            else
+            {
+                return Content("-2");
+            }
+        }
         public ActionResult GetSortThemes(string sort, int displayNumber)
         {
             ThemeSortOption themeSort = sort.ToEnum<ThemeSortOption>(ThemeSortOption.New);
@@ -74,6 +107,114 @@ namespace IThemeSky.UI.Controllers
             if (result)
             {
                 return Content("<script type=\"text/javascript\">parent.PostCommentSuccess()</script>");
+            }
+            return Content("<script type=\"text/javascript\">alert('post comment failure,please try again for a while.');</script>");
+        }
+
+        [HttpPost]
+        public ActionResult SubmitTheme(PostThemeModel postTheme)
+        {
+            if (string.IsNullOrEmpty(postTheme.Title))
+            {
+                return Content("<script type=\"text/javascript\">alert('Title is required.');</script>");
+            }
+            if (postTheme.CategoryId <= 0)
+            {
+                return Content("<script type=\"text/javascript\">alert('CategoryId is required.');</script>");
+            }
+            if (string.IsNullOrEmpty(Request.Files["ThemeFile"].FileName))
+            {
+                return Content("<script type=\"text/javascript\">alert('You must select a theme file.');</script>");
+            }
+            if (!Regex.IsMatch(Request.Files["ThemeFile"].FileName, @".+\.(zip|rar)$", RegexOptions.IgnoreCase))
+            {
+                return Content("<script type=\"text/javascript\">alert('The format of theme file must be one of zip,rar');</script>");
+            }
+            if (Request.Files["ThemeFile"].ContentLength > 20 * 1024 * 1024)
+            {
+                return Content("<script type=\"text/javascript\">alert('The size of selected theme is not bigger than 20M');</script>");
+            }
+            if (string.IsNullOrEmpty(Request.Files["ThemeThumbnail"].FileName))
+            {
+                return Content("<script type=\"text/javascript\">alert('You must select a theme screenshot.');</script>");
+            }
+            if (!Regex.IsMatch(Request.Files["ThemeThumbnail"].FileName, @".+\.(jpg|gif|png)$", RegexOptions.IgnoreCase))
+            {
+                return Content("<script type=\"text/javascript\">alert('The format of screenshot must be one of jpg,png,gif');</script>");
+            }
+            if (Request.Files["ThemeThumbnail"].ContentLength > 2 * 1024 * 1024)
+            {
+                return Content("<script type=\"text/javascript\">alert('The size of selected screenshot is not bigger than 2M');</script>");
+            }
+            if (string.IsNullOrEmpty(postTheme.AuthorMail))
+            {
+                return Content("<script type=\"text/javascript\">alert('AuthorMail is required.');</script>");
+            }
+
+            //创建主题文件
+            postTheme.DownloadUrl = "ThemeFiles/UserUploads/" + Guid.NewGuid().ToString() + ".zip";
+            string filePath = Server.MapPath("/" + postTheme.DownloadUrl);
+            byte[] buffer = new byte[1024];
+            using (Stream stream = Request.Files["ThemeFile"].InputStream)
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                {
+                    int readCount = 0;
+                    while ((readCount = stream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        fs.Write(buffer, 0, readCount);
+                    }
+                }
+            }
+
+            //创建图片文件
+            postTheme.ThumbnailName = "ThemeThumbnails/UserUploads/" + Guid.NewGuid().ToString() + "." + Path.GetExtension(Request.Files["ThemeThumbnail"].FileName);
+            string thumbnailFile = Server.MapPath("/" + postTheme.ThumbnailName);
+            buffer = new byte[1024];
+            using (Stream stream = Request.Files["ThemeThumbnail"].InputStream)
+            {
+                using (FileStream fs = new FileStream(thumbnailFile, FileMode.Create))
+                {
+                    int readCount = 0;
+                    while ((readCount = stream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        fs.Write(buffer, 0, readCount);
+                    }
+                }
+            }
+
+            IThemeManageRepository repository = ThemeRepositoryFactory.Default.GetThemeManageRepository();
+            bool result = repository.AddTheme(
+                new Theme()
+                {
+                    AddTime = DateTime.Now,
+                    AuthorId = 0,
+                    CategoryId = postTheme.CategoryId,
+                    CheckerId = 0,
+                    CheckState = CheckStateOption.Waitting,
+                    CommendIndex = 0,
+                    Comments = 0,
+                    Description = postTheme.Description,
+                    DisplayState = DisplayStateOption.Display,
+                    Downloads = 0,
+                    DownloadUrl = postTheme.DownloadUrl,
+                    FileSize = Request.Files["ThemeFile"].ContentLength,
+                    LastMonthDownloads = 0,
+                    LastWeekDownloads = 0,
+                    ParentCategoryId = 0,
+                    RateNumbers = 0,
+                    RateScore = 0,
+                    Source = SourceOption.IPhoneThemes,
+                    ThumbnailName = postTheme.ThumbnailName,
+                    Title = postTheme.Title,
+                    UpdateTime = DateTime.Now,
+                    Views = 0,
+                    AuthorMail = postTheme.AuthorMail,
+                    AuthorName = postTheme.AuthorName,
+                });
+            if (result)
+            {
+                return Content("<script type=\"text/javascript\">parent.SubmitThemeSuccess()</script>");
             }
             return Content("<script type=\"text/javascript\">alert('post comment failure,please try again for a while.');</script>");
         }

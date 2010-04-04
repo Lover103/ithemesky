@@ -237,6 +237,9 @@ namespace IThemeSky.DataAccess
                 LastWeekDownloads = Convert.ToInt32(dataReader["LastWeekDownloads"]),
                 LastMonthDownloads = Convert.ToInt32(dataReader["LastMonthDownloads"]),
                 Source = Convert.ToInt32(dataReader["Source"]).ToEnum<SourceOption>(SourceOption.IThemeSky),
+                AuthorName = dataReader["AuthorName"].ToString(),
+                AuthorMail = dataReader["AuthorMail"].ToString(),
+                DownloadUrl = dataReader["DownloadUrl"].ToString(),
             };
         }
         /// <summary>
@@ -287,6 +290,9 @@ namespace IThemeSky.DataAccess
                 LastMonthDownloads = Convert.ToInt32(dataReader["LastMonthDownloads"]),
                 Source = Convert.ToInt32(dataReader["Source"]).ToEnum<SourceOption>(SourceOption.IThemeSky),
                 CategoryName = dataReader["CategoryName"].ToString(),
+                AuthorName = dataReader["AuthorName"].ToString(),
+                AuthorMail = dataReader["AuthorMail"].ToString(),
+                DownloadUrl = dataReader["DownloadUrl"].ToString(),
             };
         }
 

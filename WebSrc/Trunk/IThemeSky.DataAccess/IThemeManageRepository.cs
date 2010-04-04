@@ -58,5 +58,28 @@ namespace IThemeSky.DataAccess
         /// </summary>
         /// <param name="categoryId">主题分类id</param>
         bool DeleteCategory(int categoryId);
+        /// <summary>
+        /// 增加主题下载数
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        bool IncreaseDownloads(int themeId, int number);
+        /// <summary>
+        /// 增加主题浏览数
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        bool IncreaseViews(int themeId, int number);
+         /// <summary>
+        /// 评分主题
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <param name="score"></param>
+        /// <param name="userId"></param>
+        /// <param name="userIp"></param>
+        /// <returns></returns>
+        bool RateTheme(int themeId, int score, int userId, string userIp);
     }
 }

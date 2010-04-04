@@ -76,13 +76,15 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@LastWeekDownloads",SqlDbType.Int, 4, theme.LastWeekDownloads),
 				SqlParameterHelper.BuildInputParameter("@LastMonthDownloads",SqlDbType.Int, 4, theme.LastMonthDownloads),
 				SqlParameterHelper.BuildInputParameter("@Source",SqlDbType.Int, 4, theme.Source.ToInt32()),
-                SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.VarChar, 300, theme.DownloadUrl)
+                SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.VarChar, 300, theme.DownloadUrl),
+                SqlParameterHelper.BuildInputParameter("@AuthorName", SqlDbType.VarChar, 128, theme.AuthorName),
+                SqlParameterHelper.BuildInputParameter("@AuthorMail", SqlDbType.VarChar, 128, theme.AuthorMail),
 			};
             string cmdText = @"
                 INSERT INTO Theme
-				    (CategoryId,ParentCategoryId,Title,FileSize,Description,DisplayState,CheckState,AuthorId,CheckerId,CommendIndex,ThumbnailName,AddTime,UpdateTime,RateScore,RateNumbers,Comments,Downloads,Views,LastWeekDownloads,LastMonthDownloads,Source,DownloadUrl)
+				    (CategoryId,ParentCategoryId,Title,FileSize,Description,DisplayState,CheckState,AuthorId,CheckerId,CommendIndex,ThumbnailName,AddTime,UpdateTime,RateScore,RateNumbers,Comments,Downloads,Views,LastWeekDownloads,LastMonthDownloads,Source,DownloadUrl,AuthorName,AuthorMail)
 			    VALUES
-				    (@CategoryId,@ParentCategoryId,@Title,@FileSize,@Description,@DisplayState,@CheckState,@AuthorId,@CheckerId,@CommendIndex,@ThumbnailName,@AddTime,@UpdateTime,@RateScore,@RateNumbers,@Comments,@Downloads,@Views,@LastWeekDownloads,@LastMonthDownloads,@Source,@DownloadUrl);SELECT @@IDENTITY";
+				    (@CategoryId,@ParentCategoryId,@Title,@FileSize,@Description,@DisplayState,@CheckState,@AuthorId,@CheckerId,@CommendIndex,@ThumbnailName,@AddTime,@UpdateTime,@RateScore,@RateNumbers,@Comments,@Downloads,@Views,@LastWeekDownloads,@LastMonthDownloads,@Source,@DownloadUrl,@AuthorName,@AuthorMail);SELECT @@IDENTITY";
             int themeId = Convert.ToInt32(SqlHelper.ExecuteScalar(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters));
             if (themeId > 0)
             {
@@ -121,7 +123,9 @@ namespace IThemeSky.DataAccess
 				LastWeekDownloads=@LastWeekDownloads,
 				LastMonthDownloads=@LastMonthDownloads,
 				Source=@Source,
-				DownloadUrl=@DownloadUrl
+				DownloadUrl=@DownloadUrl,
+                AuthorName=@AuthorName,
+                AuthorMail=@AuthorMail
 			where 
 				ThemeId=@ThemeId 
 			";
@@ -149,7 +153,9 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@LastWeekDownloads", SqlDbType.Int, 4, theme.LastWeekDownloads),
 				SqlParameterHelper.BuildInputParameter("@LastMonthDownloads", SqlDbType.Int, 4, theme.LastMonthDownloads),
 				SqlParameterHelper.BuildInputParameter("@Source", SqlDbType.Int, 4, theme.Source),
-				SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.VarChar, 300, theme.DownloadUrl)
+				SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.VarChar, 300, theme.DownloadUrl),
+                SqlParameterHelper.BuildInputParameter("@AuthorName", SqlDbType.VarChar, 128, theme.AuthorName),
+                SqlParameterHelper.BuildInputParameter("@AuthorMail", SqlDbType.VarChar, 128, theme.AuthorMail),
 			};
             return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
         }
@@ -278,6 +284,52 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@CategoryId",SqlDbType.Int, 4, categoryId)
 			};
             return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
-        }        #endregion
+        }
+
+        /// <summary>
+        /// 增加主题下载数
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public bool IncreaseDownloads(int themeId, int number)
+        {
+            string cmdText = string.Format("UPDATE Theme SET Downloads = Downloads + {1} WHERE ThemeId={0}", themeId, number);
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText) > 0;
+        }
+        /// <summary>
+        /// 增加主题浏览数
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public bool IncreaseViews(int themeId, int number)
+        {
+            string cmdText = string.Format("UPDATE Theme SET Views = Views + {1} WHERE ThemeId={0}", themeId, number);
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText) > 0;
+        }
+        /// <summary>
+        /// 评分主题
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <param name="score"></param>
+        /// <param name="userId"></param>
+        /// <param name="userIp"></param>
+        /// <returns></returns>
+        public bool RateTheme(int themeId, int score, int userId, string userIp)
+        {
+            string cmdText = string.Format(@"
+                IF NOT EXISTS (SELECT 1 FROM ThemeRateHistory WHERE ThemeId={0} AND UserIp = '{3}')
+                BEGIN
+                    UPDATE Theme SET RateScore = RateScore + {1},RateNumbers = RateNumbers + 1 WHERE ThemeId={0};
+                    INSERT INTO ThemeRateHistory (ThemeId, RateScore, AddTime, UserId, UserIp) VALUES ({0}, {1}, getdate(), {2}, '{3}');
+                END
+            "
+                , themeId
+                , score
+                , userId
+                , userIp.Replace("'", "''")
+                );
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText) > 0;        }        #endregion
     }
 }

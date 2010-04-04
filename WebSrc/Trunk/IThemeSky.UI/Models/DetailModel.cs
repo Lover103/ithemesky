@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using IThemeSky.Model;
+using IThemeSky.DataAccess;
 
 namespace IThemeSky.UI.Models
 {
@@ -11,7 +12,9 @@ namespace IThemeSky.UI.Models
 
         public DetailModel(int themeId)
         {
+            ThemeRepositoryFactory.Default.GetThemeManageRepository().IncreaseViews(themeId, 1);
             CurrentTheme = _themeRepository.GetTheme(themeId);
+            CurrentTheme.Views++;
             Tags = _themeRepository.GetTagsByThemeId(themeId);
             string themeName;
             PrevThemeId = _themeRepository.GetPrevThemeId(CurrentTheme.CheckerId, themeId, out themeName);

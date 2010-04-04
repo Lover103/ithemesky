@@ -42,7 +42,7 @@ namespace IThemeSky.ThemesRobot
                 MatchCollection mc = Regex.Matches(content, pattern);
                 foreach (Match match in mc)
                 {
-                    AnalyseThemeInfo(match);
+                    AnalyseThemeInfo(match.Groups["DetailUrl"].Value);
                 }
                 File.AppendAllText(SAVE_PATH + "Log.txt", "抓取第" + pageIndex + "完成\r\n\r\n");
             }
@@ -62,15 +62,25 @@ namespace IThemeSky.ThemesRobot
             //}
         }
 
-        public void AnalyseThemeInfo(Match match)
+        public void AnalyseFromErrorUrl()
         {
+            string[] arrUrl = File.ReadAllLines(SAVE_PATH + "RestoreErrorUrl.txt");
+            foreach (string url in arrUrl)
+            {
+                AnalyseThemeInfo(url);
+            }
+        }
 
+        public void AnalyseThemeInfo(string detailUrl)
+        {
             try
             {
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
-                string detailContent = _webClient.DownloadString(BASE_URL + match.Groups["DetailUrl"].Value);
-                Match m = Regex.Match(detailContent, @"uploads/userup/\d+/[^.]+\.jpg");
+                string detailContent = _webClient.DownloadString(BASE_URL + detailUrl);
+                Match m = Regex.Match(detailContent, @"<h1>(?<Title>[^<]+)</h1>");
+                string title = m.Groups[1].Value;
+                m = Regex.Match(detailContent, @"uploads/userup/\d+/[^.]+\.jpg");
                 string imageUrl = "";
                 if (m.Success)
                 {
@@ -104,7 +114,7 @@ namespace IThemeSky.ThemesRobot
                     Description = content,
                     DisplayState = DisplayStateOption.Display,
                     Downloads = downloads,
-                    DownloadUrl = GetFileName("ThemeFiles/" + match.Groups["Title"].Value.Replace(" ", "-") + ".rar"),
+                    DownloadUrl = GetFileName("ThemeFiles/" + title.Replace(" ", "-") + ".rar"),
                     FileSize = 0,
                     LastMonthDownloads = downloads,
                     LastWeekDownloads = downloads,
@@ -112,8 +122,8 @@ namespace IThemeSky.ThemesRobot
                     RateNumbers = 0,
                     RateScore = 0,
                     Source = SourceOption.IPhoneThemes,
-                    ThumbnailName = GetFileName("ThemeThumbnails/" + match.Groups["Title"].Value.Replace(" ", "-") + ".jpg"),
-                    Title = match.Groups["Title"].Value,
+                    ThumbnailName = GetFileName("ThemeThumbnails/" + title.Replace(" ", "-") + ".jpg"),
+                    Title = title,
                     UpdateTime = DateTime.Now,
                     Views = downloads * 2,
                 };
@@ -149,12 +159,12 @@ namespace IThemeSky.ThemesRobot
                     repository.MappingThemeTag(theme.ThemeId, mTag.Groups["TagName"].Value);
                 }
                 watch.Stop();
-                Console.WriteLine("抓取" + match.Groups["DetailUrl"].Value + "完成，用时：" + watch.Elapsed);
+                Console.WriteLine("抓取" + detailUrl + "完成，用时：" + watch.Elapsed);
             }
             catch (Exception ex)
             {
-                File.AppendAllText(SAVE_PATH + "Error.txt", match.Groups["DetailUrl"].Value + "\r\n" + ex.ToString() + "\r\n\r\n");
-                File.AppendAllText(SAVE_PATH + "ErrorUrl.txt", match.Groups["DetailUrl"].Value + "\r\n");
+                File.AppendAllText(SAVE_PATH + "Error.txt", detailUrl + "\r\n" + ex.ToString() + "\r\n\r\n");
+                File.AppendAllText(SAVE_PATH + "ErrorUrl.txt", detailUrl + "\r\n");
             }
         }
 

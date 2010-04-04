@@ -74,7 +74,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CommentListModel.cs" />
+    <Compile Include="Models\PostThemeModel.cs" />
     <Compile Include="Models\DetailModel.cs" />
+    <Compile Include="Models\NormalPageModel.cs" />
     <Compile Include="Models\PostCommentModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\IndexModel.cs" />
@@ -112,11 +114,15 @@
     <Content Include="Content\js\IThemeSky.js" />
     <Content Include="Global.asax" />
     <Content Include="Views\Home\Detail.aspx" />
+    <Content Include="Views\Home\FAQ.aspx" />
+    <Content Include="Views\Home\Help.aspx" />
     <Content Include="Views\Home\Search.aspx" />
     <Content Include="Views\Home\List.aspx" />
+    <Content Include="Views\Home\SubmitTheme.aspx" />
     <Content Include="Views\Shared\HotTags.ascx" />
     <Content Include="Views\Shared\NormalThemeRepeater.ascx" />
     <Content Include="Views\Shared\PostCommentForm.ascx" />
+    <Content Include="Views\Shared\SubmitThemeForm.ascx" />
     <Content Include="Views\Shared\SuggestThemeRepeater.ascx" />
     <Content Include="Views\Shared\ThemeCategories.ascx" />
     <Content Include="Views\Shared\ThemeCommentRepeater.ascx" />
@@ -157,6 +163,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ThemeFiles\UserUploads\" />
+    <Folder Include="ThemeThumbnails\UserUploads\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

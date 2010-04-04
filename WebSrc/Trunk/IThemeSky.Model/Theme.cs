@@ -125,5 +125,15 @@ namespace IThemeSky.Model
         /// 下载地址
         /// </summary>
         public string DownloadUrl { get; set; }
+        
+        /// <summary>
+        /// 作者名称
+        /// </summary>
+        public string AuthorName { get; set; }
+
+        /// <summary>
+        /// 作者联系邮件
+        /// </summary>
+        public string AuthorMail { get; set; }
     }
 }

@@ -48,6 +48,21 @@ namespace IThemeSky.UI.Controllers
             return View(new DetailModel(themeId));
         }
 
+        public ActionResult FAQ()
+        {
+            return View(new NormalPageModel());
+        }
+
+        public ActionResult Help()
+        {
+            return View(new NormalPageModel());
+        }
+
+        public ActionResult SubmitTheme()
+        {
+            return View(new NormalPageModel());
+        }
+
         public ActionResult About()
         {
             return View();
