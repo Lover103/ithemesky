@@ -8,6 +8,10 @@ namespace iSprite
 {
     internal class MessageHelper
     {
+        MessageHelper()
+        { 
+        }
+
         public static DialogResult ShowError(string message)
         {
             return ShowError("Error", message);
@@ -15,7 +19,7 @@ namespace iSprite
 
         public static DialogResult ShowError(string title, string message)
         {
-            return MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return iSpriteMessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public static DialogResult ShowInfo(string message)
@@ -24,7 +28,7 @@ namespace iSprite
         }
         public static DialogResult ShowInfo(string title, string message)
         {
-            return MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return iSpriteMessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
@@ -34,7 +38,7 @@ namespace iSprite
         }
         public static DialogResult ShowConfirm(string title, string message)
         {
-            return MessageBox.Show(message, title, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            return iSpriteMessageBox.Show(message, title, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
         }
 
         public static DialogResult ShowWarning(string message)
@@ -44,7 +48,7 @@ namespace iSprite
 
         public static DialogResult ShowWarning(string title, string message)
         {
-            return MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return iSpriteMessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

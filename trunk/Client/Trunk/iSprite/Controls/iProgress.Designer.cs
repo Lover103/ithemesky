@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.lblStatus = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.progressbar = new iSprite.ThirdControl.XpProgressBar();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.btnCancel = new iSprite.iSpriteButton();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).BeginInit();
             this.SuspendLayout();
             // 
             // lblStatus
@@ -43,17 +44,6 @@
             this.lblStatus.Size = new System.Drawing.Size(47, 12);
             this.lblStatus.TabIndex = 2;
             this.lblStatus.Text = "Message";
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.BackColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(341, 91);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // progressbar
             // 
@@ -80,18 +70,33 @@
             this.lblTitle.TabIndex = 5;
             this.lblTitle.Text = "Title";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnCancel.DownImage = null;
+            this.btnCancel.HoverImage = null;
+            this.btnCancel.Location = new System.Drawing.Point(343, 91);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.NormalImage = global::iSprite.Resource.Img_button;
+            this.btnCancel.Size = new System.Drawing.Size(75, 25);
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.TabStop = false;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // iProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::iSprite.Resource.form_bg;
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.progressbar);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblStatus);
             this.Name = "iProgress";
             this.Size = new System.Drawing.Size(432, 129);
+            ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,8 +105,8 @@
         #endregion
 
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Button btnCancel;
         private iSprite.ThirdControl.XpProgressBar progressbar;
         private System.Windows.Forms.Label lblTitle;
+        private iSpriteButton btnCancel;
     }
 }

@@ -92,6 +92,7 @@ namespace iSprite
             progressBar.Visible = false;
             progressBar.OnCancel += new CancelHandler(progressBar_OnCancel);
         }
+
         private void Initialise()
         {
             InitialiseProgress();

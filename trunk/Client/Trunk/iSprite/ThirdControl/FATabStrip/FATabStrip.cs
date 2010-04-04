@@ -56,9 +56,9 @@ namespace iSprite.ThirdControl.FarsiLibrary
         private StringFormat sf = null;
         private static Font defaultFont = new Font("Tahoma", 8.25f, FontStyle.Regular);
 
-        private bool alwaysShowClose = true;
+        private bool alwaysShowClose = false;
         private bool isIniting = false;
-        private bool alwaysShowMenuGlyph = true;
+        private bool alwaysShowMenuGlyph = false;
         private bool menuOpen = false;
 
         #endregion

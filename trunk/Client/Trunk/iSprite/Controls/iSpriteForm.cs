@@ -14,6 +14,9 @@ namespace iSprite
         Rectangle m_Rectangle;
         Point M_StartPoint;
 
+        public bool EnableMaximize { get; set; }
+        public bool EnableMinimize { get; set; }
+
         public iSpriteForm()
         {
             InitializeComponent();
@@ -30,7 +33,7 @@ namespace iSprite
 
             if (null != this.BackgroundImage)
             {
-                GetNewImg(
+               Area9Helper.GetNewImg(
                     e.Graphics,
                     new int[] { 2, 2, 30, 2 },
                     (Bitmap)this.BackgroundImage,
@@ -40,58 +43,7 @@ namespace iSprite
             }
         }
 
-        Rectangle R0, R1, R2, R3, R4, R5, R6, R7, R8, R9;
-        void GetNewImg(Graphics img2Draw, int[] splitSetting, Bitmap Img, int destWidth, int destHeight)
-        {
-            if (splitSetting.Length == 4)
-            {
-                int m_width1, m_width2, m_height1, m_height2;
-
-                m_width1 = splitSetting[0];
-                m_width2 = splitSetting[1];
-                m_height1 = splitSetting[2];
-                m_height2 = splitSetting[3];
-
-                R1 = new Rectangle(new Point(0, 0), new Size(m_width1, m_height1));
-                Rectangle _R1 = R1;
-
-                R2 = new Rectangle(new Point(R1.Width, 0), new Size(Img.Width - (m_width1 + m_width2), R1.Height));
-                Rectangle _R2 = new Rectangle(new Point(_R1.Width, 0), new Size(destWidth - (m_width1 + m_width2), _R1.Height));
-
-                R3 = new Rectangle(new Point(R1.Width + R2.Width, 0), new Size(m_width2, m_height1));
-                Rectangle _R3 = new Rectangle(new Point(_R1.Width + _R2.Width, 0), new Size(m_width2, m_height1));
-
-                R4 = new Rectangle(new Point(0, R1.Height), new Size(R1.Width, Img.Height - (m_height1 + m_height2)));
-                Rectangle _R4 = new Rectangle(new Point(0, _R1.Height), new Size(_R1.Width, destHeight - (m_height1 + m_height2)));
-
-                R5 = new Rectangle(new Point(R4.Width, R1.Height), new Size(R2.Width, R4.Height));
-                Rectangle _R5 = new Rectangle(new Point(_R4.Width, _R1.Height), new Size(_R2.Width, _R4.Height));
-
-                R6 = new Rectangle(new Point(R4.Width + R5.Width, R1.Height), new Size(R3.Width, R4.Height));
-                Rectangle _R6 = new Rectangle(new Point(_R4.Width + _R5.Width, _R1.Height), new Size(_R3.Width, _R4.Height));
-
-                R7 = new Rectangle(new Point(0, R1.Height + R4.Height), new Size(R1.Width, m_height2));
-                Rectangle _R7 = new Rectangle(new Point(0, _R1.Height + _R4.Height), new Size(_R1.Width, m_height2));
-
-                R8 = new Rectangle(new Point(R7.Width, R1.Height + R4.Height), new Size(R5.Width, R7.Height));
-                Rectangle _R8 = new Rectangle(new Point(_R7.Width, _R1.Height + _R4.Height), new Size(_R5.Width, _R7.Height));
-
-                R9 = new Rectangle(new Point(R7.Width + R8.Width, R1.Height + R4.Height), new Size(R3.Width, R7.Height));
-                Rectangle _R9 = new Rectangle(new Point(_R7.Width + _R8.Width, _R1.Height + _R4.Height), new Size(_R3.Width, _R7.Height));
-
-
-                img2Draw.DrawImage(Img, _R1, R1, GraphicsUnit.Pixel);
-                img2Draw.DrawImage(Img, _R2, R2, GraphicsUnit.Pixel);
-                img2Draw.DrawImage(Img, _R3, R3, GraphicsUnit.Pixel);
-                img2Draw.DrawImage(Img, _R4, R4, GraphicsUnit.Pixel);
-                img2Draw.DrawImage(Img, _R5, R5, GraphicsUnit.Pixel);
-                img2Draw.DrawImage(Img, _R6, R6, GraphicsUnit.Pixel);
-                img2Draw.DrawImage(Img, _R7, R7, GraphicsUnit.Pixel);
-                img2Draw.DrawImage(Img, _R8, R8, GraphicsUnit.Pixel);
-                img2Draw.DrawImage(Img, _R9, R9, GraphicsUnit.Pixel);
-            }
-        }
-
+       
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -110,12 +62,12 @@ namespace iSprite
             this.Resize += new EventHandler(this.iSpriteForm_Resize);
             this.ResumeLayout(false);
 
-            btn_close = new Button();
-            btn_close.Size = new System.Drawing.Size(21, 21);
-            btn_close.Text = "X";
+            btn_close = new PictureBox();
+            btn_close.Size = new System.Drawing.Size(22, 22);
             this.Controls.Add(btn_close);
-            btn_close.Location = new Point(this.Width - btn_close.Width - 8, 5);
-
+            btn_close.Location = new Point(this.Width - btn_close.Width - 8, 1);
+            btn_close.BackgroundImage = global::iSprite.Resource.close;
+            btn_close.BackColor = Color.Transparent;
             btn_close.Click += new EventHandler(
                 delegate(object sender, EventArgs e)
                 {
@@ -123,22 +75,32 @@ namespace iSprite
                 }
             );
 
-            btn_maximize = new Button();
-            btn_maximize.Size = new System.Drawing.Size(21, 21);
-            btn_maximize.Text = "@";
+            btn_maximize = new PictureBox();
+            btn_maximize.Size = new System.Drawing.Size(22, 22);
+            btn_maximize.BackgroundImage = global::iSprite.Resource.enlarge;
+            btn_maximize.BackColor = Color.Transparent;
             this.Controls.Add(btn_maximize);
             btn_maximize.Location = new Point(btn_close.Location.X - btn_close.Width - 8, 5);
 
             btn_maximize.Click += new EventHandler(
                 delegate(object sender, EventArgs e)
                 {
-                    this.WindowState = FormWindowState.Maximized;
+                    if (this.WindowState == FormWindowState.Maximized)
+                    {
+                        this.WindowState = FormWindowState.Normal;
+                    }
+                    else
+                    {
+                        this.WindowState = FormWindowState.Maximized;
+                    }
                 }
             );
+            btn_maximize.Visible = false;
 
-            btn_minimize = new Button();
-            btn_minimize.Size = new System.Drawing.Size(21, 21);
-            btn_minimize.Text = "-";
+            btn_minimize = new PictureBox();
+            btn_minimize.Size = new System.Drawing.Size(22, 22);
+            btn_minimize.BackgroundImage = global::iSprite.Resource.shrink;
+            btn_minimize.BackColor = Color.Transparent;
             this.Controls.Add(btn_minimize);
             btn_minimize.Location = new Point(btn_maximize.Location.X - btn_maximize.Width - 8, 5);
 
@@ -148,24 +110,42 @@ namespace iSprite
                     this.WindowState = FormWindowState.Minimized;
                 }
             );
+            btn_minimize.Visible = false;
+
 
             lblTitle = new Label();
             lblTitle.Location = new Point(5, 5);
-            this.lblTitle.Font = new System.Drawing.Font("Arial", 11F, 
+            this.lblTitle.Font = new Font("Arial", 11F, 
                 FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
             lblTitle.BackColor = Color.Transparent;
             this.Controls.Add(lblTitle);           
 
 
         }
-        Button btn_close, btn_maximize, btn_minimize;
+        PictureBox btn_close, btn_maximize, btn_minimize;
         Label lblTitle;
         internal void ChangeControlsLocation()
         {
             lblTitle.Text = this.Text;
-            btn_close.Location = new Point(this.Width - btn_close.Width - 8, 5);
-            btn_maximize.Location = new Point(btn_close.Location.X - btn_close.Width - 8, 5);
-            btn_minimize.Location = new Point(btn_maximize.Location.X - btn_maximize.Width - 8, 5);
+            btn_close.Location = new Point(this.Width - btn_close.Width - 8, 3);
+            if (EnableMaximize)
+            {
+                btn_maximize.Visible = true;
+                btn_maximize.Location = new Point(btn_close.Location.X - btn_close.Width - 6, 3);
+            }
+            else
+            {
+                btn_maximize.Visible = false;
+            }
+            if (EnableMinimize)
+            {
+                btn_minimize.Visible = true;
+                btn_minimize.Location = new Point(btn_maximize.Location.X - btn_maximize.Width - 6, 3);
+            }
+            else
+            {
+                btn_minimize.Visible = false;
+            }
         }
 
         /// <summary>

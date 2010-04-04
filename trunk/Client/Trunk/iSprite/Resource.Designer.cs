@@ -74,6 +74,13 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap button {
+            get {
+                object obj = ResourceManager.GetObject("button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Calculator {
             get {
                 object obj = ResourceManager.GetObject("Calculator", resourceCulture);
@@ -102,6 +109,20 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap close {
+            get {
+                object obj = ResourceManager.GetObject("close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap enlarge {
+            get {
+                object obj = ResourceManager.GetObject("enlarge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Folder_16 {
             get {
                 object obj = ResourceManager.GetObject("Folder_16", resourceCulture);
@@ -119,6 +140,20 @@ namespace iSprite {
         internal static System.Drawing.Bitmap form_bg {
             get {
                 object obj = ResourceManager.GetObject("form_bg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Img_button {
+            get {
+                object obj = ResourceManager.GetObject("Img_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Img_button_down {
+            get {
+                object obj = ResourceManager.GetObject("Img_button_down", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -196,6 +231,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap Settings {
             get {
                 object obj = ResourceManager.GetObject("Settings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap shrink {
+            get {
+                object obj = ResourceManager.GetObject("shrink", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -98,6 +98,8 @@
             // 
             // tabs
             // 
+            this.tabs.AlwaysShowClose = false;
+            this.tabs.AlwaysShowMenuGlyph = false;
             this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabs.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.tabs.Items.AddRange(new iSprite.ThirdControl.FarsiLibrary.FATabStripItem[] {
@@ -210,6 +212,8 @@
             // 
             // faTabStrip1
             // 
+            this.faTabStrip1.AlwaysShowClose = false;
+            this.faTabStrip1.AlwaysShowMenuGlyph = false;
             this.faTabStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.faTabStrip1.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.faTabStrip1.Location = new System.Drawing.Point(3, 30);
@@ -226,6 +230,8 @@
             this.ClientSize = new System.Drawing.Size(992, 673);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.faTabStrip1);
+            this.EnableMaximize = true;
+            this.EnableMinimize = true;
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.Text = "iSprite";

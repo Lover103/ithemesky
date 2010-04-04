@@ -85,8 +85,8 @@ namespace iSprite
                 int timeleft = (int)(timeElapse * ((1 - perent) / perent));
                 this.Status = string.Format(
                     "Transmited {0}, Speed {1}, Time Left {2}",
-                    Utility.FormatFileSize(completeSize),
-                    Utility.FormatFileSize((ulong)speed),
+                    Utility.FormatFileSizeFloat(completeSize),
+                    Utility.FormatFileSizeFloat((ulong)speed),
                     string.Format("{0:00}:{1:00}",timeleft/60,timeleft%60)
                     );
             }
@@ -94,8 +94,8 @@ namespace iSprite
             {
                 this.Status = string.Format(
                     "Transmited {0}, Speed {1}",
-                    Utility.FormatFileSize(completeSize),
-                    Utility.FormatFileSize((ulong)speed)
+                    Utility.FormatFileSizeFloat(completeSize),
+                    Utility.FormatFileSizeFloat((ulong)speed)
                     );
             }
         }
