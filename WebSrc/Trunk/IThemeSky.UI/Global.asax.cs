@@ -82,6 +82,11 @@ namespace IThemeSky.UI
                 new { controller = "Service", action = "DownloadTheme" } // Parameter defaults
             );
             routes.MapRoute(
+                "DownloadThemePicService", // Route name
+                "Service/DownloadPic/{themeId},{themeName}", // URL with parameters
+                new { controller = "Service", action = "DownloadThemePic" } // Parameter defaults
+            );
+            routes.MapRoute(
                 "RateThemeService", // Route name
                 "Service/RateTheme/{themeId},{score}", // URL with parameters
                 new { controller = "Service", action = "RateTheme" } // Parameter defaults
