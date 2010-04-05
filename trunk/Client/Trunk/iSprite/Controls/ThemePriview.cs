@@ -59,6 +59,7 @@ namespace iSprite
 
         internal void ShowPriview(List<string> themeInfo)
         {
+            this.Visible = false;
             m_themeInfo = themeInfo;
             if (themeInfo.Count == 2)
             {
@@ -77,98 +78,148 @@ namespace iSprite
             string themeIconPath = themePacket + "\\Icons\\";
             string themeWallpaper = themePacket + "\\Wallpaper.png";
             string themeDock = themePacket + "\\Dock.png";
+            string themePreview = themePacket + "\\previewImg.jpg";
 
-            foreach (string icon in m_ThemeIconDic.Keys)
+            if (File.Exists(themeWallpaper) && Directory.Exists(themeIconPath))
             {
-                m_ThemeIconDic[icon].Image = (Image)m_ThemeIconDic[icon].Tag;
-            }            
-
-            this.pWallpaper.BackgroundImage = null;
-            if (File.Exists(themeWallpaper))
-            {
-                try
+                //标准主题
+                foreach (string icon in m_ThemeIconDic.Keys)
                 {
-                    using (Image objImage = Image.FromFile(themeWallpaper))
+                    m_ThemeIconDic[icon].Visible = true;
+                    m_ThemeIconDic[icon].Image = (Image)m_ThemeIconDic[icon].Tag;
+                }
+
+                #region 加载背景
+                //加载背景
+                this.pWallpaper.BackgroundImage = null;
+                if (File.Exists(themeWallpaper))
+                {
+                    try
                     {
-                        this.pWallpaper.BackgroundImage = (Image)objImage.Clone();
+                        using (Image objImage = Image.FromFile(themeWallpaper))
+                        {
+                            this.pWallpaper.BackgroundImage = (Image)objImage.Clone();
+                            objImage.Dispose();
+                        }
+                    }
+                    catch
+                    {
                     }
                 }
-                catch
-                {
-                }
-            }
+                #endregion
 
-            System.Drawing.Image imgBlank = null;
-            System.Drawing.Graphics imgDraw = null;
-
-            if (File.Exists(themeDock))
-            {
-                try
+                #region 加载dock图标
+                System.Drawing.Image imgBlank = null;
+                System.Drawing.Graphics imgDraw = null;
+                //加载dock图标
+                if (File.Exists(themeDock))
                 {
-                    using (Image objImage = Image.FromFile(themeDock))
+                    try
                     {
-                        imgBlank = this.pWallpaper.BackgroundImage;
+                        using (Image objImage = Image.FromFile(themeDock))
+                        {
+                            imgBlank = this.pWallpaper.BackgroundImage;
+                            imgDraw = System.Drawing.Graphics.FromImage(imgBlank);
+
+                            imgDraw.DrawImage(objImage, new Rectangle(0, 392, imgBlank.Width, 88),
+                                new Rectangle(0, 0, objImage.Width, objImage.Height), GraphicsUnit.Pixel);
+                            imgDraw.Dispose();
+                        }
+
+                        this.pWallpaper.BackgroundImage = imgBlank;
+                    }
+                    catch
+                    {
+                    }
+                }
+                #endregion
+
+                #region 加载背景文字
+                imgBlank = this.pWallpaper.BackgroundImage;
+                if (imgBlank != null)
+                {
+                    try
+                    {
                         imgDraw = System.Drawing.Graphics.FromImage(imgBlank);
 
-                        imgDraw.DrawImage(objImage, new Rectangle(0, 392, imgBlank.Width, 88),
-                            new Rectangle(0, 0, objImage.Width, objImage.Height), GraphicsUnit.Pixel);
+                        imgDraw.DrawImage(global::iSprite.Resource.WB_Text, 0, 0, imgBlank.Width, imgBlank.Height);
                         imgDraw.Dispose();
+
+
+                        this.pWallpaper.BackgroundImage = imgBlank;
                     }
-
-                    this.pWallpaper.BackgroundImage = imgBlank;
-                }
-                catch
-                {
-                }
-            }
-
-            imgBlank = this.pWallpaper.BackgroundImage;
-            if (imgBlank != null)
-            {
-                try
-                {
-                    imgDraw = System.Drawing.Graphics.FromImage(imgBlank);
-
-                    imgDraw.DrawImage(global::iSprite.Resource.WB_Text, 0, 0, imgBlank.Width, imgBlank.Height);
-                    imgDraw.Dispose();
-
-
-                    this.pWallpaper.BackgroundImage = imgBlank;
-                }
-                catch
-                {
-                }
-            }
-
-            // 检查是否存在Icon库 
-            if (Directory.Exists(themeIconPath))
-            {
-                string fullFileName;
-                foreach (KeyValuePair<string, PictureBox> item in m_ThemeIconDic)
-                {
-                    fullFileName = themeIconPath + item.Key + ".png";
-                    if (File.Exists(fullFileName))
+                    catch
                     {
-                        try
+                    }
+                }
+                #endregion
+
+                // 检查是否存在Icon库 
+                if (Directory.Exists(themeIconPath))
+                {
+                    #region 加载图标
+                    string fullFileName;
+                    foreach (KeyValuePair<string, PictureBox> item in m_ThemeIconDic)
+                    {
+                        fullFileName = themeIconPath + item.Key + ".png";
+                        if (File.Exists(fullFileName))
                         {
-                            using (Image objImage = Image.FromFile(fullFileName))
+                            try
                             {
-                                m_ThemeIconDic[item.Key].Image = (Image)objImage.Clone();
-                                //m_ThemeIconDic[item.Key].BackColor = Color.Transparent;
+                                using (Image objImage = Image.FromFile(fullFileName))
+                                {
+                                    m_ThemeIconDic[item.Key].Image = (Image)objImage.Clone();
+                                }
+                            }
+                            catch
+                            {
                             }
                         }
-                        catch
+                    }
+                    if (null != this.pWallpaper.BackgroundImage)
+                    {
+                        Bitmap mapWallpaper = (Bitmap)this.pWallpaper.BackgroundImage;
+                        foreach (KeyValuePair<string, PictureBox> item in m_ThemeIconDic)
                         {
+                            Rectangle r = new Rectangle(item.Value.Location.X - pWallpaper.Location.X, item.Value.Location.Y - pWallpaper.Location.Y, 59, 60);
+                            item.Value.BackgroundImage = mapWallpaper.Clone(r, mapWallpaper.PixelFormat);
                         }
                     }
+                    #endregion
                 }
-                Bitmap mapWallpaper = (Bitmap)this.pWallpaper.BackgroundImage;
-                foreach (KeyValuePair<string, PictureBox> item in m_ThemeIconDic)
-                {
-                    Rectangle r = new Rectangle(item.Value.Location.X - pWallpaper.Location.X, item.Value.Location.Y - pWallpaper.Location.Y, 59, 60);
-                    item.Value.BackgroundImage = mapWallpaper.Clone(r, mapWallpaper.PixelFormat);
-                }  
             }
+            else
+            { 
+                //动态主题
+                if (File.Exists(themePreview))
+                {
+                    #region 加载背景
+                    //加载背景
+                    this.pWallpaper.BackgroundImage = null;
+                    try
+                    {
+                        foreach (string icon in m_ThemeIconDic.Keys)
+                        {
+                            m_ThemeIconDic[icon].Visible = false;
+                        }
+                        using (Image objImage = Image.FromFile(themePreview))
+                        {
+                            this.pWallpaper.BackgroundImage = (Image)objImage.Clone();
+                        }
+                    }
+                    catch
+                    {
+                    }
+
+                    #endregion
+                }
+                else
+                {
+                    //其他情况，不显示预览图，直接安装
+                    this.Visible = false;
+                    RaiseMessageHandler(m_themeInfo, ThemePriviewMessageTypeOption.Apply);
+                }
+            }            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

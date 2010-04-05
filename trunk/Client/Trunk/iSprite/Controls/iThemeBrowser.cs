@@ -10,6 +10,7 @@ using CE.iPhone.PList;
 using System.Text.RegularExpressions;
 using Manzana;
 using System.Web;
+using System.Threading;
 
 namespace iSprite
 {
@@ -25,7 +26,7 @@ namespace iSprite
         List<string> m_SystemSettingName;
         ToolStrip m_Toolmenu;
         ThemePriview m_ThemePriview;
-
+        WebBrowser themeBrowser;
 
         internal event FileProgressHandler OnProgressHandler;
 
@@ -47,7 +48,6 @@ namespace iSprite
             }
         }
         #endregion
-
 
         internal void SetPreviewVisable(bool enable)
         {
@@ -82,7 +82,6 @@ namespace iSprite
             InitThemeTab();
 
             InitialiseThemePriview(parentForm);
-
         }
 
         private iThemeBrowser()
@@ -119,7 +118,7 @@ namespace iSprite
                 }
             }
 
-            WebBrowser themeBrowser = new WebBrowser();
+            themeBrowser = new WebBrowser();
             this.m_tabTheme.Controls.Add(themeBrowser);
 
             //themeBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -148,20 +147,31 @@ namespace iSprite
             {
                 e.Cancel = true;
 
-                //判断是否安装WinterBoard
-                if (!CheckInstallWinterBoard())
+                try
                 {
-                    return;
+                    //判断是否安装WinterBoard
+                    if (!CheckInstallWinterBoard())
+                    {
+                        return;
+                    }
+
+                    string themeName = url.Substring(url.LastIndexOf(",") + 1);
+                    themeName = HttpUtility.UrlDecode(themeName, Encoding.UTF8);
+
+                    string filepath = iSpriteContext.Current.iSpriteTempPath + "/" + Path.GetFileNameWithoutExtension(themeName) + ".zip";
+                    string previewImg = iSpriteContext.Current.iSpriteTempPath + "/" + Path.GetFileNameWithoutExtension(themeName) + ".jpg";
+
+                    if (Utility.DownloadFile(url, filepath, OnProgressHandler))
+                    {
+                        InstallFromZIP(filepath, url);
+                    }
+                    else
+                    {
+                        RaiseMessageHandler(this, "Fail to download the theme files, try again please .", MessageTypeOption.Error);
+                    }
                 }
-
-                string themeName = url.Substring(url.LastIndexOf(",") + 1);
-                themeName = HttpUtility.UrlDecode(themeName,Encoding.UTF8);
-
-                string filepath = iSpriteContext.Current.iSpriteTempPath + "/" + Path.GetFileNameWithoutExtension(themeName) + ".zip";
-
-                if (Utility.DownloadFile(url, filepath, OnProgressHandler))
-                {
-                    InstallFromZIP(filepath);
+                catch
+                { 
                 }
 
             }
@@ -212,7 +222,12 @@ namespace iSprite
         }
         void InstallFromZIP(string zippath)
         {
+            InstallFromZIP(zippath,string.Empty);
+        }
+        void InstallFromZIP(string zippath,string url)
+        {
             string tozippath = iSpriteContext.Current.iSpriteTempPath + "\\" + Path.GetRandomFileName() + "\\";
+
 
             if (ZipHelper.UnZip(zippath, tozippath) > 0)
             {
@@ -220,6 +235,12 @@ namespace iSprite
 
                 if (themepath != string.Empty)
                 {
+                    if (!Directory.Exists(themepath + "\\Icons\\")
+                        || !File.Exists(themepath + "\\Wallpaper.png"))
+                    {
+                        Utility.DownloadFile(url.Replace("/Download/", "/DownloadPic/"), themepath + "\\previewImg.jpg", OnProgressHandler);
+                    }
+
                     InstallFromFolder(
                         Path.GetFileNameWithoutExtension(themepath).TrimEnd('\\'),
                         themepath
@@ -280,9 +301,7 @@ namespace iSprite
         /// <returns></returns>
         bool CheckThemePacket(string themePath)
         {
-            return true;
             int iconnum = 0;
-
             foreach (KeyValuePair<string, string> item in m_DefaultIconDic)
             {
                 if (item.Key == "com.apple.MobileSMS")
@@ -300,7 +319,9 @@ namespace iSprite
                     iconnum++;
                 }
             }
-            return iconnum > 0;
+
+            return true;
+            //return iconnum > 0;
         }
         #endregion
 
@@ -334,6 +355,7 @@ namespace iSprite
             themeInfo.Add(themeName);
             themeInfo.Add(themePath);
             m_ThemePriview.ShowPriview(themeInfo);
+            //SetTheme(themeInfo[0], themeInfo[1]);
         }
 
         void ThemePriview_OnMessage(List<string> themeInfo, ThemePriviewMessageTypeOption messagetype)
@@ -355,6 +377,7 @@ namespace iSprite
                 RaiseMessageHandler(this, "Fail to copy the theme file to iPhone .", MessageTypeOption.Error);
                 return;
             }
+
 
             string iPhoneThemeSetting = iSpriteContext.Current.iPhone_WinterBoardSetting_Path;
             string localThemeSetting = iSpriteContext.Current.iSpriteTempPath + Path.GetFileName(iPhoneThemeSetting);
@@ -586,7 +609,7 @@ namespace iSprite
                             if (m_iPhoneDevice.Copy2iPhone(wbfilepath,
                                 iSpriteContext.Current.iPhone_CydiaAutoInstallPath))
                             {
-                                MessageHelper.ShowConfirm("WinterBoard has been copied to iPhone, please reboot your iPhone to finish Installation.");
+                                MessageHelper.ShowInfo("WinterBoard has been copied to iPhone, You must reboot your iPhone Twice to finish Installation.");
                                 return true;
                             }
                         }

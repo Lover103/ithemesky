@@ -166,6 +166,9 @@ namespace iSprite
             bool iscrtl = (e.Modifiers == Keys.Control);
             switch (e.KeyCode)
             {
+                case Keys.Enter:
+                    OpenSelectItem();
+                    break;
                 case Keys.F5:
                     RefreshData();
                     break;
@@ -197,6 +200,7 @@ namespace iSprite
                     }
                     break;
             }
+            this.Focus();
         }
         #endregion
 
@@ -574,7 +578,11 @@ namespace iSprite
         /// <param name="e"></param>
         void iListView_DoubleClick(object sender, EventArgs e)
         {
-            if (this.SelectedItems.Count == 1)
+            OpenSelectItem();
+        }
+        void OpenSelectItem()
+        {
+            if (this.SelectedItems.Count >= 1)
             {
                 ListViewItem item = this.SelectedItems[0];
                 if ((ListViewItemTypeOption)item.Tag == ListViewItemTypeOption.File)
@@ -689,6 +697,11 @@ namespace iSprite
                 {
                     Columns[0].Width = 30;
                 }
+            }
+
+            if (this.Items.Count > 0)
+            {
+                this.Items[0].Focused = true;
             }
         }
         #endregion

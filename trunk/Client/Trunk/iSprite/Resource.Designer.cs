@@ -200,6 +200,27 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap Msg_Confirm {
+            get {
+                object obj = ResourceManager.GetObject("Msg_Confirm", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Msg_Error {
+            get {
+                object obj = ResourceManager.GetObject("Msg_Error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Msg_Info {
+            get {
+                object obj = ResourceManager.GetObject("Msg_Info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Notes {
             get {
                 object obj = ResourceManager.GetObject("Notes", resourceCulture);

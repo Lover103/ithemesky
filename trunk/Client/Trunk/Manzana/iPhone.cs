@@ -961,7 +961,7 @@ namespace Manzana {
             }
             if (File.Exists(srcpath_Computer))
             {
-                if (srcpath_Computer.EndsWith("thumbs.db"))
+                if (srcpath_Computer.EndsWith("thumbs.db", StringComparison.CurrentCultureIgnoreCase))
                 {
                     return true;
                 }
