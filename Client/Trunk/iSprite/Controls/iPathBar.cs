@@ -189,7 +189,7 @@ namespace iSprite
 
 		private void PathBarResize()
 		{
-            cbbpathlist.Width = tsMain.Width - (btnUp.Width * 3) - tsbtnFavourites.Width - 8;
+            cbbpathlist.Width = tsMain.Width - (btnUp.Width * 3) - tsbtnFavourites.Width - 8-8;
         }
         #endregion
 

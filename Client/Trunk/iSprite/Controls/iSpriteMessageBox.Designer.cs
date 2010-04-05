@@ -31,12 +31,14 @@
             this.btnOK = new iSprite.iSpriteButton();
             this.btnCancel = new iSprite.iSpriteButton();
             this.btnAbort = new iSprite.iSpriteButton();
+            this.pnl = new System.Windows.Forms.TableLayoutPanel();
             this.lblMsg = new System.Windows.Forms.Label();
-            this.panel = new System.Windows.Forms.Panel();
+            this.picbox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.btnOK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnAbort)).BeginInit();
-            this.panel.SuspendLayout();
+            this.pnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOK
@@ -81,32 +83,57 @@
             this.btnAbort.Text = "Abort";
             this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
             // 
+            // pnl
+            // 
+            this.pnl.BackColor = System.Drawing.Color.Transparent;
+            this.pnl.ColumnCount = 2;
+            this.pnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.447004F));
+            this.pnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.55299F));
+            this.pnl.Controls.Add(this.lblMsg, 1, 0);
+            this.pnl.Controls.Add(this.picbox, 0, 0);
+            this.pnl.Location = new System.Drawing.Point(12, 31);
+            this.pnl.Name = "pnl";
+            this.pnl.RowCount = 1;
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.Size = new System.Drawing.Size(434, 56);
+            this.pnl.TabIndex = 4;
+            // 
             // lblMsg
             // 
-            this.lblMsg.BackColor = System.Drawing.Color.Transparent;
-            this.lblMsg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMsg.Location = new System.Drawing.Point(0, 0);
+            this.lblMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMsg.AutoSize = true;
+            this.lblMsg.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblMsg.Location = new System.Drawing.Point(43, 21);
             this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(363, 45);
-            this.lblMsg.TabIndex = 4;
-            this.lblMsg.Text = "msg";
+            this.lblMsg.Size = new System.Drawing.Size(388, 14);
+            this.lblMsg.TabIndex = 0;
+            this.lblMsg.Text = "Msg";
             // 
-            // panel
+            // picbox
             // 
-            this.panel.BackColor = System.Drawing.Color.Transparent;
-            this.panel.Controls.Add(this.lblMsg);
-            this.panel.Location = new System.Drawing.Point(35, 46);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(363, 45);
-            this.panel.TabIndex = 5;
+            this.picbox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.picbox.Location = new System.Drawing.Point(4, 21);
+            this.picbox.Name = "picbox";
+            this.picbox.Size = new System.Drawing.Size(32, 32);
+            this.picbox.TabIndex = 1;
+            this.picbox.TabStop = false;
             // 
             // iSpriteMessageBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::iSprite.Resource.form_bg;
-            this.ClientSize = new System.Drawing.Size(429, 136);
-            this.Controls.Add(this.panel);
+            this.ClientSize = new System.Drawing.Size(458, 136);
+            this.Controls.Add(this.pnl);
             this.Controls.Add(this.btnAbort);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -114,11 +141,13 @@
             this.Controls.SetChildIndex(this.btnOK, 0);
             this.Controls.SetChildIndex(this.btnCancel, 0);
             this.Controls.SetChildIndex(this.btnAbort, 0);
-            this.Controls.SetChildIndex(this.panel, 0);
+            this.Controls.SetChildIndex(this.pnl, 0);
             ((System.ComponentModel.ISupportInitialize)(this.btnOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnAbort)).EndInit();
-            this.panel.ResumeLayout(false);
+            this.pnl.ResumeLayout(false);
+            this.pnl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -128,7 +157,8 @@
         private iSpriteButton btnOK;
         private iSpriteButton btnCancel;
         private iSpriteButton btnAbort;
+        private System.Windows.Forms.TableLayoutPanel pnl;
         private System.Windows.Forms.Label lblMsg;
-        private System.Windows.Forms.Panel panel;
+        internal System.Windows.Forms.PictureBox picbox;
     }
 }

@@ -313,6 +313,8 @@ namespace iSprite
         #region 维护收藏夹
         internal void MaintainFavourites()
         {
+            Dictionary<string, string> dicPaths = GetMenuItems(this.m_ContextMenuStrip);
+            FavoritesForm.Show(this, dicPaths);
         }
         #endregion
 
@@ -335,6 +337,11 @@ namespace iSprite
 		internal void Save()
 		{
 			SaveFavourites();
+        }
+        internal void Save(Dictionary<string, string> dicPaths)
+        {
+            SaveFavourites(dicPaths);
+            LoadFavourites();
         }
         #endregion
 

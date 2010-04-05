@@ -78,7 +78,7 @@ namespace iSprite
                     }
                 }
 
-                returnCode = true;
+                returnCode = !cancelDownload;
             }
             catch //(Exception ex)
             {
