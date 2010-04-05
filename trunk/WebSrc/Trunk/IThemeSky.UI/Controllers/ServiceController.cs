@@ -31,6 +31,18 @@ namespace IThemeSky.UI.Controllers
                 return Redirect("/404.html");
             }
         }
+        public ActionResult DownloadThemePic(int themeId, string themeName)
+        {
+            Theme theme = _themeRepository.GetTheme(themeId);
+            if (theme != null)
+            {
+                return Redirect("/" + theme.ThumbnailName);
+            }
+            else
+            {
+                return Redirect("/404.html");
+            }
+        }
         [OutputCache(Location = OutputCacheLocation.None)]
         public ActionResult RateTheme(int themeId, int score)
         {
