@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using System.Text;
 using System.IO;
 using Manzana;
@@ -182,14 +182,21 @@ namespace iSprite
         {
             if (!iphone.IsConnected)
             {
+                _context.ThemeHomePage = "http://www.ithemesky.com/";
                 return;
+            }
+            else
+            {
             }
 
             Reload();
 
             string ver = iphone.DeviceVersion;
-
             ver = ver.Trim();
+            _context.ThemeHomePage += "?chl=iSprite&phonever=" + ver 
+                + "&softver=" + _context.CurrentVersion 
+                + "&deviceid="+iphone.DeviceId;
+
             if (ver.Split('.').Length < 3)
             {
                 ver = ver + ".0";
@@ -212,15 +219,17 @@ namespace iSprite
                 iphone.CreateDirectory(_context.iPhone_CydiaAutoInstallPath);
             }
 
-            foreach (string path in iphone.GetDirectories("/private/var/stash/"))
-            {
-                if (path.StartsWith("Themes."))
-                {
-                    _context.iPhone_WinterBoardFile_Path = "/private/var/stash/" + path + "/";
-                    break;
-                }
-            }
+            //foreach (string path in iphone.GetDirectories("/private/var/stash/"))
+            //{
+            //    if (path.StartsWith("Themes."))
+            //    {
+            //        _context.iPhone_WinterBoardFile_Path = "/private/var/stash/" + path + "/";
+            //        break;
+            //    }
+            //}
             _context.iPhone_WinterBoardFile_Path = "/Library/Themes/";
+
+
         }
     }
 }
