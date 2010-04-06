@@ -120,12 +120,12 @@
 					</div>
 					<dl class="themeShare">
 						<dt>Share this theme:</dt>
-						<dd class="shareTwitter"><a href="#" title="Tweet this!">Tweet this!</a></dd>
-						<dd class="shareFacebook"><a href="#" title="Share on Facebook.">Share on Facebook.</a></dd>
-						<dd class="shareDigg"><a href="#" title="Digg This!">Digg This!</a></dd>
-						<dd class="shareStumbleUpon"><a href="#" title="StumbleUpon.">StumbleUpon.</a></dd>
-						<dd class="shareReddit"><a href="#" title="Vote on Reddit.">Vote on Reddit.</a></dd>
-						<dd class="shareDelicious"><a href="#" title="Bookmark on Delicious.">Bookmark on Delicious.</a></dd>
+						<dd class="shareTwitter"><a rel="nofollow" target="_blank" href="http://twitter.com/home?status=<%=ViewData.Model.CurrentTheme.Title %>+<%=Request.Url.ToString()%>" title="Tweet this!">Tweet this!</a></dd>
+						<dd class="shareFacebook"><a rel="nofollow" target="_blank" href="http://www.facebook.com/share.php?u=<%=Request.Url.ToString()%>" title="Share on Facebook.">Share on Facebook.</a></dd>
+						<dd class="shareDigg"><a rel="nofollow" target="_blank" href="http://digg.com/submit?phase=2&amp;url=<%=Request.Url.ToString()%>&amp;title=<%=ViewData.Model.CurrentTheme.Title %>" title="Digg This!">Digg This!</a></dd>
+						<dd class="shareStumbleUpon"><a rel="nofollow" target="_blank" href="http://www.stumbleupon.com/submit?url=<%=Request.Url.ToString()%>&amp;title=<%=ViewData.Model.CurrentTheme.Title %>" title="StumbleUpon.">StumbleUpon.</a></dd>
+						<dd class="shareReddit"><a rel="nofollow" target="_blank" href="http://reddit.com/submit?url=<%=Request.Url.ToString()%>&amp;title=<%=ViewData.Model.CurrentTheme.Title %>" title="Vote on Reddit.">Vote on Reddit.</a></dd>
+						<dd class="shareDelicious"><a rel="nofollow" target="_blank" href="http://del.icio.us/post?url=<%=Request.Url.ToString()%>&amp;title=<%=ViewData.Model.CurrentTheme.Title %>" title="Bookmark on Delicious.">Bookmark on Delicious.</a></dd>
 					</dl>
 				</div>
 			</div>
