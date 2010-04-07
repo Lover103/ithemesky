@@ -11,6 +11,7 @@
 </head>
 <body>
 <!--header begin-->
+<a name="top"></a>
 <div id="headerWrapper">
 	<div id="header">
 		<h2 class="logo"><a href="/" title="ithemesky.com provided themes for iphone"><img src="/Content/images/logo.png" alt="ithemesky.com provided themes for iphone" width="200" height="62" /></a></h2>
@@ -41,10 +42,33 @@
 <!--footer begin-->
 <div id="footerWrapper">
 	<div id="footer">
-		Copyright &copy; 2010 ithemesky.com All rights reserved.<span class="footerNav"><a href="#">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Help</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Sitemap</a></span>
+		<span class="copyright">Copyright &copy; 2010 ithemesky.com All rights reserved.</span>
+		<ul class="footNav">
+			<li class="first"><a href="mailto:ithemesky@gmail.com">Contact</a></li>
+			<li><a href="/home/help">Help</a></li>
+			<li class="go2Top"><a href="#top" title="Go to top">TOP</a></li>
+		</ul>
 	</div>
 </div>
 <!--footer end-->
+<script type="text/javascript">
+$(document).ready(function(){
+	  $('a[href*=#top]').click(function() {
+		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+		&& location.hostname == this.hostname) {
+		  var $target = $(this.hash);
+		  $target = $target.length && $target
+		  || $('[name=' + this.hash.slice(1) +']');
+		  if ($target.length) {
+			var targetOffset = $target.offset().top;
+			$('html,body')
+			.animate({scrollTop: targetOffset}, 700);
+		   return false;
+		  }
+		}
+	  });
+	});
+</script>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
