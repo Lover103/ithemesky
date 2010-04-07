@@ -10,14 +10,16 @@ namespace IThemeSky.ThemesRobot
     {
         static void Main(string[] args)
         {
-            MBThemeRobot robot = new MBThemeRobot();
+            //MBThemeRobot robot = new MBThemeRobot();
             //for (int i = 29; i <= 36; i++)       //34
             //{
             //    robot.AnalyseList(i);
             //}
             //robot.AnalyseFromErrorUrl();
-            ThemeFileChecker.Check();
-            //Console.WriteLine("完成所有抓取！！！！！！！！BinGo!");
+            //ThemeFileChecker.Check();
+            MRobot r = new MRobot();
+            r.Start();
+            Console.WriteLine("BinGo!");
             Console.Read();
         }
     }
