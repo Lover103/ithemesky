@@ -16,45 +16,7 @@ namespace IThemeSky.ThemesRobot
     {
         private readonly string SAVE_PATH = System.Configuration.ConfigurationSettings.AppSettings["ThemeFilePath"];
         private WebClient _webClient = new WebClient();
-        public void Build()
-        {
-            string conn = "Data Source=10.1.242.18;Initial Catalog=NewResourceDB;Persist Security Info=True;User ID=nddblzz;Password=uNm46KP8xSUwfZUK";
-            string cmdText = @"SELECT * FROM [dbo].[View_ChannelThemes] where f_platform = 1 and ChannelId = 0";
-            List<Theme> themes = new List<Theme>();
-            using (IDataReader reader = SqlHelper.ExecuteReader(conn, System.Data.CommandType.Text, cmdText))
-            {
-                while (reader.Read())
-                {
-                    themes.Add(new Theme()
-                    {
-                        AddTime = Convert.ToDateTime(reader["f_upload_time"]),
-                        AuthorId = 0,
-                        CategoryId = Convert.ToInt32(reader["f_cateid"]),
-                        CheckerId = 0,
-                        CheckState = CheckStateOption.Waitting,
-                        CommendIndex = Convert.ToInt32(reader["f_tuijian"]),
-                        Comments = 0,
-                        Description = reader["f_summary"].ToString(),
-                        DisplayState = DisplayStateOption.Display,
-                        Downloads = Convert.ToInt32(reader["f_downnum"]),
-                        FileSize = Convert.ToInt64(reader["f_size"]),
-                        LastMonthDownloads = 0,
-                        LastWeekDownloads = 0,
-                        ParentCategoryId = 0,
-                        Source = SourceOption.M,
-                        ThumbnailName = "http://image.91.com/sj91/upload/" + string.Format("{0}{1}.{2}", reader["f_path"].ToString(), reader["f_picname"].ToString(), reader["f_ext"].ToString()),
-                        Title = reader["f_name"].ToString(),
-                        UpdateTime = DateTime.Now,
-                        Views = Convert.ToInt32(reader["f_viewnum"]),
-                        DownloadUrl = string.IsNullOrEmpty(reader["f_downurl"].ToString()) ? reader["f_downurl2"].ToString() : "http://www.91rb.com/theme/iphone/" + reader["f_downurl"].ToString(),
-                        RateNumbers = 0,
-                        RateScore = 0,
-                        AuthorName = reader["f_id"].ToString(),
-                    });
-                }
-            }
-            SerializeHelper.BinarySerialize<List<Theme>>(themes, Path.Combine(SAVE_PATH, "rewrite.dll"));
-        }
+        
 
         public void Start()
         {
