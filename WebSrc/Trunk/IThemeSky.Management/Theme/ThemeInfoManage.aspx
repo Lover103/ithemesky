@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <asp:HiddenField ID="hidThemeId" Value="" runat="server" />
     <div>
         <table width="100%" cellpadding="6" cellspacing="1" class="InputGrid">
           <thead>
@@ -77,6 +78,16 @@
                 <td class="InputName">描述信息</td>
                 <td><asp:TextBox ID="txtDescription" runat="server" CssClass="TextInput" TextMode="MultiLine" Columns="60" Rows="10"></asp:TextBox></td>
                 <td><span class="ImportantText">*</span></td>
+            </tr>
+            <tr>
+                <td class="InputName">作者姓名</td>
+                <td><asp:TextBox ID="txtAuthorName" runat="server" CssClass="TextInput"></asp:TextBox></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="InputName">作者邮箱</td>
+                <td><asp:TextBox ID="txtAuthorMail" runat="server" CssClass="TextInput"></asp:TextBox></td>
+                <td></td>
             </tr>
             <tr>
                 <td></td>
