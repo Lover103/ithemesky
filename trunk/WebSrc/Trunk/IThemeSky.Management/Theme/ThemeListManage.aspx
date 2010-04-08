@@ -63,7 +63,12 @@
             <asp:Repeater ID="rptThemes" runat="server" OnItemDataBound="rptThemes_ItemDataBound">
                 <ItemTemplate>
                     <tr>
-                        <td><%#Eval("Title") %>(id:<%#Eval("ThemeId") %>)<asp:HiddenField ID="hidThemeId" runat="server" /></td>
+                        <td>
+                        <asp:TextBox ID="txtTitle" runat="server" value='<%#Eval("Title") %>' OnTextChanged="propertyList_SelectedIndexChanged" AutoPostBack="true"></asp:TextBox>
+                        (id:<%#Eval("ThemeId") %>)(<a href="/<%#Eval("DownloadUrl") %>" target="_blank">下载</a>)(<a href="/iphone-themes/<%#Eval("Title").ToString().Trim().Replace(" ", "-") %>/<%#Eval("ThemeId") %>" target="_blank">浏览</a>)<br />
+                        <a href="/<%#Eval("ThumbnailName") %>" target="_blank"><img src="/<%#Eval("ThumbnailName").ToString().Replace(".jpg", "_112x168.jpg") %>" border="0" /></a>
+                        <asp:HiddenField ID="hidThemeId" runat="server" />
+                        </td>
                         <td>
                             <asp:DropDownList ID="ddlCategoryId" runat="server" DataTextField="CategoryName" DataValueField="CategoryId" AutoPostBack="true" AppendDataBoundItems="true" OnSelectedIndexChanged="propertyList_SelectedIndexChanged">
                                 <asp:ListItem Text="未归类" Value="0"></asp:ListItem>
