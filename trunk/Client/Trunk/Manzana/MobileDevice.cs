@@ -160,10 +160,11 @@ namespace Manzana {
 	internal class MobileDevice 
     {
         const string DLLName = "iTunesMobileDevice.dll";
+        static string iTunesPath = string.Empty;
         static MobileDevice()
         {
-            string iTunesPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles).TrimEnd('\\')
-                +@"\Apple\Mobile Device Support\bin";
+            iTunesPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles).TrimEnd('\\')
+                + @"\Apple\Mobile Device Support\bin";
             if (!Directory .Exists(iTunesPath))
             {
                 //64 位系统的 Common Files 目录
@@ -177,6 +178,15 @@ namespace Manzana {
                     iTunesPath
                 }
                     ));
+        }
+
+        /// <summary>
+        /// 判断iTunes是否已经安装
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsInstalliTunes()
+        {
+            return File.Exists(iTunesPath + "\\" + DLLName);
         }
 
 		[DllImport("CoreFoundation.dll", CallingConvention = CallingConvention.Cdecl)]
