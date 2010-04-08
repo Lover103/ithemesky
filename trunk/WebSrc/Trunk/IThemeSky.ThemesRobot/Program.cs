@@ -17,8 +17,10 @@ namespace IThemeSky.ThemesRobot
             //}
             //robot.AnalyseFromErrorUrl();
             //ThemeFileChecker.Check();
-            MRobot r = new MRobot();
-            r.Start();
+            //MRobot r = new MRobot();
+            //r.Start();
+            RepairTheme rt = new RepairTheme();
+            rt.Start();
             Console.WriteLine("BinGo!");
             Console.Read();
         }
