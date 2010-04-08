@@ -59,6 +59,7 @@ namespace IThemeSky.ThemesRobot
                     IThemeManageRepository repository = ThemeRepositoryFactory.Default.GetThemeManageRepository();
                     repository.AddTheme(theme);
                     Console.WriteLine("#" + index + ":" + theme.Title);
+                    File.AppendAllText(SAVE_PATH + "Log.txt", index + "\r\n");
                 }
                 catch (Exception ex)
                 {
