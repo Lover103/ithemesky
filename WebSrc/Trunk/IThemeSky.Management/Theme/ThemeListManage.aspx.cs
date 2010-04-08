@@ -71,26 +71,34 @@ namespace IThemeSky.Management.Theme
             IThemeSky.Model.Theme theme = _repositoryManage.GetTheme(themeId);
 
             string message = "";
-            DropDownList dropDownList = sender as DropDownList;
-            if (dropDownList.ID.Equals("ddlCategoryId"))
+
+            if (sender is DropDownList)
             {
-                theme.CategoryId = Convert.ToInt32(dropDownList.SelectedValue);
-                message = string.Format("[{0}]分类修改成功", theme.Title);
+                DropDownList dropDownList = sender as DropDownList;
+                if (dropDownList.ID.Equals("ddlCategoryId"))
+                {
+                    theme.CategoryId = Convert.ToInt32(dropDownList.SelectedValue);
+                    message = string.Format("[{0}]分类修改成功", theme.Title);
+                }
+                if (dropDownList.ID.Equals("ddlCommendIndex"))
+                {
+                    theme.CommendIndex = Convert.ToInt32(dropDownList.SelectedValue);
+                    message = string.Format("[{0}]推荐指数修改成功", theme.Title);
+                }
+                if (dropDownList.ID.Equals("ddlCheckState"))
+                {
+                    theme.CheckState = Convert.ToInt32(dropDownList.SelectedValue).ToEnum<CheckStateOption>(CheckStateOption.Waitting);
+                    message = string.Format("[{0}]审核状态修改成功", theme.Title);
+                }
+                if (dropDownList.ID.Equals("ddlDisplayState"))
+                {
+                    theme.DisplayState = Convert.ToInt32(dropDownList.SelectedValue).ToEnum<DisplayStateOption>(DisplayStateOption.Hidden);
+                    message = string.Format("[{0}]显示状态修改成功", theme.Title);
+                }
             }
-            if (dropDownList.ID.Equals("ddlCommendIndex"))
+            else if (sender is TextBox)
             {
-                theme.CommendIndex = Convert.ToInt32(dropDownList.SelectedValue);
-                message = string.Format("[{0}]推荐指数修改成功", theme.Title);
-            }
-            if (dropDownList.ID.Equals("ddlCheckState"))
-            {
-                theme.CheckState = Convert.ToInt32(dropDownList.SelectedValue).ToEnum<CheckStateOption>(CheckStateOption.Waitting);
-                message = string.Format("[{0}]审核状态修改成功", theme.Title);
-            }
-            if (dropDownList.ID.Equals("ddlDisplayState"))
-            {
-                theme.DisplayState = Convert.ToInt32(dropDownList.SelectedValue).ToEnum<DisplayStateOption>(DisplayStateOption.Hidden);
-                message = string.Format("[{0}]显示状态修改成功", theme.Title);
+                theme.Title = (sender as TextBox).Text;
             }
             _repositoryManage.UpdateTheme(theme);
             ltlMessage.Text = message;
