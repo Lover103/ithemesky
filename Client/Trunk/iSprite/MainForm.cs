@@ -100,8 +100,15 @@ namespace iSprite
             mainsplitcontainer.SplitterDistance = this.ClientSize.Width / 2;
 
             //	iPhone操作面板
-            iphone.Connect += new ConnectEventHandler(iphone_Connect);
-            iphone.Disconnect += new ConnectEventHandler(iphone_Disconnect);
+            if (iphone.IsInstalliTunes)
+            {
+                iphone.Connect += new ConnectEventHandler(iphone_Connect);
+                iphone.Disconnect += new ConnectEventHandler(iphone_Disconnect);
+            }
+            else
+            {
+                ShowMessage(this, "Current program rely on iTunes, please check you have installed it.", MessageTypeOption.Error);
+            }
             iphonedriver = new iPhoneFileDevice(iphone);
 
             iphonedriver.OnCompleteHandler += new FileCompletedHandler(iphonedriver_OnCompleteHandler);

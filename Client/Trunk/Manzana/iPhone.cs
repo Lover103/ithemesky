@@ -104,6 +104,7 @@ namespace Manzana {
 
         private iPhoneFile _syncLockFile;
         public event EventHandler SyncCancelled;
+        public bool IsInstalliTunes;
 		#endregion	// Locals
 
 		#region Constructors
@@ -112,23 +113,29 @@ namespace Manzana {
 		/// </summary>
 		unsafe private void doConstruction() 
         {
-			dnc = new DeviceNotificationCallback(NotifyCallback);
-			drn1 = new DeviceRestoreNotificationCallback(DfuConnectCallback);
-			drn2 = new DeviceRestoreNotificationCallback(RecoveryConnectCallback);
-			drn3 = new DeviceRestoreNotificationCallback(DfuDisconnectCallback);
-			drn4 = new DeviceRestoreNotificationCallback(RecoveryDisconnectCallback);
+            IsInstalliTunes = MobileDevice.IsInstalliTunes();
+            if (IsInstalliTunes)
+            {
+                dnc = new DeviceNotificationCallback(NotifyCallback);
+                drn1 = new DeviceRestoreNotificationCallback(DfuConnectCallback);
+                drn2 = new DeviceRestoreNotificationCallback(RecoveryConnectCallback);
+                drn3 = new DeviceRestoreNotificationCallback(DfuDisconnectCallback);
+                drn4 = new DeviceRestoreNotificationCallback(RecoveryDisconnectCallback);
 
-			void* notification;
-			int ret = MobileDevice.AMDeviceNotificationSubscribe(dnc, 0, 0, 0, out notification);
-			if (ret != 0) {
-				throw new Exception("AMDeviceNotificationSubscribe failed with error " + ret);
-			}
+                void* notification;
+                int ret = MobileDevice.AMDeviceNotificationSubscribe(dnc, 0, 0, 0, out notification);
+                if (ret != 0)
+                {
+                    throw new Exception("AMDeviceNotificationSubscribe failed with error " + ret);
+                }
 
-			ret = MobileDevice.AMRestoreRegisterForDeviceNotifications(drn1, drn2, drn3, drn4, 0, null);
-			if (ret != 0) {
-				throw new Exception("AMRestoreRegisterForDeviceNotifications failed with error " + ret);
-			}
-			current_directory = "/";
+                ret = MobileDevice.AMRestoreRegisterForDeviceNotifications(drn1, drn2, drn3, drn4, 0, null);
+                if (ret != 0)
+                {
+                    throw new Exception("AMRestoreRegisterForDeviceNotifications failed with error " + ret);
+                }
+                current_directory = "/";
+            }
 		}
 
 		/// <summary>
