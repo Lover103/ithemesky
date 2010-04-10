@@ -17,6 +17,17 @@ namespace iSprite
         public event FileCompletedHandler OnCompleteHandler;
         public event FileProgressHandler OnProgressHandler;
         string m_deviceName = "none iPhone";
+        public event MessageHandler OnMessage;
+
+        #region 消息处理
+        private void RaiseMessageHandler(object sender, string Message, MessageTypeOption messageType)
+        {
+            if (OnMessage != null)
+            {
+                OnMessage(sender, Message, messageType);
+            }
+        }
+        #endregion
 
         internal string CurrentLang { private set;get;}
 
@@ -70,6 +81,14 @@ namespace iSprite
             {
                 m_deviceName = "none iPhone";
             }
+        }
+
+        /// <summary>
+        /// 注销iPhone
+        /// </summary>
+        internal void Respring()
+        {
+            iPhoneInterface.Respring();
         }
 
         internal string GetFileText(string iPhonePath)
@@ -133,6 +152,7 @@ namespace iSprite
         {
             get
             {
+                return "iSprite's iPhone";
                 return m_deviceName;
             }
         }
@@ -337,9 +357,16 @@ namespace iSprite
             List<string> list = new List<string>();
             if (IsConnected && iPhoneInterface.Exists(path))
             {
-                foreach (string name in iPhoneInterface.GetDirectories(path))
+                try
                 {
-                    list.Add(path.TrimEnd(DirectorySeparatorChar) + DirectorySeparatorChar + name + DirectorySeparatorChar);
+                    foreach (string name in iPhoneInterface.GetDirectories(path))
+                    {
+                        list.Add(path.TrimEnd(DirectorySeparatorChar) + DirectorySeparatorChar + name + DirectorySeparatorChar);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    RaiseMessageHandler(this, ex.Message, MessageTypeOption.Error);
                 }
             }
             return list;
@@ -367,14 +394,21 @@ namespace iSprite
             List<iFileInfo> list = new List<iFileInfo>();
             if (IsConnected)
             {
-                foreach (string name in iPhoneInterface.GetFiles(path))
+                try
                 {
-                    iFileInfo fileinfo = new iFileInfo();
-                    fileinfo.FileName = name;
-                    fileinfo.FullPath = path.TrimEnd('/') + "/" + name;
-                    fileinfo.FileSize = iPhoneInterface.FileSize(fileinfo.FullPath);
-                    fileinfo.UpdateTime = DateTime.MinValue;
-                    list.Add(fileinfo);
+                    foreach (string name in iPhoneInterface.GetFiles(path))
+                    {
+                        iFileInfo fileinfo = new iFileInfo();
+                        fileinfo.FileName = name;
+                        fileinfo.FullPath = path.TrimEnd('/') + "/" + name;
+                        fileinfo.FileSize = iPhoneInterface.FileSize(fileinfo.FullPath);
+                        fileinfo.UpdateTime = DateTime.MinValue;
+                        list.Add(fileinfo);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    RaiseMessageHandler(this,ex.Message, MessageTypeOption.Error);
                 }
             }
             return list;

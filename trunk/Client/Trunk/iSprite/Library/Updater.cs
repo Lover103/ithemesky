@@ -27,30 +27,36 @@ namespace iSprite
 
         internal void CheckNewVer()
         {
-            string path = Application.StartupPath;
-            string updatexmlpath = path + "\\UpdateFiles\\";
-            if (!Directory.Exists(updatexmlpath))
+            try
             {
-                Directory.CreateDirectory(updatexmlpath);
-            }
-            updatexmlpath = updatexmlpath + "update.xml";
-            if (Utility.DownloadFile(iSpriteContext.Current.UpdateUrl, updatexmlpath))
-            {
-                DataSet ds = new DataSet();
-                ds.ReadXml(updatexmlpath);
-                if (ds.Tables.Count == 1 && ds.Tables[0].Rows.Count == 1)
+                string path = Application.StartupPath;
+                string updatexmlpath = path + "\\UpdateFiles\\";
+                if (!Directory.Exists(updatexmlpath))
                 {
-                    DataRow row = ds.Tables[0].Rows[0];
-                    string serverver = row["Ver"].ToString();
-                    downurl = row["downurl"].ToString();
-                    if (new Version(serverver) > new Version(iSpriteContext.Current.CurrentVersion))
+                    Directory.CreateDirectory(updatexmlpath);
+                }
+                updatexmlpath = updatexmlpath + "update.xml";
+                if (Utility.DownloadFile(iSpriteContext.Current.UpdateUrl, updatexmlpath))
+                {
+                    DataSet ds = new DataSet();
+                    ds.ReadXml(updatexmlpath);
+                    if (ds.Tables.Count == 1 && ds.Tables[0].Rows.Count == 1)
                     {
-                        RaiseMessageHandler(this,
-                            string.Format("The lastest iSprite version is V{0}, Would you to upgrade it ?", serverver), 
-                            MessageTypeOption.Upgrade
-                            );
+                        DataRow row = ds.Tables[0].Rows[0];
+                        string serverver = row["Ver"].ToString();
+                        downurl = row["downurl"].ToString();
+                        if (new Version(serverver) > new Version(iSpriteContext.Current.CurrentVersion))
+                        {
+                            RaiseMessageHandler(this,
+                                string.Format("The lastest iSprite version is V{0}, Would you to upgrade it ?", serverver),
+                                MessageTypeOption.Upgrade
+                                );
+                        }
                     }
                 }
+            }
+            catch
+            { 
             }
         }
 

@@ -33,17 +33,25 @@ namespace iSprite
                 {
                     if (theEntry.Name != String.Empty)
                     {
-                        fileName = Path.Combine(destZipedFolder, theEntry.Name);
+                        fileName = Path.Combine(destZipedFolder, theEntry.Name).Replace("/", "\\");
                         //判断文件路径是否是文件夹
                         if (fileName.EndsWith("/") || fileName.EndsWith("\\"))
                         {
                             Directory.CreateDirectory(fileName);
                             continue;
                         }
+
+                        string dirName = fileName.Substring(0, fileName.LastIndexOf("\\"));
+
+                        if (!Directory.Exists(dirName))
+                        {
+                            Directory.CreateDirectory(dirName);
+                        }
+
                         using (FileStream streamWriter = File.Create(fileName))
                         {
                             int size = 2048;
-                            byte[] data = new byte[2048];
+                            byte[] data = new byte[20480];
                             while (true)
                             {
                                 size = s.Read(data, 0, data.Length);

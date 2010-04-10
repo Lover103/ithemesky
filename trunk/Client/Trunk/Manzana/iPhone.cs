@@ -362,6 +362,19 @@ namespace Manzana {
 		#endregion	// Events
 
         /// <summary>
+        /// ÖØÆôspingboard
+        /// </summary>
+        unsafe public void Respring()
+        {
+            //return;
+
+            MobileDevice.AMDPostNotification(
+                    this._notificationsHandle,
+                    MobileDevice.StringToCFString("com.apple.language.changed"),
+                    0);
+            Thread.Sleep(200);
+        }
+        /// <summary>
         /// ¿ªÊ¼Sync
         /// </summary>
         unsafe public void StartSync()

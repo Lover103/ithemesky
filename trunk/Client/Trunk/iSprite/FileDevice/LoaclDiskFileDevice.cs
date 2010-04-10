@@ -12,6 +12,17 @@ namespace iSprite
     {
         public event FileCompletedHandler OnCompleteHandler;
         public event FileProgressHandler OnProgressHandler;
+        public event MessageHandler OnMessage;
+
+        #region 消息处理
+        private void RaiseMessageHandler(object sender, string Message, MessageTypeOption messageType)
+        {
+            if (OnMessage != null)
+            {
+                OnMessage(sender, Message, messageType);
+            }
+        }
+        #endregion
 
         public LoaclDiskFileDevice()
         {

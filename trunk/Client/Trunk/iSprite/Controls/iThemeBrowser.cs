@@ -82,6 +82,18 @@ namespace iSprite
             InitThemeTab();
 
             InitialiseThemePriview(parentForm);
+
+            tabTheme.Resize += new EventHandler(tabTheme_Resize);
+        }
+
+        void tabTheme_Resize(object sender, EventArgs e)
+        {
+            int height = m_tabTheme.Size.Height;
+            if (height < 652)
+            {
+                height = 652;
+            }
+            this.themeBrowser.Size = new Size(m_tabTheme.Size.Width - 1, height);
         }
 
         private iThemeBrowser()
@@ -121,17 +133,16 @@ namespace iSprite
             themeBrowser = new WebBrowser();
             this.m_tabTheme.Controls.Add(themeBrowser);
 
-            //themeBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
             themeBrowser.Location = new System.Drawing.Point(m_Toolmenu.Location.X, m_Toolmenu.Location.Y + m_Toolmenu.Height);
+            //themeBrowser.Anchor = AnchorStyles.Bottom;
             themeBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             themeBrowser.Name = "themeBrowser";
             themeBrowser.Size = new System.Drawing.Size(990, 652);
             themeBrowser.TabIndex = 0;
-            themeBrowser.Url = new System.Uri(iSpriteContext.Current.ThemeHomePage, System.UriKind.Absolute);
+            themeBrowser.Url = new Uri(iSpriteContext.Current.ThemeHomePage, System.UriKind.Absolute);
 
             themeBrowser.Navigating += new WebBrowserNavigatingEventHandler(themeBrowser_Navigating);
         }
-
         #endregion
 
         #region 浏览器导航事件
@@ -411,7 +422,7 @@ namespace iSprite
                 }
 
                 //将当前主题排在第一位
-                string trueTheme = string.Format("<dict>\n\t\t\t<key>Active</key>\n\t\t\t<false />\n\t\t\t<key>Name</key>\n\t\t\t<string>{0}</string>\n\t\t</dict>\n", themeName);
+                string trueTheme = string.Format("<dict>\n\t\t\t<key>Active</key>\n\t\t\t<true />\n\t\t\t<key>Name</key>\n\t\t\t<string>{0}</string>\n\t\t</dict>\n", themeName);
                 content = content.Insert(content.IndexOf("<array>\n\t\t") + "<array>\n\t\t".Length, trueTheme);
 
                 using (StreamWriter writer = new StreamWriter(localThemeSetting, false, Encoding.UTF8))
@@ -426,14 +437,15 @@ namespace iSprite
                 #endregion
 
                 //拷贝配置文件
-                if (m_iPhoneDevice.Copy2iPhone(localThemeSetting, iPhoneThemeSetting))
+                //if (m_iPhoneDevice.Copy2iPhone(localThemeSetting, iPhoneThemeSetting))
                 {
-                    RaiseMessageHandler(this, "Successfully install theme[" + themeName + "] ,Please open winterboard to apply it. ", MessageTypeOption.Info);
+                    m_iPhoneDevice.Respring();
+                    RaiseMessageHandler(this, "Successfully install theme[" + themeName + "]. ", MessageTypeOption.Info);
                 }
-                else
-                {
-                    RaiseMessageHandler(this, "Fail to copy the theme setting file to iPhone .", MessageTypeOption.Error);
-                }
+                //else
+                //{
+                //    RaiseMessageHandler(this, "Fail to copy the theme setting file to iPhone .", MessageTypeOption.Error);
+                //}
             }
             else
             {
@@ -453,6 +465,8 @@ namespace iSprite
             {
                 m_DefaultIconDic = new Dictionary<string, string>();
                 m_DefaultIconDic = GetLocalizedApplicationNamesByLan(DefaultLanage);
+
+                themeBrowser.Url = new Uri(iSpriteContext.Current.ThemeHomePage, System.UriKind.Absolute);
             }
             foreach (ToolStripItem item in m_Toolmenu.Items)
             {
@@ -573,13 +587,6 @@ namespace iSprite
             return string.Empty;
         }
         #endregion
-
-
-        bool CheckInstalliReboot()
-        {
-            return false;
-        }
-
 
         #region 安装WinterBoard
         /// <summary>

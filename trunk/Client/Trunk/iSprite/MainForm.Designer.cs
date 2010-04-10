@@ -46,6 +46,7 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tabTheme = new iSprite.ThirdControl.FarsiLibrary.FATabStripItem();
             this.faTabStrip1 = new iSprite.ThirdControl.FarsiLibrary.FATabStrip();
+            this.faTabRespring = new iSprite.ThirdControl.FarsiLibrary.FATabStripItem();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabs)).BeginInit();
             this.tabs.SuspendLayout();
@@ -104,11 +105,12 @@
             this.tabs.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.tabs.Items.AddRange(new iSprite.ThirdControl.FarsiLibrary.FATabStripItem[] {
             this.tabFile,
-            this.tabTheme});
+            this.tabTheme,
+            this.faTabRespring});
             this.tabs.Location = new System.Drawing.Point(3, 30);
             this.tabs.Name = "tabs";
-            this.tabs.SelectedItem = this.tabFile;
-            this.tabs.Size = new System.Drawing.Size(986, 640);
+            this.tabs.SelectedItem = this.faTabRespring;
+            this.tabs.Size = new System.Drawing.Size(993, 640);
             this.tabs.TabIndex = 2;
             this.tabs.Text = "faTabStrip1";
             this.tabs.TabStripItemSelectionChanged += new iSprite.ThirdControl.FarsiLibrary.FATabStrip.TabStripItemChangedHandler(this.TabStripItemSelectionChanged);
@@ -120,8 +122,7 @@
             this.tabFile.Controls.Add(this.Filetoolmenu);
             this.tabFile.IsDrawn = true;
             this.tabFile.Name = "tabFile";
-            this.tabFile.Selected = true;
-            this.tabFile.Size = new System.Drawing.Size(984, 619);
+            this.tabFile.Size = new System.Drawing.Size(991, 619);
             this.tabFile.TabIndex = 0;
             this.tabFile.Title = "File Manage";
             // 
@@ -133,8 +134,8 @@
             this.mainsplitcontainer.Name = "mainsplitcontainer";
             this.mainsplitcontainer.Panel1MinSize = 0;
             this.mainsplitcontainer.Panel2MinSize = 0;
-            this.mainsplitcontainer.Size = new System.Drawing.Size(984, 594);
-            this.mainsplitcontainer.SplitterDistance = 513;
+            this.mainsplitcontainer.Size = new System.Drawing.Size(991, 594);
+            this.mainsplitcontainer.SplitterDistance = 516;
             this.mainsplitcontainer.SplitterWidth = 1;
             this.mainsplitcontainer.TabIndex = 13;
             // 
@@ -150,7 +151,7 @@
             this.toolStripSeparator4});
             this.Filetoolmenu.Location = new System.Drawing.Point(0, 0);
             this.Filetoolmenu.Name = "Filetoolmenu";
-            this.Filetoolmenu.Size = new System.Drawing.Size(984, 25);
+            this.Filetoolmenu.Size = new System.Drawing.Size(991, 25);
             this.Filetoolmenu.TabIndex = 12;
             this.Filetoolmenu.Text = "toolStrip3";
             // 
@@ -206,7 +207,7 @@
             // 
             this.tabTheme.IsDrawn = true;
             this.tabTheme.Name = "tabTheme";
-            this.tabTheme.Size = new System.Drawing.Size(990, 652);
+            this.tabTheme.Size = new System.Drawing.Size(991, 619);
             this.tabTheme.TabIndex = 1;
             this.tabTheme.Title = "Theme Manage";
             // 
@@ -218,16 +219,26 @@
             this.faTabStrip1.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.faTabStrip1.Location = new System.Drawing.Point(3, 30);
             this.faTabStrip1.Name = "faTabStrip1";
-            this.faTabStrip1.Size = new System.Drawing.Size(986, 640);
+            this.faTabStrip1.Size = new System.Drawing.Size(993, 640);
             this.faTabStrip1.TabIndex = 1;
             this.faTabStrip1.Text = "faTabStrip1";
+            // 
+            // faTabRespring
+            // 
+            this.faTabRespring.IsDrawn = true;
+            this.faTabRespring.Name = "faTabRespring";
+            this.faTabRespring.Selected = true;
+            this.faTabRespring.Size = new System.Drawing.Size(991, 619);
+            this.faTabRespring.TabIndex = 2;
+            this.faTabRespring.Title = "Restart SpringBoard";
+            this.faTabRespring.Click += new System.EventHandler(this.faTabRespring_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::iSprite.Resource.form_bg;
-            this.ClientSize = new System.Drawing.Size(992, 673);
+            this.ClientSize = new System.Drawing.Size(999, 673);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.faTabStrip1);
             this.EnableMaximize = true;
@@ -269,6 +280,7 @@
         private System.Windows.Forms.ToolStripButton tsbtnFlipPanes;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.Timer timer;
+        private iSprite.ThirdControl.FarsiLibrary.FATabStripItem faTabRespring;
 
 
     }

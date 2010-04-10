@@ -146,6 +146,13 @@ namespace iSprite
         /// 文件传输进度事件
         /// </summary>
         event FileProgressHandler OnProgressHandler;
+        /// <summary>
+        /// 设备标识
+        /// </summary>
         string UserIdentity{ get; }
+        /// <summary>
+        /// 消息委托
+        /// </summary>
+        event MessageHandler OnMessage;
     }
 }

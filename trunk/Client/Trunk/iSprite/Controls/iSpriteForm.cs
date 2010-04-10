@@ -14,6 +14,9 @@ namespace iSprite
         Rectangle m_Rectangle;
         Point M_StartPoint;
 
+        PictureBox btn_close, btn_maximize, btn_minimize,m_icon;
+        Label lblTitle;
+
         public bool EnableMaximize { get; set; }
         public bool EnableMinimize { get; set; }
 
@@ -60,7 +63,16 @@ namespace iSprite
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.iSpriteForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.iSpriteForm_MouseMove);
             this.Resize += new EventHandler(this.iSpriteForm_Resize);
+            this.DoubleClick += new EventHandler(iSpriteForm_DoubleClick);
             this.ResumeLayout(false);
+
+            m_icon = new PictureBox();
+            m_icon.Size = new System.Drawing.Size(25, 25);
+            m_icon.Location = new Point(3, 1);
+            m_icon.BackgroundImage = global::iSprite.Resource.isprite_icon_32;
+            m_icon.BackgroundImageLayout = ImageLayout.Stretch;
+            m_icon.BackColor = Color.Transparent;
+            this.Controls.Add(m_icon);           
 
             btn_close = new PictureBox();
             btn_close.Size = new System.Drawing.Size(22, 22);
@@ -114,7 +126,7 @@ namespace iSprite
 
 
             lblTitle = new Label();
-            lblTitle.Location = new Point(5, 5);
+            lblTitle.Location = new Point(30, 5);
             this.lblTitle.Font = new Font("Arial", 11F, 
                 FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
             lblTitle.BackColor = Color.Transparent;
@@ -122,8 +134,19 @@ namespace iSprite
 
 
         }
-        PictureBox btn_close, btn_maximize, btn_minimize;
-        Label lblTitle;
+
+        void iSpriteForm_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.StartPosition = FormStartPosition.CenterScreen;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+        }
         internal void ChangeControlsLocation()
         {
             lblTitle.Text = this.Text;
@@ -174,8 +197,10 @@ namespace iSprite
         }
 
         #region 拖动窗体相关
+                bool m_IsMove = false;
         private void iSpriteForm_MouseDown(object sender, MouseEventArgs e)
         {
+            int i= e.Clicks;
             if (this.FormBorderStyle == FormBorderStyle.None  )
             {
                 m_IsDrag = true;
@@ -187,8 +212,9 @@ namespace iSprite
 
         private void iSpriteForm_MouseMove(object sender, MouseEventArgs e)
         {
-            if (this.FormBorderStyle == FormBorderStyle.None && m_IsDrag&& e.Button== MouseButtons.Left)
+            if (this.FormBorderStyle == FormBorderStyle.None && m_IsDrag && e.Button == MouseButtons.Left)
             {
+                m_IsMove = true;
                 Point endPoint = this.PointToScreen(new Point(e.X, e.Y));
                 ControlPaint.DrawReversibleFrame(m_Rectangle, ControlPaint.ContrastControlDark, FrameStyle.Dashed);
                 m_Rectangle = new Rectangle(endPoint.X - M_StartPoint.X, endPoint.Y - M_StartPoint.Y, this.Width, this.Height);
@@ -197,7 +223,7 @@ namespace iSprite
         }
         private void iSpriteForm_MouseUp(object sender, MouseEventArgs e)
         {
-            if (this.FormBorderStyle == FormBorderStyle.None && m_IsDrag )
+            if (this.FormBorderStyle == FormBorderStyle.None && m_IsDrag && m_IsMove)
             {
                 this.SuspendLayout();
                 ControlPaint.DrawReversibleFrame(m_Rectangle, ControlPaint.ContrastControlDark, FrameStyle.Dashed);
@@ -212,6 +238,7 @@ namespace iSprite
 
                 ControlPaint.DrawBorder(this.CreateGraphics(), this.ClientRectangle, Color.Black, ButtonBorderStyle.Solid);
             }
+            m_IsMove = m_IsDrag = false;
         }
         #endregion
     }
