@@ -179,6 +179,20 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap isprite_icon_32 {
+            get {
+                object obj = ResourceManager.GetObject("isprite_icon_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap isprite_icon_64 {
+            get {
+                object obj = ResourceManager.GetObject("isprite_icon_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap iTunes {
             get {
                 object obj = ResourceManager.GetObject("iTunes", resourceCulture);

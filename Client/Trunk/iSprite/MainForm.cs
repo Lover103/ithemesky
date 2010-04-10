@@ -70,7 +70,6 @@ namespace iSprite
         public MainForm()
         {
             InitializeComponent();
-            iphone = new iPhone();
 
             this.Text = "iSprite (V" + iSpriteContext.Current.CurrentVersion + ")";
             this.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
@@ -99,6 +98,7 @@ namespace iSprite
 
             mainsplitcontainer.SplitterDistance = this.ClientSize.Width / 2;
 
+            iphone = new iPhone();
             //	iPhone操作面板
             if (iphone.IsInstalliTunes)
             {
@@ -109,7 +109,9 @@ namespace iSprite
             {
                 ShowMessage(this, "Current program rely on iTunes, please check you have installed it.", MessageTypeOption.Error);
             }
+
             iphonedriver = new iPhoneFileDevice(iphone);
+            iphonedriver.OnMessage += new MessageHandler(ShowMessage);
 
             iphonedriver.OnCompleteHandler += new FileCompletedHandler(iphonedriver_OnCompleteHandler);
             iphonedriver.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
@@ -136,7 +138,6 @@ namespace iSprite
                     item.Click += new EventHandler(toolmenuitem_Click);
                 }
             }
-
             m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme, this);
             m_themeManage.OnMessage += new MessageHandler(ShowMessage);
             m_themeManage.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
@@ -149,6 +150,12 @@ namespace iSprite
 
             this.tabs.BackgroundImage = global::iSprite.Resource.BackgroundImage;
             this.tabFile.BackgroundImage = global::iSprite.Resource.BackgroundImage;
+
+            this.Resize += new EventHandler(MainForm_Resize);
+        }
+
+        void MainForm_Resize(object sender, EventArgs e)
+        {
         }
 
 
@@ -159,7 +166,14 @@ namespace iSprite
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Initialise();
+            try
+            {
+                Initialise();
+            }
+            catch(Exception ex)
+            {
+                ShowMessage(this,ex.Message+ex.StackTrace, MessageTypeOption.Error);
+            }
         }
         /// <summary>
         /// 窗体关闭
@@ -220,28 +234,41 @@ namespace iSprite
                 this.Invoke(new ThreadInvokeDelegate(
                     delegate()
                     {
-                        m_iPhonePanel.Enabled = enable;
-                        if (enable)
+                        try
                         {
-                            iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
-                            ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
-                            m_iPhonePanel.AfterDeviceFinishConnected();
+                            m_iPhonePanel.Enabled = enable;
+                            if (enable)
+                            {
+                                iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
+                                ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
+                                m_iPhonePanel.AfterDeviceFinishConnected();
+                            }
+                            m_themeManage.AfterDeviceFinishConnected(enable);
                         }
-                        m_themeManage.AfterDeviceFinishConnected(enable);
+                        catch (Exception ex)
+                        {
+                            ShowMessage(this, ex.Message, MessageTypeOption.Error);
+                        }
                     }
                 ));
             }
             else
             {
-                m_iPhonePanel.Enabled = enable;
-                if (enable)
+                try
                 {
-                    iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
-                    m_iPhonePanel.AfterDeviceFinishConnected();
-                    iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
-                    ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
+                    m_iPhonePanel.Enabled = enable;
+                    if (enable)
+                    {
+                        iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
+                        ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
+                        m_iPhonePanel.AfterDeviceFinishConnected();
+                    }
+                    m_themeManage.AfterDeviceFinishConnected(enable);
                 }
-                m_themeManage.AfterDeviceFinishConnected(enable);
+                catch (Exception ex)
+                {
+                    ShowMessage(this, ex.Message, MessageTypeOption.Error);
+                }
             }
         }
         #endregion
@@ -472,6 +499,11 @@ namespace iSprite
                     m_themeManage.SetPreviewVisable(false);
                 }
             }
+        }
+
+        private void faTabRespring_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

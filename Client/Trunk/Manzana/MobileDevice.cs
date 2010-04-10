@@ -163,21 +163,34 @@ namespace Manzana {
         static string iTunesPath = string.Empty;
         static MobileDevice()
         {
+            List<string> paths = new List<string>();
             iTunesPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles).TrimEnd('\\')
-                + @"\Apple\Mobile Device Support\bin";
-            if (!Directory .Exists(iTunesPath))
+                + @"\Apple\Mobile Device Support\";
+            paths.Add(iTunesPath);
+            paths.Add(iTunesPath + "bin\\");
+            paths.Add(iTunesPath.Replace(@"Program Files\Common Files", @"Program Files (x86)\Common Files"));
+            paths.Add(iTunesPath.Replace(@"Program Files\Common Files", @"Program Files (x86)\Common Files") + "bin\\");
+
+            foreach (string path in paths)
             {
-                //64 位系统的 Common Files 目录
-                iTunesPath = iTunesPath.Replace(@"Program Files\Common Files", @"Program Files (x86)\Common Files");
+                if (File.Exists(path + DLLName))
+                {
+                    iTunesPath = path;
+                    break;
+                }
             }
-            // try to find the dll automatically
-            Environment.SetEnvironmentVariable("Path", 
-                string.Join(";", new String[] 
+            if (File.Exists(iTunesPath + DLLName))
+            {
+                // try to find the dll automatically
+                Environment.SetEnvironmentVariable("Path",
+                    string.Join(";", new String[] 
                 { 
                     Environment.GetEnvironmentVariable("Path"), 
                     iTunesPath
                 }
-                    ));
+                        )
+                        );
+            }
         }
 
         /// <summary>
@@ -200,10 +213,10 @@ namespace Manzana {
 		[DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
 		unsafe public extern static IntPtr AMDeviceCopyDeviceIdentifier(void* device);
 
-		[DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
 		unsafe public extern static int AMDeviceNotificationSubscribe(DeviceNotificationCallback callback, uint unused1, uint unused2, uint unused3, out void* am_device_notification_ptr);
 
-        [DllImport("iTunesMobileDevice.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int AMDPostNotification(void* ptr, IntPtr text, uint unknown);
 
 		[DllImport(DLLName, CallingConvention=CallingConvention.Cdecl)]
@@ -240,14 +253,14 @@ namespace Manzana {
         //unsafe public static int AFCDirectoryOpen(void* conn, string path, ref void* dir) {
         //    return AFCDirectoryOpen(conn, Encoding.UTF8.GetBytes(path), ref dir);
         //}
-        [DllImport("iTunesMobileDevice.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int AMDListenForNotifications(void* conn, DeviceEventSink callback, IntPtr userdata);
-        [DllImport("iTunesMobileDevice.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int AMDObserveNotification(void* conn, IntPtr notification);
 
-        [DllImport("iTunesMobileDevice.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int AMSBeginSync(uint unknown, void* device, uint unk2, uint unk3);
-        [DllImport("iTunesMobileDevice.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int AMSInitialize();
 
 		unsafe public static int AFCDirectoryRead(void* conn, void* dir, ref string buffer) {
@@ -297,12 +310,12 @@ namespace Manzana {
 		[DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
         unsafe public extern static int AFCConnectionClose(void* conn);
 
-        [DllImport("iTunesMobileDevice.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int AFCFileRefLock(void* conn, long handle);
 
-        [DllImport("iTunesMobileDevice.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int AFCFileRefUnlock(void* conn, long handle);
-        [DllImport("iTunesMobileDevice.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
         unsafe public static extern int AFCDeviceInfoOpen(void* conn, ref void* buffer);
 
 		/*
