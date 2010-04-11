@@ -82,13 +82,23 @@ namespace iSprite
                 m_deviceName = "none iPhone";
             }
         }
-
+        void NotConnectedErrot()
+        { 
+            RaiseMessageHandler(this, "Please Make sure you have connected your iPhone to PC via USB cable.", MessageTypeOption.Error);
+        }
         /// <summary>
         /// 注销iPhone
         /// </summary>
         internal void Respring()
         {
-            iPhoneInterface.Respring();
+            if (iPhoneInterface.IsConnected)
+            {
+                iPhoneInterface.Respring();
+            }
+            else
+            {
+                NotConnectedErrot();
+            }
         }
 
         internal string GetFileText(string iPhonePath)
@@ -206,20 +216,35 @@ namespace iSprite
         /// <param name="newname"></param>
         public void ReNameFolder(string oldname, string newname)
         {
-            if (IsConnected && oldname != newname)
+            if (IsConnected)
             {
-                iPhoneInterface.Rename(oldname, newname);
+                if (oldname != newname)
+                {
+                    iPhoneInterface.Rename(oldname, newname);
+                }
+            }
+            else
+            {
+                NotConnectedErrot();
             }
         }
 
         public bool CreateDirectory(string path)
         {
-            if (IsConnected && iPhoneInterface.CreateDirectory(path))
+            if (IsConnected)
             {
-                return true;
+                if (iPhoneInterface.CreateDirectory(path))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
+                NotConnectedErrot();
                 return false;
             }
         }
@@ -229,6 +254,10 @@ namespace iSprite
             {
                 iPhoneInterface.DeleteFile(path);
             }
+            else
+            {
+                NotConnectedErrot();
+            }
         }
         public void DeleteDirectory(string path)
         {
@@ -236,12 +265,20 @@ namespace iSprite
             {
                 iPhoneInterface.DeleteDirectory(path);
             }
+            else
+            {
+                NotConnectedErrot();
+            }
         }
         public void DeleteDirectory(string path, bool recursive)
         {
             if (IsConnected )
             {
                 iPhoneInterface.DeleteDirectory(path, recursive);
+            }
+            else
+            {
+                NotConnectedErrot();
             }
         }
 
@@ -355,19 +392,26 @@ namespace iSprite
         public List<string> GetDirectories(string path)
         { 
             List<string> list = new List<string>();
-            if (IsConnected && iPhoneInterface.Exists(path))
+            if (IsConnected )
             {
-                try
+                if (iPhoneInterface.Exists(path))
                 {
-                    foreach (string name in iPhoneInterface.GetDirectories(path))
+                    try
                     {
-                        list.Add(path.TrimEnd(DirectorySeparatorChar) + DirectorySeparatorChar + name + DirectorySeparatorChar);
+                        foreach (string name in iPhoneInterface.GetDirectories(path))
+                        {
+                            list.Add(path.TrimEnd(DirectorySeparatorChar) + DirectorySeparatorChar + name + DirectorySeparatorChar);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        RaiseMessageHandler(this, ex.Message, MessageTypeOption.Error);
                     }
                 }
-                catch (Exception ex)
-                {
-                    RaiseMessageHandler(this, ex.Message, MessageTypeOption.Error);
-                }
+            }
+            else
+            {
+                NotConnectedErrot();
             }
             return list;
         }
@@ -385,6 +429,10 @@ namespace iSprite
                 {
                     list.Add(name);
                 }
+            }
+            else
+            {
+                NotConnectedErrot();
             }
             return list;
         }
@@ -411,6 +459,10 @@ namespace iSprite
                     RaiseMessageHandler(this,ex.Message, MessageTypeOption.Error);
                 }
             }
+            else
+            {
+                NotConnectedErrot();
+            }
             return list;
         }
 
@@ -432,6 +484,7 @@ namespace iSprite
         {
             if (!this.IsConnected)
             {
+                NotConnectedErrot();
                 return false;
             }
             return this.iPhoneInterface.Downlod2PC(
@@ -450,6 +503,7 @@ namespace iSprite
         {
             if (!this.IsConnected)
             {
+                NotConnectedErrot();
                 return;
             }
             iPhoneFileAsyncTransfer transfer = new iPhoneFileAsyncTransfer(
@@ -475,6 +529,7 @@ namespace iSprite
         {
             if (!this.IsConnected)
             {
+                NotConnectedErrot();
                 return false;
             }
 
@@ -501,6 +556,7 @@ namespace iSprite
         {
             if (!this.IsConnected)
             {
+                NotConnectedErrot();
                 return;
             }
             iPhoneFileAsyncTransfer transfer = new iPhoneFileAsyncTransfer(

@@ -398,6 +398,9 @@ namespace iSprite
                 case "tsbtnFlipPanes":
                     SwapPanes();
                     break;
+                case "tsbtnreSpring":
+                    ReSpring();
+                    break;
             }
         }
         #endregion
@@ -486,6 +489,17 @@ namespace iSprite
         }
         #endregion
 
+        /// <summary>
+        /// 重启Springboard
+        /// </summary>
+        void ReSpring()
+        {
+            if (MessageHelper.ShowConfirm("Are you sure you want to reboot Springboard ?") == DialogResult.OK)
+            {
+                ((iPhoneFileDevice)iphonedriver).Respring();
+            }
+        }
+
         private void TabStripItemSelectionChanged(iSprite.ThirdControl.FarsiLibrary.TabStripItemChangedEventArgs e)
         {
             if (m_themeManage != null)
@@ -499,11 +513,6 @@ namespace iSprite
                     m_themeManage.SetPreviewVisable(false);
                 }
             }
-        }
-
-        private void faTabRespring_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

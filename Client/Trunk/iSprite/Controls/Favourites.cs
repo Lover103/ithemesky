@@ -208,6 +208,12 @@ namespace iSprite
                       iSpriteContext.Current.iPhone_WinterBoardFile_Path
                       );
 
+
+                SysFavPaths.Add(
+                      "Cydia AutoInstall",
+                      iSpriteContext.Current.iPhone_CydiaAutoInstallPath
+                      );
+
                 SysFavPaths.Add(
                       "Picture / Screen Shot",
                       iSpriteContext.Current.iPhone_ScreenShot_Path

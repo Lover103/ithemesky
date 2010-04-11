@@ -186,10 +186,24 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Icon iSprite_icon_321 {
+            get {
+                object obj = ResourceManager.GetObject("iSprite_icon_321", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap isprite_icon_64 {
             get {
                 object obj = ResourceManager.GetObject("isprite_icon_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Icon iSprite_icon_641 {
+            get {
+                object obj = ResourceManager.GetObject("iSprite_icon_641", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -252,6 +266,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap Photos {
             get {
                 object obj = ResourceManager.GetObject("Photos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap quick_restart {
+            get {
+                object obj = ResourceManager.GetObject("quick_restart", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
