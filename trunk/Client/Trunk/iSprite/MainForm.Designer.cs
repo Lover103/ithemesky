@@ -34,6 +34,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.faTabStrip1 = new iSprite.ThirdControl.FarsiLibrary.FATabStrip();
             this.tabs = new iSprite.ThirdControl.FarsiLibrary.FATabStrip();
             this.tabFile = new iSprite.ThirdControl.FarsiLibrary.FATabStripItem();
             this.mainsplitcontainer = new System.Windows.Forms.SplitContainer();
@@ -44,16 +45,15 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnFlipPanes = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbtnreSpring = new System.Windows.Forms.ToolStripButton();
             this.tabTheme = new iSprite.ThirdControl.FarsiLibrary.FATabStripItem();
-            this.faTabStrip1 = new iSprite.ThirdControl.FarsiLibrary.FATabStrip();
-            this.faTabRespring = new iSprite.ThirdControl.FarsiLibrary.FATabStripItem();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.faTabStrip1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabs)).BeginInit();
             this.tabs.SuspendLayout();
             this.tabFile.SuspendLayout();
             this.mainsplitcontainer.SuspendLayout();
             this.Filetoolmenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.faTabStrip1)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
@@ -97,6 +97,18 @@
             this.timer.Interval = 300;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // faTabStrip1
+            // 
+            this.faTabStrip1.AlwaysShowClose = false;
+            this.faTabStrip1.AlwaysShowMenuGlyph = false;
+            this.faTabStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.faTabStrip1.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.faTabStrip1.Location = new System.Drawing.Point(3, 30);
+            this.faTabStrip1.Name = "faTabStrip1";
+            this.faTabStrip1.Size = new System.Drawing.Size(993, 640);
+            this.faTabStrip1.TabIndex = 1;
+            this.faTabStrip1.Text = "faTabStrip1";
+            // 
             // tabs
             // 
             this.tabs.AlwaysShowClose = false;
@@ -105,11 +117,10 @@
             this.tabs.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.tabs.Items.AddRange(new iSprite.ThirdControl.FarsiLibrary.FATabStripItem[] {
             this.tabFile,
-            this.tabTheme,
-            this.faTabRespring});
+            this.tabTheme});
             this.tabs.Location = new System.Drawing.Point(3, 30);
             this.tabs.Name = "tabs";
-            this.tabs.SelectedItem = this.faTabRespring;
+            this.tabs.SelectedItem = this.tabFile;
             this.tabs.Size = new System.Drawing.Size(993, 640);
             this.tabs.TabIndex = 2;
             this.tabs.Text = "faTabStrip1";
@@ -122,6 +133,7 @@
             this.tabFile.Controls.Add(this.Filetoolmenu);
             this.tabFile.IsDrawn = true;
             this.tabFile.Name = "tabFile";
+            this.tabFile.Selected = true;
             this.tabFile.Size = new System.Drawing.Size(991, 619);
             this.tabFile.TabIndex = 0;
             this.tabFile.Title = "File Manage";
@@ -148,7 +160,8 @@
             this.tsbtnSinglePane,
             this.toolStripSeparator1,
             this.tsbtnFlipPanes,
-            this.toolStripSeparator4});
+            this.toolStripSeparator4,
+            this.tsbtnreSpring});
             this.Filetoolmenu.Location = new System.Drawing.Point(0, 0);
             this.Filetoolmenu.Name = "Filetoolmenu";
             this.Filetoolmenu.Size = new System.Drawing.Size(991, 25);
@@ -203,6 +216,16 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbtnreSpring
+            // 
+            this.tsbtnreSpring.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnreSpring.Image = global::iSprite.Resource.quick_restart;
+            this.tsbtnreSpring.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnreSpring.Name = "tsbtnreSpring";
+            this.tsbtnreSpring.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnreSpring.Text = "reSpring";
+            this.tsbtnreSpring.ToolTipText = "Restart SpringBoard";
+            // 
             // tabTheme
             // 
             this.tabTheme.IsDrawn = true;
@@ -210,28 +233,6 @@
             this.tabTheme.Size = new System.Drawing.Size(991, 619);
             this.tabTheme.TabIndex = 1;
             this.tabTheme.Title = "Theme Manage";
-            // 
-            // faTabStrip1
-            // 
-            this.faTabStrip1.AlwaysShowClose = false;
-            this.faTabStrip1.AlwaysShowMenuGlyph = false;
-            this.faTabStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.faTabStrip1.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.faTabStrip1.Location = new System.Drawing.Point(3, 30);
-            this.faTabStrip1.Name = "faTabStrip1";
-            this.faTabStrip1.Size = new System.Drawing.Size(993, 640);
-            this.faTabStrip1.TabIndex = 1;
-            this.faTabStrip1.Text = "faTabStrip1";
-            // 
-            // faTabRespring
-            // 
-            this.faTabRespring.IsDrawn = true;
-            this.faTabRespring.Name = "faTabRespring";
-            this.faTabRespring.Selected = true;
-            this.faTabRespring.Size = new System.Drawing.Size(991, 619);
-            this.faTabRespring.TabIndex = 2;
-            this.faTabRespring.Title = "Restart SpringBoard";
-            this.faTabRespring.Click += new System.EventHandler(this.faTabRespring_Click);
             // 
             // MainForm
             // 
@@ -243,6 +244,7 @@
             this.Controls.Add(this.faTabStrip1);
             this.EnableMaximize = true;
             this.EnableMinimize = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.Text = "iSprite";
@@ -250,6 +252,7 @@
             this.Controls.SetChildIndex(this.faTabStrip1, 0);
             this.Controls.SetChildIndex(this.tabs, 0);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.faTabStrip1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabs)).EndInit();
             this.tabs.ResumeLayout(false);
             this.tabFile.ResumeLayout(false);
@@ -257,20 +260,19 @@
             this.mainsplitcontainer.ResumeLayout(false);
             this.Filetoolmenu.ResumeLayout(false);
             this.Filetoolmenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.faTabStrip1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private iSprite.ThirdControl.FarsiLibrary.FATabStripItem tabFile;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
-        private iSprite.ThirdControl.FarsiLibrary.FATabStrip tabs;
-        private iSprite.ThirdControl.FarsiLibrary.FATabStripItem tabTheme;
         private iSprite.ThirdControl.FarsiLibrary.FATabStrip faTabStrip1;
+        private System.Windows.Forms.Timer timer;
+        private iSprite.ThirdControl.FarsiLibrary.FATabStrip tabs;
+        private iSprite.ThirdControl.FarsiLibrary.FATabStripItem tabFile;
         private System.Windows.Forms.SplitContainer mainsplitcontainer;
         private System.Windows.Forms.ToolStrip Filetoolmenu;
         private System.Windows.Forms.ToolStripButton tsbtnTileVertical;
@@ -279,8 +281,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton tsbtnFlipPanes;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.Timer timer;
-        private iSprite.ThirdControl.FarsiLibrary.FATabStripItem faTabRespring;
+        private iSprite.ThirdControl.FarsiLibrary.FATabStripItem tabTheme;
+        private System.Windows.Forms.ToolStripButton tsbtnreSpring;
 
 
     }

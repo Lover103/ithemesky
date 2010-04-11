@@ -232,4 +232,13 @@
   <data name="isprite_icon_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\isprite_icon_64.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="iSprite_icon_321" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\iSprite_icon_32.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iSprite_icon_641" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\iSprite_icon_64.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="quick_restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\quick_restart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
