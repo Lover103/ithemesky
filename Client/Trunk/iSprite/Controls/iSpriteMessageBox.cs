@@ -19,6 +19,9 @@ namespace iSprite
             InitializeComponent();
             this.DialogResult = DialogResult.Cancel;
             this.ShowInTaskbar = false;
+
+            this.lblMsg.Font = new Font("Arial", 10F,
+                FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
         }
 
         public string Message

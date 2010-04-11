@@ -15,6 +15,22 @@
     <TargetZone>LocalIntranet</TargetZone>
     <GenerateManifests>false</GenerateManifests>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <ApplicationIcon>iSprite_icon_32.ico</ApplicationIcon>
+    <PublishUrl>http://localhost/iSprite/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -72,6 +89,18 @@
     <Compile Include="Controls\iThemeBrowser.cs" />
     <Compile Include="Controls\iUserControl.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PlistEditer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\PlistEditer.Designer.cs">
+      <DependentUpon>PlistEditer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ThemePreviewItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ThemePreviewItem.Designer.cs">
+      <DependentUpon>ThemePreviewItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ThemePriview.cs">
       <SubType>UserControl</SubType>
@@ -135,6 +164,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\iSpriteMessageBox.resx">
       <DependentUpon>iSpriteMessageBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PlistEditer.resx">
+      <DependentUpon>PlistEditer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ThemePreviewItem.resx">
+      <DependentUpon>ThemePreviewItem.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ThemePriview.resx">
@@ -223,9 +260,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dlls\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="iSprite_icon_32.ico" />
+    <None Include="Resources\quick_restart.png" />
+    <None Include="Resources\winterboard.PNG" />
     <None Include="Resources\iSprite_icon_32.ico" />
     <None Include="Resources\iSprite_icon_64.ico" />
-    <None Include="Resources\quick_restart.png" />
     <None Include="Resources\isprite_icon_32.png" />
     <None Include="Resources\isprite_icon_64.png" />
     <None Include="Properties\app.manifest" />
@@ -262,6 +301,23 @@
     <None Include="Resources\zip_16.png" />
     <None Include="Resources\Folder_32.png" />
     <None Include="Resources\Folder_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -63,16 +63,20 @@ namespace iSprite
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.iSpriteForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.iSpriteForm_MouseMove);
             this.Resize += new EventHandler(this.iSpriteForm_Resize);
+            this.Load += new EventHandler(iSpriteForm_Load);
             this.DoubleClick += new EventHandler(iSpriteForm_DoubleClick);
             this.ResumeLayout(false);
+        }
 
+        void Initialize()
+        {
             m_icon = new PictureBox();
             m_icon.Size = new System.Drawing.Size(25, 25);
             m_icon.Location = new Point(3, 1);
             m_icon.BackgroundImage = global::iSprite.Resource.isprite_icon_32;
             m_icon.BackgroundImageLayout = ImageLayout.Stretch;
             m_icon.BackColor = Color.Transparent;
-            this.Controls.Add(m_icon);           
+            this.Controls.Add(m_icon);
 
             btn_close = new PictureBox();
             btn_close.Size = new System.Drawing.Size(22, 22);
@@ -92,7 +96,6 @@ namespace iSprite
             btn_maximize.BackgroundImage = global::iSprite.Resource.enlarge;
             btn_maximize.BackColor = Color.Transparent;
             this.Controls.Add(btn_maximize);
-            btn_maximize.Location = new Point(btn_close.Location.X - btn_close.Width - 8, 5);
 
             btn_maximize.Click += new EventHandler(
                 delegate(object sender, EventArgs e)
@@ -105,6 +108,7 @@ namespace iSprite
                     {
                         this.WindowState = FormWindowState.Maximized;
                     }
+                    ChangeControlsLocation();
                 }
             );
             btn_maximize.Visible = false;
@@ -114,7 +118,6 @@ namespace iSprite
             btn_minimize.BackgroundImage = global::iSprite.Resource.shrink;
             btn_minimize.BackColor = Color.Transparent;
             this.Controls.Add(btn_minimize);
-            btn_minimize.Location = new Point(btn_maximize.Location.X - btn_maximize.Width - 8, 5);
 
             btn_minimize.Click += new EventHandler(
                 delegate(object sender, EventArgs e)
@@ -124,15 +127,25 @@ namespace iSprite
             );
             btn_minimize.Visible = false;
 
-
+            //标题
             lblTitle = new Label();
+            lblTitle.AutoSize = false;
             lblTitle.Location = new Point(30, 5);
-            this.lblTitle.Font = new Font("Arial", 11F, 
+            this.lblTitle.Font = new Font("Arial", 11F,
                 FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
             lblTitle.BackColor = Color.Transparent;
-            this.Controls.Add(lblTitle);           
+            lblTitle.Text = this.Text;
 
+            Size size = lblTitle.GetPreferredSize(lblTitle.Size);
+            lblTitle.Size = size;
 
+            this.Controls.Add(lblTitle); 
+        }
+
+        void iSpriteForm_Load(object sender, EventArgs e)
+        {
+            Initialize();
+            ChangeControlsLocation();
         }
 
         void iSpriteForm_DoubleClick(object sender, EventArgs e)
@@ -140,16 +153,18 @@ namespace iSprite
             if (this.WindowState == FormWindowState.Maximized)
             {
                 this.WindowState = FormWindowState.Normal;
-                this.StartPosition = FormStartPosition.CenterScreen;
             }
             else
             {
                 this.WindowState = FormWindowState.Maximized;
             }
+            ChangeControlsLocation();
         }
+        /// <summary>
+        /// 更新按钮位置
+        /// </summary>
         internal void ChangeControlsLocation()
         {
-            lblTitle.Text = this.Text;
             btn_close.Location = new Point(this.Width - btn_close.Width - 8, 3);
             if (EnableMaximize)
             {
@@ -192,8 +207,6 @@ namespace iSprite
 
         private void iSpriteForm_Resize(object sender, EventArgs e)
         {
-            this.Invalidate();
-            ChangeControlsLocation();
         }
 
         #region 拖动窗体相关

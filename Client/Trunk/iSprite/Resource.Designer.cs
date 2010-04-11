@@ -326,6 +326,13 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap winterboard {
+            get {
+                object obj = ResourceManager.GetObject("winterboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap YouTube {
             get {
                 object obj = ResourceManager.GetObject("YouTube", resourceCulture);

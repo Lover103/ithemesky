@@ -27,7 +27,7 @@ namespace iSprite
         ToolStrip m_Toolmenu;
         ThemePriview m_ThemePriview;
         WebBrowser themeBrowser;
-
+        FlowLayoutPanel  m_themesPanel;
         internal event FileProgressHandler OnProgressHandler;
 
         #endregion
@@ -94,6 +94,7 @@ namespace iSprite
                 height = 652;
             }
             this.themeBrowser.Size = new Size(m_tabTheme.Size.Width - 1, height);
+            m_themesPanel.Size = new Size(m_tabTheme.Size.Width - 1, height);
         }
 
         private iThemeBrowser()
@@ -130,6 +131,45 @@ namespace iSprite
                 }
             }
 
+            #region tsbtn_ThemesIniPhone
+            ToolStripSplitButton tsbtn_ThemesIniPhone = new ToolStripSplitButton();
+            tsbtn_ThemesIniPhone.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbtn_ThemesIniPhone.Name = "tsbtn_InstallFromFolder";
+            tsbtn_ThemesIniPhone.Size = new System.Drawing.Size(32, 100);
+            tsbtn_ThemesIniPhone.ToolTipText = "Themes In iPhone";
+            tsbtn_ThemesIniPhone.Text = "Themes In iPhone";
+            tsbtn_ThemesIniPhone.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsbtn_ThemesIniPhone.Image = global::iSprite.Resource.winterboard;
+
+            tsbtn_ThemesIniPhone.Click += new EventHandler
+                (
+                    delegate(object sender, EventArgs e)
+                    {
+                        ShowThemesIniPhone();
+                        tsbtn_ThemesIniPhone.DropDown.Visible = true;
+                    }
+                );
+
+            m_Toolmenu.Items.Add(tsbtn_ThemesIniPhone);
+
+            ContextMenuStrip ctxThemesIniPhone = new ContextMenuStrip();
+            ctxThemesIniPhone.OwnerItem = tsbtn_ThemesIniPhone;
+            ctxThemesIniPhone.Size = new System.Drawing.Size(153, 26);
+            tsbtn_ThemesIniPhone.DropDown = ctxThemesIniPhone;
+
+            ToolStripMenuItem ctxitem = new ToolStripMenuItem("Apply Selected Theme");
+            ctxitem.Click += new EventHandler(ctxitem_Click);
+            ctxThemesIniPhone.Items.Add(ctxitem);
+
+            ctxitem = new ToolStripMenuItem("Delete Selected Themes");
+            ctxitem.Click += new EventHandler(ctxitem_Click);
+            ctxThemesIniPhone.Items.Add(ctxitem);
+            ctxitem = new ToolStripMenuItem("Goto Online Themes");
+            ctxitem.Click += new EventHandler(ctxitem_Click);
+            ctxThemesIniPhone.Items.Add(ctxitem);
+            #endregion
+
+            #region themeBrowser
             themeBrowser = new WebBrowser();
             this.m_tabTheme.Controls.Add(themeBrowser);
 
@@ -140,8 +180,35 @@ namespace iSprite
             themeBrowser.Size = new System.Drawing.Size(990, 652);
             themeBrowser.TabIndex = 0;
             themeBrowser.Url = new Uri(iSpriteContext.Current.ThemeHomePage, System.UriKind.Absolute);
-
             themeBrowser.Navigating += new WebBrowserNavigatingEventHandler(themeBrowser_Navigating);
+            #endregion
+
+            #region m_themesPanel
+            m_themesPanel = new FlowLayoutPanel();
+            m_themesPanel.BackColor = Color.White;
+            m_themesPanel.Size = new Size(990, 652);            
+            this.m_tabTheme.Controls.Add(m_themesPanel);
+            m_themesPanel.SendToBack();
+            m_themesPanel.FlowDirection = FlowDirection.LeftToRight;
+            m_themesPanel.AutoScroll = true;
+            m_themesPanel.Location = new Point(m_Toolmenu.Location.X, m_Toolmenu.Location.Y + m_Toolmenu.Height);
+            #endregion
+        }
+
+        void ctxitem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            switch (item.Text)
+            {
+                case "Apply Selected Theme":
+                    break;
+                case "Delete Selected Themes":
+                    break;
+                case "Goto Online Themes":
+                    themeBrowser.BringToFront();
+                    m_themesPanel.SendToBack();
+                    break;
+            }
         }
         #endregion
 
@@ -189,7 +256,7 @@ namespace iSprite
         }
         #endregion
 
-        #region 创建新按钮
+        #region 按钮事件处理
         /// <summary>
         /// 按钮事件处理
         /// </summary>
@@ -198,9 +265,11 @@ namespace iSprite
         void toolmenu_Click(object sender, EventArgs e)
         {
             ToolStripItem item = (ToolStripItem)sender;
+            m_themesPanel.SendToBack();
             switch (item.Name)
             {
                 case "tsbtn_InstallFromZIP":
+                    themeBrowser.BringToFront();
                     InstallFromZIP();
                     break;
 
@@ -208,6 +277,61 @@ namespace iSprite
                     InstallFromFolder();
                     break;
             }
+        }
+        #endregion
+
+        #region 获取iPhone上的主题列表
+        /// <summary>
+        /// 获取iPhone上的主题列表
+        /// </summary>
+        void ShowThemesIniPhone()
+        {
+            m_themesPanel.BringToFront();
+            string wallpaperpath = string.Empty;
+            string localpath = string.Empty;
+            string themeiconpath = string.Empty;
+            string localthemepcaketpath = string.Empty;
+            Image imgTheme;
+            ThemePreviewItem p;
+            string themeName = string.Empty;
+            foreach (string dir in m_iPhoneDevice.GetDirectories(iSpriteContext.Current.iPhone_WinterBoardFile_Path))
+            {
+                if (!dir.EndsWith(".theme") && !m_themesPanel.Controls.ContainsKey(dir))
+                {
+                    wallpaperpath = dir + "/Wallpaper.png";
+                    themeiconpath = dir + "/Icons/";
+                    if (m_iPhoneDevice.FileExists(wallpaperpath) && m_iPhoneDevice.DirectoryExists(themeiconpath))
+                    {
+                        localthemepcaketpath = iSpriteContext.Current.iSpriteTempPath + Path.GetRandomFileName().Replace(".","");
+                        if (m_iPhoneDevice.Downlod2PC(dir, localthemepcaketpath, false))
+                        {
+                            imgTheme = m_ThemePriview.ShowPreview(localthemepcaketpath);
+                            themeName = new DirectoryInfo(dir).Name;
+                            p = new ThemePreviewItem(imgTheme, themeName);
+                            p.Click += new EventHandler(ThemePreviewItem_Click);
+                            List<string> themeInfo = new List<string>();
+                            themeInfo.Add(themeName);
+                            themeInfo.Add(localthemepcaketpath);
+                            p.Tag = themeInfo;
+                            p.Name = dir;
+                            m_themesPanel.Controls.Add(p);
+                            Application.DoEvents();
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region iPhone上的主题预览
+        /// <summary>
+        /// iPhone上的主题预览
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void ThemePreviewItem_Click(object sender, EventArgs e)
+        {
+            m_ThemePriview.ShowPreview((List<string>)((ThemePreviewItem)sender).Tag);
         }
         #endregion
 
@@ -365,7 +489,7 @@ namespace iSprite
             List<string> themeInfo = new List<string>();
             themeInfo.Add(themeName);
             themeInfo.Add(themePath);
-            m_ThemePriview.ShowPriview(themeInfo);
+            m_ThemePriview.ShowPreview(themeInfo);
             //SetTheme(themeInfo[0], themeInfo[1]);
         }
 
