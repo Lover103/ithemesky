@@ -119,6 +119,26 @@ namespace iSprite
             }
         }
 
+        /// <summary>
+        /// 保存文件内容到iPhone
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="iPhonePath"></param>
+        internal bool SetFileText(string content,string iPhonePath)
+        {
+            string localpath = iSpriteContext.Current.iSpriteTempPath + Path.GetFileName(iPhonePath);
+            File.WriteAllText(localpath, content,Encoding.UTF8);
+
+            if (Utility.GetFileType(localpath) == iPhoneFileTypeOption.FILE_PList)
+            {
+                PListRoot root = PListRoot.Load(localpath);
+                root.Save(localpath, PListFormat.Binary);
+            }
+
+            return Copy2iPhone(localpath, iPhonePath);
+        }
+
+
         public bool IsConnected
         {
             get
@@ -162,7 +182,7 @@ namespace iSprite
         {
             get
             {
-                return "iSprite's iPhone";
+                //return "iSprite's iPhone";
                 return m_deviceName;
             }
         }
@@ -357,13 +377,7 @@ namespace iSprite
                                 System.Diagnostics.Process.Start(tmppath2);
                                 break;
                             case iPhoneFileTypeOption.FILE_PList:
-                                tmppath2 = iSpriteContext.Current.iSpriteTempPath + Guid.NewGuid() + Path.GetExtension(path);
-                                PListRoot root = PListRoot.Load(tmppath);
-                                root.Save(tmppath2, PListFormat.Xml);
-                                string plistcontent = File.ReadAllText(tmppath2, Encoding.UTF8);
-                                plistcontent = plistcontent.Replace("\n","\r\n");
-                                File.WriteAllText(tmppath2,plistcontent, Encoding.UTF8);
-                                Process.Start("notepad.exe", tmppath2);
+                                RaiseMessageHandler(this, path, MessageTypeOption.EditPlist);
                                 break;
                             default:
                                 Process.Start(tmppath);
@@ -475,24 +489,40 @@ namespace iSprite
         {
             return string.Empty;
         }
+        public bool Downlod2PC(string srcpath_iPhone, string destpath_Computer)
+        {
+            return Downlod2PC(srcpath_iPhone, destpath_Computer, true);
+        }
         /// <summary>
         /// 将文件通过异步方式下载到pc
         /// </summary>
         /// <param name="srcpath_iPhone"></param>
         /// <param name="destpath_Computer"></param>
-        public bool Downlod2PC(string srcpath_iPhone, string destpath_Computer)
+        public bool Downlod2PC(string srcpath_iPhone, string destpath_Computer, bool showProgress)
         {
             if (!this.IsConnected)
             {
                 NotConnectedErrot();
                 return false;
             }
-            return this.iPhoneInterface.Downlod2PC(
-                srcpath_iPhone,
-                destpath_Computer,
-                this.OnProgressHandler, 
-                this.OnCompleteHandler
-                );
+            if (showProgress)
+            {
+                return this.iPhoneInterface.Downlod2PC(
+                    srcpath_iPhone,
+                    destpath_Computer,
+                    this.OnProgressHandler,
+                    this.OnCompleteHandler
+                    );
+            }
+            else
+            {
+                return this.iPhoneInterface.Downlod2PC(
+                    srcpath_iPhone,
+                    destpath_Computer,
+                    null,
+                    null
+                    );
+            }
         }
         /// <summary>
         /// 将文件通过异步方式下载到pc

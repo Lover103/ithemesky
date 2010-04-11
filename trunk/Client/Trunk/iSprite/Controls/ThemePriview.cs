@@ -57,7 +57,7 @@ namespace iSprite
             }
         }
 
-        internal void ShowPriview(List<string> themeInfo)
+        internal void ShowPreview(List<string> themeInfo)
         {
             this.Visible = false;
             m_themeInfo = themeInfo;
@@ -66,14 +66,27 @@ namespace iSprite
                 string themePacket = themeInfo[1];
                 if (Directory.Exists(themePacket))
                 {
-                    ShowIcons(themePacket);
+                    ShowIcons(themePacket,false);
 
                     this.Visible = true;
                 }
             }
         }
 
-        private void ShowIcons(string themePacket)
+        internal Image ShowPreview(string themePacket)
+        {
+            m_themeInfo = new List<string>();
+            this.Visible = false;
+            if (Directory.Exists(themePacket))
+            {
+                m_themeInfo.Add("iSprite-InnerShowPreview");
+                m_themeInfo.Add(themePacket);
+                ShowIcons(themePacket,true);
+            }
+            return (Image)this.pWallpaper.BackgroundImage.Clone();
+        }
+
+        private void ShowIcons(string themePacket,bool forlistview)
         {
             string themeIconPath = themePacket + "\\Icons\\";
             string themeWallpaper = themePacket + "\\Wallpaper.png";
@@ -179,10 +192,37 @@ namespace iSprite
                     if (null != this.pWallpaper.BackgroundImage)
                     {
                         Bitmap mapWallpaper = (Bitmap)this.pWallpaper.BackgroundImage;
+
+                        if (forlistview)
+                        {
+                            imgBlank = this.pWallpaper.BackgroundImage;
+                            imgDraw = System.Drawing.Graphics.FromImage(imgBlank);
+                        }
+
                         foreach (KeyValuePair<string, PictureBox> item in m_ThemeIconDic)
                         {
-                            Rectangle r = new Rectangle(item.Value.Location.X - pWallpaper.Location.X, item.Value.Location.Y - pWallpaper.Location.Y, 59, 60);
-                            item.Value.BackgroundImage = mapWallpaper.Clone(r, mapWallpaper.PixelFormat);
+                            Rectangle r = new Rectangle(
+                                item.Value.Location.X - pWallpaper.Location.X, 
+                                item.Value.Location.Y - pWallpaper.Location.Y, 
+                                item.Value.Image.Width,
+                                item.Value.Image.Height
+                                );
+                            
+                            if (forlistview)
+                            {
+                                Rectangle _r = new Rectangle(0, 0, item.Value.Image.Width, item.Value.Image.Height);
+                                item.Value.Visible = false;
+                                imgDraw.DrawImage(item.Value.Image, r, _r, GraphicsUnit.Pixel);
+                            }
+                            else
+                            {
+                                item.Value.Visible = true;
+                                item.Value.BackgroundImage = mapWallpaper.Clone(r, mapWallpaper.PixelFormat);
+                            }
+                        }
+                        if (forlistview)
+                        {
+                            this.pWallpaper.BackgroundImage = imgBlank;
                         }
                     }
                     #endregion
@@ -217,7 +257,10 @@ namespace iSprite
                 {
                     //其他情况，不显示预览图，直接安装
                     this.Visible = false;
-                    RaiseMessageHandler(m_themeInfo, ThemePriviewMessageTypeOption.Apply);
+                    if (!forlistview)
+                    {
+                        RaiseMessageHandler(m_themeInfo, ThemePriviewMessageTypeOption.Apply);
+                    }
                 }
             }            
         }

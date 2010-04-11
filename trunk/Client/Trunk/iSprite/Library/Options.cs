@@ -108,7 +108,11 @@ namespace iSprite
         /// <summary>
         /// 更新
         /// </summary>
-        Upgrade
+        Upgrade,
+        /// <summary>
+        /// 更新Plist文件
+        /// </summary>
+        EditPlist
     }
     #endregion
 

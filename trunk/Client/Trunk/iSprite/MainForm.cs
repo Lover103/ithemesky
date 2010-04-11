@@ -74,8 +74,6 @@ namespace iSprite
             this.Text = "iSprite (V" + iSpriteContext.Current.CurrentVersion + ")";
             this.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
 
-
-            this.ChangeControlsLocation();
             Utility.SetWindow(this);
         }
         /// <summary>
@@ -172,7 +170,7 @@ namespace iSprite
             }
             catch(Exception ex)
             {
-                ShowMessage(this,ex.Message+ex.StackTrace, MessageTypeOption.Error);
+                ShowMessage(this, ex.Message + ex.StackTrace, MessageTypeOption.Error);
             }
         }
         /// <summary>
@@ -277,28 +275,31 @@ namespace iSprite
         /// 消息处理
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="Message"></param>
+        /// <param name="message"></param>
         /// <param name="messagetype"></param>
-        void ShowMessage(object sender, string Message, MessageTypeOption messagetype)
+        void ShowMessage(object sender, string message, MessageTypeOption messagetype)
         {
             switch (messagetype)
             {
                 case MessageTypeOption.Info:
-                    MessageHelper.ShowInfo(Message);
+                    MessageHelper.ShowInfo(message);
                     break;
 
                 case MessageTypeOption.Warning:
-                    MessageHelper.ShowWarning(Message);
+                    MessageHelper.ShowWarning(message);
                     break;
 
                 case MessageTypeOption.Error:
-                    MessageHelper.ShowError(Message);
+                    MessageHelper.ShowError(message);
                     break;
                 case MessageTypeOption.Upgrade:
-                    if (MessageHelper.ShowConfirm(Message) == DialogResult.OK)
+                    if (MessageHelper.ShowConfirm(message) == DialogResult.OK)
                     {
                         m_Updater.DoUpdate();
                     }
+                    break;
+                case MessageTypeOption.EditPlist:
+                    PlistEditer.Show((iPhoneFileDevice)iphonedriver, message);
                     break;
 
             }
