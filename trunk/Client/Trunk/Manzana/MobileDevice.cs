@@ -161,35 +161,77 @@ namespace Manzana {
     {
         const string DLLName = "iTunesMobileDevice.dll";
         static string iTunesPath = string.Empty;
+
         static MobileDevice()
         {
-            List<string> paths = new List<string>();
-            iTunesPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles).TrimEnd('\\')
-                + @"\Apple\Mobile Device Support\";
-            paths.Add(iTunesPath);
-            paths.Add(iTunesPath + "bin\\");
-            paths.Add(iTunesPath.Replace(@"Program Files\Common Files", @"Program Files (x86)\Common Files"));
-            paths.Add(iTunesPath.Replace(@"Program Files\Common Files", @"Program Files (x86)\Common Files") + "bin\\");
-
-            foreach (string path in paths)
+            FileInfo iTunesMobileDeviceFile;
+            object c = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Apple Inc.\Apple Mobile Device Support\Shared", "iTunesMobileDeviceDLL", DLLName);
+            if (null != c)
             {
-                if (File.Exists(path + DLLName))
+                iTunesMobileDeviceFile = new FileInfo(c.ToString());
+                if (iTunesMobileDeviceFile.Exists)
                 {
-                    iTunesPath = path;
-                    break;
+                    iTunesPath = iTunesMobileDeviceFile.DirectoryName + "\\";
+                }
+            }
+
+            string ApplicationSupportPath = string.Empty;
+            object o = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Apple Inc.\Apple Application Support", "InstallDir", "");
+            if (null != o)
+            {
+                DirectoryInfo ApplicationSupportDirectory = new DirectoryInfo(o.ToString());
+                if (ApplicationSupportDirectory.Exists)
+                {
+                    ApplicationSupportPath = ApplicationSupportDirectory.FullName;
+                }
+            }
+
+
+            if (iTunesPath == string.Empty)
+            {
+                List<string> paths = new List<string>();
+                iTunesPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles).TrimEnd('\\')
+                    + @"\Apple\Mobile Device Support\";
+                paths.Add(iTunesPath);
+                paths.Add(iTunesPath + "bin\\");
+                paths.Add(iTunesPath.Replace(@"Program Files\Common Files", @"Program Files (x86)\Common Files"));
+                paths.Add(iTunesPath.Replace(@"Program Files\Common Files", @"Program Files (x86)\Common Files") + "bin\\");
+
+                foreach (string path in paths)
+                {
+                    if (File.Exists(path + DLLName))
+                    {
+                        iTunesPath = path;
+                        break;
+                    }
                 }
             }
             if (File.Exists(iTunesPath + DLLName))
             {
                 // try to find the dll automatically
-                Environment.SetEnvironmentVariable("Path",
-                    string.Join(";", new String[] 
-                { 
-                    Environment.GetEnvironmentVariable("Path"), 
-                    iTunesPath
+                if (ApplicationSupportPath != string.Empty)
+                {
+                    Environment.SetEnvironmentVariable("Path",
+                        string.Join(";", new String[] 
+                            { 
+                                Environment.GetEnvironmentVariable("Path"), 
+                                iTunesPath,
+                                ApplicationSupportPath
+                            }
+                            )
+                            );
                 }
-                        )
-                        );
+                else
+                {
+                    Environment.SetEnvironmentVariable("Path",
+                        string.Join(";", new String[] 
+                            { 
+                                Environment.GetEnvironmentVariable("Path"), 
+                                iTunesPath
+                            }
+                            )
+                            );
+                }
             }
         }
 
@@ -213,6 +255,7 @@ namespace Manzana {
 		[DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
 		unsafe public extern static IntPtr AMDeviceCopyDeviceIdentifier(void* device);
 
+        //@"C:\Program Files\Common Files\Apple\Mobile Device Support\iTunesMobileDevice.dll"
         [DllImport(DLLName, CallingConvention = CallingConvention.Cdecl)]
 		unsafe public extern static int AMDeviceNotificationSubscribe(DeviceNotificationCallback callback, uint unused1, uint unused2, uint unused3, out void* am_device_notification_ptr);
 

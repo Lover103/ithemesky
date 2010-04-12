@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace Manzana
 {
     internal class Utility
     {
+        static bool isdebug = false;
+        public static void WriteLog(string content)
+        {
+            if (isdebug)
+            {
+                File.AppendAllText("c:/iSprite.log", DateTime.Now + content + "\r\n");
+            }
+        }
+
         /// <summary>
         /// 从内存中获取字符串(UTF8)
         /// </summary>
