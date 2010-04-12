@@ -23,6 +23,15 @@ namespace IThemeSky.Management.Theme {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// ltlMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlMessage;
+        
+        /// <summary>
         /// hidThemeId control.
         /// </summary>
         /// <remarks>
@@ -57,15 +66,6 @@ namespace IThemeSky.Management.Theme {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator val_txtTitle;
-        
-        /// <summary>
-        /// ddlParentCategoryId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlParentCategoryId;
         
         /// <summary>
         /// ddlCategoryId control.
@@ -120,6 +120,15 @@ namespace IThemeSky.Management.Theme {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDownloadUrl;
+        
+        /// <summary>
+        /// txtFileSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFileSize;
         
         /// <summary>
         /// txtRateScore control.
