@@ -1123,17 +1123,21 @@ namespace Manzana {
 				//MobileDevice.AMRestoreModeDeviceCreate(0, connid, 0);
 				//return false;
 			}
-			if (MobileDevice.AMDeviceIsPaired(iPhoneHandle) == 0) {
+			if (MobileDevice.AMDeviceIsPaired(iPhoneHandle) == 0)
+            {
+                Utility.WriteLog("iPhone AMDeviceIsPaired fail");
 				return false;
 			}
 			int chk = MobileDevice.AMDeviceValidatePairing(iPhoneHandle);
-			if (chk != 0) 
+			if (chk != 0)
             {
+                Utility.WriteLog("iPhone AMDeviceValidatePairing fail");
 				return false;
 			}
 
-			if (MobileDevice.AMDeviceStartSession(iPhoneHandle) == 1) 
+			if (MobileDevice.AMDeviceStartSession(iPhoneHandle) == 1)
             {
+                Utility.WriteLog("iPhone AMDeviceStartSession fail");
 				return false;
 			}
 
@@ -1147,6 +1151,7 @@ namespace Manzana {
             {
                 if (MobileDevice.AMDeviceStartService(iPhoneHandle, MobileDevice.CFStringMakeConstantString("com.apple.afc"), ref hService, null) != 0)
                 {
+                    Utility.WriteLog("iPhone com.apple.afc fail");
                     return false;
                 }
             }
@@ -1164,28 +1169,21 @@ namespace Manzana {
                 null
                 );
 
-            //chk = MobileDevice.AMDeviceStartService(
-            //    this.iPhoneHandle,
-            //    MobileDevice.CFStringMakeConstantString("com.apple.screenshotr"),
-            //    ref this.hService,
-            //    null
-            //    );
 
             chk = MobileDevice.AMDeviceStopSession(this.iPhoneHandle);
             if (chk != 0)
             {
-                return false;
+                Utility.WriteLog("iPhone AMDeviceStopSession fail");
+                //return false;
             }
-
-            //if (MobileDevice.AMDeviceDisconnect(this.iPhoneHandle) != 0)//先断开连接
-            //{
-            //    return false;
-            //}
 
 			if (MobileDevice.AFCConnectionOpen(hService, 0, ref hAFC) != 0)
             {
+                Utility.WriteLog("iPhone AFCConnectionOpen fail");
 				return false;
 			}
+
+            /*
             chk = MobileDevice.AMDObserveNotification(
                 this._notificationsHandle,
                 MobileDevice.StringToCFString("com.apple.itunes-client.syncCancelRequest")
@@ -1193,30 +1191,39 @@ namespace Manzana {
 
             if (chk != 0)
             {
-                return false;
+                Utility.WriteLog("iPhone AMDObserveNotification fail");
             }
+
             this._deviceEventSink = new DeviceEventSink(this.DeviceNotification2);
             chk = MobileDevice.AMDListenForNotifications(this._notificationsHandle, this._deviceEventSink, IntPtr.Zero);
-
             if (chk != 0)
             {
-                return false;
+                Utility.WriteLog("iPhone AMDListenForNotifications fail");
             }
+            */
+
 			connected = true;
 			return true;
 		}
 
 		unsafe private void NotifyCallback(ref AMDeviceNotificationCallbackInfo callback) {
-			if (callback.msg == NotificationMessage.Connected) {
-				iPhoneHandle = callback.dev;
-				if (ConnectToPhone()) {
-					OnConnect(new ConnectEventArgs(callback));
-				}
-			}
-			else if (callback.msg == NotificationMessage.Disconnected) {
-				connected = false;
-				OnDisconnect(new ConnectEventArgs(callback));
-			}
+            if (callback.msg == NotificationMessage.Connected)
+            {
+                Utility.WriteLog("iPhone is Connected");
+
+                iPhoneHandle = callback.dev;
+                if (ConnectToPhone())
+                {
+                    Utility.WriteLog("iPhone Connected callback");
+
+                    OnConnect(new ConnectEventArgs(callback));
+                }
+            }
+            else if (callback.msg == NotificationMessage.Disconnected)
+            {
+                connected = false;
+                OnDisconnect(new ConnectEventArgs(callback));
+            }
 		}
 
 		private void DfuConnectCallback(ref AMRecoveryDevice callback) {
