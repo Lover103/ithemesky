@@ -66,6 +66,7 @@
                         <td>
                         <asp:TextBox ID="txtTitle" runat="server" value='<%#Eval("Title") %>' OnTextChanged="propertyList_SelectedIndexChanged" AutoPostBack="true"></asp:TextBox>
                         (id:<%#Eval("ThemeId") %>)(<a href="ThemeInfoManage.aspx?themeId=<%#Eval("ThemeId") %>" target="_blank">编辑</a>)(<a href="/<%#Eval("DownloadUrl") %>" target="_blank">下载</a>)(<a href="/iphone-themes/<%#Eval("Title").ToString().Trim().Replace(" ", "-") %>/<%#Eval("ThemeId") %>" target="_blank">浏览</a>)<br />
+                        所属标签：<asp:TextBox ID="txtTags" runat="server" value='<%#GetThemeTags(Eval("ThemeId")) %>' OnTextChanged="propertyList_SelectedIndexChanged" AutoPostBack="true"></asp:TextBox><br />
                         <a href="/<%#Eval("ThumbnailName") %>" target="_blank"><img src="/<%#Eval("ThumbnailName").ToString().Replace(".jpg", "_112x168.jpg") %>" border="0" /></a>
                         <asp:HiddenField ID="hidThemeId" runat="server" />
                         </td>

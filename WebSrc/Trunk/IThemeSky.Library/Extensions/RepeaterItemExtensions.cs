@@ -5,10 +5,10 @@ using System.Text;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 
-namespace net91com.Core.Extensions
+namespace IThemeSky.Library.Extensions
 {
     /// <summary>
-    /// 对RepeaterItem的扩展,by lzz 2010-3-24
+    /// 对RepeaterItem的扩展
     /// </summary>
     public static class RepeaterItemExtensions
     {

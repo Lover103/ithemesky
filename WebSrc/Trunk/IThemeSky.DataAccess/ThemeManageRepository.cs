@@ -222,6 +222,22 @@ namespace IThemeSky.DataAccess
         }
 
         /// <summary>
+        /// 删除指定主题的所有标签映射关系
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <returns></returns>
+        public bool DeleteTagMaps(int themeId)
+        {
+            string cmdText = "DELETE FROM ThemeTagMap WHERE ThemeId=@ThemeId";
+            SqlParameter[]  parameters = new SqlParameter[]
+			{
+				SqlParameterHelper.BuildInputParameter("@ThemeId",SqlDbType.Int, 4, themeId),
+			};
+            SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters);
+            return true;
+        }
+
+        /// <summary>
         /// 增加主题分类
         /// </summary>
         /// <param name="category">主题分类实体</param>
