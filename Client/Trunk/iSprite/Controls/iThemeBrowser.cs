@@ -294,6 +294,9 @@ namespace iSprite
             Image imgTheme;
             ThemePreviewItem p;
             string themeName = string.Empty;
+
+            RaiseMessageHandler(this, "Begin to Load Themes", MessageTypeOption.SetStatusBar);
+
             foreach (string dir in m_iPhoneDevice.GetDirectories(iSpriteContext.Current.iPhone_WinterBoardFile_Path))
             {
                 if (!dir.EndsWith(".theme") && !m_themesPanel.Controls.ContainsKey(dir))
@@ -309,9 +312,10 @@ namespace iSprite
                             themeName = new DirectoryInfo(dir).Name;
                             p = new ThemePreviewItem(imgTheme, themeName);
                             p.Click += new EventHandler(ThemePreviewItem_Click);
-                            List<string> themeInfo = new List<string>();
-                            themeInfo.Add(themeName);
-                            themeInfo.Add(localthemepcaketpath);
+                            ThemeInfo themeInfo = new ThemeInfo();
+                            themeInfo.Name=(themeName);
+                            themeInfo.LocalPath=(localthemepcaketpath);
+                            themeInfo.IsExistsIniPhone = true;
                             p.Tag = themeInfo;
                             p.Name = dir;
                             m_themesPanel.Controls.Add(p);
@@ -320,6 +324,7 @@ namespace iSprite
                     }
                 }
             }
+            RaiseMessageHandler(this, "", MessageTypeOption.HiddenStatusBar);
         }
         #endregion
 
@@ -331,7 +336,7 @@ namespace iSprite
         /// <param name="e"></param>
         void ThemePreviewItem_Click(object sender, EventArgs e)
         {
-            m_ThemePriview.ShowPreview((List<string>)((ThemePreviewItem)sender).Tag);
+            m_ThemePriview.ShowPreview((ThemeInfo)((ThemePreviewItem)sender).Tag);
         }
         #endregion
 
@@ -486,31 +491,36 @@ namespace iSprite
                 RaiseMessageHandler(this, "Can't convert theme for your current lang !", MessageTypeOption.Error);
                 return;
             }
-            List<string> themeInfo = new List<string>();
-            themeInfo.Add(themeName);
-            themeInfo.Add(themePath);
+            ThemeInfo themeInfo = new ThemeInfo();
+            themeInfo.Name=(themeName);
+            themeInfo.LocalPath=(themePath);
             m_ThemePriview.ShowPreview(themeInfo);
             //SetTheme(themeInfo[0], themeInfo[1]);
         }
 
-        void ThemePriview_OnMessage(List<string> themeInfo, ThemePriviewMessageTypeOption messagetype)
+        void ThemePriview_OnMessage(ThemeInfo themeInfo, ThemePriviewMessageTypeOption messagetype)
         {
             if (messagetype == ThemePriviewMessageTypeOption.Apply)
             {
-                SetTheme(themeInfo[0], themeInfo[1]);
+                SetTheme(themeInfo);
             }
         }
         /// <summary>
         /// 设置主题
         /// </summary>
-        /// <param name="themeName"></param>
-        /// <param name="themePath"></param>
-        void SetTheme(string themeName, string themePath)
+        /// <param name="themeInfo"></param>
+        void SetTheme(ThemeInfo themeInfo)
         {
-            if (!m_iPhoneDevice.Copy2iPhone(themePath, iSpriteContext.Current.iPhone_WinterBoardFile_Path + "/" + themeName))
+            string themeName = themeInfo.Name;
+            string themePath = themeInfo.LocalPath;
+
+            if (!themeInfo.IsExistsIniPhone)//如果主题已经在iPhone上面存在就无需再次上传
             {
-                RaiseMessageHandler(this, "Fail to copy the theme file to iPhone .", MessageTypeOption.Error);
-                return;
+                if (!m_iPhoneDevice.Copy2iPhone(themePath, iSpriteContext.Current.iPhone_WinterBoardFile_Path + "/" + themeName))
+                {
+                    RaiseMessageHandler(this, "Fail to copy the theme file to iPhone .", MessageTypeOption.Error);
+                    return;
+                }
             }
 
 
@@ -561,15 +571,15 @@ namespace iSprite
                 #endregion
 
                 //拷贝配置文件
-                //if (m_iPhoneDevice.Copy2iPhone(localThemeSetting, iPhoneThemeSetting))
+                if (m_iPhoneDevice.Copy2iPhone(localThemeSetting, iPhoneThemeSetting))
                 {
                     m_iPhoneDevice.Respring();
                     RaiseMessageHandler(this, "Successfully install theme[" + themeName + "]. ", MessageTypeOption.Info);
                 }
-                //else
-                //{
-                //    RaiseMessageHandler(this, "Fail to copy the theme setting file to iPhone .", MessageTypeOption.Error);
-                //}
+                else
+                {
+                    RaiseMessageHandler(this, "Fail to copy the theme setting file to iPhone .", MessageTypeOption.Error);
+                }
             }
             else
             {

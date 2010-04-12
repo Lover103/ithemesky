@@ -61,6 +61,11 @@ namespace iSprite
         IFileDevice iphonedriver;
         IFileDevice localdiskdriver;
         Updater m_Updater;
+
+        /// <summary>
+        /// 状态条
+        /// </summary>
+        private iSpriteStatus statusBar;
         #endregion
 
         #region 构造函数
@@ -88,6 +93,13 @@ namespace iSprite
             progressBar.Top = (this.Height - progressBar.Height) / 2;
             progressBar.Visible = false;
             progressBar.OnCancel += new CancelHandler(progressBar_OnCancel);
+
+            statusBar = new iSpriteStatus();
+            Controls.Add(statusBar);
+            statusBar.BringToFront();
+            statusBar.Left = (this.Width - statusBar.Width) / 2;
+            statusBar.Top = (this.Height - statusBar.Height) / 2;
+            statusBar.Visible = false;
         }
 
         private void Initialise()
@@ -300,6 +312,12 @@ namespace iSprite
                     break;
                 case MessageTypeOption.EditPlist:
                     PlistEditer.Show((iPhoneFileDevice)iphonedriver, message);
+                    break;
+                case MessageTypeOption.SetStatusBar:
+                    statusBar.StatusMsg = message;
+                    break;
+                case MessageTypeOption.HiddenStatusBar:
+                    statusBar.Visible = false;
                     break;
 
             }

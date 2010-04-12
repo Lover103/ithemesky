@@ -13,12 +13,12 @@ namespace iSprite
     internal partial class ThemePriview : iUserControl
     {
         internal event ThemePriviewMessageHandler OnMessage;
-        List<string> m_themeInfo;
+        ThemeInfo m_themeInfo;
 
         private Dictionary<string, PictureBox> m_ThemeIconDic = new Dictionary<string, PictureBox>();
 
         #region 消息通知
-        private void RaiseMessageHandler(List<string> themeInfo, ThemePriviewMessageTypeOption messageType)
+        private void RaiseMessageHandler(ThemeInfo themeInfo, ThemePriviewMessageTypeOption messageType)
         {
             if (OnMessage != null)
             {
@@ -57,30 +57,27 @@ namespace iSprite
             }
         }
 
-        internal void ShowPreview(List<string> themeInfo)
+        internal void ShowPreview(ThemeInfo themeInfo)
         {
             this.Visible = false;
             m_themeInfo = themeInfo;
-            if (themeInfo.Count == 2)
-            {
-                string themePacket = themeInfo[1];
-                if (Directory.Exists(themePacket))
-                {
-                    ShowIcons(themePacket,false);
 
-                    this.Visible = true;
-                }
+            string themePacket = m_themeInfo.LocalPath;
+            if (Directory.Exists(themePacket))
+            {
+                ShowIcons(themePacket, false);
+
+                this.Visible = true;
             }
         }
 
         internal Image ShowPreview(string themePacket)
         {
-            m_themeInfo = new List<string>();
+            m_themeInfo = new ThemeInfo();
             this.Visible = false;
             if (Directory.Exists(themePacket))
             {
-                m_themeInfo.Add("iSprite-InnerShowPreview");
-                m_themeInfo.Add(themePacket);
+                m_themeInfo.LocalPath=themePacket;
                 ShowIcons(themePacket,true);
             }
             return (Image)this.pWallpaper.BackgroundImage.Clone();

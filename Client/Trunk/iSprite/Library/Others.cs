@@ -6,6 +6,13 @@ using System.Text;
 
 namespace iSprite
 {
+    public class ThemeInfo
+    {
+        public string Name = string.Empty;
+        public string LocalPath = string.Empty;
+        public bool IsExistsIniPhone = false;
+    }
+
     /// <summary>
     /// 拷贝中传递的对象
     /// </summary>
@@ -41,7 +48,7 @@ namespace iSprite
     /// <param name="sender"></param>
     /// <param name="Message"></param>
     /// <param name="messagetype"></param>
-    public delegate void ThemePriviewMessageHandler(List<string> themeInfo, ThemePriviewMessageTypeOption messagetype);
+    public delegate void ThemePriviewMessageHandler(ThemeInfo themeInfo, ThemePriviewMessageTypeOption messagetype);
 
     /// <summary>
     /// 文件信息
