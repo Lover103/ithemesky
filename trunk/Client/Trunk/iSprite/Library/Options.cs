@@ -112,7 +112,15 @@ namespace iSprite
         /// <summary>
         /// 更新Plist文件
         /// </summary>
-        EditPlist
+        EditPlist,
+        /// <summary>
+        /// 设置状态条文字
+        /// </summary>
+        SetStatusBar,
+        /// <summary>
+        /// 隐藏状态条
+        /// </summary>
+        HiddenStatusBar
     }
     #endregion
 

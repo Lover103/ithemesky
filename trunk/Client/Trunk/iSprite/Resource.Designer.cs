@@ -144,6 +144,13 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap form_box_titleless {
+            get {
+                object obj = ResourceManager.GetObject("form_box_titleless", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Img_button {
             get {
                 object obj = ResourceManager.GetObject("Img_button", resourceCulture);
@@ -210,6 +217,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap iTunes {
             get {
                 object obj = ResourceManager.GetObject("iTunes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap loader {
+            get {
+                object obj = ResourceManager.GetObject("loader", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
