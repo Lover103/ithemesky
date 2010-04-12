@@ -95,10 +95,24 @@ namespace IThemeSky.Management.Theme
                     theme.DisplayState = Convert.ToInt32(dropDownList.SelectedValue).ToEnum<DisplayStateOption>(DisplayStateOption.Hidden);
                     message = string.Format("[{0}]显示状态修改成功", theme.Title);
                 }
+                
             }
             else if (sender is TextBox)
             {
-                theme.Title = (sender as TextBox).Text;
+                TextBox txtBox = sender as TextBox;
+                if (txtBox.ID.Equals("txtTitle"))
+                {
+                    theme.Title = txtBox.Text;
+                }
+                if (txtBox.ID.Equals("txtTags"))
+                {
+                    string[] tags = txtBox.Text.Split(',');
+                    _repositoryManage.DeleteTagMaps(themeId);
+                    foreach (string tag in tags)
+                    {
+                        _repositoryManage.MappingThemeTag(themeId, tag);
+                    }
+                }
             }
             _repositoryManage.UpdateTheme(theme);
             ltlMessage.Text = message;
@@ -117,6 +131,20 @@ namespace IThemeSky.Management.Theme
                 filter.SearchKeyword = txtTitleFilter.Text;
             }
             return filter;
+        }
+
+        protected string GetThemeTags(object themeId)
+        {
+            List<string> tags = _repositoryView.GetTagsByThemeId(themeId.ToString().ToInt32());
+            if (tags.Count > 1)
+            {
+                return tags.Aggregate((s1, s2) => s1 + "," + s2);
+            }
+            else if (tags.Count > 0)
+            {
+                return tags[0];
+            }
+            return "";
         }
     }
 }

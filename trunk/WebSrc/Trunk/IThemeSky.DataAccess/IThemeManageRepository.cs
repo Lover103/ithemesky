@@ -44,6 +44,12 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         bool MappingThemeTag(int themeId, string tagName);
         /// <summary>
+        /// 删除指定主题的所有标签映射关系
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <returns></returns>
+        bool DeleteTagMaps(int themeId);
+        /// <summary>
         /// 增加主题分类
         /// </summary>
         /// <param name="category">主题分类实体</param>
