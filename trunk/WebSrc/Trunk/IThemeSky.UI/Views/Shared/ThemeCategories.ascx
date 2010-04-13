@@ -4,7 +4,7 @@
     <ul class="sideColContent sideMenu">
 	    <% foreach (ThemeCategory category in ViewData.Model)
         { %>
-	    <li><a href="/list/new/<%=HttpUtility.UrlEncode(category.CategoryName)%>_<%=category.CategoryId%>"><%=category.CategoryName%></a></li>
+	    <li><a href="/list/new/<%=category.CategoryName.Replace("&", "")%>_<%=category.CategoryId%>"><%=category.CategoryName%></a></li>
 	    <%} %>
     </ul>
 </div>
