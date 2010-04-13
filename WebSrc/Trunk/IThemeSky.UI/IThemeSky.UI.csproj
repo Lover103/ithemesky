@@ -85,6 +85,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Clear.aspx" />
     <Content Include="Content\css\fancybox.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\bg_body.jpg" />
