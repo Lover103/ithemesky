@@ -112,7 +112,7 @@ namespace iSprite
             m_ThemePriview.Left = (parentForm.Width - m_ThemePriview.Width) / 2;
             m_ThemePriview.Top = (parentForm.Height - m_ThemePriview.Height) / 2;
             m_ThemePriview.OnMessage += new ThemePriviewMessageHandler(ThemePriview_OnMessage);
-            m_ThemePriview.Height = 548;
+            m_ThemePriview.Height = 570;
         }
 
         void InitThemeTab()
@@ -198,11 +198,46 @@ namespace iSprite
         void ctxitem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            ThemePreviewItem p;
+            ThemeInfo themeInfo;
             switch (item.Text)
             {
                 case "Apply Selected Theme":
+                    foreach (Control c in m_themesPanel.Controls)
+                    {
+                        if (c is ThemePreviewItem)
+                        { 
+                            p = (ThemePreviewItem)c;
+                            if (p.IsSelected)
+                            {
+                                themeInfo = (ThemeInfo)p.Tag;
+                                m_ThemePriview.ShowPreview(themeInfo);
+                                break;
+                            }
+                        }
+                    }
                     break;
                 case "Delete Selected Themes":
+                    List<string> list = new List<string>();
+
+                    foreach (Control c in m_themesPanel.Controls)
+                    {
+                        if (c is ThemePreviewItem)
+                        {
+                            p = (ThemePreviewItem)c;
+                            if (p.IsSelected)
+                            {
+                                themeInfo = (ThemeInfo)p.Tag;
+                                list.Add(themeInfo.Name);
+                            }
+                        }
+                    }
+
+                    if (list.Count > 0)
+                    {
+                        DeleteThemes(list);
+                    }
+
                     break;
                 case "Goto Online Themes":
                     themeBrowser.BringToFront();
@@ -473,7 +508,7 @@ namespace iSprite
             if (CheckSameThemeName(themeName))
             {
                 if (MessageHelper.ShowConfirm(
-                    string.Format("The theme[{0}] is already exist, would you want to recover it?", themeName))
+                    string.Format("The theme \"" + themeName + "\"  is already exist, would you want to recover it?", themeName))
                     != DialogResult.OK
                     )
                 {
@@ -500,16 +535,16 @@ namespace iSprite
 
         void ThemePriview_OnMessage(ThemeInfo themeInfo, ThemePriviewMessageTypeOption messagetype)
         {
-            if (messagetype == ThemePriviewMessageTypeOption.Apply)
+            if (messagetype != ThemePriviewMessageTypeOption.Cancel)
             {
-                SetTheme(themeInfo);
+                SetTheme(themeInfo, messagetype);
             }
         }
         /// <summary>
         /// 设置主题
         /// </summary>
         /// <param name="themeInfo"></param>
-        void SetTheme(ThemeInfo themeInfo)
+        void SetTheme(ThemeInfo themeInfo, ThemePriviewMessageTypeOption messagetype)
         {
             string themeName = themeInfo.Name;
             string themePath = themeInfo.LocalPath;
@@ -521,6 +556,13 @@ namespace iSprite
                     RaiseMessageHandler(this, "Fail to copy the theme file to iPhone .", MessageTypeOption.Error);
                     return;
                 }
+            }
+
+            if (messagetype == ThemePriviewMessageTypeOption.Upload)
+            {
+                //如果只是上传就不需要拷贝plist文件到iPhone
+                RaiseMessageHandler(this, "The theme \"" + themeName + "\" has been successfully copy to iPhone .", MessageTypeOption.Info);
+                return;
             }
 
 
@@ -574,7 +616,7 @@ namespace iSprite
                 if (m_iPhoneDevice.Copy2iPhone(localThemeSetting, iPhoneThemeSetting))
                 {
                     m_iPhoneDevice.Respring();
-                    RaiseMessageHandler(this, "Successfully install theme[" + themeName + "]. ", MessageTypeOption.Info);
+                    RaiseMessageHandler(this, "The theme \"" + themeName + "\" has been successfully installed .", MessageTypeOption.Info);
                 }
                 else
                 {
@@ -674,7 +716,22 @@ namespace iSprite
             }
             else
             {
-                return true;
+                //判断图标有没有显示出来
+                string content = m_iPhoneDevice.GetFileText(iSpriteContext.Current.iPhone_InstallationPath);
+                if (!content.Contains("<key>com.saurik.WinterBoard</key>"))
+                {
+                    //如果没有显示，需要重启Springboard
+                    if (MessageHelper.ShowInfo("WinterBoard has been installed, iSprite will reboot iPhone SpringBoard to show WinterBoard in  home screen?") == DialogResult.OK)
+                    {
+                        //重启Respring
+                        m_iPhoneDevice.Respring();
+                    }
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
         #endregion
@@ -750,7 +807,7 @@ namespace iSprite
                             if (m_iPhoneDevice.Copy2iPhone(wbfilepath,
                                 iSpriteContext.Current.iPhone_CydiaAutoInstallPath))
                             {
-                                MessageHelper.ShowInfo("WinterBoard has been copied to iPhone, You must reboot your iPhone Twice to finish Installation.");
+                                MessageHelper.ShowInfo("WinterBoard has been copied to iPhone, You must reboot your iPhone to finish Installation.");
                                 return true;
                             }
                         }
@@ -881,6 +938,22 @@ namespace iSprite
             }
 
             return button;
+        }
+        #endregion
+
+        #region 删除主题
+        /// <summary>
+        /// 删除主题
+        /// </summary>
+        /// <param name="list"></param>
+        void DeleteThemes(List<string> list)
+        {
+            RaiseMessageHandler(this, "Begin to Delete Themes", MessageTypeOption.SetStatusBar);
+            foreach (string themeName in list)
+            {
+                m_iPhoneDevice.DeleteDirectory(iSpriteContext.Current.iPhone_WinterBoardFile_Path + "/" + themeName);
+            }
+            RaiseMessageHandler(this, "", MessageTypeOption.HiddenStatusBar);
         }
         #endregion
     }

@@ -63,6 +63,7 @@ namespace iSprite
             m_themeInfo = themeInfo;
 
             string themePacket = m_themeInfo.LocalPath;
+            btnUpload.Visible = !m_themeInfo.IsExistsIniPhone;
             if (Directory.Exists(themePacket))
             {
                 ShowIcons(themePacket, false);
@@ -272,6 +273,11 @@ namespace iSprite
         {
             this.Visible = false;
             RaiseMessageHandler(m_themeInfo, ThemePriviewMessageTypeOption.Apply);
+        }
+
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            RaiseMessageHandler(m_themeInfo, ThemePriviewMessageTypeOption.Upload);
         }
 
     }

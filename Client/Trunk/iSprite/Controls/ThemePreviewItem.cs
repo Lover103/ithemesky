@@ -14,6 +14,14 @@ namespace iSprite
         { 
         }
 
+        public bool IsSelected
+        {
+            get
+            {
+                return this.chlselect.Checked;
+            }
+        }
+
         public ThemePreviewItem(Image imgTheme, string themeName)
         {
             InitializeComponent();

@@ -491,12 +491,13 @@
             this.tsbtnLVFilter.Size = new System.Drawing.Size(52, 20);
             this.tsbtnLVFilter.Text = "*.*";
             this.tsbtnLVFilter.ToolTipText = "File Filter (All Files)";
+            this.tsbtnLVFilter.Visible = false;
             // 
             // ctxLVFilter
             // 
             this.ctxLVFilter.Name = "ctxLVFilter";
             this.ctxLVFilter.OwnerItem = this.tsbtnLVFilter;
-            this.ctxLVFilter.Size = new System.Drawing.Size(61, 4);
+            this.ctxLVFilter.Size = new System.Drawing.Size(153, 26);
             // 
             // tsbtnFavourites
             // 

@@ -90,7 +90,10 @@ namespace iSprite
         /// <summary>
         /// CydiaAutoInstallPath
         /// </summary>
-        internal string iPhone_CydiaAutoInstallPath { private set; get; }
+        internal string iPhone_CydiaAutoInstallPath { private set; get; }/// <summary>
+        /// iPhone_InstallationPath
+        /// </summary>
+        internal string iPhone_InstallationPath { private set; get; }
 
         /// <summary>
         /// 静态构造器
@@ -129,6 +132,7 @@ namespace iSprite
             iPhone_ScreenShot_Path = "/private/var/mobile/Media/DCIM/100APPLE/";
             iPhone_GlobalPreferences_Path = "/private/var/root/Library/Preferences/.GlobalPreferences.plist";
             iPhone_CydiaAutoInstallPath = "/private/var/root/Media/Cydia/AutoInstall/";
+            iPhone_InstallationPath = "/var/mobile/Library/Caches/com.apple.mobile.installation.plist";
 
             iSpriteApplicationDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles).TrimEnd('\\')
                    + @"\iSprite\";

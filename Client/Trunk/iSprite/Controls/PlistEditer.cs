@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace iSprite
 {
@@ -20,7 +21,7 @@ namespace iSprite
 
             InitializeComponent();
 
-            this.Text = "1PlistEditer (" + m_PlistPath + ")";
+            this.Text = "PlistEditer";
 
             this.DialogResult = DialogResult.Cancel;
             this.ShowInTaskbar = false;
