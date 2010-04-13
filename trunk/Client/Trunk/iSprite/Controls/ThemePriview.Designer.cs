@@ -48,6 +48,7 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnApply = new iSprite.iSpriteButton();
             this.btnCancel = new iSprite.iSpriteButton();
+            this.btnUpload = new iSprite.iSpriteButton();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox8)).BeginInit();
@@ -66,6 +67,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnApply)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUpload)).BeginInit();
             this.SuspendLayout();
             // 
             // PictureBox16
@@ -270,7 +272,7 @@
             this.btnApply.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnApply.DownImage = global::iSprite.Resource.Img_button_down;
             this.btnApply.HoverImage = null;
-            this.btnApply.Location = new System.Drawing.Point(179, 521);
+            this.btnApply.Location = new System.Drawing.Point(232, 526);
             this.btnApply.Name = "btnApply";
             this.btnApply.NormalImage = global::iSprite.Resource.Img_button;
             this.btnApply.Size = new System.Drawing.Size(75, 25);
@@ -284,7 +286,7 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnCancel.DownImage = global::iSprite.Resource.Img_button_down;
             this.btnCancel.HoverImage = null;
-            this.btnCancel.Location = new System.Drawing.Point(68, 521);
+            this.btnCancel.Location = new System.Drawing.Point(23, 526);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.NormalImage = global::iSprite.Resource.Img_button;
             this.btnCancel.Size = new System.Drawing.Size(75, 25);
@@ -293,12 +295,27 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnUpload
+            // 
+            this.btnUpload.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnUpload.DownImage = global::iSprite.Resource.Img_button_down;
+            this.btnUpload.HoverImage = null;
+            this.btnUpload.Location = new System.Drawing.Point(127, 526);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.NormalImage = global::iSprite.Resource.Img_button;
+            this.btnUpload.Size = new System.Drawing.Size(75, 25);
+            this.btnUpload.TabIndex = 93;
+            this.btnUpload.TabStop = false;
+            this.btnUpload.Text = "Upload";
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            // 
             // ThemePriview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::iSprite.Resource.form_bg;
+            this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.lblTitle);
@@ -320,7 +337,7 @@
             this.Controls.Add(this.PictureBox1);
             this.Controls.Add(this.pWallpaper);
             this.Name = "ThemePriview";
-            this.Size = new System.Drawing.Size(330, 580);
+            this.Size = new System.Drawing.Size(330, 570);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox8)).EndInit();
@@ -339,6 +356,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnApply)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUpload)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -366,5 +384,6 @@
         private System.Windows.Forms.Label lblTitle;
         private iSpriteButton btnApply;
         private iSpriteButton btnCancel;
+        private iSpriteButton btnUpload;
     }
 }

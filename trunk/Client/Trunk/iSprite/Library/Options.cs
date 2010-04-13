@@ -133,6 +133,10 @@ namespace iSprite
         /// <summary>
         /// 应用
         /// </summary>
+        Upload,
+        /// <summary>
+        /// 应用
+        /// </summary>
         Apply,
         /// <summary>
         /// 取消
