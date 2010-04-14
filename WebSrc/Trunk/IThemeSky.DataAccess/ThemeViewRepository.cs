@@ -377,7 +377,7 @@ namespace IThemeSky.DataAccess
         public virtual List<ThemeCategory> GetThemeCategories()
         {
             List<ThemeCategory> categories = new List<ThemeCategory>();
-            string cmdText = "SELECT * FROM ThemeCategory";
+            string cmdText = "SELECT * FROM ThemeCategory ORDER BY SortNumber DESC";
             using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
             {
                 while (reader.Read())
