@@ -117,10 +117,10 @@ namespace iSprite
         {
             CurrentVersion = "2.0";
 
-            ThemeHomePage = "http://www.ithemesky.com/";
+            ThemeHomePage = Manzana.Utility.Decrypt("60A99C413E1F93068451A6E02805A1E0A306054C5C2C6E15001DC23B9551C12B");
             HelpUrl = "http://www.ithemesky.com/help/";
             UpdateUrl = "http://update.ithemesky.com/update/update.xml";
-            WinterBoardXML = "http://update.ithemesky.com/winterboard/update.xml";
+            WinterBoardXML = Manzana.Utility.Decrypt("86307D8B09A4E77ADDB7DB85E40A158DDC1507B95EC2AB9193B6DC72D41F9565B73EB7DFAB12C7012632317568B94A3A91CC3CBACC1FFA99");
             iPhone_PhotosLibrary_Path = "/private/var/root/Media/Photos/";
             iPhone_Wallpaper_Path = "/Library/Wallpaper/";
             iPhone_LockBackground_Path = "/private/var/root/Library/";
@@ -189,17 +189,15 @@ namespace iSprite
                 _context.ThemeHomePage = "http://www.ithemesky.com/";
                 return;
             }
-            else
-            {
-            }
 
             Reload();
 
             string ver = iphone.DeviceVersion;
             ver = ver.Trim();
-            _context.ThemeHomePage += "?chl=iSprite&phonever=" + ver 
-                + "&softver=" + _context.CurrentVersion 
-                + "&deviceid="+iphone.DeviceId;
+            _context.ThemeHomePage += "?chl=iSprite&phonever=" + ver
+                + "&softver=" + _context.CurrentVersion
+                + "&iTunesVer=" + iphone.iTunesVer
+                + "&deviceid=" + iphone.DeviceId;
 
             if (ver.Split('.').Length < 3)
             {

@@ -37,54 +37,15 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace Manzana {
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public enum FileProgressMode
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        iPhone2PC = 0,
-        /// <summary>
-        /// 
-        /// </summary>
-        PC2iPhone = 1,
-        /// <summary>
-        /// 
-        /// </summary>
-        Internet2PC = 2
-    }
-
-    /// <summary>
-    /// 文件传输进度委托
-    /// </summary>
-    /// <param name="success"></param>
-    /// <param name="file"></param>
-    /// <param name="lastErr"></param>
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void FileCompletedHandler(bool success, string file, string lastErr);
-    
-    /// <summary>
-    /// 文件传输完成委托
-    /// </summary>
-    /// <param name="mode"></param>
-    /// <param name="totalSize"></param>
-    /// <param name="completeSize"></param>
-    /// <param name="speed"></param>
-    /// <param name="timeElapse"></param>
-    /// <param name="file"></param>
-    /// <param name="cancel"></param>
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void FileProgressHandler(FileProgressMode mode, ulong totalSize, ulong completeSize, int speed, double timeElapse, string file, ref bool cancel);
 
 	/// <summary>
 	/// Exposes access to the Apple iPhone
 	/// </summary>
 	public class iPhone {
+
 		#region Locals
 		private DeviceNotificationCallback			dnc;
 		private DeviceRestoreNotificationCallback	drn1;
@@ -256,6 +217,14 @@ namespace Manzana {
 		}
 		#endregion	// Properties
 
+        /// <summary>
+        /// iTunes版本
+        /// </summary>
+        internal string iTunesVer
+        {
+            get { return MobileDevice.iTunesVer; }
+        }
+
 		#region Events
 		/// <summary>
 		/// The <c>Connect</c> event is triggered when a iPhone is connected to the computer
@@ -370,10 +339,11 @@ namespace Manzana {
 
             MobileDevice.AMDPostNotification(
                     this._notificationsHandle,
-                    MobileDevice.StringToCFString("com.apple.language.changed"),
+                    MobileDevice.StringToCFString(Utility.Decrypt("87D3BE389EB15FF98FE644B02AE44FFE5DD31FFBF5ECFFBFC109053C24095055")),
                     0);
             Thread.Sleep(200);
         }
+
         /// <summary>
         /// 开始Sync
         /// </summary>
@@ -382,8 +352,8 @@ namespace Manzana {
             if (this._syncLockFile == null)
             {
                 int num = MobileDevice.AMDPostNotification(
-                    this._notificationsHandle, 
-                    MobileDevice.StringToCFString("com.apple.itunes-mobdev.syncWillStart"),
+                    this._notificationsHandle,
+                    MobileDevice.StringToCFString(Utility.Decrypt("87D3BE389EB15FF924757E0A6758AC48918CD809D6CD08072EB0CF760B65C5895052E881D889880E")),
                     0) ;
                 Thread.Sleep(200);
 
@@ -391,8 +361,8 @@ namespace Manzana {
                 Thread.Sleep(50);
 
                 num = MobileDevice.AMDPostNotification(
-                    this._notificationsHandle, 
-                    MobileDevice.StringToCFString("com.apple.itunes-mobdev.syncLockRequest"), 0);
+                    this._notificationsHandle,
+                    MobileDevice.StringToCFString(Utility.Decrypt("87D3BE389EB15FF924757E0A6758AC48918CD809D6CD0807C9A183064349E963082391CC2AB31024")), 0);
                 Thread.Sleep(200);
 
                 this._syncLockFile.Lock(20);
@@ -412,7 +382,7 @@ namespace Manzana {
             this._syncLockFile = null;
             int num = MobileDevice.AMDPostNotification(
                 this._notificationsHandle,
-                MobileDevice.StringToCFString("com.apple.itunes-mobdev.syncDidFinish"), 0);
+                MobileDevice.StringToCFString(Utility.Decrypt("87D3BE389EB15FF924757E0A6758AC48918CD809D6CD080792FCAB7CA1581E36A915B863CC8E01D0")), 0);
             Thread.Sleep(200);
         }
 
@@ -838,6 +808,8 @@ namespace Manzana {
                                 if (progresshandler != null)
                                 {
                                     progresshandler(FileProgressMode.iPhone2PC, totalfileSize, finishSize, speed, timeElapse, srcpath_iPhone, ref cancelDownload);
+
+                                    Application.DoEvents();
                                     if (cancelDownload)
                                     {
                                         break;
@@ -858,9 +830,11 @@ namespace Manzana {
                             if (completedhandler != null)
                             {
                                 completedhandler(!cancelDownload, srcpath_iPhone, null);
+                                Application.DoEvents();
                             }
 
                             returncode = !cancelDownload;
+                            Application.DoEvents();
                         }
                         catch (Exception ex1)
                         {
@@ -1005,6 +979,8 @@ namespace Manzana {
                             if (progresshandler != null)
                             {
                                 progresshandler(FileProgressMode.PC2iPhone, totalfileSize, finishSize, speed, timeElapse, srcpath_Computer, ref cancalUpload);
+
+                                Application.DoEvents();
                                 if (cancalUpload)
                                 {
                                     break;
@@ -1030,9 +1006,11 @@ namespace Manzana {
                         finishSize = totalfileSize;
                         if (completedhandler != null)
                         {
+                            Application.DoEvents();
                             completedhandler(!cancalUpload, srcpath_Computer, "");
                         }
                         returncode = !cancalUpload;
+                        Application.DoEvents();
                     }
                     catch (Exception ex)
                     {

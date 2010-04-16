@@ -16,7 +16,7 @@ namespace iSprite
         Manzana.iPhone iPhoneInterface;
         public event FileCompletedHandler OnCompleteHandler;
         public event FileProgressHandler OnProgressHandler;
-        string m_deviceName = "none iPhone";
+        string m_deviceName = "no iPhone/iPod found";
         public event MessageHandler OnMessage;
 
         #region 消息处理
@@ -79,7 +79,7 @@ namespace iSprite
             }
             else
             {
-                m_deviceName = "none iPhone";
+                m_deviceName = "no iPhone/iPod found";
             }
         }
         void NotConnectedErrot()
@@ -182,8 +182,8 @@ namespace iSprite
         {
             get
             {
-                //return "iSprite's iPhone";
-                return m_deviceName;
+                return "iSprite's iPhone";
+                //return m_deviceName;
             }
         }
 

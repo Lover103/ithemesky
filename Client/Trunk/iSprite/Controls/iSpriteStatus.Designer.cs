@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.picbox = new System.Windows.Forms.PictureBox();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picbox)).BeginInit();
             this.SuspendLayout();
             // 
             // picbox
             // 
-            this.picbox.Image = global::iSprite.Resource.loader;
             this.picbox.Location = new System.Drawing.Point(22, 25);
             this.picbox.Name = "picbox";
             this.picbox.Size = new System.Drawing.Size(32, 32);
@@ -51,6 +52,11 @@
             this.lblStatus.Size = new System.Drawing.Size(47, 12);
             this.lblStatus.TabIndex = 3;
             this.lblStatus.Text = "Message";
+            // 
+            // timer
+            // 
+            this.timer.Interval = 180;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // iSpriteStatus
             // 
@@ -71,5 +77,6 @@
 
         private System.Windows.Forms.PictureBox picbox;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Timer timer;
     }
 }

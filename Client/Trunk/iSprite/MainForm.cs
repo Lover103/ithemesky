@@ -318,7 +318,7 @@ namespace iSprite
                     statusBar.StatusMsg = message;
                     break;
                 case MessageTypeOption.HiddenStatusBar:
-                    statusBar.Visible = false;
+                    statusBar.Hidden();
                     break;
 
             }

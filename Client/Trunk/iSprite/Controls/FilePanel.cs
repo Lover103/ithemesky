@@ -320,6 +320,13 @@ namespace iSprite
 
                 LoadFavourites();
             }
+            else
+            {
+                if (m_FileDevice is iPhoneFileDevice)
+                {
+                    gbxMain.Text = "no iPhone/iPod found";
+                }
+            }
         }
         #endregion       
         

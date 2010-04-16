@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace Manzana
 {
     internal class Utility
     {
         static bool isdebug = false;
-        public static void WriteLog(string content)
+        static string decryptkey = "iSpriite";
+        internal static void WriteLog(string content)
         {
             if (isdebug)
             {
@@ -22,7 +24,7 @@ namespace Manzana
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public static unsafe string HeapToString(IntPtr p)
+        internal static unsafe string HeapToString(IntPtr p)
         { 
             return  HeapToString(p, Encoding.UTF8);
         }
@@ -32,7 +34,7 @@ namespace Manzana
         /// <param name="p">字符串头指针</param>
         /// <param name="encoding">编码</param>
         /// <returns>字符串</returns>
-        public static unsafe string HeapToString(IntPtr p, Encoding encoding)
+        internal static unsafe string HeapToString(IntPtr p, Encoding encoding)
         {
             if (encoding == null)
                 return Marshal.PtrToStringAnsi(p);
@@ -59,7 +61,7 @@ namespace Manzana
         /// <param name="s"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static IntPtr StringToHeap(string s)
+        internal static IntPtr StringToHeap(string s)
         { 
             return StringToHeap(s, Encoding.UTF8);
         }
@@ -71,7 +73,7 @@ namespace Manzana
         /// <exception cref="System.NotSupportedException">不支持的操作</exception>
         /// <exception cref="System.OutOfMemoryException">没有足够的内存</exception>
         /// <returns>字符串头指针地址</returns>
-        public static IntPtr StringToHeap(string s, Encoding encoding)
+        internal static IntPtr StringToHeap(string s, Encoding encoding)
         {
             if (encoding == null)
                 return Marshal.StringToCoTaskMemAnsi(s);
@@ -102,6 +104,35 @@ namespace Manzana
             }
 
             return mem;
+        }
+        internal static string Decrypt(string source)
+        {
+            if (string.IsNullOrEmpty(source))
+                return null;
+
+            DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+
+            //将字符串转为字节数组  
+            byte[] inputByteArray = new byte[source.Length / 2];
+            for (int x = 0; x < source.Length / 2; x++)
+            {
+                int i = (Convert.ToInt32(source.Substring(x * 2, 2), 16));
+                inputByteArray[x] = (byte)i;
+            }
+
+            //建立加密对象的密钥和偏移量，此值重要，不能修改  
+            des.Key = UTF8Encoding.UTF8.GetBytes(decryptkey);
+            des.IV = UTF8Encoding.UTF8.GetBytes(decryptkey);
+
+            MemoryStream ms = new MemoryStream();
+            CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
+            cs.Write(inputByteArray, 0, inputByteArray.Length);
+            cs.FlushFinalBlock();
+
+            //建立StringBuild对象，CreateDecrypt使用的是流对象，必须把解密后的文本变成流对象  
+            StringBuilder ret = new StringBuilder();
+
+            return System.Text.Encoding.UTF8.GetString(ms.ToArray());
         }
     }
 }
