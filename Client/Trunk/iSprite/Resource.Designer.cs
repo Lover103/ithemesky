@@ -29,7 +29,8 @@ namespace iSprite {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource() {
+        internal Resource()
+        {
         }
         
         /// <summary>
@@ -37,9 +38,17 @@ namespace iSprite {
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
+            get
+            {
+                Type type = typeof(Resource);
+                string baseName = type.Name;
+                if (!string.IsNullOrEmpty(type.Namespace))
+                {
+                    baseName = type.Namespace + "." + baseName;
+                }
+
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("iSprite.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager(baseName, type.Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -165,20 +174,6 @@ namespace iSprite {
             }
         }
         
-        internal static System.Drawing.Bitmap img_NewFolder {
-            get {
-                object obj = ResourceManager.GetObject("img_NewFolder", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap img_Remove {
-            get {
-                object obj = ResourceManager.GetObject("img_Remove", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap iPod {
             get {
                 object obj = ResourceManager.GetObject("iPod", resourceCulture);
@@ -263,6 +258,13 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap NewFolder {
+            get {
+                object obj = ResourceManager.GetObject("NewFolder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Notes {
             get {
                 object obj = ResourceManager.GetObject("Notes", resourceCulture);
@@ -287,6 +289,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap quick_restart {
             get {
                 object obj = ResourceManager.GetObject("quick_restart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Remove {
+            get {
+                object obj = ResourceManager.GetObject("Remove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

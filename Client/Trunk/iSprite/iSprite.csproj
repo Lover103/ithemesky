@@ -10,12 +10,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>iSprite</RootNamespace>
     <AssemblyName>iSprite</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetZone>LocalIntranet</TargetZone>
     <GenerateManifests>false</GenerateManifests>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <ApplicationIcon>iSprite_icon_32.ico</ApplicationIcon>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <PublishUrl>http://localhost/iSprite/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -28,7 +29,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -41,6 +41,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,8 +52,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Web" />
     <Reference Include="System.Data" />
@@ -116,6 +119,45 @@
     <Compile Include="Controls\iSpriteStatus.Designer.cs">
       <DependentUpon>iSpriteStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="ICSharpCode\Checksums\Adler32.cs" />
+    <Compile Include="ICSharpCode\Checksums\CRC32.cs" />
+    <Compile Include="ICSharpCode\Checksums\IChecksum.cs" />
+    <Compile Include="ICSharpCode\Checksums\StrangeCRC.cs" />
+    <Compile Include="ICSharpCode\Core\FileSystemScanner.cs" />
+    <Compile Include="ICSharpCode\Core\INameTransform.cs" />
+    <Compile Include="ICSharpCode\Core\IScanFilter.cs" />
+    <Compile Include="ICSharpCode\Core\NameFilter.cs" />
+    <Compile Include="ICSharpCode\Core\PathFilter.cs" />
+    <Compile Include="ICSharpCode\Core\StreamUtils.cs" />
+    <Compile Include="ICSharpCode\Core\WindowsPathUtils.cs" />
+    <Compile Include="ICSharpCode\Encryption\PkzipClassic.cs" />
+    <Compile Include="ICSharpCode\SharpZipBaseException.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\Deflater.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\Inflater.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="ICSharpCode\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="ICSharpCode\Zip\FastZip.cs" />
+    <Compile Include="ICSharpCode\Zip\IEntryFactory.cs" />
+    <Compile Include="ICSharpCode\Zip\WindowsNameTransform.cs" />
+    <Compile Include="ICSharpCode\Zip\ZipConstants.cs" />
+    <Compile Include="ICSharpCode\Zip\ZipEntry.cs" />
+    <Compile Include="ICSharpCode\Zip\ZipEntryFactory.cs" />
+    <Compile Include="ICSharpCode\Zip\ZipException.cs" />
+    <Compile Include="ICSharpCode\Zip\ZipExtraData.cs" />
+    <Compile Include="ICSharpCode\Zip\ZipFile.cs" />
+    <Compile Include="ICSharpCode\Zip\ZipHelperStream.cs" />
+    <Compile Include="ICSharpCode\Zip\ZipInputStream.cs" />
+    <Compile Include="ICSharpCode\Zip\ZipNameTransform.cs" />
+    <Compile Include="ICSharpCode\Zip\ZipOutputStream.cs" />
     <Compile Include="Library\Area9Helper.cs" />
     <Compile Include="Library\iSpriteContext.cs" />
     <Compile Include="FileDevice\LoaclDiskFileDevice.cs" />
@@ -136,6 +178,33 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Library\Updater.cs" />
+    <Compile Include="Manzana\AFCDeviceInfo.cs" />
+    <Compile Include="Manzana\ConnectEventArgs.cs" />
+    <Compile Include="Manzana\ConnectEventHandler.cs" />
+    <Compile Include="Manzana\DeviceNotificationEventArgs.cs" />
+    <Compile Include="Manzana\iPhone.cs" />
+    <Compile Include="Manzana\iPhoneFile.cs" />
+    <Compile Include="Manzana\MobileDevice.cs" />
+    <Compile Include="Manzana\Utility.cs" />
+    <Compile Include="PList\IPListElement.cs" />
+    <Compile Include="PList\PListBinaryReader.cs" />
+    <Compile Include="PList\PListBinaryWriter.cs" />
+    <Compile Include="PList\PListContainer\PListArray.cs" />
+    <Compile Include="PList\PListContainer\PListDict.cs" />
+    <Compile Include="PList\PListElement.cs" />
+    <Compile Include="PList\PListElementFactory.cs" />
+    <Compile Include="PList\PListExceptions\PListException.cs" />
+    <Compile Include="PList\PListExceptions\PListFormatException.cs" />
+    <Compile Include="PList\PListFormat.cs" />
+    <Compile Include="PList\PListPrimitives\PListBool.cs" />
+    <Compile Include="PList\PListPrimitives\PListData.cs" />
+    <Compile Include="PList\PListPrimitives\PListDate.cs" />
+    <Compile Include="PList\PListPrimitives\PListFill.cs" />
+    <Compile Include="PList\PListPrimitives\PListInteger.cs" />
+    <Compile Include="PList\PListPrimitives\PListNull.cs" />
+    <Compile Include="PList\PListPrimitives\PListReal.cs" />
+    <Compile Include="PList\PListPrimitives\PListString.cs" />
+    <Compile Include="PList\PListRoot.cs" />
     <Compile Include="ThirdControl\XpProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -257,16 +326,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\btn_go.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Manzana\Manzana.csproj">
-      <Project>{8C260F85-65AC-40A6-85BF-D89C49052F64}</Project>
-      <Name>Manzana</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PList\PList.csproj">
-      <Project>{C1154025-FCAB-40AF-A715-91D10420C321}</Project>
-      <Name>PList</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dlls\ICSharpCode.SharpZipLib.dll" />

@@ -256,7 +256,7 @@
             // tsbtnNewFolder
             // 
             this.tsbtnNewFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtnNewFolder.Image = global::iSprite.Resource.img_NewFolder;
+            this.tsbtnNewFolder.Image = global::iSprite.Resource.NewFolder;
             this.tsbtnNewFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnNewFolder.Name = "tsbtnNewFolder";
             this.tsbtnNewFolder.Size = new System.Drawing.Size(23, 22);
@@ -265,7 +265,7 @@
             // tsbtnDelete
             // 
             this.tsbtnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtnDelete.Image = global::iSprite.Resource.img_Remove;
+            this.tsbtnDelete.Image = global::iSprite.Resource.Remove;
             this.tsbtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnDelete.Name = "tsbtnDelete";
             this.tsbtnDelete.Size = new System.Drawing.Size(23, 22);
@@ -448,7 +448,7 @@
             // tsbnNewFolder
             // 
             this.tsbnNewFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbnNewFolder.Image = global::iSprite.Resource.img_NewFolder;
+            this.tsbnNewFolder.Image = global::iSprite.Resource.NewFolder;
             this.tsbnNewFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbnNewFolder.Name = "tsbnNewFolder";
             this.tsbnNewFolder.Size = new System.Drawing.Size(23, 20);
@@ -457,7 +457,7 @@
             // tsbnDelete
             // 
             this.tsbnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbnDelete.Image = global::iSprite.Resource.img_Remove;
+            this.tsbnDelete.Image = global::iSprite.Resource.Remove;
             this.tsbnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbnDelete.Name = "tsbnDelete";
             this.tsbnDelete.Size = new System.Drawing.Size(23, 20);

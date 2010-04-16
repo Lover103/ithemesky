@@ -77,7 +77,6 @@ namespace iSprite
             m_icon.BackgroundImageLayout = ImageLayout.Stretch;
             m_icon.BackColor = Color.Transparent;
             this.Controls.Add(m_icon);
-
             btn_close = new PictureBox();
             btn_close.Size = new System.Drawing.Size(22, 22);
             this.Controls.Add(btn_close);

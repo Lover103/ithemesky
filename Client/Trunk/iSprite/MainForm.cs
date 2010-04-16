@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Manzana;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.Drawing.Imaging;
 
 namespace iSprite
 {

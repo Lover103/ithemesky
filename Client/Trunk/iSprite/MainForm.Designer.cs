@@ -30,9 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.faTabStrip1 = new iSprite.ThirdControl.FarsiLibrary.FATabStrip();
             this.tabs = new iSprite.ThirdControl.FarsiLibrary.FATabStrip();
@@ -47,49 +45,15 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnreSpring = new System.Windows.Forms.ToolStripButton();
             this.tabTheme = new iSprite.ThirdControl.FarsiLibrary.FATabStripItem();
-            this.panel2.SuspendLayout();
+
             ((System.ComponentModel.ISupportInitialize)(this.faTabStrip1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabs)).BeginInit();
             this.tabs.SuspendLayout();
             this.tabFile.SuspendLayout();
             this.mainsplitcontainer.SuspendLayout();
             this.Filetoolmenu.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // label4
-            // 
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.label4.ForeColor = System.Drawing.Color.ForestGreen;
-            this.label4.Location = new System.Drawing.Point(3, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(814, 81);
-            this.label4.TabIndex = 0;
-            this.label4.Text = resources.GetString("label4.Text");
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Millimeter, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(71, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(678, 106);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Drag && Drop files here from\r\nwindows explorer\r\nin order to have them automatical" +
-                "ly opened in new tabs";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.SandyBrown;
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 126);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(820, 182);
-            this.panel2.TabIndex = 4;
+            this.SuspendLayout();           
+            
             // 
             // timer
             // 
@@ -251,7 +215,6 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Controls.SetChildIndex(this.faTabStrip1, 0);
             this.Controls.SetChildIndex(this.tabs, 0);
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.faTabStrip1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabs)).EndInit();
             this.tabs.ResumeLayout(false);
@@ -266,9 +229,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panel2;
         private iSprite.ThirdControl.FarsiLibrary.FATabStrip faTabStrip1;
         private System.Windows.Forms.Timer timer;
         private iSprite.ThirdControl.FarsiLibrary.FATabStrip tabs;
