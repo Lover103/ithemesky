@@ -29,8 +29,7 @@ namespace iSprite {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource()
-        {
+        internal Resource() {
         }
         
         /// <summary>
@@ -38,17 +37,9 @@ namespace iSprite {
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
-            get
-            {
-                Type type = typeof(Resource);
-                string baseName = type.Name;
-                if (!string.IsNullOrEmpty(type.Namespace))
-                {
-                    baseName = type.Namespace + "." + baseName;
-                }
-
+            get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager(baseName, type.Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("iSprite.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -268,6 +259,90 @@ namespace iSprite {
         internal static System.Drawing.Bitmap Notes {
             get {
                 object obj = ResourceManager.GetObject("Notes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_1 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_10 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_11 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_12 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_2 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_3 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_4 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_5 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_6 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_7 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_8 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pg_loader_9 {
+            get {
+                object obj = ResourceManager.GetObject("pg_loader_9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

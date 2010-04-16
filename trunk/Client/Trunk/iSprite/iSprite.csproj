@@ -185,6 +185,7 @@
     <Compile Include="Manzana\iPhone.cs" />
     <Compile Include="Manzana\iPhoneFile.cs" />
     <Compile Include="Manzana\MobileDevice.cs" />
+    <Compile Include="Manzana\Other.cs" />
     <Compile Include="Manzana\Utility.cs" />
     <Compile Include="PList\IPListElement.cs" />
     <Compile Include="PList\PListBinaryReader.cs" />
@@ -330,6 +331,18 @@
   <ItemGroup>
     <Content Include="Dlls\ICSharpCode.SharpZipLib.dll" />
     <Content Include="iSprite_icon_32.ico" />
+    <None Include="Resources\pg_loader_11.png" />
+    <None Include="Resources\pg_loader_10.png" />
+    <None Include="Resources\pg_loader_9.png" />
+    <None Include="Resources\pg_loader_8.png" />
+    <None Include="Resources\pg_loader_7.png" />
+    <None Include="Resources\pg_loader_6.png" />
+    <None Include="Resources\pg_loader_5.png" />
+    <None Include="Resources\pg_loader_4.png" />
+    <None Include="Resources\pg_loader_3.png" />
+    <None Include="Resources\pg_loader_2.png" />
+    <None Include="Resources\pg_loader_1.png" />
+    <None Include="Resources\pg_loader_12.png" />
     <None Include="Resources\loader.gif" />
     <None Include="Resources\form_box_titleless.png" />
     <None Include="Resources\quick_restart.png" />

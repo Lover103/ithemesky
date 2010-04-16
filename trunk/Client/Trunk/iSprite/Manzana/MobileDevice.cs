@@ -41,6 +41,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace Manzana {
 	internal enum AppleMobileErrors
@@ -161,6 +162,7 @@ namespace Manzana {
     {
         const string DLLName = "iTunesMobileDevice.dll";
         static string iTunesPath = string.Empty;
+        internal static string iTunesVer = string.Empty;
 
         static MobileDevice()
         {
@@ -231,6 +233,14 @@ namespace Manzana {
                             }
                             )
                             );
+                }
+                try
+                {
+                    FileVersionInfo fInfo = FileVersionInfo.GetVersionInfo(iTunesPath + DLLName);//为磁盘上的物理文件提供版本信息
+                    iTunesVer = fInfo.ProductVersion;
+                }
+                catch
+                { 
                 }
             }
         }

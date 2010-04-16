@@ -332,6 +332,8 @@ namespace iSprite
 
             RaiseMessageHandler(this, "Begin to Load Themes", MessageTypeOption.SetStatusBar);
 
+            Application.DoEvents();
+
             foreach (string dir in m_iPhoneDevice.GetDirectories(iSpriteContext.Current.iPhone_WinterBoardFile_Path))
             {
                 if (!dir.EndsWith(".theme") && !m_themesPanel.Controls.ContainsKey(dir))
@@ -343,6 +345,7 @@ namespace iSprite
                         localthemepcaketpath = iSpriteContext.Current.iSpriteTempPath + Path.GetRandomFileName().Replace(".","");
                         if (m_iPhoneDevice.Downlod2PC(dir, localthemepcaketpath, false))
                         {
+                            Application.DoEvents();
                             imgTheme = m_ThemePriview.ShowPreview(localthemepcaketpath);
                             themeName = new DirectoryInfo(dir).Name;
                             p = new ThemePreviewItem(imgTheme, themeName);
@@ -359,7 +362,7 @@ namespace iSprite
                     }
                 }
             }
-            RaiseMessageHandler(this, "", MessageTypeOption.HiddenStatusBar);
+            //RaiseMessageHandler(this, "", MessageTypeOption.HiddenStatusBar);
         }
         #endregion
 

@@ -68,7 +68,7 @@ namespace iSprite
                     else
                     {
                         imgInx = IconHelper.GetImageIndex(CSIDL.CSIDL_DRIVES);
-                        rootName = SystemInformation.ComputerName;
+                        rootName = m_FileDevice.StartPath;
                     }
 
                     TreeNode root = this.Nodes.Add(m_CurrentPath, rootName, imgInx, imgInx);
