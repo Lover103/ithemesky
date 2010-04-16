@@ -49,32 +49,43 @@
 					<dt>Color:</dt>
 					<dd>
 						<ul class="clearfix">
+							<li><a href="#">Black</a></li>
 							<li><a href="#">Blue</a></li>
-							<li><a href="#">White</a></li>
-							<li><a href="#">Orange</a></li>
-							<li><a href="#">Pink</a></li>
+							<li><a href="#">Brown</a></li>
+							<li><a href="#">Cyan</a></li>
 							<li><a href="#">Gray</a></li>
 							<li><a href="#">Green</a></li>
+							<li><a href="#">Orange</a></li>
+							<li><a href="#">Pink</a></li>
+							<li><a href="#">Purple</a></li>
 							<li><a href="#">Red</a></li>
-							<li><a href="#">Black</a></li>
+							<li><a href="#">White</a></li>
 							<li><a href="#">Yellow</a></li>
 						</ul>
 					</dd>
 				</dl>
 				<dl class="clearfix last">
-					<dt>Holiday:</dt>
+					<dt>Hot Tags:</dt>
 					<dd>
 						<ul class="clearfix">
-							<li><a href="#">New Year’s Day</a></li>
-							<li><a href="#">Valentines Day</a></li>
-							<li><a href="#">Easter Day</a></li>
-							<li><a href="#">Halloween</a></li>
-							<li><a href="#">Thanksgiving Day</a></li>
-							<li><a href="#">Christmas</a></li>
-							<li><a href="#">Boxing Day</a></li>
-							<li><a href="#">Mothers Day</a></li>
-							<li><a href="#">Spring Festival</a></li>
-							<li><a href="#">Moon Festival</a></li>
+							<li><a href="#">3D</a></li>
+							<li><a href="#">sexy</a></li>
+							<li><a href="#">lovely</a></li>
+							<li><a href="#">fire</a></li>
+							<li><a href="#">magic</a></li>
+							<li><a href="#">Chinese</a></li>
+							<li><a href="#">legs</a></li>
+							<li><a href="#">Japan</a></li>
+							<li><a href="#">night</a></li>
+							<li><a href="#">cute</a></li>
+							<li><a href="#">light</a></li>
+							<li><a href="#">disney</a></li>
+							<li><a href="#">logo</a></li>
+							<li><a href="#">funny</a></li>
+							<li><a href="#">cool</a></li>
+							<li><a href="#">funny</a></li>
+							<li><a href="#">design</a></li>
+							<li><a href="#">sketch</a></li>
 						</ul>
 					</dd>
 				</dl>
