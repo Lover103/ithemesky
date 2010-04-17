@@ -84,10 +84,10 @@ namespace IThemeSky.DataAccess
             SqlParameter[] parameters = new SqlParameter[] 
 			{
 				SqlParameterHelper.BuildParameter("@RecordNum",SqlDbType.Int, 4, ParameterDirection.InputOutput, recordCount),
-				SqlParameterHelper.BuildInputParameter("@SelectList",SqlDbType.VarChar,2000, SIMPLE_THEME_FIELDS),
-				SqlParameterHelper.BuildInputParameter("@TableSource",SqlDbType.VarChar,300, GetDataViewName(filter, sort)),
-				SqlParameterHelper.BuildInputParameter("@SearchCondition",SqlDbType.VarChar,2000, filter.ToString()),
-				SqlParameterHelper.BuildInputParameter("@OrderExpression",SqlDbType.VarChar,1000, GetSortExpression(sort)),
+				SqlParameterHelper.BuildInputParameter("@SelectList",SqlDbType.NVarChar,2000, SIMPLE_THEME_FIELDS),
+				SqlParameterHelper.BuildInputParameter("@TableSource",SqlDbType.NVarChar,300, GetDataViewName(filter, sort)),
+				SqlParameterHelper.BuildInputParameter("@SearchCondition",SqlDbType.NVarChar,2000, filter.ToString()),
+				SqlParameterHelper.BuildInputParameter("@OrderExpression",SqlDbType.NVarChar,1000, GetSortExpression(sort)),
 				SqlParameterHelper.BuildInputParameter("@PageSize",SqlDbType.Int,4,pageSize),
 				SqlParameterHelper.BuildInputParameter("@PageIndex",SqlDbType.Int,4,pageIndex)
 			};
@@ -144,10 +144,10 @@ namespace IThemeSky.DataAccess
             SqlParameter[] parameters = new SqlParameter[] 
 			{
 				SqlParameterHelper.BuildParameter("@RecordNum",SqlDbType.Int, 4, ParameterDirection.InputOutput, recordCount),
-				SqlParameterHelper.BuildInputParameter("@SelectList",SqlDbType.VarChar,2000, "*"),
-				SqlParameterHelper.BuildInputParameter("@TableSource",SqlDbType.VarChar,300, GetDataViewName(filter, sort)),
-				SqlParameterHelper.BuildInputParameter("@SearchCondition",SqlDbType.VarChar,2000, filter.ToString()),
-				SqlParameterHelper.BuildInputParameter("@OrderExpression",SqlDbType.VarChar,1000, GetSortExpression(sort)),
+				SqlParameterHelper.BuildInputParameter("@SelectList",SqlDbType.NVarChar,2000, "*"),
+				SqlParameterHelper.BuildInputParameter("@TableSource",SqlDbType.NVarChar,300, GetDataViewName(filter, sort)),
+				SqlParameterHelper.BuildInputParameter("@SearchCondition",SqlDbType.NVarChar,2000, filter.ToString()),
+				SqlParameterHelper.BuildInputParameter("@OrderExpression",SqlDbType.NVarChar,1000, GetSortExpression(sort)),
 				SqlParameterHelper.BuildInputParameter("@PageSize",SqlDbType.Int,4,pageSize),
 				SqlParameterHelper.BuildInputParameter("@PageIndex",SqlDbType.Int,4,pageIndex)
 			};

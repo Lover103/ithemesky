@@ -29,7 +29,7 @@ namespace IThemeSky.UI.Models
             if (!string.IsNullOrEmpty(tagNames))
             {
                 List<List<string>> tagsFilter = new List<List<string>>();
-                string[] arrAndTags = Regex.Split(tagNames, " and ");
+                string[] arrAndTags = Regex.Split(tagNames, "-");
                 foreach (string andTags in arrAndTags)
                 {
                     List<string> tags = new List<string>();

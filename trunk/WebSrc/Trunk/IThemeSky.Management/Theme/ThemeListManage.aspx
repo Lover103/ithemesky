@@ -64,9 +64,11 @@
                 <ItemTemplate>
                     <tr>
                         <td>
-                        <asp:TextBox ID="txtTitle" runat="server" value='<%#Eval("Title") %>' OnTextChanged="propertyList_SelectedIndexChanged" AutoPostBack="true"></asp:TextBox>
+                        <asp:TextBox ID="txtTitle" runat="server" value='<%#Eval("Title") %>'></asp:TextBox>
                         (id:<%#Eval("ThemeId") %>)(<a href="ThemeInfoManage.aspx?themeId=<%#Eval("ThemeId") %>" target="_blank">编辑</a>)(<a href="/<%#Eval("DownloadUrl") %>" target="_blank">下载</a>)(<a href="/iphone-themes/<%#Eval("Title").ToString().Trim().Replace(" ", "-") %>/<%#Eval("ThemeId") %>" target="_blank">浏览</a>)<br />
-                        所属标签：<asp:TextBox ID="txtTags" runat="server" value='<%#GetThemeTags(Eval("ThemeId")) %>' OnTextChanged="propertyList_SelectedIndexChanged" AutoPostBack="true"></asp:TextBox><br />
+                        所属标签：<asp:TextBox ID="txtTags" runat="server" value='<%#GetThemeTags(Eval("ThemeId")) %>'></asp:TextBox>
+                        <asp:Button ID="btnSave" OnClick="propertyList_OnClick" Text="保存" runat="server" />
+                        <br />
                         <a href="/<%#Eval("ThumbnailName") %>" target="_blank"><img src="/<%#Eval("ThumbnailName").ToString().Replace(".jpg", "_112x168.jpg") %>" border="0" /></a>
                         <asp:HiddenField ID="hidThemeId" runat="server" />
                         </td>
@@ -108,7 +110,7 @@
           </tbody>
         </table>
         <div class="pager">
-            <asp:AspNetPager ID="pager" runat="server" PageSize="20" FirstPageText="首页" LastPageText="末页" PrevPageText="上页" NextPageText="下页" OnPageChanged="pager_PageChanged"></asp:AspNetPager>
+            <asp:AspNetPager ID="pager" runat="server" PageSize="5" FirstPageText="首页" LastPageText="末页" PrevPageText="上页" NextPageText="下页" OnPageChanged="pager_PageChanged"></asp:AspNetPager>
         </div>
     </div>
     </form>

@@ -59,7 +59,7 @@
 			<ul class="breadcrumb">
 				<li class="home"><a href="/" title="Homepage">ithemesky.com Homepage</a></li>
 				<li><a href="/list/new/">All Categories</a></li>
-				<li><a href="/list/new/<%=ViewData.Model.CurrentTheme.CategoryName %>_<%=ViewData.Model.CurrentTheme.CategoryId %>/"><%=ViewData.Model.CurrentTheme.CategoryName %></a></li>
+				<li><a href="/list/new/<%=ViewData.Model.CurrentTheme.CategoryName.Replace(" ", "").Replace("&", "-") %>_<%=ViewData.Model.CurrentTheme.CategoryId %>/"><%=ViewData.Model.CurrentTheme.CategoryName %></a></li>
 				<li><a href="<%=ViewData.Model.CurrentTheme.ThemeDetailUrl %>"><%=ViewData.Model.CurrentTheme.Title %></a></li>
 			</ul>
 		</div>
@@ -85,7 +85,7 @@
 						<dd>
 						    <% for (int i = 0; i < ViewData.Model.Tags.Count; i++)
                             { %>
-                                <%= i > 0 ? ", " : ""%><a href="#<%=ViewData.Model.Tags[i] %>"><%=ViewData.Model.Tags[i] %></a>
+                                <%= i > 0 ? ", " : ""%><a href="/list/new/1/<%=ViewData.Model.Tags[i] %>"><%=ViewData.Model.Tags[i] %></a>
 						    <%} %>
 						</dd>
 					</dl>
