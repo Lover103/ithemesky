@@ -20,7 +20,7 @@ namespace IThemeSky.ThemesRobot
             //MRobot r = new MRobot();
             //r.Start();
             RepairTheme rt = new RepairTheme();
-            rt.Start();
+            rt.RepairCode();
             Console.WriteLine("BinGo!");
             Console.Read();
         }

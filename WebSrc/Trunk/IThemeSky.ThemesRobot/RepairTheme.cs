@@ -18,7 +18,20 @@ namespace IThemeSky.ThemesRobot
         public RepairTheme()
         {
             _connection = ThemeRepositoryFactory.Default.ConnectionProvider.GetReadConnectionString();
-            _themeDataFile = Path.Combine(Environment.CurrentDirectory, "rewrite.dll");
+            _themeDataFile = Path.Combine(SAVE_PATH, "rewrite.dll");
+        }
+
+        public void RepairCode()
+        { 
+            List<Theme> themes = SerializeHelper.BinaryDeserialize<List<Theme>>(_themeDataFile);
+            foreach (Theme theme in themes)
+            {
+                int result = SqlHelper.ExecuteNonQuery(_connection, System.Data.CommandType.Text, "UPDATE Theme SET Title=N'" + theme.Title.Replace("'", "''") + "',Description=N'" + theme.Description.Replace("'", "''") +  "' WHERE AuthorName='" + theme.AuthorName + "' AND Source=1 AND CheckState<1");
+                if (result > 0)
+                {
+                    Console.WriteLine(theme.Title);
+                }
+            }
         }
 
         public void Start()

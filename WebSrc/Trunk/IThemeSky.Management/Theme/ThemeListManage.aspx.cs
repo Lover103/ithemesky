@@ -117,6 +117,24 @@ namespace IThemeSky.Management.Theme
             _repositoryManage.UpdateTheme(theme);
             ltlMessage.Text = message;
         }
+
+        protected void propertyList_OnClick(object sender, EventArgs e)
+        {
+            RepeaterItem item = (sender as Control).Parent as RepeaterItem;
+            int themeId = Convert.ToInt32((item.FindControl("hidThemeId") as HiddenField).Value);
+            IThemeSky.Model.Theme theme = _repositoryManage.GetTheme(themeId);
+            TextBox txtTitle = item.FindControl("txtTitle") as TextBox;
+            TextBox txtTags = item.FindControl("txtTags") as TextBox;
+            theme.Title = txtTitle.Text;
+            _repositoryManage.UpdateTheme(theme);
+            string[] tags = txtTags.Text.Split(',');
+            _repositoryManage.DeleteTagMaps(themeId);
+            foreach (string tag in tags)
+            {
+                _repositoryManage.MappingThemeTag(themeId, tag);
+            }
+            ltlMessage.Text = "修改主题基本信息成功";
+        }
         protected void filter_Changed(object sender, EventArgs e)
         {
             BindThemeList();

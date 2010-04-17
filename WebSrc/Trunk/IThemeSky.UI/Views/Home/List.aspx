@@ -39,9 +39,14 @@
 			<div class="selectedTips">
 				<p class="clearfix">
 					<span class="tips">Please choose anyone of the tags or any tags together below. (e.g. blue, red, and Christmas.)</span>
-					<a href="#" class="close" onclick="$('div.selectedTips').hide()">I got it</a>
+					<a href="#" class="close" onclick="createCookie('GotTagsHelp', '1', 365);$('div.selectedTips').hide();">I got it</a>
 				</p>
 			</div>
+			<script type="text/javascript">
+			    if (readCookie('GotTagsHelp') != null) {
+			        $('div.selectedTips').hide();
+			    }
+			</script>
 			<!--tips end-->
 			<!--tags sort list begin-->
 			<div class="selectTags">

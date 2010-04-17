@@ -57,15 +57,15 @@ namespace IThemeSky.DataAccess
 			{
 				SqlParameterHelper.BuildInputParameter("@CategoryId",SqlDbType.Int, 4, theme.CategoryId),
 				SqlParameterHelper.BuildInputParameter("@ParentCategoryId",SqlDbType.Int, 4, theme.ParentCategoryId),
-				SqlParameterHelper.BuildInputParameter("@Title",SqlDbType.VarChar, 300, theme.Title),
+				SqlParameterHelper.BuildInputParameter("@Title",SqlDbType.NVarChar, 300, theme.Title),
 				SqlParameterHelper.BuildInputParameter("@FileSize",SqlDbType.BigInt, 8, theme.FileSize),
-				SqlParameterHelper.BuildInputParameter("@Description",SqlDbType.VarChar, 1000, theme.Description),
+				SqlParameterHelper.BuildInputParameter("@Description",SqlDbType.NVarChar, 1000, theme.Description),
 				SqlParameterHelper.BuildInputParameter("@DisplayState",SqlDbType.SmallInt, 2, theme.DisplayState.ToInt32()),
 				SqlParameterHelper.BuildInputParameter("@CheckState",SqlDbType.SmallInt, 2, theme.CheckState.ToInt32()),
 				SqlParameterHelper.BuildInputParameter("@AuthorId",SqlDbType.Int, 4, theme.AuthorId),
 				SqlParameterHelper.BuildInputParameter("@CheckerId",SqlDbType.Int, 4, theme.CheckerId),
 				SqlParameterHelper.BuildInputParameter("@CommendIndex",SqlDbType.Int, 4, theme.CommendIndex),
-				SqlParameterHelper.BuildInputParameter("@ThumbnailName",SqlDbType.VarChar, 100, theme.ThumbnailName),
+				SqlParameterHelper.BuildInputParameter("@ThumbnailName",SqlDbType.NVarChar, 100, theme.ThumbnailName),
 				SqlParameterHelper.BuildInputParameter("@AddTime",SqlDbType.DateTime, 8, theme.AddTime),
 				SqlParameterHelper.BuildInputParameter("@UpdateTime",SqlDbType.DateTime, 8, theme.UpdateTime),
 				SqlParameterHelper.BuildInputParameter("@RateScore",SqlDbType.Int, 4, theme.RateScore),
@@ -76,9 +76,9 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@LastWeekDownloads",SqlDbType.Int, 4, theme.LastWeekDownloads),
 				SqlParameterHelper.BuildInputParameter("@LastMonthDownloads",SqlDbType.Int, 4, theme.LastMonthDownloads),
 				SqlParameterHelper.BuildInputParameter("@Source",SqlDbType.Int, 4, theme.Source.ToInt32()),
-                SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.VarChar, 300, theme.DownloadUrl),
-                SqlParameterHelper.BuildInputParameter("@AuthorName", SqlDbType.VarChar, 128, theme.AuthorName),
-                SqlParameterHelper.BuildInputParameter("@AuthorMail", SqlDbType.VarChar, 128, theme.AuthorMail),
+                SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.NVarChar, 300, theme.DownloadUrl),
+                SqlParameterHelper.BuildInputParameter("@AuthorName", SqlDbType.NVarChar, 128, theme.AuthorName),
+                SqlParameterHelper.BuildInputParameter("@AuthorMail", SqlDbType.NVarChar, 128, theme.AuthorMail),
 			};
             string cmdText = @"
                 INSERT INTO Theme
@@ -134,15 +134,15 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@ThemeId", SqlDbType.Int, 4, theme.ThemeId),
 				SqlParameterHelper.BuildInputParameter("@CategoryId", SqlDbType.Int, 4, theme.CategoryId),
 				SqlParameterHelper.BuildInputParameter("@ParentCategoryId", SqlDbType.Int, 4, theme.ParentCategoryId),
-				SqlParameterHelper.BuildInputParameter("@Title", SqlDbType.VarChar, 300, theme.Title),
+				SqlParameterHelper.BuildInputParameter("@Title", SqlDbType.NVarChar, 300, theme.Title),
 				SqlParameterHelper.BuildInputParameter("@FileSize", SqlDbType.BigInt, 8, theme.FileSize),
-				SqlParameterHelper.BuildInputParameter("@Description", SqlDbType.VarChar, 1000, theme.Description),
+				SqlParameterHelper.BuildInputParameter("@Description", SqlDbType.NVarChar, 1000, theme.Description),
 				SqlParameterHelper.BuildInputParameter("@DisplayState", SqlDbType.SmallInt, 2, theme.DisplayState),
 				SqlParameterHelper.BuildInputParameter("@CheckState", SqlDbType.SmallInt, 2, theme.CheckState),
 				SqlParameterHelper.BuildInputParameter("@AuthorId", SqlDbType.Int, 4, theme.AuthorId),
 				SqlParameterHelper.BuildInputParameter("@CheckerId", SqlDbType.Int, 4, theme.CheckerId),
 				SqlParameterHelper.BuildInputParameter("@CommendIndex", SqlDbType.Int, 4, theme.CommendIndex),
-				SqlParameterHelper.BuildInputParameter("@ThumbnailName", SqlDbType.VarChar, 100, theme.ThumbnailName),
+				SqlParameterHelper.BuildInputParameter("@ThumbnailName", SqlDbType.NVarChar, 100, theme.ThumbnailName),
 				SqlParameterHelper.BuildInputParameter("@AddTime", SqlDbType.DateTime, 8, theme.AddTime),
 				SqlParameterHelper.BuildInputParameter("@UpdateTime", SqlDbType.DateTime, 8, theme.UpdateTime),
 				SqlParameterHelper.BuildInputParameter("@RateScore", SqlDbType.Int, 4, theme.RateScore),
@@ -153,9 +153,9 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@LastWeekDownloads", SqlDbType.Int, 4, theme.LastWeekDownloads),
 				SqlParameterHelper.BuildInputParameter("@LastMonthDownloads", SqlDbType.Int, 4, theme.LastMonthDownloads),
 				SqlParameterHelper.BuildInputParameter("@Source", SqlDbType.Int, 4, theme.Source),
-				SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.VarChar, 300, theme.DownloadUrl),
-                SqlParameterHelper.BuildInputParameter("@AuthorName", SqlDbType.VarChar, 128, theme.AuthorName),
-                SqlParameterHelper.BuildInputParameter("@AuthorMail", SqlDbType.VarChar, 128, theme.AuthorMail),
+				SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.NVarChar, 300, theme.DownloadUrl),
+                SqlParameterHelper.BuildInputParameter("@AuthorName", SqlDbType.NVarChar, 128, theme.AuthorName),
+                SqlParameterHelper.BuildInputParameter("@AuthorMail", SqlDbType.NVarChar, 128, theme.AuthorMail),
 			};
             return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
         }
@@ -180,7 +180,7 @@ namespace IThemeSky.DataAccess
 			{
 				SqlParameterHelper.BuildInputParameter("@ThemeId",SqlDbType.Int, 4, themeId),
 				SqlParameterHelper.BuildInputParameter("@IsDefault",SqlDbType.SmallInt, 2, isDefault ? 1 : 0),
-				SqlParameterHelper.BuildInputParameter("@Url",SqlDbType.VarChar, 500, url),
+				SqlParameterHelper.BuildInputParameter("@Url",SqlDbType.NVarChar, 500, url),
 				SqlParameterHelper.BuildInputParameter("@Source",SqlDbType.SmallInt, 2, source),
 				SqlParameterHelper.BuildInputParameter("@AddTime",SqlDbType.DateTime, 8, DateTime.Now)
 			};
@@ -203,7 +203,7 @@ namespace IThemeSky.DataAccess
             ";
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				SqlParameterHelper.BuildInputParameter("@TagName", SqlDbType.VarChar, 40, tagName),
+				SqlParameterHelper.BuildInputParameter("@TagName", SqlDbType.NVarChar, 40, tagName),
 			};
             int tagId = Convert.ToInt32(SqlHelper.ExecuteScalar(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters));
 
@@ -251,11 +251,11 @@ namespace IThemeSky.DataAccess
 			";
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				SqlParameterHelper.BuildInputParameter("@CategoryName",SqlDbType.VarChar, 300, category.CategoryName),
+				SqlParameterHelper.BuildInputParameter("@CategoryName",SqlDbType.NVarChar, 300, category.CategoryName),
 				SqlParameterHelper.BuildInputParameter("@ParentId",SqlDbType.Int, 4, category.ParentId),
-				SqlParameterHelper.BuildInputParameter("@CategoryIcon",SqlDbType.VarChar, 300, category.CategoryIcon),
+				SqlParameterHelper.BuildInputParameter("@CategoryIcon",SqlDbType.NVarChar, 300, category.CategoryIcon),
 				SqlParameterHelper.BuildInputParameter("@SortNumber",SqlDbType.Int, 4, category.SortNumber),
-				SqlParameterHelper.BuildInputParameter("@BindTagCategories",SqlDbType.VarChar, 500, category.BindTagCategories)
+				SqlParameterHelper.BuildInputParameter("@BindTagCategories",SqlDbType.NVarChar, 500, category.BindTagCategories)
 			};
             category.CategoryId = Convert.ToInt32(SqlHelper.ExecuteScalar(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters));
             return category.CategoryId > 0;
@@ -279,11 +279,11 @@ namespace IThemeSky.DataAccess
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				SqlParameterHelper.BuildInputParameter("@CategoryId", SqlDbType.Int, 4, category.CategoryId),
-				SqlParameterHelper.BuildInputParameter("@CategoryName", SqlDbType.VarChar, 300, category.CategoryName),
+				SqlParameterHelper.BuildInputParameter("@CategoryName", SqlDbType.NVarChar, 300, category.CategoryName),
 				SqlParameterHelper.BuildInputParameter("@ParentId", SqlDbType.Int, 4, category.ParentId),
-				SqlParameterHelper.BuildInputParameter("@CategoryIcon", SqlDbType.VarChar, 300, category.CategoryIcon),
+				SqlParameterHelper.BuildInputParameter("@CategoryIcon", SqlDbType.NVarChar, 300, category.CategoryIcon),
 				SqlParameterHelper.BuildInputParameter("@SortNumber", SqlDbType.Int, 4, category.SortNumber),
-				SqlParameterHelper.BuildInputParameter("@BindTagCategories", SqlDbType.VarChar, 500, category.BindTagCategories)
+				SqlParameterHelper.BuildInputParameter("@BindTagCategories", SqlDbType.NVarChar, 500, category.BindTagCategories)
 			};
             return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
         }
