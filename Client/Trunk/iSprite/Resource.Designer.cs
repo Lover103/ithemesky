@@ -151,6 +151,20 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap go_backward {
+            get {
+                object obj = ResourceManager.GetObject("go_backward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap go_forward {
+            get {
+                object obj = ResourceManager.GetObject("go_forward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Img_button {
             get {
                 object obj = ResourceManager.GetObject("Img_button", resourceCulture);

@@ -15,6 +15,11 @@ namespace iSprite
         static Utility()
         {
         }
+        internal static  string GetDirName(string path)
+        {
+            DirectoryInfo info = new DirectoryInfo(path);
+            return info.Name;
+        }
         internal static bool IsDriver(string path)
         {
             if (path.Length <= 3)

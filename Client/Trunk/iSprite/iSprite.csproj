@@ -9,8 +9,8 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>iSprite</RootNamespace>
-    <AssemblyName>iSprite</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <AssemblyName>iSpirit</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetZone>LocalIntranet</TargetZone>
     <GenerateManifests>false</GenerateManifests>
@@ -53,9 +53,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Web" />
     <Reference Include="System.Data" />
@@ -331,6 +328,8 @@
   <ItemGroup>
     <Content Include="Dlls\ICSharpCode.SharpZipLib.dll" />
     <Content Include="iSprite_icon_32.ico" />
+    <None Include="Resources\go_forward.png" />
+    <None Include="Resources\go_backward.png" />
     <None Include="Resources\pg_loader_11.png" />
     <None Include="Resources\pg_loader_10.png" />
     <None Include="Resources\pg_loader_9.png" />

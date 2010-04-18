@@ -77,7 +77,7 @@ namespace iSprite
         {
             InitializeComponent();
 
-            this.Text = "iSprite (V" + iSpriteContext.Current.CurrentVersion + ")";
+            this.Text = "iSpirit (V" + iSpriteContext.Current.CurrentVersion + ")";
             this.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
 
             Utility.SetWindow(this);

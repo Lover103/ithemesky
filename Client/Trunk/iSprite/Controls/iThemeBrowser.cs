@@ -29,6 +29,7 @@ namespace iSprite
         WebBrowser themeBrowser;
         FlowLayoutPanel  m_themesPanel;
         internal event FileProgressHandler OnProgressHandler;
+        ToolStripItem tsbtn_Back, tsbtn_Forward;
 
         #endregion
 
@@ -122,15 +123,6 @@ namespace iSprite
             m_Toolmenu.Items.Add(CreateMenuItem("tsbtn_InstallFromZIP", "Install From ZIP", global::iSprite.Resource.zip_32));
             m_Toolmenu.Items.Add(CreateMenuItem("tsbtn_InstallFromFolder", "Install From Folder", global::iSprite.Resource.Folder_16));
 
-            foreach (ToolStripItem item in m_Toolmenu.Items)
-            {
-                if (item is ToolStripButton)
-                {
-                    item.Click += new EventHandler(toolmenu_Click);
-                    item.Enabled = false;
-                }
-            }
-
             #region tsbtn_ThemesIniPhone
             ToolStripSplitButton tsbtn_ThemesIniPhone = new ToolStripSplitButton();
             tsbtn_ThemesIniPhone.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -158,14 +150,14 @@ namespace iSprite
             tsbtn_ThemesIniPhone.DropDown = ctxThemesIniPhone;
 
             ToolStripMenuItem ctxitem = new ToolStripMenuItem("Apply Selected Theme");
-            ctxitem.Click += new EventHandler(ctxitem_Click);
+            ctxitem.Click += new EventHandler(ThemeManItem_Click);
             ctxThemesIniPhone.Items.Add(ctxitem);
 
             ctxitem = new ToolStripMenuItem("Delete Selected Themes");
-            ctxitem.Click += new EventHandler(ctxitem_Click);
+            ctxitem.Click += new EventHandler(ThemeManItem_Click);
             ctxThemesIniPhone.Items.Add(ctxitem);
             ctxitem = new ToolStripMenuItem("Goto Online Themes");
-            ctxitem.Click += new EventHandler(ctxitem_Click);
+            ctxitem.Click += new EventHandler(ThemeManItem_Click);
             ctxThemesIniPhone.Items.Add(ctxitem);
             #endregion
 
@@ -181,6 +173,8 @@ namespace iSprite
             themeBrowser.TabIndex = 0;
             themeBrowser.Url = new Uri(iSpriteContext.Current.ThemeHomePage, System.UriKind.Absolute);
             themeBrowser.Navigating += new WebBrowserNavigatingEventHandler(themeBrowser_Navigating);
+            themeBrowser.CanGoForwardChanged += new EventHandler(themeBrowser_CanGoForwardChanged);
+            themeBrowser.CanGoBackChanged += new EventHandler(themeBrowser_CanGoBackChanged);
             #endregion
 
             #region m_themesPanel
@@ -193,9 +187,45 @@ namespace iSprite
             m_themesPanel.AutoScroll = true;
             m_themesPanel.Location = new Point(m_Toolmenu.Location.X, m_Toolmenu.Location.Y + m_Toolmenu.Height);
             #endregion
+
+            tsbtn_Back = CreateMenuItem("tsbtn_Back", "Go Back", global::iSprite.Resource.go_backward);
+            tsbtn_Forward = CreateMenuItem("tsbtn_Forward", "Go Forward", global::iSprite.Resource.go_forward);
+            m_Toolmenu.Items.Add(tsbtn_Back);
+            m_Toolmenu.Items.Add(tsbtn_Forward);
+
+            tsbtn_Back.Enabled = false;
+            tsbtn_Forward.Enabled = false;
+
+            //事件
+            foreach (ToolStripItem item in m_Toolmenu.Items)
+            {
+                if (item is ToolStripButton)
+                {
+                    item.Click += new EventHandler(toolmenu_Click);
+                    item.Enabled = false;
+                }
+            }
         }
 
-        void ctxitem_Click(object sender, EventArgs e)
+        void themeBrowser_CanGoBackChanged(object sender, EventArgs e)
+        {
+            tsbtn_Back.Enabled = themeBrowser.CanGoBack;
+        }
+
+        void themeBrowser_CanGoForwardChanged(object sender, EventArgs e)
+        {
+            tsbtn_Forward.Enabled = themeBrowser.CanGoForward;
+        }
+
+        #endregion
+
+        #region iPhone上的主题管理
+        /// <summary>
+        /// iPhone上的主题管理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void ThemeManItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
             ThemePreviewItem p;
@@ -206,7 +236,7 @@ namespace iSprite
                     foreach (Control c in m_themesPanel.Controls)
                     {
                         if (c is ThemePreviewItem)
-                        { 
+                        {
                             p = (ThemePreviewItem)c;
                             if (p.IsSelected)
                             {
@@ -311,6 +341,14 @@ namespace iSprite
                 case "tsbtn_InstallFromFolder":
                     InstallFromFolder();
                     break;
+
+                case "tsbtn_Back":
+                    themeBrowser.GoBack();
+                    break;
+
+                case "tsbtn_Forward":
+                    themeBrowser.GoForward();
+                    break;
             }
         }
         #endregion
@@ -362,7 +400,7 @@ namespace iSprite
                     }
                 }
             }
-            //RaiseMessageHandler(this, "", MessageTypeOption.HiddenStatusBar);
+            RaiseMessageHandler(this, "", MessageTypeOption.HiddenStatusBar);
         }
         #endregion
 
@@ -420,7 +458,7 @@ namespace iSprite
                     }
 
                     InstallFromFolder(
-                        Path.GetFileNameWithoutExtension(themepath).TrimEnd('\\'),
+                        Utility.GetDirName(themepath),
                         themepath
                         );
                 }
@@ -450,7 +488,7 @@ namespace iSprite
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 themepath = fbd.SelectedPath;
-                string themeName = Path.GetFileName(themepath.TrimEnd('\\'));
+                string themeName = Utility.GetDirName(themepath);
                 InstallFromFolder(themeName,themepath);
             }
         }
@@ -654,6 +692,9 @@ namespace iSprite
                     item.Enabled = isContected;
                 }
             }
+
+            tsbtn_Back.Enabled = false;
+            tsbtn_Forward.Enabled = false;
         }
         #endregion
 
@@ -951,12 +992,16 @@ namespace iSprite
         /// <param name="list"></param>
         void DeleteThemes(List<string> list)
         {
-            RaiseMessageHandler(this, "Begin to Delete Themes", MessageTypeOption.SetStatusBar);
-            foreach (string themeName in list)
+            if (list.Count > 0 &&
+                MessageHelper.ShowConfirm("Are you sure you want to delete the selected themes ? ") == DialogResult.OK)
             {
-                m_iPhoneDevice.DeleteDirectory(iSpriteContext.Current.iPhone_WinterBoardFile_Path + "/" + themeName);
+                RaiseMessageHandler(this, "Begin to Delete Themes", MessageTypeOption.SetStatusBar);
+                foreach (string themeName in list)
+                {
+                    m_iPhoneDevice.DeleteDirectory(iSpriteContext.Current.iPhone_WinterBoardFile_Path + "/" + themeName);
+                }
+                RaiseMessageHandler(this, "", MessageTypeOption.HiddenStatusBar);
             }
-            RaiseMessageHandler(this, "", MessageTypeOption.HiddenStatusBar);
         }
         #endregion
     }

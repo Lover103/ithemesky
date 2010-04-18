@@ -80,7 +80,7 @@ namespace iSprite
             {
                 if (!showFullPath)
                 {
-                    text = Path.GetFileName(fullName.TrimEnd(m_FileDevice.DirectorySeparatorChar));
+                    text = Utility.GetDirName(fullName);
                 }
             }
 

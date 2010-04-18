@@ -38,7 +38,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Xml;
 using System.Xml.Schema;
@@ -138,7 +137,11 @@ namespace CE.iPhone.PList {
             writer.BaseStream.Write(keys, 0, keys.Length);
             writer.BaseStream.Write(values, 0, values.Length);
 
-            KeyValuePair<String, IPListElement>[] elems = this.ToArray();
+            ICollection<KeyValuePair<String, IPListElement>> is2 = this as ICollection<KeyValuePair<String, IPListElement>>;
+            KeyValuePair<String, IPListElement>[] elems = new KeyValuePair<String, IPListElement>[this.Count];
+            is2.CopyTo(elems, 0);
+
+            //KeyValuePair<String, IPListElement>[] elems = this.ToArray();
 
             for (int i = 0; i < Count; i++) {
                 int elementIdx = writer.WriteInternal(PListElementFactory.Instance.CreateKeyElement(elems[i].Key));
