@@ -29,7 +29,7 @@ namespace iSprite
         {
             try
             {
-                string path = Application.StartupPath;
+                string path = iSpriteContext.Current.iSpriteApplicationDataPath;
                 string updatexmlpath = path + "\\UpdateFiles\\";
                 if (!Directory.Exists(updatexmlpath))
                 {
@@ -48,7 +48,7 @@ namespace iSprite
                         if (new Version(serverver) > new Version(iSpriteContext.Current.CurrentVersion))
                         {
                             RaiseMessageHandler(this,
-                                string.Format("The lastest iSprite version is V{0}, Would you to upgrade it ?", serverver),
+                                string.Format("The lastest iSpirit version is V{0}, Would you to upgrade it ?", serverver),
                                 MessageTypeOption.Upgrade
                                 );
                         }
@@ -64,21 +64,19 @@ namespace iSprite
         { 
             //下载文件
             //下载更新程序
-            string path = Application.StartupPath;
-            string iSpriteUpgradePath = path + "\\iSpriteUpgrade.exe";
-            if (Utility.DownloadFile(downurl + "\\iSpriteUpgrade.exe", iSpriteUpgradePath, OnProgressHandler))
+            string path = iSpriteContext.Current.iSpriteApplicationDataPath;
+            string iSpriteUpgradePath = path + "\\iSpiritUpgrade.exe";
+            if (Utility.DownloadFile(downurl + "\\iSpiritUpgrade.exe", iSpriteUpgradePath, OnProgressHandler))
             {
-                string iSpritePath = path + "\\iSprite.zip";
-                if (Utility.DownloadFile(downurl + "\\iSprite.zip", iSpritePath, OnProgressHandler))
+                string iSpritePath = path + "\\iSpirit.zip";
+                if (Utility.DownloadFile(downurl + "\\iSpirit.zip", iSpritePath, OnProgressHandler))
                 {
                     if (ZipHelper.UnZip(iSpritePath, path + "\\UpdateFiles\\") > 0)
                     {
-                        string appName = System.Diagnostics.Process.GetCurrentProcess().MainModule.ModuleName;
-                        appName = Path.GetFileNameWithoutExtension(appName);
-
+                        string appName = "iSpirit";
                         ProcessStartInfo startInfo = new ProcessStartInfo();
                         startInfo.FileName = iSpriteUpgradePath;
-                        startInfo.Arguments = appName;
+                        startInfo.Arguments = appName + ";" + Application.StartupPath;
                         startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
                         Process.Start(startInfo);

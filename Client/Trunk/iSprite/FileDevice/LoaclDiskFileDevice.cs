@@ -75,7 +75,7 @@ namespace iSprite
         {
             get
             {
-                return "NB";
+                //return "NB";
                 return SystemInformation.ComputerName;
             }
         }

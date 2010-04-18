@@ -37,9 +37,18 @@ namespace iSprite {
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("iSprite.Resource", typeof(Resource).Assembly);
+            get 
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
+                    Type type = typeof(Resource);
+                    string baseName = type.Name;
+                    if (!string.IsNullOrEmpty(type.Namespace))
+                    {
+                        baseName = type.Namespace + "." + baseName;
+                    }
+
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager(baseName, type.Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

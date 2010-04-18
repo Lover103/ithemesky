@@ -18,9 +18,10 @@ namespace iSpriteUpgrade
                 //先杀原有进程
                 try
                 {
-                    string appname = args[0];
+                    string appname = args[0].Split(';')[0];
+                    Console.WriteLine(appname);
                     //string appname = "iSprite";
-                    string currentpath = System.Environment.CurrentDirectory;
+                    string currentpath = args[0].Split(';')[1];
                     System.Diagnostics.Process[] ps = System.Diagnostics.Process.GetProcesses();
                     foreach (Process p in ps)
                     {
@@ -31,12 +32,14 @@ namespace iSpriteUpgrade
                             break;
                         }
                     }
-                    Thread.Sleep(TimeSpan.FromSeconds(2));
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
                     Console.WriteLine(currentpath);
                     if (currentpath != string.Empty)
                     {
                         //替换文件
-                        foreach (string file in Directory.GetFiles(currentpath + "\\UpdateFiles\\"))
+                        string iSpriteApplicationDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles).TrimEnd('\\')
+                   + @"\iSpirit\";
+                        foreach (string file in Directory.GetFiles(iSpriteApplicationDataPath + "\\UpdateFiles\\"))
                         {
                             if (Path.GetExtension(file) != ".xml")
                             {
@@ -45,10 +48,17 @@ namespace iSpriteUpgrade
                             }
                         }
 
-                        Directory.Delete(currentpath + "\\UpdateFiles\\",true);
+                        try
+                        {
+                            Directory.Delete(iSpriteApplicationDataPath + "\\UpdateFiles\\", true);
+                        }
+                        catch (Exception ex1)
+                        {
+                            Console.WriteLine(ex1.Message);
+                        }
 
                         //启动程序
-                        Process.Start(currentpath + @"\iSprite.exe");
+                        Process.Start(currentpath + @"\iSpirit.exe");
 
                     }
                 }
@@ -59,7 +69,7 @@ namespace iSpriteUpgrade
             }
 
             Console.WriteLine("完成升级");
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 

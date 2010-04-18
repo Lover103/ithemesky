@@ -182,8 +182,8 @@ namespace iSprite
         {
             get
             {
-                return "iSprite's iPhone";
-                //return m_deviceName;
+                //return "iSprite's iPhone";
+                return m_deviceName;
             }
         }
 
