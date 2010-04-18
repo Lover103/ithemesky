@@ -188,7 +188,7 @@ namespace IThemeSky.DataAccess
             switch (sort)
             {
                 case ThemeSortOption.New:
-                    return "AddTime DESC";
+                    return "UpdateTime DESC";
                 case ThemeSortOption.Popular:
                     return "Downloads DESC";
                 case ThemeSortOption.Rank_Of_Month:
