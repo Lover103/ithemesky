@@ -91,7 +91,7 @@
             this.pnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.55299F));
             this.pnl.Controls.Add(this.lblMsg, 1, 0);
             this.pnl.Controls.Add(this.picbox, 0, 0);
-            this.pnl.Location = new System.Drawing.Point(12, 31);
+            this.pnl.Location = new System.Drawing.Point(8, 31);
             this.pnl.Name = "pnl";
             this.pnl.RowCount = 1;
             this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -104,7 +104,7 @@
             this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
-            this.pnl.Size = new System.Drawing.Size(434, 56);
+            this.pnl.Size = new System.Drawing.Size(443, 56);
             this.pnl.TabIndex = 4;
             // 
             // lblMsg
@@ -112,9 +112,9 @@
             this.lblMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMsg.AutoSize = true;
             this.lblMsg.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblMsg.Location = new System.Drawing.Point(43, 21);
+            this.lblMsg.Location = new System.Drawing.Point(44, 21);
             this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(388, 14);
+            this.lblMsg.Size = new System.Drawing.Size(396, 14);
             this.lblMsg.TabIndex = 0;
             this.lblMsg.Text = "Msg";
             // 
@@ -138,10 +138,6 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Name = "iSpriteMessageBox";
-            this.Controls.SetChildIndex(this.btnOK, 0);
-            this.Controls.SetChildIndex(this.btnCancel, 0);
-            this.Controls.SetChildIndex(this.btnAbort, 0);
-            this.Controls.SetChildIndex(this.pnl, 0);
             ((System.ComponentModel.ISupportInitialize)(this.btnOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnAbort)).EndInit();

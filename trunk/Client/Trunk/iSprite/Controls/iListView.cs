@@ -344,7 +344,7 @@ namespace iSprite
                             if (sourceName.EndsWith(@"\") || pcdriver.DirectoryExists(sourceName))
                             {
                                 //ÎÄ¼þ¼Ð
-                                destName = m_CurrentPath + pcdriver.GetFolderName(sourceName);
+                                destName = m_CurrentPath + Utility.GetDirName(sourceName);
                                 pcdriver.CopyDirectory(sourceName, destName);
                             }
                             else
@@ -630,7 +630,7 @@ namespace iSprite
 
             if (itemType == ListViewItemTypeOption.Folder)
             {
-                item.Text = m_FileDevice.GetFolderName(name);
+                item.Text = Utility.GetDirName(name);
             }
             else
             {

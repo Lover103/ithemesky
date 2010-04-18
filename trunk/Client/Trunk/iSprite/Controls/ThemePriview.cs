@@ -179,7 +179,14 @@ namespace iSprite
                             {
                                 using (Image objImage = Image.FromFile(fullFileName))
                                 {
-                                    m_ThemeIconDic[item.Key].Image = (Image)objImage.Clone();
+                                    if (objImage.Height > 60 || objImage.Width > 60)
+                                    {
+                                        m_ThemeIconDic[item.Key].Image = objImage.GetThumbnailImage(60, 60, null, IntPtr.Zero);
+                                    }
+                                    else
+                                    {
+                                        m_ThemeIconDic[item.Key].Image = (Image)objImage.Clone();
+                                    }
                                 }
                             }
                             catch
@@ -199,23 +206,29 @@ namespace iSprite
 
                         foreach (KeyValuePair<string, PictureBox> item in m_ThemeIconDic)
                         {
-                            Rectangle r = new Rectangle(
-                                item.Value.Location.X - pWallpaper.Location.X, 
-                                item.Value.Location.Y - pWallpaper.Location.Y, 
+                            try
+                            {
+                                Rectangle r = new Rectangle(
+                                item.Value.Location.X - pWallpaper.Location.X,
+                                item.Value.Location.Y - pWallpaper.Location.Y,
                                 item.Value.Image.Width,
                                 item.Value.Image.Height
                                 );
-                            
-                            if (forlistview)
-                            {
-                                Rectangle _r = new Rectangle(0, 0, item.Value.Image.Width, item.Value.Image.Height);
-                                item.Value.Visible = false;
-                                imgDraw.DrawImage(item.Value.Image, r, _r, GraphicsUnit.Pixel);
+
+                                if (forlistview)
+                                {
+                                    Rectangle _r = new Rectangle(0, 0, item.Value.Image.Width, item.Value.Image.Height);
+                                    item.Value.Visible = false;
+                                    imgDraw.DrawImage(item.Value.Image, r, _r, GraphicsUnit.Pixel);
+                                }
+                                else
+                                {
+                                    item.Value.Visible = true;
+                                    item.Value.BackgroundImage = mapWallpaper.Clone(r, mapWallpaper.PixelFormat);
+                                }
                             }
-                            else
-                            {
-                                item.Value.Visible = true;
-                                item.Value.BackgroundImage = mapWallpaper.Clone(r, mapWallpaper.PixelFormat);
+                            catch
+                            { 
                             }
                         }
                         if (forlistview)
@@ -277,6 +290,7 @@ namespace iSprite
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
+            this.Visible = false;
             RaiseMessageHandler(m_themeInfo, ThemePriviewMessageTypeOption.Upload);
         }
 

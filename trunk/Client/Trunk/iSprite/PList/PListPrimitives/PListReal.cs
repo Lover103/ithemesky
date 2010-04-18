@@ -37,7 +37,6 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 
 using CE.iPhone.PList.Internal;
 
@@ -107,8 +106,16 @@ namespace CE.iPhone.PList {
             switch (reader.CurrentElementLength) {
                 case 0: throw new PListFormatException("Real < 32Bit");
                 case 1: throw new PListFormatException("Real < 32Bit");
-                case 2: Value = BitConverter.ToSingle(buf.Reverse().ToArray(), 0); break;
-                case 3: Value = BitConverter.ToDouble(buf.Reverse().ToArray(), 0); break;
+                case 2:
+                    Array.Reverse(buf);
+                    Value = BitConverter.ToSingle(buf, 0); 
+                    //Value = BitConverter.ToSingle(buf.Reverse().ToArray(), 0); 
+                    break;
+                case 3:
+                    Array.Reverse(buf);
+                    Value = BitConverter.ToDouble(buf, 0); 
+                    //Value = BitConverter.ToDouble(buf.Reverse().ToArray(), 0); 
+                    break;
                 default: throw new PListFormatException("Real > 64Bit");
             }
         }
@@ -127,8 +134,11 @@ namespace CE.iPhone.PList {
         /// </summary>
         /// <param name="writer">The <see cref="T:CE.iPhone.PListBinaryWriter"/> to which the element is written.</param>
         /// <remarks>Provided for internal use only.</remarks>
-        public override void WriteBinary(PListBinaryWriter writer) {
-            Byte[] buf = BitConverter.GetBytes(Value).Reverse().ToArray();
+        public override void WriteBinary(PListBinaryWriter writer) 
+        {
+            Byte[] buf = BitConverter.GetBytes(Value);
+            Array.Reverse(buf);
+            //Byte[] buf = BitConverter.GetBytes(Value).Reverse().ToArray();
             writer.BaseStream.Write(buf, 0, buf.Length);
 
         }

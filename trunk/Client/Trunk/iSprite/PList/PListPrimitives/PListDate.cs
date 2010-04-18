@@ -37,11 +37,11 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-
-using System.Linq;
 using CE.iPhone.PList.Internal;
+using System.Runtime.InteropServices;
 
-namespace CE.iPhone.PList {
+namespace CE.iPhone.PList 
+{
     /// <summary>
     /// Represents a DateTime Value from a PList
     /// </summary>
@@ -109,8 +109,16 @@ namespace CE.iPhone.PList {
             switch (reader.CurrentElementLength) {
                 case 0: throw new PListFormatException("Date < 32Bit");
                 case 1: throw new PListFormatException("Date < 32Bit");
-                case 2: ticks = BitConverter.ToSingle(buf.Reverse().ToArray(), 0); break;
-                case 3: ticks = BitConverter.ToDouble(buf.Reverse().ToArray(), 0); break;
+                case 2:
+                    Array.Reverse(buf);
+                    ticks = BitConverter.ToSingle(buf, 0);
+                    //ticks = BitConverter.ToSingle(buf.Reverse().ToArray(), 0);
+                    break;
+                case 3:
+                    Array.Reverse(buf);
+                    ticks = BitConverter.ToDouble(buf, 0);
+                    //ticks = BitConverter.ToDouble(buf.Reverse().ToArray(), 0);
+                    break;
                 default: throw new PListFormatException("Date > 64Bit");
             }
 
@@ -137,7 +145,10 @@ namespace CE.iPhone.PList {
             DateTime start = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
             TimeSpan ts = Value - start;
-            Byte[] buf = BitConverter.GetBytes(ts.TotalSeconds).Reverse().ToArray();
+
+            Byte[] buf = BitConverter.GetBytes(ts.TotalSeconds);
+            Array.Reverse(buf);
+            //Byte[] buf = BitConverter.GetBytes(ts.TotalSeconds).Reverse().ToArray();
             writer.BaseStream.Write(buf, 0, buf.Length);
         }
     }

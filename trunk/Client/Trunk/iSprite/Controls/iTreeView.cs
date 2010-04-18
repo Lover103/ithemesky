@@ -414,7 +414,7 @@ namespace iSprite
                 }
                 if (m_FileDevice.CreateDirectory(folderName))
                 {
-                    TreeNode node = CreateEmtyNode(Path.GetFileName(folderName));
+                    TreeNode node = CreateEmtyNode(Utility.GetDirName(folderName));
                     node.Name = folderName + m_FileDevice.DirectorySeparatorChar;
                     this.SelectedNode.Nodes.Add(node);
                     SelectNodeByName(node.Name,true);
