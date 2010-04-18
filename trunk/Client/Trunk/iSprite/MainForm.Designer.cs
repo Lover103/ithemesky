@@ -211,7 +211,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
-            this.Text = "iSprite";
+            this.Text = "iSpirit";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Controls.SetChildIndex(this.faTabStrip1, 0);
             this.Controls.SetChildIndex(this.tabs, 0);

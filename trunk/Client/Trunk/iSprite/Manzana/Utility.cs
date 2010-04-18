@@ -15,7 +15,7 @@ namespace Manzana
         {
             if (isdebug)
             {
-                File.AppendAllText("c:/iSprite.log", DateTime.Now + content + "\r\n");
+                File.AppendAllText("c:/iSpirit.log", DateTime.Now + content + "\r\n");
             }
         }
 

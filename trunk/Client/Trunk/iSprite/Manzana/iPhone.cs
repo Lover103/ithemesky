@@ -1093,7 +1093,8 @@ namespace Manzana {
 
 		#region Private Methods
 		unsafe private bool ConnectToPhone() {
-			if (MobileDevice.AMDeviceConnect(iPhoneHandle) == 1) {
+			if (MobileDevice.AMDeviceConnect(iPhoneHandle) == 1) 
+            {
 				//int connid;
 
 				throw new Exception("Phone in recovery mode, support not yet implemented");
@@ -1119,11 +1120,6 @@ namespace Manzana {
 				return false;
 			}
 
-            //IntPtr stringRef = MobileDevice.AMDeviceCopyDeviceIdentifier(this.iPhoneHandle);
-            //string serialNumber = MobileDevice.CFStringRefToString(stringRef);
-            //string firmwareVersion = MobileDevice.AMDeviceCopyValue(this.iPhoneHandle, "FirmwareVersion");
-            //Thread.Sleep(10);
-            //string productVersion = MobileDevice.AMDeviceCopyValue(this.iPhoneHandle, "ProductVersion");
 
             if (MobileDevice.AMDeviceStartService(iPhoneHandle, MobileDevice.CFStringMakeConstantString("com.apple.afc2"), ref hService, null) != 0)
             {

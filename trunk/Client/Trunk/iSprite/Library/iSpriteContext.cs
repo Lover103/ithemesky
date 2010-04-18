@@ -135,7 +135,7 @@ namespace iSprite
             iPhone_InstallationPath = "/var/mobile/Library/Caches/com.apple.mobile.installation.plist";
 
             iSpriteApplicationDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles).TrimEnd('\\')
-                   + @"\iSprite\";
+                   + @"\iSpirit\";
 
             if (!Directory.Exists(iSpriteApplicationDataPath))
             {
@@ -143,7 +143,7 @@ namespace iSprite
             }
 
             iSpriteTempPath = Path.GetTempPath().TrimEnd('\\')
-                   + @"\iSprite\";
+                   + @"\iSpirit\";
 
             if (!Directory.Exists(iSpriteTempPath))
             {
@@ -194,7 +194,7 @@ namespace iSprite
 
             string ver = iphone.DeviceVersion;
             ver = ver.Trim();
-            _context.ThemeHomePage += "?chl=iSprite&phonever=" + ver
+            _context.ThemeHomePage += "?chl=iSpirit&phonever=" + ver
                 + "&softver=" + _context.CurrentVersion
                 + "&iTunesVer=" + iphone.iTunesVer
                 + "&deviceid=" + iphone.DeviceId;
