@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<DetailModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	<title><%=ViewData.Model.CurrentTheme.Title %> iphone theme - iphone themes free download, ithemesky.com provided iphone themes</title>
+	<title><%=ViewData.Model.CurrentTheme.Title %> iPhone theme - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
     <meta name="description" content="ithemesky.com provided iphone themes, more than 2,000 iphone themes free download!" />
-    <meta name="keywords" content="<% foreach (string tag in ViewData.Model.Tags){ %><%=tag %>,<%} %>,<%=ViewData.Model.CurrentTheme.CategoryName %>,iphone theme, iphone themes, jailbroken iphone, install iphone themes, free download, iphone" />
+    <meta name="keywords" content="<% foreach (string tag in ViewData.Model.Tags){ %><%=tag %>,<%} %>,<%=ViewData.Model.CurrentTheme.CategoryName %>, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
     <link rel="stylesheet" href="/Content/css/fancybox.css" type="text/css" />
     <script type="text/javascript" src="/Content/js/fancybox.js"></script>
     <script type="text/javascript">
