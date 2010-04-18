@@ -14,15 +14,18 @@ function BindSuggestEvent() {
     $('#txtSearchKeyword').keyup(
         function(evt) {
             if (evt.keyCode == 13) {
-
+                if ($(this).val() != '') {
+                    window.location.href = '/search/new/' + escape($(this).val()) + '/1';
+                }
             }
             else {
                 if ($(this).val() != '') {
                     $('.searchPannel .searchResult').show('slow');
                     $('.searchPannel .searchResult').load('/Service/GetSuggestThemes/' + $(this).val() + ',3');
+                    $('.searchPannel a.btn').show();
                 }
                 else {
-                    $('.searchPannel .searchResult').hide();
+                    $('.searchPannel .searchResult').show();
                 }
             }
         }
@@ -31,6 +34,8 @@ function BindSuggestEvent() {
         function() {
             $('.searchPannel .searchResult .list').html(' No Result. Please try another key word.');
             $('.searchPannel .searchResult').hide('slow');
+            $('#txtSearchKeyword').val('');
+            $(this).hide();
         }
     );
 }
