@@ -87,5 +87,12 @@ namespace IThemeSky.DataAccess
         /// <param name="userIp"></param>
         /// <returns></returns>
         bool RateTheme(int themeId, int score, int userId, string userIp);
+        /// <summary>
+        /// 增加下载历史
+        /// </summary>
+        /// <param name="themeId">主题id</param>
+        /// <param name="userIp">用户ip</param>
+        /// <returns></returns>
+        bool InsertDownloadHistory(int themeId, string userIp);
     }
 }

@@ -114,6 +114,7 @@ namespace IThemeSky.Management.Theme
                     }
                 }
             }
+            theme.UpdateTime = DateTime.Now;
             _repositoryManage.UpdateTheme(theme);
             ltlMessage.Text = message;
         }
@@ -126,6 +127,7 @@ namespace IThemeSky.Management.Theme
             TextBox txtTitle = item.FindControl("txtTitle") as TextBox;
             TextBox txtTags = item.FindControl("txtTags") as TextBox;
             theme.Title = txtTitle.Text;
+            theme.UpdateTime = DateTime.Now;
             _repositoryManage.UpdateTheme(theme);
             string[] tags = txtTags.Text.Split(',');
             _repositoryManage.DeleteTagMaps(themeId);

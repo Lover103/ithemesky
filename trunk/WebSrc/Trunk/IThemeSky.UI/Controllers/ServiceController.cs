@@ -24,6 +24,7 @@ namespace IThemeSky.UI.Controllers
             {
                 theme.Downloads++;
                 _themeManageRepository.IncreaseDownloads(themeId, 1);
+                _themeManageRepository.InsertDownloadHistory(themeId, Request.UserHostAddress);
                 return Redirect("/" + theme.DownloadUrl);
             }
             else

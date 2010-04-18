@@ -68,7 +68,9 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ISpiritController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -114,12 +116,14 @@
     <Content Include="Content\js\fancybox.js" />
     <Content Include="Content\js\IThemeSky.js" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Help\faq.aspx" />
     <Content Include="Views\Home\Detail.aspx" />
     <Content Include="Views\Home\FAQ.aspx" />
     <Content Include="Views\Home\Help.aspx" />
     <Content Include="Views\Home\Search.aspx" />
     <Content Include="Views\Home\List.aspx" />
     <Content Include="Views\Home\SubmitTheme.aspx" />
+    <Content Include="Views\iSpirit\Index.aspx" />
     <Content Include="Views\Shared\HotTags.ascx" />
     <Content Include="Views\Shared\NormalThemeRepeater.ascx" />
     <Content Include="Views\Shared\PostCommentForm.ascx" />

@@ -91,6 +91,24 @@ namespace IThemeSky.UI
                 "Service/RateTheme/{themeId},{score}", // URL with parameters
                 new { controller = "Service", action = "RateTheme" } // Parameter defaults
             );
+            //ISpirit专用服务
+            routes.MapRoute(
+                "iSpiritService", // Route name
+                "iSpirit/download", // URL with parameters
+                new { controller = "ISpirit", action = "Donwload" } // Parameter defaults
+            );
+            routes.MapRoute(
+                "iSpirit", // Route name
+                "iSpirit/{viewName}", // URL with parameters
+                new { controller = "iSpirit", action = "Index", viewName = "index" } // Parameter defaults
+            );
+
+            //帮助
+            routes.MapRoute(
+                "Help", // Route name
+                "Help/{viewName}", // URL with parameters
+                new { controller = "Help", action = "Index", viewName = "faq" } // Parameter defaults
+            );
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{themeId}", // URL with parameters

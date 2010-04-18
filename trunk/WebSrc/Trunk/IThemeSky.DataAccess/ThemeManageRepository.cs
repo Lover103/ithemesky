@@ -346,6 +346,32 @@ namespace IThemeSky.DataAccess
                 , userId
                 , userIp.Replace("'", "''")
                 );
-            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText) > 0;        }        #endregion
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText) > 0;        }
+        /// <summary>
+        /// 增加下载历史
+        /// </summary>
+        /// <param name="themeId">主题id</param>
+        /// <param name="userIp">用户ip</param>
+        /// <returns></returns>
+        public bool InsertDownloadHistory(int themeId, string userIp)
+        {
+            string cmdText = @"                INSERT INTO [ThemeDownloadHistory]
+                       ([ThemeId]
+                       ,[AddTime]
+                       ,[UserId]
+                       ,[UserIp]
+                       )
+                 VALUES
+                       (@ThemeId
+                       ,getdate()
+                       ,0
+                       ,@UserIp
+                       )            ";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				SqlParameterHelper.BuildInputParameter("@ThemeId",SqlDbType.Int, 4, themeId),
+                SqlParameterHelper.BuildInputParameter("@UserIp",SqlDbType.VarChar, 40, userIp),
+			};
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;        }        #endregion
     }
 }

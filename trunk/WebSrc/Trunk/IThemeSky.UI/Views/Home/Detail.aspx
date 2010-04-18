@@ -102,6 +102,10 @@
 						<dd><%=ViewData.Model.CurrentTheme.Downloads.ToString("N00") %></dd>
 					</dl>
 					<dl class="details clearfix"> 
+           				<dt>Size:</dt>
+						<dd><%=ViewData.Model.CurrentTheme.FileSize.ToFileSize() %></dd>
+					</dl>
+					<dl class="details clearfix"> 
            				<dt>Rate now:</dt>
 						<dd class="detailRate">
 							<span class="rateResult star<%=ViewData.Model.CurrentTheme.CommendIndex %>"><%=ViewData.Model.CurrentTheme.CommendIndex %>/5 stars</span>
