@@ -7,10 +7,11 @@ using System.Web.UI.WebControls;
 using IThemeSky.Library.Extensions;
 using IThemeSky.Model;
 using IThemeSky.DataAccess;
+using IThemeSky.Management.Base;
 
 namespace IThemeSky.Management.Theme
 {
-    public partial class ThemeInfoManage : System.Web.UI.Page
+    public partial class ThemeInfoManage : PageBase
     {
         private IThemeViewRepository _repositoryView = ThemeRepositoryFactory.Default.GetThemeViewRepository();
         private IThemeManageRepository _repositoryManage = ThemeRepositoryFactory.Default.GetThemeManageRepository();
