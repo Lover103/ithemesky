@@ -2,8 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	<title><%=ViewData.Model.CategoryId > 0 ? ViewData.Model.CategoryName : "All Categories"%> - <%=ViewData.Model.Sort%> - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
-    <meta name="description" content="ithemesky.com provided iphone themes, more than 2,000 iphone themes free download!" />
-    <meta name="keywords" content="iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
+    <meta name="description" content="ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
+    <meta name="keywords" content="iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
     <script type="text/javascript">
         $(document).ready(
             function() {
@@ -38,7 +38,7 @@
 			<!--tips begin-->
 			<div class="selectedTips">
 				<p class="clearfix">
-					<span class="tips">Please choose anyone of the tags or any tags together below. (e.g. blue, red, and Christmas.)</span>
+					<span class="tips">Please choose anyone of the tags or any tags together below. (e.g. Blue, Red, and cool.)</span>
 					<a href="#" class="close" onclick="createCookie('GotTagsHelp', '1', 365);$('div.selectedTips').hide();">I got it</a>
 				</p>
 			</div>
@@ -88,7 +88,6 @@
 							<li><a href="#">logo</a></li>
 							<li><a href="#">funny</a></li>
 							<li><a href="#">cool</a></li>
-							<li><a href="#">funny</a></li>
 							<li><a href="#">design</a></li>
 							<li><a href="#">sketch</a></li>
 						</ul>
