@@ -20,7 +20,7 @@
 			<li class="s2"><a href="/list/new" title="All Categories">All Categories</a></li>
 			<li class="s3"><a href="/list/popular" title="Ranking">Ranking</a></li>
 			<li class="s4"><a href="/home/submitTheme" title="Submit Themes">Submit Themes</a></li>
-			<li class="s5"><a href="#" title="ispirit">ispirit</a></li>
+			<li class="s5"><a href="/ispirit" title="iSpirit">iSpirit</a></li>
 			<li class="s6 last"><a href="/help/faq" title="Help">Help</a></li>
 		</ul>
 		<div class="searchPannel">
