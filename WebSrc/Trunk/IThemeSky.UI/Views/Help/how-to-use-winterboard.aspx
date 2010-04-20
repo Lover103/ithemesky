@@ -2,14 +2,18 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 <title>How to Use WinterBoard: A Walkthrough - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
-<meta name="description" content="ithemesky.com provided iphone themes, more than 2,000 iphone themes free download!" />
-<meta name="keywords" content="How to Use WinterBoard, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
-<link type="text/css" rel="stylesheet" media="screen" href="/Content/css/lightbox.css">
-<script type="text/javascript" src="/Content/js/lightbox.js"></script>
+<meta name="description" content="ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
+<meta name="keywords" content="How to Use WinterBoard, iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
+<link type="text/css" rel="stylesheet" media="screen" href="/Content/css/fancybox_normal.css">
+<script type="text/javascript" src="/Content/js/fancybox_normal.js"></script>
 <script type="text/javascript">
-    $(function() {
-        $('a.lightbox').lightBox();
-    });
+$(document).ready(function() {
+	$("a.imgZoom").fancybox({
+		'titleShow'		: false,
+		'transitionIn'	: 'elastic',
+		'transitionOut'	: 'elastic'
+	});
+});
 </script>
 </asp:Content>
 
@@ -45,16 +49,16 @@
 					<p>Here, I'll walk through installing WinterBoard and downloading a theme from Cydia to apply to the iPhone Springboard.  I'll also show you a few of the different variations of theming that can be applied using WinterBoard.</p>
 					<h3>Walkthrough<br /><br /></h3>
 					<h4>1. Download WinterBoard from Cydia</h4>
-					<p><a rel="lightbox" href="/Content/images/help/winterboard/img_00019.png" class="lightbox"><img width="150" src="/Content/images/help/winterboard/img_00019-200x300.png" alt="" /></a>&nbsp;&nbsp; &nbsp;<a rel="lightbox" href="/Content/images/help/winterboard/img_00028.png" class="lightbox"><img width="150" alt="" src="/Content/images/help/winterboard/img_00028-200x300.png" /></a>&nbsp;&nbsp; &nbsp;<a rel="lightbox" href="/Content/images/help/winterboard/img_00034.png" class="lightbox"><img width="150"  alt="" src="/Content/images/help/winterboard/img_00034-200x300.png" /></a></p>
+					<p><a href="/Content/images/help/winterboard/img_00019.png" class="imgZoom"><img width="150" src="/Content/images/help/winterboard/img_00019-200x300.png" alt="" /></a>&nbsp;&nbsp; &nbsp;<a href="/Content/images/help/winterboard/img_00028.png" class="imgZoom"><img width="150" alt="" src="/Content/images/help/winterboard/img_00028-200x300.png" /></a>&nbsp;&nbsp; &nbsp;<a href="/Content/images/help/winterboard/img_00034.png" class="imgZoom"><img width="150"  alt="" src="/Content/images/help/winterboard/img_00034-200x300.png" /></a></p>
 					<h4>2. <span style="color:#FC0;">RESTART YOUR PHONE</span></h4>
 					<p>In order for WinterBoard to work correctly you MUST restart your phone after installation.  To do this hold down the power button until the "slide to power off" slider appears.  Power off the phone, and then press the power button again to turn it back on.</p>
-					<p><a rel="lightbox" href="/Content/images/help/winterboard/1426.png" class="lightbox"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/1426-200x300.png" /></a></p>
+					<p><a href="/Content/images/help/winterboard/1426.png" class="imgZoom"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/1426-200x300.png" /></a></p>
 					<h4>3. Open WinterBoard</h4>
 					<p>Tap the WinterBoard icon on the Springboard.</p>
-					<p><a rel="lightbox" href="/Content/images/help/winterboard/img_00018.png" class="lightbox"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00018-200x300.png" /></a></p>
+					<p><a href="/Content/images/help/winterboard/img_00018.png" class="imgZoom"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00018-200x300.png" /></a></p>
 					<h4>4. Apply Selected Theme(s)</h4>
 					<p>WinterBoard comes with a few built in themes.  One is Saurik's own to show off changing backgrounds and other elements that WinterBoard is capable of.  I say 'Theme(s)' in the title of this step because WinterBoard allows you to apply multiple themes at one time.  For instance, you might apply one of Saurik's themes and also want 'Transparent Icon Labels'.  You could select both, and elements from both would be applied to your Springboard.</p>
-					<p><a rel="lightbox" href="/Content/images/help/winterboard/img_00068.png" class="lightbox"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00068-200x300.png" /></a>&nbsp;&nbsp;&nbsp;<a rel="lightbox" href="/Content/images/help/winterboard/img_00086.png" class="lightbox"><img width="200" height="300"alt="" src="/Content/images/help/winterboard/img_00086-200x300.png" /></a></p>
+					<p><a href="/Content/images/help/winterboard/img_00068.png" class="imgZoom"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00068-200x300.png" /></a>&nbsp;&nbsp;&nbsp;<a href="/Content/images/help/winterboard/img_00086.png" class="imgZoom"><img width="200" height="300"alt="" src="/Content/images/help/winterboard/img_00086-200x300.png" /></a></p>
 					<h4>5. Download Custom Themes From ithemesky.com or Cydia</h4>
 					<p>Now that we've verified theming is working ok, let's try a custom theme from Cydia. I'll use a NBA theme for this example.</p>
 					<ul>
@@ -67,9 +71,9 @@
 						<li>Check NBA-Theme</li>
 						<li>Exit WinterBoard</li>
 					</ul>
-					<p style="color:#FC0;">If you are not satisfied with the themes on Cydia, visit www.ithemesky.com, it provided thousands of free iphone themes, enjoy it. If you don't know how to download themes from ithemesky, please click here.</p>
-					<p><a rel="lightbox" href="/Content/images/help/winterboard/img_00095.png" class="lightbox"><img width="150" alt="" src="/Content/images/help/winterboard/img_00095-200x300.png" /></a>&nbsp;&nbsp;&nbsp;<a rel="lightbox" href="/Content/images/help/winterboard/img_00103.png" class="lightbox"><img width="150" alt="" src="/Content/images/help/winterboard/img_00103-200x300.png" /></a>&nbsp;&nbsp; &nbsp;<a rel="lightbox" href="/Content/images/help/winterboard/img_00115.png" class="lightbox"><img width="150" alt="" src="/Content/images/help/winterboard/img_00115-200x300.png" /></a></p>
-					<p><a rel="lightbox" href="/Content/images/help/winterboard/img_00143.png" class="lightbox"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00143-200x300.png" /></a>&nbsp;&nbsp;&nbsp;<a rel="lightbox" href="/Content/images/help/winterboard/img_00164.png" class="lightbox"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00164-200x300.png" /></a></p>
+					<p style="color:#FC0;">If you are not satisfied with the themes on Cydia, visit www.ithemesky.com, it provided thousands of free iphone themes, enjoy it. If you don't know how to download themes from ithemesky, please <a href="/ispirit">click here</a>.</p>
+					<p><a href="/Content/images/help/winterboard/img_00095.png" class="imgZoom"><img width="150" alt="" src="/Content/images/help/winterboard/img_00095-200x300.png" /></a>&nbsp;&nbsp;&nbsp;<a href="/Content/images/help/winterboard/img_00103.png" class="imgZoom"><img width="150" alt="" src="/Content/images/help/winterboard/img_00103-200x300.png" /></a>&nbsp;&nbsp; &nbsp;<a href="/Content/images/help/winterboard/img_00115.png" class="imgZoom"><img width="150" alt="" src="/Content/images/help/winterboard/img_00115-200x300.png" /></a></p>
+					<p><a href="/Content/images/help/winterboard/img_00143.png" class="imgZoom"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00143-200x300.png" /></a>&nbsp;&nbsp;&nbsp;<a href="/Content/images/help/winterboard/img_00164.png" class="imgZoom"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00164-200x300.png" /></a></p>
 					<h4>6. Applying Multiple Themes</h4>
 					<p>I mentioned earlier you could apply multiple themes to combine elements.  Let's try adding Saurik's theme to the NBA-Theme.  We should get Saurik's Background and Dock and NBA-Theme's Icons.</p>
 					<ul>
@@ -78,11 +82,11 @@
 						<li>Check Saurik</li>
 						<li>Press Home to return to the Springboard</li>
 					</ul>
-					<p><a rel="lightbox" href="/Content/images/help/winterboard/img_00174.png" class="lightbox"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00174-200x300.png" /></a></p>
+					<p><a href="/Content/images/help/winterboard/img_00174.png" class="imgZoom"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00174-200x300.png" /></a></p>
 					<p>Ok, I admit it's a really bad example as these two themes look hideous together, however it does show the power of WinterBoard compared to the original SummerBoard.</p>
 					<h4>7. Remove All Themes</h4>
 					<p>If you want to return the phone to a stock look, simply open WinterBoard and uncheck all themes.</p>
-					<p><a rel="lightbox" href="/Content/images/help/winterboard/img_00018.png" class="lightbox"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00018-200x300.png" /></a></p>
+					<p><a href="/Content/images/help/winterboard/img_00018.png" class="imgZoom"><img width="200" height="300" alt="" src="/Content/images/help/winterboard/img_00018-200x300.png" /></a></p>
 				</div>
 			</div>
 			<!--help content end-->
