@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title>How to jailbreak iPhone - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
-<meta name="description" content="ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
+<title>How to jailbreak iPhone - Help - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
+<meta name="description" content="How to jailbreak iPhone. ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
 <meta name="keywords" content="How to jailbreak iPhone, iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
 </asp:Content>
 
