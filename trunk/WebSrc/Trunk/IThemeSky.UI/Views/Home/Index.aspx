@@ -60,7 +60,7 @@
 		    <div class="subCol">
 			    <h3 class="subColHead colTitle">Help</h3>
 			    <ul class="subColContent subHelp">
-				    <li><a href="/Home/FAQ#faqContent1"><span class="orange">How to install themes on jailbroken iPhone?</span></a></li>
+				    <li><a href="/ispirit"><span class="orange">How to install themes on jailbroken iPhone?</span></a></li>
 				    <li><a href="/help/how-to-use-winterboard">How to Use WinterBoard?</a></li>
 				    <li><a href="/help/why-jailbreak-iphone">Why jailbreak iPhone?</a></li>
 				    <li><a href="/help/how-to-jailbreak-iphone">How to jailbreak iPhone?</a></li>
