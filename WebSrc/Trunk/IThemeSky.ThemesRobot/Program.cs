@@ -19,10 +19,22 @@ namespace IThemeSky.ThemesRobot
             //ThemeFileChecker.Check();
             //MRobot r = new MRobot();
             //r.Start();
-            RepairTheme rt = new RepairTheme();
-            rt.RepairCode();
-            Console.WriteLine("BinGo!");
+            //RepairTheme rt = new RepairTheme();
+            //rt.RepairCode();
+            ThemeFileChecker.Check();
+            Console.WriteLine("bingo");
             Console.Read();
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+

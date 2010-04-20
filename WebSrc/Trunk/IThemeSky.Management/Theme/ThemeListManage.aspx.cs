@@ -116,6 +116,7 @@ namespace IThemeSky.Management.Theme
                 }
             }
             theme.UpdateTime = DateTime.Now;
+            theme.CheckerId = UserContext.UserId;
             _repositoryManage.UpdateTheme(theme);
             ltlMessage.Text = message;
         }
@@ -129,6 +130,11 @@ namespace IThemeSky.Management.Theme
             TextBox txtTags = item.FindControl("txtTags") as TextBox;
             theme.Title = txtTitle.Text;
             theme.UpdateTime = DateTime.Now;
+            if ((sender as Control).ID.Equals("btnSaveAndCheck"))
+            {
+                theme.CheckState = CheckStateOption.CheckSuccess;
+            }
+            theme.CheckerId = UserContext.UserId;
             _repositoryManage.UpdateTheme(theme);
             string[] tags = txtTags.Text.Split(',');
             _repositoryManage.DeleteTagMaps(themeId);

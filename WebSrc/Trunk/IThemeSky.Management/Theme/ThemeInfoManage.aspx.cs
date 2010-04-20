@@ -58,6 +58,7 @@ namespace IThemeSky.Management.Theme
                 theme.AuthorMail = txtAuthorMail.Text;
                 theme.AuthorName = txtAuthorName.Text;
                 theme.CategoryId = ddlCategoryId.SelectedValue.ToInt32();
+                theme.CheckerId = UserContext.UserId;
                 theme.CheckState = ddlCheckState.SelectedValue.ToEnum<CheckStateOption>(CheckStateOption.Waitting);
                 theme.CommendIndex = ddlCommendIndex.SelectedValue.ToInt32();
                 theme.Comments = 0;
@@ -86,6 +87,7 @@ namespace IThemeSky.Management.Theme
                     AuthorMail = txtAuthorMail.Text,
                     AuthorName = txtAuthorName.Text,
                     CategoryId = ddlCategoryId.SelectedValue.ToInt32(),
+                    CheckerId = UserContext.UserId,
                     CheckState = ddlCheckState.SelectedValue.ToEnum<CheckStateOption>(CheckStateOption.Waitting),
                     CommendIndex = ddlCommendIndex.SelectedValue.ToInt32(),
                     Comments = 0,
