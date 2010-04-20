@@ -2,8 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 <title>Why jailbreak iPhone - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
-<meta name="description" content="ithemesky.com provided iphone themes, more than 2,000 iphone themes free download!" />
-<meta name="keywords" content="Why jailbreak iPhone, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
+<meta name="description" content="ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
+<meta name="keywords" content="Why jailbreak iPhone, iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -37,7 +37,7 @@ So you have your 3.0 iPhone and you can install thousands of apps from AppStore.
 					
 					Simply put, Apple&#8217;s rules for AppStore are way too limiting. The apps listed in the sections below are not possible to be in AppStore since they break one or more of Apple&#8217;s rules. These rules keep control of the iPhone platform in Apple&#8217;s control. Some of these rules include: patching system files such as SpringBoard, allowing apps to run in the background, running apps out of the &#8220;sandbox&#8221;, and simply doing things Apple decided that they don&#8217;t want you to do often for reasons to their benefit, not yours (such as tethering).</p>
 					<p><strong>Risk Free:</strong><br />
-					Jailbreaking is not unlocking! It is risk free. Everything that works before jailbreaking continues to work after. Jailbreaking only adds features. Jailbreaking is <strong>risk free and cannot void your warranty</strong>. You can simply restore in iTunes at anytime to get back to a factory state. You are not alone, many people are doing it. For understanding of jailbreak vs unlock read my <a href="http://thebigboss.org/2008/03/15/terminology/" target="_blank" rel="nofollow" class="linkEct">terminology</a> post.</p>
+					Jailbreaking is not unlocking! It is risk free. Everything that works before jailbreaking continues to work after. Jailbreaking only adds features. Jailbreaking is <strong>risk free and cannot void your warranty</strong>. You can simply restore in iTunes at anytime to get back to a factory state. You are not alone, many people are doing it. For understanding of jailbreak vs unlock read my<br /><a href="http://thebigboss.org/2008/03/15/terminology/" target="_blank" rel="nofollow" class="linkEct">terminology</a> post.</p>
 					
 					<p><strong>How To:</strong><br />
 					If you decide after reading this that you wish to jailbreak, head on over to our <a href="how-to-jailbreak-iphone">guides</a> section and find the guide or method that works best for you. I recommend one of the pwnage methods.</p>
