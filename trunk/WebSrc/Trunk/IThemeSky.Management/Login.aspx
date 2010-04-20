@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        我们通常把"单摆"称呼为？
+        您的名字是？
         <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox> 
         <asp:Button ID="btnLogin" runat="server" Text="提交答案" onclick="btnLogin_Click" /><br />
     </div>

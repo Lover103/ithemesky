@@ -20,15 +20,15 @@ namespace IThemeSky.Library.Extensions
             }
             if ((FileSize >= 0x400L) && (FileSize <= 0x100000L))
             {
-                return string.Format("{0:F2}KB", FileSize / 0x400L).Trim('0').Trim('.');
+                return string.Format("{0:F2}", FileSize*1.0 / 0x400L).Trim('0').Trim('.') + "KB";
             }
             if ((FileSize >= 0x100000L) && (FileSize <= 0x40000000L))
             {
-                return string.Format("{0:F2}MB", FileSize / 0x100000L).Trim('0').Trim('.');
+                return string.Format("{0:F2}", FileSize * 1.0 / 0x100000L).Trim('0').Trim('.') + "MB";
             }
             if (FileSize >= 0x40000000L)
             {
-                return string.Format("{0:F2}GB", FileSize / 0x40000000L).Trim('0').Trim('.');
+                return string.Format("{0:F2}", FileSize * 1.0 / 0x40000000L).Trim('0').Trim('.') + "GB";
             }
             return "";
         }

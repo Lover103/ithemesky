@@ -28,18 +28,24 @@ namespace IThemeSky.ThemesRobot
                         {
                             if (!ThemeIsOK(themeFile))
                             {
+                                cmdText = "UPDATE Theme SET Title = Title + '(D)', CheckState=-1, DisplayState=-1 WHERE ThemeId=" + reader["ThemeId"].ToString();
+                                SqlHelper.ExecuteNonQuery(connection, CommandType.Text, cmdText);
                                 Console.WriteLine("#" + reader["ThemeId"] + ":" + reader["Title"].ToString() + "," + reader["DownloadUrl"].ToString());
                                 File.AppendAllText(Path.Combine(Environment.CurrentDirectory, "DY.txt"), "#" + reader["ThemeId"] + ":" + reader["Title"].ToString() + "," + reader["DownloadUrl"].ToString() + "\r\n");
                             }
                         }
                         else
                         {
+                            cmdText = "UPDATE Theme SET Title = Title + '(F)', CheckState=-1, DisplayState=-1 WHERE ThemeId=" + reader["ThemeId"].ToString();
+                            SqlHelper.ExecuteNonQuery(connection, CommandType.Text, cmdText);
                             Console.WriteLine("NotFound：#" + reader["ThemeId"] + ":" + reader["Title"].ToString() + "," + reader["DownloadUrl"].ToString());
                             File.AppendAllText(Path.Combine(Environment.CurrentDirectory, "NotFound.txt"), "#" + reader["ThemeId"] + ":" + reader["Title"].ToString() + "," + reader["DownloadUrl"].ToString() + "\r\n");
                         }
                     }
                     catch (Exception ex)
                     {
+                        cmdText = "UPDATE Theme SET Title = Title + '(Z)', CheckState=-1, DisplayState=-1 WHERE ThemeId=" + reader["ThemeId"].ToString();
+                        SqlHelper.ExecuteNonQuery(connection, CommandType.Text, cmdText);
                         File.AppendAllText(Path.Combine(Environment.CurrentDirectory, "Error.txt"), "#" + reader["ThemeId"] + ":" + reader["Title"].ToString() + "," + reader["DownloadUrl"].ToString() + "\r\n" + ex.ToString() + "\r\n\r\n\r\n\r\n");
                     }
                 }
@@ -64,7 +70,7 @@ namespace IThemeSky.ThemesRobot
                     {
                         fileName = theEntry.Name.Replace("/", "\\");
 
-                        if (fileName.ToLower().Contains(" \\icons\\") || fileName.ToLower().StartsWith("icons\\"))
+                        if (fileName.ToLower().Contains("\\icons\\") || fileName.ToLower().StartsWith("icons\\"))
                         {
                             hasicons = true;
                         }
