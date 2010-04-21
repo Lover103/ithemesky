@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -72,6 +73,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ISpiritController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\ThemeControllerBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -87,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="Clear.aspx" />
     <Content Include="Content\css\fancybox.css" />
     <Content Include="Content\css\style.css" />
@@ -118,8 +121,6 @@
     <Content Include="Global.asax" />
     <Content Include="Views\Help\faq.aspx" />
     <Content Include="Views\Home\Detail.aspx" />
-    <Content Include="Views\Home\FAQ.aspx" />
-    <Content Include="Views\Home\Help.aspx" />
     <Content Include="Views\Home\Search.aspx" />
     <Content Include="Views\Home\List.aspx" />
     <Content Include="Views\Home\SubmitTheme.aspx" />
@@ -146,7 +147,6 @@
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
-    <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\Site.Master" />
@@ -165,6 +165,14 @@
       <Project>{7F4BD5DA-2315-4E2E-982D-8AF1D66D10BB}</Project>
       <Name>IThemeSky.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Help\how-to-jailbreak-iphone.aspx" />
+    <Content Include="Views\Help\how-to-use-winterboard.aspx" />
+    <Content Include="Views\Help\why-jailbreak-iphone.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

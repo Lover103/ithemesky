@@ -13,7 +13,7 @@ using System.Text.RegularExpressions;
 
 namespace IThemeSky.UI.Controllers
 {
-    public class ServiceController : Controller
+    public class ServiceController : ThemeControllerBase
     {
         private ICacheThemeViewRepository _themeRepository = ThemeRepositoryFactory.Default.GetCachedThemeViewRepository();
         private IThemeManageRepository _themeManageRepository = ThemeRepositoryFactory.Default.GetThemeManageRepository();
@@ -25,7 +25,7 @@ namespace IThemeSky.UI.Controllers
                 theme.Downloads++;
                 _themeManageRepository.IncreaseDownloads(themeId, 1);
                 _themeManageRepository.InsertDownloadHistory(themeId, Request.UserHostAddress);
-                return Redirect("/" + theme.DownloadUrl);
+                return Redirect("http://resource.ithemesky.com/" + theme.DownloadUrl);
             }
             else
             {
@@ -37,7 +37,7 @@ namespace IThemeSky.UI.Controllers
             Theme theme = _themeRepository.GetTheme(themeId);
             if (theme != null)
             {
-                return Redirect("/" + theme.ThumbnailName);
+                return Redirect("http://resource.ithemesky.com/" + theme.ThumbnailName);
             }
             else
             {

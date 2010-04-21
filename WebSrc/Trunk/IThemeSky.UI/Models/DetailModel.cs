@@ -17,9 +17,9 @@ namespace IThemeSky.UI.Models
             CurrentTheme.Views++;
             Tags = _themeRepository.GetTagsByThemeId(themeId);
             string themeName;
-            PrevThemeId = _themeRepository.GetPrevThemeId(CurrentTheme.CheckerId, themeId, out themeName);
+            PrevThemeId = _themeRepository.GetPrevThemeId(CurrentTheme.CategoryId, themeId, out themeName);
             PrevThemeName = themeName;
-            NextThemeId = _themeRepository.GetNextThemeId(CurrentTheme.CheckerId, themeId, out themeName);
+            NextThemeId = _themeRepository.GetNextThemeId(CurrentTheme.CategoryId, themeId, out themeName);
             NextThemeName = themeName;
 
             LuckyThemes = _themeRepository.GetRandomThemes(CurrentTheme.CategoryId, ThemeSortOption.Rating, 4);

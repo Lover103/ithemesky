@@ -68,7 +68,7 @@
 			<!--theme detail begin-->
 			<div class="themeDetail clearfix">
 				<div class="detailSide">
-					<div class="themeCut"><a href="/<%=ViewData.Model.CurrentTheme.ThumbnailName %>" title="<%=ViewData.Model.CurrentTheme.Title %>"><img src="/<%=ViewData.Model.CurrentTheme.ThumbnailName %>" width="170" height="255" alt="<%=ViewData.Model.CurrentTheme.Title %>" id="themeCut" /></a></div>
+					<div class="themeCut"><a href="<%=ViewData.Model.CurrentTheme.ThumbnailName %>" title="<%=ViewData.Model.CurrentTheme.Title %>"><img src="<%=ViewData.Model.CurrentTheme.ThumbnailName %>" width="170" height="255" alt="<%=ViewData.Model.CurrentTheme.Title %>" id="themeCut" /></a></div>
 					<ul class="btn">
 						<li class="previous"><a <%=ViewData.Model.PrevThemeId <=0 ? "class=\"none\" onclick=\"return false;\"" : "" %> href="/iphone-themes/<%=ViewData.Model.PrevThemeName.Trim().Replace(" ", "-") %>/<%=ViewData.Model.PrevThemeId %>" title="Previous: <%=ViewData.Model.PrevThemeName %>">Previous</a></li>
 						<li class="next"><a <%=ViewData.Model.NextThemeId <=0 ? "class=\"none\" onclick=\"return false;\"" : "" %> href="/iphone-themes/<%=ViewData.Model.NextThemeName.Trim().Replace(" ", "-") %>/<%=ViewData.Model.NextThemeId %>" title="Next: <%=ViewData.Model.NextThemeName %>">Next</a></li>
@@ -166,7 +166,7 @@
                        { %>
 					    <li class="champion">
 						    <dl class="clearfix">
-							    <dt><a href="<%=theme.ThemeDetailUrl %>"><img src="/<%=theme.Thumbnail_112x168 %>" width="32" height="48" alt="<%=theme.Title %>" /></a></dt>
+							    <dt><a href="<%=theme.ThemeDetailUrl %>"><img src="<%=theme.Thumbnail_112x168 %>" width="32" height="48" alt="<%=theme.Title %>" /></a></dt>
 							    <dd class="title"><a href="<%=theme.ThemeDetailUrl %>"><%=theme.Title.SubStr(12) %></a></dd>
 							    <dd><span class="rateResult star<%=theme.CommendIndex %>" title="<%=theme.CommendIndex %>/5 stars"><%=theme.CommendIndex %>/5 stars</span></dd>
 							    <dd><small>Downloads:</small><span class="downloadNum"><%=theme.Downloads %></span></dd>

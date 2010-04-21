@@ -158,7 +158,7 @@ namespace IThemeSky.DataAccess
         {
             ThemesFilter filter = _filter.Clone();
             filter.CategoryIds.Add(categoryId);
-            return GetSimpleThemes(_filter, sort, displayNumber);
+            return GetSimpleThemes(filter, sort, displayNumber);
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace IThemeSky.DataAccess
         {
             ThemesFilter filter = _filter.Clone();
             filter.CategoryIds.Add(categoryId);
-            return GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
+            return GetSimpleThemes(filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace IThemeSky.DataAccess
         {
             ThemesFilter filter = _filter.Clone();
             filter.ParentCategoryIds.Add(parentCategoryId);
-            return GetSimpleThemes(_filter, sort, displayNumber);
+            return GetSimpleThemes(filter, sort, displayNumber);
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace IThemeSky.DataAccess
         {
             ThemesFilter filter = _filter.Clone();
             filter.ParentCategoryIds.Add(parentCategoryId);
-            return GetSimpleThemes(_filter, sort, pageIndex, pageSize, ref recordCount);
+            return GetSimpleThemes(filter, sort, pageIndex, pageSize, ref recordCount);
         }
 
         /// <summary>

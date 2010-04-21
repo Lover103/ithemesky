@@ -11,6 +11,10 @@ namespace IThemeSky.Model
     public enum ThemeSortOption
     {
         /// <summary>
+        /// 根据主题id排序
+        /// </summary>
+        Default,
+        /// <summary>
         /// 最新排序
         /// </summary>
         New,
