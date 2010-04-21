@@ -3,7 +3,7 @@
 <div class="list">
     <% foreach(SimpleThemeView theme in ViewData.Model){ %>
     <dl>
-	    <dt><a href="<%=theme.ThemeDetailUrl %>"><img src="/<%=theme.Thumbnail_112x168 %>" width="60" height="90" alt="<%=theme.Title %>" /></a></dt>
+	    <dt><a href="<%=theme.ThemeDetailUrl %>"><img src="<%=theme.Thumbnail_112x168 %>" width="60" height="90" alt="<%=theme.Title %>" /></a></dt>
 	    <dd>
 		    <span class="title"><a href="<%=theme.ThemeDetailUrl %>"><%=theme.Title %></a></span>
 		    <span class="rateResult star<%=theme.CommendIndex %>" title="<%=theme.CommendIndex %>/5 stars"><%=theme.CommendIndex %>/5 stars</span>

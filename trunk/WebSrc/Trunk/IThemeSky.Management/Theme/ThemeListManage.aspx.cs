@@ -34,7 +34,7 @@ namespace IThemeSky.Management.Theme
             ltlMessage.Text = "";
             _categories = _repositoryView.GetThemeCategories();
             int recordCount = 0;
-            rptThemes.DataSource = _repositoryView.GetFullThemesByFilter(GetFilter(), ThemeSortOption.New, pager.CurrentPageIndex, pager.PageSize, ref recordCount);
+            rptThemes.DataSource = _repositoryView.GetFullThemesByFilter(GetFilter(), ThemeSortOption.Default, pager.CurrentPageIndex, pager.PageSize, ref recordCount);
             rptThemes.DataBind();
             pager.RecordCount = recordCount;
         }

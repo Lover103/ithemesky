@@ -255,8 +255,8 @@ namespace IThemeSky.DataAccess
                 CommendIndex = Convert.ToInt32(dataReader["CommendIndex"]),
                 Downloads = Convert.ToInt32(dataReader["Downloads"]),
                 CategoryName = dataReader["CategoryName"].ToString(),
-                Thumbnail = dataReader["ThumbnailName"].ToString(),
-                Thumbnail_112x168 = dataReader["ThumbnailName"].ToString().Replace(".jpg", "_112x168.jpg"),
+                Thumbnail = "http://resource.ithemesky.com/" + dataReader["ThumbnailName"].ToString(),
+                Thumbnail_112x168 = "http://resource.ithemesky.com/" + dataReader["ThumbnailName"].ToString().Replace(".jpg", "_112x168.jpg"),
             };
         }
 
@@ -278,7 +278,7 @@ namespace IThemeSky.DataAccess
                 AuthorId = Convert.ToInt32(dataReader["AuthorId"]),
                 CheckerId = Convert.ToInt32(dataReader["CheckerId"]),
                 CommendIndex = Convert.ToInt32(dataReader["CommendIndex"]),
-                ThumbnailName = dataReader["ThumbnailName"].ToString(),
+                ThumbnailName = "http://resource.ithemesky.com/" + dataReader["ThumbnailName"].ToString(),
                 AddTime = Convert.ToDateTime(dataReader["AddTime"]),
                 UpdateTime = Convert.ToDateTime(dataReader["UpdateTime"]),
                 RateScore = Convert.ToInt32(dataReader["RateScore"]),

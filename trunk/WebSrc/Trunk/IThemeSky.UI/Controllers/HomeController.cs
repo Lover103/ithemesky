@@ -10,8 +10,7 @@ using IThemeSky.UI.Models;
 
 namespace IThemeSky.UI.Controllers
 {
-    [HandleError]
-    public class HomeController : Controller
+    public class HomeController : ThemeControllerBase
     {
         public ActionResult Index()
         {

@@ -8,7 +8,7 @@ using IThemeSky.UI.Models;
 
 namespace IThemeSky.UI.Controllers
 {
-    public class ISpiritController : Controller
+    public class ISpiritController : ThemeControllerBase
     {
         //
         // GET: /ISpirit/
@@ -24,7 +24,7 @@ namespace IThemeSky.UI.Controllers
             IThemeManageRepository _themeManageRepository = ThemeRepositoryFactory.Default.GetThemeManageRepository();
             _themeManageRepository.InsertDownloadHistory(0, Request.UserHostAddress);
             //转向到下载地址
-            return Redirect("http://update.ithemesky.com/iSpirit.exe");
+            return Redirect("http://update.ithemesky.com/iSpirit.zip");
         }
     }
 }
