@@ -48,13 +48,19 @@ namespace IThemeSky.UI
                 new { controller = "Home", action = "Search", sort = "new", keyword = "", pageIndex = 1 }
             );
             
+
             //详细页
+            routes.MapRoute(
+                "DetailWithExt", // Route name
+                "iphone-themes/{themeName}/{themeId}.zip", // URL with parameters
+                new { controller = "Home", action = "Detail" } // Parameter defaults
+            );
             routes.MapRoute(
                 "Detail", // Route name
                 "iphone-themes/{themeName}/{themeId}", // URL with parameters
                 new { controller = "Home", action = "Detail" } // Parameter defaults
             );
-
+            
             //接口服务
             routes.MapRoute(
                 "GetSortThemesService", // Route name
