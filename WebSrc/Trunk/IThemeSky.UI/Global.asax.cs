@@ -15,6 +15,12 @@ namespace IThemeSky.UI
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            
+            routes.MapRoute(
+                "css",
+                "Content/css/site.css",
+                new { controller = "Service", action = "GetCss" }
+            );
 
             //*/list/排序方式/分类名_分类id/页码/标签名称1,标签名称2
             routes.MapRoute(

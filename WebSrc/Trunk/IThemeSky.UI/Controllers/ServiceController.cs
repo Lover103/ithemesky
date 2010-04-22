@@ -10,6 +10,7 @@ using IThemeSky.UI.Models;
 using System.Web.UI;
 using System.IO;
 using System.Text.RegularExpressions;
+using IThemeSky.Library.Util;
 
 namespace IThemeSky.UI.Controllers
 {
@@ -17,6 +18,13 @@ namespace IThemeSky.UI.Controllers
     {
         private ICacheThemeViewRepository _themeRepository = ThemeRepositoryFactory.Default.GetCachedThemeViewRepository();
         private IThemeManageRepository _themeManageRepository = ThemeRepositoryFactory.Default.GetThemeManageRepository();
+
+        public ActionResult GetCss()
+        {
+            IpDefender.RemoveIp();
+            return Redirect("/Content/css/style.css");
+        }
+
         public ActionResult DownloadTheme(int themeId, string themeName)
         {
             Theme theme = _themeRepository.GetTheme(themeId);
