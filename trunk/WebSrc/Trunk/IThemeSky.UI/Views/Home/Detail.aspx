@@ -13,33 +13,7 @@
                 LoadComments(1);
                 BindRateEvent();
             });
-        function LoadComments(pageIndex) {
-            $("#commentListContainer").html('loading comments ...');
-            $("#commentListContainer").load('/Service/GetThemeComments/<%=ViewData.Model.CurrentTheme.ThemeId %>,' + pageIndex + ',5');
-        }
-        function PostCommentSuccess() {
-            alert('post comment success.');
-            $('#Content').html('');
-            LoadComments(1);
-        }
-        function BindRateEvent() {
-            $('.detailRate li a').click(
-                function() {
-                    $.get('/Service/RateTheme/<%=ViewData.Model.CurrentTheme.ThemeId %>,' + $(this).attr('value')
-                    , function(data) {
-                        if (data == '1') {
-                            alert('thanks for your rating');
-                        }
-                        else if (data == '-1') {
-                            alert('you have rated.');
-                        }
-                        else {
-                            alert('ratting error. please try again later.');
-                        }
-                    });
-                }
-            );
-        }
+        _themeId = '<%=ViewData.Model.CurrentTheme.ThemeId %>';
     </script>
 </asp:Content>
 

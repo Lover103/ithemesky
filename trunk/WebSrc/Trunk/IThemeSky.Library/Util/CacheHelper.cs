@@ -201,10 +201,9 @@ namespace IThemeSky.Library.Util
         /// </summary>
         NotRemovable = 0,
         /// <summary>
-        /// <summary>
-        /// 短时间 5分钟
+        /// 短时间 10分钟
         /// </summary>
-        Short = 5,
+        Short = 10,
         /// <summary>
         /// 一般正常过期时间30分钟
         /// </summary>
