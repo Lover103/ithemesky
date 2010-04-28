@@ -17,6 +17,7 @@
 		    <!--Tags end-->
 	    </div>
 	    <div id="mainContent">
+			<div class="banner"><a href="/ispirit"><img src="/Content/images/banner01.jpg" alt="iSpirit - iPhone themes and files manager" width="588" height="188" /></a></div>
 		    <!--last update begin-->
 		    <div class="mainCol">
 			    <div class="mainColHead">
@@ -28,16 +29,6 @@
 			    </div>
 		    </div>
 		    <!--last update end-->
-		    <!--Recommended begin-->
-		    <div class="mainCol">
-			    <div class="mainColHead">
-				    <h3 class="colTitle">Recommended</h3>
-			    </div>
-			    <div class="mainColContent themeList clearfix">
-				    <% Html.RenderPartial("NormalThemeRepeater", ViewData.Model.RecommendedThemes); %>
-			    </div>
-		    </div>
-		    <!--Recommended end-->
 		    <!--Most Popular begin-->
 		    <div class="mainCol">
 			    <div class="mainColHead">
