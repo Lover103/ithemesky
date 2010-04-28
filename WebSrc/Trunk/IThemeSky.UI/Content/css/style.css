@@ -29,6 +29,8 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 #mainContent{ float:left; width:600px;}
 #subContent{ float:right; width:160px;}
 #main{ float:right; width:770px;}
+a.linkEct:link,a.linkEct:visited{ background:url(../images/sprites_common.png) no-repeat right -696px; padding-right:12px;}
+a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 
 .b{ font-weight:bold;}
 .u{ text-decoration:underline;}
@@ -122,6 +124,8 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .themeList .btnDownload a:hover,.themeList .btnDownload a:active{ background:url(../images/sprites_common.png) no-repeat -280px -130px;}
 
 /*homepage*/
+.banner{ width:590px; height:190px; padding:5px; background:url(../images/bg_banner.png) no-repeat; margin-bottom:10px;}
+.banner img{ display:block; border:1px solid #000;}
 .colTitle{ font-weight:bold; font-size:13px; color:#CCD4DC;}
 .mainCol{ width:600px; background:url(../images/sprites_box.png) no-repeat -400px 0; padding-top:2px; margin-bottom:10px;}
 .mainColHead{ margin:0 2px; background:url(../images/sprites_common.png) no-repeat 0 -40px; height:34px;}
@@ -313,13 +317,15 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 /*common page*/
 .commonPage{  background:url(../images/sprites_box.png) no-repeat -1920px 0; margin-top:10px;}
 .commonContent{ background:url(../images/sprites_box.png) no-repeat -1000px bottom; padding:15px; width:570px;}
-.commonContent p{ padding:8px 0;}
-.commonContent ol{ list-style:decimal outside none; padding-left:15px;}
-.commonContent ol li{ list-style:decimal outside none; margin-left:5px;}
+.commonContent p{ padding:12px 0;}
+.commonContent ol{ list-style:decimal outside none; padding:12px 0 12px 15px;}
+.commonContent ol li{ list-style:decimal outside none; margin:3px 0 0 5px;}
+.commonContent ul{ list-style:square outside none; padding:12px 0 12px 15px;}
+.commonContent ul li{ list-style:square outside none; margin:3px 0 0 5px;}
 
 /*FAQ*/
 .faqList{ width:560px; margin:0 5px;}
-.faqList li{ padding:3px 0 7px 15px; background:url(../images/sprites_subpages.png) no-repeat -593px 10px; font-weight:bold; overflow:hidden;}
+.faqList li{ padding:3px 0 7px 15px; background:url(../images/sprites_subpages.png) no-repeat -763px 10px; font-weight:bold; overflow:hidden;}
 .faqList a{ float:left; padding-bottom:2px; background:url(../images/bg_dot_line.png) repeat-x left bottom;}
 .faqContent .title{ width:545px; height:25px; padding-left:25px; background:url(../images/sprites_subpages.png) no-repeat; margin:20px 0 10px 0;}
 .faqContent .title .text{ float:left; font-weight:bold; line-height:25px; color:#9FBBBF;}
@@ -328,10 +334,16 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .faqEntry{ padding:0 10px; width:550px; overflow:hidden;}
 
 .normalTitle{ background:url(../images/sprites_subpages.png) no-repeat 0 -70px; padding-left:25px; font-weight:bold; line-height:28px; font-size:13px; color:#9FBBBF;}
-.normalEntry{ padding:10px; width:550px; overflow:hidden;}
+.normalEntry{ padding:10px 5px; width:560px; overflow:hidden;}
+.normalEntry h3{ font-size:16px; font-weight:bold; color:#9FBBBF;}
+.normalEntry h4{ font-size:14px; font-weight:bold; padding-top:6px; color:#9FBBBF;}
+.normalEntry .alignCenter{ text-align:center;}
+.normalEntry p img{ padding:1px; border:1px solid #003B37;}
+.normalEntry a:link,.normalEntry a:visited{ text-decoration:underline; color:#9FBBBF;}
+.normalEntry a:hover,.normalEntry a:active{ text-decoration:underline; color:#FFF;}
 
 /*submit themes*/
-.submitTips{ padding:5px 0 10px 20px; background:url(../images/sprites_subpages.png) -589px -105px; width:550px;}
+.submitTips{ padding:5px 0 10px 20px; background:url(../images/sprites_subpages.png) no-repeat -759px -105px; width:550px;}
 .submitThemes{ padding:5px 0;}
 .submitForm{ clear:both; width:570px; padding-top:10px;}
 .submitForm .label{ float:left; width:115px; font-weight:bold; padding-right:5px; text-align:right; line-height:20px; color:#9FBABF;}
@@ -346,3 +358,45 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 .submitForm textarea{ width:416px; height:96px; line-height:1.5; padding:1px; scrollbar-base-color:#000B0B; scrollbar-face-color:none; scrollbar-arrow-color:#9FBABF; scrollbar-track-color:#000B0B; scrollbar-3dlight-color:#000B0B; scrollbar-darkshadow-color:#000B0B; scrollbar-highlight-color:#304543; scrollbar-shadow-color:#253634;}
 .submitBtn{ clear:both; padding:10px 0 0 120px;}
 .submitBtn button{ width:100px; height:24px; background:url(../images/sprites_detail.png) no-repeat 0 -400px; color:#D9DCDD; border:none; padding:0; margin:0;}
+
+/*iSpirit*/
+.fullContent{ margin-top:10px; width:770px; background:url(../images/sprites_box_wide.png) no-repeat -2310px bottom; padding-bottom:20px;}
+.iSpirit{ width:740px; background:url(../images/sprites_box_wide.png) no-repeat -1540px 0; padding:20px 15px;}
+.iSpirit dl{ background:url(../images/ispirit_cover.png) no-repeat 5px 5px; padding-left:240px; width:500px; min-height:185px; -height:185px;}
+.iSpirit dt{ padding:5px 0; font:0/0 Arial;}
+.iSpirit dd{ padding:0 5px;}
+.iSpirit dd .req{ margin:10px 0;  padding:5px 10px 8px 10px; border:1px dotted #003B37;}
+.iSpiritNav{ width:740px; height:75px; margin:0 auto; background:url(../images/sprites_ispirit.png) no-repeat;}
+.iSpiritNav li{ float:left; width:220px; height:75px; margin-right:40px; -display:inline;}
+.iSpiritNav a:link,.iSpiritNav a:visited{ display:block; height:60px;}
+.iSpiritNav a:hover,.iSpiritNav a:active{ background:url(../images/sprites_ispirit.png) no-repeat 0 -140px;}
+.iSpiritNav a.current:link,.iSpiritNav a.current:visited,.iSpiritNav a.current:hover,.iSpiritNav a.current:active{ height:75px; background:url(../images/sprites_ispirit.png) no-repeat -240px -140px;}
+.iSpiritNav li.s3{ margin:0;}
+.iSpiritNav li .link{ display:block; height:60px; margin-left:18px; width:202px; background:url(../images/sprites_ispirit.png) no-repeat; text-indent:-999em; overflow:hidden; cursor:pointer;}
+.iSpiritNav li.s1 .link{ background-position:0 -72px;}
+.iSpiritNav li.s2 .link{ background-position:-240px -72px;}
+.iSpiritNav li.s3 .link{ background-position:-480px -72px;}
+.iSpiritNav .dlBubbleInfo { position: relative; z-index:1}
+.iSpiritNav .dlTrigger {position: absolute; z-index:1;}
+.iSpiritNav .s1 a:hover,.iSpiritNav .s1 a:active{ position:relative; z-index:1;}
+.iSpiritNav .s1 .dlPopup{ display:none; color:#9FB8BF; font-size:11px; line-height:1.4;}
+.iSpiritNav .s1 a:hover .dlPopup,.iSpiritNav .s1 a:active .dlPopup{ display:block; position:absolute; z-index:50; padding:12px 0 0 16px; width:196px; height:100px; background:url(../images/sprites_ispirit.png) no-repeat -480px -140px; top:-112px; left:4px;}
+.iSpiritNav .dlPopup .label{ float:left; width:32px; text-align:right; font-weight:bold; clear:left;}
+.iSpiritNav .dlPopup .entry{ display:block; margin-left:35px; -margin-left:32px; width:160px;}
+
+/*iSpirit feature*/
+.iSpiritMain{ width:710px; margin:15px auto 0 auto; background:url(../images/ispirit_main_bg.png) repeat; padding:10px 15px;}
+.featureTitle{ font-weight:bold; color:#9FBABF; width:710px; overflow:hidden; padding:5px 0;}
+.featureTitle .titleIco{ float:left; width:30px; height:28px; background:url(../images/sprites_ispirit.png) no-repeat; text-indent:-999em; overflow:hidden;}
+.featureTitle .ico_1{ background-position:0 -270px;}
+.featureTitle .ico_2{ background-position:-50px -270px;}
+.featureTitle .ico_3{ background-position:-100px -270px;}
+.featureTitle .ico_4{ background-position:-150px -270px;}
+.featureTitle .ico_5{ background-position:-200px -270px;}
+.featureTitle .ico_6{ background-position:-250px -270px;}
+.featureTitle .ico_7{ background-position:-300px -270px;}
+.featureTitle .ico_8{ background-position:-350px -270px;}
+.featureTitle .titleEntry{ float:left; padding:3px 0 0 5px; width:670px;}
+.featureContent{ padding:5px 0 15px 35px;}
+.featureContent a:link img,.featureContent a:visited img{ padding:2px; border:1px solid #31494B;filter: Alpha(opacity=80); -moz-opacity:.8; opacity:0.8;}
+.featureContent a:hover img,.featureContent a:active img{ border:1px solid #426264;filter: Alpha(opacity=100); -moz-opacity:1.0; opacity:1.0;}
