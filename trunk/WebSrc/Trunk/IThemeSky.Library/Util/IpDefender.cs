@@ -33,7 +33,7 @@ namespace IThemeSky.Library.Util
                 }
                 if (dicIP.ContainsKey(userIp))
                 {
-                    if (dicIP[userIp] > 120)    //10分钟内访问超过120次，且没有一次访问到防火墙的js
+                    if (dicIP[userIp] > 10)    //10分钟内访问超过10次，且没有一次访问到防火墙的js
                     {
                         return true;
                     }

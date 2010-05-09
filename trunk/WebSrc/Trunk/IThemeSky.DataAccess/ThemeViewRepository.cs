@@ -54,7 +54,7 @@ namespace IThemeSky.DataAccess
         /// </summary>
         /// <param name="themeId">主题id</param>
         /// <returns></returns>
-        public FullThemeView GetTheme(int themeId)
+        public virtual FullThemeView GetTheme(int themeId)
         {
             string cmdText = "SELECT TOP 1 * FROM " + GetDataViewName(_filter, ThemeSortOption.New) + " WHERE ThemeId=" + themeId + " AND " + _filter.ToString();
             using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
@@ -74,7 +74,7 @@ namespace IThemeSky.DataAccess
         /// <param name="themeId">主题id</param>
         /// <param name="themeName">主题名称(out)</param>
         /// <returns></returns>
-        public int GetPrevThemeId(int categoryId, int themeId, out string themeName)
+        public virtual int GetPrevThemeId(int categoryId, int themeId, out string themeName)
         {
             ThemesFilter filter = _filter.Clone();
             if (categoryId > 0)
@@ -102,7 +102,7 @@ namespace IThemeSky.DataAccess
         /// <param name="themeId">主题id</param>
         /// <param name="themeName">主题名称(out)</param>
         /// <returns></returns>
-        public int GetNextThemeId(int categoryId, int themeId, out string themeName)
+        public virtual int GetNextThemeId(int categoryId, int themeId, out string themeName)
         {
             ThemesFilter filter = _filter.Clone();
             if (categoryId > 0)
@@ -271,11 +271,11 @@ namespace IThemeSky.DataAccess
         /// <summary>
         /// 获取随机主题
         /// </summary>
+        /// <param name="seed">种子</param>
         /// <param name="categoryId">所属分类id</param>
-        /// <param name="sort">排序方式</param>
         /// <param name="displayNumber">显示条数</param>
         /// <returns></returns>
-        public List<SimpleThemeView> GetRandomThemes(int categoryId, ThemeSortOption sort, int displayNumber)
+        public virtual List<SimpleThemeView> GetRandomThemes(int seed, int categoryId, int displayNumber)
         {
             ThemesFilter filter = _filter.Clone();
             if (categoryId > 0)
@@ -283,8 +283,16 @@ namespace IThemeSky.DataAccess
                 filter.CategoryIds.Add(categoryId);
             }
             string searchCondition = filter.ToString();
-            searchCondition += " and 0.6 >= CAST(CHECKSUM(NEWID(), ThemeId) & 0x7fffffff AS float) / CAST (0x7fffffff AS int)";
-            return GetSimpleThemes(GetDataViewName(_filter, sort), searchCondition, GetSortExpression(sort), displayNumber); 
+            string cmdText = "SELECT TOP " + displayNumber + " * FROM (SELECT NEWID() rndNumber," + SIMPLE_THEME_FIELDS + " FROM " + GetDataViewName(filter, ThemeSortOption.Default) + " WHERE " + searchCondition + ") t ORDER BY rndNumber";
+            List<SimpleThemeView> themes = new List<SimpleThemeView>();
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                while (reader.Read())
+                {
+                    themes.Add(BindSimpleThemeView(reader));
+                }
+            }
+            return themes; 
         }
 
         /// <summary>
@@ -357,7 +365,7 @@ namespace IThemeSky.DataAccess
         /// </summary>
         /// <param name="themeId">主题id</param>
         /// <returns></returns>
-        public List<string> GetTagsByThemeId(int themeId)
+        public virtual List<string> GetTagsByThemeId(int themeId)
         {
             List<string> tags = new List<string>();
             string cmdText = "SELECT TagName FROM ThemeTagMap INNER JOIN ThemeTag ON ThemeTagMap.TagId = ThemeTag.TagId WHERE ThemeId=" + themeId;

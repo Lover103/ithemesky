@@ -126,11 +126,11 @@ namespace IThemeSky.DataAccess
         /// <summary>
         /// 获取随机主题
         /// </summary>
+        /// <param name="seed">种子</param>
         /// <param name="categoryId">所属分类id</param>
-        /// <param name="sort">排序方式</param>
         /// <param name="displayNumber">显示条数</param>
         /// <returns></returns>
-        List<SimpleThemeView> GetRandomThemes(int categoryId, ThemeSortOption sort, int displayNumber);
+        List<SimpleThemeView> GetRandomThemes(int seed, int categoryId, int displayNumber);
         /// <summary>
         /// 根据多种组合的标签名称获取主题列表
         /// </summary>

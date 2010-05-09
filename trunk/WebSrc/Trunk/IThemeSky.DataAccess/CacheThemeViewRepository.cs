@@ -56,6 +56,100 @@ namespace IThemeSky.DataAccess
         }
 
         #region 通用的主题列表获取方法(Override)
+        /// <summary>
+        /// 根据主题id获取主题完整实体
+        /// </summary>
+        /// <param name="themeId">主题id</param>
+        /// <returns></returns>
+        public override FullThemeView GetTheme(int themeId)
+        {
+            FullThemeView theme;
+            string cacheKey = BuildCacheKey("GetTheme", themeId);
+            if (_enableCache == false)
+            {
+                theme = base.GetTheme(themeId);
+                _enableCache = true;
+            }
+            else
+            {
+                if (CacheHelper.Contains(cacheKey))
+                {
+                    theme = CacheHelper.Get<FullThemeView>(cacheKey);
+                }
+                else
+                {
+                    theme = base.GetTheme(themeId);
+                    CacheHelper.Set<FullThemeView>(cacheKey, theme, _cacheTime);
+                }
+            }
+            return theme;
+        }
+        /// <summary>
+        /// 根据指定主题的下一个主题id
+        /// </summary>
+        /// <param name="categoryId">所属分类id</param>
+        /// <param name="themeId">主题id</param>
+        /// <param name="themeName">主题名称(out)</param>
+        /// <returns></returns>
+        public override int GetNextThemeId(int categoryId, int themeId, out string themeName)
+        {
+            int id;
+            string cacheKey = BuildCacheKey("GetNextThemeId", themeId);
+            string cacheKey2 = BuildCacheKey("GetNextThemeId_themeName", themeId);
+            if (_enableCache == false)
+            {
+                id = base.GetNextThemeId(categoryId, themeId, out themeName);
+                _enableCache = true;
+            }
+            else
+            {
+                if (CacheHelper.Contains(cacheKey) && CacheHelper.Contains(cacheKey2))
+                {
+                    id = CacheHelper.Get<int>(cacheKey);
+                    themeName = CacheHelper.Get<string>(cacheKey2);
+                }
+                else
+                {
+                    id = base.GetNextThemeId(categoryId, themeId, out themeName);
+                    CacheHelper.Set<int>(cacheKey, id, _cacheTime);
+                    CacheHelper.Set<string>(cacheKey2, themeName, _cacheTime);
+                }
+            }
+            return id;
+        }
+        /// <summary>
+        /// 根据指定主题的上一个主题id
+        /// </summary>
+        /// <param name="categoryId">所属分类id</param>
+        /// <param name="themeId">主题id</param>
+        /// <param name="themeName">主题名称(out)</param>
+        /// <returns></returns>
+        public override int GetPrevThemeId(int categoryId, int themeId, out string themeName)
+        {
+            int id;
+            string cacheKey = BuildCacheKey("GetPrevThemeId", themeId);
+            string cacheKey2 = BuildCacheKey("GetPrevThemeId_themeName", themeId);
+            if (_enableCache == false)
+            {
+                id = base.GetPrevThemeId(categoryId, themeId, out themeName);
+                _enableCache = true;
+            }
+            else
+            {
+                if (CacheHelper.Contains(cacheKey) && CacheHelper.Contains(cacheKey2))
+                {
+                    id = CacheHelper.Get<int>(cacheKey);
+                    themeName = CacheHelper.Get<string>(cacheKey2);
+                }
+                else
+                {
+                    id = base.GetPrevThemeId(categoryId, themeId, out themeName);
+                    CacheHelper.Set<int>(cacheKey, id, _cacheTime);
+                    CacheHelper.Set<string>(cacheKey2, themeName, _cacheTime);
+                }
+            }
+            return id;
+        }
 
         /// <summary>
         /// 获取符何指定过滤器条件的主题列表
@@ -196,6 +290,65 @@ namespace IThemeSky.DataAccess
                 }
             }
             return themes;
+        }
+        /// <summary>
+        /// 获取随机主题
+        /// </summary>
+        /// <param name="seed">种子</param>
+        /// <param name="categoryId">所属分类id</param>
+        /// <param name="displayNumber">显示条数</param>
+        /// <returns></returns>
+        public override List<SimpleThemeView> GetRandomThemes(int seed, int categoryId, int displayNumber)
+        {
+            List<SimpleThemeView> themes;
+            string cacheKey = BuildCacheKey("GetRandomThemes", seed, categoryId, displayNumber);
+            if (_enableCache == false)
+            {
+                themes = base.GetRandomThemes(seed, categoryId, displayNumber);
+                _enableCache = true;
+            }
+            else
+            {
+                if (CacheHelper.Contains(cacheKey))
+                {
+                    themes = CacheHelper.Get<List<SimpleThemeView>>(cacheKey);
+                }
+                else
+                {
+                    themes = base.GetRandomThemes(seed, categoryId, displayNumber);
+                    CacheHelper.Set<List<SimpleThemeView>>(cacheKey, themes, _cacheTime);
+                }
+            }
+            return themes;
+        }
+        /// <summary>
+        /// 获取指定主题的标签列表
+        /// </summary>
+        /// <param name="themeId">主题id</param>
+        /// <returns></returns>
+        public override List<string> GetTagsByThemeId(int themeId)
+        {
+            List<string> tags;
+            string cacheKey = BuildCacheKey("GetTagsByThemeId", themeId);
+            if (_enableCache == false)
+            {
+                tags = base.GetTagsByThemeId(themeId);
+                _enableCache = true;
+            }
+            else
+            {
+                if (CacheHelper.Contains(cacheKey))
+                {
+                    tags = CacheHelper.Get<List<string>>(cacheKey);
+                }
+                else
+                {
+                    tags = base.GetTagsByThemeId(themeId);
+                    CacheHelper.Set<List<string>>(cacheKey, tags, _cacheTime);
+                }
+            }
+            return tags;
+
         }
         /// <summary>
         /// 获取所有主题分类列表

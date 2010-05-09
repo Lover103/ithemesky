@@ -78,6 +78,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CommentListModel.cs" />
+    <Compile Include="Models\PostSupportModel.cs" />
     <Compile Include="Models\PostThemeModel.cs" />
     <Compile Include="Models\DetailModel.cs" />
     <Compile Include="Models\NormalPageModel.cs" />
@@ -106,16 +107,6 @@
     <Content Include="Content\images\sprites_common.png" />
     <Content Include="Content\images\sprites_detail.png" />
     <Content Include="Content\images\sprites_header.png" />
-    <Content Include="Content\images\temp\theme_cut01.jpg" />
-    <Content Include="Content\images\temp\theme_full_01.jpg" />
-    <Content Include="Content\images\temp\theme_normal01.jpg" />
-    <Content Include="Content\images\temp\theme_normal02.jpg" />
-    <Content Include="Content\images\temp\theme_normal03.jpg" />
-    <Content Include="Content\images\temp\theme_normal04.jpg" />
-    <Content Include="Content\images\temp\theme_normal05.jpg" />
-    <Content Include="Content\images\temp\theme_normal06.jpg" />
-    <Content Include="Content\images\temp\theme_normal07.jpg" />
-    <Content Include="Content\images\temp\theme_normal08.jpg" />
     <Content Include="Content\js\fancybox.js" />
     <Content Include="Content\js\IThemeSky.js" />
     <Content Include="Global.asax" />
@@ -167,6 +158,90 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\banner01.jpg" />
+    <Content Include="Content\images\bg_banner.png" />
+    <Content Include="Content\images\bg_dot_line.png" />
+    <Content Include="Content\images\error_bg.jpg" />
+    <Content Include="Content\images\error_logo.png" />
+    <Content Include="Content\images\error_note.png" />
+    <Content Include="Content\images\error_sorry.png" />
+    <Content Include="Content\images\help\whyjailb\btkeyboard.jpg" />
+    <Content Include="Content\images\help\whyjailb\circuitous1.png" />
+    <Content Include="Content\images\help\whyjailb\circuitous2.png" />
+    <Content Include="Content\images\help\whyjailb\FantasyPack01.jpg" />
+    <Content Include="Content\images\help\whyjailb\FantasyPack02.jpg" />
+    <Content Include="Content\images\help\whyjailb\FantasyPack03.jpg" />
+    <Content Include="Content\images\help\whyjailb\FantasyPack04.jpg" />
+    <Content Include="Content\images\help\whyjailb\FantasyPack05.jpg" />
+    <Content Include="Content\images\help\whyjailb\FantasyPack06.jpg" />
+    <Content Include="Content\images\help\whyjailb\irealsmsqr02.png" />
+    <Content Include="Content\images\help\whyjailb\irealsmsqr03.png" />
+    <Content Include="Content\images\help\whyjailb\proswitcher1.png" />
+    <Content Include="Content\images\help\whyjailb\proswitcher4.png" />
+    <Content Include="Content\images\help\whyjailb\sbsettings_090-1.png" />
+    <Content Include="Content\images\help\whyjailb\sbsfreemem2.png" />
+    <Content Include="Content\images\help\whyjailb\whyjb_apps.jpg" />
+    <Content Include="Content\images\help\whyjailb\whyjb_categories.jpg" />
+    <Content Include="Content\images\help\whyjailb\whyjb_keyboards.jpg" />
+    <Content Include="Content\images\help\whyjailb\whyjb_sbthemes.jpg" />
+    <Content Include="Content\images\help\whyjailb\whyjb_term.jpg" />
+    <Content Include="Content\images\help\winterboard\1426-200x300.png" />
+    <Content Include="Content\images\help\winterboard\1426.png" />
+    <Content Include="Content\images\help\winterboard\img_00018-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00018.png" />
+    <Content Include="Content\images\help\winterboard\img_00019-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00019.png" />
+    <Content Include="Content\images\help\winterboard\img_00028-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00028.png" />
+    <Content Include="Content\images\help\winterboard\img_00034-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00034.png" />
+    <Content Include="Content\images\help\winterboard\img_00068-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00068.png" />
+    <Content Include="Content\images\help\winterboard\img_00086-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00086.png" />
+    <Content Include="Content\images\help\winterboard\img_00095-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00095.png" />
+    <Content Include="Content\images\help\winterboard\img_00103-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00103.png" />
+    <Content Include="Content\images\help\winterboard\img_00115-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00115.png" />
+    <Content Include="Content\images\help\winterboard\img_00143-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00143.png" />
+    <Content Include="Content\images\help\winterboard\img_00164-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00164.png" />
+    <Content Include="Content\images\help\winterboard\img_00174-200x300.png" />
+    <Content Include="Content\images\help\winterboard\img_00174.png" />
+    <Content Include="Content\images\ispirit\features\01.png" />
+    <Content Include="Content\images\ispirit\features\01_thumb.png" />
+    <Content Include="Content\images\ispirit\features\02.png" />
+    <Content Include="Content\images\ispirit\features\02_thumb.png" />
+    <Content Include="Content\images\ispirit\features\03.png" />
+    <Content Include="Content\images\ispirit\features\03_thumb.png" />
+    <Content Include="Content\images\ispirit\features\04.png" />
+    <Content Include="Content\images\ispirit\features\04_thumb.png" />
+    <Content Include="Content\images\ispirit\features\05.png" />
+    <Content Include="Content\images\ispirit\features\05_thumb.png" />
+    <Content Include="Content\images\ispirit\features\06.png" />
+    <Content Include="Content\images\ispirit\features\06_thumb.png" />
+    <Content Include="Content\images\ispirit\features\07.png" />
+    <Content Include="Content\images\ispirit\features\07_thumb.png" />
+    <Content Include="Content\images\ispirit\features\08.png" />
+    <Content Include="Content\images\ispirit\features\08_thumb.png" />
+    <Content Include="Content\images\ispirit\features\09.png" />
+    <Content Include="Content\images\ispirit\features\09_thumb.png" />
+    <Content Include="Content\images\ispirit\features\10.png" />
+    <Content Include="Content\images\ispirit\features\10_thumb.png" />
+    <Content Include="Content\images\ispirit_cover.png" />
+    <Content Include="Content\images\ispirit_main_bg.png" />
+    <Content Include="Content\images\ispirit_title.png" />
+    <Content Include="Content\images\lightbox-blank.gif" />
+    <Content Include="Content\images\lightbox-btn-close.gif" />
+    <Content Include="Content\images\lightbox-btn-next.gif" />
+    <Content Include="Content\images\lightbox-btn-prev.gif" />
+    <Content Include="Content\images\lightbox-ico-loading.gif" />
+    <Content Include="Content\images\sprites_ispirit.png" />
+    <Content Include="Content\images\sprites_subpages.png" />
+    <Content Include="Content\js\fancybox_normal.js" />
     <Content Include="Content\js\lightbox.js" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -174,6 +249,7 @@
     <Content Include="Views\Help\how-to-jailbreak-iphone.aspx" />
     <Content Include="Views\Help\how-to-use-winterboard.aspx" />
     <Content Include="Views\Help\why-jailbreak-iphone.aspx" />
+    <Content Include="Views\iSpirit\help.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

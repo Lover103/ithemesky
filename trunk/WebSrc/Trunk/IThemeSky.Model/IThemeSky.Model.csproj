@@ -51,12 +51,14 @@
     <Compile Include="FullThemeView.cs" />
     <Compile Include="SimpleThemeView.cs" />
     <Compile Include="SourceOption.cs" />
+    <Compile Include="SupportTypeOption.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThemeCategory.cs" />
     <Compile Include="ThemeComment.cs" />
     <Compile Include="ThemesFilter.cs" />
     <Compile Include="ThemeSortOption.cs" />
+    <Compile Include="ThemeSupport.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IThemeSky.Library\IThemeSky.Library.csproj">
