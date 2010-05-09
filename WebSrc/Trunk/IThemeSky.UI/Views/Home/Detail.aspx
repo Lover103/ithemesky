@@ -94,7 +94,7 @@
 					</dl>
 					<div class="btnDownload"><a href="/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>" title="Download Now">Download Now</a></div>
 					<div class="installIip">
-						<a href="/ispirit"><span class="orange">Tutorial of installing iphone themes!</span></a> Install the theme to iphone with ispirit, <a href="/ispirit/download" target="_blank">click here to download ispirit</a>. 
+						<a href="/ispirit/help"><span class="orange">Tutorial of installing iphone themes!</span></a> Install the theme to iphone with ispirit, <a href="/ispirit/download" target="_blank">click here to download ispirit</a>. 
 					</div>
 					<dl class="themeShare">
 						<dt>Share this theme:</dt>
