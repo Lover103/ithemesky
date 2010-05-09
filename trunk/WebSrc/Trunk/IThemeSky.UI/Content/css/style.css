@@ -400,3 +400,15 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .featureContent{ padding:5px 0 15px 35px;}
 .featureContent a:link img,.featureContent a:visited img{ padding:2px; border:1px solid #31494B;filter: Alpha(opacity=80); -moz-opacity:.8; opacity:0.8;}
 .featureContent a:hover img,.featureContent a:active img{ border:1px solid #426264;filter: Alpha(opacity=100); -moz-opacity:1.0; opacity:1.0;}
+
+/*iSpirit support*/
+.supportSort{ height:25px; padding:5px 0 5px 35px; background:url(../images/sprites_subpages.png) no-repeat; color:#CACACA; font-size:14px; font-weight:bold; line-height:25px;}
+.iSpiritMain h3.s1{ background-position:0 -175px;}
+.iSpiritMain h3.s2{ background-position:0 -215px; margin-top:20px;}
+.iSpiritFaq{ margin-left:15px; padding:5px 0 5px 16px; background:url(../images/sprites_subpages.png) no-repeat -762px -210px; cursor:pointer;}
+.iSpiritFaq a:link,.iSpiritFaq a:visited{ color:#9FBABF;}
+.iSpiritFaq a:hover,.iSpiritFaq a:active{ color:#FFF;}
+.iSpiritMain h4.active a{ color:#FFF;}
+.iSpiritFaqContent{ margin-left:30px; width:640px; padding:0 15px; background:#022E39; display:none; color:#9FBABF;}
+.iSpiritFaqContent p{ padding:10px 0;}
+.iSpiritForm{ padding:5px 20px 10px 30px;}
