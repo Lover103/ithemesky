@@ -134,6 +134,41 @@ namespace IThemeSky.UI.Controllers
         }
 
         [HttpPost]
+        public ActionResult AddThemeSupport(ThemeSupport postSupport)
+        {
+            if (string.IsNullOrEmpty(postSupport.Mail))
+            {
+                return Content("<script type=\"text/javascript\">alert('Mail is required.');</script>");
+            }
+            if (string.IsNullOrEmpty(postSupport.Subject))
+            {
+                return Content("<script type=\"text/javascript\">alert('Subject is required.');</script>");
+            }
+            if (string.IsNullOrEmpty(postSupport.Description))
+            {
+                return Content("<script type=\"text/javascript\">alert('Description is required.');</script>");
+            }
+            IThemeSupportRepository respository = ThemeRepositoryFactory.Default.GetThemeSupportRepository();
+            bool result = respository.AddSupport(
+                new ThemeSupport()
+                {
+                    Description = postSupport.Description,
+                    Mail = postSupport.Mail,
+                    Name = postSupport.Name,
+                    Subject = postSupport.Subject,
+                    ThemeId = postSupport.ThemeId,
+                    SupportType = postSupport.SupportType,
+                    AddTime = DateTime.Now,
+                    UserIp = Request.UserHostAddress,
+                });
+            if (result)
+            {
+                return Content("<script type=\"text/javascript\">parent.SubmitSupportSuccess()</script>");
+            }
+            return Content("<script type=\"text/javascript\">alert('post comment failure,please try again for a while.');</script>");
+        }
+
+        [HttpPost]
         public ActionResult SubmitTheme(PostThemeModel postTheme)
         {
             if (string.IsNullOrEmpty(postTheme.Title))

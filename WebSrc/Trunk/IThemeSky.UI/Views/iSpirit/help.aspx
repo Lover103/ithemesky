@@ -106,28 +106,33 @@
 				<h3 class="supportSort s2">Get Support</h3>
 				<div class="iSpiritForm">
 					<p>If you have an issue or a specific question regarding iSpirit or you want to give a bug report, please contact us. You can use the form below or email us directly at ithemesky@gmail.com. If you use the form please make sure there isn’t a typo in your email address. Please give us a few business days to respond!<br /><br /></p>
-					<form action="">
+					<iframe id="hiddenIframe" name="hiddenIframe" src="#" style="display:none"></iframe>
+                    <% using (Html.BeginForm("AddThemeSupport", "Service", FormMethod.Post, new { target = "hiddenIframe" }))
+                       { %>
+                       <%= Html.Hidden("SupportType", 2) %>
 					<div class="submitForm clearfix">
 						<label class="label">Name:</label>
-						<input type="text" class="inputNormal" />
+						<%= Html.TextBox("Name", "", new { Class="inputNormal", onfocus="this.className='inputFocus'", onblur="this.className='inputNormal'" })%>
 						<small>(optional)</small>
 					</div>
 					<div class="submitForm clearfix">
 						<label class="label">Email:</label>
-						<input type="text" class="inputNormal" />
+						<%= Html.TextBox("Mail", "", new { Class="inputNormal", onfocus="this.className='inputFocus'", onblur="this.className='inputNormal'" })%>
 						<small>(required)</small>
 					</div>
 					<div class="submitForm clearfix">
 						<label class="label">Subject:</label>
-						<input type="text" class="inputNormal" />
+						<%= Html.TextBox("Subject", "", new { Class="inputNormal", onfocus="this.className='inputFocus'", onblur="this.className='inputNormal'" })%>
 						<small>(required)</small>
 					</div>
 					<div class="submitForm clearfix">
 						<label class="label">description:</label>
-						<div class="textarea"><textarea class="textareaNormal"></textarea><!--<textarea class="textareaFocus"></textarea>--></div>
+						<div class="textarea">
+						<%= Html.TextArea("Description", "", new { Class = "textareaNormal", onfocus = "this.className='textareaFocus'", onblur = "this.className='textareaNormal'" })%>
+						</div>
 					</div>
 					<div class="submitBtn"><button type="submit">Submit</button></div>
-					</form>
+					 <% } %>
 				</div>
 			</div>
 		</div>
@@ -150,5 +155,9 @@ $(document).ready(function(){
 	});
 
 });
+function SubmitSupportSuccess() {
+    $('#Description,#Subject').val('');
+    alert('Submit success!');
+}
 </script>
 </asp:Content>

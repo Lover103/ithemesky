@@ -90,5 +90,14 @@ namespace IThemeSky.DataAccess
         {
             return new ThemeCommentRepository(_connectionProvider);
         }
+        /// <summary>
+        /// 获取主题的反馈数据访问对象
+        /// </summary>
+        /// <returns></returns>
+        public IThemeSupportRepository GetThemeSupportRepository()
+        {
+            return new ThemeSupportRepository(_connectionProvider);
+        }
+
     }
 }
