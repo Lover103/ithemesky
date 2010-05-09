@@ -30,7 +30,7 @@ namespace IThemeSky.Library.Extensions
                 {
                     beginIndex = (pageIndex / displayPageLinkNumber) * displayPageLinkNumber + 1;
                 }
-                int endIndex = beginIndex + displayPageLinkNumber;
+                int endIndex = beginIndex + displayPageLinkNumber - 1;
                 if (endIndex > pageCount)
                 {
                     endIndex = pageCount;
