@@ -32,7 +32,7 @@
 				<dl>
 					<dt><img src="/Content/images/ispirit_title.png" width="345" height="72" alt="iSpirit - iPhone themes and files manager" /></dt>
 					<dd>
-						<p>iSpirit is specially designed for iPhone, used on your PC for iPhone files and themes mangement. With iSpirit, you would install theme on your iPhone, and manage the files in your iphone easily. And also, you would free download iPhone themes from iSpirit. It works with iPhone, iPhone 3G, iPhone 3Gs in Firmware1.x, 2.x and 3.x.</p>
+						<p>iSpirit is specially designed for iPhone, used on your PC for iPhone files and themes mangement. With iSpirit, you would install theme on your iPhone, and manage the files in your iphone easily. You would free download iPhone themes from iSpirit. It works with iPhone, iPhone 3G, iPhone 3Gs in Firmware1.x, 2.x and 3.x.</p>
 						<p style="margin-top:5px;"><strong>System Requirement:</strong></p>
 						<p class="req">
 							<strong>&nbsp;&nbsp;&nbsp;OS:</strong> Windows XP / Windows Vista / Windows 7<br />
