@@ -146,8 +146,8 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .subColContent{ background:url(../images/sprites_box.png) repeat-y -1600px 0;}
 
 /*sub content*/
-.subHelp{ padding:5px 10px;}
-.subHelp li{ background:url(../images/sprites_common.png) no-repeat -771px -340px; padding:5px 0 0 12px;}
+.subHelp{ padding:5px 10px; width:140px;}
+.subHelp li{ width:128px; background:url(../images/sprites_common.png) no-repeat -771px -340px; padding:5px 0 0 12px;}
 .subCol .themeList dl{ margin:0 auto; padding-bottom:7px;}
 .subCol .themeList{ padding:5px 0;}
 
