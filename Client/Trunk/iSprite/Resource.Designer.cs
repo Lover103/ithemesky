@@ -37,18 +37,9 @@ namespace iSprite {
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
-            get 
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
-                    Type type = typeof(Resource);
-                    string baseName = type.Name;
-                    if (!string.IsNullOrEmpty(type.Namespace))
-                    {
-                        baseName = type.Namespace + "." + baseName;
-                    }
-
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager(baseName, type.Assembly);
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("iSprite.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -132,6 +123,13 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap file_deb {
+            get {
+                object obj = ResourceManager.GetObject("file_deb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Folder_16 {
             get {
                 object obj = ResourceManager.GetObject("Folder_16", resourceCulture);
@@ -170,6 +168,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap go_forward {
             get {
                 object obj = ResourceManager.GetObject("go_forward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap help {
+            get {
+                object obj = ResourceManager.GetObject("help", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

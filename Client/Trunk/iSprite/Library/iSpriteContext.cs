@@ -80,6 +80,10 @@ namespace iSprite
         /// </summary>
         internal string HelpUrl { private set; get; }
         /// <summary>
+        /// 帮助
+        /// </summary>
+        internal string DebInstallerHelpUrl { private set; get; }
+        /// <summary>
         /// 更新地址
         /// </summary>
         internal string UpdateUrl { private set; get; }
@@ -118,7 +122,8 @@ namespace iSprite
             CurrentVersion = "1.0";
 
             ThemeHomePage = Manzana.Utility.Decrypt("60A99C413E1F93068451A6E02805A1E0A306054C5C2C6E15001DC23B9551C12B");
-            HelpUrl = "http://www.ithemesky.com/help/";
+            HelpUrl = "http://www.ithemesky.com/ispirit/help";
+            DebInstallerHelpUrl = "http://forum.ithemesky.com/default.aspx?g=posts&m=8";
             UpdateUrl = Manzana.Utility.Decrypt("3501D1C8C59D7EAF92628F7F888FFE3357ABE2F61CA39A061E48C427F05FD075C4411E951520DC689064DAC4F68193DC");
             WinterBoardXML = Manzana.Utility.Decrypt("3501D1C8C59D7EAF92628F7F888FFE3357ABE2F61CA39A061E48C427F05FD07599180FD221B79C86BD2D7EA8EF325F71C27DD3B87D889ECE762FACE2427D1B6E");
             iPhone_PhotosLibrary_Path = "/private/var/root/Media/Photos/";

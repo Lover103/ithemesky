@@ -357,6 +357,25 @@ namespace iSprite
             }
         }
 
+        public bool CheckDirectoryExists(string path)
+        {
+            if (IsConnected)
+            {
+                if (!iPhoneInterface.Exists(path))
+                {
+                    return iPhoneInterface.CreateDirectory(path);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public long GetFileSize(string path)
         {
             if (IsConnected && iPhoneInterface.Exists(path))

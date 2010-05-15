@@ -770,7 +770,7 @@ namespace iSprite
                 if (!content.Contains("<key>com.saurik.WinterBoard</key>"))
                 {
                     //如果没有显示，需要重启Springboard
-                    if (MessageHelper.ShowInfo("WinterBoard has been installed, iSprite will reboot iPhone SpringBoard to show WinterBoard in  home screen?") == DialogResult.OK)
+                    if (MessageHelper.ShowInfo("WinterBoard has been installed, ispirit will reboot iPhone SpringBoard to show WinterBoard in  home screen?") == DialogResult.OK)
                     {
                         //重启Respring
                         m_iPhoneDevice.Respring();
