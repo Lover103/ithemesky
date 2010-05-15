@@ -197,7 +197,8 @@ namespace iSprite
             _context.ThemeHomePage += "?chl=iSpirit&phonever=" + ver
                 + "&softver=" + _context.CurrentVersion
                 + "&iTunesVer=" + iphone.iTunesVer
-                + "&deviceid=" + iphone.DeviceId;
+                + "&deviceid=" + iphone.DeviceId
+                +"&deviceType=" + iphone.DeviceType;
 
             if (ver.Split('.').Length < 3)
             {
@@ -212,13 +213,16 @@ namespace iSprite
                 _context.iPhone_GlobalPreferences_Path = _context.iPhone_GlobalPreferences_Path.Replace("/root/", "/mobile/");
 
             }
-            if (!iphone.Exists(_context.iPhone_MyDocuments_Path))
+            if (iphone.IsJailbreak && iphone.DeviceType!="iPad")
             {
-                iphone.CreateDirectory(_context.iPhone_MyDocuments_Path);
-            }
-            if (!iphone.Exists(_context.iPhone_CydiaAutoInstallPath))
-            {
-                iphone.CreateDirectory(_context.iPhone_CydiaAutoInstallPath);
+                if (!iphone.Exists(_context.iPhone_MyDocuments_Path))
+                {
+                    iphone.CreateDirectory(_context.iPhone_MyDocuments_Path);
+                }
+                if (!iphone.Exists(_context.iPhone_CydiaAutoInstallPath))
+                {
+                    iphone.CreateDirectory(_context.iPhone_CydiaAutoInstallPath);
+                }
             }
 
             //foreach (string path in iphone.GetDirectories("/private/var/stash/"))
