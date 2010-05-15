@@ -749,6 +749,11 @@ namespace iSprite
         /// <returns></returns>
         bool CheckInstallWinterBoard()
         {
+            if (!m_iPhoneDevice.IsJailbreak)
+            {
+                MessageHelper.ShowError("To use theme ,you must Jailbreak your " + m_iPhoneDevice.DeviceTypeName + " first !");
+                return false;
+            }
             if (!m_iPhoneDevice.DirectoryExists(iSpriteContext.Current.iPhone_WinterBoardApp_Path))
             {
                 if (MessageHelper.ShowConfirm("WinterBoard has not been installed, Would you want to install?") == DialogResult.OK)

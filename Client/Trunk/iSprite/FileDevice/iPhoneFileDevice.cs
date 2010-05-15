@@ -74,7 +74,14 @@ namespace iSprite
                 }
                 else
                 {
-                    m_deviceName = "no named";
+                    if (iPhoneInterface.DeviceType != string.Empty)
+                    {
+                        m_deviceName = iPhoneInterface.DeviceType + "(" + iPhoneInterface .DeviceVersion+ ")";
+                    }
+                    else
+                    {
+                        m_deviceName = "no named";
+                    }
                 }
             }
             else
@@ -99,6 +106,15 @@ namespace iSprite
             {
                 NotConnectedErrot();
             }
+        }
+
+        internal bool IsJailbreak
+        {
+            get
+            {
+                return iPhoneInterface.IsConnected && iPhoneInterface.IsJailbreak;
+            }
+
         }
 
         internal string GetFileText(string iPhonePath)
@@ -175,6 +191,21 @@ namespace iSprite
             get
             {
                 return DeviceTypeOption.iPhone;
+            }
+        }
+
+        public string DeviceTypeName
+        {
+            get
+            {
+                if (IsConnected)
+                {
+                    return iPhoneInterface.DeviceType;
+                }
+                else
+                {
+                    return "iPhone";
+                }
             }
         }
 

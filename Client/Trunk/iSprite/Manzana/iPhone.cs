@@ -146,30 +146,33 @@ namespace Manzana {
 			}
 		}
 
+        string m_DeviceId = string.Empty;
 		///<summary>
 		/// Returns the 40-character UUID of the device
 		///</summary>
 		unsafe public string DeviceId {
 			get {
-				return MobileDevice.AMDeviceCopyValue(iPhoneHandle, "UniqueDeviceID");
+                return m_DeviceId;
 			}
 		}
 
+        string m_DeviceType = string.Empty;
 		///<summary>
 		/// Returns the type of the device, should be either 'iPhone' or 'iPod'.
 		///</summary>
 		unsafe public string DeviceType {
 			get {
-				return MobileDevice.AMDeviceCopyValue(iPhoneHandle, "DeviceClass");
+                return m_DeviceType;
 			}
 		}
 
+        string m_DeviceVersion = string.Empty;
 		///<summary>
 		/// Returns the current OS version running on the device (2.0, 2.2, 3.0, 3.1, etc).
 		///</summary>
 		unsafe public string DeviceVersion {
 			get {
-				return MobileDevice.AMDeviceCopyValue(iPhoneHandle, "ProductVersion");
+                return m_DeviceVersion;
 			}
 		}
 		///<summary>
@@ -336,11 +339,14 @@ namespace Manzana {
         unsafe public void Respring()
         {
             //return;
-
             MobileDevice.AMDPostNotification(
                     this._notificationsHandle,
-                    MobileDevice.StringToCFString(Utility.Decrypt("87D3BE389EB15FF98FE644B02AE44FFE5DD31FFBF5ECFFBFC109053C24095055")),
+                    MobileDevice.StringToCFString("com.apple.mobile.nikita_loaded"),
                     0);
+            //MobileDevice.AMDPostNotification(
+            //        this._notificationsHandle,
+            //        MobileDevice.StringToCFString(Utility.Decrypt("87D3BE389EB15FF98FE644B02AE44FFE5DD31FFBF5ECFFBFC109053C24095055")),
+            //        0);
             Thread.Sleep(200);
         }
 
@@ -1120,6 +1126,9 @@ namespace Manzana {
 				return false;
 			}
 
+            m_DeviceId = MobileDevice.AMDeviceCopyValue(iPhoneHandle, "UniqueDeviceID");
+            m_DeviceType = MobileDevice.AMDeviceCopyValue(iPhoneHandle, "DeviceClass");
+            m_DeviceVersion = MobileDevice.AMDeviceCopyValue(iPhoneHandle, "ProductVersion");
 
             if (MobileDevice.AMDeviceStartService(iPhoneHandle, MobileDevice.CFStringMakeConstantString("com.apple.afc2"), ref hService, null) != 0)
             {
