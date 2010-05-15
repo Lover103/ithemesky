@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label4.Text" xml:space="preserve">
-    <value>This program allows to host several open windows in one parent window so that you can easily access and navigate between them, as well as clean up space in taskbar. To add existing open windows to host window click the 'Add open windows to this window' button above. To automatically open files in new tabs either click the 'Open file in new tab' button or just drag and drop them below. You can navigate between tabs by clicking ctrl+1, ctrl+2, etc or you can just simply hover mouse over the tab and it will be selected automatically. If you want to tab all open windows, just click the tab all windows in the context menu</value>
-  </data>
   <metadata name="timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1070, 17</value>
   </metadata>
@@ -162,17 +159,17 @@
   <data name="tsbtnFlipPanes.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAiNJREFUOE+V0V9I
-        U2EYBvB12XX3sdDMWRdBBZqFAy+WmAvLalpjOVa5sTqFTUJY3yrWqVabzaXtzFxdDDJTocLKUYEaJwm2
-        vKgoh2P9cYuClV0Um35P5zOQxpmxPnjuvvfh5f0pFAW8NiLQxjOR1QV8zf+llXTT7W3Pnm/Q3125ZIkt
-        kHRwVxOOw5ffOgzOyZwc9cWx//w01uoGOkv1gyvylmxteQz7zRRswnsc8cZgvRKDpSMGsycGrusDrMJP
-        bDSGUbZnYF95Q99yWUlZrQeh0Qx6n8xBCM/D92Ae7nsU/BDF6X4K7vov1J/9JG0xCFXjHfk9SjW8NJCF
-        RcjA5PuBZu8s9O7vaLr0DQ3OFOrsU9CciKDCeB+qXbf8sg1KqglU2sBi1u0MYr2uH5sMw6g4NArtqTgq
-        TQ/h6hlBcV2w/L9ESrQ3pLLbIITQggaJ001bhRkogGVsoLimu7BhMRpXEuKhJ3s/Yws3Cas3ucrgSSr3
-        8rmp4qJK2SZidEpNSAd1hL5KClnUtL/DsWtf0OJNweD6uJgmPgFGLisIjUzjXF8a/vAciMTWHsqCC8zC
-        7J2B8cKbhTTzr7DbHgUjlxX4h17D7IrgeE8apq4MdBfTqHcksM32ElWWp6g8+AibTcMLYeSygvGJiQPs
-        yoyKkTE6RsgoGenfxIw8r8aY+EK6A6GMjNGt2RFUF9UG1EWaztxUE/WSnKIoShKEMjqF4g/jv95vDaRh
-        JLHIyZkAAAAASUVORK5CYII=
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAiRJREFUOE+V0V9I
+        U2EYBvB12XX3sdDMWRdBBZqFAy+WmAvLalpjOVa5sTqFTUJY3yzslDNX21rtzFxdDDJTocLKYYEVJwm2
+        vKgoh2P9cYuClV0Um35P5zOQxpmxPnjuvvfh5f0pFAW8NuKjjacjqwv4mv9LK/HQ7W3Pnm/Q31m5ZIkt
+        kHRwlxOOwxfeOgydkzk56o1j/7lprNUNekr1QyvylmxtGYP9Rgo24T2OuGOwXorBcjEGsysGzvcBVuEn
+        NhrDKNszuK+8oX+5rKSs1oXQeAZ9j+YghOfhvT+PnrsU/DBFxwAFd+0X6s98krYYgqrxtvwepRpeGsjC
+        ImRg8v5As3sW+p7vaOr+hobOFOrsU9CciKDCeA+qXTf9sg1KqglU2sBi1u0MYr1uAJsMI6g4NA7tqTgq
+        TQ/g7B1FcV2w/L9ESrTXpbJbIITQggZJRxdtFWagAJaxgeKaK4UNi9G4khAnPdn3GVu4SVjdyVUGV1K5
+        l89NFRdVyjYRo1NqQrqpI/RVUsiipv0djl39ghZ3Cgbnx8U08QkwcllBaHQaZ/vT8IfnQCS29lAWXGAW
+        ZvcMjOffLKSZf4Xd9igYuazAP/waZmcEx3vTMPky0HWlUe9IYJvtJaosj1F58CE2m0YWwshlBU8nJg6w
+        KzMqRsboGCGjZKR/EzPyvBpPxBfSHQhlZIxuzY6guqg2oC7SeHJTTdRLcoqiKEkQyugUij+M/3q/AdMZ
+        YQx1yTw4AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

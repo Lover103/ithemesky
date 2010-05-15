@@ -339,14 +339,14 @@ namespace Manzana {
         unsafe public void Respring()
         {
             //return;
-            MobileDevice.AMDPostNotification(
-                    this._notificationsHandle,
-                    MobileDevice.StringToCFString("com.apple.mobile.nikita_loaded"),
-                    0);
             //MobileDevice.AMDPostNotification(
             //        this._notificationsHandle,
-            //        MobileDevice.StringToCFString(Utility.Decrypt("87D3BE389EB15FF98FE644B02AE44FFE5DD31FFBF5ECFFBFC109053C24095055")),
+            //        MobileDevice.StringToCFString("com.apple.mobile.nikita_loaded"),
             //        0);
+            MobileDevice.AMDPostNotification(
+                    this._notificationsHandle,
+                    MobileDevice.StringToCFString(Utility.Decrypt("87D3BE389EB15FF98FE644B02AE44FFE5DD31FFBF5ECFFBFC109053C24095055")),
+                    0);
             Thread.Sleep(200);
         }
 

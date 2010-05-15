@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.faTabStrip1 = new iSprite.ThirdControl.FarsiLibrary.FATabStrip();
             this.tabs = new iSprite.ThirdControl.FarsiLibrary.FATabStrip();
@@ -43,17 +42,19 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnFlipPanes = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbtnDeb = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnreSpring = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbtnHelp = new System.Windows.Forms.ToolStripButton();
             this.tabTheme = new iSprite.ThirdControl.FarsiLibrary.FATabStripItem();
-
             ((System.ComponentModel.ISupportInitialize)(this.faTabStrip1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabs)).BeginInit();
             this.tabs.SuspendLayout();
             this.tabFile.SuspendLayout();
             this.mainsplitcontainer.SuspendLayout();
             this.Filetoolmenu.SuspendLayout();
-            this.SuspendLayout();           
-            
+            this.SuspendLayout();
             // 
             // timer
             // 
@@ -125,7 +126,11 @@
             this.toolStripSeparator1,
             this.tsbtnFlipPanes,
             this.toolStripSeparator4,
-            this.tsbtnreSpring});
+            this.tsbtnDeb,
+            this.toolStripSeparator3,
+            this.tsbtnreSpring,
+            this.toolStripSeparator2,
+            this.tsbtnHelp});
             this.Filetoolmenu.Location = new System.Drawing.Point(0, 0);
             this.Filetoolmenu.Name = "Filetoolmenu";
             this.Filetoolmenu.Size = new System.Drawing.Size(991, 25);
@@ -180,15 +185,42 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbtnDeb
+            // 
+            this.tsbtnDeb.Image = global::iSprite.Resource.file_deb;
+            this.tsbtnDeb.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnDeb.Name = "tsbtnDeb";
+            this.tsbtnDeb.Size = new System.Drawing.Size(91, 22);
+            this.tsbtnDeb.Text = "Install Deb";
+            this.tsbtnDeb.ToolTipText = "Install Deb File";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // tsbtnreSpring
             // 
-            this.tsbtnreSpring.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbtnreSpring.Image = global::iSprite.Resource.quick_restart;
             this.tsbtnreSpring.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnreSpring.Name = "tsbtnreSpring";
-            this.tsbtnreSpring.Size = new System.Drawing.Size(23, 22);
-            this.tsbtnreSpring.Text = "reSpring";
+            this.tsbtnreSpring.Size = new System.Drawing.Size(73, 22);
+            this.tsbtnreSpring.Text = "Respring";
             this.tsbtnreSpring.ToolTipText = "Restart SpringBoard";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsbtnHelp
+            // 
+            this.tsbtnHelp.Image = global::iSprite.Resource.help;
+            this.tsbtnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnHelp.Name = "tsbtnHelp";
+            this.tsbtnHelp.Size = new System.Drawing.Size(49, 22);
+            this.tsbtnHelp.Text = "Help";
+            this.tsbtnHelp.ToolTipText = "Get Help";
             // 
             // tabTheme
             // 
@@ -213,8 +245,6 @@
             this.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.Text = "iSpirit";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Controls.SetChildIndex(this.faTabStrip1, 0);
-            this.Controls.SetChildIndex(this.tabs, 0);
             ((System.ComponentModel.ISupportInitialize)(this.faTabStrip1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabs)).EndInit();
             this.tabs.ResumeLayout(false);
@@ -243,6 +273,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private iSprite.ThirdControl.FarsiLibrary.FATabStripItem tabTheme;
         private System.Windows.Forms.ToolStripButton tsbtnreSpring;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton tsbtnHelp;
+        private System.Windows.Forms.ToolStripButton tsbtnDeb;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 
 
     }

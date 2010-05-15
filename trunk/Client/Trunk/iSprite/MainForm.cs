@@ -255,6 +255,8 @@ namespace iSprite
                                 m_iPhonePanel.AfterDeviceFinishConnected();
                             }
                             m_themeManage.AfterDeviceFinishConnected(enable);
+
+                            tsbtnDeb.Enabled = tsbtnreSpring.Enabled = enable;
                         }
                         catch (Exception ex)
                         {
@@ -275,6 +277,7 @@ namespace iSprite
                         m_iPhonePanel.AfterDeviceFinishConnected();
                     }
                     m_themeManage.AfterDeviceFinishConnected(enable);
+                    tsbtnDeb.Enabled = tsbtnreSpring.Enabled = enable;
                 }
                 catch (Exception ex)
                 {
@@ -420,6 +423,12 @@ namespace iSprite
                     break;
                 case "tsbtnreSpring":
                     ReSpring();
+                    break;
+                case "tsbtnHelp":
+                    System.Diagnostics.Process.Start(iSpriteContext.Current.HelpUrl);
+                    break;
+                case "tsbtnDeb":
+                    DebInstaller.Show((iPhoneFileDevice)iphonedriver);
                     break;
             }
         }
