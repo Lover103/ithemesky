@@ -106,7 +106,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .sideMenu a:link,.sideMenu a:visited{ display:block; height:24px; padding-left:20px; line-height:22px; background:url(../images/sprites_common.png) no-repeat 0 0;}
 .sideMenu a:hover,.sideMenu a:active{ background:url(../images/sprites_common.png) no-repeat -190px 0;}
 .sideTags{ width:180px; padding:5px 10px;}
-.sideTags li{ display:inline; white-space:nowrap; padding:3px 3px 0 3px;}
+.sideTags a{ white-space:nowrap; padding:3px 3px 0 3px;}
 
 /*theme list layout*/
 .themeList dl{ width:138px; height:260px; background:url(../images/sprites_common.png) no-repeat 0 -80px;}
