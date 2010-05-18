@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title>Help - iSpirit -iPhone themes and files manager - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
-<meta name="description" content="iSpirit is a utility that will help you manage your files between PC and iPhone. It can help you changing iphone themes easily. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+<title>Help - iSpirit - iPhone themes and files manager - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+<meta name="description" content="iSpirit is a utility that will help you manage your files between PC and iPhone. It can help you change iPhone themes easily." />
 <meta name="keywords" content="iSpirit help, iSpirit download, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 </asp:Content>
 
