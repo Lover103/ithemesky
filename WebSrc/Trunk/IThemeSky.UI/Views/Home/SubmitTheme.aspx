@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <title>Submit iPhone theme - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
-    <meta name="description" content="ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
-    <meta name="keywords" content="iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
+    <title>Submit iPhone theme - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+    <meta name="description" content="Submit iPhone theme. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+    <meta name="keywords" content="<!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
     <script type="text/javascript">
         function SubmitThemeSuccess() {
             alert('congratulations, submit theme success. \r\n we\'ll check it as quickly as we can');

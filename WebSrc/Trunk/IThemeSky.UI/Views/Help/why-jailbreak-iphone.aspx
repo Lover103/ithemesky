@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title>Why jailbreak iPhone - Help - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
-<meta name="description" content="Why jailbreak iPhone. ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
-<meta name="keywords" content="Why jailbreak iPhone, iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
+<title>Why jailbreak iPhone - Help - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+<meta name="description" content="Why jailbreak iPhone. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+<meta name="keywords" content="Why jailbreak iPhone, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title>How to Use WinterBoard: A Walkthrough - Help - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
-<meta name="description" content="How to Use WinterBoard. ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
-<meta name="keywords" content="How to Use WinterBoard, iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
+<title>How to Use WinterBoard: A Walkthrough - Help - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+<meta name="description" content="How to Use WinterBoard. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+<meta name="keywords" content="How to Use WinterBoard, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 <link type="text/css" rel="stylesheet" media="screen" href="/Content/css/fancybox_normal.css">
 <script type="text/javascript" src="/Content/js/fancybox_normal.js"></script>
 <script type="text/javascript">

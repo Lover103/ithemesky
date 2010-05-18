@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title>iSpirit -iPhone themes and files manager - ithemesky.com</title>
-<meta name="description" content="iSpirit is specially designed for iPhone, used on your PC for file and theme mangement. ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
-<meta name="keywords" content="iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
+<title>iSpirit -iPhone themes and files manager - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+<meta name="description" content="iSpirit is a utility that will help you manage your files between PC and iPhone. It can help you changing iphone themes easily. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+<meta name="keywords" content="iSpirit download, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 <link type="text/css" rel="stylesheet" media="screen" href="/Content/css/fancybox_normal.css">
 <script type="text/javascript" src="/Content/js/fancybox_normal.js"></script>
 <script type="text/javascript">
@@ -37,7 +37,7 @@ $(document).ready(function() {
 		<!--breadcrumb end-->
 		<!--ispirit begin-->
 		<div class="fullContent">
-			<% Html.RenderPartial("ispirit"); %>
+			<% Html.RenderPartial("iSpirit"); %>
 			<div class="iSpiritNav">
 				<ul>
 					<li class="s1"><a href="/iSpirit/download/" title="Download - Click here to get iSpirit" target="_blank"><span class="link">Download - Click here to get iSpirit</span>

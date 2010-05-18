@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<DetailModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	<title><%=ViewData.Model.CurrentTheme.Title %> iPhone theme - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
-    <meta name="description" content="ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
-    <meta name="keywords" content="<% foreach (string tag in ViewData.Model.Tags){ %><%=tag %>,<%} %>,<%=ViewData.Model.CurrentTheme.CategoryName %>, iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
+	<title><%=ViewData.Model.CurrentTheme.Title %> - <%=ViewData.Model.CurrentTheme.CategoryName %> iPhone Theme - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+    <meta name="description" content="<%=ViewData.Model.CurrentTheme.CategoryName %> iPhone themes. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+    <meta name="keywords" content="<% foreach (string tag in ViewData.Model.Tags){ %><%=tag %>, <%} %> <%=ViewData.Model.CurrentTheme.CategoryName %>, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
     <link rel="stylesheet" href="/Content/css/fancybox.css" type="text/css" />
     <script type="text/javascript" src="/Content/js/fancybox.js"></script>
     <script type="text/javascript">
