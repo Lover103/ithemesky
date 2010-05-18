@@ -1,1 +1,1 @@
-ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!
+iThemesky.com provided free iPhone themes. iSpirit help you manage files and iPhone themes between PC and iPhone.
