@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<SearchModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	<title><%=ViewData.Model.Keyword%> - Search results - iPhone Themes free download, ithemesky.com provided iPhone Themes</title>
-    <meta name="description" content="ithemesky.com provided iPhone themes, more than 2,000 iPhone themes free download!" />
-    <meta name="keywords" content="iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, jailbreak" />
+	<title><%=ViewData.Model.Keyword%> iPhone themes - Search results - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+    <meta name="description" content="<%=ViewData.Model.Keyword%> iPhone themes. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+    <meta name="keywords" content="<%=ViewData.Model.Keyword%>, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

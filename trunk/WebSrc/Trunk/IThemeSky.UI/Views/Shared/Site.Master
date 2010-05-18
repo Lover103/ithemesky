@@ -7,13 +7,13 @@
 <link href="/Content/css/site.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
 <script type="text/javascript" src="/Content/js/IThemeSky.js"></script>
+<asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder>
 <!--[if lte IE 6]>
 <style type="text/css">  
 img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6,span,p,button,textarea{behavior:url(/Content/js/iepngfix.htc);} 
 </style>
 <script type="text/javascript" src="/Content/js/iepngfix_tilebg.js"></script>
 <![endif]-->
-<asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
 <!--header begin-->
@@ -27,7 +27,7 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 			<li class="s3"><a href="/list/popular" title="Ranking">Ranking</a></li>
 			<li class="s5"><a href="/ispirit" title="iSpirit">iSpirit</a></li>
 			<li class="s6"><a href="/help/faq" title="Help">Help</a></li>
-			<li class="s7 last"><a href="http://forum.ithemesky.com/" title="Froum">Froum</a></li>
+			<li class="s7 last"><a href="http://forum.ithemesky.com/" title="Forum">Forum</a></li>
 		</ul>
 		<div class="searchPannel">
 			<label class="label">Search</label>
