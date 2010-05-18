@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title>iSpirit -iPhone themes and files manager - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
-<meta name="description" content="iSpirit is a utility that will help you manage your files between PC and iPhone. It can help you changing iphone themes easily. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+<title>iSpirit - iPhone themes and files manager - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+<meta name="description" content="iSpirit is a utility that will help you manage your files between PC and iPhone. It can help you change iPhone themes easily." />
 <meta name="keywords" content="iSpirit download, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 <link type="text/css" rel="stylesheet" media="screen" href="/Content/css/fancybox_normal.css">
 <script type="text/javascript" src="/Content/js/fancybox_normal.js"></script>
