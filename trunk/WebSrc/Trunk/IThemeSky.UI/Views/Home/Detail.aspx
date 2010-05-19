@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<DetailModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	<title><%=ViewData.Model.CurrentTheme.Title %> - <%=ViewData.Model.CurrentTheme.CategoryName %> iPhone Theme - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+	<title><%=ViewData.Model.CurrentTheme.Title %> iPhone theme - <%=ViewData.Model.CurrentTheme.CategoryName %> - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
     <meta name="description" content="<%=ViewData.Model.CurrentTheme.CategoryName %> iPhone themes. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
     <meta name="keywords" content="<% foreach (string tag in ViewData.Model.Tags){ %><%=tag %>, <%} %> <%=ViewData.Model.CurrentTheme.CategoryName %>, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
     <link rel="stylesheet" href="/Content/css/fancybox.css" type="text/css" />
