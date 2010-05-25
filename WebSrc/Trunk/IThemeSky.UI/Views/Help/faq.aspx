@@ -29,10 +29,50 @@
 		<div id="mainContent" class="commonPage">
 			<!--help content begin-->
 			<div class="commonContent">
-				<h1 class="normalTitle">FAQ</h1>
-				<div class="normalEntry">
-					<p>Comming soon</p>
-				</div>
+				<ul class="faqList">
+					<li><a href="#faqContent1">How to install theme on jailbroken iPhone?</a></li>
+					<li><a href="#faqContent2">How to Use WinterBoard?</a></li>
+					<li><a href="#faqContent3">Why jailbreak iPhone?</a></li>
+					<li><a href="#faqContent4">How to jailbreak iPhone?</a></li>
+					<li><a href="#faqContent5">What is the system requirement for iSpirit?</a></li>
+				</ul>
+				<dl class="faqContent">
+					<dt class="title"><span class="text">How to install theme on jailbroken iPhone?</span><a href="#top" name="faqContent1" class="goTop" title="TOP">TOP</a></dt>
+					<dd class="faqEntry">
+						<p>
+							1. If you have wifi, you could install the winterboard via cydia directly.<br />
+							2. If no wifi there, will install automatically when you use the iSpirit, please step as instructed.<br />
+							3. Download and install iSpirit.<br />
+							4. In the theme management, you could install the theme from Zip directly or install from folder.<br />
+							5. If you need more theme, you could download from our website.<br />
+							6. And also you could download from the website indicated in the iSpirit, iSpirit will help you install the theme automatically.
+						</p>
+					</dd>
+				</dl>
+				<dl class="faqContent">
+					<dt class="title"><span class="text">How to Use WinterBoard?</span><a href="#top" name="faqContent2" class="goTop" title="TOP">TOP</a></dt>
+					<dd class="faqEntry">
+						<p>Please follow our <a href="/help/how-to-use-winterboard">WinterBoard use guide <span style="color:#FFF;">here</span></a>.</p>
+					</dd>
+				</dl>
+				<dl class="faqContent">
+					<dt class="title"><span class="text">Why jailbreak iPhone?</span><a href="#top" name="faqContent3" class="goTop" title="TOP">TOP</a></dt>
+					<dd class="faqEntry">
+						<p>It cite some of the most compelling <a href="/help/why-jailbreak-iphone">reasons to jailbreak your iPhone <span style="color:#FFF;">here</span></a>.</p>
+					</dd>
+				</dl>
+				<dl class="faqContent">
+					<dt class="title"><span class="text">How to jailbreak iPhone?</span><a href="#top" name="faqContent4" class="goTop" title="TOP">TOP</a></dt>
+					<dd class="faqEntry">
+						<p>Please follow our <a href="/help/how-to-jailbreak-iphone">iPhone jailbreak guide <span style="color:#FFF;">here</span></a>.</p>
+					</dd>
+				</dl>
+				<dl class="faqContent">
+					<dt class="title"><span class="text">What is the system requirement for iSpirit?</span><a href="#top" name="faqContent5" class="goTop" title="TOP">TOP</a></dt>
+					<dd class="faqEntry">
+						<p>iSpirit is only for Windows (Windows XP/ Windows Vista/ Windows 7). Please install both .net Framework 2.0 or higher and iTunes 7.5 or higher before you use iSpirit. The .net Framework 4.0 and iTunes9.1 are been recommended.</p>
+					</dd>
+				</dl>
 			</div>
 			<!--help content end-->
 		</div>
