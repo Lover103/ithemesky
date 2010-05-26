@@ -3,11 +3,11 @@
 				<dl>
 					<dt><img src="/Content/images/ispirit_title.png" width="345" height="72" alt="iSpirit - iPhone themes and files manager" /></dt>
 					<dd>
-						<p>iSpirit is specially designed for iPhone, used on your PC for iPhone files,installing third Application and themes mangement. With iSpirit, you would install theme/third Application on your iPhone, and manage the 
+						<p>iSpirit is specially designed for iPhone, used on your PC for iPhone files,installing third Application and themes mangement. With iSpirit, you would install theme and manage the 
 
-files in your iphone easily. You would free download iPhone themes from iSpirit. It works with iPod touch, iPhone, iPhone 3G, iPhone 3Gs,iPad in Firmware1.x, 2.x and 
+files in your iphone easily. You would free download iPhone themes from iSpirit. It works with iPod touch, iPhone, iPhone 3G, iPhone 3Gs in Firmware1.x, 2.x and 
 
-3.x, even without jailbreak.</p>
+3.x and iPad.</p>
 						<p style="margin-top:5px;"><strong>System Requirement:</strong></p>
 						<p class="req">
 							<strong>&nbsp;&nbsp;&nbsp;OS:</strong> Windows XP / Windows Vista / Windows 7<br />
