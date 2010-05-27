@@ -128,8 +128,8 @@ namespace iSprite
             tsbtn_ThemesIniPhone.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbtn_ThemesIniPhone.Name = "tsbtn_InstallFromFolder";
             tsbtn_ThemesIniPhone.Size = new System.Drawing.Size(32, 100);
-            tsbtn_ThemesIniPhone.ToolTipText = "Themes In iPhone";
-            tsbtn_ThemesIniPhone.Text = "Themes In iPhone";
+            tsbtn_ThemesIniPhone.ToolTipText = "Themes In " + iSpriteContext.Current.AppleDeviceType + "";
+            tsbtn_ThemesIniPhone.Text = "Themes In " + iSpriteContext.Current.AppleDeviceType + "";
             tsbtn_ThemesIniPhone.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
             tsbtn_ThemesIniPhone.Image = global::iSprite.Resource.winterboard;
 
@@ -505,7 +505,7 @@ namespace iSprite
             }
             else
             {
-                RaiseMessageHandler(this, "Fail to operate ! iPhone is disconnected .", MessageTypeOption.Error);
+                RaiseMessageHandler(this, "Fail to operate ! " + iSpriteContext.Current.AppleDeviceType + " is disconnected .", MessageTypeOption.Error);
             }
         }
 
@@ -594,7 +594,7 @@ namespace iSprite
             {
                 if (!m_iPhoneDevice.Copy2iPhone(themePath, iSpriteContext.Current.iPhone_WinterBoardFile_Path + "/" + themeName))
                 {
-                    RaiseMessageHandler(this, "Fail to copy the theme file to iPhone .", MessageTypeOption.Error);
+                    RaiseMessageHandler(this, "Fail to copy the theme file to " + iSpriteContext.Current.AppleDeviceType + " .", MessageTypeOption.Error);
                     return;
                 }
             }
@@ -602,7 +602,7 @@ namespace iSprite
             if (messagetype == ThemePriviewMessageTypeOption.Upload)
             {
                 //如果只是上传就不需要拷贝plist文件到iPhone
-                RaiseMessageHandler(this, "The theme \"" + themeName + "\" has been successfully copy to iPhone .", MessageTypeOption.Info);
+                RaiseMessageHandler(this, "The theme \"" + themeName + "\" has been successfully copy to " + iSpriteContext.Current.AppleDeviceType + " .", MessageTypeOption.Info);
                 return;
             }
 
@@ -661,7 +661,7 @@ namespace iSprite
                 }
                 else
                 {
-                    RaiseMessageHandler(this, "Fail to copy the theme setting file to iPhone .", MessageTypeOption.Error);
+                    RaiseMessageHandler(this, "Fail to copy the theme setting file to " + iSpriteContext.Current.AppleDeviceType + " .", MessageTypeOption.Error);
                 }
             }
             else
@@ -770,7 +770,7 @@ namespace iSprite
                 if (!content.Contains("<key>com.saurik.WinterBoard</key>"))
                 {
                     //如果没有显示，需要重启Springboard
-                    if (MessageHelper.ShowInfo("WinterBoard has been installed, ispirit will reboot iPhone SpringBoard to show WinterBoard in  home screen?") == DialogResult.OK)
+                    if (MessageHelper.ShowInfo("WinterBoard has been installed, ispirit will reboot " + iSpriteContext.Current.AppleDeviceType + " SpringBoard to show WinterBoard in  home screen?") == DialogResult.OK)
                     {
                         //重启Respring
                         m_iPhoneDevice.Respring();
@@ -856,7 +856,7 @@ namespace iSprite
                             if (m_iPhoneDevice.Copy2iPhone(wbfilepath,
                                 iSpriteContext.Current.iPhone_CydiaAutoInstallPath))
                             {
-                                MessageHelper.ShowInfo("WinterBoard has been copied to iPhone, You must reboot your iPhone to finish Installation.");
+                                MessageHelper.ShowInfo("WinterBoard has been copied to " + iSpriteContext.Current.AppleDeviceType + ", You must reboot your " + iSpriteContext.Current.AppleDeviceType + " to finish Installation.");
                                 return true;
                             }
                         }

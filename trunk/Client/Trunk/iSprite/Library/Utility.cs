@@ -7,6 +7,7 @@ using System.Net;
 using Manzana;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Data;
 
 namespace iSprite
 {
@@ -15,6 +16,31 @@ namespace iSprite
         static Utility()
         {
         }
+
+        internal static string GetWinterBoardUrl(iPhoneFileDevice m_iPhoneDevice)
+        {
+            string wbxmlpath = iSpriteContext.Current.iSpriteTempPath + "\\" + "update.xml";
+            if (Utility.DownloadFile(iSpriteContext.Current.WinterBoardXML, wbxmlpath))
+            {
+                DataSet ds = new DataSet();
+                ds.ReadXml(wbxmlpath);
+                if (ds.Tables.Count == 1 && ds.Tables[0].Rows.Count >= 1)
+                {
+                    DataRow[] rows = ds.Tables[0].Select("Ver='" + m_iPhoneDevice.DeviceVersion + "'");
+                    if (rows.Length == 0)
+                    {
+                        rows = ds.Tables[0].Select("Ver='all'");
+                    }
+                    if (rows.Length > 0)
+                    {
+                        string wburl = rows[0]["downurl"].ToString();
+                        return wburl;
+                    }
+                }
+            }
+            return "http://update.ithemesky.com/winterboard.deb";
+        }
+
         internal static  string GetDirName(string path)
         {
             DirectoryInfo info = new DirectoryInfo(path);

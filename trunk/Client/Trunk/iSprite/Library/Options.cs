@@ -4,6 +4,44 @@ using System.Text;
 
 namespace iSprite
 {
+    public enum InstallAppOption
+    { 
+        Winterboard,
+        OpenSSH
+    }
+    #region SSH状态
+    /// <summary>
+    /// SSH状态
+    /// </summary>
+    public enum SshStatusOption
+    {
+        /// <summary>
+        /// 成功连接
+        /// </summary>
+        Connected,
+        /// <summary>
+        /// 无法连接
+        /// </summary>
+        NotConnected,
+        /// <summary>
+        /// 未安装SSH
+        /// </summary>
+        OpenSSHNoInstalled,
+        /// <summary>
+        /// iTunnel没有正常运行
+        /// </summary>
+        iTunnelNoRun,
+        /// <summary>
+        /// 密码错误
+        /// </summary>
+        ErrorPassword,
+        /// <summary>
+        /// 未知错误
+        /// </summary>
+        UnknownError
+    }
+    #endregion
+
     #region 视图行类型
     /// <summary>
     /// 主窗体显示模式

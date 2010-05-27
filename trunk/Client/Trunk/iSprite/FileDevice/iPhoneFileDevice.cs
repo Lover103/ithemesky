@@ -16,7 +16,7 @@ namespace iSprite
         Manzana.iPhone iPhoneInterface;
         public event FileCompletedHandler OnCompleteHandler;
         public event FileProgressHandler OnProgressHandler;
-        string m_deviceName = "no iPhone/iPod found";
+        string m_deviceName = "no iPhone/iPod/iPad found";
         public event MessageHandler OnMessage;
 
         #region 消息处理
@@ -86,12 +86,12 @@ namespace iSprite
             }
             else
             {
-                m_deviceName = "no iPhone/iPod found";
+                m_deviceName = "no iPhone/iPod/iPad found";
             }
         }
         void NotConnectedErrot()
         { 
-            RaiseMessageHandler(this, "Please Make sure you have connected your iPhone to PC via USB cable.", MessageTypeOption.Error);
+            RaiseMessageHandler(this, "Please Make sure you have connected your " + iSpriteContext.Current.AppleDeviceType + " to PC via USB cable.", MessageTypeOption.Error);
         }
         /// <summary>
         /// 注销iPhone

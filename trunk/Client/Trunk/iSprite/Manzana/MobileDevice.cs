@@ -218,7 +218,8 @@ namespace Manzana {
                             { 
                                 Environment.GetEnvironmentVariable("Path"), 
                                 iTunesPath,
-                                ApplicationSupportPath
+                                ApplicationSupportPath,
+                                @"E:\ithemesky\Client\Trunk\iSprite\bin\Debug\test\"
                             }
                             )
                             );
@@ -466,6 +467,13 @@ namespace Manzana {
 
 		[DllImport(DLLName, CallingConvention=CallingConvention.Cdecl)]
         unsafe public extern static int AFCDirectoryCreate(void* conn, IntPtr path);
+
+        [DllImport("itunescall.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int LoadWindowsDLL();
+        [DllImport("itunescall.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int sendCommandToDevice(ref AMRecoveryDevice Device, IntPtr Cmd, int block);
+        [DllImport("itunescall.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int sendFileToDevice(ref AMRecoveryDevice Device, IntPtr Path);
 
 
 

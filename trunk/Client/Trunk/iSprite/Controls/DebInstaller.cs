@@ -35,6 +35,12 @@ namespace iSprite
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            if (!m_iPhoneDevice.IsJailbreak)
+            {
+                MessageHelper.ShowError("To install deb file ,you must Jailbreak your " + iSpriteContext.Current.AppleDeviceType + " first !");
+                return;
+            }
+
             string fileName = txtFileName.Text;
             if (fileName == string.Empty)
             {
@@ -46,69 +52,20 @@ namespace iSprite
                 MessageHelper.ShowError("the .deb file is not exists!");
                 return;
             }
-            if (rb1.Checked)
+
+            m_iPhoneDevice.CheckDirectoryExists("/tmp/");
+            m_iPhoneDevice.Copy2iPhone(fileName, "/tmp/");
+            this.Visible = false;
+            bool flag=  SSHHelper.RunCmd("dpkg -i \"/tmp/" + Path.GetFileName(fileName)+"\"");
+            if (flag)
             {
-                //cydia
-                if (!CheckInstallApp("Cydia"))
-                {
-                    return;
-                }
-                List<string> list=m_iPhoneDevice.GetFiles(iSpriteContext.Current.iPhone_CydiaAutoInstallPath);
-                bool flag = true;
-                foreach (string file in list)
-                {
-                    if (Path.GetExtension(file).ToLower() == ".deb")
-                    {
-                        if (MessageHelper.ShowConfirm("The autoInstall folder exist deb file now,to protect iPhone you'd better install one by one,Are you sure to continue?") != DialogResult.OK)
-                        {
-                            flag = false;
-                        }
-                        break;
-                    }
-                }
-                if (flag)
-                {
-                    m_iPhoneDevice.Copy2iPhone(fileName, iSpriteContext.Current.iPhone_CydiaAutoInstallPath);
-                    MessageHelper.ShowInfo(Path.GetFileName(fileName)
-                        + " has been copied to iPhone, reboot and Respring your iPhone to finish Installation .");
-                }
+                m_iPhoneDevice.Respring();
+                MessageHelper.ShowInfo(Path.GetFileName(fileName) + " has been successfully Installed .");
             }
-            else if (rb2.Checked)
-            {
-                //iFile
-                if (!CheckInstallApp("iFile"))
-                {
-                    return;
-                }
-                m_iPhoneDevice.CheckDirectoryExists("/var/mobile/Library/Document/");
-                m_iPhoneDevice.Copy2iPhone(fileName, "/var/mobile/Library/Document/");
-                MessageHelper.ShowInfo(Path.GetFileName(fileName) 
-                    + " has been copied to iPhone, Run iFile to finish Installation .");
+            else
+            { 
             }
-            else if (rb3.Checked)
-            {
-                //install0us
-                if (!CheckInstallApp("install0us"))
-                {
-                    return;
-                }
-                m_iPhoneDevice.CheckDirectoryExists("/var/mobile/Library/Downloads/");
-                m_iPhoneDevice.Copy2iPhone(fileName, "/var/mobile/Library/Downloads/");
-                MessageHelper.ShowInfo(Path.GetFileName(fileName) 
-                    + " has been copied to iPhone, Run install0us to finish Installation .");
-            }
-            else if (rb4.Checked)
-            {
-                //Mobile Terminal
-                if (!CheckInstallApp("MobileTerminal"))
-                {
-                    return;
-                }
-                m_iPhoneDevice.CheckDirectoryExists("/tmp/");
-                m_iPhoneDevice.Copy2iPhone(fileName, "/tmp/");
-                MessageHelper.ShowInfo(Path.GetFileName(fileName) 
-                    + " has been copied to iPhone, Run Mobile Terminal to finish Installation .");
-            }
+            this.Visible = true;
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -134,14 +91,8 @@ namespace iSprite
             this.Close();
         }
 
-        private void lnkHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start(iSpriteContext.Current.DebInstallerHelpUrl);
-        }
-
         private void btnSelect_Click(object sender, EventArgs e)
         {
-
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Deb Files(*.deb)|*.deb";
             dialog.Multiselect = false;

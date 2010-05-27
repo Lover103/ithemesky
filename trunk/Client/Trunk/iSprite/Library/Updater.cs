@@ -48,7 +48,7 @@ namespace iSprite
                         if (new Version(serverver) > new Version(iSpriteContext.Current.CurrentVersion))
                         {
                             RaiseMessageHandler(this,
-                                string.Format("The lastest iSpirit version is V{0}, Would you to upgrade it ?", serverver),
+                                string.Format("The lastest iSpirit version is V{0}, Would you want to upgrade it ?", serverver),
                                 MessageTypeOption.Upgrade
                                 );
                         }

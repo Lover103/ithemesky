@@ -324,7 +324,7 @@ namespace iSprite
             {
                 if (m_FileDevice is iPhoneFileDevice)
                 {
-                    gbxMain.Text = "no iPhone/iPod found";
+                    gbxMain.Text = "no iPhone/iPod/iPad found";
                 }
             }
         }
