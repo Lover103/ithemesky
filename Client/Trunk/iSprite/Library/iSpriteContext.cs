@@ -17,6 +17,11 @@ namespace iSprite
         private static iSpriteContext _context;
 
         /// <summary>
+        /// 当前连接的设备类型（iPod、iPhone、iPad）
+        /// </summary>
+        internal string AppleDeviceType { private set; get; }
+
+        /// <summary>
         /// 获取或设置当前应用程序数据路径
         /// </summary>
         internal string iSpriteApplicationDataPath { private set; get; }
@@ -94,7 +99,8 @@ namespace iSprite
         /// <summary>
         /// CydiaAutoInstallPath
         /// </summary>
-        internal string iPhone_CydiaAutoInstallPath { private set; get; }/// <summary>
+        internal string iPhone_CydiaAutoInstallPath { private set; get; }
+        /// <summary>
         /// iPhone_InstallationPath
         /// </summary>
         internal string iPhone_InstallationPath { private set; get; }
@@ -119,8 +125,8 @@ namespace iSprite
         /// </summary>
         public void Reload()
         {
-            CurrentVersion = "1.0";
-
+            CurrentVersion = "1.0.2";
+            AppleDeviceType = "iPhone";
             ThemeHomePage = Manzana.Utility.Decrypt("60A99C413E1F93068451A6E02805A1E0A306054C5C2C6E15001DC23B9551C12B");
             HelpUrl = "http://www.ithemesky.com/ispirit/help";
             DebInstallerHelpUrl = "http://forum.ithemesky.com/default.aspx?g=posts&m=8";
@@ -238,6 +244,8 @@ namespace iSprite
             //        break;
             //    }
             //}
+
+            _context.AppleDeviceType = iphone.DeviceType;
             _context.iPhone_WinterBoardFile_Path = "/Library/Themes/";
 
 

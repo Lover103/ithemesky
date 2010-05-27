@@ -21,7 +21,7 @@ namespace iSprite
 
             InitializeComponent();
 
-            this.Text = "PlistEditer";
+            this.Text = "PlistEditer(" + plistpath + ")";
 
             this.DialogResult = DialogResult.Cancel;
             this.ShowInTaskbar = false;
@@ -38,7 +38,16 @@ namespace iSprite
         {
             string content = m_iPhoneFileDevice.GetFileText(m_PlistPath);
             txtContent.Text = content.Replace("\n", "\r\n");
+            this.KeyDown += new KeyEventHandler(PlistEditer_KeyDown);
             txtContent.SelectionLength = 0;
+        }
+
+        void PlistEditer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode== Keys.A)
+            {
+                txtContent.SelectAll();
+            }
         }
         #endregion
 
@@ -54,11 +63,11 @@ namespace iSprite
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (MessageHelper.ShowConfirm("Are you sure you want to save current Plist content to iPhone ?") == DialogResult.OK)
+            if (MessageHelper.ShowConfirm("Are you sure you want to save current Plist content to " + iSpriteContext.Current.AppleDeviceType + " ?") == DialogResult.OK)
             {
                 if (!m_iPhoneFileDevice.SetFileText(txtContent.Text, m_PlistPath))
                 {
-                    MessageHelper.ShowError("Fail to save current Plist content to iPhone .");
+                    MessageHelper.ShowError("Fail to save current Plist content to " + iSpriteContext.Current.AppleDeviceType + " .");
                 }
                 else
                 {

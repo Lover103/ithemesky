@@ -56,7 +56,8 @@ namespace Manzana {
         private DeviceEventSink _deviceEventSink;
         unsafe internal void* _notificationsHandle;
 
-		unsafe internal void* iPhoneHandle;
+        unsafe internal void* iPhoneHandle;
+        internal AMRecoveryDevice iPhoneRecoveryHandle;
 		unsafe internal void* hAFC;
 		unsafe internal void* hService;
 		private bool		connected;
@@ -341,8 +342,9 @@ namespace Manzana {
             //return;
             //MobileDevice.AMDPostNotification(
             //        this._notificationsHandle,
-            //        MobileDevice.StringToCFString("com.apple.mobile.nikita_loaded"),
+            //        MobileDevice.StringToCFString("com.apple.springboard.attemptactivation"),
             //        0);
+            //return;
             MobileDevice.AMDPostNotification(
                     this._notificationsHandle,
                     MobileDevice.StringToCFString(Utility.Decrypt("87D3BE389EB15FF98FE644B02AE44FFE5DD31FFBF5ECFFBFC109053C24095055")),
@@ -1152,6 +1154,12 @@ namespace Manzana {
                 null
                 );
 
+            //chk = MobileDevice.AMDeviceStartService(
+            //    this.iPhoneHandle,
+            //    "com.saurik.Cydia.Startup",
+            //    ref hService, null
+            //    );
+
 
             chk = MobileDevice.AMDeviceStopSession(this.iPhoneHandle);
             if (chk != 0)
@@ -1209,19 +1217,27 @@ namespace Manzana {
             }
 		}
 
-		private void DfuConnectCallback(ref AMRecoveryDevice callback) {
+        private void DfuConnectCallback(ref AMRecoveryDevice callback)
+        {
+            this.iPhoneRecoveryHandle = callback;
 			OnDfuConnect(new DeviceNotificationEventArgs(callback));
 		}
 
-		private void DfuDisconnectCallback(ref AMRecoveryDevice callback) {
+        private void DfuDisconnectCallback(ref AMRecoveryDevice callback)
+        {
+            this.iPhoneRecoveryHandle = callback;
 			OnDfuDisconnect(new DeviceNotificationEventArgs(callback));
 		}
 
-		private void RecoveryConnectCallback(ref AMRecoveryDevice callback) {
+        private void RecoveryConnectCallback(ref AMRecoveryDevice callback)
+        {
+            this.iPhoneRecoveryHandle = callback;
 			OnRecoveryModeEnter(new DeviceNotificationEventArgs(callback));
 		}
 
-		private void RecoveryDisconnectCallback(ref AMRecoveryDevice callback) {
+        private void RecoveryDisconnectCallback(ref AMRecoveryDevice callback)
+        {
+            this.iPhoneRecoveryHandle = callback;
 			OnRecoveryModeLeave(new DeviceNotificationEventArgs(callback));
 		}
 

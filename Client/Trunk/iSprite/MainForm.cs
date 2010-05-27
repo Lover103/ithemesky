@@ -76,7 +76,6 @@ namespace iSprite
         public MainForm()
         {
             InitializeComponent();
-
             this.Text = "iSpirit (V" + iSpriteContext.Current.CurrentVersion + ")";
             this.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
 
@@ -247,6 +246,9 @@ namespace iSprite
                     {
                         try
                         {
+                            //new LockdowndService().Start();
+                            //new LockdowndService().Stop();
+
                             m_iPhonePanel.Enabled = enable;
                             if (enable)
                             {

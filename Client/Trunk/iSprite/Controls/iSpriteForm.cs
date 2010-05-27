@@ -128,7 +128,7 @@ namespace iSprite
 
             //标题
             lblTitle = new Label();
-            lblTitle.AutoSize = false;
+            lblTitle.AutoSize = true;
             lblTitle.Location = new Point(30, 5);
             this.lblTitle.Font = new Font("Arial", 11F,
                 FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
