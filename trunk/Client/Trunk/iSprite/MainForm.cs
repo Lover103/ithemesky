@@ -62,6 +62,7 @@ namespace iSprite
         IFileDevice iphonedriver;
         IFileDevice localdiskdriver;
         Updater m_Updater;
+        AppManage m_AppManage;
 
         /// <summary>
         /// 状态条
@@ -105,6 +106,9 @@ namespace iSprite
         private void Initialise()
         {
             InitialiseProgress();
+
+            this.tabs.SelectedItem = this.tabFile;
+
 
             mainsplitcontainer.SplitterDistance = this.ClientSize.Width / 2;
 
@@ -151,6 +155,8 @@ namespace iSprite
             m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme, this);
             m_themeManage.OnMessage += new MessageHandler(ShowMessage);
             m_themeManage.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
+
+            m_AppManage = new AppManage((iPhoneFileDevice)iphonedriver, tvCatalog, this);
 
             //检查更新
             m_Updater = new Updater();

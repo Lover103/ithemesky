@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AppManage.cs" />
     <Compile Include="Controls\FavoritesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,7 +192,6 @@
     <Compile Include="Controls\iListView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Library\ProcessCaller.cs" />
     <Compile Include="Library\SSHHelper.cs" />
     <Compile Include="Library\Updater.cs" />
     <Compile Include="Manzana\AFCDeviceInfo.cs" />
@@ -483,6 +483,8 @@
     <Content Include="Dlls\ICSharpCode.SharpZipLib.dll" />
     <Content Include="Dlls\Org.Mentalis.Security.dll" />
     <Content Include="iSprite_icon_32.ico" />
+    <None Include="Resources\ipa.jpg" />
+    <None Include="Resources\pxl.png" />
     <None Include="Resources\file_deb.png" />
     <None Include="Resources\help.png" />
     <None Include="Resources\go_forward.png" />

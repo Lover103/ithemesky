@@ -159,19 +159,22 @@
   <data name="tsbtnFlipPanes.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAiRJREFUOE+V0V9I
-        U2EYBvB12XX3sdDMWRdBBZqFAy+WmAvLalpjOVa5sTqFTUJY3yzslDNX21rtzFxdDDJTocLKYYEVJwm2
-        vKgoh2P9cYuClV0Um35P5zOQxpmxPnjuvvfh5f0pFAW8NuKjjacjqwv4mv9LK/HQ7W3Pnm/Q31m5ZIkt
-        kHRwlxOOwxfeOgydkzk56o1j/7lprNUNekr1QyvylmxtGYP9Rgo24T2OuGOwXorBcjEGsysGzvcBVuEn
-        NhrDKNszuK+8oX+5rKSs1oXQeAZ9j+YghOfhvT+PnrsU/DBFxwAFd+0X6s98krYYgqrxtvwepRpeGsjC
-        ImRg8v5As3sW+p7vaOr+hobOFOrsU9CciKDCeA+qXTf9sg1KqglU2sBi1u0MYr1uAJsMI6g4NA7tqTgq
-        TQ/g7B1FcV2w/L9ESrTXpbJbIITQggZJRxdtFWagAJaxgeKaK4UNi9G4khAnPdn3GVu4SVjdyVUGV1K5
-        l89NFRdVyjYRo1NqQrqpI/RVUsiipv0djl39ghZ3Cgbnx8U08QkwcllBaHQaZ/vT8IfnQCS29lAWXGAW
-        ZvcMjOffLKSZf4Xd9igYuazAP/waZmcEx3vTMPky0HWlUe9IYJvtJaosj1F58CE2m0YWwshlBU8nJg6w
-        KzMqRsboGCGjZKR/EzPyvBpPxBfSHQhlZIxuzY6guqg2oC7SeHJTTdRLcoqiKEkQyugUij+M/3q/AdMZ
-        YQx1yTw4AAAAAElFTkSuQmCC
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAiNJREFUOE+V0V9I
+        U2EYBvB12XX3sdDMWRdBBZqFAy+WmAvLalpjOVa5sTqFTUJY31TslEtXx2VtM1cXg8xUqLByWGDKSYIt
+        LyrK4Vh/3KJgZRfFpt/T+QykcWasD5677314eX8KRQ6viXTS2tbQ+hy+Zv/SSDro7qbJ51v099auWGLz
+        xR3c1ZjjeOdbh6F9OiMn3VEcvjCLjbrB7kL90JqsJTsbxmC/lYDN+x4nhAisVyKwXI7A7IqA6/kAq/cn
+        thqDKDoweKi4pn+1rKSo0oXAeAp9TxbgDS7C/XARXfcp+GGKlgEK7sYvVLd9krYYgqr2rvwehRpeGkjD
+        4k3B5P6BemEe+q7vqLv0DTXtCVTZZ6A5E0KJ8QFU+257ZBsUlBOotL7lbNrrx2bdALYZRlBybBzac1GU
+        mh7B2TuK/Cp/8X+JFGhvSmV3QAihOQ0S0kIbvXNQAKvYQH7FtdyGxXBUSUgrPdv3GTu4aViF+DqDK648
+        yGemjAsrZZuI4Rk1IW3UEfgqKaRR0fwOp65/QYOQgMH5cTl1fAyMXFYQGJ3F+f4kPMEFEImtOZAG55uH
+        WZiD8eKbpdTzr7DfHgYjlxV4hl/D7AzhdG8Spp4UdB1JVDti2GV7iTLLU5QefYztppGlMHJZwcTU1BF2
+        ZUbFyBgdI2SUjPRvYkaeVeOZ+EK6A6GMjNFt2ONX51X61Hma7syUE/WKnKIoShKEMjqF4g/jv95vXSBg
+        3VI5s2MAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 54</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

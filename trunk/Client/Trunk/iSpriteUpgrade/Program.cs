@@ -69,6 +69,7 @@ namespace iSpriteUpgrade
             }
 
             Console.WriteLine("完成升级");
+            Thread.Sleep(2000);
             //Console.ReadLine();
         }
     }
