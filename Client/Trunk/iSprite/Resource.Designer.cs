@@ -37,18 +37,9 @@ namespace iSprite {
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
-                    Type type = typeof(Resource);
-                    string baseName = type.Name;
-                    if (!string.IsNullOrEmpty(type.Namespace))
-                    {
-                        baseName = type.Namespace + "." + baseName;
-                    }
-
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager(baseName, type.Assembly);
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("iSprite.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -198,6 +189,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap Img_button_down {
             get {
                 object obj = ResourceManager.GetObject("Img_button_down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ipa {
+            get {
+                object obj = ResourceManager.GetObject("ipa", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -394,6 +392,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap Photos {
             get {
                 object obj = ResourceManager.GetObject("Photos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pxl {
+            get {
+                object obj = ResourceManager.GetObject("pxl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
