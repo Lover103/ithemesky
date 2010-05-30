@@ -49,6 +49,7 @@
     <Compile Include="CheckStateOption.cs" />
     <Compile Include="DisplayStateOption.cs" />
     <Compile Include="FullThemeView.cs" />
+    <Compile Include="ISpiritUserInfo.cs" />
     <Compile Include="SimpleThemeView.cs" />
     <Compile Include="SourceOption.cs" />
     <Compile Include="SupportTypeOption.cs" />

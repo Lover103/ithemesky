@@ -64,7 +64,7 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildParameter("@RecordNum",SqlDbType.Int,4, ParameterDirection.InputOutput, recordCount),
 				SqlParameterHelper.BuildInputParameter("@SelectList",SqlDbType.VarChar,2000,"*"),
 				SqlParameterHelper.BuildInputParameter("@TableSource",SqlDbType.VarChar,100,"ThemeSupport"),
-				SqlParameterHelper.BuildInputParameter("@SearchCondition",SqlDbType.VarChar,2000, "SupportType=" + supportType.ToInt32()),
+				SqlParameterHelper.BuildInputParameter("@SearchCondition",SqlDbType.VarChar,2000, supportType == SupportTypeOption.All ? "" : "SupportType=" + supportType.ToInt32()),
 				SqlParameterHelper.BuildInputParameter("@OrderExpression",SqlDbType.VarChar,1000, "SupportId DESC"),
 				SqlParameterHelper.BuildInputParameter("@PageSize",SqlDbType.Int,4,pageSize),
 				SqlParameterHelper.BuildInputParameter("@PageIndex",SqlDbType.Int,4,pageIndex)
@@ -80,7 +80,31 @@ namespace IThemeSky.DataAccess
             recordCount = Convert.ToInt32(parameters[0].Value);
             return list;
         }
-
+        /// <summary>
+        /// 添加iSpirit用户信息
+        /// </summary>
+        /// <param name="spiritUser"></param>
+        /// <returns></returns>
+        public bool AddISpiritUserInfo(ISpiritUserInfo spiritUser)
+        {
+            string cmdText = @"
+			insert into ISpiritUsers
+				(PhoneVersion,SoftVersion,ITunesVersion,DeviceId,DeviceType,UserAgent,AddTime,UserIp)
+			values
+				(@PhoneVersion,@SoftVersion,@ITunesVersion,@DeviceId,@DeviceType,@UserAgent,getdate(),@UserIp)
+			";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				SqlParameterHelper.BuildInputParameter("@PhoneVersion",SqlDbType.NVarChar, 30, spiritUser.PhoneVersion),
+				SqlParameterHelper.BuildInputParameter("@SoftVersion",SqlDbType.NVarChar, 30, spiritUser.SoftVersion),
+                SqlParameterHelper.BuildInputParameter("@ITunesVersion",SqlDbType.NVarChar, 30, spiritUser.ITunesVersion),
+                SqlParameterHelper.BuildInputParameter("@DeviceId",SqlDbType.NVarChar, 300, spiritUser.DeviceId),
+                SqlParameterHelper.BuildInputParameter("@DeviceType",SqlDbType.NVarChar, 30, spiritUser.DeviceType),
+                SqlParameterHelper.BuildInputParameter("@UserAgent",SqlDbType.NVarChar, 500, spiritUser.UserAgent),
+                SqlParameterHelper.BuildInputParameter("@UserIP",SqlDbType.NVarChar, 50, spiritUser.UserIP),
+			};
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
+        }
         #endregion
 
         /// <summary>

@@ -32,5 +32,11 @@ namespace IThemeSky.DataAccess
         /// <param name="recordCount">总记录数(ref)</param>
         /// <returns></returns>
         List<ThemeSupport> GetSupports(SupportTypeOption supportType, int pageIndex, int pageSize, ref int recordCount);
+        /// <summary>
+        /// 添加iSpirit用户信息
+        /// </summary>
+        /// <param name="spiritUser"></param>
+        /// <returns></returns>
+        bool AddISpiritUserInfo(ISpiritUserInfo spiritUser);
     }
 }
