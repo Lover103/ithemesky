@@ -14,6 +14,22 @@ namespace IThemeSky.UI.Controllers
     {
         public ActionResult Index()
         {
+            if (Request.QueryString.Count > 0 && Request.QueryString["chl"] != null)
+            {
+                IThemeSupportRepository repository = ThemeRepositoryFactory.Default.GetThemeSupportRepository();
+                repository.AddISpiritUserInfo(
+                    new ISpiritUserInfo() 
+                    {
+                        AddTime = DateTime.Now,
+                        DeviceId = Request.QueryString[""],
+                        PhoneVersion = Request.QueryString["phonever"],
+                        SoftVersion = Request.QueryString["softver"],
+                        ITunesVersion = Request.QueryString["itunesver"],
+                        DeviceType = Request.QueryString["deviceType"],
+                        UserAgent = Request.UserAgent,
+                        UserIP = Request.UserHostAddress,
+                    });
+            }
             IndexModel model = new IndexModel();
             return View(model);
         }

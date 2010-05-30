@@ -7,6 +7,7 @@ namespace IThemeSky.Model
 {
     public enum SupportTypeOption
     {
+        All = 0,
         Theme = 1,
         ISpirit = 2,
     }

@@ -69,7 +69,7 @@
                         所属标签：<asp:TextBox ID="txtTags" runat="server" value='<%#GetThemeTags(Eval("ThemeId")) %>'></asp:TextBox>
                         <asp:Button ID="btnSave" OnClick="propertyList_OnClick" Text="保存" runat="server" />&nbsp;<asp:Button ID="btnSaveAndCheck" OnClick="propertyList_OnClick" Text="保存并审核通过" runat="server" />
                         <br />
-                        <a href="/<%#Eval("ThumbnailName") %>" target="_blank"><img src="/<%#Eval("ThumbnailName").ToString().Replace(".jpg", "_112x168.jpg") %>" border="0" /></a>
+                        <a href="<%#Eval("ThumbnailName") %>" target="_blank"><img src="<%#Eval("ThumbnailName").ToString().Replace(".jpg", "_112x168.jpg") %>" border="0" /></a>
                         <asp:HiddenField ID="hidThemeId" runat="server" />
                         </td>
                         <td>
