@@ -12,6 +12,7 @@ using Manzana;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace iSprite
 {
@@ -78,9 +79,26 @@ namespace iSprite
         {
             InitializeComponent();
             this.Text = "iSpirit (V" + iSpriteContext.Current.CurrentVersion + ")";
-            this.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
-
+            //this.FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
             Utility.SetWindow(this);
+        }
+
+        void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //ShowMessage(this, "Begin to Save Setting...", MessageTypeOption.SetStatusBar);
+            //Application.DoEvents();
+
+            //if (null != iphone)
+            //{
+            //    //移除事件
+            //    iphone.Connect -= new ConnectEventHandler(iphone_Connect);
+            //    iphone.Disconnect -= new ConnectEventHandler(iphone_Disconnect);
+            //}
+            //if (null != m_AppManage)
+            //{
+            //    m_AppManage.SaveDownQueue();
+            //}
+            //ShowMessage(this, "", MessageTypeOption.HiddenStatusBar);
         }
         /// <summary>
         /// 加载进度条
@@ -103,13 +121,59 @@ namespace iSprite
             statusBar.Visible = false;
         }
 
+        void RunTestCode()
+        {
+            return;
+            //DataSet ds = new DataSet();
+            //ds.ReadXml(@"E:\ithemesky\Client\Trunk\iSprite\CydiaSourceCfg.xml");
+            //List<RepositoryInfo> repositoryInfos = new List<RepositoryInfo>();
+            //foreach (DataRow row in ds.Tables[0].Rows)
+            //{
+            //    string url = row["Release"].ToString().Trim();
+            //    string APTCachedReleaseURL = url;
+            //    RepositoryInfo repositoryInfo;
+            //    string content = string.Empty;
+            //    if (PackageDataContext.GetRepositoryInfoByUrl(url, ref  APTCachedReleaseURL, out  repositoryInfo))
+            //    {
+            //        repositoryInfos.Add(repositoryInfo);
+            //    }
+            //}
+            //List<string> list = new List<string>();
+            ////list.Add("http://apt.saurik.com/");
+            //list.Add("http://apt.bigboss.us.com/repofiles/cydia/");
+            //list.Add("http://apt.modmyi.com/");
+            //list.Add("http://cydia.zodttd.com/");
+            //list.Add("http://apt9.yellowsn0w.com/");
+            //list.Add("http://cydia.zodttd.com/");
+            //list.Add("http://iphone.hackndev.org/");
+            //list.Add("http://iphonehe.com/");
+            //list.Add("http://ispaziorepo.com/cydia/apt");
+            //list.Add("http://repo.smxy.org/cydia/apt/");
+            //list.Add("http://urbanfanatics.com/");
+            //list.Add("http://www.ispaziorepo.com/");
+            //list.Add("http://www.zodttd.com/");
+            //foreach (string url in list)
+            //{
+            //    string APTCachedReleaseURL = string.Empty;
+            //    RepositoryInfo repositoryInfo;
+            //    if (PackageDataContext.GetRepositoryInfoByUrl(url, ref  APTCachedReleaseURL, out  repositoryInfo))
+            //    {
+            //        repositoryInfos.Add(repositoryInfo);
+            //    }
+            //}
+            //string APTCachedReleaseURL = string.Empty;
+            //RepositoryInfo repositoryInfo;
+            //PackageDataContext.GetRepositoryInfoByUrl("http://apt.saurik.com/", ref  APTCachedReleaseURL, out  repositoryInfo);
+            string CachedPackagesURL = string.Empty;
+            List<PackageItem> packages;
+            //PackageDataContext.GetPackagesByUrl("http://apt.saurik.com/", ref  CachedPackagesURL, out  packages);
+        }
+
         private void Initialise()
         {
             InitialiseProgress();
-
-            this.tabs.SelectedItem = this.tabFile;
-
-
+            RunTestCode();
+            //this.tabs.SelectedItem = this.tabFile;
             mainsplitcontainer.SplitterDistance = this.ClientSize.Width / 2;
 
             iphone = new iPhone();
@@ -156,7 +220,7 @@ namespace iSprite
             m_themeManage.OnMessage += new MessageHandler(ShowMessage);
             m_themeManage.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
 
-            m_AppManage = new AppManage((iPhoneFileDevice)iphonedriver, tvCatalog, this);
+            m_AppManage = new AppManage((iPhoneFileDevice)iphonedriver, this);
 
             //检查更新
             m_Updater = new Updater();
@@ -189,20 +253,6 @@ namespace iSprite
             catch(Exception ex)
             {
                 ShowMessage(this, ex.Message + ex.StackTrace, MessageTypeOption.Error);
-            }
-        }
-        /// <summary>
-        /// 窗体关闭
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (null != iphone)
-            {
-                //移除事件
-                //if (iphone.Connect!=null) iphone.Connect -= new ConnectEventHandler(iphone_Connect);
-                //iphone.Disconnect -= new ConnectEventHandler(iphone_Disconnect);
             }
         }
         #endregion
@@ -263,7 +313,7 @@ namespace iSprite
                                 m_iPhonePanel.AfterDeviceFinishConnected();
                             }
                             m_themeManage.AfterDeviceFinishConnected(enable);
-
+                            m_AppManage.AfterDeviceFinishConnected(enable);
                             tsbtnDeb.Enabled = tsbtnreSpring.Enabled = enable;
                         }
                         catch (Exception ex)
@@ -400,6 +450,10 @@ namespace iSprite
             if (null != m_LoaclDiskPanel)
             {
                 m_LoaclDiskPanel.UpdateMenuStatus();
+            }
+            if (null != m_AppManage)
+            {
+                m_AppManage.UpdateDownloadList();
             }
         }
 

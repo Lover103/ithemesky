@@ -283,6 +283,8 @@ namespace iSprite
             {
                 if (m_FileDevice.DirectoryExists(selectpath))
                 {
+                    selectpath = selectpath.TrimEnd(m_FileDevice.DirectorySeparatorChar) + m_FileDevice.DirectorySeparatorChar;
+
                     RaisePathChanged(this, selectpath);
                 }
                 else

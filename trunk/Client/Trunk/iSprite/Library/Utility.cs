@@ -17,6 +17,41 @@ namespace iSprite
         {
         }
 
+        public static string GetNotExistFileName(string newFileName)
+        {
+            FileInfo fileInfo = new FileInfo(newFileName);
+            if (fileInfo.Exists)
+            {
+                int count = 1;
+
+                string fileExitWithoutExt = Path.GetFileNameWithoutExtension(newFileName);
+                string ext = fileInfo.Extension;
+
+                do
+                {
+                    newFileName = GetWithBackslash(fileInfo.DirectoryName)
+                        + fileExitWithoutExt + String.Format("({0})", count++) + ext;
+                }
+                while (File.Exists(newFileName));
+            }
+            return newFileName;
+        }
+
+        /// <summary>
+        /// 路径添加反斜杠
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string GetWithBackslash(string path)
+        {
+            if (!path.EndsWith(Path.DirectorySeparatorChar.ToString()))
+            {
+                path += Path.DirectorySeparatorChar.ToString();
+            }
+
+            return path;
+        }
+
         internal static string GetWinterBoardUrl(iPhoneFileDevice m_iPhoneDevice)
         {
             string wbxmlpath = iSpriteContext.Current.iSpriteTempPath + "\\" + "update.xml";
@@ -181,29 +216,27 @@ namespace iSprite
             return path1.TrimEnd(DirectorySeparatorChar)+DirectorySeparatorChar+path2;
         }
 
-        public static string FormatFileSize(ulong FileSize)
+        public static string FormatFileSize(ulong size)
         {
-            //显示单位为KB
-             if (FileSize <= 1048576)
+            ulong KB = 1024;
+            ulong MB = KB * 1024;
+            ulong GB = MB * 1024;
+            if (size < KB)
             {
-                ulong k = (FileSize / 1024);
-                if (k <= 0)
-                {
-                    k = 1;
-                }
-                return string.Format("{0:F0} KB", k);
+                return String.Format("{0} b", size);
             }
-                //大于1M，则显示单位为MB
-            else if ((FileSize >= 1048576) && (FileSize <= 1073741824))
+            else if (size >= KB && size < MB)
             {
-                return string.Format("{0:F0} MB", FileSize / 1048576);
+                return String.Format("{0:0} KB", size / 1024.0f);
             }
-                //大于1G，则显示单位为G
-            else if (FileSize >= 1073741824)
+            else if (size >= MB && size < GB)
             {
-                return string.Format("{0:F0} GB", FileSize / 1073741824);
+                return String.Format("{0:F2} MB", size / 1024.0f / 1024.0f);
             }
-            return "";
+            else // size >= GB
+            {
+                return String.Format("{0:F2} GB", size / 1024.0f / 1024.0f / 1024.0f);
+            }
         }
 
         public static string FormatFileSizeFloat(ulong FileSize)
