@@ -60,6 +60,34 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap app_btn {
+            get {
+                object obj = ResourceManager.GetObject("app_btn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap app_ico_star_full {
+            get {
+                object obj = ResourceManager.GetObject("app_ico_star_full", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap app_ico_star_half {
+            get {
+                object obj = ResourceManager.GetObject("app_ico_star_half", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap app_ico_star_none {
+            get {
+                object obj = ResourceManager.GetObject("app_ico_star_none", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap BackgroundImage {
             get {
                 object obj = ResourceManager.GetObject("BackgroundImage", resourceCulture);
@@ -70,6 +98,48 @@ namespace iSprite {
         internal static System.Drawing.Bitmap btn_go {
             get {
                 object obj = ResourceManager.GetObject("btn_go", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btn_pause {
+            get {
+                object obj = ResourceManager.GetObject("btn_pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btn_start {
+            get {
+                object obj = ResourceManager.GetObject("btn_start", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btnFirst {
+            get {
+                object obj = ResourceManager.GetObject("btnFirst", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btnLast {
+            get {
+                object obj = ResourceManager.GetObject("btnLast", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btnNext {
+            get {
+                object obj = ResourceManager.GetObject("btnNext", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btnPrevious {
+            get {
+                object obj = ResourceManager.GetObject("btnPrevious", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -294,6 +364,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap Notes {
             get {
                 object obj = ResourceManager.GetObject("Notes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Others {
+            get {
+                object obj = ResourceManager.GetObject("Others", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

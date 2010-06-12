@@ -179,6 +179,14 @@ namespace iSprite
                 { 
                 }
             }
+            if (!Directory.Exists(iSpriteTempPath + "icons\\"))
+            {
+                Directory.CreateDirectory(iSpriteTempPath + "icons\\");
+            }
+            (Resource.app_btn).Save(iSpriteTempPath + "icons\\btn.png");
+            (Resource.app_ico_star_full).Save(iSpriteTempPath + "icons\\ico_star_full.png");
+            (Resource.app_ico_star_half).Save(iSpriteTempPath + "icons\\ico_star_half.png");
+            (Resource.app_ico_star_none).Save(iSpriteTempPath + "icons\\ico_star_none.png");
         }
 
         /// <summary>
