@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Resources;
+using System.Threading;
 
 namespace iSprite
 {
@@ -22,7 +23,6 @@ namespace iSprite
         public iSpriteStatus()
         {
             InitializeComponent();
-            this.Paint += new PaintEventHandler(iSpriteStatus_Paint);
 
             pblist.Add(picbox);
             picbox.BackColor = Color.Transparent;
@@ -41,17 +41,55 @@ namespace iSprite
             }
         }
 
-        void iSpriteStatus_Paint(object sender, PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
+            //pblist[Pindex].BringToFront();
+            //Application.DoEvents();
+        }
 
-            this.SetStyle(ControlStyles.ResizeRedraw | ControlStyles.Opaque, true);  //优化双缓冲
+        [RefreshProperties(RefreshProperties.Repaint)]
+        int Pindex
+        {
+            set
+            {
+                if (index >= 12)
+                {
+                    index = 0;
+                }
+                else
+                {
+                    index = value;
+                }
+            }
+            get
+            {
+                return index;
+            }
         }
 
         internal void Hidden()
         {
             this.timer.Enabled = false;
             this.Visible = false;
+        }
+
+        void SetImg()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new ThreadInvokeDelegate(
+                    delegate()
+                    {
+                        pblist[Pindex].BringToFront();
+                        Application.DoEvents();
+                    }
+                ));
+            }
+            else
+            {
+                pblist[Pindex].BringToFront();
+                Application.DoEvents();
+            }
         }
         /// <summary>
         /// 设置状态条文字
@@ -76,18 +114,32 @@ namespace iSprite
                     this.Visible = true;
                     this.timer.Enabled = true;
                     this.lblStatus.Text = value;
+                    new Thread(new ThreadStart(Change)).Start();
                 }
             }
         }
 
+        void Change()
+        {
+           //while(true)
+           //{
+           //    Pindex++;
+           //    SetImg();
+           //    Application.DoEvents();
+           //    //this.Invalidate();
+           //    Thread.Sleep(TimeSpan.FromSeconds(0.3));
+           //}
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (index >= 12)
-            {
-                index = 0;
-            }
-            pblist[index++].BringToFront();
-            Application.DoEvents();
+            //if (index >= 12)
+            //{
+            //    index = 0;
+            //}
+            //pblist[index++].BringToFront();
+            //this.Invalidate();
+            //Application.DoEvents();
         }
 
     }

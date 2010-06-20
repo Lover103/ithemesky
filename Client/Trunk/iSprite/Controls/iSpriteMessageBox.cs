@@ -70,6 +70,7 @@ namespace iSprite
                     MsgBox.btnOK.Left = MsgBox.btnCancel.Left * 2 + MsgBox.btnOK.Width;
                     break;
             }
+            MsgBox.BringToFront();
             return MsgBox.ShowDialog();
         }
 

@@ -15,6 +15,7 @@ namespace iSprite
     {
         static private DebInstaller InstallerBox;
         iPhoneFileDevice m_iPhoneDevice;
+        internal event MessageHandler OnMessage;
 
         public DebInstaller()
         {
@@ -24,11 +25,20 @@ namespace iSprite
         }
 
 
-        public static DialogResult Show(iPhoneFileDevice filedevice)
+        private void RaiseMessageHandler(object sender, string Message, MessageTypeOption messageType)
+        {
+            if (OnMessage != null)
+            {
+                OnMessage(sender, Message, messageType);
+            }
+        }
+
+
+        public static DialogResult Show(iPhoneFileDevice filedevice,MessageHandler megHandler)
         {
             InstallerBox = new DebInstaller();
             InstallerBox.m_iPhoneDevice = filedevice;
-
+            InstallerBox.OnMessage += megHandler;
             return InstallerBox.ShowDialog();
         }
 
@@ -52,14 +62,12 @@ namespace iSprite
                 MessageHelper.ShowError("the .deb file is not exists!");
                 return;
             }
-
-            m_iPhoneDevice.CheckDirectoryExists("/tmp/");
-            m_iPhoneDevice.Copy2iPhone(fileName, "/tmp/");
             this.Visible = false;
-            bool flag=  SSHHelper.RunCmd("dpkg -i \"/tmp/" + Path.GetFileName(fileName)+"\"");
+            string msg = string.Empty;
+            bool flag = SSHHelper.InstallDeb(m_iPhoneDevice, fileName, out msg);
             if (flag)
             {
-                m_iPhoneDevice.Respring();
+                RaiseMessageHandler(this,string.Empty, MessageTypeOption.SuccessInstalled);
                 MessageHelper.ShowInfo(Path.GetFileName(fileName) + " has been successfully Installed .");
             }
             else

@@ -76,21 +76,6 @@
             this.ctxLVFilter = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsbtnFavourites = new System.Windows.Forms.ToolStripSplitButton();
             this.ctxFavourites = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ctxViews = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuViewDetails = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewLargeIcons = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewList = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewSmallIcons = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewTile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewThumbnails16x16 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewThumbnails32x32 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewThumbnails48x48 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuViewShowFolders = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewShowGridlines = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewshowObjectTypeColumn = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuViewCancel = new System.Windows.Forms.ToolStripMenuItem();
             this.imlTLB = new System.Windows.Forms.ImageList(this.components);
             this.panPathBar = new System.Windows.Forms.Panel();
             this.gbxMain = new System.Windows.Forms.GroupBox();
@@ -102,7 +87,6 @@
             this.ctxTVTools.SuspendLayout();
             this.tsListView.SuspendLayout();
             this.ctxLVTools.SuspendLayout();
-            this.ctxViews.SuspendLayout();
             this.gbxMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -169,7 +153,6 @@
             this.toolStripSeparator6,
             this.mnuTVCancel});
             this.ctxTVTools.Name = "ctxTools";
-            this.ctxTVTools.OwnerItem = this.tsbtnTVTools;
             this.ctxTVTools.Size = new System.Drawing.Size(190, 166);
             // 
             // mnuTVRefresh
@@ -350,7 +333,6 @@
             this.toolStripMenuItem13,
             this.mnuLVCancel});
             this.ctxLVTools.Name = "ctxTools";
-            this.ctxLVTools.OwnerItem = this.tsbtnLVTools;
             this.ctxLVTools.Size = new System.Drawing.Size(190, 216);
             // 
             // mnuLVRefresh
@@ -496,8 +478,7 @@
             // ctxLVFilter
             // 
             this.ctxLVFilter.Name = "ctxLVFilter";
-            this.ctxLVFilter.OwnerItem = this.tsbtnLVFilter;
-            this.ctxLVFilter.Size = new System.Drawing.Size(153, 26);
+            this.ctxLVFilter.Size = new System.Drawing.Size(61, 4);
             // 
             // tsbtnFavourites
             // 
@@ -515,121 +496,7 @@
             // ctxFavourites
             // 
             this.ctxFavourites.Name = "ctxFavourites";
-            this.ctxFavourites.OwnerItem = this.tsbtnFavourites;
             this.ctxFavourites.Size = new System.Drawing.Size(61, 4);
-            // 
-            // ctxViews
-            // 
-            this.ctxViews.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuViewDetails,
-            this.mnuViewLargeIcons,
-            this.mnuViewList,
-            this.mnuViewSmallIcons,
-            this.mnuViewTile,
-            this.mnuViewThumbnails16x16,
-            this.mnuViewThumbnails32x32,
-            this.mnuViewThumbnails48x48,
-            this.toolStripMenuItem5,
-            this.mnuViewShowFolders,
-            this.mnuViewShowGridlines,
-            this.mnuViewshowObjectTypeColumn,
-            this.toolStripSeparator14,
-            this.mnuViewCancel});
-            this.ctxViews.Name = "ctxTools";
-            this.ctxViews.Size = new System.Drawing.Size(209, 280);
-            // 
-            // mnuViewDetails
-            // 
-            this.mnuViewDetails.Checked = true;
-            this.mnuViewDetails.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnuViewDetails.Name = "mnuViewDetails";
-            this.mnuViewDetails.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewDetails.Text = "Details";
-            // 
-            // mnuViewLargeIcons
-            // 
-            this.mnuViewLargeIcons.Name = "mnuViewLargeIcons";
-            this.mnuViewLargeIcons.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewLargeIcons.Text = "Large Icons";
-            // 
-            // mnuViewList
-            // 
-            this.mnuViewList.Name = "mnuViewList";
-            this.mnuViewList.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewList.Text = "List";
-            // 
-            // mnuViewSmallIcons
-            // 
-            this.mnuViewSmallIcons.Name = "mnuViewSmallIcons";
-            this.mnuViewSmallIcons.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewSmallIcons.Text = "Small Icons";
-            // 
-            // mnuViewTile
-            // 
-            this.mnuViewTile.Name = "mnuViewTile";
-            this.mnuViewTile.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewTile.Text = "Tile";
-            // 
-            // mnuViewThumbnails16x16
-            // 
-            this.mnuViewThumbnails16x16.Name = "mnuViewThumbnails16x16";
-            this.mnuViewThumbnails16x16.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewThumbnails16x16.Text = "Thumbnails 16x16";
-            // 
-            // mnuViewThumbnails32x32
-            // 
-            this.mnuViewThumbnails32x32.Name = "mnuViewThumbnails32x32";
-            this.mnuViewThumbnails32x32.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewThumbnails32x32.Text = "Thumbnails 32x32";
-            // 
-            // mnuViewThumbnails48x48
-            // 
-            this.mnuViewThumbnails48x48.Name = "mnuViewThumbnails48x48";
-            this.mnuViewThumbnails48x48.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewThumbnails48x48.Text = "Thumbnails 48x48";
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(205, 6);
-            // 
-            // mnuViewShowFolders
-            // 
-            this.mnuViewShowFolders.Checked = true;
-            this.mnuViewShowFolders.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnuViewShowFolders.Name = "mnuViewShowFolders";
-            this.mnuViewShowFolders.ShortcutKeyDisplayString = "Ctrl+F";
-            this.mnuViewShowFolders.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewShowFolders.Text = "Show Folders";
-            // 
-            // mnuViewShowGridlines
-            // 
-            this.mnuViewShowGridlines.Checked = true;
-            this.mnuViewShowGridlines.CheckOnClick = true;
-            this.mnuViewShowGridlines.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnuViewShowGridlines.Name = "mnuViewShowGridlines";
-            this.mnuViewShowGridlines.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewShowGridlines.Text = "Show Gridlines";
-            // 
-            // mnuViewshowObjectTypeColumn
-            // 
-            this.mnuViewshowObjectTypeColumn.Checked = true;
-            this.mnuViewshowObjectTypeColumn.CheckOnClick = true;
-            this.mnuViewshowObjectTypeColumn.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnuViewshowObjectTypeColumn.Name = "mnuViewshowObjectTypeColumn";
-            this.mnuViewshowObjectTypeColumn.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewshowObjectTypeColumn.Text = "Show Object Type Column";
-            // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(205, 6);
-            // 
-            // mnuViewCancel
-            // 
-            this.mnuViewCancel.Name = "mnuViewCancel";
-            this.mnuViewCancel.Size = new System.Drawing.Size(208, 22);
-            this.mnuViewCancel.Text = "Cancel";
             // 
             // imlTLB
             // 
@@ -686,7 +553,6 @@
             this.tsListView.ResumeLayout(false);
             this.tsListView.PerformLayout();
             this.ctxLVTools.ResumeLayout(false);
-            this.ctxViews.ResumeLayout(false);
             this.gbxMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -729,31 +595,16 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem mnuTVDeleteMarked;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ContextMenuStrip ctxViews;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewShowFolders;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewShowGridlines;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewCancel;
         private System.Windows.Forms.ToolStripMenuItem mnuTVCancel;
         private System.Windows.Forms.ToolStrip tsTV;
         private System.Windows.Forms.ToolStripDropDownButton tsbtnTVTools;
         private System.Windows.Forms.ToolStripButton tsbtnTVRefresh;
         private System.Windows.Forms.ToolStripButton tsbtnTVCopyPath;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewDetails;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewLargeIcons;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewList;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewSmallIcons;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewTile;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewThumbnails16x16;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewThumbnails32x32;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewThumbnails48x48;
         private System.Windows.Forms.Panel panPathBar;
         private System.Windows.Forms.GroupBox gbxMain;
         private System.Windows.Forms.ToolStripSplitButton tsbtnFavourites;
         private System.Windows.Forms.ContextMenuStrip ctxFavourites;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewshowObjectTypeColumn;
         internal System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ToolStripButton tsbnNewFolder;
         private System.Windows.Forms.ToolStripButton tsbnDelete;

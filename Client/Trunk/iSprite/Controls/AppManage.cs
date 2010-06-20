@@ -8,36 +8,35 @@ using MyDownloader.Core;
 using System.Web;
 using System.IO;
 using System.Threading;
+using Manzana;
 
 namespace iSprite
 {
     internal class AppManage
     {
         #region 变量定义
-        iPhoneFileDevice m_iPhoneDevice;
+
         internal event PathChanged OnPathChanged;
         internal event MessageHandler OnMessage;
-        MainForm mainform;
+        internal event FileProgressHandler OnProgressHandler;
 
+        iPhoneFileDevice m_iPhoneDevice;
+        AppHelper m_appHelper;
+        /// <summary>
+        /// 跨线程调用委托
+        /// </summary>
+        private delegate void ThreadInvokeDelegate();
+
+        MainForm m_MainForm;
         private TreeView m_tvCatalog;
-
-        AppHelper appHelper;
-        iPager m_appPager;
-        WebBrowser m_appwb;
-        Dictionary<string, PackageItem> m_Packagelist;
-        DownloadList m_DownloadList;
-
         SplitContainer m_appContainer;
-        Panel m_app_Paneltop;
-        Panel m_app_Panelbutton;
 
-        AppSearchBar m_AppSearchBar;
-        AppDownloadBar m_AppDownloadBar;
 
-        string m_SearchKey = string.Empty;
-        DateTime m_LastSaveDownQueueTime = DateTime.MaxValue;
-        static object m_InstallLock = new object();
-        InstalledAppList m_InstalledAppList;
+        OnlineAppList m_OnlineAppList;
+        AptInstalledList m_AptInstalledList;
+        AptDownList m_AptDownList;
+        CydiaSourceList m_CydiaSourceList;
+
         #endregion
 
         #region 消息处理
@@ -66,16 +65,10 @@ namespace iSprite
         internal AppManage(iPhoneFileDevice filedevice, Form parentForm)
         {
             m_iPhoneDevice = filedevice;
-            mainform = (MainForm)parentForm;
-            m_tvCatalog = mainform.tvCatalog;
-            m_appwb = mainform.appwb;
-            m_appPager = mainform.appPager;
-
-            m_appContainer= mainform.appContainer;
-            m_app_Paneltop = mainform.app_Paneltop;
-            m_app_Panelbutton = mainform.app_Panelbuttom;
-
-            appHelper = new AppHelper(m_iPhoneDevice);
+            m_MainForm = (MainForm)parentForm;
+            m_tvCatalog = m_MainForm.tvCatalog;
+            m_appContainer = m_MainForm.appContainer;
+            m_appHelper = new AppHelper(m_iPhoneDevice);
 
             InitControls();            
         }
@@ -87,185 +80,154 @@ namespace iSprite
         /// </summary>
         void InitControls()
         {
-            m_appPager.OnPageChanged += new PageChangedEventHandler(Pager_OnPageChanged);
             m_tvCatalog.AfterSelect += new TreeViewEventHandler(Catalog_AfterSelect);
 
-            m_DownloadList = new DownloadList();
-            m_appContainer.Panel2.Controls.Add(m_DownloadList);
-            m_DownloadList.Dock = System.Windows.Forms.DockStyle.Fill;
-            m_DownloadList.Location = new System.Drawing.Point(0, 39);
 
-            m_DownloadList.OnDoInstall += new InstallAppHandler(DownloadList_OnDoInstall);
-            m_DownloadList.OnSaveDownQueue += new SaveDownQueueHandler(DownloadList_OnSaveDownQueue);
+            //在线软件列表
+            m_OnlineAppList = new OnlineAppList(m_iPhoneDevice, m_appHelper);
+            m_OnlineAppList.OnMessage += new MessageHandler(RaiseMessageHandler);
+            m_OnlineAppList.OnDownloadApp += new AddURL2DownloadHandler(AddURL2Download);
+            m_OnlineAppList.OnSetNodeCount += new SetNodeCountHandler(SetNodeCount);
+            m_appContainer.Panel2.Controls.Add(m_OnlineAppList);
+            m_OnlineAppList.Dock = System.Windows.Forms.DockStyle.Fill;
+            m_OnlineAppList.Location = new System.Drawing.Point(0, 0);
 
-            m_AppSearchBar = new AppSearchBar();
-            m_app_Paneltop.Controls.Add(m_AppSearchBar);
-            m_AppSearchBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            m_AppSearchBar.OnSearch += new SearchHandler(AppSearchBar_OnSearch);
+            //下载列表
+            m_AptDownList = new AptDownList(m_iPhoneDevice, m_appHelper);
+            m_AptDownList.OnMessage += new MessageHandler(RaiseMessageHandler);
+            m_AptDownList.OnSetNodeCount += new SetNodeCountHandler(SetNodeCount);
+            m_appContainer.Panel2.Controls.Add(m_AptDownList);
+            m_AptDownList.Dock = System.Windows.Forms.DockStyle.Fill;
+            m_AptDownList.Location = new System.Drawing.Point(0, 0);
 
-            m_AppDownloadBar = new AppDownloadBar();
-            m_app_Paneltop.Controls.Add(m_AppDownloadBar);
-            m_AppDownloadBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            m_AppDownloadBar.OnDoAction += new AppDownloadBarEventHandler(AppDownloadBar_OnDoAction);
+            //安装列表
+            m_AptInstalledList = new AptInstalledList(m_iPhoneDevice, m_appHelper);
+            m_AptInstalledList.OnMessage += new MessageHandler(RaiseMessageHandler);
+            m_AptInstalledList.OnSetNodeCount += new SetNodeCountHandler(SetNodeCount);
+            m_appContainer.Panel2.Controls.Add(m_AptInstalledList);
+            m_AptInstalledList.Dock = System.Windows.Forms.DockStyle.Fill;
+            m_AptInstalledList.Location = new System.Drawing.Point(0, 0);
 
-            m_appwb.Navigating += new WebBrowserNavigatingEventHandler(Appwb_Navigating);
+
+            //cydia源
+            m_CydiaSourceList = new CydiaSourceList(m_iPhoneDevice, m_appHelper);
+            m_CydiaSourceList.OnSetNodeCount += new SetNodeCountHandler(SetNodeCount);
+            m_CydiaSourceList.OnUpdataCatalogCount += new UpdataCatalogCountHandler(UpdataCatalogCount);
+            m_CydiaSourceList.OnMessage += new MessageHandler(RaiseMessageHandler);
+            m_appContainer.Panel2.Controls.Add(m_CydiaSourceList);
+            m_CydiaSourceList.Dock = System.Windows.Forms.DockStyle.Fill;
+            m_CydiaSourceList.Location = new System.Drawing.Point(0, 0);
+
 
             LoadAdminCatalog();
-
-
-            m_InstalledAppList = new InstalledAppList(m_iPhoneDevice, appHelper);
-            m_appContainer.Panel2.Controls.Add(m_InstalledAppList);
-            m_InstalledAppList.Dock = System.Windows.Forms.DockStyle.Fill;
-            m_InstalledAppList.Location = new System.Drawing.Point(0, 39);
-
-            //注册下载可以支持的协议类型
-            ProtocolProviderFactory.RegisterProtocolHandler("http", typeof(HttpProtocolProvider));
-            ProtocolProviderFactory.RegisterProtocolHandler("https", typeof(HttpProtocolProvider));
-            ProtocolProviderFactory.RegisterProtocolHandler("ftp", typeof(FtpProtocolProvider));
-            DownloadManager.Instance.LoadDownQueueFromFile(appHelper.DownQueueFile);//从保存的下载队列恢复
-            m_LastSaveDownQueueTime = DateTime.Now;
         }
+        #endregion
 
-        void DownloadList_OnSaveDownQueue()
+        void UpdataCatalogCount()
         {
-            SaveDownQueue();
-        }
-
-        void Appwb_Navigating(object sender, WebBrowserNavigatingEventArgs e)
-        {
-            string url = e.Url.ToString();
-            if (url.Contains("dl.aspx?"))
+            List<string> c = new List<string>();
+            foreach (KeyValuePair<string, CatalogItem> item in m_appHelper.Catalogs)
             {
-                e.Cancel = true;
-                try
+                c.Add(item.Key);
+            }
+            c.Add("Others");
+            CatalogItem catalog;
+            foreach (string name in c)
+            {
+                if (m_appHelper.Catalogs.TryGetValue(name, out catalog))
                 {
-                    NameValueCollection nv = HttpUtility.ParseQueryString(e.Url.Query, Encoding.UTF8);
-                    string fileName = nv["name"];
-                    if (string.IsNullOrEmpty(fileName))
+                    SetNodeCount(catalog.Name, catalog.Count, false);
+                    Application.DoEvents();
+                }
+            }
+            SetNodeCount("All Packages", m_appHelper.Packagelist.Count, false);
+            m_OnlineAppList.LoadCatalogData(c, m_appHelper.AppNames);
+        }
+
+        #region 设置当前选中视图
+        /// <summary>
+        /// 添加到下载队列
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="path"></param>
+        /// <param name="fileName"></param>
+        void AddURL2Download(string url, string path, string fileName)
+        {
+            m_AptDownList.DownList.AddURL2Download(url, path, fileName);
+        }
+        #endregion
+
+        #region 重新加载已经安装的软件列表
+        /// <summary>
+        /// 重新加载已经安装的软件列表
+        /// </summary>
+        public void SafeRefreshApp()
+        {
+            m_appHelper.LoadInstallDebs();
+            if (m_MainForm.InvokeRequired)
+            {
+                m_MainForm.Invoke(new ThreadInvokeDelegate(
+                    delegate()
                     {
-                        fileName = Path.GetRandomFileName() + ".deb";
+                        m_AptInstalledList.UpdataList();
                     }
-
-                    fileName = Utility.GetNotExistFileName(fileName);
-                    m_DownloadList.AddURL2Download(url, appHelper.AptDownloadFolder, fileName);
-                }
-                catch
-                { 
-                }
-            }
-        }
-
-        void AppDownloadBar_OnDoAction(ActionOption option)
-        {
-            if (null != m_DownloadList)
-            {
-                switch (option)
-                {
-                    case ActionOption.Start:
-                        m_DownloadList.StartSelections();
-                        break;
-                    case ActionOption.Pause:
-                        m_DownloadList.PauseSelections();
-                        break;
-                    case ActionOption.Remove:
-                        m_DownloadList.RemoveSelections();
-                        break;
-                }
-            }
-        }
-
-        void AppSearchBar_OnSearch(string key, string catalogName)
-        {
-            m_SearchKey = key;
-            if (string.IsNullOrEmpty(m_SearchKey))
-            {
-                GetPackagesByCatalog(catalogName);
+                ));
             }
             else
             {
-                m_Packagelist = appHelper.SearchPackages(appHelper.Packagelist, catalogName, m_SearchKey);
-                BindAppData();
-            }
-            SelectNode("Search Result");
-            SetAppCount("Search Result", m_Packagelist.Count);
-        }
-        #endregion
-
-        void DownloadList_OnDoInstall(Downloader d)
-        {
-            if (null != d && d.InstallCode == InstallState.Prepare2Install)
-            {
-                lock (m_InstallLock)
-                {
-                    if (d.InstallCode == InstallState.Prepare2Install)
-                    {
-                        d.InstallCode = InstallState.Installing;
-
-                        m_iPhoneDevice.CheckDirectoryExists("/tmp/");
-                        m_iPhoneDevice.Copy2iPhone(d.LocalFile, "/tmp/");
-                        bool flag = SSHHelper.RunCmd("dpkg -i \"/tmp/" + Path.GetFileName(d.LocalFile) + "\"");
-                        if (flag)
-                        {
-                            m_iPhoneDevice.Respring();
-                            d.InstallCode = InstallState.Prepare2Install;
-                            MessageHelper.ShowInfo(Path.GetFileName(d.LocalFile) + " has been successfully Installed .");
-                        }
-                        else
-                        {
-                        }
-                    }
-                }
+                m_AptInstalledList.UpdataList();
             }
         }
-
-        #region 刷新下载列表
+        #endregion        
+        
+        #region 设置当前选中视图
         /// <summary>
-        /// 刷新下载列表
+        /// 设置当前选中视图
         /// </summary>
-        public void UpdateDownloadList()
-        {
-            if (null != m_DownloadList)
-            {
-                m_DownloadList.UpdateList();
-
-                if (DateTime.Now - m_LastSaveDownQueueTime > TimeSpan.FromSeconds(20))
-                {
-                    new Thread(new ThreadStart(SaveDownQueue)).Start();
-                }
-            }
-        }
-        internal void SaveDownQueue()
-        {
-            m_LastSaveDownQueueTime = DateTime.Now;
-            DownloadManager.Instance.SaveDownQueue(appHelper.DownQueueFile);
-        }
-        #endregion
-
+        /// <param name="nodeName"></param>
         void SetViewMode(string nodeName)
         {
             switch (nodeName)
             {
                 case "Downloaded Packages":
-                    m_DownloadList.BringToFront();
-                    m_AppDownloadBar.BringToFront();
+                    m_AptDownList.BringToFront();
                     break;
                 case "Installed Packages":
-                    m_InstalledAppList.BringToFront();
+                    m_AptInstalledList.BringToFront();
+                    break;
+                case "Cydia Sources":
+                    m_CydiaSourceList.BringToFront();
                     break;
                 default:
-                    m_appwb.BringToFront();
-                    m_AppSearchBar.BringToFront();
+                    m_OnlineAppList.BringToFront();
                     break;
             }
         }
+        #endregion
 
-        #region 搜索
+        #region 更新下载列表
         /// <summary>
-        /// 搜索
+        /// 更新下载列表
         /// </summary>
-        void Search()
+        internal void UpdateDownloadList()
         {
-            
+            if (m_AptDownList != null)
+            {
+                m_AptDownList.UpdateDownloadList();
+            }
+        }
+        #endregion
+
+        #region 保存下载队列
+        /// <summary>
+        /// 保存下载队列
+        /// </summary>
+        internal void SaveDownQueue()
+        {
+            if (m_AptDownList != null)
+            {
+                m_AptDownList.SaveDownQueue();
+            }
         }
         #endregion
 
@@ -281,15 +243,15 @@ namespace iSprite
             {
                 if (e.Node.Tag.Equals("0"))
                 {
-                    GetPackagesByCatalog(e.Node.Name);
+                    m_OnlineAppList.GetPackagesByCatalog(e.Node.Name);
                 }
                 else if (e.Node.Tag.Equals("1"))
                 {
                     switch (e.Node.Name)
                     {
                         case "All Packages":
-                            SetAppCount(e.Node.Name, appHelper.Packagelist.Count);
-                            GetPackagesByCatalog(e.Node.Name);
+                            m_OnlineAppList.GetPackagesByCatalog(e.Node.Name);
+                            SetNodeCount(e.Node.Name, m_appHelper.Packagelist.Count,true);
                             break;
                     }
                 }
@@ -297,52 +259,7 @@ namespace iSprite
                 SetViewMode(e.Node.Name);
             }
         }
-        #endregion
-
-        #region 获取指定分类的软件列表
-        /// <summary>
-        /// 获取指定分类的软件列表
-        /// </summary>
-        /// <param name="name"></param>
-        void GetPackagesByCatalog(string name)
-        {
-            m_SearchKey = string.Empty;
-            if (string.IsNullOrEmpty(name) || name == "All Packages")
-            {
-                m_Packagelist = appHelper.Packagelist;
-            }
-            else
-            {
-                m_Packagelist = appHelper.GetPackagesByCatalog(appHelper.Packagelist, name);
-            }
-            BindAppData();
-        }
-        #endregion
-
-        #region 软件列表分页事件处理
-        /// <summary>
-        /// 软件列表分页事件处理
-        /// </summary>
-        /// <param name="e"></param>
-        void Pager_OnPageChanged(PageChangedEventArgs e)
-        {
-            m_appPager.CurrentPageIndex = e.NewPageIndex;
-            BindAppData();
-        }
-        #endregion
-
-        #region 绑定软件列表
-        /// <summary>
-        /// 绑定软件列表
-        /// </summary>
-        void BindAppData()
-        {
-            Dictionary<string, PackageItem> packages = m_Packagelist;
-            m_appPager.RecordCount = packages.Count;
-            m_appPager.DataBind();
-            m_appwb.Navigate(appHelper.Packages2Html(packages, m_appPager.PageSize, m_appPager.CurrentPageIndex, m_SearchKey));
-        }
-        #endregion
+        #endregion        
 
         #region iPhone连接后初始化
         /// <summary>
@@ -353,10 +270,10 @@ namespace iSprite
         {
             if (isContected)
             {
-                appHelper.InitAppData();
-                LoadCatalogs();            
-                SelectNode("All Packages");
-                m_InstalledAppList.LoadData();
+                m_appHelper.InitAppData();
+                LoadCatalogs();
+                m_AptInstalledList.UpdataList();
+                m_CydiaSourceList.UpdataList();
             }
         }
         #endregion
@@ -368,7 +285,7 @@ namespace iSprite
         void LoadCatalogs()
         {
             List<string> c = new List<string>();
-            foreach (KeyValuePair<string, CatalogItem> item in appHelper.Catalogs)
+            foreach (KeyValuePair<string, CatalogItem> item in m_appHelper.Catalogs)
             {
                 c.Add(item.Key);
             }
@@ -378,7 +295,7 @@ namespace iSprite
             CatalogItem catalog;
             foreach (string name in c)
             {
-                if (appHelper.Catalogs.TryGetValue(name, out catalog))
+                if (m_appHelper.Catalogs.TryGetValue(name, out catalog))
                 {
                     m_tvCatalog.Nodes.Add(
                         catalog.Name,
@@ -392,7 +309,8 @@ namespace iSprite
             }
             m_tvCatalog.Enabled = true;
 
-            m_AppSearchBar.LoadData(c,appHelper.AppNames);
+            m_OnlineAppList.LoadCatalogData(c, m_appHelper.AppNames);
+            SetNodeCount("All Packages", m_appHelper.Packagelist.Count, true);
         }
         #endregion
 
@@ -404,7 +322,7 @@ namespace iSprite
         {
             m_tvCatalog.Nodes.Clear();
             Dictionary<string, string> dics = new Dictionary<string, string>();
-            dics.Add("Favorites", "Favorites");
+            dics.Add("Cydia Sources", "Cydia Sources");
             dics.Add("Search Result", "Search Result");
             dics.Add("Installed Packages", "Installed Packages");
             dics.Add("Downloaded Packages", "Downloaded Packages");
@@ -424,34 +342,13 @@ namespace iSprite
         }
         #endregion
 
-        #region 选中节点
-        /// <summary>
-        /// 选中节点
-        /// </summary>
-        /// <param name="nodeName"></param>
-        void SelectNode(string nodeName)
-        {
-            TreeNode[] tnArray = m_tvCatalog.Nodes.Find(nodeName, false);
-            if (tnArray.Length > 0)
-            {
-                TreeNode tnFind = null;
-                tnFind = tnArray[0];
-                if (tnFind != null)
-                {
-                    m_tvCatalog.SelectedNode = tnFind;
-                    m_tvCatalog.Focus();
-                }
-            }
-        }
-        #endregion
-
         #region 设置数量
         /// <summary>
         /// 设置数量
         /// </summary>
         /// <param name="nodeName"></param>
         /// <param name="count"></param>
-        void SetAppCount(string nodeName,int count)
+        void SetNodeCount(string nodeName, int count, bool selectNode)
         {
             TreeNode[] tnArray = m_tvCatalog.Nodes.Find(nodeName, false);
             if (tnArray.Length > 0)
@@ -461,6 +358,12 @@ namespace iSprite
                 if (tnFind != null)
                 {
                     tnFind.Text = tnFind.Name + "(" + count + ")";
+
+                    if (selectNode)
+                    {
+                        m_tvCatalog.SelectedNode = tnFind;
+                        m_tvCatalog.Focus();
+                    }
                 }
             }
         }
