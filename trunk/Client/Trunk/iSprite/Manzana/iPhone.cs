@@ -75,7 +75,6 @@ namespace Manzana {
 		/// </summary>
 		unsafe private void doConstruction() 
         {
-            IsInstalliTunes = MobileDevice.IsInstalliTunes();
             if (IsInstalliTunes)
             {
                 dnc = new DeviceNotificationCallback(NotifyCallback);
@@ -101,11 +100,17 @@ namespace Manzana {
 		}
 
 		/// <summary>
-		/// Creates a new iPhone object. If an iPhone is connected to the computer, a connection will automatically be opened.
+		/// Creates a new iPhone object
 		/// </summary>
-		public iPhone () {
-			doConstruction();
+		public iPhone ()
+        {
+            IsInstalliTunes = MobileDevice.IsInstalliTunes();
 		}
+
+        public void StartContect()
+        {
+            doConstruction();
+        }
 
 		/// <summary>
 		/// Constructor for iPhone object

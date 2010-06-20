@@ -50,6 +50,10 @@ namespace iSprite
     /// <param name="messagetype"></param>
     public delegate void ThemePriviewMessageHandler(ThemeInfo themeInfo, ThemePriviewMessageTypeOption messagetype);
 
+
+    public delegate void SetNodeCountHandler(string nodeName, int count, bool selectNode);
+    public delegate void UpdataCatalogCountHandler();
+
     /// <summary>
     /// 文件信息
     /// </summary>

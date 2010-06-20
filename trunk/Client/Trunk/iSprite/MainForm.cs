@@ -13,6 +13,7 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Diagnostics;
 
 namespace iSprite
 {
@@ -69,6 +70,7 @@ namespace iSprite
         /// 状态条
         /// </summary>
         private iSpriteStatus statusBar;
+
         #endregion
 
         #region 构造函数
@@ -79,31 +81,16 @@ namespace iSprite
         {
             InitializeComponent();
             this.Text = "iSpirit (V" + iSpriteContext.Current.CurrentVersion + ")";
-            //this.FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
+            this.FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
             Utility.SetWindow(this);
         }
+        #endregion
 
-        void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //ShowMessage(this, "Begin to Save Setting...", MessageTypeOption.SetStatusBar);
-            //Application.DoEvents();
-
-            //if (null != iphone)
-            //{
-            //    //移除事件
-            //    iphone.Connect -= new ConnectEventHandler(iphone_Connect);
-            //    iphone.Disconnect -= new ConnectEventHandler(iphone_Disconnect);
-            //}
-            //if (null != m_AppManage)
-            //{
-            //    m_AppManage.SaveDownQueue();
-            //}
-            //ShowMessage(this, "", MessageTypeOption.HiddenStatusBar);
-        }
+        #region 加载进度条
         /// <summary>
         /// 加载进度条
         /// </summary>
-        void InitialiseProgress()
+        void InitProgress()
         {
             progressBar = new iProgress();
             Controls.Add(progressBar);
@@ -120,79 +107,29 @@ namespace iSprite
             statusBar.Top = (this.Height - statusBar.Height) / 2;
             statusBar.Visible = false;
         }
+        #endregion
 
-        void RunTestCode()
+        #region 加载控件
+        /// <summary>
+        /// 加载控件
+        /// </summary>
+        private void LoadControls()
         {
-            return;
-            //DataSet ds = new DataSet();
-            //ds.ReadXml(@"E:\ithemesky\Client\Trunk\iSprite\CydiaSourceCfg.xml");
-            //List<RepositoryInfo> repositoryInfos = new List<RepositoryInfo>();
-            //foreach (DataRow row in ds.Tables[0].Rows)
-            //{
-            //    string url = row["Release"].ToString().Trim();
-            //    string APTCachedReleaseURL = url;
-            //    RepositoryInfo repositoryInfo;
-            //    string content = string.Empty;
-            //    if (PackageDataContext.GetRepositoryInfoByUrl(url, ref  APTCachedReleaseURL, out  repositoryInfo))
-            //    {
-            //        repositoryInfos.Add(repositoryInfo);
-            //    }
-            //}
-            //List<string> list = new List<string>();
-            ////list.Add("http://apt.saurik.com/");
-            //list.Add("http://apt.bigboss.us.com/repofiles/cydia/");
-            //list.Add("http://apt.modmyi.com/");
-            //list.Add("http://cydia.zodttd.com/");
-            //list.Add("http://apt9.yellowsn0w.com/");
-            //list.Add("http://cydia.zodttd.com/");
-            //list.Add("http://iphone.hackndev.org/");
-            //list.Add("http://iphonehe.com/");
-            //list.Add("http://ispaziorepo.com/cydia/apt");
-            //list.Add("http://repo.smxy.org/cydia/apt/");
-            //list.Add("http://urbanfanatics.com/");
-            //list.Add("http://www.ispaziorepo.com/");
-            //list.Add("http://www.zodttd.com/");
-            //foreach (string url in list)
-            //{
-            //    string APTCachedReleaseURL = string.Empty;
-            //    RepositoryInfo repositoryInfo;
-            //    if (PackageDataContext.GetRepositoryInfoByUrl(url, ref  APTCachedReleaseURL, out  repositoryInfo))
-            //    {
-            //        repositoryInfos.Add(repositoryInfo);
-            //    }
-            //}
-            //string APTCachedReleaseURL = string.Empty;
-            //RepositoryInfo repositoryInfo;
-            //PackageDataContext.GetRepositoryInfoByUrl("http://apt.saurik.com/", ref  APTCachedReleaseURL, out  repositoryInfo);
-            string CachedPackagesURL = string.Empty;
-            List<PackageItem> packages;
-            //PackageDataContext.GetPackagesByUrl("http://apt.saurik.com/", ref  CachedPackagesURL, out  packages);
-        }
-
-        private void Initialise()
-        {
-            InitialiseProgress();
             RunTestCode();
+
+
+            InitProgress();
+
             //this.tabs.SelectedItem = this.tabFile;
             mainsplitcontainer.SplitterDistance = this.ClientSize.Width / 2;
 
             iphone = new iPhone();
-            //	iPhone操作面板
-            if (iphone.IsInstalliTunes)
-            {
-                iphone.Connect += new ConnectEventHandler(iphone_Connect);
-                iphone.Disconnect += new ConnectEventHandler(iphone_Disconnect);
-            }
-            else
-            {
-                ShowMessage(this, "Current program rely on iTunes, please check you have installed it.", MessageTypeOption.Error);
-            }
-
             iphonedriver = new iPhoneFileDevice(iphone);
             iphonedriver.OnMessage += new MessageHandler(ShowMessage);
 
             iphonedriver.OnCompleteHandler += new FileCompletedHandler(iphonedriver_OnCompleteHandler);
             iphonedriver.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
+
             m_iPhonePanel = new FilePanel(iphonedriver);
             mainsplitcontainer.Panel1.Controls.Add(m_iPhonePanel);
             m_iPhonePanel.Dock = DockStyle.Fill;
@@ -216,11 +153,16 @@ namespace iSprite
                     item.Click += new EventHandler(toolmenuitem_Click);
                 }
             }
+
+            //主题管理
             m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme, this);
             m_themeManage.OnMessage += new MessageHandler(ShowMessage);
             m_themeManage.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
 
+            //程序管理
             m_AppManage = new AppManage((iPhoneFileDevice)iphonedriver, this);
+            m_AppManage.OnMessage += new MessageHandler(ShowMessage);
+            m_AppManage.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
 
             //检查更新
             m_Updater = new Updater();
@@ -232,13 +174,24 @@ namespace iSprite
             this.tabFile.BackgroundImage = global::iSprite.Resource.BackgroundImage;
 
             this.Resize += new EventHandler(MainForm_Resize);
+
+
+            //	iPhone操作面板
+            if (iphone.IsInstalliTunes)
+            {
+                iphone.Connect += new ConnectEventHandler(iphone_Connect);
+                iphone.Disconnect += new ConnectEventHandler(iphone_Disconnect);
+                iphone.StartContect();
+            }
+            else
+            {
+                ShowMessage(this, "Current program rely on iTunes, please check you have installed it.", MessageTypeOption.Error);
+            }
+
         }
+        #endregion
 
-        void MainForm_Resize(object sender, EventArgs e)
-        {
-        }
-
-
+        #region 窗体加载
         /// <summary>
         /// 窗体加载
         /// </summary>
@@ -248,12 +201,57 @@ namespace iSprite
         {
             try
             {
-                Initialise();
+                LoadControls();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ShowMessage(this, ex.Message + ex.StackTrace, MessageTypeOption.Error);
             }
+        }
+        #endregion
+
+        #region 窗体关闭中
+        /// <summary>
+        /// 窗体关闭中
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //ShowMessage(this, "Begin to Save Setting...", MessageTypeOption.SetStatusBar);
+            //Application.DoEvents();
+
+            if (null != iphone)
+            {
+                //移除事件
+                iphone.Connect -= new ConnectEventHandler(iphone_Connect);
+                iphone.Disconnect -= new ConnectEventHandler(iphone_Disconnect);
+            }
+            if (null != m_AppManage)
+            {
+                m_AppManage.SaveDownQueue();
+            }
+            //ShowMessage(this, "", MessageTypeOption.HiddenStatusBar);
+
+            Process[] pList = Process.GetProcesses();
+            for (int j = 0; j < pList.Length; j++)
+            {
+                if (pList[j].ProcessName.StartsWith("ispirit", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    pList[j].Kill();
+                }
+            }
+        }
+        #endregion
+
+        #region 窗体改变大小
+        /// <summary>
+        /// 窗体改变大小
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void MainForm_Resize(object sender, EventArgs e)
+        {
         }
         #endregion
 
@@ -300,47 +298,33 @@ namespace iSprite
                 this.Invoke(new ThreadInvokeDelegate(
                     delegate()
                     {
-                        try
-                        {
-                            //new LockdowndService().Start();
-                            //new LockdowndService().Stop();
-
-                            m_iPhonePanel.Enabled = enable;
-                            if (enable)
-                            {
-                                iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
-                                ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
-                                m_iPhonePanel.AfterDeviceFinishConnected();
-                            }
-                            m_themeManage.AfterDeviceFinishConnected(enable);
-                            m_AppManage.AfterDeviceFinishConnected(enable);
-                            tsbtnDeb.Enabled = tsbtnreSpring.Enabled = enable;
-                        }
-                        catch (Exception ex)
-                        {
-                            ShowMessage(this, ex.Message, MessageTypeOption.Error);
-                        }
+                        DoConnectSetting(enable);
                     }
                 ));
             }
             else
             {
-                try
+                DoConnectSetting(enable);
+            }
+        }
+        void DoConnectSetting(bool enable)
+        {
+            try
+            {
+                m_iPhonePanel.Enabled = enable;
+                if (enable)
                 {
-                    m_iPhonePanel.Enabled = enable;
-                    if (enable)
-                    {
-                        iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
-                        ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
-                        m_iPhonePanel.AfterDeviceFinishConnected();
-                    }
-                    m_themeManage.AfterDeviceFinishConnected(enable);
-                    tsbtnDeb.Enabled = tsbtnreSpring.Enabled = enable;
+                    iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
+                    ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
+                    m_iPhonePanel.AfterDeviceFinishConnected();
                 }
-                catch (Exception ex)
-                {
-                    ShowMessage(this, ex.Message, MessageTypeOption.Error);
-                }
+                m_themeManage.AfterDeviceFinishConnected(enable);
+                m_AppManage.AfterDeviceFinishConnected(enable);
+                tsbtnDeb.Enabled = tsbtnreSpring.Enabled = enable;
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(this, ex.Message, MessageTypeOption.Error);
             }
         }
         #endregion
@@ -379,7 +363,18 @@ namespace iSprite
                     statusBar.StatusMsg = message;
                     break;
                 case MessageTypeOption.HiddenStatusBar:
+                    if (message != string.Empty)
+                    {
+                        statusBar.StatusMsg = message;
+                        Thread.Sleep(TimeSpan.FromSeconds(1.5));
+                    }
                     statusBar.Hidden();
+                    break;
+                case MessageTypeOption.SuccessInstalled:
+                    if (null != m_AppManage)
+                    {
+                        m_AppManage.SafeRefreshApp();
+                    }
                     break;
 
             }
@@ -490,7 +485,7 @@ namespace iSprite
                     System.Diagnostics.Process.Start(iSpriteContext.Current.HelpUrl);
                     break;
                 case "tsbtnDeb":
-                    DebInstaller.Show((iPhoneFileDevice)iphonedriver);
+                    DebInstaller.Show((iPhoneFileDevice)iphonedriver, new MessageHandler(ShowMessage));
                     break;
             }
         }
@@ -580,6 +575,7 @@ namespace iSprite
         }
         #endregion
 
+        #region 重启Springboard
         /// <summary>
         /// 重启Springboard
         /// </summary>
@@ -590,7 +586,13 @@ namespace iSprite
                 ((iPhoneFileDevice)iphonedriver).Respring();
             }
         }
+        #endregion
 
+        #region tab切换
+        /// <summary>
+        /// tab切换
+        /// </summary>
+        /// <param name="e"></param>
         private void TabStripItemSelectionChanged(iSprite.ThirdControl.FarsiLibrary.TabStripItemChangedEventArgs e)
         {
             if (m_themeManage != null)
@@ -605,5 +607,56 @@ namespace iSprite
                 }
             }
         }
+        #endregion
+
+        #region 测试代码
+        void RunTestCode()
+        {
+            return;
+            //DataSet ds = new DataSet();
+            //ds.ReadXml(@"E:\ithemesky\Client\Trunk\iSprite\CydiaSourceCfg.xml");
+            //List<RepositoryInfo> repositoryInfos = new List<RepositoryInfo>();
+            //foreach (DataRow row in ds.Tables[0].Rows)
+            //{
+            //    string url = row["Release"].ToString().Trim();
+            //    string APTCachedReleaseURL = url;
+            //    RepositoryInfo repositoryInfo;
+            //    string content = string.Empty;
+            //    if (PackageDataContext.GetRepositoryInfoByUrl(url, ref  APTCachedReleaseURL, out  repositoryInfo))
+            //    {
+            //        repositoryInfos.Add(repositoryInfo);
+            //    }
+            //}
+            //List<string> list = new List<string>();
+            ////list.Add("http://apt.saurik.com/");
+            //list.Add("http://apt.bigboss.us.com/repofiles/cydia/");
+            //list.Add("http://apt.modmyi.com/");
+            //list.Add("http://cydia.zodttd.com/");
+            //list.Add("http://apt9.yellowsn0w.com/");
+            //list.Add("http://cydia.zodttd.com/");
+            //list.Add("http://iphone.hackndev.org/");
+            //list.Add("http://iphonehe.com/");
+            //list.Add("http://ispaziorepo.com/cydia/apt");
+            //list.Add("http://repo.smxy.org/cydia/apt/");
+            //list.Add("http://urbanfanatics.com/");
+            //list.Add("http://www.ispaziorepo.com/");
+            //list.Add("http://www.zodttd.com/");
+            //foreach (string url in list)
+            //{
+            //    string APTCachedReleaseURL = string.Empty;
+            //    RepositoryInfo repositoryInfo;
+            //    if (PackageDataContext.GetRepositoryInfoByUrl(url, ref  APTCachedReleaseURL, out  repositoryInfo))
+            //    {
+            //        repositoryInfos.Add(repositoryInfo);
+            //    }
+            //}
+            //string APTCachedReleaseURL = string.Empty;
+            //RepositoryInfo repositoryInfo;
+            //PackageDataContext.GetRepositoryInfoByUrl("http://apt.saurik.com/", ref  APTCachedReleaseURL, out  repositoryInfo);
+            string CachedPackagesURL = string.Empty;
+            List<PackageItem> packages;
+            //PackageDataContext.GetPackagesByUrl("http://apt.saurik.com/", ref  CachedPackagesURL, out  packages);
+        }
+        #endregion
     }
 }

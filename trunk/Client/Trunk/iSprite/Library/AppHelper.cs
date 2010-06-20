@@ -32,9 +32,12 @@ namespace iSprite
         internal event MessageHandler OnMessage;
         Dictionary<string, PackageItem> m_Packagelist;
         Dictionary<string, CatalogItem> m_Catalogs;
+        Dictionary<string, InstalledDebItem> m_InstalledDebList;
         private List<string> m_AppNames;
         string m_downqueuefile = string.Empty;
         string m_AptDownloadFolder = string.Empty;
+        List<string> m_SystemDeb;
+        Dictionary<string, PackageItem> m_TempPackagelist;
 
         #region html模板
         const string itemhtmltemplate = @"
@@ -162,6 +165,14 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             }
         }
 
+        internal Dictionary<string, InstalledDebItem> InstalledDebList
+        {
+            get
+            {
+                return m_InstalledDebList;
+            }
+        }
+
         #region 消息处理
         private void RaiseMessageHandler(string message, MessageTypeOption messageType)
         {
@@ -187,6 +198,8 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             m_Packagelist = new Dictionary<string, PackageItem>();
             m_Catalogs = new Dictionary<string, CatalogItem>();
             m_AppNames = new List<string>();
+            m_InstalledDebList = new Dictionary<string, InstalledDebItem>();
+            m_TempPackagelist = new Dictionary<string, PackageItem>();
 
             m_AptFolder = iSpriteContext.Current.iSpriteApplicationDataPath + "Apt\\";
             if (!Directory.Exists(m_AptFolder))
@@ -249,6 +262,13 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             PackagesUrlSuffixList.Add("dists/tangelo-3.7/main/binary-iphoneos-arm/Packages.bz2");
             PackagesUrlSuffixList.Add("dists/tangelo-3.7/main/binary-iphoneos-arm/Packages.gz");
             PackagesUrlSuffixList.Add("dists/tangelo-3.7/main/binary-iphoneos-arm/Packages");
+
+
+            m_SystemDeb = new List<string>(new string[] { 
+                "adv-cmds", "apt", "base", "bash", "berkeleydb", "bigboss", "bzip2", "coreutils", "cydia", "cydia-sources", "darwintools", "diffutils", "dpkg", "findutils", "gettext", "gnupg", 
+                "grep", "gzip", "inetutils", "ispazio.net", "less", "libgcc", "libutil", "modmyifone", "nano", "ncurses", "network-cmds", "pcre", "readline", "saurik", "sed", "shell-cmds", 
+                "ste", "system-cmds", "tar", "unzip", "yellowsn0w.com", "zodttd", "firmware", "apr-lib", "apt7-key", "apt7-lib", "coreutils-bin", "essential", "lzma", "pam", "pam-modules", "profile.d"
+             });
         }
         #endregion
 
@@ -257,6 +277,7 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         /// </summary>
         public void InitAppData()
         {
+            LoadInstallDebs();
             LoadCydiaSource();
             LoadCydiaPackages();
         }
@@ -285,12 +306,12 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
 
             if (File.Exists(m_AptSourceCfg))
             {
-                GetAptSourceCfg(m_RepositoryList);
+                GetAptSourceCfg();
             }
 
             foreach (string url in urllist)
             {
-                CheckAptSourceCfg(url, m_RepositoryList);
+                CheckAptSourceCfg(url);
             }
 
             LoadRepository2PathList();
@@ -299,9 +320,9 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             {
                 if (string.IsNullOrEmpty(item.Value.APTCachedPackagesURL))
                 {
-                    if (m_Repository2PathList.ContainsKey(item.Value.Name))
+                    if (m_Repository2PathList.ContainsKey(item.Value.Identifier))
                     {
-                        item.Value.APTCachedPackagesURL = "http://" + m_Repository2PathList[item.Value.Name].Replace("_", "/");
+                        item.Value.APTCachedPackagesURL = "http://" + m_Repository2PathList[item.Value.Identifier].Replace("_", "/");
                     }
                 }
                 if (string.IsNullOrEmpty(item.Value.APTCachedReleaseURL) && !string.IsNullOrEmpty(item.Value.APTCachedPackagesURL))
@@ -311,7 +332,7 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
                 }
             }
 
-            SaveAptSourceCfg(m_RepositoryList);
+            SaveAptSourceCfg();
         }
         #endregion
 
@@ -373,10 +394,7 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             #endregion
 
             string[] localfilelist = Directory.GetFiles(m_AptPackagesFolder);
-            //List<string> c = new List<string>();
 
-            CatalogItem catalogitem;
-            Dictionary<string, PackageItem> packages = new Dictionary<string, PackageItem>();
             foreach (string filepath in localfilelist)
             {
                 if (filepath.EndsWith("_Packages"))
@@ -393,50 +411,58 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
                             foreach (AptData aptdata in list)
                             {
                                 PackageItem item = AptData2PackageItem(aptdata);
-                                if ( !packages.ContainsKey(item.PackageID))
-                                {
-                                    item.Category = FormatCatalog(item.Category);
-                                    if (m_Catalogs.TryGetValue(item.Category, out catalogitem))
-                                    {
-                                        catalogitem.Count += 1;
-                                    }
-                                    else
-                                    {
-                                        catalogitem = new CatalogItem();
-                                        catalogitem.Name = item.Category;
-                                        catalogitem.Count = 1;
-                                        m_Catalogs.Add(catalogitem.Name, catalogitem);
-                                    }
-                                    item.AdditionalInfoURL = host;
-                                    packages.Add(item.PackageID, item);
-
-                                    if (item.Category != "Themes" //主题包太多了
-                                        && !m_AppNames.Contains(item.Name))
-                                    {
-                                        m_AppNames.Add(item.Name);//搜索用的
-                                    }
-                                }
-
-                                //if (!c.Contains(item.Category))
-                                //{
-                                //    c.Add(item.Category);
-                                //}
+                                AddPackageItem2Temp(host, item);
                             }
                         }
                     }
                 }
             }
-            //c.Sort();
-
-            //StringBuilder sb = new StringBuilder();
-            //foreach (string name in c)
-            //{
-            //    sb.AppendFormat("case \"{0}\":\r\n name=\"{0}\";\r\nbreak;\r\n", name);
-            //}
 
             //排序
+            SortPackages();
+        }
+
+        bool AddPackageItem2Temp(string host, PackageItem item)
+        {
+            CatalogItem catalogitem;
+            if (!m_TempPackagelist.ContainsKey(item.PackageID))
+            {
+                item.Category = FormatCatalog(item.Category);
+                if (m_Catalogs.TryGetValue(item.Category, out catalogitem))
+                {
+                    catalogitem.Count += 1;
+                }
+                else
+                {
+                    catalogitem = new CatalogItem();
+                    catalogitem.Name = item.Category;
+                    catalogitem.Count = 1;
+                    m_Catalogs.Add(catalogitem.Name, catalogitem);
+                }
+                item.AdditionalInfoURL = host;
+                m_TempPackagelist.Add(item.PackageID, item);
+
+                if (item.Category != "Themes" //主题包太多了
+                    && !m_AppNames.Contains(item.Name))
+                {
+                    m_AppNames.Add(item.Name);//搜索用的
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        void SortPackages()
+        {
             List<string> appnamelist = new List<string>();
-            foreach (KeyValuePair<string, PackageItem> item in packages)
+            foreach (KeyValuePair<string, PackageItem> item in m_TempPackagelist)
             {
                 appnamelist.Add(item.Key);
             }
@@ -444,7 +470,7 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             foreach (string packageid in appnamelist)
             {
                 PackageItem item;
-                if (packages.TryGetValue(packageid, out item))
+                if (m_TempPackagelist.TryGetValue(packageid, out item) && !m_Packagelist.ContainsKey(packageid))
                 {
                     m_Packagelist.Add(packageid, item);
                 }
@@ -454,6 +480,288 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         }
         #endregion
 
+        #region 获取已经安装的deb软件
+        /// <summary>
+        /// 获取已经安装的deb软件
+        /// </summary>
+        /// <returns></returns>
+        public void LoadInstallDebs()
+        {
+            string content = m_iPhoneDevice.GetFileText("/private/var/lib/dpkg/status");
+            List<AptData> AptList = new List<AptData>();
+            if (ParseAptData(content, ref AptList))
+            {
+                foreach (AptData apt in AptList)
+                {
+                    InstalledDebItem item = AptData2DebItem(apt);
+                    if ((item.Status.Equals("install ok installed", StringComparison.CurrentCultureIgnoreCase) ||
+                        item.Status.Equals("purge ok not-installed", StringComparison.CurrentCultureIgnoreCase) ||
+                        item.Status.Equals("install reinstreq half-installed", StringComparison.CurrentCultureIgnoreCase) ||
+                        item.Status.Equals("install ok half-configured", StringComparison.CurrentCultureIgnoreCase))
+                        && !m_InstalledDebList.ContainsKey(item.DebID))
+                    {
+                        item.IsSystemDeb = m_SystemDeb.Contains(item.Package) || apt.GetTagValue("Essential") == "yes";
+
+                        m_InstalledDebList.Add(item.DebID, item);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        Version GetVer(string ver)
+        {
+            return new Version(ver.Replace("-", "."));
+        }
+
+        #region 判断是否已经安装
+        bool HasInstalled(string packageIdentifier, string ver, string compare)
+        {
+            string packageName = string.Empty;
+            return HasInstalled(packageIdentifier, ver, compare, out packageName);
+        }
+        /// <summary>
+        /// 判断是否已经安装
+        /// </summary>
+        /// <param name="packagename"></param>
+        /// <param name="ver"></param>
+        /// <param name="compare"></param>
+        /// <returns></returns>
+        bool HasInstalled(string packageIdentifier, string ver, string compare,out string packageName)
+        {
+            packageName = string.Empty;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(ver))
+                {
+                    if (compare == "=")
+                    {
+                        return m_InstalledDebList.ContainsKey(packageIdentifier + "-" + ver);
+                    }
+                    else
+                    {
+                        Version v = GetVer(ver);
+                        foreach (KeyValuePair<string, InstalledDebItem> item in m_InstalledDebList)
+                        {
+                            if (item.Value.Version != "" && item.Value.Package.Equals(packageIdentifier, StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                Version _v = GetVer(item.Value.Version);
+                                if (_v >= v)
+                                {
+                                    packageName = item.Value.Name == "" ? item.Value.Package : item.Value.Name;
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (KeyValuePair<string, InstalledDebItem> item in m_InstalledDebList)
+                    {
+                        if (item.Value.Package.Equals(packageIdentifier, StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            packageName = item.Value.Name == "" ? item.Value.Package : item.Value.Name;
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region 从字典删除已经安装的deb软件
+        /// <summary>
+        /// 从字典删除已经安装的deb软件
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public void RemoveInstallDeb(InstalledDebItem item)
+        {
+            m_InstalledDebList.Remove(item.DebID);
+        }
+        #endregion
+
+        #region 根据名称（版本号）获取软件信息
+        /// <summary>
+        /// 根据名称（版本号）获取软件信息
+        /// </summary>
+        /// <param name="packagename"></param>
+        /// <param name="ver"></param>
+        /// <returns></returns>
+        PackageItem GetPackageItem(string packageIdentifier, string ver, string compare)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(ver))
+                {
+                    //需要根据版本号进行比较
+                    if (compare == "=")
+                    {
+                        //返回相同版本号的
+                        PackageItem debitem;
+                        if (m_Packagelist.TryGetValue(packageIdentifier + "-" + ver, out debitem))
+                        {
+                            return debitem;
+                        }
+                    }
+                    else
+                    {
+                        //返回>=当前版本号的
+                        Version v = GetVer(ver);
+                        foreach (KeyValuePair<string, PackageItem> item in m_Packagelist)
+                        {
+                            if (item.Value.Version != ""
+                                && item.Value.Identifier.Equals(packageIdentifier, StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                Version _v = GetVer(item.Value.Version);
+                                if (_v >= v)
+                                {
+                                    return item.Value;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (KeyValuePair<string, PackageItem> item in m_Packagelist)
+                    {
+                        if (item.Value.Identifier.Equals(packageIdentifier, StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            return item.Value;
+                        }
+                    }
+                }
+            }
+            catch
+            { 
+            }
+
+            return null;
+        }
+        #endregion
+
+        #region 判断是否和当前已经安装的软件冲突
+        /// <summary>
+        /// 判断是否和当前已经安装的软件冲突
+        /// </summary>
+        /// <param name="debitem"></param>
+        /// <param name="errList"></param>
+        /// <returns></returns>
+        public bool CheckConflict2Installed(PackageItem debitem, out List<string> errList)
+        {
+            errList = new List<string>();
+            if (string.IsNullOrEmpty(debitem.Conflicts))
+            {
+                return false;
+            }
+            else
+            {
+                foreach (string d in (debitem.Conflicts).Split(','))
+                {
+                    string p = d.Trim();
+                    if (p != string.Empty)
+                    {
+                        string packageName = string.Empty;
+                        if (HasInstalled(p, string.Empty, string.Empty, out packageName))
+                        {
+                            errList.Add(packageName);
+                        }
+                    }
+                }
+            }
+            return errList.Count > 0;
+        }
+        #endregion
+
+        #region 获取依赖软件
+        /// <summary>
+        /// 获取依赖软件
+        /// </summary>
+        /// <param name="debitem"></param>
+        /// <param name="errList"></param>
+        /// <returns></returns>
+        public List<PackageItem> GetDependsDeb(PackageItem debitem, out List<string> errList)
+        {
+            List<PackageItem> deplist = new List<PackageItem>();
+            errList = new List<string>();
+            string packageIdentifier;
+            string packageVer;
+            string compare;
+            foreach (string d in (debitem.Pre_Depends + "," + debitem.Dependencies).Split(','))
+            {
+                string p = d.Trim();
+                if (p != string.Empty)
+                {
+                    #region 获取软件标识、版本等信息
+                    packageIdentifier = string.Empty;
+                    packageVer = string.Empty;
+                    compare = string.Empty;
+                    int index = p.IndexOf("(");
+                    if (index > -1)
+                    {
+                        packageIdentifier = p.Substring(0,index).Trim();
+                        if (p.Contains(">="))
+                        {
+                            compare = ">=";
+                        }
+                        else
+                        {
+                            compare = "=";
+                        }
+
+                        index = p.IndexOf(compare) + compare.Length;
+                        int endindex = p.IndexOf(")");
+                        if (endindex > -1)
+                        {
+                            packageVer = p.Substring(index, endindex - index).Trim();
+                        }
+                        else
+                        {
+                            packageVer = "";
+                        }
+                    }
+                    else
+                    {
+                        packageIdentifier = p;
+                    }
+                    #endregion
+
+                    if (!HasInstalled(packageIdentifier, packageVer, compare))
+                    {
+                        PackageItem dep_debitem = GetPackageItem(packageIdentifier, packageVer, compare);
+                        if (null != dep_debitem)
+                        {
+                            if (!deplist.Contains(dep_debitem))
+                            {
+                                deplist.Add(dep_debitem);
+                            }
+                        }
+                        else
+                        {
+                            errList.Add(p);
+                        }
+                    }
+                }
+            }
+            return deplist;
+        }
+        #endregion
+
+        #region 根据类别获取软件
+        /// <summary>
+        /// 根据类别获取软件
+        /// </summary>
+        /// <param name="packages"></param>
+        /// <param name="catalogName"></param>
+        /// <returns></returns>
         public Dictionary<string, PackageItem> GetPackagesByCatalog(Dictionary<string, PackageItem> packages, string catalogName)
         {
             Dictionary<string, PackageItem> list = new Dictionary<string, PackageItem>();
@@ -466,7 +774,16 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             }
             return list;
         }
+        #endregion
 
+        #region 根据类别和关键字搜索软件
+        /// <summary>
+        /// 根据类别和关键字搜索软件
+        /// </summary>
+        /// <param name="packages"></param>
+        /// <param name="catalogName"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public Dictionary<string, PackageItem> SearchPackages(Dictionary<string, PackageItem> packages, string catalogName,string key)
         {
             key = key.ToLower();
@@ -483,6 +800,7 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             }
             return list;
         }
+        #endregion
 
         #region 添加Cydia源
         /// <summary>
@@ -490,22 +808,77 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public bool AddCydiaSource(string url)
-        { 
-            RepositoryInfo repositoryInfo;
+        public bool AddCydiaSource(RepositoryInfo repositoryInfo, out int errCode)
+        {
+            errCode = 0;
             string APTCachedReleaseURL=string.Empty;
-            if (GetRepositoryInfoByUrl(url, ref APTCachedReleaseURL, out repositoryInfo))
+            if (GetRepositoryInfoByUrl(repositoryInfo.URL, ref APTCachedReleaseURL, ref repositoryInfo))
             {
-                if (!m_RepositoryList.ContainsKey(repositoryInfo.Name))
+                if (!m_RepositoryList.ContainsKey(repositoryInfo.Identifier))
                 {
-                    m_RepositoryList.Add(repositoryInfo.Name, repositoryInfo);
+                    m_RepositoryList.Add(repositoryInfo.Identifier, repositoryInfo);
+                    SaveAptSourceCfg();
+                    return true;
                 }
-                return true;
+                else
+                {
+                    errCode = 1;
+                    return false;
+                }
             }
             else
             {
+                errCode = 2;
                 return false;
             }
+        }
+        #endregion
+
+        #region 删除源
+        /// <summary>
+        /// 添加Cydia源
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public bool RemoveCydiaSource(RepositoryInfo repositoryInfo)
+        {
+            m_RepositoryList.Remove(repositoryInfo.Identifier);
+
+            List<string> appnamelist = new List<string>(); 
+            CatalogItem catalogitem;
+            foreach (KeyValuePair<string, PackageItem> item in m_TempPackagelist)
+            {
+                if (item.Value.AdditionalInfoURL.Equals(repositoryInfo.Identifier, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    appnamelist.Add(item.Key); 
+                    
+                    if (m_Catalogs.TryGetValue(item.Value.Category, out catalogitem))
+                    {
+                        catalogitem.Count -= 1;
+                    }
+                }
+            }
+            foreach (string packageid in appnamelist)
+            {
+                m_Packagelist.Remove(packageid);
+                m_TempPackagelist.Remove(packageid);
+            }
+
+            try
+            {
+                //删除文件
+                string fileName = repositoryInfo.APTCachedPackagesURL.Substring(7).Replace("/", "_");
+                fileName = Path.GetFileNameWithoutExtension(fileName);
+
+                File.Delete(m_AptPackagesFolder + fileName);
+                m_iPhoneDevice.DeleteFile(m_CydiaPackagesFolder + fileName);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
         #endregion
 
@@ -524,11 +897,27 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             string packetcontent = string.Empty;
             if (GetPackagesByUrl(repInfo, out packages, ref packetcontent))
             {
-                //写成文件保存到m_AptPackagesFolder
-                string fileName =  repInfo.APTCachedPackagesURL.Substring(7).Replace("/","_");
-                File.WriteAllText(m_AptPackagesFolder +fileName, packetcontent,Encoding.UTF8);
-                //保存到iPhone的m_CydiaPackagesFolder
-                m_iPhoneDevice.Copy2iPhone(m_AptPackagesFolder + fileName, m_CydiaPackagesFolder + fileName);
+                int count = 0;
+                foreach (PackageItem item in packages)
+                {
+                    if (AddPackageItem2Temp(repInfo.Identifier, item))
+                    {
+                        count++;
+                    }
+                }
+                if (count > 0)
+                {
+                    SortPackages();
+                    //写成文件保存到m_AptPackagesFolder
+
+                    string fileName = repInfo.APTCachedPackagesURL.Substring(7).Replace("/", "_");
+                    fileName=Path.GetFileNameWithoutExtension(fileName);
+
+                    File.WriteAllText(m_AptPackagesFolder + fileName, packetcontent, Encoding.UTF8);
+                    //保存到iPhone的m_CydiaPackagesFolder
+                    m_iPhoneDevice.Copy2iPhone(m_AptPackagesFolder + fileName, m_CydiaPackagesFolder + fileName);
+                }
+
                 return true;
             }
             else
@@ -544,10 +933,10 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         /// </summary>
         /// <param name="url"></param>
         /// <param name="replist"></param>
-        private void CheckAptSourceCfg(string url, Dictionary<string, RepositoryInfo> replist)
+        private void CheckAptSourceCfg(string url)
         {
             string host = new Uri(url).Host;
-            bool flag = replist.ContainsKey(host);
+            bool flag = m_RepositoryList.ContainsKey(host);
             if (!flag)
             {
                 RepositoryInfo info = new RepositoryInfo();
@@ -555,9 +944,9 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
                 info.URL = url;
                 info.APTDownloadBaseURL = url;
 
-                if (!replist.ContainsKey(info.Name))
+                if (!m_RepositoryList.ContainsKey(info.Identifier))
                 {
-                    replist.Add(info.Name, info);
+                    m_RepositoryList.Add(info.Identifier, info);
                 }
             }
         }
@@ -568,10 +957,10 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         /// 保存源配置文件（SourceCfg.ini）
         /// </summary>
         /// <param name="replist"></param>
-        private void SaveAptSourceCfg(Dictionary<string, RepositoryInfo> replist)
+        public void SaveAptSourceCfg()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (KeyValuePair<string, RepositoryInfo> info in replist)
+            foreach (KeyValuePair<string, RepositoryInfo> info in m_RepositoryList)
             {
                 sb.Append(info.Value.ToString());
                 sb.AppendLine();
@@ -587,7 +976,7 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         /// </summary>
         /// <param name="replist"></param>
         /// <returns></returns>
-        bool GetAptSourceCfg(Dictionary<string, RepositoryInfo> replist)
+        bool GetAptSourceCfg()
         {
             string content = File.ReadAllText(m_AptSourceCfg, Encoding.UTF8);
             List<AptData> list = new List<AptData>();
@@ -604,9 +993,10 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
                     info.APTCachedPackagesURL = aptdata.GetTagValue("APTCachedPackagesURL");
                     info.APTCachedReleaseURL = aptdata.GetTagValue("APTCachedReleaseURL");
                     info.APTDownloadBaseURL = aptdata.GetTagValue("APTDownloadBaseURL");
-                    if (!replist.ContainsKey(info.Name))
+                    info.LastUpdate = aptdata.GetTagValue("LastUpdate");
+                    if (!m_RepositoryList.ContainsKey(info.Identifier))
                     {
-                        replist.Add(info.Name,info);
+                        m_RepositoryList.Add(info.Identifier, info);
                     }
                 }
                 return true;
@@ -627,9 +1017,8 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         /// <param name="repositoryInfo"></param>
         /// <returns></returns>
         public bool GetRepositoryInfoByUrl(string BaseURL, ref string APTCachedReleaseURL,
-            out RepositoryInfo repositoryInfo)
+            ref RepositoryInfo repositoryInfo)
         {
-            repositoryInfo = new RepositoryInfo();
             List<AptData> list = new List<AptData>();
             bool isRepoInfoAvailable = false;
 
@@ -832,6 +1221,26 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             item.Tags = aptdata.GetTagValue("Tag");
             item.DownloadURL = aptdata.GetTagValue("Filename");
             item.Hash = aptdata.GetTagValue("MD5sum");
+
+            return item;
+        }
+        #endregion
+
+        #region 将AptData转换成InstalledDebItem
+        /// <summary>
+        /// 将AptData转换成InstalledDebItem
+        /// </summary>
+        /// <param name="aptdata"></param>
+        /// <returns></returns>
+        InstalledDebItem AptData2DebItem(AptData aptdata)
+        {
+            InstalledDebItem item = new InstalledDebItem();
+            item.Name = aptdata.GetTagValue("Name");
+            item.Package = aptdata.GetTagValue("Package");
+            item.Status = aptdata.GetTagValue("Status");
+            item.Version = aptdata.GetTagValue("Version");
+            item.Installed_Size = aptdata.GetTagValue("Installed-Size");
+            item.Description = aptdata.GetTagValue("Description");
 
             return item;
         }
@@ -1131,6 +1540,15 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         }
         #endregion
 
+        #region 转换成html
+        /// <summary>
+        /// 转换成html
+        /// </summary>
+        /// <param name="packagelist"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public string Packages2Html(Dictionary<string, PackageItem> packagelist,int pagesize,int pageindex,string key)
         {
             if (pageindex < 1)
@@ -1154,33 +1572,29 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
                     {
                         description = description.Substring(0, len) + "...";
                     }
-
+                    string ver = item.Value.Version;
+                    if (!string.IsNullOrEmpty(ver))
+                    {
+                        ver = " (V" + ver + ")";
+                    }
                     if (m_RepositoryList.TryGetValue(item.Value.AdditionalInfoURL, out repInfo))
                     {
                         if (!string.IsNullOrEmpty(key))
                         {
                             itemsb.AppendFormat(itemhtmltemplate,
-                                Regex.Replace(item.Value.Name, key, "<em>" + key + "</em>", RegexOptions.IgnoreCase),
+                                Regex.Replace(item.Value.Name, key, "<em>" + key + "</em>", RegexOptions.IgnoreCase) + ver,
                                 Regex.Replace(description, key, "<em>" + key + "</em>", RegexOptions.IgnoreCase),
                                 Utility.FormatFileSize((ulong)item.Value.Size),
-                                string.Format("http://www.ithemesky.com/dl.aspx?url={0}{1}&name={2}",
-                                                HttpUtility.UrlDecode(repInfo.APTDownloadBaseURL, Encoding.UTF8),
-                                                HttpUtility.UrlDecode(item.Value.DownloadURL, Encoding.UTF8),
-                                                Path.GetFileName(item.Value.DownloadURL)
-                                               )
+                                item.Value.FinalDownloadURL(repInfo.APTDownloadBaseURL)
                                 );
                         }
                         else
                         {
                             itemsb.AppendFormat(itemhtmltemplate,
-                                item.Value.Name,
+                                item.Value.Name + ver,
                                 description,
                                 Utility.FormatFileSize((ulong)item.Value.Size),
-                                string.Format("http://www.ithemesky.com/dl.aspx?url={0}{1}&name={2}",
-                                                HttpUtility.UrlDecode(repInfo.APTDownloadBaseURL,Encoding.UTF8),
-                                                HttpUtility.UrlDecode(item.Value.DownloadURL, Encoding.UTF8), 
-                                                Path.GetFileName(item.Value.DownloadURL)
-                                               )
+                                item.Value.FinalDownloadURL(repInfo.APTDownloadBaseURL)
                                 );
                         }
                     }
@@ -1195,6 +1609,7 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             File.WriteAllText(filePath,htmlcontent,Encoding.UTF8);
             return filePath;
         }
+        #endregion
 
         #region 类别名称格式化
         /// <summary>

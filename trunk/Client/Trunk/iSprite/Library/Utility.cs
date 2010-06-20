@@ -17,6 +17,16 @@ namespace iSprite
         {
         }
 
+        public static string List2String(List<string> list)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (string item in list)
+            {
+                sb.Append(item).Append(",");
+            }
+            return sb.ToString().TrimEnd(',');
+        }
+
         public static string GetNotExistFileName(string newFileName)
         {
             FileInfo fileInfo = new FileInfo(newFileName);
