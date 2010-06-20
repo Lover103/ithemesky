@@ -1,56 +1,111 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace iSprite
 {
-    internal class InstalledAppList : ListView
+    internal partial class AptInstalledList : UserControl
     {
         #region 变量定义
-        iPhoneFileDevice m_iPhoneDevice;
         AppHelper m_appHelper;
+        internal event MessageHandler OnMessage;
+        public event SetNodeCountHandler OnSetNodeCount;
+        iPhoneFileDevice m_iPhoneDevice;
+        ListView m_InstalledAppList;
         ListViewGroup m_UserGroup = new ListViewGroup();
         ListViewGroup m_SystemGroup = new ListViewGroup();
-
-        public event SetNodeCountHandler OnUpdateAppCount;
         #endregion
 
-        void RaiseUpdateAppCount(int count)
+        #region 设置节点数量
+        /// <summary>
+        /// 设置节点数量
+        /// </summary>
+        /// <param name="nodeName"></param>
+        /// <param name="count"></param>
+        /// <param name="selectNode"></param>
+        void SetNodeCount(string nodeName, int count, bool selectNode)
         {
-            if (OnUpdateAppCount != null)
+            if (null != OnSetNodeCount)
             {
-                OnUpdateAppCount("Installed Packages", count, false);
+                OnSetNodeCount(nodeName, count, selectNode);
             }
         }
+        #endregion
+
+        #region 消息处理
+        /// <summary>
+        /// 消息处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="Message"></param>
+        /// <param name="messageType"></param>
+        private void RaiseMessageHandler(object sender, string Message, MessageTypeOption messageType)
+        {
+            if (OnMessage != null)
+            {
+                OnMessage(sender, Message, messageType);
+            }
+        }
+        #endregion
 
         #region 构造函数
         /// <summary>
         /// 构造函数
         /// </summary>
-        public InstalledAppList(iPhoneFileDevice iphoneDevice, AppHelper apphelper)
+        /// <param name="iphoneDevice"></param>
+        /// <param name="appHelper"></param>
+        public AptInstalledList(iPhoneFileDevice iphoneDevice, AppHelper appHelper)
         {
             m_iPhoneDevice = iphoneDevice;
-            m_appHelper = apphelper;
+            m_appHelper = appHelper;
 
+            AddControls();
 
-            Initialise();
+            InitializeComponent();
+
+            InitControls();
+
         }
         #endregion
-
+        
         #region 初始化
         /// <summary>
         /// 初始化
         /// </summary>
-        void Initialise()
+        void InitControls()
         {
-            this.FullRowSelect = true;
-            this.View = View.Details;
+            this.toolbtnRemove.Click += new EventHandler
+                (
+                    delegate(object sender, EventArgs e)
+                    {
+                        RemoveApps();
+                    }
+                );
+        }
+        #endregion
+
+
+        #region AddControls
+        /// <summary>
+        /// AddControls
+        /// </summary>
+        void AddControls()
+        {
+            m_InstalledAppList = new ListView();
+            this.Controls.Add(this.m_InstalledAppList);
+            this.m_InstalledAppList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.m_InstalledAppList.Location = new System.Drawing.Point(0, 25);
+
+            m_InstalledAppList.FullRowSelect = true;
+            m_InstalledAppList.View = View.Details;
 
             ImageList imgList = new ImageList();
             imgList.ImageSize = new Size(1, 18);//分别是宽和高
-            this.SmallImageList = imgList;
+            m_InstalledAppList.SmallImageList = imgList;
 
             ColumnHeader columnFile = new ColumnHeader();
             ColumnHeader columnSize = new ColumnHeader();
@@ -69,7 +124,7 @@ namespace iSprite
             columnDescription.Text = "Description";
             columnDescription.Width = 360;
 
-            this.Columns.AddRange(
+            m_InstalledAppList.Columns.AddRange(
                 new ColumnHeader[] 
                 {
                     columnFile,
@@ -83,12 +138,13 @@ namespace iSprite
             m_UserGroup.Header = "User Deb";
             m_UserGroup.Tag = m_UserGroup.Header;
             m_UserGroup.HeaderAlignment = HorizontalAlignment.Left;
-            this.Groups.Add(m_UserGroup);
+            m_InstalledAppList.Groups.Add(m_UserGroup);
 
             m_SystemGroup.Header = "System Deb";
             m_SystemGroup.Tag = m_UserGroup.Header;
             m_SystemGroup.HeaderAlignment = HorizontalAlignment.Left;
-            this.Groups.Add(m_SystemGroup);
+            m_InstalledAppList.Groups.Add(m_SystemGroup);
+
         }
         #endregion
 
@@ -98,18 +154,18 @@ namespace iSprite
         /// </summary>
         public void RemoveApps()
         {
-            if (this.SelectedItems.Count > 0)
+            if (m_InstalledAppList.SelectedItems.Count > 0)
             {
                 if (MessageHelper.ShowConfirm("Are you sure you want to delete the selected apps ? ") == DialogResult.OK)
                 {
                     try
                     {
-                        this.BeginUpdate();
+                        m_InstalledAppList.BeginUpdate();
 
                         bool flag = false;
-                        for (int i = this.SelectedItems.Count - 1; i >= 0; i--)
+                        for (int i = m_InstalledAppList.SelectedItems.Count - 1; i >= 0; i--)
                         {
-                            ListViewItem item = this.SelectedItems[i];
+                            ListViewItem item = m_InstalledAppList.SelectedItems[i];
                             InstalledDebItem debitem = (InstalledDebItem)item.Tag;
                             if (!debitem.IsSystemDeb)
                             {
@@ -122,7 +178,7 @@ namespace iSprite
                                 else
                                 {
                                     m_appHelper.RemoveInstallDeb(debitem);
-                                    this.Items.RemoveByKey(item.Name);
+                                    m_InstalledAppList.Items.RemoveByKey(item.Name);
                                     flag = true;
                                 }
                             }
@@ -135,7 +191,7 @@ namespace iSprite
                     finally
                     {
                         UpdateGroupCount();
-                        this.EndUpdate();
+                        m_InstalledAppList.EndUpdate();
                     }
                 }
             }
@@ -150,7 +206,7 @@ namespace iSprite
         public void UpdataList()
         {
             Dictionary<string, InstalledDebItem> InstalledList = m_appHelper.InstalledDebList;
-            this.Items.Clear();
+            m_InstalledAppList.Items.Clear();
 
             foreach (KeyValuePair<string, InstalledDebItem> kv in InstalledList)
             {
@@ -184,7 +240,7 @@ namespace iSprite
 
                 rowitem.Tag = item;
 
-                this.Items.Add(rowitem);
+                m_InstalledAppList.Items.Add(rowitem);
             }
             UpdateGroupCount();
         }
@@ -194,12 +250,9 @@ namespace iSprite
             m_UserGroup.Header = m_UserGroup.Tag + "(" + m_UserGroup.Items.Count + ")";
             m_SystemGroup.Header = m_SystemGroup.Tag + "(" + m_SystemGroup.Items.Count + ")";
 
-            int count = this.Items.Count;
-            RaiseUpdateAppCount(count);
+            int count = m_InstalledAppList.Items.Count;
+            SetNodeCount("Installed Packages", count, false);
         }
         #endregion
-        
     }
-
-
 }

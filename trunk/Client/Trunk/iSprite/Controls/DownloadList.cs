@@ -85,6 +85,7 @@ namespace iSprite
             DownloadManager.Instance.EndAddBatchDownloads += new EventHandler(Instance_EndAddBatchDownloads);
 
             this.GridLines = true;
+            this.FullRowSelect = true;
             this.View = View.Details;
         }
         #endregion
@@ -292,7 +293,7 @@ namespace iSprite
         /// </summary>
         public void RemoveSelections()
         {
-            if (MessageHelper.ShowConfirm("Are you sure that you want to remove selected downloads?") == DialogResult.Yes)
+            if (MessageHelper.ShowConfirm("Are you sure that you want to remove selected downloads") == DialogResult.Yes)
             {
                 try
                 {
@@ -538,9 +539,9 @@ namespace iSprite
         }
         #endregion
 
-        #region 下载任务结束事件
+        #region 下载任务移除事件
         /// <summary>
-        /// 下载任务结束事件
+        /// 下载任务移除事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -567,7 +568,12 @@ namespace iSprite
         }
         #endregion
 
-        #region 下载任务移除事件
+        #region 下载任务结束事件
+        /// <summary>
+        /// 下载任务结束事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void Instance_DownloadEnded(object sender, DownloaderEventArgs e)
         {
             if (e.Downloader.State == DownloaderState.Finished)

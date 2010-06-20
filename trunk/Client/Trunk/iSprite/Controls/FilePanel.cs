@@ -116,7 +116,6 @@ namespace iSprite
 			splitContainer1.Panel2.Controls.Add(m_DirectoryDetailList);
 			m_DirectoryDetailList.BringToFront();
 			m_DirectoryDetailList.Dock = DockStyle.Fill;
-			m_DirectoryDetailList.GridLines = mnuViewShowGridlines.Checked;
 			m_DirectoryDetailList.Font = this.Font;
             m_DirectoryDetailList.OnPathChanged += new PathChanged(OnPathChanged);
 
@@ -438,37 +437,37 @@ namespace iSprite
 			if (m_ChangingFolderCheck)
 				return;
 
-			m_ChangingFolderCheck = true;
+            //m_ChangingFolderCheck = true;
 
-			mnuViewShowFolders.Checked = !mnuViewShowFolders.Checked;
+            //mnuViewShowFolders.Checked = !mnuViewShowFolders.Checked;
 
-			if (mnuViewShowFolders.Checked)
-			{
-				splitContainer1.SplitterDistance = m_SplitDistance;
-				tsbtnShowFolders.ToolTipText = "Hide Folders";
-				tsbtnShowFolders.Checked = true;
-			}
-			else
-			{
-				splitContainer1.SplitterDistance = 0;
-				tsbtnShowFolders.ToolTipText = "Show Folders";
-				tsbtnShowFolders.Checked = false;
-			}
-			m_ChangingFolderCheck = false;
+            //if (mnuViewShowFolders.Checked)
+            //{
+            //    splitContainer1.SplitterDistance = m_SplitDistance;
+            //    tsbtnShowFolders.ToolTipText = "Hide Folders";
+            //    tsbtnShowFolders.Checked = true;
+            //}
+            //else
+            //{
+            //    splitContainer1.SplitterDistance = 0;
+            //    tsbtnShowFolders.ToolTipText = "Show Folders";
+            //    tsbtnShowFolders.Checked = false;
+            //}
+            //m_ChangingFolderCheck = false;
         }
         #endregion
 
         #region 移动拆分器
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-		{
-			if (mnuViewShowFolders.Checked)
-				m_SplitDistance = splitContainer1.SplitterDistance;
+        {
+        //    if (mnuViewShowFolders.Checked)
+        //        m_SplitDistance = splitContainer1.SplitterDistance;
 		}
 
 		private void splitContainer1_SplitterMoving(object sender, SplitterCancelEventArgs e)
-		{
-			if (!mnuViewShowFolders.Checked)
-				e.Cancel = true;
+        {
+        //    if (!mnuViewShowFolders.Checked)
+        //        e.Cancel = true;
         }
         #endregion   
 

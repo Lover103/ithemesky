@@ -95,7 +95,8 @@ namespace iSprite
         /// <param name="imglist"></param>
         internal iListView(IFileDevice filedevice, ImageList imglist)
 			: base()
-		{
+        {
+            this.FullRowSelect = true;
             m_FileDevice = filedevice;
 
 
