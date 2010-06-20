@@ -158,7 +158,11 @@ namespace iSprite
         /// <summary>
         /// 隐藏状态条
         /// </summary>
-        HiddenStatusBar
+        HiddenStatusBar,
+        /// <summary>
+        /// 成功安装软件
+        /// </summary>
+        SuccessInstalled
     }
     #endregion
 

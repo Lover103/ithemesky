@@ -67,18 +67,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AppDownloadBar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\AppDownloadBar.Designer.cs">
-      <DependentUpon>AppDownloadBar.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\AppManage.cs" />
-    <Compile Include="Controls\AppSearchBar.cs">
+    <Compile Include="Controls\AptDownList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\AppSearchBar.Designer.cs">
-      <DependentUpon>AppSearchBar.cs</DependentUpon>
+    <Compile Include="Controls\AptDownList.Designer.cs">
+      <DependentUpon>AptDownList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AptInstalledList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AptInstalledList.Designer.cs">
+      <DependentUpon>AptInstalledList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CydiaSourceList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CydiaSourceList.Designer.cs">
+      <DependentUpon>CydiaSourceList.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DownloadList.cs">
       <SubType>Component</SubType>
@@ -88,9 +94,6 @@
     </Compile>
     <Compile Include="Controls\FavoritesForm.Designer.cs">
       <DependentUpon>FavoritesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\InstalledAppList.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\iPager.cs">
       <SubType>UserControl</SubType>
@@ -119,6 +122,12 @@
     <Compile Include="Controls\iThemeBrowser.cs" />
     <Compile Include="Controls\iUserControl.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OnlineAppList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OnlineAppList.Designer.cs">
+      <DependentUpon>OnlineAppList.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\PlistEditer.cs">
       <SubType>Form</SubType>
@@ -428,12 +437,16 @@
     <Compile Include="Library\Others.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\AppDownloadBar.resx">
-      <DependentUpon>AppDownloadBar.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\AptDownList.resx">
+      <DependentUpon>AptDownList.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\AppSearchBar.resx">
-      <DependentUpon>AppSearchBar.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\AptInstalledList.resx">
+      <DependentUpon>AptInstalledList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CydiaSourceList.resx">
+      <DependentUpon>CydiaSourceList.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\FavoritesForm.resx">
@@ -458,6 +471,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\iSpriteStatus.resx">
       <DependentUpon>iSpriteStatus.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OnlineAppList.resx">
+      <DependentUpon>OnlineAppList.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PlistEditer.resx">

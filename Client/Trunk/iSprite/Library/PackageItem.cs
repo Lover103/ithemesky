@@ -3,7 +3,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Collections;
-using System.Text;   
+using System.Text;
+using System.Web;
+using System.IO;   
 
 namespace iSprite
 {
@@ -41,6 +43,11 @@ namespace iSprite
 
         public string GetTagValue(string TagName)
         {
+            return GetTagValue(TagName, string.Empty);
+        }
+
+        public string GetTagValue(string TagName,string defaultValue)
+        {
             if (ContainsTag(TagName))
             {
                 return this[TagName].ToString();
@@ -50,7 +57,6 @@ namespace iSprite
                 return string.Empty;
             }
         }
-
 
         public string[] Tags
         {
@@ -67,6 +73,28 @@ namespace iSprite
 
     public class RepositoryInfo
     {
+        int _ItemCount = 0;
+        public RepositoryInfo()
+        { 
+        }
+
+        public string Identifier
+        { 
+            get 
+            {
+                return new Uri(URL).Host;
+            }
+        }
+        private int ItemCount { 
+            get
+            {
+                return _ItemCount;
+            }
+            set
+            { 
+                _ItemCount = value;
+            } 
+        }
         public string Name { get; set; }
         public string URL { get; set; }
         public string Category { get; set; }
@@ -81,6 +109,8 @@ namespace iSprite
         public string APTCachedPackagesURL { get; set; }
         public string APTCachedReleaseURL { get; set; }
         public string APTDownloadBaseURL { get; set; }
+        public string LastUpdate { get; set; }
+
 
         public override string ToString ()
         {
@@ -93,12 +123,26 @@ namespace iSprite
             sb.AppendFormat("APTCachedPackagesURL: {0}\r\n", APTCachedPackagesURL == null ? "" : APTCachedPackagesURL);
             sb.AppendFormat("APTCachedReleaseURL: {0}\r\n", APTCachedReleaseURL == null ? "" : APTCachedReleaseURL);
             sb.AppendFormat("APTDownloadBaseURL: {0}\r\n", APTDownloadBaseURL == null ? "" : APTDownloadBaseURL);
+            sb.AppendFormat("LastUpdate: {0}\r\n", LastUpdate == null ? "" : LastUpdate);
 
             return sb.ToString();
         }
     }
     public class PackageItem : INotifyPropertyChanging, INotifyPropertyChanged
     {
+        /// <summary>
+        /// 最终的下载地址
+        /// </summary>
+        public string FinalDownloadURL(string baseURL)
+        {
+            return string.Format("http://www.ithemesky.com/dl.aspx?url={0}{1}&name={2}&PID={3}",
+                                                  HttpUtility.UrlDecode(baseURL, Encoding.UTF8),
+                                                  HttpUtility.UrlDecode(DownloadURL, Encoding.UTF8),
+                                                  Path.GetFileName(DownloadURL),
+                                                  HttpUtility.UrlDecode(PackageID, Encoding.UTF8)
+                                                 );
+        }
+
         public string PackageID
         {
             get

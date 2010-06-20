@@ -20,7 +20,7 @@ namespace iSprite
         static SshStatusOption CheckSshStatus(out string errMsg)
         {
             errMsg=string.Empty;
-            if (shell.Connected)
+            if (shell.Connected && shell.ShellOpened)
             {
                 return SshStatusOption.Connected;
             }
@@ -31,7 +31,7 @@ namespace iSprite
                 try
                 {
                     shell.Connect();
-                    if (shell.Connected)
+                    if (shell.Connected && shell.ShellOpened)
                     {
                         return SshStatusOption.Connected;
                     }
@@ -61,6 +61,48 @@ namespace iSprite
                 }
             }
             return SshStatusOption.UnknownError;
+        }
+
+        public static bool InstallDeb(iPhoneFileDevice iphone, string localfile, out string msg)
+        {
+            msg = string.Empty;
+            iphone.CheckDirectoryExists("/tmp/");
+            iphone.Copy2iPhone(localfile, "/tmp/");
+            bool flag = RunCmd("dpkg -i \"/tmp/" + Path.GetFileName(localfile) + "\"");
+            if (flag)
+            {
+                iphone.Respring();
+                msg = Path.GetFileName(localfile) + " has been successfully Installed .";
+                return true;
+            }
+            else
+            {
+                //todo;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 卸载deb
+        /// </summary>
+        /// <param name="iphone"></param>
+        /// <param name="debName"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        public static bool UnInstallDeb(iPhoneFileDevice iphone, string debName, out string msg)
+        {
+            msg = string.Empty;
+            bool flag = RunCmd("dpkg -r \"" + debName + "\"");
+            if (flag)
+            {
+                msg = debName + " has been successfully uninstalled .";
+                return true;
+            }
+            else
+            {
+                //todo;
+                return false;
+            }
         }
 
         /// <summary>
@@ -94,7 +136,7 @@ namespace iSprite
                         MessageHelper.ShowInfo("You must Install OpenSSH first.");
                         break;
                     case SshStatusOption.UnknownError:
-                        MessageHelper.ShowInfo("Can not connect to ssh service(" + errMsg + ") .");
+                        MessageHelper.ShowError("Can not connect to ssh service(" + errMsg + ") .");
                         break;
                 }
                 return false;

@@ -52,10 +52,6 @@
             this.appContainer = new System.Windows.Forms.SplitContainer();
             this.tvCatalog = new System.Windows.Forms.TreeView();
             this.catalogimg = new System.Windows.Forms.ImageList(this.components);
-            this.appwb = new System.Windows.Forms.WebBrowser();
-            this.app_Panelbuttom = new System.Windows.Forms.Panel();
-            this.appPager = new iSprite.iPager();
-            this.app_Paneltop = new System.Windows.Forms.Panel();
             this.toolapp = new System.Windows.Forms.ToolStrip();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -70,9 +66,7 @@
             this.Filetoolmenu.SuspendLayout();
             this.tabApp.SuspendLayout();
             this.appContainer.Panel1.SuspendLayout();
-            this.appContainer.Panel2.SuspendLayout();
             this.appContainer.SuspendLayout();
-            this.app_Panelbuttom.SuspendLayout();
             this.toolapp.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,13 +120,13 @@
             // mainsplitcontainer
             // 
             this.mainsplitcontainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainsplitcontainer.Location = new System.Drawing.Point(0, 0);
+            this.mainsplitcontainer.Location = new System.Drawing.Point(0, 25);
             this.mainsplitcontainer.Margin = new System.Windows.Forms.Padding(0);
             this.mainsplitcontainer.Name = "mainsplitcontainer";
             this.mainsplitcontainer.Panel1MinSize = 0;
             this.mainsplitcontainer.Panel2MinSize = 0;
-            this.mainsplitcontainer.Size = new System.Drawing.Size(991, 619);
-            this.mainsplitcontainer.SplitterDistance = 516;
+            this.mainsplitcontainer.Size = new System.Drawing.Size(991, 594);
+            this.mainsplitcontainer.SplitterDistance = 964;
             this.mainsplitcontainer.SplitterWidth = 1;
             this.mainsplitcontainer.TabIndex = 13;
             // 
@@ -156,7 +150,6 @@
             this.Filetoolmenu.Size = new System.Drawing.Size(991, 25);
             this.Filetoolmenu.TabIndex = 12;
             this.Filetoolmenu.Text = "toolStrip3";
-            this.Filetoolmenu.Visible = false;
             // 
             // tsbtnTileVertical
             // 
@@ -275,12 +268,6 @@
             // 
             this.appContainer.Panel1.Controls.Add(this.tvCatalog);
             this.appContainer.Panel1MinSize = 0;
-            // 
-            // appContainer.Panel2
-            // 
-            this.appContainer.Panel2.Controls.Add(this.appwb);
-            this.appContainer.Panel2.Controls.Add(this.app_Panelbuttom);
-            this.appContainer.Panel2.Controls.Add(this.app_Paneltop);
             this.appContainer.Panel2MinSize = 0;
             this.appContainer.Size = new System.Drawing.Size(991, 594);
             this.appContainer.SplitterDistance = 209;
@@ -353,44 +340,6 @@
             this.catalogimg.Images.SetKeyName(44, "Widgets.png");
             this.catalogimg.Images.SetKeyName(45, "X Window.png");
             this.catalogimg.Images.SetKeyName(46, "Others.png");
-            // 
-            // appwb
-            // 
-            this.appwb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.appwb.Location = new System.Drawing.Point(0, 30);
-            this.appwb.MinimumSize = new System.Drawing.Size(20, 20);
-            this.appwb.Name = "appwb";
-            this.appwb.Size = new System.Drawing.Size(781, 534);
-            this.appwb.TabIndex = 2;
-            // 
-            // app_Panelbuttom
-            // 
-            this.app_Panelbuttom.Controls.Add(this.appPager);
-            this.app_Panelbuttom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.app_Panelbuttom.Location = new System.Drawing.Point(0, 564);
-            this.app_Panelbuttom.Name = "app_Panelbuttom";
-            this.app_Panelbuttom.Size = new System.Drawing.Size(781, 30);
-            this.app_Panelbuttom.TabIndex = 1;
-            // 
-            // appPager
-            // 
-            this.appPager.CurrentPageIndex = 0;
-            this.appPager.Enabled = false;
-            this.appPager.Location = new System.Drawing.Point(530, 5);
-            this.appPager.Name = "appPager";
-            this.appPager.PageCount = 0;
-            this.appPager.PageSize = 20;
-            this.appPager.RecordCount = 0;
-            this.appPager.Size = new System.Drawing.Size(248, 30);
-            this.appPager.TabIndex = 0;
-            // 
-            // app_Paneltop
-            // 
-            this.app_Paneltop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.app_Paneltop.Location = new System.Drawing.Point(0, 0);
-            this.app_Paneltop.Name = "app_Paneltop";
-            this.app_Paneltop.Size = new System.Drawing.Size(781, 30);
-            this.app_Paneltop.TabIndex = 0;
             // 
             // toolapp
             // 
@@ -470,9 +419,7 @@
             this.tabApp.ResumeLayout(false);
             this.tabApp.PerformLayout();
             this.appContainer.Panel1.ResumeLayout(false);
-            this.appContainer.Panel2.ResumeLayout(false);
             this.appContainer.ResumeLayout(false);
-            this.app_Panelbuttom.ResumeLayout(false);
             this.toolapp.ResumeLayout(false);
             this.toolapp.PerformLayout();
             this.ResumeLayout(false);
@@ -508,12 +455,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ImageList catalogimg;
-        internal System.Windows.Forms.WebBrowser appwb;
-        internal iSprite.iPager appPager;
         internal System.Windows.Forms.SplitContainer appContainer;
         internal System.Windows.Forms.TreeView tvCatalog;
-        internal System.Windows.Forms.Panel app_Paneltop;
-        internal System.Windows.Forms.Panel app_Panelbuttom;
 
 
     }
