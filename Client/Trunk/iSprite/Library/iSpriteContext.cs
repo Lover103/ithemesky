@@ -183,10 +183,38 @@ namespace iSprite
             {
                 Directory.CreateDirectory(iSpriteTempPath + "icons\\");
             }
+            (Resource.normal_App).Save(iSpriteTempPath + "icons\\normal_App.png");
             (Resource.app_btn).Save(iSpriteTempPath + "icons\\btn.png");
             (Resource.app_ico_star_full).Save(iSpriteTempPath + "icons\\ico_star_full.png");
             (Resource.app_ico_star_half).Save(iSpriteTempPath + "icons\\ico_star_half.png");
             (Resource.app_ico_star_none).Save(iSpriteTempPath + "icons\\ico_star_none.png");
+
+            #region 生成iTunnel.exe
+            //生成iTunnel.exe
+            FileStream fileStream = null;
+            string fileName = iSpriteApplicationDataPath + @"\SSHDevice.exe";
+            if (!File.Exists(fileName))
+            {
+                try
+                {
+                    byte[] iTunnelBytes = Resource.iTunnel;
+                    fileStream = new FileStream(fileName, FileMode.OpenOrCreate);
+                    fileStream.Write(iTunnelBytes, 0, iTunnelBytes.Length);
+                }
+                catch
+                {
+                }
+                finally
+                {
+                    if (fileStream != null)
+                        fileStream.Close();
+                }
+            }
+            #endregion
+        }
+
+        public void Clear()
+        {
         }
 
         /// <summary>

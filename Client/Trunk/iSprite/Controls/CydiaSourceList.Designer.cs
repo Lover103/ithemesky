@@ -64,7 +64,7 @@
             // 
             // toolbtnAdd
             // 
-            this.toolbtnAdd.Image = global::iSprite.Resource.btn_start;
+            this.toolbtnAdd.Image = global::iSprite.Resource.btn_add;
             this.toolbtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolbtnAdd.Name = "toolbtnAdd";
             this.toolbtnAdd.Size = new System.Drawing.Size(85, 22);
@@ -78,7 +78,7 @@
             // 
             // toolbtnUpdate
             // 
-            this.toolbtnUpdate.Image = global::iSprite.Resource.btn_pause;
+            this.toolbtnUpdate.Image = global::iSprite.Resource.btn_refresh;
             this.toolbtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolbtnUpdate.Name = "toolbtnUpdate";
             this.toolbtnUpdate.Size = new System.Drawing.Size(103, 22);
@@ -106,7 +106,6 @@
             this.app_Panelbuttom.Name = "app_Panelbuttom";
             this.app_Panelbuttom.Size = new System.Drawing.Size(775, 30);
             this.app_Panelbuttom.TabIndex = 18;
-
             // 
             // CydiaSourceList
             // 

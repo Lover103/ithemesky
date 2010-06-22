@@ -89,9 +89,9 @@ namespace iSprite
         #endregion
 
 
-        #region AddControls
+        #region 添加控件
         /// <summary>
-        /// AddControls
+        /// 添加控件
         /// </summary>
         void AddControls()
         {
@@ -102,9 +102,10 @@ namespace iSprite
 
             m_InstalledAppList.FullRowSelect = true;
             m_InstalledAppList.View = View.Details;
-
             ImageList imgList = new ImageList();
-            imgList.ImageSize = new Size(1, 18);//分别是宽和高
+            imgList.ImageSize = new Size(18, 18);//分别是宽和高
+            imgList.Images.Add(global::iSprite.Resource.normal_App);
+            imgList.Images.Add(global::iSprite.Resource.system_app);
             m_InstalledAppList.SmallImageList = imgList;
 
             ColumnHeader columnFile = new ColumnHeader();
@@ -141,7 +142,7 @@ namespace iSprite
             m_InstalledAppList.Groups.Add(m_UserGroup);
 
             m_SystemGroup.Header = "System Deb";
-            m_SystemGroup.Tag = m_UserGroup.Header;
+            m_SystemGroup.Tag = m_SystemGroup.Header;
             m_SystemGroup.HeaderAlignment = HorizontalAlignment.Left;
             m_InstalledAppList.Groups.Add(m_SystemGroup);
 
@@ -220,17 +221,19 @@ namespace iSprite
                 rowitem.Name = item.DebID;
                 if (item.IsSystemDeb)
                 {
+                    rowitem.ImageIndex = 1;
                     rowitem.Group = m_SystemGroup;
                 }
                 else
                 {
+                    rowitem.ImageIndex = 0;
                     rowitem.Group = m_UserGroup;
                 }
                 if (item.Name == string.Empty)
                 {
                     item.Name = item.Package;
                 }
-                rowitem.Text = item.Name;
+                rowitem.Text = " " + item.Name;
 
                 rowitem.SubItems.Add(item.Version);
 

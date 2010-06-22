@@ -127,7 +127,7 @@ namespace iSprite
                     case SshStatusOption.ErrorPassword:
                         break;
                     case SshStatusOption.iTunnelNoRun:
-                        MessageHelper.ShowInfo("iTunnel can not run!");
+                        MessageHelper.ShowInfo("SSHDevice can not run!");
                         break;
                     case SshStatusOption.NotConnected:
                         MessageHelper.ShowInfo("Can not connect to ssh service, you can reinstall OpenSSH.");
@@ -151,14 +151,14 @@ namespace iSprite
             try
             {
                 int port = 22;
-                Process[] ps = Process.GetProcessesByName("iTunnel");
+                Process[] ps = Process.GetProcessesByName("SSHDevice");
                 if (ps.Length > 0)
                 {
                     return true;
                 }
 
                 Process processiTunnel = new Process();
-                processiTunnel.StartInfo.FileName = iSpriteContext.Current.iSpriteApplicationDataPath + @"\iTunnel.exe";
+                processiTunnel.StartInfo.FileName = iSpriteContext.Current.iSpriteApplicationDataPath + @"\SSHDevice.exe";
                 processiTunnel.StartInfo.Arguments = "22 " + port;
                 processiTunnel.StartInfo.ErrorDialog = false;
                 processiTunnel.StartInfo.CreateNoWindow = true;

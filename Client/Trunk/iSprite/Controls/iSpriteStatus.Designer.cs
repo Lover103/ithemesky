@@ -28,55 +28,78 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.pnl = new System.Windows.Forms.TableLayoutPanel();
             this.picbox = new System.Windows.Forms.PictureBox();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.pnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbox)).BeginInit();
             this.SuspendLayout();
             // 
+            // pnl
+            // 
+            this.pnl.BackColor = System.Drawing.Color.Transparent;
+            this.pnl.ColumnCount = 2;
+            this.pnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.01976F));
+            this.pnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.98024F));
+            this.pnl.Controls.Add(this.picbox, 0, 0);
+            this.pnl.Controls.Add(this.lblStatus, 1, 0);
+            this.pnl.Location = new System.Drawing.Point(25, 13);
+            this.pnl.Name = "pnl";
+            this.pnl.RowCount = 1;
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.pnl.Size = new System.Drawing.Size(253, 56);
+            this.pnl.TabIndex = 5;
+            this.pnl.Visible = false;
+            // 
             // picbox
             // 
-            this.picbox.Location = new System.Drawing.Point(22, 25);
+            this.picbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.picbox.Location = new System.Drawing.Point(3, 12);
             this.picbox.Name = "picbox";
-            this.picbox.Size = new System.Drawing.Size(32, 32);
-            this.picbox.TabIndex = 0;
+            this.picbox.Size = new System.Drawing.Size(31, 32);
+            this.picbox.TabIndex = 1;
             this.picbox.TabStop = false;
             // 
             // lblStatus
             // 
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStatus.AutoSize = true;
-            this.lblStatus.BackColor = System.Drawing.Color.Transparent;
-            this.lblStatus.Location = new System.Drawing.Point(69, 35);
+            this.lblStatus.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblStatus.Location = new System.Drawing.Point(40, 21);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(47, 12);
-            this.lblStatus.TabIndex = 3;
-            this.lblStatus.Text = "Message";
-            // 
-            // timer
-            // 
-            this.timer.Interval = 180;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.lblStatus.Size = new System.Drawing.Size(210, 14);
+            this.lblStatus.TabIndex = 0;
+            this.lblStatus.Text = "Msg";
             // 
             // iSpriteStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::iSprite.Resource.form_box_titleless;
-            this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.picbox);
+            this.Controls.Add(this.pnl);
             this.Name = "iSpriteStatus";
-            this.Size = new System.Drawing.Size(266, 82);
+            this.Size = new System.Drawing.Size(306, 82);
+            this.pnl.ResumeLayout(false);
+            this.pnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbox)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox picbox;
+        private System.Windows.Forms.TableLayoutPanel pnl;
+        internal System.Windows.Forms.PictureBox picbox;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Timer timer;
+
     }
 }
