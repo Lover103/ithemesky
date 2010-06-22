@@ -95,6 +95,13 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap btn_add {
+            get {
+                object obj = ResourceManager.GetObject("btn_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap btn_go {
             get {
                 object obj = ResourceManager.GetObject("btn_go", resourceCulture);
@@ -105,6 +112,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap btn_pause {
             get {
                 object obj = ResourceManager.GetObject("btn_pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btn_refresh {
+            get {
+                object obj = ResourceManager.GetObject("btn_refresh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -312,6 +326,13 @@ namespace iSprite {
             }
         }
         
+        internal static byte[] iTunnel {
+            get {
+                object obj = ResourceManager.GetObject("iTunnel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap loader {
             get {
                 object obj = ResourceManager.GetObject("loader", resourceCulture);
@@ -357,6 +378,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap NewFolder {
             get {
                 object obj = ResourceManager.GetObject("NewFolder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap normal_App {
+            get {
+                object obj = ResourceManager.GetObject("normal_App", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -515,9 +543,23 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap site {
+            get {
+                object obj = ResourceManager.GetObject("site", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Stocks {
             get {
                 object obj = ResourceManager.GetObject("Stocks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap system_app {
+            get {
+                object obj = ResourceManager.GetObject("system_app", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -337,4 +337,22 @@
   <data name="btn_start" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\btn_start.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="btn_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\btn_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\btn-refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="site" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\site.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="normal_App" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\normal_App.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="system_app" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\system_app.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iTunnel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\iTunnel.exe;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

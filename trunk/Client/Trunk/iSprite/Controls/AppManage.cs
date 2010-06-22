@@ -123,6 +123,10 @@ namespace iSprite
         }
         #endregion
 
+        #region 更新类别数量
+        /// <summary>
+        /// 更新类别数量
+        /// </summary>
         void UpdataCatalogCount()
         {
             List<string> c = new List<string>();
@@ -143,6 +147,7 @@ namespace iSprite
             SetNodeCount("All Packages", m_appHelper.Packagelist.Count, false);
             m_OnlineAppList.LoadCatalogData(c, m_appHelper.AppNames);
         }
+        #endregion
 
         #region 设置当前选中视图
         /// <summary>

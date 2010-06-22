@@ -53,11 +53,11 @@
             this.tvCatalog = new System.Windows.Forms.TreeView();
             this.catalogimg = new System.Windows.Forms.ImageList(this.components);
             this.toolapp = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnInstallDeb = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnInstallIPA = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnInstallPXL = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.faTabStrip1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabs)).BeginInit();
             this.tabs.SuspendLayout();
@@ -340,58 +340,59 @@
             this.catalogimg.Images.SetKeyName(44, "Widgets.png");
             this.catalogimg.Images.SetKeyName(45, "X Window.png");
             this.catalogimg.Images.SetKeyName(46, "Others.png");
+            this.catalogimg.Images.SetKeyName(47, "Cydia Sources.png");
             // 
             // toolapp
             // 
             this.toolapp.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolapp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton5,
+            this.tsbtnInstallDeb,
             this.toolStripSeparator7,
-            this.toolStripButton6,
+            this.tsbtnInstallIPA,
             this.toolStripSeparator8,
-            this.toolStripButton7});
+            this.tsbtnInstallPXL});
             this.toolapp.Location = new System.Drawing.Point(0, 0);
             this.toolapp.Name = "toolapp";
             this.toolapp.Size = new System.Drawing.Size(991, 25);
             this.toolapp.TabIndex = 13;
             this.toolapp.Text = "toolStrip3";
             // 
-            // toolStripButton5
+            // tsbtnInstallDeb
             // 
-            this.toolStripButton5.Image = global::iSprite.Resource.file_deb;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(91, 22);
-            this.toolStripButton5.Text = "Install Deb";
-            this.toolStripButton5.ToolTipText = "Install Deb File";
+            this.tsbtnInstallDeb.Image = global::iSprite.Resource.file_deb;
+            this.tsbtnInstallDeb.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnInstallDeb.Name = "tsbtnInstallDeb";
+            this.tsbtnInstallDeb.Size = new System.Drawing.Size(91, 22);
+            this.tsbtnInstallDeb.Text = "Install Deb";
+            this.tsbtnInstallDeb.ToolTipText = "Install Deb File";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton6
+            // tsbtnInstallIPA
             // 
-            this.toolStripButton6.Image = global::iSprite.Resource.ipa;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(91, 22);
-            this.toolStripButton6.Text = "Install IPA";
-            this.toolStripButton6.ToolTipText = "Install IPA";
+            this.tsbtnInstallIPA.Image = global::iSprite.Resource.ipa;
+            this.tsbtnInstallIPA.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnInstallIPA.Name = "tsbtnInstallIPA";
+            this.tsbtnInstallIPA.Size = new System.Drawing.Size(91, 22);
+            this.tsbtnInstallIPA.Text = "Install IPA";
+            this.tsbtnInstallIPA.ToolTipText = "Install IPA";
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton7
+            // tsbtnInstallPXL
             // 
-            this.toolStripButton7.Image = global::iSprite.Resource.pxl;
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(91, 22);
-            this.toolStripButton7.Text = "Install PXL";
-            this.toolStripButton7.ToolTipText = "Get Help";
+            this.tsbtnInstallPXL.Image = global::iSprite.Resource.pxl;
+            this.tsbtnInstallPXL.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnInstallPXL.Name = "tsbtnInstallPXL";
+            this.tsbtnInstallPXL.Size = new System.Drawing.Size(91, 22);
+            this.tsbtnInstallPXL.Text = "Install PXL";
+            this.tsbtnInstallPXL.ToolTipText = "Get Help";
             // 
             // MainForm
             // 
@@ -449,11 +450,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private iSprite.ThirdControl.FarsiLibrary.FATabStripItem tabApp;
         private System.Windows.Forms.ToolStrip toolapp;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton tsbtnInstallDeb;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.ToolStripButton tsbtnInstallIPA;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.ToolStripButton tsbtnInstallPXL;
         private System.Windows.Forms.ImageList catalogimg;
         internal System.Windows.Forms.SplitContainer appContainer;
         internal System.Windows.Forms.TreeView tvCatalog;

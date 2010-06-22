@@ -42,7 +42,7 @@ namespace iSprite
         #region html模板
         const string itemhtmltemplate = @"
         <li>
-			<div class='appIcon'><img src='http://img1.qq.com/pcdesk/pics/14661/14661865.gif' alt='{0}' width='32' height='32' /></div>
+			<div class='appIcon'><img src='icons/normal_App.png' alt='{0}' width='32' height='32' /></div>
 			<dl class='appIntro'>
 				<dt>{0}</dt>
 				<dd>{1} </dd>
@@ -50,8 +50,7 @@ namespace iSprite
 			<ul class='appInfo'>
 				<li class='size'>{2}</li>
 				<li class='rate'>
-					<img src='icons/ico_star_full.png' /><img src='icons/ico_star_full.png' /><img src='icons/ico_star_full.png' /><img src='icons/ico_star_full.png' /><img src='icons/ico_star_half.png' />
-					<p>4.5 Stars <a href='#'>Rate</a></p>
+					<a href='goto:{4}'>{4}</li>
 				</li>
 				<li class='btn'>
 					<a href='{3}' class='download'>Download</a>
@@ -1563,38 +1562,42 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
 
             RepositoryInfo repInfo;
 
+            PackageItem packageItem;
             foreach(KeyValuePair<string, PackageItem> item in packagelist)
             {
                 if (index++ >= beginindex)
                 {
-                    string description = item.Value.Description;
+                    packageItem = item.Value;
+                    string description = packageItem.Description;
                     if (description.Length > len)
                     {
                         description = description.Substring(0, len) + "...";
                     }
-                    string ver = item.Value.Version;
+                    string ver = packageItem.Version;
                     if (!string.IsNullOrEmpty(ver))
                     {
                         ver = " (V" + ver + ")";
                     }
-                    if (m_RepositoryList.TryGetValue(item.Value.AdditionalInfoURL, out repInfo))
+                    if (m_RepositoryList.TryGetValue(packageItem.AdditionalInfoURL, out repInfo))
                     {
                         if (!string.IsNullOrEmpty(key))
                         {
                             itemsb.AppendFormat(itemhtmltemplate,
-                                Regex.Replace(item.Value.Name, key, "<em>" + key + "</em>", RegexOptions.IgnoreCase) + ver,
+                                Regex.Replace(packageItem.Name, key, "<em>" + key + "</em>", RegexOptions.IgnoreCase) + ver,
                                 Regex.Replace(description, key, "<em>" + key + "</em>", RegexOptions.IgnoreCase),
-                                Utility.FormatFileSize((ulong)item.Value.Size),
-                                item.Value.FinalDownloadURL(repInfo.APTDownloadBaseURL)
+                                Utility.FormatFileSize((ulong)packageItem.Size),
+                                packageItem.FinalDownloadURL(repInfo.APTDownloadBaseURL),
+                                packageItem.Category
                                 );
                         }
                         else
                         {
                             itemsb.AppendFormat(itemhtmltemplate,
-                                item.Value.Name + ver,
+                                packageItem.Name + ver,
                                 description,
-                                Utility.FormatFileSize((ulong)item.Value.Size),
-                                item.Value.FinalDownloadURL(repInfo.APTDownloadBaseURL)
+                                Utility.FormatFileSize((ulong)packageItem.Size),
+                                packageItem.FinalDownloadURL(repInfo.APTDownloadBaseURL),
+                                packageItem.Category
                                 );
                         }
                     }

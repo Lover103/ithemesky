@@ -17,79 +17,71 @@ namespace iSprite
         /// 跨线程调用委托
         /// </summary>
         private delegate void ThreadInvokeDelegate();
-        List<PictureBox> pblist = new List<PictureBox>();
-        int index = 0;
+        List<Bitmap> m_ImgList = new List<Bitmap>();
+        int M_picIndex = 0;
+        const int imgCount = 12;
+        bool firstload = false;
 
         public iSpriteStatus()
         {
             InitializeComponent();
-
-            pblist.Add(picbox);
+            m_ImgList = new List<Bitmap>();
             picbox.BackColor = Color.Transparent;
-            this.picbox.BackgroundImage = global::iSprite.Resource.pg_loader_1;
-            for (int i = 2; i <= 12; i++)
+            for (int i = 1; i <= imgCount; i++)
             {
-                PictureBox box = new PictureBox();
-                box.Size = picbox.Size;
-                box.Location = picbox.Location;
-                this.Controls.Add(box);
-
-                object obj = Resource.ResourceManager.GetObject("pg_loader_" + i, null);
-                box.BackColor = Color.Transparent;
-                box.BackgroundImage = (Bitmap)(obj);
-                pblist.Add(box);
+                m_ImgList.Add((Bitmap)Resource.ResourceManager.GetObject("pg_loader_" + i, null));
             }
+            picbox.BackColor = Color.Transparent;
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            //pblist[Pindex].BringToFront();
-            //Application.DoEvents();
+            if (!this.IsDisposed)
+            {
+                if (!firstload)
+                {
+                    firstload = true;
+                    base.OnPaint(e);
+                }
+                //this.picbox.BackgroundImage = m_ImgList[M_picIndex];
+            }
         }
 
         [RefreshProperties(RefreshProperties.Repaint)]
-        int Pindex
+        int PicIndex
         {
             set
             {
-                if (index >= 12)
+                if (value >= imgCount)
                 {
-                    index = 0;
+                    M_picIndex = 0;
                 }
                 else
                 {
-                    index = value;
+                    M_picIndex = value;
                 }
+                picbox.Invalidate();
             }
             get
             {
-                return index;
+                return M_picIndex;
+            }
+        }
+
+
+        void Change()
+        {
+            while (this.Visible)
+            {
+                PicIndex++;
+                Application.DoEvents();
+                Thread.Sleep(TimeSpan.FromSeconds(0.05));
             }
         }
 
         internal void Hidden()
         {
-            this.timer.Enabled = false;
             this.Visible = false;
-        }
-
-        void SetImg()
-        {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new ThreadInvokeDelegate(
-                    delegate()
-                    {
-                        pblist[Pindex].BringToFront();
-                        Application.DoEvents();
-                    }
-                ));
-            }
-            else
-            {
-                pblist[Pindex].BringToFront();
-                Application.DoEvents();
-            }
         }
         /// <summary>
         /// 设置状态条文字
@@ -103,44 +95,19 @@ namespace iSprite
                     this.Invoke(new ThreadInvokeDelegate(
                         delegate()
                         {
-                            this.timer.Enabled = true;
                             this.Visible = true;
                             this.lblStatus.Text = value;
+                            new Thread(new ThreadStart(Change)).Start();
                         }
                     ));
                 }
                 else
                 {
                     this.Visible = true;
-                    this.timer.Enabled = true;
                     this.lblStatus.Text = value;
                     new Thread(new ThreadStart(Change)).Start();
                 }
             }
-        }
-
-        void Change()
-        {
-           //while(true)
-           //{
-           //    Pindex++;
-           //    SetImg();
-           //    Application.DoEvents();
-           //    //this.Invalidate();
-           //    Thread.Sleep(TimeSpan.FromSeconds(0.3));
-           //}
-        }
-
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            //if (index >= 12)
-            //{
-            //    index = 0;
-            //}
-            //pblist[index++].BringToFront();
-            //this.Invalidate();
-            //Application.DoEvents();
-        }
-
+        }        
     }
 }

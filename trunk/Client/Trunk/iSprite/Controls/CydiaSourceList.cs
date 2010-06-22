@@ -97,13 +97,15 @@ namespace iSprite
             this.m_SourceList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_SourceList.Location = new System.Drawing.Point(0, 25);
 
+            ImageList imgList = new ImageList();
+            imgList.ImageSize = new Size(22, 22);//分别是宽和高
+            imgList.Images.Add(global::iSprite.Resource.site);
+            m_SourceList.SmallImageList = imgList;
+
             m_SourceList.FullRowSelect = true;
             m_SourceList.View = View.Details;
             m_SourceList.GridLines = true;
 
-            ImageList imgList = new ImageList();
-            imgList.ImageSize = new Size(1, 20);//分别是宽和高
-            m_SourceList.SmallImageList = imgList;
 
             ColumnHeader columnFile = new ColumnHeader();
             ColumnHeader columnURL = new ColumnHeader();
@@ -278,6 +280,7 @@ namespace iSprite
         void AddSource()
         {
             ListViewItem rowitem = new ListViewItem();
+            rowitem.ImageIndex = 0;
             rowitem.Text = "http://";
             m_SourceList.Items.Add(rowitem);
             rowitem.BeginEdit();
@@ -373,7 +376,7 @@ namespace iSprite
 
                 ListViewItem rowitem = new ListViewItem();
                 rowitem.Name = item.Name;
-
+                rowitem.ImageIndex = 0;
 
                 // URL
                 rowitem.Text = item.URL;

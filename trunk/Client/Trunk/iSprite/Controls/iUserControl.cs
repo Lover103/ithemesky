@@ -15,7 +15,7 @@ namespace iSprite
             {
                 Area9Helper.GetNewImg(
                     e.Graphics,
-                    new int[] { 2, 2, 30, 2 },
+                    new int[] { 2, 2, 2, 2 },
                     (Bitmap)this.BackgroundImage,
                     this.Width,
                     this.Height

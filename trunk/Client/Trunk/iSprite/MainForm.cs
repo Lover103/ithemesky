@@ -154,6 +154,14 @@ namespace iSprite
                 }
             }
 
+            foreach (ToolStripItem item in this.toolapp.Items)
+            {
+                if (item is ToolStripButton)
+                {
+                    item.Click += new EventHandler(toolmenuitem_Click);
+                }
+            }
+
             //主题管理
             m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme, this);
             m_themeManage.OnMessage += new MessageHandler(ShowMessage);
@@ -326,6 +334,10 @@ namespace iSprite
             {
                 ShowMessage(this, ex.Message, MessageTypeOption.Error);
             }
+
+
+            ShowMessage(this, "Prepare to add...", MessageTypeOption.SetStatusBar);
+            //new Thread(new ThreadStart(Change)).Start();
         }
         #endregion
 
@@ -485,7 +497,12 @@ namespace iSprite
                     System.Diagnostics.Process.Start(iSpriteContext.Current.HelpUrl);
                     break;
                 case "tsbtnDeb":
+                case "tsbtnInstallDeb":
                     DebInstaller.Show((iPhoneFileDevice)iphonedriver, new MessageHandler(ShowMessage));
+                    break;
+                case "tsbtnInstallIPA":
+                case "tsbtnInstallPXL":
+                    ShowMessage(this,"Coming soon...", MessageTypeOption.Info);
                     break;
             }
         }
