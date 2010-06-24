@@ -8,6 +8,7 @@ using ICSharpCode.SharpZipLib.GZip;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Windows.Forms;
 
 namespace iSprite
 {
@@ -20,6 +21,7 @@ namespace iSprite
     {
         #region 变量定义
         iPhoneFileDevice m_iPhoneDevice;
+        internal event FinishLoadAppDataHandler OnFinishLoad;
         private List<string> ReleaseUrlSuffixList;
         private List<string> PackagesUrlSuffixList;
         string m_CydiaSourceFolder = "/etc/apt/sources.list.d/";
@@ -109,6 +111,14 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         #endregion
 
         #endregion
+
+        private void RaiseFinishLoadEvent()
+        {
+            if (OnFinishLoad != null)
+            {
+                OnFinishLoad();
+            }
+        }
 
         internal string DownQueueFile
         {
@@ -279,6 +289,8 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             LoadInstallDebs();
             LoadCydiaSource();
             LoadCydiaPackages();
+
+            RaiseFinishLoadEvent();
         }
 
         #region 读取Cydia源
@@ -881,6 +893,36 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         }
         #endregion
 
+        public void UpdateCydiaSource(List<ListViewItem> selectedItems,
+            CydiaSourceActionHandler action,
+            FinishAppHelpActionHandler finishAction)
+        {
+            RepositoryInfo repItem;
+            int sucessCount = 0;
+            foreach (ListViewItem item in selectedItems)
+            {
+                if (item.Tag is RepositoryInfo)
+                {
+                    action(item, false);
+                    repItem = (RepositoryInfo)item.Tag; 
+                    
+                    if (string.IsNullOrEmpty(repItem.Description))
+                    {
+                        string APTCachedReleaseURL = repItem.APTCachedReleaseURL;
+                        if (GetRepositoryInfoByUrl(repItem.URL, ref APTCachedReleaseURL, ref repItem))
+                        {
+                            repItem.APTCachedReleaseURL = APTCachedReleaseURL;
+                        }
+                    }
+                    if (UpdatePackagesByCydiaSource(repItem))
+                    {
+                        sucessCount++;
+                        action(item, true);
+                    }
+                }
+            }
+            finishAction(sucessCount);
+        }
         #region 更新指定的cydia源的软件包
         /// <summary>
         /// 更新指定的cydia源的软件包
@@ -896,6 +938,7 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             string packetcontent = string.Empty;
             if (GetPackagesByUrl(repInfo, out packages, ref packetcontent))
             {
+
                 int count = 0;
                 foreach (PackageItem item in packages)
                 {
@@ -913,9 +956,12 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
                     fileName=Path.GetFileNameWithoutExtension(fileName);
 
                     File.WriteAllText(m_AptPackagesFolder + fileName, packetcontent, Encoding.UTF8);
+
                     //保存到iPhone的m_CydiaPackagesFolder
-                    m_iPhoneDevice.Copy2iPhone(m_AptPackagesFolder + fileName, m_CydiaPackagesFolder + fileName);
+                    m_iPhoneDevice.Copy2iPhone(m_AptPackagesFolder + fileName, m_CydiaPackagesFolder + fileName, false);
                 }
+
+                repInfo.LastUpdate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                 return true;
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using System.Text;
+using System.Windows.Forms;
 
 
 namespace iSprite
@@ -28,6 +29,12 @@ namespace iSprite
         /// </summary>
         public List<string> fileList { get; set; }
     }
+
+    /// <summary>
+    /// 跨线程调用委托
+    /// </summary>
+    public delegate void ThreadInvokeDelegate();
+
     /// <summary>
     /// 路径变更委托
     /// </summary>
@@ -53,6 +60,12 @@ namespace iSprite
 
     public delegate void SetNodeCountHandler(string nodeName, int count, bool selectNode);
     public delegate void UpdataCatalogCountHandler();
+
+    public delegate void FinishAppActionHandler();
+    public delegate void FinishLoadAppDataHandler();
+
+    public delegate void CydiaSourceActionHandler(ListViewItem item, bool finished);
+    public delegate void FinishAppHelpActionHandler(int sucessCount);
 
     /// <summary>
     /// 文件信息

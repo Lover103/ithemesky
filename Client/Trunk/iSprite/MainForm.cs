@@ -100,7 +100,7 @@ namespace iSprite
             progressBar.Visible = false;
             progressBar.OnCancel += new CancelHandler(progressBar_OnCancel);
 
-            statusBar = new iSpriteStatus();
+            statusBar = new iSpriteStatus(this);
             Controls.Add(statusBar);
             statusBar.BringToFront();
             statusBar.Left = (this.Width - statusBar.Width) / 2;
@@ -336,7 +336,7 @@ namespace iSprite
             }
 
 
-            ShowMessage(this, "Prepare to add...", MessageTypeOption.SetStatusBar);
+            //ShowMessage(this, "Prepare to add...", MessageTypeOption.SetStatusBar);
             //new Thread(new ThreadStart(Change)).Start();
         }
         #endregion
@@ -373,12 +373,13 @@ namespace iSprite
                     break;
                 case MessageTypeOption.SetStatusBar:
                     statusBar.StatusMsg = message;
+                    Application.DoEvents();
                     break;
                 case MessageTypeOption.HiddenStatusBar:
                     if (message != string.Empty)
                     {
                         statusBar.StatusMsg = message;
-                        Thread.Sleep(TimeSpan.FromSeconds(1.5));
+                        Thread.Sleep(TimeSpan.FromSeconds(3));
                     }
                     statusBar.Hidden();
                     break;

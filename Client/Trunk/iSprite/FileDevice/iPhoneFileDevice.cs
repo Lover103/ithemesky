@@ -555,24 +555,12 @@ namespace iSprite
                 NotConnectedErrot();
                 return false;
             }
-            if (showProgress)
-            {
-                return this.iPhoneInterface.Downlod2PC(
-                    srcpath_iPhone,
-                    destpath_Computer,
-                    this.OnProgressHandler,
-                    this.OnCompleteHandler
-                    );
-            }
-            else
-            {
-                return this.iPhoneInterface.Downlod2PC(
-                    srcpath_iPhone,
-                    destpath_Computer,
-                    null,
-                    null
-                    );
-            }
+            return this.iPhoneInterface.Downlod2PC(
+                srcpath_iPhone,
+                destpath_Computer,
+                showProgress ? this.OnProgressHandler : null,
+                showProgress ? this.OnCompleteHandler : null
+                );
         }
         /// <summary>
         /// 将文件通过异步方式下载到pc
@@ -604,8 +592,18 @@ namespace iSprite
         /// </summary>
         /// <param name="srcpath_Computer"></param>
         /// <param name="destpath_iPhone"></param>
-        public bool Copy2iPhone(string srcpath_Computer, string destpath_iPhone
-            )
+        /// <param name="showProgress"></param>
+        /// <returns></returns>
+        public bool Copy2iPhone(string srcpath_Computer, string destpath_iPhone)
+        {
+            return Copy2iPhone(srcpath_Computer, destpath_iPhone, true);
+        }
+        /// <summary>
+        /// 将文件上传到iPhone
+        /// </summary>
+        /// <param name="srcpath_Computer"></param>
+        /// <param name="destpath_iPhone"></param>
+        public bool Copy2iPhone(string srcpath_Computer, string destpath_iPhone, bool showProgress )
         {
             if (!this.IsConnected)
             {
@@ -613,15 +611,12 @@ namespace iSprite
                 return false;
             }
 
-            //iPhoneInterface.StartSync();
-
             bool returnCode = iPhoneInterface.Copy2iPhone(
                 srcpath_Computer,
                 destpath_iPhone,
-                this.OnProgressHandler, 
-                this.OnCompleteHandler
+                showProgress ? this.OnProgressHandler : null,
+                showProgress ? this.OnCompleteHandler : null
                 );
-            //iPhoneInterface.EndSync();
 
             return returnCode;
         }
