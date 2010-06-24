@@ -39,11 +39,11 @@
             // 
             this.pnl.BackColor = System.Drawing.Color.Transparent;
             this.pnl.ColumnCount = 2;
-            this.pnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.01976F));
-            this.pnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.98024F));
+            this.pnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.35616F));
+            this.pnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 86.64384F));
             this.pnl.Controls.Add(this.picbox, 0, 0);
             this.pnl.Controls.Add(this.lblStatus, 1, 0);
-            this.pnl.Location = new System.Drawing.Point(25, 13);
+            this.pnl.Location = new System.Drawing.Point(7, 13);
             this.pnl.Name = "pnl";
             this.pnl.RowCount = 1;
             this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -56,16 +56,15 @@
             this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.pnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
-            this.pnl.Size = new System.Drawing.Size(253, 56);
+            this.pnl.Size = new System.Drawing.Size(292, 56);
             this.pnl.TabIndex = 5;
-            this.pnl.Visible = false;
             // 
             // picbox
             // 
             this.picbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.picbox.Location = new System.Drawing.Point(3, 12);
             this.picbox.Name = "picbox";
-            this.picbox.Size = new System.Drawing.Size(31, 32);
+            this.picbox.Size = new System.Drawing.Size(32, 32);
             this.picbox.TabIndex = 1;
             this.picbox.TabStop = false;
             // 
@@ -74,9 +73,9 @@
             this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblStatus.Location = new System.Drawing.Point(40, 21);
+            this.lblStatus.Location = new System.Drawing.Point(41, 21);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(210, 14);
+            this.lblStatus.Size = new System.Drawing.Size(248, 14);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Msg";
             // 

@@ -196,6 +196,12 @@ namespace iSprite
         #region 行编辑相关
         void SourceList_BeforeLabelEdit(object sender, LabelEditEventArgs e)
         {
+            ListViewItem rowitem = m_SourceList.Items[e.Item];
+            if (rowitem.Tag is RepositoryInfo)
+            {
+                e.CancelEdit = true;
+            }
+            
         }
 
         void SourceList_AfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -221,7 +227,7 @@ namespace iSprite
 
                     RaiseMessageHandler(this, "Success to add a new cydia source", MessageTypeOption.HiddenStatusBar);
 
-                    if (MessageHelper.ShowConfirm("Success add a Cydia source, Do you want to update it now ? ") == DialogResult.OK)
+                    if (MessageHelper.ShowConfirm("Success to add a Cydia source, Do you want to update it now ? ") == DialogResult.OK)
                     {
                         UnSelectAllItems();
                         rowitem.Selected = true;
@@ -295,37 +301,66 @@ namespace iSprite
         {
             if (m_SourceList.SelectedItems.Count > 0)
             {
-                RepositoryInfo repItem;
+                RaiseMessageHandler(this, "Prepare to update cydia source...", MessageTypeOption.SetStatusBar);
+                List<ListViewItem> selectedItems = new List<ListViewItem>();
                 foreach (ListViewItem item in m_SourceList.SelectedItems)
                 {
-                    if (item.Tag is RepositoryInfo)
-                    {
-                        repItem = (RepositoryInfo)item.Tag;
-                        if (string.IsNullOrEmpty(repItem.Description))
-                        {
-                            string APTCachedReleaseURL = repItem.APTCachedReleaseURL;
-                            if (m_appHelper.GetRepositoryInfoByUrl(repItem.URL, ref APTCachedReleaseURL, ref repItem))
-                            {
-                                repItem.APTCachedReleaseURL = APTCachedReleaseURL;
-                            }
-                        }
-                        if (m_appHelper.UpdatePackagesByCydiaSource(repItem))
-                        {
-                            repItem.LastUpdate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                            item.SubItems[1].Text = (repItem.Name);
-                            item.SubItems[2].Text = (repItem.LastUpdate);
-                            item.SubItems[3].Text = (repItem.Description);
-                        }
-
-                    }
+                    selectedItems.Add(item);
                 }
 
-                m_appHelper.SaveAptSourceCfg();
-                UpdataCatalogCount();
+                ThreadStart threadStart = delegate 
+                { 
+                    m_appHelper.UpdateCydiaSource
+                        (
+                            selectedItems,
+                            delegate(ListViewItem item, bool finished)
+                            {
+                                this.Invoke(new ThreadInvokeDelegate(
+                                            delegate()
+                                            {
+                                                RepositoryInfo repItem = (RepositoryInfo)item.Tag;
+                                                if (!finished)
+                                                {
+                                                    RaiseMessageHandler(this, "Begin to update cydia source (" + repItem.Name + ")", MessageTypeOption.SetStatusBar);
+                                                }
+                                                else
+                                                {
+                                                    RaiseMessageHandler(this, "Finish update cydia source (" + repItem.Name + ")", MessageTypeOption.SetStatusBar);
+                                                    item.SubItems[1].Text = repItem.Name;
+                                                    item.SubItems[2].Text = repItem.LastUpdate;
+                                                    item.SubItems[3].Text = repItem.Description;
+                                                }
+                                            }
+                                        ));
+                            },
+                            delegate(int sucessCount)
+                            {
+                                m_appHelper.SaveAptSourceCfg();
+                                string msg = string.Empty;
+                                if (sucessCount > 0)
+                                {
+                                    msg = "Success to  update " + sucessCount + " cydia source(s).";
+                                }
+                                else
+                                {
+                                    msg = "Fail to  update all cydia source.";
+                                }
+                                this.Invoke(new ThreadInvokeDelegate(
+                                            delegate()
+                                            {
+                                                RaiseMessageHandler(this, msg, MessageTypeOption.HiddenStatusBar);
+                                                UpdataCatalogCount();
+                                            }
+                                        ));
+                            }
+                        ); 
+                };
+                new Thread(threadStart).Start();
+
             }
             else
             {
-                MessageHelper.ShowError("Please select a cydia source to update!");
+                MessageHelper.ShowWarning("Please select a cydia source to update!");
             }
         }
         #endregion

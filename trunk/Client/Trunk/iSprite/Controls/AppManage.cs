@@ -22,10 +22,6 @@ namespace iSprite
 
         iPhoneFileDevice m_iPhoneDevice;
         AppHelper m_appHelper;
-        /// <summary>
-        /// 跨线程调用委托
-        /// </summary>
-        private delegate void ThreadInvokeDelegate();
 
         MainForm m_MainForm;
         private TreeView m_tvCatalog;
@@ -80,6 +76,8 @@ namespace iSprite
         /// </summary>
         void InitControls()
         {
+            m_appHelper.OnFinishLoad += new FinishLoadAppDataHandler(AppHelper_OnFinishLoad);
+
             m_tvCatalog.AfterSelect += new TreeViewEventHandler(Catalog_AfterSelect);
 
 
@@ -121,6 +119,7 @@ namespace iSprite
 
             LoadAdminCatalog();
         }
+
         #endregion
 
         #region 更新类别数量
@@ -275,13 +274,22 @@ namespace iSprite
         {
             if (isContected)
             {
-                m_appHelper.InitAppData();
-                LoadCatalogs();
-                m_AptInstalledList.UpdataList();
-                m_CydiaSourceList.UpdataList();
+                new Thread(new ThreadStart(m_appHelper.InitAppData)).Start();
             }
         }
         #endregion
+
+        void AppHelper_OnFinishLoad()
+        {
+            m_MainForm.Invoke(new ThreadInvokeDelegate(
+                    delegate()
+                    {
+                        LoadCatalogs();
+                        m_AptInstalledList.UpdataList();
+                        m_CydiaSourceList.UpdataList();
+                    }
+                ));
+        }
 
         #region 加载软件分类
         /// <summary>

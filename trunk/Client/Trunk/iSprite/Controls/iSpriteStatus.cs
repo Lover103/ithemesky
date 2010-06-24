@@ -20,34 +20,20 @@ namespace iSprite
         List<Bitmap> m_ImgList = new List<Bitmap>();
         int M_picIndex = 0;
         const int imgCount = 12;
-        bool firstload = false;
 
-        public iSpriteStatus()
+        MainForm m_MainForm;
+
+        public iSpriteStatus(Form parentForm)
         {
-            InitializeComponent();
+            m_MainForm = (MainForm)parentForm;
             m_ImgList = new List<Bitmap>();
-            picbox.BackColor = Color.Transparent;
             for (int i = 1; i <= imgCount; i++)
             {
                 m_ImgList.Add((Bitmap)Resource.ResourceManager.GetObject("pg_loader_" + i, null));
             }
+            InitializeComponent();
             picbox.BackColor = Color.Transparent;
         }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            if (!this.IsDisposed)
-            {
-                if (!firstload)
-                {
-                    firstload = true;
-                    base.OnPaint(e);
-                }
-                //this.picbox.BackgroundImage = m_ImgList[M_picIndex];
-            }
-        }
-
-        [RefreshProperties(RefreshProperties.Repaint)]
         int PicIndex
         {
             set
@@ -60,7 +46,6 @@ namespace iSprite
                 {
                     M_picIndex = value;
                 }
-                picbox.Invalidate();
             }
             get
             {
@@ -68,19 +53,39 @@ namespace iSprite
             }
         }
 
+        void SetOtherControls(bool enable)
+        {
+            foreach (Control ctl in m_MainForm.Controls)
+            {
+                if (!(ctl is iSpriteStatus))
+                {
+                    ctl.Enabled = enable;
+                    Application.DoEvents();
+                }
+            }
+        }
 
         void Change()
         {
             while (this.Visible)
             {
                 PicIndex++;
-                Application.DoEvents();
                 Thread.Sleep(TimeSpan.FromSeconds(0.05));
+
+                this.Invoke(new ThreadInvokeDelegate(
+                        delegate()
+                        {
+                            this.picbox.BackgroundImage = m_ImgList[M_picIndex];
+                            picbox.Invalidate();
+                            Application.DoEvents();
+                        }
+                    ));
             }
         }
 
         internal void Hidden()
         {
+            SetOtherControls(true);
             this.Visible = false;
         }
         /// <summary>
@@ -97,7 +102,9 @@ namespace iSprite
                         {
                             this.Visible = true;
                             this.lblStatus.Text = value;
+                            SetOtherControls(false);
                             new Thread(new ThreadStart(Change)).Start();
+                            Application.DoEvents();
                         }
                     ));
                 }
@@ -105,7 +112,9 @@ namespace iSprite
                 {
                     this.Visible = true;
                     this.lblStatus.Text = value;
+                    SetOtherControls(false);
                     new Thread(new ThreadStart(Change)).Start();
+                    Application.DoEvents();
                 }
             }
         }        
