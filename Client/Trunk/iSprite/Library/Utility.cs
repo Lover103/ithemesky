@@ -17,6 +17,15 @@ namespace iSprite
         {
         }
 
+        static bool isdebug = true;
+        internal static void WriteLog(string content)
+        {
+            if (isdebug)
+            {
+                File.AppendAllText(iSpriteContext.Current.iSpriteApplicationDataPath + "\\iSpirit.log", DateTime.Now + content + "\r\n");
+            }
+        }
+
         public static string List2String(List<string> list)
         {
             StringBuilder sb = new StringBuilder();

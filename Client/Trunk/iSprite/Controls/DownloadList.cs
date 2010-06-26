@@ -22,6 +22,7 @@ namespace iSprite
     public partial class DownloadList : ListView
     {
         delegate void ActionDownloader(Downloader d, ListViewItem item);
+        public event UpdataListViewCountHandler OnUpdateCount;
 
         Hashtable mapItemToDownload = new Hashtable();
         Hashtable mapDownloadToItem = new Hashtable();
@@ -33,6 +34,21 @@ namespace iSprite
         int colIndex_Left;
         int colIndex_Rate;
         int colIndex_State;
+        int colIndex_Installed;
+
+        #region 更新数量
+        /// <summary>
+        /// 更新数量
+        /// </summary>
+        /// <param name="count"></param>
+        private void RaiseUpdateCount(int count)
+        {
+            if (OnUpdateCount != null)
+            {
+                OnUpdateCount(count);
+            }
+        }
+        #endregion
 
         public event InstallAppHandler OnDoInstall;
         /// <summary>
@@ -106,9 +122,10 @@ namespace iSprite
             ColumnHeader columnLeft = new ColumnHeader();
             ColumnHeader columnRate = new ColumnHeader();
             ColumnHeader columnState = new ColumnHeader();
+            ColumnHeader columnInstalled = new ColumnHeader();
 
             columnFile.Text = "File";
-            columnFile.Width = 320;
+            columnFile.Width = 260;
 
             columnSize.Text = "Size";
             columnSize.Width = 80;
@@ -122,8 +139,11 @@ namespace iSprite
             columnRate.Text = "Rate";
             columnRate.Width = 72;
 
-            columnState.Text = "State";
-            columnState.Width = 97;
+            columnState.Text = "Down State";
+            columnState.Width = 100;
+
+            columnInstalled.Text = "Installed";
+            columnInstalled.Width = 80;
 
             this.Columns.AddRange(
                 new ColumnHeader[] 
@@ -134,6 +154,7 @@ namespace iSprite
                     columnLeft,
                     columnRate,
                     columnState,
+                    columnInstalled
                 }
             );
 
@@ -143,6 +164,7 @@ namespace iSprite
             colIndex_Left = 3;
             colIndex_Rate = 4;
             colIndex_State = 5;
+            colIndex_Installed = 6;
         }
         #endregion
 
@@ -151,57 +173,51 @@ namespace iSprite
         /// 添加下载任务
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="path"></param>
-        public void AddURL2Download(string url, string path, string fileName)
+        /// <param name="savePath"></param>
+        /// <param name="fileName"></param>
+        /// <param name="state"></param>
+        public void AddURL2Download(string url, string savePath, string fileName,InstallState state)
         {
-            List<ResourceLocation> args = new List<ResourceLocation>();
             ResourceLocation location = new ResourceLocation();
             location.URL = url;
-            args.Add(location);
-            int segments=5;
-            AddURLsDownload(args, segments, path, fileName);
-        }
-        /// <summary>
-        /// 添加下载任务
-        /// </summary>
-        /// <param name="args"></param>
-        /// <param name="segments"></param>
-        /// <param name="path"></param>
-        /// <param name="nrOfSubfolders"></param>
-        public void AddURLsDownload(List<ResourceLocation> args, int segments, string path, string fileName)
-        {
-            if (args == null || string.IsNullOrEmpty(path))
-            {
-                return;
-            }
+            int segments = 5;
 
-            path = PathHelper.GetWithBackslash(path);
+            string fullfilename = savePath + fileName;
+            Downloader d = DownloadManager.Instance.Add(
+                location,
+                null,
+                fullfilename,
+                segments,
+                true
+                );
 
-            try
-            {
-                DownloadManager.Instance.OnBeginAddBatchDownloads();
-
-                foreach (ResourceLocation rl in args)
-                {
-                    Uri uri = new Uri(rl.URL);
-
-                    Downloader d = DownloadManager.Instance.Add(
-                        rl,
-                        null,
-                        path + fileName,
-                        segments,
-                        true
-                        );
-                    d.NeedInstall = true;
-                    d.InstallCode = InstallState.Prepare2Install;
-                }
-            }
-            finally
-            {
-                DownloadManager.Instance.OnEndAddBatchDownloads();
-            }
+            d.InstallCode = state;
 
             SaveDownQueue();
+        }
+        #endregion
+
+        #region 下载任务结束事件
+        /// <summary>
+        /// 下载任务结束事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void Instance_DownloadEnded(object sender, DownloaderEventArgs e)
+        {
+            if (e.Downloader.State == DownloaderState.Finished)
+            {
+                Downloader d = e.Downloader;
+                //完成文件下载
+                if (d.InstallCode == InstallState.NeedInstall || d.InstallCode == InstallState.DependInstall)
+                {
+                    DoInstall(e.Downloader);
+                }
+            }
+            else
+            {
+            }
+            RaiseUpdateCount(this.Items.Count);
         }
         #endregion
 
@@ -293,7 +309,7 @@ namespace iSprite
         /// </summary>
         public void RemoveSelections()
         {
-            if (MessageHelper.ShowConfirm("Are you sure that you want to remove selected downloads") == DialogResult.Yes)
+            if (MessageHelper.ShowConfirm("Are you sure that you want to remove selected downloads") == DialogResult.OK)
             {
                 try
                 {
@@ -395,7 +411,6 @@ namespace iSprite
                 finally
                 {
                     this.EndUpdate();
-                    UpdateSegments();
                 }
             }
         }
@@ -409,8 +424,6 @@ namespace iSprite
         /// <param name="e"></param>
         private void LV_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            UpdateSegments();
-
             UpdateUI();
         }
         #endregion
@@ -469,14 +482,10 @@ namespace iSprite
                             item.SubItems[colIndex_State].Text = d.State.ToString() + ", " + d.StatusMessage;
                         }
                     }
+                    item.SubItems[colIndex_Installed].Text = (d.InstallCode == InstallState.InstallFinished ? "Yes" : "No");
                     item.Tag = d.State;
                 }
             }
-
-            UpdateSegments();
-        }
-        private void UpdateSegments()
-        {
         }
         private void UpdateUI()
         {
@@ -531,11 +540,13 @@ namespace iSprite
             item.SubItems.Add("0");
 
             item.SubItems.Add(d.State.ToString());
+            item.SubItems.Add(d.InstallCode == InstallState.InstallFinished ? "Yes" : "No");
 
             mapDownloadToItem[d] = item;
             mapItemToDownload[item] = d;
 
             this.Items.Add(item);
+            RaiseUpdateCount(this.Items.Count);
         }
         #endregion
 
@@ -562,32 +573,10 @@ namespace iSprite
                     mapItemToDownload[item] = null;
 
                     item.Remove();
+                    RaiseUpdateCount(this.Items.Count);
                 }
             }
             );
-        }
-        #endregion
-
-        #region 下载任务结束事件
-        /// <summary>
-        /// 下载任务结束事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void Instance_DownloadEnded(object sender, DownloaderEventArgs e)
-        {
-            if (e.Downloader.State == DownloaderState.Finished)
-            {
-                //完成文件下载
-                if (e.Downloader.NeedInstall == true 
-                    && e.Downloader.InstallCode== InstallState.Prepare2Install)
-                {
-                    DoInstall(e.Downloader);
-                }
-            }
-            else
-            { 
-            }
         }
         #endregion
 

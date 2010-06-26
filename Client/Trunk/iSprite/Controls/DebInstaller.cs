@@ -47,7 +47,7 @@ namespace iSprite
         {
             if (!m_iPhoneDevice.IsJailbreak)
             {
-                MessageHelper.ShowError("To install deb file ,you must Jailbreak your " + iSpriteContext.Current.AppleDeviceType + " first !");
+                MessageHelper.ShowError("To install deb file ,you must Jailbreak your #AppleDeviceType# first !");
                 return;
             }
 
@@ -62,18 +62,19 @@ namespace iSprite
                 MessageHelper.ShowError("the .deb file is not exists!");
                 return;
             }
-            this.Visible = false;
+            //this.Visible = false;
             string msg = string.Empty;
             bool flag = SSHHelper.InstallDeb(m_iPhoneDevice, fileName, out msg);
             if (flag)
             {
                 RaiseMessageHandler(this,string.Empty, MessageTypeOption.SuccessInstalled);
-                MessageHelper.ShowInfo(Path.GetFileName(fileName) + " has been successfully Installed .");
+                MessageHelper.ShowInfo(msg);
             }
-            else
-            { 
+            else if(!string.IsNullOrEmpty(msg))
+            {
+                MessageHelper.ShowError(msg);
             }
-            this.Visible = true;
+            //this.Visible = true;
 
             this.DialogResult = DialogResult.OK;
             this.Close();

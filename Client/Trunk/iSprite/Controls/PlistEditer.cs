@@ -63,11 +63,11 @@ namespace iSprite
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (MessageHelper.ShowConfirm("Are you sure you want to save current Plist content to " + iSpriteContext.Current.AppleDeviceType + " ?") == DialogResult.OK)
+            if (MessageHelper.ShowConfirm("Are you sure you want to save current Plist content to #AppleDeviceType# ?") == DialogResult.OK)
             {
                 if (!m_iPhoneFileDevice.SetFileText(txtContent.Text, m_PlistPath))
                 {
-                    MessageHelper.ShowError("Fail to save current Plist content to " + iSpriteContext.Current.AppleDeviceType + " .");
+                    MessageHelper.ShowError("Fail to save current Plist content to #AppleDeviceType# .");
                 }
                 else
                 {

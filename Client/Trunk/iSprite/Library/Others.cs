@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using System.Text;
 using System.Windows.Forms;
+using MyDownloader.Core;
 
 
 namespace iSprite
@@ -12,6 +13,15 @@ namespace iSprite
         public string Name = string.Empty;
         public string LocalPath = string.Empty;
         public bool IsExistsIniPhone = false;
+    }
+
+    public class DownLoadItemInfo
+    {
+        //string url, string path, string fileName,InstallState state
+        public string Url = string.Empty;
+        public string SaveDir = string.Empty;
+        public string FileName = string.Empty;
+        public InstallState State = InstallState.NoNeedInstall;
     }
 
     /// <summary>
@@ -66,6 +76,8 @@ namespace iSprite
 
     public delegate void CydiaSourceActionHandler(ListViewItem item, bool finished);
     public delegate void FinishAppHelpActionHandler(int sucessCount);
+    public delegate void AddURL2DownloadHandler(string url, string path, string fileName, InstallState state);
+    public delegate void UpdataListViewCountHandler(int count);
 
     /// <summary>
     /// 文件信息

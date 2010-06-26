@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using MyDownloader.Core;
 using MyDownloader.Extension.Protocols;
 using System.Threading;
+using System.IO;
 
 namespace iSprite
 {
@@ -89,7 +90,9 @@ namespace iSprite
             ProtocolProviderFactory.RegisterProtocolHandler("http", typeof(HttpProtocolProvider));
             ProtocolProviderFactory.RegisterProtocolHandler("https", typeof(HttpProtocolProvider));
             ProtocolProviderFactory.RegisterProtocolHandler("ftp", typeof(FtpProtocolProvider));
-            DownloadManager.Instance.LoadDownQueueFromFile(m_appHelper.DownQueueFile);//从保存的下载队列恢复
+
+            //从保存的下载队列恢复
+            DownloadManager.Instance.LoadDownQueueFromFile(m_appHelper.DownQueueFile);
 
             m_LastSaveDownQueueTime = DateTime.Now;
 
@@ -117,10 +120,16 @@ namespace iSprite
                     }
                 );
 
-            m_DownloadList.OnDoInstall += new InstallAppHandler(DownloadList_OnDoInstall);
+            m_DownloadList.OnDoInstall += new InstallAppHandler(DoInstall);
             m_DownloadList.OnSaveDownQueue += new SaveDownQueueHandler(DownloadList_OnSaveDownQueue);
+            m_DownloadList.OnUpdateCount += new UpdataListViewCountHandler(UpdateCount);
         }
         #endregion
+
+        void UpdateCount(int count)
+        {
+            SetNodeCount("Downloaded Packages", m_DownloadList.Items.Count, false);
+        }
 
         void AddControls()
         {
@@ -140,6 +149,8 @@ namespace iSprite
             {
                 m_DownloadList.UpdateList();
 
+                int count = m_DownloadList.Items.Count;
+
                 if (DateTime.Now - m_LastSaveDownQueueTime > TimeSpan.FromSeconds(20))
                 {
                     new Thread(new System.Threading.ThreadStart(SaveDownQueue)).Start();
@@ -148,35 +159,111 @@ namespace iSprite
         }
         #endregion
 
+        internal void AfterDeviceFinishConnected(bool isContected)
+        {
+            if (isContected)
+            {
+                SetNodeCount("Downloaded Packages", m_DownloadList.Items.Count, false);
+                //安装已经下载完成的软件
+                for (int i = 0; i < DownloadManager.Instance.Downloads.Count; i++)
+                {
+                    Downloader d = DownloadManager.Instance.Downloads[i];
+                    if (d.State == DownloaderState.Finished 
+                        && (d.InstallCode == InstallState.NeedInstall || d.InstallCode == InstallState.DependInstall))
+                    {
+                        DoInstall(d);
+                    }
+                }
+
+            }
+        }
+
         #region 安装软件
         /// <summary>
         /// 安装软件
         /// </summary>
         /// <param name="d"></param>
-        void DownloadList_OnDoInstall(Downloader d)
+        void DoInstall(Downloader d)
         {
-            if (null != d && d.InstallCode == InstallState.Prepare2Install && m_iPhoneDevice.IsConnected)
+            if (null != d)
+            {
+                if (File.Exists(d.LocalFile_D))
+                {
+                    File.Move(d.LocalFile_D, d.LocalFile_F);//表示下载完成
+                }
+            }
+            else
+            {
+                return;
+            }
+            if (null != d 
+                && (d.InstallCode == InstallState.NeedInstall || d.InstallCode == InstallState.DependInstall) 
+                )
             {
                 try
                 {
                     lock (m_InstallLock)
                     {
-                        if (d.InstallCode == InstallState.Prepare2Install)
+                        if ((d.InstallCode == InstallState.NeedInstall || d.InstallCode == InstallState.DependInstall))
                         {
-                            d.InstallCode = InstallState.Installing;
-
-                            string msg = string.Empty;
-                            bool flag = SSHHelper.InstallDeb(m_iPhoneDevice, d.LocalFile, out msg);
-                            if (flag)
+                            if (d.InstallCode == InstallState.DependInstall)
                             {
-                                RaiseMessageHandler(this, string.Empty, MessageTypeOption.SuccessInstalled);
-                                d.InstallCode = InstallState.Installed;
-                                MessageHelper.ShowInfo(msg);
+                                d.InstallCode = InstallState.InstallFinished;
+                            }
+
+                            int index = d.LocalFile.LastIndexOf("+");
+                            string mainfilename = string.Empty;
+                            if (index == -1)
+                            {
+                                mainfilename = d.LocalFile;
                             }
                             else
                             {
-                                MessageHelper.ShowError(msg);
+                                mainfilename = d.LocalFile.Substring(0, index) + ".deb";
                             }
+
+                            if (Directory.GetFiles(m_appHelper.AptDownloadFolder, Path.GetFileName(mainfilename).Replace(".deb", "*.d")).Length == 0)
+                            {
+                                if (Directory.GetFiles(m_appHelper.AptDownloadFolder, Path.GetFileName(mainfilename).Replace(".deb", "*.f")).Length > 0)
+                                {
+                                    if (!m_iPhoneDevice.IsConnected)
+                                    {
+                                        MessageHelper.ShowError(Path.GetFileName(mainfilename) + " has been successfully downloaded,please connect your #AppleDeviceType# to finish installation  .");
+                                        return;
+                                    }
+                                    List<string> toinstalllist = new List<string>();
+                                    foreach (string filename in
+                                        Directory.GetFiles(m_appHelper.AptDownloadFolder, Path.GetFileName(mainfilename).Replace(".deb", "+*.deb")))
+                                    {
+                                        toinstalllist.Add(filename);
+                                    }
+                                    toinstalllist.Add(mainfilename);//主文件最后安装
+
+                                    string msg = string.Empty;
+                                    bool flag = SSHHelper.InstallDebs(m_iPhoneDevice, toinstalllist, out msg);
+                                    if (flag)
+                                    {
+                                        RaiseMessageHandler(this, string.Empty, MessageTypeOption.SuccessInstalled);
+
+                                        //更新为已完成安装
+                                        for (int i = 0; i < DownloadManager.Instance.Downloads.Count; i++)
+                                        {
+                                            if (new FileInfo(DownloadManager.Instance.Downloads[i].LocalFile).FullName 
+                                                == new FileInfo(mainfilename).FullName)
+                                            {
+                                                DownloadManager.Instance.Downloads[i].InstallCode = InstallState.InstallFinished;
+                                                break;
+                                            }
+                                        }
+
+                                        MessageHelper.ShowInfo(msg);
+                                    }
+                                    else if(!string.IsNullOrEmpty(msg))
+                                    {
+                                        MessageHelper.ShowError(msg);
+                                    }
+                                }
+                            }                            
                         }
                     }
                 }
@@ -200,7 +287,6 @@ namespace iSprite
             m_LastSaveDownQueueTime = DateTime.Now;
             DownloadManager.Instance.SaveDownQueue(m_appHelper.DownQueueFile);
         }
-
 
     }
 }

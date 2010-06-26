@@ -221,8 +221,8 @@ namespace iSprite
                     rowitem.Name = repItem.Name;
                     rowitem.Text = repItem.URL;
                     rowitem.SubItems.Add(repItem.Name);
-                    rowitem.SubItems.Add(repItem.Description);
                     rowitem.SubItems.Add("");
+                    rowitem.SubItems.Add(repItem.Description);
                     rowitem.Tag = repItem;
 
                     RaiseMessageHandler(this, "Success to add a new cydia source", MessageTypeOption.HiddenStatusBar);

@@ -35,6 +35,8 @@ namespace iSprite
 
         public static DialogResult Show(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
         {
+            message = message.Replace("#AppleDeviceType#", iSpriteContext.Current.AppleDeviceType);
+
             MsgBox = new iSpriteMessageBox();
             MsgBox.Text = title;
             MsgBox.Visible = false;
@@ -70,7 +72,6 @@ namespace iSprite
                     MsgBox.btnOK.Left = MsgBox.btnCancel.Left * 2 + MsgBox.btnOK.Width;
                     break;
             }
-            MsgBox.BringToFront();
             return MsgBox.ShowDialog();
         }
 

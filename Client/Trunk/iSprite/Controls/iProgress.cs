@@ -71,10 +71,10 @@ namespace iSprite
             switch (mode)
             {
                 case FileProgressMode.PC2iPhone:
-                    this.Title = string.Format("Copy file({0}) to " + iSpriteContext.Current.AppleDeviceType + "...", Path.GetFileName(file));
+                    this.Title = string.Format("Copy file({0}) to #AppleDeviceType#...", Path.GetFileName(file));
                     break;
                 case FileProgressMode.iPhone2PC:
-                    this.Title = string.Format("Copy file({0}) from " + iSpriteContext.Current.AppleDeviceType + "...", Path.GetFileName(file));
+                    this.Title = string.Format("Copy file({0}) from #AppleDeviceType#...", Path.GetFileName(file));
                     break;
                 case FileProgressMode.Internet2PC:
                     this.Title = string.Format("Download file({0}) from Internet...", Path.GetFileName(file));

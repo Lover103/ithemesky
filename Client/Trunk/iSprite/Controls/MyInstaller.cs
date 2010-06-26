@@ -44,7 +44,7 @@ namespace iSprite
         {
             if (!m_iPhoneDevice.IsJailbreak)
             {
-                MessageHelper.ShowError("To install deb file ,you must Jailbreak your " + iSpriteContext.Current.AppleDeviceType + " first !");
+                MessageHelper.ShowError("To install deb file ,you must Jailbreak your #AppleDeviceType# first !");
                 return;
             }
 
@@ -62,13 +62,13 @@ namespace iSprite
                         {
                             if (!m_iPhoneDevice.Copy2iPhone(tozippath, iSpriteContext.Current.iPhone_CydiaAutoInstallPath))
                             {
-                                MessageHelper.ShowInfo("OpenSSH can not copy to " + iSpriteContext.Current.AppleDeviceType + ", please try again.");
+                                MessageHelper.ShowInfo("OpenSSH can not copy to #AppleDeviceType#, please try again.");
                             }
                             else
                             {
                                 MessageHelper.ShowInfo("OpenSSH has been copied to "
                                     + iSpriteContext.Current.AppleDeviceType
-                                    + ", You must reboot your " + iSpriteContext.Current.AppleDeviceType + " to finish Installation.");
+                                    + ", You must reboot your #AppleDeviceType# to finish Installation.");
                             }
                         }
                         else
@@ -90,13 +90,13 @@ namespace iSprite
                     {
                         if (!m_iPhoneDevice.Copy2iPhone(zippath, iSpriteContext.Current.iPhone_CydiaAutoInstallPath))
                         {
-                            MessageHelper.ShowInfo("Winterboard can not copy to " + iSpriteContext.Current.AppleDeviceType + ", please try again.");
+                            MessageHelper.ShowInfo("Winterboard can not copy to #AppleDeviceType#, please try again.");
                         }
                         else
                         {
                             MessageHelper.ShowInfo("WinterBoard has been copied to " 
                                 + iSpriteContext.Current.AppleDeviceType
-                                + ", You must reboot your " + iSpriteContext.Current.AppleDeviceType + " to finish Installation.");
+                                + ", You must reboot your #AppleDeviceType# to finish Installation.");
                         }
                     }
                     else

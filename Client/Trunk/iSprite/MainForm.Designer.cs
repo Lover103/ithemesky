@@ -45,6 +45,7 @@
             this.tsbtnDeb = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnreSpring = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnReboot = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnHelp = new System.Windows.Forms.ToolStripButton();
             this.tabTheme = new iSprite.ThirdControl.FarsiLibrary.FATabStripItem();
@@ -100,7 +101,7 @@
             this.tabApp});
             this.tabs.Location = new System.Drawing.Point(3, 30);
             this.tabs.Name = "tabs";
-            this.tabs.SelectedItem = this.tabApp;
+            this.tabs.SelectedItem = this.tabFile;
             this.tabs.Size = new System.Drawing.Size(993, 640);
             this.tabs.TabIndex = 2;
             this.tabs.Text = "faTabStrip1";
@@ -113,6 +114,7 @@
             this.tabFile.Controls.Add(this.Filetoolmenu);
             this.tabFile.IsDrawn = true;
             this.tabFile.Name = "tabFile";
+            this.tabFile.Selected = true;
             this.tabFile.Size = new System.Drawing.Size(991, 619);
             this.tabFile.TabIndex = 0;
             this.tabFile.Title = "File Manage";
@@ -143,6 +145,7 @@
             this.tsbtnDeb,
             this.toolStripSeparator3,
             this.tsbtnreSpring,
+            this.tsbtnReboot,
             this.toolStripSeparator2,
             this.tsbtnHelp});
             this.Filetoolmenu.Location = new System.Drawing.Point(0, 0);
@@ -222,6 +225,14 @@
             this.tsbtnreSpring.Text = "Respring";
             this.tsbtnreSpring.ToolTipText = "Restart SpringBoard";
             // 
+            // tsbtnReboot
+            // 
+            this.tsbtnReboot.Image = global::iSprite.Resource.btn_restart;
+            this.tsbtnReboot.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnReboot.Name = "tsbtnReboot";
+            this.tsbtnReboot.Size = new System.Drawing.Size(61, 22);
+            this.tsbtnReboot.Text = "Reboot";
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -252,7 +263,6 @@
             this.tabApp.Controls.Add(this.toolapp);
             this.tabApp.IsDrawn = true;
             this.tabApp.Name = "tabApp";
-            this.tabApp.Selected = true;
             this.tabApp.Size = new System.Drawing.Size(991, 619);
             this.tabApp.TabIndex = 2;
             this.tabApp.Title = "App Manage";
@@ -458,6 +468,7 @@
         private System.Windows.Forms.ImageList catalogimg;
         internal System.Windows.Forms.SplitContainer appContainer;
         internal System.Windows.Forms.TreeView tvCatalog;
+        private System.Windows.Forms.ToolStripButton tsbtnReboot;
 
 
     }

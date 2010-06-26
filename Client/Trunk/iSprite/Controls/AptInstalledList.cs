@@ -88,7 +88,6 @@ namespace iSprite
         }
         #endregion
 
-
         #region 添加控件
         /// <summary>
         /// 添加控件
@@ -186,7 +185,7 @@ namespace iSprite
                         }
                         if (flag)
                         {
-                            m_iPhoneDevice.Respring();
+                            m_iPhoneDevice.RepairAppIcons();
                         }
                     }
                     finally
@@ -212,38 +211,36 @@ namespace iSprite
             foreach (KeyValuePair<string, InstalledDebItem> kv in InstalledList)
             {
                 InstalledDebItem item = kv.Value;
-                if (item.Status.Equals("purge ok not-installed", StringComparison.CurrentCultureIgnoreCase))
+                if (item.Installed_Size != string.Empty )
                 {
-                    continue;
-                }
+                    ListViewItem rowitem = new ListViewItem();
+                    rowitem.Name = item.DebID;
+                    if (item.IsSystemDeb)
+                    {
+                        rowitem.ImageIndex = 1;
+                        rowitem.Group = m_SystemGroup;
+                    }
+                    else
+                    {
+                        rowitem.ImageIndex = 0;
+                        rowitem.Group = m_UserGroup;
+                    }
+                    if (item.Name == string.Empty)
+                    {
+                        item.Name = item.Package;
+                    }
+                    rowitem.Text = " " + item.Name;
 
-                ListViewItem rowitem = new ListViewItem();
-                rowitem.Name = item.DebID;
-                if (item.IsSystemDeb)
-                {
-                    rowitem.ImageIndex = 1;
-                    rowitem.Group = m_SystemGroup;
-                }
-                else
-                {
-                    rowitem.ImageIndex = 0;
-                    rowitem.Group = m_UserGroup;
-                }
-                if (item.Name == string.Empty)
-                {
-                    item.Name = item.Package;
-                }
-                rowitem.Text = " " + item.Name;
+                    rowitem.SubItems.Add(item.Version);
 
-                rowitem.SubItems.Add(item.Version);
+                    rowitem.SubItems.Add(item.Installed_Size);
 
-                rowitem.SubItems.Add(item.Installed_Size);
+                    rowitem.SubItems.Add(item.Description);
 
-                rowitem.SubItems.Add(item.Description);
+                    rowitem.Tag = item;
 
-                rowitem.Tag = item;
-
-                m_InstalledAppList.Items.Add(rowitem);
+                    m_InstalledAppList.Items.Add(rowitem);
+                }                
             }
             UpdateGroupCount();
         }

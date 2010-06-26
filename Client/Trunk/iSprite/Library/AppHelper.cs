@@ -21,7 +21,6 @@ namespace iSprite
     {
         #region 变量定义
         iPhoneFileDevice m_iPhoneDevice;
-        internal event FinishLoadAppDataHandler OnFinishLoad;
         private List<string> ReleaseUrlSuffixList;
         private List<string> PackagesUrlSuffixList;
         string m_CydiaSourceFolder = "/etc/apt/sources.list.d/";
@@ -43,16 +42,17 @@ namespace iSprite
 
         #region html模板
         const string itemhtmltemplate = @"
-        <li>
-			<div class='appIcon'><img src='icons/normal_App.png' alt='{0}' width='32' height='32' /></div>
+        <li id=""{5}"">
+			<div class='appIcon' name='itemIcon'><img src='icons/normal_App.png' alt='{0}' width='32' height='32' /></div>
 			<dl class='appIntro'>
 				<dt>{0}</dt>
 				<dd>{1} </dd>
 			</dl>
 			<ul class='appInfo'>
 				<li class='size'>{2}</li>
-				<li class='rate'>
-					<a href='goto:{4}'>{4}</li>
+				<li class='rate' name='itemrate'>
+					<a href='goto:{4}' title='Catalog:{4}'>{4}</a><br>
+                    <a href=""http://www.ithemesky.com/Service/SoftComment/{5}/{6}/{7}/"" target='_blank'>Comments</a>
 				</li>
 				<li class='btn'>
 					<a href='{3}' class='download'>Download</a>
@@ -99,26 +99,31 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
 .pageInfo li.current a:link,.pageInfo li.current a:visited,.pageInfo li.current a:hover,.pageInfo li.current a:active{ text-decoration:none; background:url(icons/btn.png) no-repeat -20px -62px; border:1px solid #F90; color:#F60;}
 </style>
 </head>
-<body>
+<script type='text/javascript'>
+function loadInfo()
+{
+    try
+    {
+        loadAppData();
+    }
+    catch(err)
+    {
+    }
+}
+</script>
+<body onload='loadInfo();'>
 <div class='appList'>
 	<ul>
 {Content}
     </ul>
 </div>
+<script language='javascript' type='text/javascript' src='http://www.ithemesky.com/appfunction.js'></script>
 </body>
 </html>
 ";
         #endregion
 
         #endregion
-
-        private void RaiseFinishLoadEvent()
-        {
-            if (OnFinishLoad != null)
-            {
-                OnFinishLoad();
-            }
-        }
 
         internal string DownQueueFile
         {
@@ -233,50 +238,50 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
 
             //ReleaseUrlSuffixList
             ReleaseUrlSuffixList = new List<string>();
-            ReleaseUrlSuffixList.Add("dists/stable/Release");
-            ReleaseUrlSuffixList.Add("Release.bz2");
-            ReleaseUrlSuffixList.Add("Release.gz");
+
             ReleaseUrlSuffixList.Add("Release");
-            ReleaseUrlSuffixList.Add("dists/stable/Release.bz2");
-            ReleaseUrlSuffixList.Add("dists/stable/Release.gz");
             ReleaseUrlSuffixList.Add("dists/stable/Release");
-
-            ReleaseUrlSuffixList.Add("dists/tangelo/Release.bz2");
-            ReleaseUrlSuffixList.Add("dists/tangelo/Release.gz");
             ReleaseUrlSuffixList.Add("dists/tangelo/Release");
-
-
-            ReleaseUrlSuffixList.Add("dists/tangelo-3.7/Release.bz2");
-            ReleaseUrlSuffixList.Add("dists/tangelo-3.7/Release.gz");
+            ReleaseUrlSuffixList.Add("dists/hnd/Release");
             ReleaseUrlSuffixList.Add("dists/tangelo-3.7/Release");
 
-            ReleaseUrlSuffixList.Add("dists/hnd/Release");
+            ReleaseUrlSuffixList.Add("Release.bz2");
+            ReleaseUrlSuffixList.Add("dists/stable/Release.bz2");
+            ReleaseUrlSuffixList.Add("dists/tangelo/Release.bz2");
+            ReleaseUrlSuffixList.Add("dists/hnd/Release.bz2");
+            ReleaseUrlSuffixList.Add("dists/tangelo-3.7/Release.bz2");
+
+            ReleaseUrlSuffixList.Add("Release.gz");
+            ReleaseUrlSuffixList.Add("dists/stable/Release.gz");
+            ReleaseUrlSuffixList.Add("dists/tangelo/Release.gz");
+            ReleaseUrlSuffixList.Add("dists/hnd/Release.gz");
+            ReleaseUrlSuffixList.Add("dists/tangelo-3.7/Release.gz");
 
             //PackagesUrlSuffixList
             PackagesUrlSuffixList = new List<string>();
-            PackagesUrlSuffixList.Add("dists/hnd/main/binary-iphoneos-arm/Packages.bz2");
-            PackagesUrlSuffixList.Add("dists/hnd/main/binary-iphoneos-arm/Packages");
-            PackagesUrlSuffixList.Add("Packages.bz2");
-            PackagesUrlSuffixList.Add("Packages.gz");
             PackagesUrlSuffixList.Add("Packages");
-            PackagesUrlSuffixList.Add("main/binary-iphoneos-arm/Packages.bz2");
-            PackagesUrlSuffixList.Add("main/binary-iphoneos-arm/Packages");
-            PackagesUrlSuffixList.Add("dists/stable/main/binary-iphoneos-arm/Packages.bz2");
-            PackagesUrlSuffixList.Add("dists/stable/main/binary-iphoneos-arm/Packages.gz");
             PackagesUrlSuffixList.Add("dists/stable/main/binary-iphoneos-arm/Packages");
-            PackagesUrlSuffixList.Add("dists/tangelo/main/binary-iphoneos-arm/Packages.bz2");
-            PackagesUrlSuffixList.Add("dists/tangelo/main/binary-iphoneos-arm/Packages.gz");
             PackagesUrlSuffixList.Add("dists/tangelo/main/binary-iphoneos-arm/Packages");
-
-            PackagesUrlSuffixList.Add("dists/tangelo-3.7/main/binary-iphoneos-arm/Packages.bz2");
-            PackagesUrlSuffixList.Add("dists/tangelo-3.7/main/binary-iphoneos-arm/Packages.gz");
+            PackagesUrlSuffixList.Add("dists/hnd/main/binary-iphoneos-arm/Packages");
             PackagesUrlSuffixList.Add("dists/tangelo-3.7/main/binary-iphoneos-arm/Packages");
+
+            PackagesUrlSuffixList.Add("Packages.bz2");
+            PackagesUrlSuffixList.Add("dists/stable/main/binary-iphoneos-arm/Packages.bz2");
+            PackagesUrlSuffixList.Add("dists/tangelo/main/binary-iphoneos-arm/Packages.bz2");
+            PackagesUrlSuffixList.Add("dists/hnd/main/binary-iphoneos-arm/Packages.bz2");
+            PackagesUrlSuffixList.Add("dists/tangelo-3.7/main/binary-iphoneos-arm/Packages.bz2");
+
+            PackagesUrlSuffixList.Add("Packages.gz");
+            PackagesUrlSuffixList.Add("dists/stable/main/binary-iphoneos-arm/Packages.gz");
+            PackagesUrlSuffixList.Add("dists/tangelo/main/binary-iphoneos-arm/Packages.gz");
+            PackagesUrlSuffixList.Add("dists/hnd/main/binary-iphoneos-arm/Packages.gz");
+            PackagesUrlSuffixList.Add("dists/tangelo-3.7/main/binary-iphoneos-arm/Packages.gz");
 
 
             m_SystemDeb = new List<string>(new string[] { 
                 "adv-cmds", "apt", "base", "bash", "berkeleydb", "bigboss", "bzip2", "coreutils", "cydia", "cydia-sources", "darwintools", "diffutils", "dpkg", "findutils", "gettext", "gnupg", 
                 "grep", "gzip", "inetutils", "ispazio.net", "less", "libgcc", "libutil", "modmyifone", "nano", "ncurses", "network-cmds", "pcre", "readline", "saurik", "sed", "shell-cmds", 
-                "ste", "system-cmds", "tar", "unzip", "yellowsn0w.com", "zodttd", "firmware", "apr-lib", "apt7-key", "apt7-lib", "coreutils-bin", "essential", "lzma", "pam", "pam-modules", "profile.d"
+                "ste", "system-cmds", "tar", "zip", "unzip", "yellowsn0w.com", "zodttd", "firmware", "apr-lib", "apt7-key", "apt7-lib", "coreutils-bin", "essential", "lzma", "pam", "pam-modules", "profile.d"
              });
         }
         #endregion
@@ -284,13 +289,13 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
         /// <summary>
         /// 初始化
         /// </summary>
-        public void InitAppData()
+        public void InitAppData(FinishLoadAppDataHandler doFinishLoad)
         {
             LoadInstallDebs();
             LoadCydiaSource();
             LoadCydiaPackages();
 
-            RaiseFinishLoadEvent();
+            doFinishLoad();
         }
 
         #region 读取Cydia源
@@ -505,11 +510,7 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
                 foreach (AptData apt in AptList)
                 {
                     InstalledDebItem item = AptData2DebItem(apt);
-                    if ((item.Status.Equals("install ok installed", StringComparison.CurrentCultureIgnoreCase) ||
-                        item.Status.Equals("purge ok not-installed", StringComparison.CurrentCultureIgnoreCase) ||
-                        item.Status.Equals("install reinstreq half-installed", StringComparison.CurrentCultureIgnoreCase) ||
-                        item.Status.Equals("install ok half-configured", StringComparison.CurrentCultureIgnoreCase))
-                        && !m_InstalledDebList.ContainsKey(item.DebID))
+                    if (item.Installed_Size != string.Empty && !m_InstalledDebList.ContainsKey(item.DebID))
                     {
                         item.IsSystemDeb = m_SystemDeb.Contains(item.Package) || apt.GetTagValue("Essential") == "yes";
 
@@ -1091,7 +1092,15 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
             if (isRepoInfoAvailable)
             {
                 repositoryInfo.URL = BaseURL;
-                repositoryInfo.APTDownloadBaseURL = BaseURL;
+                int index = APTCachedReleaseURL.IndexOf("/dists/");
+                if (index!=-1)
+                {
+                    repositoryInfo.APTDownloadBaseURL = APTCachedReleaseURL.Substring(0, index+1);
+                }
+                else
+                {
+                    repositoryInfo.APTDownloadBaseURL = "http://" + new Uri(BaseURL).Host;
+                }
                 repositoryInfo.APTCachedReleaseURL = APTCachedReleaseURL;
                 if (list.Count > 0)
                 {
@@ -1633,7 +1642,10 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
                                 Regex.Replace(description, key, "<em>" + key + "</em>", RegexOptions.IgnoreCase),
                                 Utility.FormatFileSize((ulong)packageItem.Size),
                                 packageItem.FinalDownloadURL(repInfo.APTDownloadBaseURL),
-                                packageItem.Category
+                                packageItem.Category,
+                                HttpUtility.UrlDecode(packageItem.Identifier, Encoding.UTF8),
+                                HttpUtility.UrlDecode(packageItem.Name, Encoding.UTF8),
+                                HttpUtility.UrlDecode(packageItem.Description, Encoding.UTF8)
                                 );
                         }
                         else
@@ -1643,7 +1655,10 @@ ul,li,dl,dt,dd,ol{ padding:0; margin:0; list-style:none;}
                                 description,
                                 Utility.FormatFileSize((ulong)packageItem.Size),
                                 packageItem.FinalDownloadURL(repInfo.APTDownloadBaseURL),
-                                packageItem.Category
+                                packageItem.Category,
+                                HttpUtility.UrlDecode(packageItem.Identifier, Encoding.UTF8),
+                                HttpUtility.UrlDecode(packageItem.Name, Encoding.UTF8),
+                                HttpUtility.UrlDecode(packageItem.Description.Replace("\"",""), Encoding.UTF8)
                                 );
                         }
                     }
