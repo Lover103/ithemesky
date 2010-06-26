@@ -218,8 +218,7 @@ namespace Manzana {
                             { 
                                 Environment.GetEnvironmentVariable("Path"), 
                                 iTunesPath,
-                                ApplicationSupportPath,
-                                @"E:\ithemesky\Client\Trunk\iSprite\bin\Debug\test\"
+                                ApplicationSupportPath
                             }
                             )
                             );

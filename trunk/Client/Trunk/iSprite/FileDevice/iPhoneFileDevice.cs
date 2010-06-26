@@ -91,8 +91,9 @@ namespace iSprite
         }
         void NotConnectedErrot()
         { 
-            RaiseMessageHandler(this, "Please Make sure you have connected your " + iSpriteContext.Current.AppleDeviceType + " to PC via USB cable.", MessageTypeOption.Error);
+            RaiseMessageHandler(this, "Please Make sure you have connected your #AppleDeviceType# to PC via USB cable.", MessageTypeOption.Error);
         }
+
         /// <summary>
         /// 注销iPhone
         /// </summary>
@@ -100,6 +101,23 @@ namespace iSprite
         {
             if (iPhoneInterface.IsConnected)
             {
+                iPhoneInterface.Respring();
+            }
+            else
+            {
+                NotConnectedErrot();
+            }
+        }
+
+        /// <summary>
+        /// 修复图标
+        /// </summary>
+        internal void RepairAppIcons()
+        {
+            if (iPhoneInterface.IsConnected)
+            {
+                iPhoneInterface.DeleteFile(iSpriteContext.Current.iPhone_InstallationPath);
+                Thread.Sleep(TimeSpan.FromSeconds(1.5));
                 iPhoneInterface.Respring();
             }
             else

@@ -18,7 +18,6 @@ namespace iSprite
 
         internal event PathChanged OnPathChanged;
         internal event MessageHandler OnMessage;
-        internal event FileProgressHandler OnProgressHandler;
 
         iPhoneFileDevice m_iPhoneDevice;
         AppHelper m_appHelper;
@@ -76,8 +75,6 @@ namespace iSprite
         /// </summary>
         void InitControls()
         {
-            m_appHelper.OnFinishLoad += new FinishLoadAppDataHandler(AppHelper_OnFinishLoad);
-
             m_tvCatalog.AfterSelect += new TreeViewEventHandler(Catalog_AfterSelect);
 
 
@@ -155,9 +152,9 @@ namespace iSprite
         /// <param name="url"></param>
         /// <param name="path"></param>
         /// <param name="fileName"></param>
-        void AddURL2Download(string url, string path, string fileName)
+        void AddURL2Download(string url, string path, string fileName, InstallState state)
         {
-            m_AptDownList.DownList.AddURL2Download(url, path, fileName);
+            m_AptDownList.DownList.AddURL2Download(url, path, fileName, state);
         }
         #endregion
 
@@ -257,6 +254,9 @@ namespace iSprite
                             m_OnlineAppList.GetPackagesByCatalog(e.Node.Name);
                             SetNodeCount(e.Node.Name, m_appHelper.Packagelist.Count,true);
                             break;
+                        case "Search Result":
+                            m_OnlineAppList.Search();
+                            break;
                     }
                 }
 
@@ -274,22 +274,28 @@ namespace iSprite
         {
             if (isContected)
             {
-                new Thread(new ThreadStart(m_appHelper.InitAppData)).Start();
+                ThreadStart threadStart = delegate
+                {
+                    m_appHelper.InitAppData
+                        (
+                            delegate()
+                            {
+                                m_MainForm.Invoke(new ThreadInvokeDelegate(
+                                            delegate()
+                                            {
+                                                LoadCatalogs();
+                                                m_AptInstalledList.UpdataList();
+                                                m_CydiaSourceList.UpdataList();
+                                                m_AptDownList.AfterDeviceFinishConnected(isContected);
+                                            }
+                                        ));
+                            }
+                        );
+                };
+                new Thread(threadStart).Start();
             }
         }
         #endregion
-
-        void AppHelper_OnFinishLoad()
-        {
-            m_MainForm.Invoke(new ThreadInvokeDelegate(
-                    delegate()
-                    {
-                        LoadCatalogs();
-                        m_AptInstalledList.UpdataList();
-                        m_CydiaSourceList.UpdataList();
-                    }
-                ));
-        }
 
         #region 加载软件分类
         /// <summary>
@@ -336,9 +342,9 @@ namespace iSprite
             m_tvCatalog.Nodes.Clear();
             Dictionary<string, string> dics = new Dictionary<string, string>();
             dics.Add("Cydia Sources", "Cydia Sources");
-            dics.Add("Search Result", "Search Result");
             dics.Add("Installed Packages", "Installed Packages");
             dics.Add("Downloaded Packages", "Downloaded Packages");
+            dics.Add("Search Result", "Search Result");
             dics.Add("All Packages", "All Packages");
             try
             {
@@ -370,13 +376,18 @@ namespace iSprite
                 tnFind = tnArray[0];
                 if (tnFind != null)
                 {
-                    tnFind.Text = tnFind.Name + "(" + count + ")";
+                    m_MainForm.BeginInvoke(
+                        (MethodInvoker)delegate() 
+                        {
+                            tnFind.Text = tnFind.Name + "(" + count + ")";
 
-                    if (selectNode)
-                    {
-                        m_tvCatalog.SelectedNode = tnFind;
-                        m_tvCatalog.Focus();
-                    }
+                            if (selectNode)
+                            {
+                                m_tvCatalog.SelectedNode = tnFind;
+                                m_tvCatalog.Focus();
+                            }
+                        }
+                    );                    
                 }
             }
         }

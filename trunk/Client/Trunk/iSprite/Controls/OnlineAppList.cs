@@ -9,6 +9,7 @@ using System.Web;
 using System.Collections.Specialized;
 using System.IO;
 using System.Threading;
+using MyDownloader.Core;
 
 namespace iSprite
 {
@@ -30,11 +31,11 @@ namespace iSprite
         /// <param name="url"></param>
         /// <param name="path"></param>
         /// <param name="fileName"></param>
-        void AddURL2Download(string url, string path, string fileName)
+        void AddURL2Download(string url, string path, string fileName, InstallState state)
         {
             if (null != OnDownloadApp)
             {
-                OnDownloadApp(url, path, fileName);
+                OnDownloadApp(url, path, fileName, state);
             }
         }
         #endregion
@@ -124,7 +125,7 @@ namespace iSprite
         /// <summary>
         /// 搜索
         /// </summary>
-        void Search()
+        public void Search()
         {
             string key = txtKey.Text.Trim();
             string catalogName = string.Empty;
@@ -151,9 +152,9 @@ namespace iSprite
         }
         #endregion
 
-        #region 下载监控
+        #region 导航监控
         /// <summary>
-        /// 下载监控
+        /// 导航监控
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -176,6 +177,20 @@ namespace iSprite
                 {
                 }
             }
+            else if (url.Contains("goto:"))
+            {
+                e.Cancel = true;
+                try
+                {
+                    string nodeName=url.Substring(5);
+                    GetPackagesByCatalog(nodeName);
+                    SetNodeCount(nodeName, m_Packagelist.Count, true);
+                    this.appwb.Focus();
+                }
+                catch
+                {
+                }
+            }
         }
         #endregion
 
@@ -186,7 +201,7 @@ namespace iSprite
         /// <param name="url"></param>
         /// <param name="fileName"></param>
         /// <param name="PID"></param>
-        void AddApp2DownloadList(string url, string fileName, string PID)
+        void AddApp2DownloadList(string url, string mainFileName, string PID)
         {
             RaiseMessageHandler(this, "Prepare to download app...", MessageTypeOption.SetStatusBar);
             Application.DoEvents();
@@ -213,35 +228,73 @@ namespace iSprite
             }
             if (toContinue)
             {
-                if (string.IsNullOrEmpty(fileName))
+                if (string.IsNullOrEmpty(mainFileName))
                 {
-                    fileName = Path.GetRandomFileName() + ".deb";
+                    mainFileName = Path.GetRandomFileName() + ".deb";
                 }
 
                 //添加主文件到下载队列
-                fileName = Utility.GetNotExistFileName(fileName);
-                AddURL2Download(url, m_appHelper.AptDownloadFolder, fileName);
+                mainFileName = mainFileName.Replace("+", "");//+要用来信息分隔符，所以先去掉
+                mainFileName = Utility.GetNotExistFileName(mainFileName);
 
+                List<DownLoadItemInfo> todownlist = new List<DownLoadItemInfo>();
+
+                DownLoadItemInfo downitem = new DownLoadItemInfo();
+                downitem.Url = url;
+                downitem.SaveDir = m_appHelper.AptDownloadFolder;
+                downitem.FileName = mainFileName;
+                downitem.State = InstallState.NeedInstall;
+                todownlist.Add(downitem);
+
+                int dependCount = 0;
                 if (deplist != null)
                 {
+                    dependCount = deplist.Count;
                     //添加依赖文件到下载队列
                     RepositoryInfo repInfo;
                     foreach (PackageItem item in deplist)
                     {
                         if (m_appHelper.RepositoryList.TryGetValue(item.AdditionalInfoURL, out repInfo))
                         {
-                            fileName = Utility.GetNotExistFileName(Path.GetFileName(item.DownloadURL));
-                            AddURL2Download(
-                                item.FinalDownloadURL(repInfo.APTDownloadBaseURL),
-                                m_appHelper.AptDownloadFolder,
-                                fileName
+                            string depFileName = Utility.GetNotExistFileName(
+                                Path.GetFileNameWithoutExtension(mainFileName) + "+" + Path.GetFileName(item.DownloadURL).Replace("+", "")
                                 );
+
+                            downitem = new DownLoadItemInfo();
+                            downitem.Url = item.FinalDownloadURL(repInfo.APTDownloadBaseURL);
+                            downitem.SaveDir = m_appHelper.AptDownloadFolder;
+                            downitem.FileName = depFileName;
+                            downitem.State = InstallState.DependInstall;
+                            todownlist.Add(downitem);
+
+                            Application.DoEvents();
                         }
                     }
                 }
-                Thread.Sleep(TimeSpan.FromSeconds(2));
+
+                foreach (DownLoadItemInfo item in todownlist)
+                {
+                    File.WriteAllText(Path.ChangeExtension(item.SaveDir + item.FileName, ".d"), string.Empty);//表示文件下载未完成
+                }
+
+                foreach (DownLoadItemInfo item in todownlist)
+                {
+                    AddURL2Download(item.Url, item.SaveDir, item.FileName, item.State);
+                }
+
+                if (dependCount > 0)
+                {
+                    RaiseMessageHandler(this, "Success to add 1 main app and " + dependCount + " depend app to downlist.iSpirit will auto install app after finish download.", MessageTypeOption.HiddenStatusBar);
+                }
+                else
+                {
+                    RaiseMessageHandler(this, "Success to add 1 deb app to downlist.iSpirit will auto install app after finish download.", MessageTypeOption.HiddenStatusBar);
+                }
             }
-            RaiseMessageHandler(this, "", MessageTypeOption.HiddenStatusBar);
+            else
+            {
+                RaiseMessageHandler(this, string.Empty, MessageTypeOption.HiddenStatusBar);
+            }
             Application.DoEvents();
         }
         #endregion
@@ -274,6 +327,7 @@ namespace iSprite
                 m_SearchKey
                 )
                 );
+            this.appwb.Focus();
         }
         #endregion
 
@@ -320,5 +374,4 @@ namespace iSprite
         #endregion 
     }
 
-    public delegate void AddURL2DownloadHandler(string url, string path, string fileName);
 }

@@ -170,7 +170,6 @@ namespace iSprite
             //程序管理
             m_AppManage = new AppManage((iPhoneFileDevice)iphonedriver, this);
             m_AppManage.OnMessage += new MessageHandler(ShowMessage);
-            m_AppManage.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
 
             //检查更新
             m_Updater = new Updater();
@@ -241,6 +240,13 @@ namespace iSprite
             }
             //ShowMessage(this, "", MessageTypeOption.HiddenStatusBar);
 
+
+            Process[] ps = Process.GetProcessesByName("iTunnel");
+            for (int j = 0; j < ps.Length; j++)
+            {
+                ps[j].Kill();
+            }
+
             Process[] pList = Process.GetProcesses();
             for (int j = 0; j < pList.Length; j++)
             {
@@ -249,6 +255,8 @@ namespace iSprite
                     pList[j].Kill();
                 }
             }
+
+
         }
         #endregion
 
@@ -334,10 +342,6 @@ namespace iSprite
             {
                 ShowMessage(this, ex.Message, MessageTypeOption.Error);
             }
-
-
-            //ShowMessage(this, "Prepare to add...", MessageTypeOption.SetStatusBar);
-            //new Thread(new ThreadStart(Change)).Start();
         }
         #endregion
 
@@ -505,6 +509,9 @@ namespace iSprite
                 case "tsbtnInstallPXL":
                     ShowMessage(this,"Coming soon...", MessageTypeOption.Info);
                     break;
+                case "tsbtnReboot":
+                    Reboot();
+                    break;
             }
         }
         #endregion
@@ -602,6 +609,24 @@ namespace iSprite
             if (MessageHelper.ShowConfirm("Are you sure you want to reboot Springboard ?") == DialogResult.OK)
             {
                 ((iPhoneFileDevice)iphonedriver).Respring();
+            }
+        }
+        #endregion
+
+        #region 重启iPhone
+        /// <summary>
+        /// 重启iPhone
+        /// </summary>
+        void Reboot()
+        {
+            if (MessageHelper.ShowConfirm("Are you sure you want to reboot your #AppleDeviceType# ?") == DialogResult.OK)
+            {
+                string errMsg = string.Empty;
+                if (SSHHelper.Reboot(out errMsg) 
+                    && !string.IsNullOrEmpty(errMsg))
+                {
+                    MessageHelper.ShowError(errMsg);
+                }
             }
         }
         #endregion

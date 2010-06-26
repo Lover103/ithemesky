@@ -123,6 +123,13 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap btn_restart {
+            get {
+                object obj = ResourceManager.GetObject("btn_restart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap btn_start {
             get {
                 object obj = ResourceManager.GetObject("btn_start", resourceCulture);

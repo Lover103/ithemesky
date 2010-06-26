@@ -699,6 +699,7 @@
     <Content Include="Images\X Window.png" />
     <Content Include="iSprite_icon_32.ico" />
     <Content Include="CydiaSourceCfg.xml" />
+    <None Include="Resources\btn_restart.png" />
     <None Include="Resources\iTunnel.exe" />
     <None Include="Resources\normal_App.png" />
     <None Include="Resources\system_app.png" />
