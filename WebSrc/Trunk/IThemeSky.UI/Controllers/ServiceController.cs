@@ -98,6 +98,13 @@ namespace IThemeSky.UI.Controllers
             return this.PartialView("ThemeCommentRepeater", model);
         }
 
+        [OutputCache(Location = OutputCacheLocation.None)]
+        public ActionResult GetSoftComments(string softIdentify, int pageIndex, int pageSize)
+        {
+            SoftCommentListModel model = new SoftCommentListModel(softIdentify, pageIndex, pageSize);
+            return this.PartialView("SoftCommentRepeater", model);
+        }
+
         [HttpPost]
         public ActionResult AddThemeComment(PostCommentModel postComment)
         {
@@ -133,7 +140,43 @@ namespace IThemeSky.UI.Controllers
             }
             return Content("<script type=\"text/javascript\">alert('post comment failure,please try again for a while.');</script>");
         }
-
+        [HttpPost]
+        public ActionResult AddSoftComment(PostSoftCommentModel postComment)
+        {
+            if (string.IsNullOrEmpty(postComment.UserName))
+            {
+                return Content("<script type=\"text/javascript\">alert('UserName is required.');</script>");
+            }
+            if (string.IsNullOrEmpty(postComment.Content))
+            {
+                return Content("<script type=\"text/javascript\">alert('Comment Content is required.');</script>");
+            }
+            ISoftCommentRepository commentRespository = ThemeRepositoryFactory.Default.GetSoftCommentRepository();
+            bool result = commentRespository.AddComment(
+                new SoftComment()
+                {
+                    AddTime = DateTime.Now,
+                    BuryNumber = 0,
+                    CommentId = 0,
+                    Content = postComment.Content,
+                    DiggNumber = 0,
+                    RateType = 0,
+                    SoftIdentify = postComment.SoftIdentify,
+                    SoftTitle = postComment.SoftTitle,
+                    SoftDescription = postComment.SoftDescription,
+                    Title = postComment.Content.SubStr(100),
+                    UpdateTime = DateTime.Now,
+                    UserId = 0,
+                    UserIp = Request.UserHostAddress,
+                    UserMail = postComment.UserMail,
+                    UserName = postComment.UserName,
+                });
+            if (result)
+            {
+                return Content("<script type=\"text/javascript\">parent.PostSoftCommentSuccess()</script>");
+            }
+            return Content("<script type=\"text/javascript\">alert('post comment failure,please try again for a while.');</script>");
+        }
         [HttpPost]
         public ActionResult AddThemeSupport(ThemeSupport postSupport)
         {

@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheThemeViewRepository.cs" />
+    <Compile Include="SoftCommentRepository.cs" />
+    <Compile Include="ISoftCommentRepository.cs" />
     <Compile Include="ICacheThemeViewRepository.cs" />
     <Compile Include="IThemeCommentRepository.cs" />
     <Compile Include="IThemeManageRepository.cs" />
