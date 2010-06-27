@@ -90,6 +90,23 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\iSpiritUsersReport.aspx.cs">
+      <DependentUpon>iSpiritUsersReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\iSpiritUsersReport.aspx.designer.cs">
+      <DependentUpon>iSpiritUsersReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportData.ashx.cs">
+      <DependentUpon>ReportData.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Support\UserSupport.aspx.cs">
       <DependentUpon>UserSupport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -129,6 +146,62 @@
       <Project>{0F038EDA-7B96-4462-BBAB-171249DB3C89}</Project>
       <Name>IThemeSky.WebControls</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\test.aspx" />
+    <Content Include="Reports\test.xml" />
+    <Content Include="Reports\iSpiritUsersReport.aspx" />
+    <Content Include="Reports\ReportData.ashx" />
+    <Content Include="Resources\Charts\Area2D.swf" />
+    <Content Include="Resources\Charts\Bar2D.swf" />
+    <Content Include="Resources\Charts\Bubble.swf" />
+    <Content Include="Resources\Charts\Column2D.swf" />
+    <Content Include="Resources\Charts\Column3D.swf" />
+    <Content Include="Resources\Charts\Doughnut2D.swf" />
+    <Content Include="Resources\Charts\Doughnut3D.swf" />
+    <Content Include="Resources\Charts\FCExporter.swf" />
+    <Content Include="Resources\Charts\Funnel.swf" />
+    <Content Include="Resources\Charts\InverseMSArea.swf" />
+    <Content Include="Resources\Charts\InverseMSColumn2D.swf" />
+    <Content Include="Resources\Charts\InverseMSLine.swf" />
+    <Content Include="Resources\Charts\Line.swf" />
+    <Content Include="Resources\Charts\LogMSColumn2D.swf" />
+    <Content Include="Resources\Charts\LogMSLine.swf" />
+    <Content Include="Resources\Charts\MSArea.swf" />
+    <Content Include="Resources\Charts\MSBar2D.swf" />
+    <Content Include="Resources\Charts\MSBar3D.swf" />
+    <Content Include="Resources\Charts\MSColumn2D.swf" />
+    <Content Include="Resources\Charts\MSColumn3D.swf" />
+    <Content Include="Resources\Charts\MSColumn3DLineDY.swf" />
+    <Content Include="Resources\Charts\MSColumnLine3D.swf" />
+    <Content Include="Resources\Charts\MSCombi2D.swf" />
+    <Content Include="Resources\Charts\MSCombi3D.swf" />
+    <Content Include="Resources\Charts\MSCombiDY2D.swf" />
+    <Content Include="Resources\Charts\MSLine.swf" />
+    <Content Include="Resources\Charts\MSSpline.swf" />
+    <Content Include="Resources\Charts\MSSplineArea.swf" />
+    <Content Include="Resources\Charts\MSStackedColumn2D.swf" />
+    <Content Include="Resources\Charts\MSStackedColumn2DLineDY.swf" />
+    <Content Include="Resources\Charts\Pie2D.swf" />
+    <Content Include="Resources\Charts\Pie3D.swf" />
+    <Content Include="Resources\Charts\Pyramid.swf" />
+    <Content Include="Resources\Charts\Scatter.swf" />
+    <Content Include="Resources\Charts\ScrollArea2D.swf" />
+    <Content Include="Resources\Charts\ScrollColumn2D.swf" />
+    <Content Include="Resources\Charts\ScrollCombi2D.swf" />
+    <Content Include="Resources\Charts\ScrollCombiDY2D.swf" />
+    <Content Include="Resources\Charts\ScrollLine2D.swf" />
+    <Content Include="Resources\Charts\ScrollStackedColumn2D.swf" />
+    <Content Include="Resources\Charts\Spline.swf" />
+    <Content Include="Resources\Charts\SplineArea.swf" />
+    <Content Include="Resources\Charts\SSGrid.swf" />
+    <Content Include="Resources\Charts\StackedArea2D.swf" />
+    <Content Include="Resources\Charts\StackedBar2D.swf" />
+    <Content Include="Resources\Charts\StackedBar3D.swf" />
+    <Content Include="Resources\Charts\StackedColumn2D.swf" />
+    <Content Include="Resources\Charts\StackedColumn3D.swf" />
+    <Content Include="Resources\Charts\StackedColumn3DLineDY.swf" />
+    <Content Include="Resources\Js\FusionCharts.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
