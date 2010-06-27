@@ -69,6 +69,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\SoftController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ISpiritController.cs" />
@@ -78,6 +79,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CommentListModel.cs" />
+    <Compile Include="Models\SoftCommentListModel.cs" />
+    <Compile Include="Models\PostSoftCommentModel.cs" />
+    <Compile Include="Models\SoftCommentDetailModel.cs" />
     <Compile Include="Models\PostSupportModel.cs" />
     <Compile Include="Models\PostThemeModel.cs" />
     <Compile Include="Models\DetailModel.cs" />
@@ -250,6 +254,9 @@
     <Content Include="Views\Help\how-to-use-winterboard.aspx" />
     <Content Include="Views\Help\why-jailbreak-iphone.aspx" />
     <Content Include="Views\iSpirit\help.aspx" />
+    <Content Include="Views\Shared\SoftCommentRepeater.ascx" />
+    <Content Include="Views\Shared\PostSoftCommentForm.ascx" />
+    <Content Include="Views\Soft\Comment.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -98,6 +98,13 @@ namespace IThemeSky.DataAccess
         {
             return new ThemeSupportRepository(_connectionProvider);
         }
-
+        /// <summary>
+        /// 获取软件的评论数据访问对象
+        /// </summary>
+        /// <returns></returns>
+        public ISoftCommentRepository GetSoftCommentRepository()
+        {
+            return new SoftCommentRepository(_connectionProvider);
+        }
     }
 }

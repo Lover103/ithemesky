@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BooleanFilterOption.cs" />
     <Compile Include="CheckStateOption.cs" />
+    <Compile Include="SoftComment.cs" />
     <Compile Include="DisplayStateOption.cs" />
     <Compile Include="FullThemeView.cs" />
     <Compile Include="ISpiritUserInfo.cs" />

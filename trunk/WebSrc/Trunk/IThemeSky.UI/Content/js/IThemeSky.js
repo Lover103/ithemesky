@@ -105,7 +105,17 @@ function LoadComments(pageIndex) {
 function PostCommentSuccess() {
     alert('post comment success.');
     $('#Content').html('');
-    LoadComments(1);
+    LoadSoftComments(1);
+}
+var _softIdentify = '';
+function LoadSoftComments(pageIndex) {
+    $("#commentListContainer").html('loading comments ...');
+    $("#commentListContainer").load('/Service/GetSoftComments/' + escape(_softIdentify) + ',' + pageIndex + ',5');
+}
+function PostSoftCommentSuccess() {
+    alert('post comment success.');
+    $('#Content').html('');
+    LoadSoftComments(1);
 }
 function BindRateEvent() {
     $('.detailRate li a').click(

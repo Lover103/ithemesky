@@ -172,6 +172,202 @@ namespace IThemeSky.Library.Util
 
             return TimeSpan.FromMinutes((int)CacheTimeOption);
         }
+
+        #region 2010-04-26带更新事件缓存方法
+        /// <summary>
+        /// 缓存数据源更新委托
+        /// </summary>
+        /// <returns></returns>
+        public delegate object RefreshCacheDataHandler();
+        /// <summary>
+        /// 带ref int的缓存数据源更新委托，一般用于分页方法
+        /// </summary>
+        /// <param name="recordCount"></param>
+        /// <returns></returns>
+        public delegate object RefreshCacheDataWithRefParamHandler(ref int recordCount);
+        /// <summary>
+        /// 带out int的缓存数据源更新委托，一般用于分页方法
+        /// </summary>
+        /// <param name="recordCount"></param>
+        /// <returns></returns>
+        public delegate object RefreshCacheDataWithOutParamHandler(out int recordCount);
+        /// <summary>
+        /// 获取指定key缓存数据，如果该缓存不存在，则自动调用数据源委托生成缓存
+        /// </summary>
+        /// <typeparam name="T">缓存数据的类型</typeparam>
+        /// <param name="key">缓存key</param>
+        /// <param name="cacheTime">缓存时间</param>
+        /// <param name="callback">数据源委托</param>
+        /// <returns></returns>
+        public static T Get<T>(string key, CacheTimeOption cacheTime, RefreshCacheDataHandler callback) where T : class
+        {
+            if (Contains(key))
+            {
+                return Get<T>(key);
+            }
+            T content = callback() as T;
+            Set<T>(key, content, cacheTime);
+            return content;
+        }
+        /// <summary>
+        /// 获取指定key缓存数据，如果该缓存不存在，则自动调用数据源委托生成缓存
+        /// </summary>
+        /// <typeparam name="T">缓存数据的类型</typeparam>
+        /// <param name="key">缓存key</param>
+        /// <param name="recordCountKey">记录总数的缓存key</param>
+        /// <param name="recordCount">记录总数(ref)</param>
+        /// <param name="cacheTime">缓存时间</param>
+        /// <param name="callback">数据源委托</param>
+        /// <returns></returns>
+        public static T Get<T>(string key, string recordCountKey, ref int recordCount, CacheTimeOption cacheTime, RefreshCacheDataWithRefParamHandler callback) where T : class
+        {
+            if (Contains(recordCountKey))
+            {
+                recordCount = Get<int>(recordCountKey);
+            }
+            if (Contains(key))
+            {
+                return Get<T>(key);
+            }
+            T content = callback(ref recordCount) as T;
+            Set<T>(key, content, cacheTime);
+            Set<int>(recordCountKey, recordCount, cacheTime);
+            return content;
+        }
+        /// <summary>
+        /// 获取指定key缓存数据，如果该缓存不存在，则自动调用数据源委托生成缓存
+        /// </summary>
+        /// <typeparam name="T">缓存数据的类型</typeparam>
+        /// <param name="key">缓存key</param>
+        /// <param name="recordCountKey">记录总数的缓存key</param>
+        /// <param name="recordCount">记录总数(out)</param>
+        /// <param name="cacheTime">缓存时间</param>
+        /// <param name="callback">数据源委托</param>
+        /// <returns></returns>
+        public static T Get<T>(string key, string recordCountKey, out int recordCount, CacheTimeOption cacheTime, RefreshCacheDataWithOutParamHandler callback) where T : class
+        {
+            recordCount = 0;
+            if (Contains(recordCountKey))
+            {
+                recordCount = Get<int>(recordCountKey);
+            }
+            if (Contains(key))
+            {
+                return Get<T>(key);
+            }
+            T content = callback(out recordCount) as T;
+            Set<T>(key, content, cacheTime);
+            Set<int>(recordCountKey, recordCount, cacheTime);
+            return content;
+        }
+        /// <summary>
+        /// 获取指定key缓存数据，如果该缓存不存在，则自动调用数据源委托生成缓存(线程安全，但会造成一定性能开销)
+        /// </summary>
+        /// <typeparam name="T">缓存数据的类型</typeparam>
+        /// <param name="key">缓存key</param>
+        /// <param name="cacheTime">缓存时间</param>
+        /// <param name="callback">数据源委托</param>
+        /// <returns></returns>
+        public static T GetWithLock<T>(string key, CacheTimeOption cacheTime, RefreshCacheDataHandler callback) where T : class
+        {
+            if (Contains(key))
+            {
+                return Get<T>(key);
+            }
+            lock (string.Intern(key))
+            {
+                if (Contains(key))
+                {
+                    return Get<T>(key);
+                }
+                else
+                {
+                    T content = callback() as T;
+                    Set<T>(key, content, cacheTime);
+                    return content;
+                }
+            }
+        }
+        /// <summary>
+        /// 获取指定key缓存数据，如果该缓存不存在，则自动调用数据源委托生成缓存(线程安全，但会造成一定性能开销)
+        /// </summary>
+        /// <typeparam name="T">缓存数据的类型</typeparam>
+        /// <param name="key">缓存key</param>
+        /// <param name="recordCountKey">记录总数的缓存key</param>
+        /// <param name="recordCount">记录总数(ref)</param>
+        /// <param name="cacheTime">缓存时间</param>
+        /// <param name="callback">数据源委托</param>
+        /// <returns></returns>
+        public static T GetWithLock<T>(string key, string recordCountKey, ref int recordCount, CacheTimeOption cacheTime, RefreshCacheDataWithRefParamHandler callback) where T : class
+        {
+            if (Contains(recordCountKey))
+            {
+                recordCount = Get<int>(recordCountKey);
+            }
+            if (Contains(key))
+            {
+                return Get<T>(key);
+            }
+            lock (string.Intern(key))
+            {
+                if (Contains(recordCountKey))
+                {
+                    recordCount = Get<int>(recordCountKey);
+                }
+                if (Contains(key))
+                {
+                    return Get<T>(key);
+                }
+                else
+                {
+                    T content = callback(ref recordCount) as T;
+                    Set<T>(key, content, cacheTime);
+                    Set<int>(recordCountKey, recordCount, cacheTime);
+                    return content;
+                }
+            }
+        }
+        /// <summary>
+        /// 获取指定key缓存数据，如果该缓存不存在，则自动调用数据源委托生成缓存(线程安全，但会造成一定性能开销)
+        /// </summary>
+        /// <typeparam name="T">缓存数据的类型</typeparam>
+        /// <param name="key">缓存key</param>
+        /// <param name="recordCountKey">记录总数的缓存key</param>
+        /// <param name="recordCount">记录总数(out)</param>
+        /// <param name="cacheTime">缓存时间</param>
+        /// <param name="callback">数据源委托</param>
+        /// <returns></returns>
+        public static T GetWithLock<T>(string key, string recordCountKey, out int recordCount, CacheTimeOption cacheTime, RefreshCacheDataWithOutParamHandler callback) where T : class
+        {
+            recordCount = 0;
+            if (Contains(recordCountKey))
+            {
+                recordCount = Get<int>(recordCountKey);
+            }
+            if (Contains(key))
+            {
+                return Get<T>(key);
+            }
+            lock (string.Intern(key))
+            {
+                if (Contains(recordCountKey))
+                {
+                    recordCount = Get<int>(recordCountKey);
+                }
+                if (Contains(key))
+                {
+                    return Get<T>(key);
+                }
+                else
+                {
+                    T content = callback(out recordCount) as T;
+                    Set<T>(key, content, cacheTime);
+                    Set<int>(recordCountKey, recordCount, cacheTime);
+                    return content;
+                }
+            }
+        }
+        #endregion 
     }
 
 

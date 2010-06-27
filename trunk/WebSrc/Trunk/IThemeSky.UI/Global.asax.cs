@@ -84,9 +84,19 @@ namespace IThemeSky.UI
                 new { controller = "Service", action = "GetThemeComments", pageIndex=1, pageSize = 5 } // Parameter defaults
             );
             routes.MapRoute(
+                "GetSoftCommentsService", // Route name
+                "Service/GetSoftComments/{softIdentify},{pageIndex},{pageSize}", // URL with parameters
+                new { controller = "Service", action = "GetSoftComments", pageIndex = 1, pageSize = 5 } // Parameter defaults
+            );
+            routes.MapRoute(
                 "AddThemeCommentsService", // Route name
                 "Service/AddThemeComment", // URL with parameters
                 new { controller = "Service", action = "AddThemeComment" } // Parameter defaults
+            );
+            routes.MapRoute(
+                "AddSoftCommentsService", // Route name
+                "Service/AddSoftComment", // URL with parameters
+                new { controller = "Service", action = "AddSoftComment" } // Parameter defaults
             );
             routes.MapRoute(
                 "DownloadThemeService", // Route name
@@ -103,6 +113,7 @@ namespace IThemeSky.UI
                 "Service/RateTheme/{themeId},{score}", // URL with parameters
                 new { controller = "Service", action = "RateTheme" } // Parameter defaults
             );
+
             //ISpirit专用服务
             routes.MapRoute(
                 "iSpiritService", // Route name
@@ -121,6 +132,15 @@ namespace IThemeSky.UI
                 "Help/{viewName}", // URL with parameters
                 new { controller = "Help", action = "Index", viewName = "faq" } // Parameter defaults
             );
+
+            //软件相关
+            routes.MapRoute(
+                "Soft", // Route name
+                "Soft/Comment/{softIdentify}/{softTitle}/{softDescription}", // URL with parameters
+                new { controller = "Soft", action = "Comment" } // Parameter defaults
+            );
+
+            //默认
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{themeId}", // URL with parameters

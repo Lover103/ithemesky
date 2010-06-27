@@ -16,7 +16,7 @@ namespace IThemeSky.UI.Models
 
             this.ThemeId = themeId;
             this.PageIndex = pageIndex;
-            this.PageSize = pageSize;            
+            this.PageSize = pageSize;
             this.Comments = commentRespository.GetComments(themeId, pageIndex, pageSize, ref recordCount);
             this.RecordCount = recordCount;
         }
