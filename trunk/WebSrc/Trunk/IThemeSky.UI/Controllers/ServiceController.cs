@@ -82,7 +82,8 @@ namespace IThemeSky.UI.Controllers
         }
 
         public ActionResult GetSuggestThemes(string keyword, int displayNumber)
-        { 
+        {
+            IpDefender.RemoveIp();
             int recordCount = 0;
             List<SimpleThemeView> themes = _themeRepository.SearchThemes(keyword, ThemeSortOption.Popular, 1, displayNumber, ref recordCount);
             ViewData["RecordCount"] = recordCount;
