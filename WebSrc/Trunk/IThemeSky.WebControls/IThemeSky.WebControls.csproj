@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0F038EDA-7B96-4462-BBAB-171249DB3C89}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -114,33 +114,43 @@
   <ItemGroup>
     <EmbeddedResource Include="AspNetPager\AspNetPager.en.resx">
       <DependentUpon>aspnetpager.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AspNetPager\AspNetPager.resx">
       <DependentUpon>aspnetpager.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AspNetPager\AspNetPager.zh-CHT.resx">
       <DependentUpon>aspnetpager.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AspNetPager\Designer\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AspNetPager\Designer\CustomInfoForm.resx">
       <DependentUpon>CustomInfoForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AspNetPager\Designer\NavTextForm.resx">
       <DependentUpon>NavTextForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AspNetPager\Designer\PageIndexBoxForm.resx">
       <DependentUpon>PageIndexBoxForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AspNetPager\Designer\SPHelpForm.resx">
       <DependentUpon>SPHelpForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AspNetPager\Designer\SPVarRegForm.resx">
       <DependentUpon>SPVarRegForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AspNetPager\Designer\StoredProcForm.resx">
       <DependentUpon>StoredProcForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
