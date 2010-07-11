@@ -10,7 +10,9 @@ h2{ font:normal 24px/1.5 "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial,
 .release ul{ font:normal 12px/17px "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif; margin:1em 0;}
 .release ul ul{ margin:0; list-style:disc; padding-left:2em;}
 h3{ font:normal 12px/14px "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif; margin:0; color:#527679;}
-h4{ font:bold 12px/14px "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;}	
+h4{ font:bold 12px/14px "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;}
+a:link,a:visited{ color:#FFF; text-decoration:underline;}
+a:hover,a:active{ color:#FF0;}
 </style>
 </head>
 <body>
