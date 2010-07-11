@@ -40,20 +40,26 @@ $(document).ready(function() {
 			<% Html.RenderPartial("iSpirit"); %>
 			<div class="iSpiritNav">
 				<ul>
-					<li class="s1"><a href="/iSpirit/download/" title="Download - Click here to get iSpirit" target="_blank"><span class="link">Download - Click here to get iSpirit</span>
-						<p class="dlPopup">
-							<span class="label">Ver:</span><span class="entry">iSpirit 1.0.2</span>
-							<span class="label">Date:</span><span class="entry">5/16/10</span>
-							<span class="label">Size:</span><span class="entry">296KB</span>
-							<span class="label">Req:</span><span class="entry"> windows XP/Vista/7<br />+ iTunes + .net Framework</span>
-						</p>
-					</a>	
-					</li>
+					<li class="s1"><% Html.RenderPartial("iSpiritDownload"); %></li>
 					<li class="s2"><a href="/ispirit" class="current" title="Features - Learn more about iSpirit"><span class="link">Features - Learn more about iSpirit</span></a></li>
 					<li class="s3"><a href="/ispirit/help" title="Get Help - FAQs and Support"><span class="link">Get Help - FAQs and Support</span></a></li>
 				</ul>
 			</div>
 			<div class="iSpiritMain">
+				<h3 class="featureTitle">
+					<span class="titleIco ico_6">8 </span>
+					<span class="titleEntry">Install <span class="orange">.DEB</span> software easily.<a href="http://forum.ithemesky.com/default.aspx?g=posts&m=5&#post5"   target=_blank> Get Help.</a><br /><br /></span>
+				</h3>
+				
+				<h3 class="featureTitle">
+					<span class="titleIco ico_8">4 </span>
+					<span class="titleEntry" style="padding-top:0;">Powerful Winterboard theme management, available to install theme via zip file, local folder or online, and manage the theme you got.</span>
+				</h3>
+				
+				<p class="featureContent">
+					<a href="/Content/images/ispirit/features/09.jpg" class="imgZoom"><img src="/Content/images/ispirit/features/09_thumb.png" alt="" width="178" height="120" /></a>&nbsp;&nbsp;&nbsp;
+					<a href="/Content/images/ispirit/features/10.jpg" class="imgZoom"><img src="/Content/images/ispirit/features/10_thumb.png" alt="" width="178" height="120" /></a>
+				</p>
 				<h3 class="featureTitle">
 					<span class="titleIco ico_1">1 </span>
 					<span class="titleEntry">Powerful file management, support for various file operation and drag.</span>
@@ -70,18 +76,10 @@ $(document).ready(function() {
 				</p>
 				<h3 class="featureTitle">
 					<span class="titleIco ico_7">3 </span>
-					<span class="titleEntry">Restart the Springboard via PC, no deamon install make you more comfortable.</span>
+					<span class="titleEntry">Restart the Springboard/Reboot/Shutdown via PC, no deamon install make you more comfortable.</span>
 				</h3>
 				<p class="featureContent">
 					<a href="/Content/images/ispirit/features/08.png" class="imgZoom"><img src="/Content/images/ispirit/features/08_thumb.png" alt="" width="178" height="120" /></a>
-				</p>
-				<h3 class="featureTitle">
-					<span class="titleIco ico_8">4 </span>
-					<span class="titleEntry" style="padding-top:0;">Powerful Winterboard theme management, available to install theme via zip file, local folder or online, and manage the theme you got.</span>
-				</h3>
-				<p class="featureContent">
-					<a href="/Content/images/ispirit/features/09.jpg" class="imgZoom"><img src="/Content/images/ispirit/features/09_thumb.png" alt="" width="178" height="120" /></a>&nbsp;&nbsp;&nbsp;
-					<a href="/Content/images/ispirit/features/10.jpg" class="imgZoom"><img src="/Content/images/ispirit/features/10_thumb.png" alt="" width="178" height="120" /></a>
 				</p>
 				<h3 class="featureTitle">
 					<span class="titleIco ico_3">5 </span>
@@ -104,10 +102,6 @@ $(document).ready(function() {
 				<p class="featureContent">
 					<a href="/Content/images/ispirit/features/07.png" class="imgZoom"><img src="/Content/images/ispirit/features/07_thumb.png" alt="" width="178" height="120" /></a>
 				</p>
-				<h3 class="featureTitle">
-					<span class="titleIco ico_6">8 </span>
-					<span class="titleEntry">Install <span class="orange">.DEB</span> software easily.<br /><br /></span>
-				</h3>
 			</div>
 		</div>
 		<!--ispirit end-->
