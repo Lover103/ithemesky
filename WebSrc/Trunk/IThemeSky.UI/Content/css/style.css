@@ -94,6 +94,11 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .footNav li.go2Top{ padding:0 30px; background:none; font-size:11px; line-height:18px; overflow:hidden;}
 .footNav li.go2Top a{ float:left; display:block; padding-left:18px; height:18px; overflow:hidden; background:url(../images/sprites_header.png) no-repeat -260px -453px;}
 .footNav li.go2Top a:hover{ background-position:-260px -473px;}
+.friendLinks{ clear:both; width:980px; padding-top:10px;}
+.friendLinks dt{ float:left; font-weight:bold; width:295px; text-align:right;}
+.friendLinks dd{ float:left; width:570px;}
+.friendLinks li{ float:left; padding:0 12px; background:url(../images/sprites_header.png) no-repeat 0 -485px;}
+.friendLinks li.first{ background:none;}
 
 /*sidebar*/
 #sidebar a:link,#sidebar a:visited{ color:#9FBCBF;}
@@ -371,7 +376,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .iSpiritNav{ width:740px; height:75px; margin:0 auto; background:url(../images/sprites_ispirit.png) no-repeat;}
 .iSpiritNav li{ float:left; width:220px; height:75px; margin-right:40px; -display:inline;}
 .iSpiritNav a:link,.iSpiritNav a:visited{ display:block; height:60px;}
-.iSpiritNav a:hover,.iSpiritNav a:active{ background:url(../images/sprites_ispirit.png) no-repeat 0 -140px;}
+.iSpiritNav a:hover,.iSpiritNav a:active,.iSpiritNav li.s1:hover a{ background:url(../images/sprites_ispirit.png) no-repeat 0 -140px;}
 .iSpiritNav a.current:link,.iSpiritNav a.current:visited,.iSpiritNav a.current:hover,.iSpiritNav a.current:active{ height:75px; background:url(../images/sprites_ispirit.png) no-repeat -240px -140px;}
 .iSpiritNav li.s3{ margin:0;}
 .iSpiritNav li .link{ display:block; height:60px; margin-left:18px; width:202px; background:url(../images/sprites_ispirit.png) no-repeat; text-indent:-999em; overflow:hidden; cursor:pointer;}
@@ -380,11 +385,13 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .iSpiritNav li.s3 .link{ background-position:-480px -72px;}
 .iSpiritNav .dlBubbleInfo { position: relative; z-index:1}
 .iSpiritNav .dlTrigger {position: absolute; z-index:1;}
-.iSpiritNav .s1 a:hover,.iSpiritNav .s1 a:active{ position:relative; z-index:1;}
-.iSpiritNav .s1 .dlPopup{ display:none; color:#9FB8BF; font-size:11px; line-height:1.4;}
-.iSpiritNav .s1 a:hover .dlPopup,.iSpiritNav .s1 a:active .dlPopup{ display:block; position:absolute; z-index:50; padding:12px 0 0 16px; width:196px; height:100px; background:url(../images/sprites_ispirit.png) no-repeat -480px -140px; top:-112px; left:4px;}
+.iSpiritNav .s1{ position:relative; z-index:1;}
+.iSpiritNav .s1 .dlPopup{ display:none; color:#9FB8BF; font-size:11px; line-height:1.6;}
+.iSpiritNav .s1:hover .dlPopup{ display:block; position:absolute; z-index:50; padding:12px 0 0 16px; width:196px; height:100px; background:url(../images/sprites_ispirit.png) no-repeat -480px -140px; top:-112px; left:4px;}
+.iSpiritNav .s1:hover .dlPopup a,.iSpiritNav .s1 .dlPopup a{ display:inline; background-image:none; text-decoration:underline;}
 .iSpiritNav .dlPopup .label{ float:left; width:32px; text-align:right; font-weight:bold; clear:left;}
 .iSpiritNav .dlPopup .entry{ display:block; margin-left:35px; -margin-left:32px; width:160px;}
+.iSpiritNav .dlPopup .noteIco{ margin-top:3px;}
 
 /*iSpirit feature*/
 .iSpiritMain{ width:710px; margin:15px auto 0 auto; background:url(../images/ispirit_main_bg.png) repeat; padding:10px 15px;}
