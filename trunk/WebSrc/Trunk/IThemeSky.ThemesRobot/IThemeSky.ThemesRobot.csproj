@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="MBThemeRobot.cs" />
     <Compile Include="MRobot.cs" />
+    <Compile Include="MRobot2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepairTheme.cs" />
