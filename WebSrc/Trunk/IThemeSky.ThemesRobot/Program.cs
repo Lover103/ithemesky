@@ -21,7 +21,9 @@ namespace IThemeSky.ThemesRobot
             //r.Start();
             //RepairTheme rt = new RepairTheme();
             //rt.RepairCode();
-            ThemeFileChecker.Check();
+           // ThemeFileChecker.Check();
+            MRobot2 robot = new MRobot2();
+            robot.Start();
             Console.WriteLine("bingo");
             Console.Read();
         }
