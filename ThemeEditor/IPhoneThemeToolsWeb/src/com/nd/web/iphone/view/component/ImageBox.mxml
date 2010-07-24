@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+		 xmlns:component="com.nd.web.iphone.view.component.*"
+		 width="100%"
+		 height="100%"
+		 horizontalAlign="center"
+		 verticalAlign="middle"
+		 cornerRadius="5"
+		 creationComplete="init();">
+
+	<mx:Script>
+		<![CDATA[
+			import mx.binding.utils.BindingUtils;
+			import com.nd.web.iphone.util.Color;
+			import com.nd.web.iphone.model.ThemeModelLocator;
+			[Bindable]
+			private var model:ThemeModelLocator=ThemeModelLocator.getInstance();
+
+			private function init():void
+			{
+				BindingUtils.bindSetter(getPicSource, this, 'data');
+			}
+
+			private function getPicSource(arg:*):void
+			{
+				if (model.curEditIcon.name == 'wallpaper')
+				{
+					//在线壁纸
+					if (model.curOnlineWallpaperState == 0)
+					{
+						imageBox.source=model.PIC_URL + escape(data.pic_118x178_resolution);
+					}
+					//关键字壁纸
+					else if (model.curOnlineWallpaperState == 1)
+					{
+						imageBox.source=model.PIC_URL + escape(data.ThumbPicUrl) + '&action=getbaiduthumb';
+					}
+				}
+				else
+				{
+					imageBox.source=model.PIC_URL + escape(data.IconUrl1);
+				}
+			}
+
+			private function imageComplete():void
+			{
+				trace("complete");
+			}
+
+			private function imageError():void
+			{
+				trace('error');
+			}
+		]]>
+	</mx:Script>
+	<component:ImageCache id="imageBox"
+						  width="{model.curEditIcon.thumbWidth}"
+						  height="{model.curEditIcon.thumbHeight}"
+						  cacheLimit="200"
+						  source="{data.url}"
+						  complete="imageComplete()"
+						  ioError="imageError()"/>
+</mx:HBox>

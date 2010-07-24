@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+				preloader="com.nd.web.iphone.view.component.preload.Preloader"
+				xmlns:ndview="com.nd.web.iphone.view.*"
+				xmlns:business="com.nd.web.iphone.business.*"
+				xmlns:control="com.nd.web.iphone.control.*"
+				layout="horizontal"
+				width="980"
+				height="720"
+				backgroundColor="#FFFFFF"
+				horizontalAlign="center"
+				verticalAlign="middle"
+				horizontalGap="30"
+				paddingBottom="0"
+				paddingLeft="0"
+				paddingTop="0"
+				paddingRight="0"
+				creationComplete="init();">
+	<mx:Script>
+		<![CDATA[
+			import com.nd.web.iphone.event.GetThemeEvent;
+			import com.nd.web.iphone.event.GetThemeTypeEvent;
+			import mx.managers.SystemManager;
+			import com.nd.web.iphone.event.GetIconsEvent;
+			import com.adobe.cairngorm.control.CairngormEventDispatcher;
+			import com.nd.web.iphone.event.AppClickEvent;
+			import com.nd.web.iphone.model.ThemeModelLocator;
+			import mx.core.UIComponent;
+			import com.nd.web.iphone.util.Color;
+			private var drawSprite:Sprite;
+			[Bindable]
+			private var model:ThemeModelLocator=ThemeModelLocator.getInstance();
+
+			private function init():void
+			{
+				//判断url中是否包含id,如果有，加载此主题
+				var themeId=Application.application.parameters['id'];
+				if (themeId != undefined && themeId != null && themeId != '')
+				{
+					var e:GetThemeEvent=new GetThemeEvent();
+					e.themeId=themeId;
+					CairngormEventDispatcher.getInstance().dispatchEvent(e);
+				}
+				//加载主题分类
+				CairngormEventDispatcher.getInstance().dispatchEvent(new GetThemeTypeEvent());
+				//添加高亮指引层
+				drawSprite=new Sprite();
+				rawChildren.addChildAt(drawSprite, 5);
+				//鼠标滑过应用图标区域事件
+				themeView.appCav.addEventListener(MouseEvent.ROLL_OVER, function(e:MouseEvent):void
+					{
+						themeView.drawMask(themeView.appCav, Color.RED);
+						iphoneView.drawLineHighLight(iphoneView.appImgCav);
+						drawHighLine(iphoneView.appImgCav, themeView.appCav);
+					});
+				//鼠标滑出应用图标区域事件
+				themeView.appCav.addEventListener(MouseEvent.ROLL_OUT, function(e:MouseEvent):void
+					{
+						themeView.drawMask(themeView.appCav, Color.BLACK);
+						iphoneView.clearHighLight();
+						drawSprite.graphics.clear();
+					});
+				//鼠标滑过壁纸区域事件
+				themeView.wallpaperCav.addEventListener(MouseEvent.ROLL_OVER, function(e:MouseEvent):void
+					{
+						themeView.drawMask(themeView.wallpaperCav, Color.RED);
+						iphoneView.drawLineHighLight(iphoneView.wallpaperImg);
+						drawHighLine(iphoneView.wallpaperImg, themeView.wallpaperCav);
+					});
+				//鼠标滑出壁纸图标区域事件	
+				themeView.wallpaperCav.addEventListener(MouseEvent.ROLL_OUT, function(e:MouseEvent):void
+					{
+						themeView.drawMask(themeView.wallpaperCav, Color.BLACK);
+						iphoneView.clearHighLight();
+						drawSprite.graphics.clear();
+					});
+				//鼠标滑过状态栏区域事件
+				themeView.statusCav.addEventListener(MouseEvent.ROLL_OVER, function(e:MouseEvent):void
+					{
+						themeView.drawMask(themeView.statusCav, Color.RED);
+						iphoneView.drawLineHighLight(iphoneView.statusBarImg);
+						drawHighLine(iphoneView.statusBarImg, themeView.statusCav);
+					});
+				//鼠标滑出状态栏区域事件
+				themeView.statusCav.addEventListener(MouseEvent.ROLL_OUT, function(e:MouseEvent):void
+					{
+						themeView.drawMask(themeView.statusCav, Color.BLACK);
+						iphoneView.clearHighLight();
+						drawSprite.graphics.clear();
+					});
+				//鼠标滑过dock区域事件
+				themeView.dockCav.addEventListener(MouseEvent.ROLL_OVER, function(e:MouseEvent):void
+					{
+						themeView.drawMask(themeView.dockCav, Color.RED);
+						iphoneView.drawLineHighLight(iphoneView.dockImg);
+						drawHighLine(iphoneView.dockImg, themeView.dockCav);
+					});
+				//鼠标滑出dock区域事件
+				themeView.dockCav.addEventListener(MouseEvent.ROLL_OUT, function(e:MouseEvent):void
+					{
+						themeView.drawMask(themeView.dockCav, Color.BLACK);
+						iphoneView.clearHighLight();
+						drawSprite.graphics.clear();
+					});
+				//空事件,若不监听MOUSE_OUT和MOUST_OVER,ROLL事件会出现问题
+				themeView.appCav.addEventListener(MouseEvent.MOUSE_OVER, voidEvent);
+				themeView.appCav.addEventListener(MouseEvent.MOUSE_OUT, voidEvent);
+				themeView.wallpaperCav.addEventListener(MouseEvent.MOUSE_OVER, voidEvent);
+				themeView.wallpaperCav.addEventListener(MouseEvent.MOUSE_OUT, voidEvent);
+				themeView.statusCav.addEventListener(MouseEvent.MOUSE_OVER, voidEvent);
+				themeView.statusCav.addEventListener(MouseEvent.MOUSE_OUT, voidEvent);
+				themeView.dockCav.addEventListener(MouseEvent.MOUSE_OVER, voidEvent);
+				themeView.dockCav.addEventListener(MouseEvent.MOUSE_OUT, voidEvent);
+
+				//鼠标滑过iphone上的壁纸事件监听
+				iphoneView.wallpaperClickSpace.addEventListener(MouseEvent.MOUSE_OVER, function():void
+					{
+						iphoneView.drawLineHighLight(iphoneView.wallpaperImg);
+						if (themeView.selectedIndex == 0)
+						{
+							themeView.drawMask(themeView.wallpaperCav, Color.RED);
+							drawHighLine(iphoneView.wallpaperImg, themeView.wallpaperCav);
+						}
+					});
+				//鼠标滑出iphone上的壁纸事件监听
+				iphoneView.wallpaperClickSpace.addEventListener(MouseEvent.MOUSE_OUT, function():void
+					{
+						themeView.drawMask(themeView.wallpaperCav, Color.BLACK);
+						iphoneView.clearHighLight();
+						drawSprite.graphics.clear();
+					});
+
+				//鼠标滑过iphone上的状态栏事件监听
+				iphoneView.statusInfoImg.addEventListener(MouseEvent.ROLL_OVER, function():void
+					{
+						iphoneView.drawLineHighLight(iphoneView.statusBarImg);
+						if (themeView.selectedIndex == 0)
+						{
+							themeView.drawMask(themeView.statusCav, Color.RED);
+							drawHighLine(iphoneView.statusBarImg, themeView.statusCav);
+						}
+					});
+				//鼠标滑出iphone上的状态栏事件监听
+				iphoneView.statusInfoImg.addEventListener(MouseEvent.ROLL_OUT, function():void
+					{
+						themeView.drawMask(themeView.statusCav, Color.BLACK);
+						iphoneView.clearHighLight();
+						drawSprite.graphics.clear();
+					});
+
+				//鼠标滑过iphone上的dock事件监听
+				iphoneView.dockImg.addEventListener(MouseEvent.MOUSE_OVER, function():void
+					{
+						iphoneView.drawLineHighLight(iphoneView.dockImg);
+						if (themeView.selectedIndex == 0)
+						{
+							themeView.drawMask(themeView.dockCav, Color.RED);
+							drawHighLine(iphoneView.dockImg, themeView.dockCav);
+						}
+					});
+				//鼠标滑出iphone上的dock事件监听
+				iphoneView.dockImg.addEventListener(MouseEvent.MOUSE_OUT, function():void
+					{
+						themeView.drawMask(themeView.dockCav, Color.BLACK);
+						iphoneView.clearHighLight();
+						drawSprite.graphics.clear();
+					});
+
+
+				//iphoneView中应用图标被点击事件
+				iphoneView.addEventListener(AppClickEvent.APP_CLICK, function(e:AppClickEvent):void
+					{
+						themeView.gotoEditMode(e.curIcon);
+					});
+			}
+
+			/**
+			 *  空事件,若不监听MOUSE_OUT和MOUST_OVER,会出现问题
+			 */
+			private function voidEvent(e:MouseEvent):void
+			{
+			}
+
+			/**
+			 * 添加高亮指引连线
+			 */
+			private function drawHighLine(fCav:UIComponent, tCav:UIComponent):void
+			{
+				var fromX:int=iphoneView.x + iphoneView.screenCav.x + fCav.x + fCav.width;
+				var fromY:int=iphoneView.y + iphoneView.screenCav.y + fCav.y + fCav.height / 2;
+				var toX:int=themeView.x + tCav.x;
+				var toY:int=themeView.y + tCav.y + tCav.height / 2;
+				var centerX:int=fromX + Math.abs(fromX - toX) / 2;
+				drawSprite.graphics.clear();
+				drawSprite.graphics.lineStyle(2, Color.RED);
+				drawSprite.graphics.moveTo(fromX, fromY);
+				drawSprite.graphics.lineTo(centerX, fromY);
+				drawSprite.graphics.lineTo(centerX, toY);
+				drawSprite.graphics.lineTo(toX, toY);
+			}
+
+			public function test():void
+			{
+
+			}
+		]]>
+	</mx:Script>
+	<!-- ========================================================================== -->
+
+	<!-- the ServiceLocator where we specify the remote services -->
+	<business:Services id="services"/>
+
+	<!-- the FrontController, containing Commands specific to this appliation -->
+	<control:ThemeController id="controller"/>
+
+	<!-- ========================================================================== -->
+	<mx:Style source="iphonethemetool.css"/>
+	<ndview:Iphone id="iphoneView"/>
+	<ndview:ThemeIcons id="themeView"/>
+</mx:Application>

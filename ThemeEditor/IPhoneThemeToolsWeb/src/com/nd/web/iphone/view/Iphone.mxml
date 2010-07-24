@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   xmlns:ns1="com.nd.web.iphone.view.*"
+		   width="374"
+		   height="705"
+		   backgroundImage="{model.assets.iphoneIcon}"
+		   fontSize="11"
+		   fontWeight="bold"
+		   color="#FFFFFF"
+		   creationComplete="init();">
+	<mx:Script>
+		<![CDATA[
+			import com.nd.web.iphone.event.AppClickEvent;
+			import com.nd.web.iphone.vo.IconVo;
+			import mx.binding.utils.BindingUtils;
+			import com.nd.web.iphone.util.ImageUtil;
+			import mx.core.UIComponent;
+			import com.nd.web.iphone.util.Color;
+			import com.nd.web.iphone.model.ThemeModelLocator;
+			import com.nd.web.iphone.view.assets.ThemeAssets;
+
+			[Bindable]
+			private var model:ThemeModelLocator=ThemeModelLocator.getInstance();
+			private var drawSprite:Sprite;
+
+
+			private function init():void
+			{
+				drawSprite=new Sprite();
+				screenCav.rawChildren.addChildAt(drawSprite, screenCav.numChildren);
+				//绑定当前壁纸属性改变
+				BindingUtils.bindSetter(changeWallpaper, model.curTheme.wallpaper, "sourceBmd");
+				//绑定当前状态栏属性改变
+				BindingUtils.bindSetter(changeStatusBar, model.curTheme.statusBar, "sourceBmd");
+				//绑定dock属性改变
+				BindingUtils.bindSetter(changeDock, model.curTheme.dock, "sourceBmd");
+			}
+
+			/**
+			 * wallpaper改变事件处理
+			 */
+			private function changeWallpaper(arg:*):void
+			{
+				wallpaperImg.source=new Bitmap(model.curTheme.wallpaper.sourceBmd.bitmapData.clone());
+			}
+
+			/**
+			 * statusBar改变事件处理
+			 */
+			private function changeStatusBar(arg:*):void
+			{
+				statusBarImg.source=new Bitmap(model.curTheme.statusBar.sourceBmd.bitmapData.clone());
+			}
+
+			/**
+			 * dock改变事件处理
+			 */
+			private function changeDock(arg:*):void
+			{
+				dockImg.source=new Bitmap(model.curTheme.dock.sourceBmd.bitmapData.clone());
+			}
+
+			/**
+			 *	画高亮边框线
+			 */
+			public function drawLineHighLight(drawObj:UIComponent):void
+			{
+				drawSprite.graphics.clear();
+				drawSprite.graphics.lineStyle(2, Color.RED, 1);
+				drawSprite.graphics.drawRect(drawObj.x, drawObj.y, drawObj.width, drawObj.height);
+				drawSprite.graphics.endFill();
+			}
+
+			/**
+			 * 画高亮背景
+			 */
+			public function drawRectHighLight(drawObj:UIComponent):void
+			{
+				drawSprite.graphics.clear();
+				drawSprite.graphics.beginFill(Color.RED, 0.5);
+				drawSprite.graphics.drawRect(drawObj.x, drawObj.y, drawObj.width, drawObj.height);
+				drawSprite.graphics.endFill();
+			}
+
+			/**
+			 * 清除高亮背景效果
+			 */
+			public function clearHighLight():void
+			{
+				drawSprite.graphics.clear();
+			}
+
+			/**鼠标滑动到应用图标上时处理*/
+			private function onMouseOverImgHandler(event:MouseEvent):void
+			{
+				Image(event.currentTarget).alpha=0.7;
+			}
+
+			/**鼠标滑出应用图标上时处理*/
+			private function onMouseOutImgHandler(event:MouseEvent):void
+			{
+				Image(event.currentTarget).alpha=1;
+			}
+
+			/**
+			 * 应用单击进入编辑
+			 */
+			private function iconClickHandler(curIcon:IconVo):void
+			{
+				var e:AppClickEvent=new AppClickEvent();
+				e.curIcon=curIcon;
+				dispatchEvent(e);
+			}
+		]]>
+	</mx:Script>
+	<mx:Canvas id="screenCav"
+			   x="26"
+			   y="120"
+			   width="320"
+			   height="480">
+		<!--可换肤的壁纸-->
+		<mx:Image id="wallpaperImg"
+				  width="320"
+				  height="480"/>
+		<!--可换肤的状态栏-->
+		<mx:Image id="statusBarImg"
+				  width="320"
+				  height="20"/>
+		<!--状态栏的状态信息-->
+		<mx:Image id="statusInfoImg"
+				  width="320"
+				  height="20"
+				  alpha="1"
+				  toolTip="点击替换状态栏"
+				  source="{model.assets.statusIcon}"
+				  buttonMode="true"
+				  useHandCursor="true"
+				  click="{iconClickHandler(model.curTheme.statusBar)}"/>
+		<!-- 可换肤的Dock-->
+		<mx:Image id="dockImg"
+				  y="389"
+				  height="91"
+				  width="320"
+				  toolTip="点击替换Dock"
+				  buttonMode="true"
+				  useHandCursor="true"
+				  click="{iconClickHandler(model.curTheme.dock)}"/>
+		<!-- 可换肤的应用图标集合-->
+		<mx:Canvas id="appImgCav"
+				   y="20"
+				   height="460"
+				   width="320">
+			<!-- Text -->
+			<mx:Image x="15"
+					  y="10"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.text)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.text.sourceBmd}"/>
+			<mx:Text x="15"
+					 y="72"
+					 text="Text"
+					 width="60"
+					 textAlign="center"/>
+			<!-- Calendar -->
+			<mx:Image x="92"
+					  y="10"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.calendar)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.calendar.sourceBmd}"/>
+			<mx:Text x="88"
+					 y="72"
+					 text="Calendar"
+					 width="66"
+					 textAlign="center"/>
+			<!-- Photos -->
+			<mx:Image x="168"
+					  y="10"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.photos)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.photos.sourceBmd}"/>
+			<mx:Text x="170"
+					 y="72"
+					 text="Photos"
+					 width="60"
+					 textAlign="center"/>
+			<!-- camera -->
+			<mx:Image x="245"
+					  y="10"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.camera)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.camera.sourceBmd}"/>
+			<mx:Text x="245"
+					 y="72"
+					 text="Camera"
+					 width="60"
+					 textAlign="center"/>
+			<!-- YouTube -->
+			<mx:Image x="15"
+					  y="102"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.youTube)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.youTube.sourceBmd}"/>
+			<mx:Text x="15"
+					 y="164"
+					 text="YouTube"
+					 width="60"
+					 textAlign="center"/>
+			<!-- Stocks -->
+			<mx:Image x="92"
+					  y="102"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.stocks)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.stocks.sourceBmd}"/>
+			<mx:Text x="92"
+					 y="164"
+					 text="Stocks"
+					 width="60"
+					 textAlign="center"/>
+			<!-- Maps -->
+			<mx:Image x="168"
+					  y="102"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.maps)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.maps.sourceBmd}"/>
+			<mx:Text x="170"
+					 y="164"
+					 text="Maps"
+					 width="60"
+					 textAlign="center"/>
+			<!-- Weather -->
+			<mx:Image x="245"
+					  y="102"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.weather)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.weather.sourceBmd}"/>
+			<mx:Text x="245"
+					 y="164"
+					 text="Weather"
+					 width="60"
+					 textAlign="center"/>
+			<!-- Clock -->
+			<mx:Image x="15"
+					  y="194"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.clock)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.clock.sourceBmd}"/>
+			<mx:Text x="15"
+					 y="256"
+					 text="Clock"
+					 width="60"
+					 textAlign="center"/>
+			<!-- Calculator -->
+			<mx:Image x="92"
+					  y="194"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.calculator)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.calculator.sourceBmd}"/>
+			<mx:Text x="86"
+					 y="256"
+					 text="Calculator"
+					 width="70"
+					 textAlign="center"/>
+			<!-- Notes -->
+			<mx:Image x="168"
+					  y="194"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.notes)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.notes.sourceBmd}"/>
+			<mx:Text x="170"
+					 y="256"
+					 text="Notes"
+					 width="60"
+					 textAlign="center"/>
+			<!-- Settings -->
+			<mx:Image x="245"
+					  y="194"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.settings)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.settings.sourceBmd}"/>
+			<mx:Text x="245"
+					 y="256"
+					 text="Settings"
+					 width="60"
+					 textAlign="center"/>
+			<!-- iTunes -->
+			<mx:Image x="15"
+					  y="286"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.iTunes)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.iTunes.sourceBmd}"/>
+			<mx:Text x="15"
+					 y="348"
+					 text="iTunes"
+					 width="60"
+					 textAlign="center"
+					 color="#FFFFFF"/>
+			<!-- App Store -->
+			<mx:Image x="92"
+					  y="286"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.appStore)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.appStore.sourceBmd}"/>
+			<mx:Text x="86"
+					 y="348"
+					 text="App Store"
+					 width="70"
+					 textAlign="center"
+					 color="#FFFFFF"/>
+
+			<!-- Phone -->
+			<mx:Image x="15"
+					  y="378"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.phone)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.phone.sourceBmd}"/>
+			<mx:Text x="15"
+					 y="444"
+					 text="Phone"
+					 width="60"
+					 textAlign="center"
+					 height="15"/>
+			<!-- Mail -->
+			<mx:Image x="92"
+					  y="378"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.mail)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.mail.sourceBmd}"/>
+			<mx:Text x="92"
+					 y="444"
+					 text="Mail"
+					 width="60"
+					 textAlign="center"
+					 height="15"/>
+			<!-- Safari -->
+			<mx:Image x="168"
+					  y="378"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.safari)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.safari.sourceBmd}"/>
+			<mx:Text x="168"
+					 y="444"
+					 text="Safari"
+					 width="60"
+					 textAlign="center"
+					 height="15"/>
+			<!-- iPod -->
+			<mx:Image x="245"
+					  y="378"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.iPod)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.iPod.sourceBmd}"/>
+			<mx:Text x="245"
+					 y="444"
+					 text="iPod"
+					 width="60"
+					 textAlign="center"
+					 height="15"/>
+			<!-- Contacts -->
+			<mx:Image x="170"
+					  y="286"
+					  height="60"
+					  width="60"
+					  buttonMode="true"
+					  useHandCursor="true"
+					  toolTip="点击替换应用图标"
+					  click="{iconClickHandler(model.curTheme.contacts)}"
+					  mouseOut="onMouseOutImgHandler(event)"
+					  mouseOver="onMouseOverImgHandler(event)"
+					  source="{model.curTheme.contacts.sourceBmd}"/>
+			<mx:Text x="164"
+					 y="348"
+					 text="Contacts"
+					 width="70"
+					 textAlign="center"
+					 color="#FFFFFF"/>
+			<!-- 壁纸生产高亮反应区域-->
+			<mx:Canvas id="wallpaperClickSpace"
+					   x="238"
+					   y="262"
+					   width="72"
+					   height="105"
+					   buttonMode="true"
+					   useHandCursor="true"
+					   toolTip="点击替换壁纸"
+					   click="{iconClickHandler(model.curTheme.wallpaper)}">
+			</mx:Canvas>
+		</mx:Canvas>
+	</mx:Canvas>
+
+</mx:Canvas>
