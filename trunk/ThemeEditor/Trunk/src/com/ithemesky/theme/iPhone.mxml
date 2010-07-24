@@ -7,11 +7,12 @@
 		<![CDATA[
 			import com.ithemesky.event.iPhoneEvent;
 			
+			import mx.controls.Alert;
 			import mx.events.FlexEvent;
 
 			protected function icon_clickHandler(event:MouseEvent):void
 			{
-				this.dispatchEvent(new iPhoneEvent(Icon(event.currentTarget).Image, 1, wallpaper.x + event.currentTarget.x, wallpaper.y + event.currentTarget.y)); 
+				this.dispatchEvent(new iPhoneEvent(iPhoneEvent.ICON_CLICK, Icon(event.currentTarget).Image, wallpaper.x + event.currentTarget.x, wallpaper.y + event.currentTarget.y)); 
 			}
 
 
@@ -24,12 +25,18 @@
 					}
 				}
 			}
-			
-			
+
+			protected function wallpaper_clickHandler(event:MouseEvent):void
+			{
+				if (event.target is Canvas)
+				{
+					this.dispatchEvent(new iPhoneEvent(iPhoneEvent.BACKGROUND_CLICK, "Resources/Image/Wallpaper.png"));
+				}
+			}
 
 		]]>
 	</mx:Script>
-	<mx:Canvas id="wallpaper" x="45" y="135" width="320" height="479" backgroundImage="@Embed('Resources/Image/Wallpaper.png')">
+	<mx:Canvas id="wallpaper" x="45" y="135" width="320" height="479" backgroundImage="@Embed('Resources/Image/Wallpaper.png')" click="wallpaper_clickHandler(event)">
 		<mx:Canvas x="0" y="0" width="100%" height="20">
 		</mx:Canvas>
 		<theme:Icon x="10" y="28" Image="Resources/Image/Icons/Text.png" Text="SMS">

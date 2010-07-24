@@ -23,10 +23,13 @@
 				new GTween(iphone, .5, {x:0, alpha:1}, {ease:Sine.easeIn});
 				new GTween(controls, .5, {x:365, alpha:1}, {ease:Sine.easeIn});
 				
+				iphone.addEventListener(iPhoneEvent.BACKGROUND_CLICK, function(event:iPhoneEvent):void{
+					controls.selectedIndex = 1;
+					LoadIcon(event, 453, 133);
+				});
 				iphone.addEventListener(iPhoneEvent.ICON_CLICK, function(event:iPhoneEvent):void{
 					controls.selectedIndex = 1;
-					LoadImage(event);
-					
+					LoadIcon(event, 585, 345);
 				});
 				controls.addEventListener(EditorEvent.LOAD_COMPLETE, function(event:EditorEvent):void {
 					_editorLoadComplete = true;
@@ -37,22 +40,21 @@
 				
 			}
 
-			protected function LoadImage(event:iPhoneEvent):void {
+			protected function LoadIcon(event:iPhoneEvent, targetX:Number, targetY:Number):void {
 				if (!_editorLoadComplete)
 				{
-					setTimeout(function():void{ LoadImage(event) }, 100);
+					setTimeout(function():void{ LoadIcon(event, targetX, targetY) }, 100);
 					return;
 				}
 				speedIcon.source = event.Image;
 				speedIcon.alpha = 1;
 				speedIcon.x = event.OffsetX;
 				speedIcon.y = event.OffsetY;
-				var tw:GTween = new GTween(speedIcon, .5, {x:585, y:345, alpha:0}, {ease:Sine.easeIn});
+				var tw:GTween = new GTween(speedIcon, .5, {x:targetX, y:targetY, alpha:0}, {ease:Sine.easeIn});
 				tw.onComplete = function(t:GTween):void {
 					imageEditor.LoadImage(event.Image);
 				};
 			}
-
 		]]>
 	</mx:Script>
 	<viewStackEffects:CoverFlowPapervision3D id="effect"/>
