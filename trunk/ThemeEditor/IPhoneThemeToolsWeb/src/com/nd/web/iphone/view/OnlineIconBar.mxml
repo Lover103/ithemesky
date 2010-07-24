@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   xmlns:ndComponent="com.nd.web.iphone.view.component.*"
+		   width="100%"
+		   height="100%"
+		   fontSize="12">
+	<mx:Script>
+		<![CDATA[
+			import com.nd.web.iphone.event.PageChangeEvent;
+			import mx.events.ListEvent;
+			import mx.events.ItemClickEvent;
+			import mx.controls.Alert;
+			import com.nd.web.iphone.model.ThemeModelLocator;
+			import com.nd.web.iphone.event.GetIconsEvent;
+			import com.adobe.cairngorm.control.CairngormEventDispatcher;
+			import com.nd.web.iphone.util.Color;
+			[Bindable]
+			private var model:ThemeModelLocator=ThemeModelLocator.getInstance();
+
+			/**
+			 * 页面改变事件处理
+			 */
+			private function pageChangedHandler(event:PageChangeEvent):void
+			{
+				if (model.curEditIcon.name == 'wallpaper')
+				{
+					if (model.curOnlineWallpaperState == 0)
+					{
+						sendWallpaperPageRequest(event.pageIndex);
+					}
+					else
+					{
+						sendKeywordWallpaperPageRequest(event.pageIndex);
+					}
+				}
+				else if (model.curEditIcon.name == 'statusbar' || model.curEditIcon.name == 'dock')
+				{
+					sendIconPageRequest(event.pageIndex);
+				}
+				else
+				{
+					if (model.curOnlineAppIconState == 0)
+					{
+						sendIconPageRequest(event.pageIndex);
+					}
+					else if (model.curOnlineAppIconState == 1)
+					{
+						sendTypeIconPageRequest(event.pageIndex);
+					}
+				}
+			}
+
+			/**
+			 *	发送壁纸请求
+			 */
+			public function sendWallpaperPageRequest(pageIndex:int):void
+			{
+				model.curPageNumber=pageIndex;
+				var getWallpapersEvent:GetIconsEvent=new GetIconsEvent(GetIconsEvent.EVENT_GET_WALPAPERS);
+				getWallpapersEvent.wallpaperType=model.curWallpaperType;
+				getWallpapersEvent.page=pageIndex;
+				getWallpapersEvent.size=model.defaultPageSize;
+				getWallpapersEvent.order=model.defaultWallpaperOrder;
+				CairngormEventDispatcher.getInstance().dispatchEvent(getWallpapersEvent);
+			}
+
+			/**
+			 * 搜索关键字壁纸
+			 */
+			public function sendKeywordWallpaperPageRequest(pageIndex:int):void
+			{
+				model.curPageNumber=pageIndex;
+				var getWallpapersEvent:GetIconsEvent=new GetIconsEvent(GetIconsEvent.EVENT_GET_KEYWORD_WALLPAPER);
+				getWallpapersEvent.wallpaperKeyword=model.curWallpaperKeyword;
+				getWallpapersEvent.resolution=model.curWallpaperResolution;
+				getWallpapersEvent.page=pageIndex;
+				getWallpapersEvent.size=model.defaultPageSize;
+				CairngormEventDispatcher.getInstance().dispatchEvent(getWallpapersEvent);
+			}
+
+			/**
+			 *	发送图标请求
+			 */
+			public function sendIconPageRequest(pageIndex:int):void
+			{
+				model.curPageNumber=pageIndex;
+				var getIconsEvent:GetIconsEvent=new GetIconsEvent(GetIconsEvent.EVENT_GET_ICONS);
+				getIconsEvent.iconTag=model.curEditIcon.name;
+				getIconsEvent.page=pageIndex;
+				getIconsEvent.order=model.defaultIconOrder;
+				getIconsEvent.size=model.defaultPageSize;
+				CairngormEventDispatcher.getInstance().dispatchEvent(getIconsEvent);
+			}
+
+			/**
+			 * 发送分类图标请求
+			 */
+			public function sendTypeIconPageRequest(pageIndex:int):void
+			{
+				model.curPageNumber=pageIndex;
+				var getIconsEvent:GetIconsEvent=new GetIconsEvent(GetIconsEvent.EVENT_GET_TYPEICON);
+				getIconsEvent.appIconType=model.curAppIconType;
+				getIconsEvent.page=pageIndex;
+				getIconsEvent.order=model.defaultIconOrder;
+				getIconsEvent.size=model.defaultPageSize;
+				CairngormEventDispatcher.getInstance().dispatchEvent(getIconsEvent);
+			}
+
+			/**
+			 *	根据当前的图标类型，初始化界面
+			 */
+			public function initBarView():void
+			{
+
+				// 壁纸展示界面
+				if (model.curEditIcon.name == 'wallpaper')
+				{
+					wallpaperTypeBtn.label='<<返回壁纸分类';
+					wallpaperListView.rowHeight=160;
+				}
+				//statusbar或dock展示界面
+				else if (model.curEditIcon.name == 'statusbar' || model.curEditIcon.name == 'dock')
+				{
+					wallpaperTypeBtn.label='<<返回工具栏';
+					wallpaperListView.rowHeight=70;
+				}
+				//应用图标展示界面
+				else
+				{
+					wallpaperListView.rowHeight=70;
+					//如果处于 在线应用类型图标状态
+					if (model.curOnlineAppIconState == 0)
+					{
+						iconTypeBtn.label='分类图标资源';
+						iconTypeBtn.toolTip='使用通用分类在线图标（如以动物，风景，明星等分类的图标）';
+						wallpaperTypeBtn.label='<<返回工具栏';
+					}
+					//如果处于 在线分类应用图标状态
+					else if (model.curOnlineAppIconState == 1)
+					{
+						iconTypeBtn.label='应用图标资源';
+						iconTypeBtn.toolTip='使用应用类型在线图标（如Text，YouTube，Clock等类型特定图标）';
+						wallpaperTypeBtn.label='返回图标分类';
+					}
+				}
+
+
+				/**
+				 * 应用图标与其它图标的展示区另
+				 */
+				if (model.curEditIcon.name != 'wallpaper' && model.curEditIcon.name != 'statusbar' && model.curEditIcon.name != 'dock')
+				{
+					iconTypeBtn.visible=true;
+
+				}
+				else
+				{
+					iconTypeBtn.visible=false;
+				}
+			}
+		]]>
+	</mx:Script>
+
+	<!--返回工具栏按钮-->
+	<mx:Button id="wallpaperTypeBtn"
+			   x="7"
+			   y="5"
+			   width="103"
+			   height="20"
+			   cornerRadius="12"
+			   fontWeight="normal"
+			   paddingLeft="0"
+			   paddingRight="0"/>
+	<!--图片特效banner-->
+	<mx:TextInput id="infoBanner"
+				  x="0"
+				  y="30"
+				  width="123"
+				  backgroundColor="#000000"
+				  editable="false"
+				  text="在线资源"
+				  color="#FFFFFF"
+				  textAlign="center"
+				  height="22"/>
+	<mx:TextInput id="curTypeBar"
+				  x="0"
+				  y="52"
+				  width="123"
+				  backgroundColor="#000000"
+				  editable="false"
+				  text="{model.curEditIcon.iconName} 专有资源"
+				  color="#FFFFFF"
+				  textAlign="center"
+				  height="22"/>
+	<ndComponent:CustomTileList id="wallpaperListView"
+								x="2"
+								y="78"
+								width="119"
+								height="430"
+								columnWidth="107"
+								dataProvider="{model.curPageList}"
+								verticalScrollPolicy="on"
+								borderStyle="none"
+								itemRenderer="com.nd.web.iphone.view.component.ImageBox"/>
+	<ndComponent:PageBar y="510"
+						 pageNowNum="{model.curPageNumber}"
+						 pageAllNum="{model.curPageCount}"
+						 PageChange="pageChangedHandler(event)"/>
+	<mx:Button id="iconTypeBtn"
+			   x="5"
+			   y="560"
+			   width="110"
+			   height="24"
+			   fontWeight="normal"
+			   color="0x3380DD"
+			   borderColor="0x3380DD"
+			   paddingLeft="0"
+			   paddingRight="0"
+			   buttonMode="true"
+			   useHandCursor="true"
+			   icon="{model.assets.arrowIcon}"/>
+</mx:Canvas>

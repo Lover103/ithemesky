@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="955" minHeight="817" backgroundColor="0x000000"
+				xmlns:theme="com.ithemesky.theme.*"
+				xmlns:viewStackEffects="org.efflex.mx.viewStackEffects.*"
+				creationComplete="application1_creationCompleteHandler(event)">
+	<mx:Style source="Main.css" />
+	<mx:Script>
+		<![CDATA[
+			import com.gskinner.motion.GTween;
+			import com.gskinner.motion.easing.Sine;
+			import com.ithemesky.event.EditorEvent;
+			import com.ithemesky.event.iPhoneEvent;
+			
+			import mx.events.FlexEvent;
+
+			private var _editorLoadComplete:Boolean = false;
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				iphone.alpha = 0;
+				iphone.x = 150;
+				controls.alpha = 0;
+				controls.x = 150;
+				new GTween(iphone, .5, {x:0, alpha:1}, {ease:Sine.easeIn});
+				new GTween(controls, .5, {x:365, alpha:1}, {ease:Sine.easeIn});
+				
+				iphone.addEventListener(iPhoneEvent.ICON_CLICK, function(event:iPhoneEvent):void{
+					controls.selectedIndex = 1;
+					LoadImage(event);
+					
+				});
+				controls.addEventListener(EditorEvent.LOAD_COMPLETE, function(event:EditorEvent):void {
+					_editorLoadComplete = true;
+				});
+				controls.addEventListener(EditorEvent.BACK, function(event:EditorEvent):void {
+					controls.selectedIndex = 0;
+				});
+				
+			}
+
+			protected function LoadImage(event:iPhoneEvent):void {
+				if (!_editorLoadComplete)
+				{
+					setTimeout(function():void{ LoadImage(event) }, 100);
+					return;
+				}
+				speedIcon.source = event.Image;
+				speedIcon.alpha = 1;
+				speedIcon.x = event.OffsetX;
+				speedIcon.y = event.OffsetY;
+				var tw:GTween = new GTween(speedIcon, .5, {x:585, y:345, alpha:0}, {ease:Sine.easeIn});
+				tw.onComplete = function(t:GTween):void {
+					imageEditor.LoadImage(event.Image);
+				};
+			}
+
+		]]>
+	</mx:Script>
+	<viewStackEffects:CoverFlowPapervision3D id="effect"/>
+	<mx:Canvas width="100%" height="100%">
+		<mx:ViewStack id="controls"
+					  x="365"
+					  y="40"
+					  selectedIndex="0">
+			<theme:ControlPanel id="helpPanel" x="0" y="0" hideEffect="effect" showEffect="effect" backgroundColor="0x000000">
+				<theme:HelpPanel>
+				</theme:HelpPanel>
+			</theme:ControlPanel>
+			<theme:ControlPanel id="controlPanel" x="0" y="0" hideEffect="effect" showEffect="effect" backgroundColor="0x000000">
+				<theme:ImageEditor id="imageEditor">
+				</theme:ImageEditor>
+			</theme:ControlPanel>
+		</mx:ViewStack>
+		<theme:iPhone id="iphone">
+		</theme:iPhone>
+		<mx:Image id="speedIcon">
+		</mx:Image>
+	</mx:Canvas>
+</mx:Application>

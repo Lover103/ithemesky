@@ -1,0 +1,30 @@
+/* CSS file */
+ToolTip
+{
+	font-size: 12;
+}
+
+/**scroll 样式*/
+.drawerScroll
+{
+}
+
+Alert { 
+    titleStyleName: "alertTitle"; 
+    messageStyleName: "alertMessage"; 
+    buttonStyleName: "alertButton"; 
+    modalTransparency: 0;
+    modalTransparencyBlur: 0;
+} 
+  
+.alertTitle { 
+    fontSize: 12; 
+} 
+  
+.alertMessage { 
+    fontSize: 12; 
+} 
+  
+.alertButton { 
+    fontSize: 12; 
+} 

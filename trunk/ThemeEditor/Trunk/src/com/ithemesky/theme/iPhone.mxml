@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="406" height="817" backgroundImage="Resources/Image/Iphone.png"
+		   xmlns:theme="com.ithemesky.theme.*"
+		   creationComplete="canvas1_creationCompleteHandler(event)"
+		   >
+	<mx:Script>
+		<![CDATA[
+			import com.ithemesky.event.iPhoneEvent;
+			
+			import mx.events.FlexEvent;
+
+			protected function icon_clickHandler(event:MouseEvent):void
+			{
+				this.dispatchEvent(new iPhoneEvent(Icon(event.currentTarget).Image, 1, wallpaper.x + event.currentTarget.x, wallpaper.y + event.currentTarget.y)); 
+			}
+
+
+			protected function canvas1_creationCompleteHandler(event:FlexEvent):void
+			{
+				for (var i:Number=0; i<wallpaper.numChildren; i++){
+					var child:DisplayObject = wallpaper.getChildAt(i);
+					if (child is Icon) {
+						child.addEventListener(MouseEvent.CLICK, icon_clickHandler);
+					}
+				}
+			}
+			
+			
+
+		]]>
+	</mx:Script>
+	<mx:Canvas id="wallpaper" x="45" y="135" width="320" height="479" backgroundImage="Resources/Image/Wallpaper.png">
+		<mx:Canvas x="0" y="0" width="100%" height="20">
+		</mx:Canvas>
+		<theme:Icon x="10" y="28" Image="Resources/Image/Icons/Text.png" Text="SMS">
+		</theme:Icon>
+		<theme:Icon x="84" y="28" Image="Resources/Image/Icons/Calendar.png" Text="Calendar">
+		</theme:Icon>
+		<theme:Icon x="158" y="28" Image="Resources/Image/Icons/Contacts.png" Text="Contacts">
+		</theme:Icon>
+		<theme:Icon x="232" y="28" Image="Resources/Image/Icons/Facebook.png" Text="Facebook">
+		</theme:Icon>
+		<theme:Icon x="10" y="119" Image="Resources/Image/Icons/Safari.png" Text="Safari">
+		</theme:Icon>
+		<theme:Icon x="10" y="210" Image="Resources/Image/Icons/Mail.png" Text="Mail">
+		</theme:Icon>
+		<theme:Icon x="84" y="210" Image="Resources/Image/Icons/Text.png" Text="SMS">
+		</theme:Icon>
+		<theme:Icon x="158" y="210" Image="Resources/Image/Icons/Weather.png" Text="Weather">
+		</theme:Icon>
+		<theme:Icon x="232" y="210" Image="Resources/Image/Icons/Google.png" Text="Google">
+		</theme:Icon>
+		<theme:Icon x="10" y="301" Image="Resources/Image/Icons/Camera.png" Text="Camera">
+		</theme:Icon>
+		<theme:Icon x="84" y="301" Image="Resources/Image/Icons/App Store.png" Text="App Store">
+		</theme:Icon>
+		<theme:Icon x="158" y="301" Image="Resources/Image/Icons/iPod.png" Text="iPod">
+		</theme:Icon>
+		<theme:Icon x="232" y="301" Image="Resources/Image/Icons/Clock.png" Text="Clock">
+		</theme:Icon>
+		<theme:Icon x="84" y="119" Image="Resources/Image/Icons/Phone.png" Text="Phone">
+		</theme:Icon>
+		<theme:Icon x="158" y="119" Image="Resources/Image/Icons/Maps.png" Text="Maps">
+		</theme:Icon>
+		<theme:Icon x="232" y="119" Image="Resources/Image/Icons/Music.png" Text="Music">
+		</theme:Icon>
+	</mx:Canvas>
+</mx:Canvas>

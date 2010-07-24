@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="75" height="92">
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+			protected var _image:String = "Resources/Image/Icons/App Store.png";
+			[Bindable]
+			protected var _text:String = "Icon Text";
+			public function set Image(value:String):void
+			{
+				_image = value;
+			}
+			public function get Image():String
+			{
+				return _image;
+			}
+			public function set Text(value:String):void
+			{
+				_text = value;
+			}
+				
+		]]>
+	</mx:Script>
+	<mx:HBox horizontalAlign="center" width="100%" mouseOver="this.alpha = 0.6" mouseOut="this.alpha=1">
+		<mx:Image source="{_image}" />
+	</mx:HBox>
+	<mx:HBox horizontalCenter="center" width="100%" horizontalAlign="center">
+		<mx:Label fontWeight="bold" color="#FCFEFE" fontFamily="Verdana" text="{_text}"/>
+	</mx:HBox>
+</mx:VBox>
