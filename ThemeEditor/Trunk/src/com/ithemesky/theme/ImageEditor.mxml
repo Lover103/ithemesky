@@ -112,7 +112,7 @@
 
 		]]>
 	</mx:Script>
-	<mx:Canvas id="editor" x="40" y="45" width="408" height="568" backgroundImage="Resources/Image/editor_bg.png">
+	<mx:Canvas id="editor" x="40" y="45" width="408" height="568" backgroundImage="@Embed('Resources/Image/editor_bg.png')">
 	</mx:Canvas>
 	<theme:EditorButton x="45" y="16" ImageName="editor_open"/>
 	<theme:EditorButton x="79" y="16" ImageName="editor_cut"/>
