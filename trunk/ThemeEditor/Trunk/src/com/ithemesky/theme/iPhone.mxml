@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="406" height="817" backgroundImage="Resources/Image/Iphone.png"
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="406" height="817" backgroundImage="@Embed('Resources/Image/Iphone.png')"
 		   xmlns:theme="com.ithemesky.theme.*"
 		   creationComplete="canvas1_creationCompleteHandler(event)"
 		   >
@@ -29,7 +29,7 @@
 
 		]]>
 	</mx:Script>
-	<mx:Canvas id="wallpaper" x="45" y="135" width="320" height="479" backgroundImage="Resources/Image/Wallpaper.png">
+	<mx:Canvas id="wallpaper" x="45" y="135" width="320" height="479" backgroundImage="@Embed('Resources/Image/Wallpaper.png')">
 		<mx:Canvas x="0" y="0" width="100%" height="20">
 		</mx:Canvas>
 		<theme:Icon x="10" y="28" Image="Resources/Image/Icons/Text.png" Text="SMS">
