@@ -21,7 +21,7 @@ namespace IThemeSky.UI.Controllers
                     new ISpiritUserInfo() 
                     {
                         AddTime = DateTime.Now,
-                        DeviceId = Request.QueryString[""],
+                        DeviceId = Request.QueryString["DeviceId"],
                         PhoneVersion = Request.QueryString["phonever"],
                         SoftVersion = Request.QueryString["softver"],
                         ITunesVersion = Request.QueryString["itunesver"],

@@ -61,7 +61,7 @@ namespace IThemeSky.ThemesRobot
                             AuthorName = currItem.SelectSingleNode("id").Value,
                         };
                         _webClient.Headers.Add(HttpRequestHeader.Referer, "http://m.91.com");
-                        _webClient.DownloadFile(currItem.SelectSingleNode("downloadUrl").Value, Path.Combine(SAVE_PATH, theme.DownloadUrl));
+                        _webClient.DownloadFile("http://mobile.91.com/t" + theme.AuthorName, Path.Combine(SAVE_PATH, theme.DownloadUrl));
                         _webClient.DownloadFile(currItem.SelectSingleNode("previewUrl").Value, Path.Combine(SAVE_PATH, theme.ThumbnailName));
                         ImageHelper.MakeThumbnail(Path.Combine(SAVE_PATH, theme.ThumbnailName), Path.Combine(SAVE_PATH, theme.ThumbnailName.Replace(".jpg", "_112x168.jpg")), 112, 168, "wh");
                         IThemeManageRepository repository = ThemeRepositoryFactory.Default.GetThemeManageRepository();
