@@ -9,6 +9,7 @@ using System.Web;
 using System.IO;
 using System.Threading;
 using Manzana;
+using System.Drawing;
 
 namespace iSprite
 {
@@ -27,10 +28,11 @@ namespace iSprite
         SplitContainer m_appContainer;
 
 
-        OnlineAppList m_OnlineAppList;
+        AptOnlineList m_OnlineAppList;
         AptInstalledList m_AptInstalledList;
         AptDownList m_AptDownList;
         CydiaSourceList m_CydiaSourceList;
+        Label m_InitLbl;
 
         #endregion
 
@@ -77,9 +79,18 @@ namespace iSprite
         {
             m_tvCatalog.AfterSelect += new TreeViewEventHandler(Catalog_AfterSelect);
 
+            m_InitLbl = new Label();
+            m_InitLbl.BackColor = Color.White;
+            m_InitLbl.Text = "Wait for finishing load app data...";
+            m_InitLbl.Font = new Font("Arial", 18F,
+                FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
+            m_InitLbl.Anchor = (AnchorStyles)(AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom);
+            m_InitLbl.AutoSize = true;
+            m_appContainer.Panel2.Controls.Add(m_InitLbl);
+            Utility.Move2Center(m_appContainer.Panel2, m_InitLbl);
 
             //在线软件列表
-            m_OnlineAppList = new OnlineAppList(m_iPhoneDevice, m_appHelper);
+            m_OnlineAppList = new AptOnlineList(m_iPhoneDevice, m_appHelper);
             m_OnlineAppList.OnMessage += new MessageHandler(RaiseMessageHandler);
             m_OnlineAppList.OnDownloadApp += new AddURL2DownloadHandler(AddURL2Download);
             m_OnlineAppList.OnSetNodeCount += new SetNodeCountHandler(SetNodeCount);

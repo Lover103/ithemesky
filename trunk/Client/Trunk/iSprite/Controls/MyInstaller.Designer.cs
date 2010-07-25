@@ -31,8 +31,8 @@
             this.btnOK = new iSprite.iSpriteButton();
             this.btnCancel = new iSprite.iSpriteButton();
             this.gb = new System.Windows.Forms.GroupBox();
-            this.r2 = new System.Windows.Forms.RadioButton();
             this.r1 = new System.Windows.Forms.RadioButton();
+            this.r2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.btnOK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).BeginInit();
             this.gb.SuspendLayout();
@@ -43,13 +43,13 @@
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnOK.DownImage = null;
             this.btnOK.HoverImage = null;
-            this.btnOK.Location = new System.Drawing.Point(284, 162);
+            this.btnOK.Location = new System.Drawing.Point(275, 162);
             this.btnOK.Name = "btnOK";
             this.btnOK.NormalImage = global::iSprite.Resource.Img_button;
             this.btnOK.Size = new System.Drawing.Size(75, 25);
             this.btnOK.TabIndex = 0;
             this.btnOK.TabStop = false;
-            this.btnOK.Text = "Install";
+            this.btnOK.Text = "Next";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
@@ -57,7 +57,7 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnCancel.DownImage = null;
             this.btnCancel.HoverImage = null;
-            this.btnCancel.Location = new System.Drawing.Point(118, 162);
+            this.btnCancel.Location = new System.Drawing.Point(109, 162);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.NormalImage = global::iSprite.Resource.Img_button;
             this.btnCancel.Size = new System.Drawing.Size(75, 25);
@@ -78,16 +78,6 @@
             this.gb.TabStop = false;
             this.gb.Text = "Install";
             // 
-            // r2
-            // 
-            this.r2.AutoSize = true;
-            this.r2.Location = new System.Drawing.Point(10, 63);
-            this.r2.Name = "r2";
-            this.r2.Size = new System.Drawing.Size(239, 16);
-            this.r2.TabIndex = 1;
-            this.r2.Text = "Search {0} From Cydia and install it";
-            this.r2.UseVisualStyleBackColor = true;
-            // 
             // r1
             // 
             this.r1.AutoSize = true;
@@ -99,6 +89,16 @@
             this.r1.TabStop = true;
             this.r1.Text = "Download {0} and Copy to Cydia AutoInstall Folder";
             this.r1.UseVisualStyleBackColor = true;
+            // 
+            // r2
+            // 
+            this.r2.AutoSize = true;
+            this.r2.Location = new System.Drawing.Point(10, 63);
+            this.r2.Name = "r2";
+            this.r2.Size = new System.Drawing.Size(323, 16);
+            this.r2.TabIndex = 1;
+            this.r2.Text = "Get help to install {0} via Cydia or other methods";
+            this.r2.UseVisualStyleBackColor = true;
             // 
             // MyInstaller
             // 

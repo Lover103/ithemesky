@@ -141,8 +141,8 @@ namespace Tamir.SharpSsh.jsch
 			{
 				try
 				{
-					Class c=Class.forName(getConfig("random"));
-					random=(Random)(c.newInstance());
+                    Class c = Class.forName(getConfig("random"));
+                    random = (Random)(c.newInstance());
 				}
 				catch(Exception e)
 				{

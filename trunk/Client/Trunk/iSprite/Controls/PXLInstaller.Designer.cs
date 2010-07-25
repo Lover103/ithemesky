@@ -1,6 +1,6 @@
 ﻿namespace iSprite
 {
-    partial class DebInstaller
+    partial class PXLInstaller
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -82,7 +82,7 @@
             this.btnSelect.UseVisualStyleBackColor = false;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
-            // DebInstaller
+            // PXLInstaller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -92,8 +92,8 @@
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSelect);
-            this.Name = "DebInstaller";
-            this.Text = "Deb Installer";
+            this.Name = "PXLInstaller";
+            this.Text = "PXL Installer";
             ((System.ComponentModel.ISupportInitialize)(this.btnOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
             this.ResumeLayout(false);

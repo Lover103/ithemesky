@@ -9,57 +9,23 @@ using MyDownloader.Core;
 using MyDownloader.Extension.Protocols;
 using System.Threading;
 using System.IO;
+using System.Diagnostics;
 
 namespace iSprite
 {
-    internal partial class AptDownList : UserControl
+    internal partial class AptDownList : BaseUserControl
     {
         #region 变量定义
-        AppHelper m_appHelper;
-        internal event MessageHandler OnMessage;
-        public event SetNodeCountHandler OnSetNodeCount;
         DownloadList m_DownloadList;
         DateTime m_LastSaveDownQueueTime = DateTime.MaxValue;
         static object m_InstallLock = new object();
-        iPhoneFileDevice m_iPhoneDevice;
+        AppDownloadUtility m_DownUtility;
         #endregion
 
         public DownloadList DownList
         {
             get { return m_DownloadList;}
         }
-
-        #region 设置节点数量
-        /// <summary>
-        /// 设置节点数量
-        /// </summary>
-        /// <param name="nodeName"></param>
-        /// <param name="count"></param>
-        /// <param name="selectNode"></param>
-        void SetNodeCount(string nodeName, int count, bool selectNode)
-        {
-            if (null != OnSetNodeCount)
-            {
-                OnSetNodeCount(nodeName, count, selectNode);
-            }
-        }
-        #endregion
-
-        #region 消息处理
-        /// <summary>
-        /// 消息处理
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="Message"></param>
-        /// <param name="messageType"></param>
-        private void RaiseMessageHandler(object sender, string Message, MessageTypeOption messageType)
-        {
-            if (OnMessage != null)
-            {
-                OnMessage(sender, Message, messageType);
-            }
-        }
-        #endregion
 
         #region 构造函数
         /// <summary>
@@ -71,7 +37,7 @@ namespace iSprite
         {
             m_iPhoneDevice = iphoneDevice;
             m_appHelper = appHelper;
-
+            m_DownUtility = new AppDownloadUtility(m_appHelper);
             AddControls();
 
             InitializeComponent();
@@ -96,41 +62,147 @@ namespace iSprite
 
             m_LastSaveDownQueueTime = DateTime.Now;
 
-            this.toolbtnStart.Click += new EventHandler
-                (
-                    delegate(object sender, EventArgs e)
-                    {
-                        m_DownloadList.StartSelections();
-                    }
-                );
+            EventHandler OnClick = new EventHandler(ToolStripButton_Click);
+            AddContextMenu(m_DownloadList, toolapp, new EventHandler(ToolStripButton_Click));
 
-            this.toolbtnPause.Click += new EventHandler
-                (
-                    delegate(object sender, EventArgs e)
-                    {
-                        m_DownloadList.PauseSelections();
-                    }
-                );
+            ToolStripButton btn = new ToolStripButton("Display in Explorer");
+            btn.Click += OnClick;
+            m_ctxTools.Items.Add(btn);
 
-            this.toolbtnRemove.Click += new EventHandler
-                (
-                    delegate(object sender, EventArgs e)
-                    {
-                        m_DownloadList.RemoveSelections();
-                    }
-                );
-
-            m_DownloadList.OnDoInstall += new InstallAppHandler(DoInstall);
+            m_DownloadList.OnDoInstall += new InstallAppHandler(DoInstallAfterFinishDown);
             m_DownloadList.OnSaveDownQueue += new SaveDownQueueHandler(DownloadList_OnSaveDownQueue);
             m_DownloadList.OnUpdateCount += new UpdataListViewCountHandler(UpdateCount);
+            m_DownloadList.DoubleClick += new EventHandler(DownloadList_DoubleClick);
+        }
+
+        //打开选中的文件
+        void DownloadList_DoubleClick(object sender, EventArgs e)
+        {
+            DisplayinWindowsExplorer();
+        }
+
+        void DisplayinWindowsExplorer()
+        {
+            if (m_DownloadList.SelectedItems.Count >= 1)
+            {
+                ListViewItem item = m_DownloadList.SelectedItems[0];
+                Downloader d = m_DownloadList.GetDownloaderByItem(item);
+                Process.Start("explorer.exe", String.Format("/select,{0}", d.LocalFile.Replace("/", "\\").Replace("\\\\", "\\")));
+            }
+        }
+
+        void ToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripButton)
+            {
+                ToolStripButton btn = (ToolStripButton)sender;
+                switch (btn.Text)
+                {
+                    case "Start":
+                        m_DownloadList.StartSelections();
+                        break;
+                    case "Pause":
+                        m_DownloadList.PauseSelections();
+                        break;
+                    case "Remove Selected":
+                        if (m_DownloadList.SelectedItems.Count > 0)
+                        {
+                            RemoveSelections();
+                        }
+                        else
+                        {
+                            RaiseMessageHandler(this, "No item to be removed.", MessageTypeOption.Warning);
+                        }
+                        break;
+                    case "Remove Installed":
+                        UnSelectAllItems();
+                        foreach (ListViewItem item in m_DownloadList.Items)
+                        {
+                            Downloader d = m_DownloadList.GetDownloaderByItem(item);
+                            if (d.InstallCode == InstallState.InstallFinished)
+                            {
+                                m_DownUtility.RemoveFiles(d);
+                                item.Selected = true;
+                            }
+                        }
+                        if (m_DownloadList.SelectedItems.Count > 0)
+                        {
+                            RemoveSelections();
+                        }
+                        else
+                        {
+                            RaiseMessageHandler(this, "No item to be removed.", MessageTypeOption.Warning);
+                        }
+                        break;
+                    case "Install App":
+                        int count = 0;
+                        foreach (ListViewItem item in m_DownloadList.SelectedItems)
+                        {
+                            Downloader d = m_DownloadList.GetDownloaderByItem(item);
+                            if (d.State == DownloaderState.Finished)
+                            {
+                                count++;
+                                d.InstallCode = InstallState.NeedInstall;
+                                DoInstallAfterFinishDown(d);
+                            }
+                        }
+                        if (count == 0)
+                        {
+                            RaiseMessageHandler(this, "No item to be Installed.", MessageTypeOption.Warning);
+                        }
+                        break;
+                    case "Display in Explorer":
+                        DisplayinWindowsExplorer();
+                        break;
+                    case "Cancel":
+                        m_ctxTools.Hide();
+                        break;
+                }
+            }
+        }
+        void RemoveSelections()
+        {
+            if (MessageHelper.ShowConfirm("Are you sure that you want to remove selected downloads") == DialogResult.OK)
+            {
+                foreach (ListViewItem item in m_DownloadList.SelectedItems)
+                {
+                    Downloader d = m_DownloadList.GetDownloaderByItem(item);
+                    m_DownUtility.RemoveFiles(d);
+                }
+
+                m_DownloadList.RemoveSelections();
+            }
         }
         #endregion
 
+        #region 取消所有选中状态
+        /// <summary>
+        /// 取消所有选中状态
+        /// </summary>
+        void UnSelectAllItems()
+        {
+            foreach (ListViewItem item in m_DownloadList.Items)
+            {
+                item.Selected = false;
+            }
+        }
+        #endregion
+
+        #region 更新节点数量
+        /// <summary>
+        /// 更新节点数量
+        /// </summary>
+        /// <param name="count"></param>
         void UpdateCount(int count)
         {
             SetNodeCount("Downloaded Packages", m_DownloadList.Items.Count, false);
         }
+        #endregion
 
+        #region 添加控件
+        /// <summary>
+        /// 添加控件
+        /// </summary>
         void AddControls()
         {
             m_DownloadList = new DownloadList();
@@ -138,6 +210,7 @@ namespace iSprite
             m_DownloadList.Dock = System.Windows.Forms.DockStyle.Fill;
             m_DownloadList.Location = new System.Drawing.Point(0, 25);
         }
+        #endregion
 
         #region 刷新下载列表
         /// <summary>
@@ -147,7 +220,15 @@ namespace iSprite
         {
             if (null != m_DownloadList)
             {
-                m_DownloadList.UpdateList();
+
+                if (IsHandleCreated)
+                {
+                    this.BeginInvoke((MethodInvoker)delegate() { m_DownloadList.UpdateList(); });
+                }
+                else
+                {
+                    m_DownloadList.UpdateList();
+                }
 
                 int count = m_DownloadList.Items.Count;
 
@@ -159,11 +240,17 @@ namespace iSprite
         }
         #endregion
 
+        #region 成功连接iPhone
+        /// <summary>
+        /// 成功连接iPhone
+        /// </summary>
+        /// <param name="isContected"></param>
         internal void AfterDeviceFinishConnected(bool isContected)
         {
             if (isContected)
             {
                 SetNodeCount("Downloaded Packages", m_DownloadList.Items.Count, false);
+
                 //安装已经下载完成的软件
                 for (int i = 0; i < DownloadManager.Instance.Downloads.Count; i++)
                 {
@@ -171,25 +258,33 @@ namespace iSprite
                     if (d.State == DownloaderState.Finished 
                         && (d.InstallCode == InstallState.NeedInstall || d.InstallCode == InstallState.DependInstall))
                     {
-                        DoInstall(d);
+                        DoInstallAfterFinishDown(d);
                     }
                 }
 
             }
         }
+        #endregion
 
-        #region 安装软件
+        #region 下载完成后安装软件
         /// <summary>
-        /// 安装软件
+        /// 下载完成后安装软件
         /// </summary>
         /// <param name="d"></param>
-        void DoInstall(Downloader d)
+        void DoInstallAfterFinishDown(Downloader d)
         {
             if (null != d)
             {
-                if (File.Exists(d.LocalFile_D))
+                if (!m_DownUtility.Marked2Finished(d))
                 {
-                    File.Move(d.LocalFile_D, d.LocalFile_F);//表示下载完成
+                    if (d.State == DownloaderState.EndedWithError)
+                    {
+                        RaiseMessageHandler(this,
+                            "The file (" + Path.GetFileName(d.LocalFile) + ") has finished download, but file hash is Incorrect, you can try again",
+                            MessageTypeOption.Error
+                            );
+                    }
+                    return;
                 }
             }
             else
@@ -211,59 +306,62 @@ namespace iSprite
                                 d.InstallCode = InstallState.InstallFinished;
                             }
 
-                            int index = d.LocalFile.LastIndexOf("+");
-                            string mainfilename = string.Empty;
-                            if (index == -1)
-                            {
-                                mainfilename = d.LocalFile;
-                            }
-                            else
-                            {
-                                mainfilename = d.LocalFile.Substring(0, index) + ".deb";
-                            }
+                            string mainAppfilename = m_DownUtility.GetMainAppFullFileName(d.LocalFile);
 
-                            if (Directory.GetFiles(m_appHelper.AptDownloadFolder, Path.GetFileName(mainfilename).Replace(".deb", "*.d")).Length == 0)
+                            if (m_DownUtility.AllAppFilesIsFinished(d.LocalFile))//判断当前主程序相关的依赖文件和自身文件是否都成功下载
                             {
-                                if (Directory.GetFiles(m_appHelper.AptDownloadFolder, Path.GetFileName(mainfilename).Replace(".deb", "*.f")).Length > 0)
+                                #region 环境检测
+                                if (!m_iPhoneDevice.IsConnected)
                                 {
-                                    if (!m_iPhoneDevice.IsConnected)
+                                    MessageHelper.ShowError(Path.GetFileName(mainAppfilename) + " has been successfully downloaded,please connect your #AppleDeviceType# to finish installation  .");
+                                    return;
+                                }
+
+                                if (!m_iPhoneDevice.CheckInstallDebApp("openssh"))
+                                {
+                                    if (MessageHelper.ShowConfirm("Please install Open ssh to finish install app, Would you want to install?")
+                                        == DialogResult.OK)
                                     {
-                                        MessageHelper.ShowError(Path.GetFileName(mainfilename) + " has been successfully downloaded,please connect your #AppleDeviceType# to finish installation  .");
+                                        //安装Open ssh
+                                        MyInstaller.Show(m_iPhoneDevice, InstallAppOption.OpenSSH, null);
                                         return;
                                     }
-                                    List<string> toinstalllist = new List<string>();
-                                    foreach (string filename in
-                                        Directory.GetFiles(m_appHelper.AptDownloadFolder, Path.GetFileName(mainfilename).Replace(".deb", "+*.deb")))
+                                    else
                                     {
-                                        toinstalllist.Add(filename);
+                                        return;
                                     }
-                                    toinstalllist.Add(mainfilename);//主文件最后安装
+                                }
+                                #endregion
 
-                                    string msg = string.Empty;
-                                    bool flag = SSHHelper.InstallDebs(m_iPhoneDevice, toinstalllist, out msg);
-                                    if (flag)
-                                    {
-                                        RaiseMessageHandler(this, string.Empty, MessageTypeOption.SuccessInstalled);
+                                List<string> toinstalllist = new List<string>();
+                                foreach (string filename in
+                                    Directory.GetFiles(m_appHelper.AptDownloadFolder, Path.GetFileName(mainAppfilename).Replace(".deb", "+*.deb")))
+                                {
+                                    toinstalllist.Add(filename);
+                                }
+                                toinstalllist.Add(mainAppfilename);//主文件最后安装
 
-                                        //更新为已完成安装
-                                        for (int i = 0; i < DownloadManager.Instance.Downloads.Count; i++)
-                                        {
-                                            if (new FileInfo(DownloadManager.Instance.Downloads[i].LocalFile).FullName 
-                                                == new FileInfo(mainfilename).FullName)
-                                            {
-                                                DownloadManager.Instance.Downloads[i].InstallCode = InstallState.InstallFinished;
-                                                break;
-                                            }
-                                        }
+                                string msg = string.Empty;
+                                bool flag = SSHHelper.InstallDebs(m_iPhoneDevice, toinstalllist, out msg);
+                                if (flag)
+                                {
+                                    RaiseMessageHandler(this, string.Empty, MessageTypeOption.SuccessInstalled);
 
-                                        MessageHelper.ShowInfo(msg);
-                                    }
-                                    else if(!string.IsNullOrEmpty(msg))
+                                    m_DownUtility.UpdataInstallStatus(mainAppfilename,true);
+
+                                    MessageHelper.ShowInfo(msg);
+                                }
+                                else
+                                {
+                                    m_DownUtility.UpdataInstallStatus(mainAppfilename, false);
+                                    if (!string.IsNullOrEmpty(msg))
                                     {
                                         MessageHelper.ShowError(msg);
                                     }
                                 }
-                            }                            
+                            }
+
+                            UpdateDownloadList();
                         }
                     }
                 }
@@ -274,19 +372,19 @@ namespace iSprite
             }
         }
         #endregion      
-
-
+        
+        #region 保存队列信息
         void DownloadList_OnSaveDownQueue()
         {
             SaveDownQueue();
         }
-
 
         internal void SaveDownQueue()
         {
             m_LastSaveDownQueueTime = DateTime.Now;
             DownloadManager.Instance.SaveDownQueue(m_appHelper.DownQueueFile);
         }
+        #endregion
 
     }
 }

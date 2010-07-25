@@ -19,6 +19,7 @@ namespace iSprite
 
         public bool EnableMaximize { get; set; }
         public bool EnableMinimize { get; set; }
+        int X,Y;
 
         public iSpriteForm()
         {
@@ -27,7 +28,20 @@ namespace iSprite
 
             DoubleBuffered = true; 
             this.StartPosition =FormStartPosition.CenterScreen;
+            X = this.Left;
+            Y = this.Top;
+        }
 
+        protected void HiddenForm()
+        {
+            this.Left = -100000;
+            this.Top = -100000;
+        }
+
+        protected void ShowForm()
+        {
+            this.Left = X;
+            this.Top = Y;
         }
 
         protected override void OnPaint(PaintEventArgs e)

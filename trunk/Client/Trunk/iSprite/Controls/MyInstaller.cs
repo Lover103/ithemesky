@@ -42,15 +42,28 @@ namespace iSprite
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (!m_iPhoneDevice.IsJailbreak)
+            this.HiddenForm();
+            if (!m_iPhoneDevice.CheckJailbreak())
             {
-                MessageHelper.ShowError("To install deb file ,you must Jailbreak your #AppleDeviceType# first !");
+                this.Close();
                 return;
             }
-
             //todo增加检测图标
             if (r1.Checked)
             {
+                if (!m_iPhoneDevice.CheckInstallApp("Cydia"))
+                {
+                    MessageHelper.ShowError("Please install Cydia to continue.");
+                    this.Close();
+                    return;
+                }
+
+                if (!m_iPhoneDevice.FileExists("/System/Library/LaunchDaemons/com.saurik.Cydia.Startup.plist"))
+                {
+                    MessageHelper.ShowError("Please enable Cydia LaunchDaemon to continue.");
+                    this.Close();
+                    return;
+                }
                 if (m_app == InstallAppOption.OpenSSH)
                 {
                     string downloadurl = "http://update.ithemesky.com/openssh.zip";
@@ -60,26 +73,29 @@ namespace iSprite
                         string tozippath = iSpriteContext.Current.iSpriteTempPath + "\\" + Path.GetRandomFileName() + "\\";
                         if (ZipHelper.UnZip(zippath, tozippath) > 0)
                         {
-                            if (!m_iPhoneDevice.Copy2iPhone(tozippath, iSpriteContext.Current.iPhone_CydiaAutoInstallPath))
+                            if (!m_iPhoneDevice.CopyDirectory2iPhone(tozippath, iSpriteContext.Current.iPhone_CydiaAutoInstallPath))
                             {
-                                MessageHelper.ShowInfo("OpenSSH can not copy to #AppleDeviceType#, please try again.");
+                                MessageHelper.ShowError("OpenSSH can not copy to #AppleDeviceType#, please try again.");
+                                this.ShowForm();
                             }
                             else
                             {
-                                MessageHelper.ShowInfo("OpenSSH has been copied to "
-                                    + iSpriteContext.Current.AppleDeviceType
-                                    + ", You must reboot your #AppleDeviceType# to finish Installation.");
+                                MessageHelper.ShowInfo("OpenSSH has been copied to #AppleDeviceType#, You must Manual reboot your #AppleDeviceType# to finish Installation.");
+
+                                this.ShowForm();
                             }
                         }
                         else
                         {
-                            MessageHelper.ShowInfo("OpenSSH can not UnZip, please try again.");
+                            MessageHelper.ShowError("OpenSSH can not UnZip, please try again.");
+                            this.ShowForm();
                         }
 
                     }
                     else
                     {
-                        MessageHelper.ShowInfo("OpenSSH can not download to your pc, please try again.");
+                        MessageHelper.ShowError("OpenSSH can not download to your pc, please try again.");
+                        this.ShowForm();
                     }
                 }
                 else if (m_app == InstallAppOption.Winterboard)
@@ -90,29 +106,32 @@ namespace iSprite
                     {
                         if (!m_iPhoneDevice.Copy2iPhone(zippath, iSpriteContext.Current.iPhone_CydiaAutoInstallPath))
                         {
-                            MessageHelper.ShowInfo("Winterboard can not copy to #AppleDeviceType#, please try again.");
+                            MessageHelper.ShowError("Winterboard can not copy to #AppleDeviceType#, please try again.");
+                            this.ShowForm();
                         }
                         else
                         {
-                            MessageHelper.ShowInfo("WinterBoard has been copied to " 
-                                + iSpriteContext.Current.AppleDeviceType
-                                + ", You must reboot your #AppleDeviceType# to finish Installation.");
+                            MessageHelper.ShowInfo("WinterBoard has been copied to #AppleDeviceType#, You must Manual reboot your #AppleDeviceType# to finish Installation.");
+                            this.ShowForm();
                         }
                     }
                     else
                     {
-                        MessageHelper.ShowInfo("OpenSSH can not download to your pc, please try again.");
+                        MessageHelper.ShowError("WinterBoard can not download to your pc, please try again.");
+                        this.ShowForm();
                     }
                 }
             }
             else//Search From Cydia and install it
             {
-                string url = string.Empty;
+                string url = "http://www.ithemesky.com/GetAnswer.aspx?";
                 if (m_app == InstallAppOption.OpenSSH)
-                { 
+                {
+                    url += "qid=1";
                 }
                 else if (m_app == InstallAppOption.Winterboard)
-                { 
+                {
+                    url += "qid=2";
                 }
                 if (url != string.Empty)
                 {
@@ -121,6 +140,8 @@ namespace iSprite
             }
             this.DialogResult = DialogResult.OK;
             this.Close();
+
+            
         }
 
         bool CheckInstallApp(string name)

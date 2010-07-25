@@ -303,6 +303,11 @@ namespace iSprite
         }
         #endregion
 
+        internal Downloader GetDownloaderByItem(ListViewItem item)
+        {
+            return (Downloader)mapItemToDownload[item];
+        }
+
         #region 移除选中的下载任务
         /// <summary>
         /// 移除选中的下载任务
@@ -428,6 +433,24 @@ namespace iSprite
         }
         #endregion
 
+        string GetInstallDisplay(InstallState s)
+        {
+            switch (s)
+            {
+                case InstallState.DependInstall:
+                case InstallState.NeedInstall:
+                case InstallState.Installing:
+                case InstallState.NoNeedInstall:
+                    return "No";
+                case InstallState.InstallFinished:
+                    return "Yes";
+                case InstallState.Error:
+                    return "Error";
+                default:
+                    return "No";
+            }
+        }
+
         #region 更新列表
         /// <summary>
         /// 更新列表
@@ -448,6 +471,8 @@ namespace iSprite
                 }
 
                 DownloaderState state;
+                string oldinstallstate = item.SubItems[colIndex_Installed].Text;
+                string newinstallstate = GetInstallDisplay(d.InstallCode);
 
                 if (item.Tag == null)
                 {
@@ -460,7 +485,9 @@ namespace iSprite
 
                 if (state != d.State ||
                     state == DownloaderState.Working ||
-                    state == DownloaderState.WaitingForReconnect)
+                    state == DownloaderState.WaitingForReconnect
+                    || oldinstallstate != newinstallstate
+                    )
                 {
                     item.SubItems[colIndex_Size].Text = ByteFormatter.ToString(d.FileSize);
                     item.SubItems[colIndex_Progress].Text = String.Format("{0:0.##}%", d.Progress);
@@ -482,7 +509,7 @@ namespace iSprite
                             item.SubItems[colIndex_State].Text = d.State.ToString() + ", " + d.StatusMessage;
                         }
                     }
-                    item.SubItems[colIndex_Installed].Text = (d.InstallCode == InstallState.InstallFinished ? "Yes" : "No");
+                    item.SubItems[colIndex_Installed].Text = newinstallstate;
                     item.Tag = d.State;
                 }
             }
@@ -540,7 +567,7 @@ namespace iSprite
             item.SubItems.Add("0");
 
             item.SubItems.Add(d.State.ToString());
-            item.SubItems.Add(d.InstallCode == InstallState.InstallFinished ? "Yes" : "No");
+            item.SubItems.Add(GetInstallDisplay(d.InstallCode));
 
             mapDownloadToItem[d] = item;
             mapItemToDownload[item] = d;

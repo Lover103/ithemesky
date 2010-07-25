@@ -237,7 +237,7 @@ namespace Manzana {
                 try
                 {
                     FileVersionInfo fInfo = FileVersionInfo.GetVersionInfo(iTunesPath + DLLName);//为磁盘上的物理文件提供版本信息
-                    iTunesVer = fInfo.ProductVersion;
+                    iTunesVer = fInfo.FileVersion;
                 }
                 catch
                 { 

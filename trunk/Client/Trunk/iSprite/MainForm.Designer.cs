@@ -45,6 +45,7 @@
             this.tsbtnDeb = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnreSpring = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnShutdown = new System.Windows.Forms.ToolStripButton();
             this.tsbtnReboot = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnHelp = new System.Windows.Forms.ToolStripButton();
@@ -145,6 +146,7 @@
             this.tsbtnDeb,
             this.toolStripSeparator3,
             this.tsbtnreSpring,
+            this.tsbtnShutdown,
             this.tsbtnReboot,
             this.toolStripSeparator2,
             this.tsbtnHelp});
@@ -204,6 +206,7 @@
             // 
             // tsbtnDeb
             // 
+            this.tsbtnDeb.Enabled = false;
             this.tsbtnDeb.Image = global::iSprite.Resource.file_deb;
             this.tsbtnDeb.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnDeb.Name = "tsbtnDeb";
@@ -218,6 +221,7 @@
             // 
             // tsbtnreSpring
             // 
+            this.tsbtnreSpring.Enabled = false;
             this.tsbtnreSpring.Image = global::iSprite.Resource.quick_restart;
             this.tsbtnreSpring.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnreSpring.Name = "tsbtnreSpring";
@@ -225,8 +229,18 @@
             this.tsbtnreSpring.Text = "Respring";
             this.tsbtnreSpring.ToolTipText = "Restart SpringBoard";
             // 
+            // tsbtnShutdown
+            // 
+            this.tsbtnShutdown.Enabled = false;
+            this.tsbtnShutdown.Image = global::iSprite.Resource.btn_Shutdown;
+            this.tsbtnShutdown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnShutdown.Name = "tsbtnShutdown";
+            this.tsbtnShutdown.Size = new System.Drawing.Size(73, 22);
+            this.tsbtnShutdown.Text = "Shutdown";
+            // 
             // tsbtnReboot
             // 
+            this.tsbtnReboot.Enabled = false;
             this.tsbtnReboot.Image = global::iSprite.Resource.btn_restart;
             this.tsbtnReboot.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnReboot.Name = "tsbtnReboot";
@@ -469,6 +483,7 @@
         internal System.Windows.Forms.SplitContainer appContainer;
         internal System.Windows.Forms.TreeView tvCatalog;
         private System.Windows.Forms.ToolStripButton tsbtnReboot;
+        private System.Windows.Forms.ToolStripButton tsbtnShutdown;
 
 
     }

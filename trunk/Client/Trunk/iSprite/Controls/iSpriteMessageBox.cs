@@ -26,7 +26,16 @@ namespace iSprite
 
         public string Message
         {
-            set { this.lblMsg.Text = value; }
+            set 
+            { 
+                this.lblMsg.Text = value;
+                if (this.lblMsg.PreferredHeight > this.pnl.Height)
+                {
+                    this.Height += (this.lblMsg.PreferredHeight - this.pnl.Height);
+                    this.pnl.Height = this.lblMsg.PreferredHeight;
+                    MsgBox.picbox.Top = this.pnl.Top + (int)((this.pnl.Height - MsgBox.picbox.Height) / 2.0);
+                }
+            }
         }
 
         void iSpriteMessageBox_FormClosed(object sender, FormClosedEventArgs e)
@@ -55,6 +64,9 @@ namespace iSprite
                     break;
                 case MessageBoxIcon.Question:
                     MsgBox.picbox.Image = global::iSprite.Resource.Msg_Confirm;
+                    break;
+                case MessageBoxIcon.Warning:
+                    MsgBox.picbox.Image = global::iSprite.Resource.Msg__Warning;
                     break;
             }
             switch (buttons)

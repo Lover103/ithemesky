@@ -51,6 +51,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -77,6 +78,9 @@
     </Compile>
     <Compile Include="Controls\AptInstalledList.Designer.cs">
       <DependentUpon>AptInstalledList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BaseUserControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CydiaSourceList.cs">
       <SubType>UserControl</SubType>
@@ -121,11 +125,11 @@
     <Compile Include="Controls\iUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OnlineAppList.cs">
+    <Compile Include="Controls\AptOnlineList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OnlineAppList.Designer.cs">
-      <DependentUpon>OnlineAppList.cs</DependentUpon>
+    <Compile Include="Controls\AptOnlineList.Designer.cs">
+      <DependentUpon>AptOnlineList.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\PlistEditer.cs">
       <SubType>Form</SubType>
@@ -156,6 +160,30 @@
     </Compile>
     <Compile Include="Controls\MyInstaller.Designer.cs">
       <DependentUpon>MyInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConfirmInstallBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ConfirmInstallBox.Designer.cs">
+      <DependentUpon>ConfirmInstallBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IPAInstaller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\IPAInstaller.Designer.cs">
+      <DependentUpon>IPAInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PXLInstaller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\PXLInstaller.Designer.cs">
+      <DependentUpon>PXLInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="DiffieHellman\DHKeyGeneration.cs" />
     <Compile Include="DiffieHellman\DHParameters.cs" />
@@ -250,6 +278,7 @@
     <Compile Include="ICSharpCode\Zip\ZipInputStream.cs" />
     <Compile Include="ICSharpCode\Zip\ZipNameTransform.cs" />
     <Compile Include="ICSharpCode\Zip\ZipOutputStream.cs" />
+    <Compile Include="Library\AppDownloadUtility.cs" />
     <Compile Include="Library\Area9Helper.cs" />
     <Compile Include="Library\iSpriteContext.cs" />
     <Compile Include="FileDevice\LoaclDiskFileDevice.cs" />
@@ -551,8 +580,8 @@
       <DependentUpon>iSpriteStatus.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OnlineAppList.resx">
-      <DependentUpon>OnlineAppList.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\AptOnlineList.resx">
+      <DependentUpon>AptOnlineList.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PlistEditer.resx">
@@ -573,6 +602,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MyInstaller.resx">
       <DependentUpon>MyInstaller.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ConfirmInstallBox.resx">
+      <DependentUpon>ConfirmInstallBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IPAInstaller.resx">
+      <DependentUpon>IPAInstaller.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PXLInstaller.resx">
+      <DependentUpon>PXLInstaller.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ThirdControl\FATabStrip\FATabStrip.resx">
@@ -699,6 +744,9 @@
     <Content Include="Images\X Window.png" />
     <Content Include="iSprite_icon_32.ico" />
     <Content Include="CydiaSourceCfg.xml" />
+    <None Include="Resources\btn_Shutdown.png" />
+    <None Include="Resources\btn_install.png" />
+    <None Include="Resources\Msg__Warning.png" />
     <None Include="Resources\btn_restart.png" />
     <None Include="Resources\iTunnel.exe" />
     <None Include="Resources\normal_App.png" />

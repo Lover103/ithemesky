@@ -1,6 +1,6 @@
 ﻿namespace iSprite
 {
-    partial class DebInstaller
+    partial class IPAInstaller
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -93,7 +93,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSelect);
             this.Name = "DebInstaller";
-            this.Text = "Deb Installer";
+            this.Text = "IPA Installer";
             ((System.ComponentModel.ISupportInitialize)(this.btnOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
             this.ResumeLayout(false);

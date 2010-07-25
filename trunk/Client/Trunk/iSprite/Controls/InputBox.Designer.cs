@@ -1,6 +1,6 @@
 ﻿namespace iSprite
 {
-    partial class DebInstaller
+    partial class InputBox
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -30,8 +30,7 @@
         {
             this.btnOK = new iSprite.iSpriteButton();
             this.btnCancel = new iSprite.iSpriteButton();
-            this.txtFileName = new System.Windows.Forms.TextBox();
-            this.btnSelect = new System.Windows.Forms.Button();
+            this.txtInput = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.btnOK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).BeginInit();
             this.SuspendLayout();
@@ -41,13 +40,13 @@
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnOK.DownImage = null;
             this.btnOK.HoverImage = null;
-            this.btnOK.Location = new System.Drawing.Point(248, 97);
+            this.btnOK.Location = new System.Drawing.Point(211, 97);
             this.btnOK.Name = "btnOK";
             this.btnOK.NormalImage = global::iSprite.Resource.Img_button;
             this.btnOK.Size = new System.Drawing.Size(75, 25);
             this.btnOK.TabIndex = 0;
             this.btnOK.TabStop = false;
-            this.btnOK.Text = "Install";
+            this.btnOK.Text = "OK";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
@@ -55,7 +54,7 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnCancel.DownImage = null;
             this.btnCancel.HoverImage = null;
-            this.btnCancel.Location = new System.Drawing.Point(136, 97);
+            this.btnCancel.Location = new System.Drawing.Point(99, 97);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.NormalImage = global::iSprite.Resource.Img_button;
             this.btnCancel.Size = new System.Drawing.Size(75, 25);
@@ -64,36 +63,24 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // txtFileName
+            // txtInput
             // 
-            this.txtFileName.Location = new System.Drawing.Point(37, 56);
-            this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(314, 21);
-            this.txtFileName.TabIndex = 5;
+            this.txtInput.Location = new System.Drawing.Point(35, 56);
+            this.txtInput.Name = "txtInput";
+            this.txtInput.Size = new System.Drawing.Size(314, 21);
+            this.txtInput.TabIndex = 5;
             // 
-            // btnSelect
-            // 
-            this.btnSelect.BackColor = System.Drawing.Color.Transparent;
-            this.btnSelect.Location = new System.Drawing.Point(357, 54);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(89, 23);
-            this.btnSelect.TabIndex = 6;
-            this.btnSelect.Text = "Select File";
-            this.btnSelect.UseVisualStyleBackColor = false;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
-            // 
-            // DebInstaller
+            // InputBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::iSprite.Resource.form_bg;
-            this.ClientSize = new System.Drawing.Size(458, 146);
-            this.Controls.Add(this.txtFileName);
+            this.ClientSize = new System.Drawing.Size(384, 146);
+            this.Controls.Add(this.txtInput);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSelect);
-            this.Name = "DebInstaller";
-            this.Text = "Deb Installer";
+            this.Name = "InputBox";
+            this.Text = "Input";
             ((System.ComponentModel.ISupportInitialize)(this.btnOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
             this.ResumeLayout(false);
@@ -105,7 +92,6 @@
 
         private iSpriteButton btnOK;
         private iSpriteButton btnCancel;
-        private System.Windows.Forms.TextBox txtFileName;
-        private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.TextBox txtInput;
     }
 }
