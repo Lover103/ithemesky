@@ -43,7 +43,7 @@ namespace iSprite
 
         public static DialogResult ShowWarning(string message)
         {
-            return ShowWarning("Error", message);
+            return ShowWarning("Warning", message);
         }
 
         public static DialogResult ShowWarning(string title, string message)

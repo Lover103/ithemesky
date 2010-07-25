@@ -38,8 +38,8 @@ namespace Tamir.SharpSsh.jsch
 		static System.Collections.Hashtable config;
 	
 		public static void Init()
-		{
-			config=new System.Collections.Hashtable();
+        {
+            config = new System.Collections.Hashtable();
 
 			//  config.Add("kex", "diffie-hellman-group-exchange-sha1");
 			config.Add("kex", "diffie-hellman-group1-sha1,diffie-hellman-group-exchange-sha1");
@@ -61,27 +61,55 @@ namespace Tamir.SharpSsh.jsch
 			config.Add("lang.s2c", "");
 			config.Add("lang.c2s", "");
 
-			config.Add("diffie-hellman-group-exchange-sha1", 
-				"Tamir.SharpSsh.jsch.DHGEX");
-			config.Add("diffie-hellman-group1-sha1", 
-				"Tamir.SharpSsh.jsch.DHG1");
+            //config.Add("diffie-hellman-group-exchange-sha1", "Tamir.SharpSsh.jsch.DHGEX");
+            config.Add("diffie-hellman-group-exchange-sha1", typeof(Tamir.SharpSsh.jsch.DHGEX).ToString());
 
-			config.Add("dh",            "Tamir.SharpSsh.jsch.jce.DH");
-			config.Add("3des-cbc",      "Tamir.SharpSsh.jsch.jce.TripleDESCBC");
+            //config.Add("diffie-hellman-group1-sha1", "Tamir.SharpSsh.jsch.DHG1");
+            config.Add("diffie-hellman-group1-sha1", typeof(Tamir.SharpSsh.jsch.DHG1).ToString());
+
+			//config.Add("dh",            "Tamir.SharpSsh.jsch.jce.DH");
+            config.Add("dh", typeof(Tamir.SharpSsh.jsch.jce.DH).ToString());
+
+           //onfig.Add("3des-cbc", "Tamir.SharpSsh.jsch.jce.TripleDESCBC");
+            config.Add("3des-cbc", typeof(Tamir.SharpSsh.jsch.jce.TripleDESCBC).ToString());
+
 			//config.Add("blowfish-cbc",  "Tamir.SharpSsh.jsch.jce.BlowfishCBC");
-			config.Add("hmac-sha1",     "Tamir.SharpSsh.jsch.jce.HMACSHA1");
-			config.Add("hmac-sha1-96",  "Tamir.SharpSsh.jsch.jce.HMACSHA196");
-			config.Add("hmac-md5",      "Tamir.SharpSsh.jsch.jce.HMACMD5");
-			config.Add("hmac-md5-96",   "Tamir.SharpSsh.jsch.jce.HMACMD596");
-			config.Add("sha-1",         "Tamir.SharpSsh.jsch.jce.SHA1");
-			config.Add("md5",           "Tamir.SharpSsh.jsch.jce.MD5");
-			config.Add("signature.dss", "Tamir.SharpSsh.jsch.jce.SignatureDSA");
-			config.Add("signature.rsa", "Tamir.SharpSsh.jsch.jce.SignatureRSA");
-			config.Add("keypairgen.dsa",   "Tamir.SharpSsh.jsch.jce.KeyPairGenDSA");
-			config.Add("keypairgen.rsa",   "Tamir.SharpSsh.jsch.jce.KeyPairGenRSA");
-			config.Add("random",        "Tamir.SharpSsh.jsch.jce.Random");
 
-			config.Add("aes128-cbc",    "Tamir.SharpSsh.jsch.jce.AES128CBC");
+            //config.Add("hmac-sha1", "Tamir.SharpSsh.jsch.jce.HMACSHA1");
+            config.Add("hmac-sha1", typeof(Tamir.SharpSsh.jsch.jce.HMACSHA1).ToString());
+
+            //config.Add("hmac-sha1-96", "Tamir.SharpSsh.jsch.jce.HMACSHA196");
+            config.Add("hmac-sha1-96", typeof(Tamir.SharpSsh.jsch.jce.HMACSHA196).ToString());
+
+            //config.Add("hmac-md5", "Tamir.SharpSsh.jsch.jce.HMACMD5");
+            config.Add("hmac-md5", typeof(Tamir.SharpSsh.jsch.jce.HMACMD5).ToString());
+
+            //config.Add("hmac-md5-96", "Tamir.SharpSsh.jsch.jce.HMACMD596");
+            config.Add("hmac-md5-96", typeof(Tamir.SharpSsh.jsch.jce.HMACMD596).ToString());
+
+            //config.Add("sha-1", "Tamir.SharpSsh.jsch.jce.SHA1");
+            config.Add("sha-1", typeof(Tamir.SharpSsh.jsch.jce.SHA1).ToString());
+
+            //config.Add("md5", "Tamir.SharpSsh.jsch.jce.MD5");
+            config.Add("md5", typeof(Tamir.SharpSsh.jsch.jce.MD5).ToString());
+
+            //config.Add("signature.dss", "Tamir.SharpSsh.jsch.jce.SignatureDSA");
+            config.Add("signature.dss", typeof(Tamir.SharpSsh.jsch.jce.SignatureDSA).ToString());
+
+            //config.Add("signature.rsa", "Tamir.SharpSsh.jsch.jce.SignatureRSA");
+            config.Add("signature.rsa", typeof(Tamir.SharpSsh.jsch.jce.SignatureRSA).ToString());
+
+            //config.Add("keypairgen.dsa", "Tamir.SharpSsh.jsch.jce.KeyPairGenDSA");
+            config.Add("keypairgen.dsa", typeof(Tamir.SharpSsh.jsch.jce.KeyPairGenDSA).ToString());
+
+            //config.Add("keypairgen.rsa", "Tamir.SharpSsh.jsch.jce.KeyPairGenRSA");
+            config.Add("keypairgen.rsa", typeof(Tamir.SharpSsh.jsch.jce.KeyPairGenRSA).ToString());
+
+            //config.Add("random", "Tamir.SharpSsh.jsch.jce.Random");
+            config.Add("random", typeof(Tamir.SharpSsh.jsch.jce.Random).ToString());
+
+            //config.Add("aes128-cbc", "Tamir.SharpSsh.jsch.jce.AES128CBC");
+            config.Add("aes128-cbc", typeof(Tamir.SharpSsh.jsch.jce.AES128CBC).ToString());
 
 			//config.Add("zlib",          "com.jcraft.jsch.jcraft.Compression");
 

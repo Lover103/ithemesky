@@ -9,62 +9,11 @@ using System.Threading;
 
 namespace iSprite
 {
-    internal partial class CydiaSourceList : UserControl
+    internal partial class CydiaSourceList : BaseUserControl
     {
         #region 变量定义
-        AppHelper m_appHelper;
-        internal event MessageHandler OnMessage;
-        public event SetNodeCountHandler OnSetNodeCount;
-        public event UpdataCatalogCountHandler OnUpdataCatalogCount;
-        iPhoneFileDevice m_iPhoneDevice;
         ListView m_SourceList;
-        ContextMenuStrip m_ctxTools;
-        #endregion
-
-        #region 设置节点数量
-        /// <summary>
-        /// 设置节点数量
-        /// </summary>
-        /// <param name="nodeName"></param>
-        /// <param name="count"></param>
-        /// <param name="selectNode"></param>
-        void SetNodeCount(string nodeName, int count, bool selectNode)
-        {
-            if (null != OnSetNodeCount)
-            {
-                OnSetNodeCount(nodeName, count, selectNode);
-            }
-        }
-        #endregion
-
-        #region 更新类别数量
-        /// <summary>
-        /// 更新类别数量
-        /// </summary>
-        void UpdataCatalogCount()
-        {
-            if (null != OnUpdataCatalogCount)
-            {
-                OnUpdataCatalogCount();
-            }
-        }
-        #endregion
-
-        #region 消息处理
-        /// <summary>
-        /// 消息处理
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="Message"></param>
-        /// <param name="messageType"></param>
-        private void RaiseMessageHandler(object sender, string Message, MessageTypeOption messageType)
-        {
-            if (OnMessage != null)
-            {
-                OnMessage(sender, Message, messageType);
-            }
-        }
-        #endregion
+        #endregion        
 
         #region 构造函数
         /// <summary>
@@ -149,24 +98,7 @@ namespace iSprite
             m_SourceList.AfterLabelEdit += new LabelEditEventHandler(SourceList_AfterLabelEdit);
             #endregion
 
-            m_ctxTools = new ContextMenuStrip(this.components);
-            m_SourceList.ContextMenuStrip = m_ctxTools;
-            ToolStripButton btn;
-            foreach (ToolStripItem item in toolapp.Items)
-            {
-                if (item is ToolStripButton)
-                {
-                    btn = new ToolStripButton(item.Text);
-                    btn.Click += new EventHandler(ToolStripButton_Click);
-                    item.Click += new EventHandler(ToolStripButton_Click);
-                    m_ctxTools.Items.Add(btn);
-                    m_ctxTools.Items.Add(new ToolStripSeparator());
-                }
-            }
-            btn = new ToolStripButton("Cancel");
-            btn.Click += new EventHandler(ToolStripButton_Click);
-            m_ctxTools.Items.Add(btn);
-
+            AddContextMenu(m_SourceList, toolapp, new EventHandler(ToolStripButton_Click));
         }
 
         void ToolStripButton_Click(object sender, EventArgs e)

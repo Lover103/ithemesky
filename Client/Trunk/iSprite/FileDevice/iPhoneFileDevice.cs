@@ -8,6 +8,7 @@ using System.Threading;
 using CE.iPhone.PList;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace iSprite
 {
@@ -134,6 +135,76 @@ namespace iSprite
             }
 
         }
+
+        internal bool CheckJailbreak()
+        {
+            if (iPhoneInterface.IsConnected)
+            {
+                if (!IsJailbreak)
+                {
+                    if (MessageHelper.ShowConfirm("To continue, you must jailbreak your #AppleDeviceType#!\r\nMay be #AppleDeviceType# is Jailbreaken,but afc2 service is not install,click OK to get help.")
+                        == DialogResult.OK)
+                    {
+                        Process.Start("http://www.ithemesky.com/GetAnswer.aspx?qid=3");
+                    }
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                RaiseMessageHandler(this, "Please Make sure you have connected your #AppleDeviceType# to PC via USB cable.", MessageTypeOption.Error);
+                return false;
+            }
+        }
+
+        internal bool CheckInstallApp(string name)
+        {
+            string content = GetFileText(iSpriteContext.Current.iPhone_InstallationPath);
+            if (!content.ToLower().Contains("<string>" + name.ToLower() + "</string>"))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        #region 判断是否安装指定名称的deb软件（如openssh）
+        /// <summary>
+        /// 判断是否安装指定名称的deb软件（如openssh）
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        internal bool CheckInstallDebApp(string name)
+        {
+            string content = GetFileText("/private/var/lib/dpkg/status");
+
+            Match match = new Regex(string.Format("Package: {0}[\\s\\S]*?Status:(?<Status>[\\S ]*?)\n", name),
+                    RegexOptions.IgnoreCase | RegexOptions.Compiled).Match(content);
+
+            if (!match.Success)
+            {
+                return false;
+            }
+            else
+            {
+                if (match.Value.Contains("not-installed"))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+        #endregion
+
 
         internal string GetFileText(string iPhonePath)
         {
@@ -442,7 +513,7 @@ namespace iSprite
                             case iPhoneFileTypeOption.FILE_IMAGE:
                                 tmppath2 = iSpriteContext.Current.iSpriteTempPath + Guid.NewGuid() + Path.GetExtension(path);
                                 iPhonePNG.ImageFromFile(tmppath).Save(tmppath2);
-                                System.Diagnostics.Process.Start(tmppath2);
+                                Process.Start(tmppath2);
                                 break;
                             case iPhoneFileTypeOption.FILE_PList:
                                 RaiseMessageHandler(this, path, MessageTypeOption.EditPlist);
@@ -507,9 +578,12 @@ namespace iSprite
             List<string> list = new List<string>();
             if (IsConnected)
             {
-                foreach (string name in iPhoneInterface.GetFiles(path))
+                if (iPhoneInterface.Exists(path))
                 {
-                    list.Add(name);
+                    foreach (string name in iPhoneInterface.GetFiles(path))
+                    {
+                        list.Add(name);
+                    }
                 }
             }
             else
@@ -526,14 +600,17 @@ namespace iSprite
             {
                 try
                 {
-                    foreach (string name in iPhoneInterface.GetFiles(path))
+                    if (iPhoneInterface.Exists(path))
                     {
-                        iFileInfo fileinfo = new iFileInfo();
-                        fileinfo.FileName = name;
-                        fileinfo.FullPath = path.TrimEnd('/') + "/" + name;
-                        fileinfo.FileSize = iPhoneInterface.FileSize(fileinfo.FullPath);
-                        fileinfo.UpdateTime = DateTime.MinValue;
-                        list.Add(fileinfo);
+                        foreach (string name in iPhoneInterface.GetFiles(path))
+                        {
+                            iFileInfo fileinfo = new iFileInfo();
+                            fileinfo.FileName = name;
+                            fileinfo.FullPath = path.TrimEnd('/') + "/" + name;
+                            fileinfo.FileSize = iPhoneInterface.FileSize(fileinfo.FullPath);
+                            fileinfo.UpdateTime = DateTime.MinValue;
+                            list.Add(fileinfo);
+                        }
                     }
                 }
                 catch(Exception ex)
@@ -615,6 +692,16 @@ namespace iSprite
         public bool Copy2iPhone(string srcpath_Computer, string destpath_iPhone)
         {
             return Copy2iPhone(srcpath_Computer, destpath_iPhone, true);
+        }
+
+        public bool CopyDirectory2iPhone(string srcpath_Computer, string destpath_iPhone)
+        {
+            foreach (string file in Directory.GetFiles(srcpath_Computer))
+            {
+                Copy2iPhone(file, destpath_iPhone, true);
+            }
+
+            return true;
         }
         /// <summary>
         /// 将文件上传到iPhone

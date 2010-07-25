@@ -13,10 +13,6 @@ namespace iSprite
 {
     internal partial class iSpriteStatus : iUserControl
     {
-        /// <summary>
-        /// 跨线程调用委托
-        /// </summary>
-        private delegate void ThreadInvokeDelegate();
         List<Bitmap> m_ImgList = new List<Bitmap>();
         int M_picIndex = 0;
         const int imgCount = 12;

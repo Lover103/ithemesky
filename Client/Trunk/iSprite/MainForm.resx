@@ -172,9 +172,6 @@
         AABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="toolapp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>130, 54</value>
-  </metadata>
   <metadata name="catalogimg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 54</value>
   </metadata>

@@ -37,9 +37,18 @@ namespace iSprite {
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("iSprite.Resource", typeof(Resource).Assembly);
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
+                    Type type = typeof(Resource);
+                    string baseName = type.Name;
+                    if (!string.IsNullOrEmpty(type.Namespace))
+                    {
+                        baseName = type.Namespace + "." + baseName;
+                    }
+
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager(baseName, type.Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -109,6 +118,13 @@ namespace iSprite {
             }
         }
         
+        internal static System.Drawing.Bitmap btn_install {
+            get {
+                object obj = ResourceManager.GetObject("btn_install", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap btn_pause {
             get {
                 object obj = ResourceManager.GetObject("btn_pause", resourceCulture);
@@ -126,6 +142,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap btn_restart {
             get {
                 object obj = ResourceManager.GetObject("btn_restart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btn_Shutdown {
+            get {
+                object obj = ResourceManager.GetObject("btn_Shutdown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -357,6 +380,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap Maps {
             get {
                 object obj = ResourceManager.GetObject("Maps", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Msg__Warning {
+            get {
+                object obj = ResourceManager.GetObject("Msg__Warning", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

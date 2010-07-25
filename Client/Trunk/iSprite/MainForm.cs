@@ -24,10 +24,6 @@ namespace iSprite
     {
         #region 变量定义
         /// <summary>
-        /// 跨线程调用委托
-        /// </summary>
-        private delegate void ThreadInvokeDelegate();
-        /// <summary>
         /// iPhone操作面板
         /// </summary>
         private FilePanel m_iPhonePanel;
@@ -47,29 +43,29 @@ namespace iSprite
         /// <summary>
         /// 进度条
         /// </summary>
-        private iProgress progressBar;
+        private iProgress m_ProgressBar;
         /// <summary>
         /// iPhone操作对象
         /// </summary>
-        private iPhone iphone;
+        private iPhone m_iPhone;
         /// <summary>
         /// 指示是否停止传输
         /// </summary>
-        private bool m_stoptransfer = false;
+        private bool m_StopTransfer = false;
         /// <summary>
         /// 显示视图
         /// </summary>
         private ViewModeOption m_ViewMode = ViewModeOption.DUALVERTICAL;
         iThemeBrowser m_themeManage;
-        IFileDevice iphonedriver;
-        IFileDevice localdiskdriver;
+        IFileDevice m_iPhoneDevice;
+        IFileDevice m_localdiskdriver;
         Updater m_Updater;
         AppManage m_AppManage;
 
         /// <summary>
         /// 状态条
         /// </summary>
-        private iSpriteStatus statusBar;
+        private iSpriteStatus m_StatusBar;
 
         #endregion
 
@@ -92,20 +88,20 @@ namespace iSprite
         /// </summary>
         void InitProgress()
         {
-            progressBar = new iProgress();
-            Controls.Add(progressBar);
-            progressBar.BringToFront();
-            progressBar.Left = (this.Width - progressBar.Width) / 2;
-            progressBar.Top = (this.Height - progressBar.Height) / 2;
-            progressBar.Visible = false;
-            progressBar.OnCancel += new CancelHandler(progressBar_OnCancel);
+            m_ProgressBar = new iProgress();
+            Controls.Add(m_ProgressBar);
+            m_ProgressBar.BringToFront();
+            m_ProgressBar.Left = (this.Width - m_ProgressBar.Width) / 2;
+            m_ProgressBar.Top = (this.Height - m_ProgressBar.Height) / 2;
+            m_ProgressBar.Visible = false;
+            m_ProgressBar.OnCancel += new CancelHandler(progressBar_OnCancel);
 
-            statusBar = new iSpriteStatus(this);
-            Controls.Add(statusBar);
-            statusBar.BringToFront();
-            statusBar.Left = (this.Width - statusBar.Width) / 2;
-            statusBar.Top = (this.Height - statusBar.Height) / 2;
-            statusBar.Visible = false;
+            m_StatusBar = new iSpriteStatus(this);
+            Controls.Add(m_StatusBar);
+            m_StatusBar.BringToFront();
+            m_StatusBar.Left = (this.Width - m_StatusBar.Width) / 2;
+            m_StatusBar.Top = (this.Height - m_StatusBar.Height) / 2;
+            m_StatusBar.Visible = false;
         }
         #endregion
 
@@ -123,22 +119,22 @@ namespace iSprite
             //this.tabs.SelectedItem = this.tabFile;
             mainsplitcontainer.SplitterDistance = this.ClientSize.Width / 2;
 
-            iphone = new iPhone();
-            iphonedriver = new iPhoneFileDevice(iphone);
-            iphonedriver.OnMessage += new MessageHandler(ShowMessage);
+            m_iPhone = new iPhone();
+            m_iPhoneDevice = new iPhoneFileDevice(m_iPhone);
+            m_iPhoneDevice.OnMessage += new MessageHandler(ShowMessage);
 
-            iphonedriver.OnCompleteHandler += new FileCompletedHandler(iphonedriver_OnCompleteHandler);
-            iphonedriver.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
+            m_iPhoneDevice.OnCompleteHandler += new FileCompletedHandler(iphonedriver_OnCompleteHandler);
+            m_iPhoneDevice.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
 
-            m_iPhonePanel = new FilePanel(iphonedriver);
+            m_iPhonePanel = new FilePanel(m_iPhoneDevice);
             mainsplitcontainer.Panel1.Controls.Add(m_iPhonePanel);
             m_iPhonePanel.Dock = DockStyle.Fill;
             m_iPhonePanel.Enabled = false;
             m_iPhonePanel.OnMessage += new MessageHandler(ShowMessage);
 
             //	本地磁盘操作面板
-            localdiskdriver = new LoaclDiskFileDevice();
-            m_LoaclDiskPanel = new FilePanel(localdiskdriver);
+            m_localdiskdriver = new LoaclDiskFileDevice();
+            m_LoaclDiskPanel = new FilePanel(m_localdiskdriver);
             mainsplitcontainer.Panel2.Controls.Add(m_LoaclDiskPanel);
             m_LoaclDiskPanel.Dock = DockStyle.Fill;
             m_LoaclDiskPanel.OnMessage += new MessageHandler(ShowMessage);
@@ -163,12 +159,12 @@ namespace iSprite
             }
 
             //主题管理
-            m_themeManage = new iThemeBrowser((iPhoneFileDevice)iphonedriver, tabTheme, this);
+            m_themeManage = new iThemeBrowser((iPhoneFileDevice)m_iPhoneDevice, tabTheme, this);
             m_themeManage.OnMessage += new MessageHandler(ShowMessage);
             m_themeManage.OnProgressHandler += new FileProgressHandler(DoProgressHandler);
 
             //程序管理
-            m_AppManage = new AppManage((iPhoneFileDevice)iphonedriver, this);
+            m_AppManage = new AppManage((iPhoneFileDevice)m_iPhoneDevice, this);
             m_AppManage.OnMessage += new MessageHandler(ShowMessage);
 
             //检查更新
@@ -184,11 +180,11 @@ namespace iSprite
 
 
             //	iPhone操作面板
-            if (iphone.IsInstalliTunes)
+            if (m_iPhone.IsInstalliTunes)
             {
-                iphone.Connect += new ConnectEventHandler(iphone_Connect);
-                iphone.Disconnect += new ConnectEventHandler(iphone_Disconnect);
-                iphone.StartContect();
+                m_iPhone.Connect += new ConnectEventHandler(iphone_Connect);
+                m_iPhone.Disconnect += new ConnectEventHandler(iphone_Disconnect);
+                m_iPhone.StartContect();
             }
             else
             {
@@ -228,11 +224,11 @@ namespace iSprite
             //ShowMessage(this, "Begin to Save Setting...", MessageTypeOption.SetStatusBar);
             //Application.DoEvents();
 
-            if (null != iphone)
+            if (null != m_iPhone)
             {
                 //移除事件
-                iphone.Connect -= new ConnectEventHandler(iphone_Connect);
-                iphone.Disconnect -= new ConnectEventHandler(iphone_Disconnect);
+                m_iPhone.Connect -= new ConnectEventHandler(iphone_Connect);
+                m_iPhone.Disconnect -= new ConnectEventHandler(iphone_Disconnect);
             }
             if (null != m_AppManage)
             {
@@ -330,13 +326,13 @@ namespace iSprite
                 m_iPhonePanel.Enabled = enable;
                 if (enable)
                 {
-                    iSpriteContext.Current.AfterDeviceFinishConnected(iphone);
-                    ((iPhoneFileDevice)iphonedriver).AfterDeviceFinishConnected();
+                    iSpriteContext.Current.AfterDeviceFinishConnected(m_iPhone);
+                    ((iPhoneFileDevice)m_iPhoneDevice).AfterDeviceFinishConnected();
                     m_iPhonePanel.AfterDeviceFinishConnected();
                 }
                 m_themeManage.AfterDeviceFinishConnected(enable);
                 m_AppManage.AfterDeviceFinishConnected(enable);
-                tsbtnDeb.Enabled = tsbtnreSpring.Enabled = enable;
+                tsbtnDeb.Enabled = tsbtnreSpring.Enabled = tsbtnReboot.Enabled = tsbtnShutdown.Enabled = enable;
             }
             catch (Exception ex)
             {
@@ -373,19 +369,19 @@ namespace iSprite
                     }
                     break;
                 case MessageTypeOption.EditPlist:
-                    PlistEditer.Show((iPhoneFileDevice)iphonedriver, message);
+                    PlistEditer.Show((iPhoneFileDevice)m_iPhoneDevice, message);
                     break;
                 case MessageTypeOption.SetStatusBar:
-                    statusBar.StatusMsg = message;
+                    m_StatusBar.StatusMsg = message;
                     Application.DoEvents();
                     break;
                 case MessageTypeOption.HiddenStatusBar:
                     if (message != string.Empty)
                     {
-                        statusBar.StatusMsg = message;
+                        m_StatusBar.StatusMsg = message;
                         Thread.Sleep(TimeSpan.FromSeconds(3));
                     }
-                    statusBar.Hidden();
+                    m_StatusBar.Hidden();
                     break;
                 case MessageTypeOption.SuccessInstalled:
                     if (null != m_AppManage)
@@ -404,7 +400,7 @@ namespace iSprite
         /// <param name="cancel"></param>
         void progressBar_OnCancel(object sender, bool cancel)
         {
-            m_stoptransfer = cancel;
+            m_StopTransfer = cancel;
         }
         /// <summary>
         /// 文件传输进度处理
@@ -418,22 +414,22 @@ namespace iSprite
         /// <param name="cancel"></param>
         void DoProgressHandler(FileProgressMode mode, ulong totalSize, ulong completeSize, int speed, double timeElapse, string file, ref bool cancel)
         {
-            if (m_stoptransfer)
+            if (m_StopTransfer)
             {
                 //取消传输
                 cancel = true;
-                m_stoptransfer = false;
-                progressBar.Visible = false;
+                m_StopTransfer = false;
+                m_ProgressBar.Visible = false;
             }
             else
             {
                 if (totalSize <= completeSize)
                 {
-                    progressBar.Visible = false;
+                    m_ProgressBar.Visible = false;
                 }
                 else
                 {
-                    progressBar.SetProgress(mode, totalSize, completeSize, speed, timeElapse, file);
+                    m_ProgressBar.SetProgress(mode, totalSize, completeSize, speed, timeElapse, file);
                 }
             }
         }
@@ -445,7 +441,7 @@ namespace iSprite
         /// <param name="lastErr"></param>
         void iphonedriver_OnCompleteHandler(bool success, string file, string lastErr)
         {
-            progressBar.Visible = false;
+            m_ProgressBar.Visible = false;
         }
 
         /// <summary>
@@ -503,14 +499,28 @@ namespace iSprite
                     break;
                 case "tsbtnDeb":
                 case "tsbtnInstallDeb":
-                    DebInstaller.Show((iPhoneFileDevice)iphonedriver, new MessageHandler(ShowMessage));
+                    DebInstaller.Show((iPhoneFileDevice)m_iPhoneDevice, 
+                        new MessageHandler(ShowMessage),
+                        new FileProgressHandler(DoProgressHandler)
+                        );
                     break;
                 case "tsbtnInstallIPA":
+                    IPAInstaller.Show((iPhoneFileDevice)m_iPhoneDevice,
+                        new MessageHandler(ShowMessage),
+                        new FileProgressHandler(DoProgressHandler)
+                        );
+                    break;
                 case "tsbtnInstallPXL":
-                    ShowMessage(this,"Coming soon...", MessageTypeOption.Info);
+                    PXLInstaller.Show((iPhoneFileDevice)m_iPhoneDevice,
+                        new MessageHandler(ShowMessage),
+                        new FileProgressHandler(DoProgressHandler)
+                        );
                     break;
                 case "tsbtnReboot":
                     Reboot();
+                    break;
+                case "tsbtnShutdown":
+                    Shutdown();
                     break;
             }
         }
@@ -608,7 +618,7 @@ namespace iSprite
         {
             if (MessageHelper.ShowConfirm("Are you sure you want to reboot Springboard ?") == DialogResult.OK)
             {
-                ((iPhoneFileDevice)iphonedriver).Respring();
+                ((iPhoneFileDevice)m_iPhoneDevice).Respring();
             }
         }
         #endregion
@@ -621,8 +631,64 @@ namespace iSprite
         {
             if (MessageHelper.ShowConfirm("Are you sure you want to reboot your #AppleDeviceType# ?") == DialogResult.OK)
             {
+                if (!((iPhoneFileDevice)m_iPhoneDevice).CheckInstallDebApp("openssh"))
+                {
+                    if (MessageHelper.ShowConfirm("Please install open ssh to continue, Would you want to install?") 
+                        == DialogResult.OK)
+                    {
+                        //安装Open ssh
+                        MyInstaller.Show(
+                            (iPhoneFileDevice)m_iPhoneDevice,
+                            InstallAppOption.OpenSSH,
+                            new FileProgressHandler(DoProgressHandler)
+                            );
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
                 string errMsg = string.Empty;
-                if (SSHHelper.Reboot(out errMsg) 
+                if (!SSHHelper.Reboot(out errMsg) 
+                    && !string.IsNullOrEmpty(errMsg))
+                {
+                    MessageHelper.ShowError(errMsg);
+                }
+            }
+        }
+        #endregion
+
+        #region 关闭iPhone
+        /// <summary>
+        /// 关闭iPhone
+        /// </summary>
+        void Shutdown()
+        {
+            if (MessageHelper.ShowConfirm("Are you sure you want to Shutdown your #AppleDeviceType# ?") == DialogResult.OK)
+            {
+                if (!((iPhoneFileDevice)m_iPhoneDevice).CheckInstallDebApp("openssh"))
+                {
+                    if (MessageHelper.ShowConfirm("Please install open ssh to continue, Would you want to install?")
+                        == DialogResult.OK)
+                    {
+                        //安装Open ssh
+                        MyInstaller.Show(
+                            (iPhoneFileDevice)m_iPhoneDevice,
+                            InstallAppOption.OpenSSH,
+                            new FileProgressHandler(DoProgressHandler)
+                            );
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                string errMsg = string.Empty;
+                if (!SSHHelper.Shutdown(out errMsg)
                     && !string.IsNullOrEmpty(errMsg))
                 {
                     MessageHelper.ShowError(errMsg);

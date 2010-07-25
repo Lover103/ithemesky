@@ -43,10 +43,11 @@
             // 
             // btnOK
             // 
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnOK.DownImage = null;
             this.btnOK.HoverImage = null;
-            this.btnOK.Location = new System.Drawing.Point(64, 97);
+            this.btnOK.Location = new System.Drawing.Point(76, 97);
             this.btnOK.Name = "btnOK";
             this.btnOK.NormalImage = global::iSprite.Resource.Img_button;
             this.btnOK.Size = new System.Drawing.Size(75, 25);
@@ -57,10 +58,11 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnCancel.DownImage = null;
             this.btnCancel.HoverImage = null;
-            this.btnCancel.Location = new System.Drawing.Point(182, 97);
+            this.btnCancel.Location = new System.Drawing.Point(194, 97);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.NormalImage = global::iSprite.Resource.Img_button;
             this.btnCancel.Size = new System.Drawing.Size(75, 25);
@@ -71,10 +73,11 @@
             // 
             // btnAbort
             // 
+            this.btnAbort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAbort.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnAbort.DownImage = null;
             this.btnAbort.HoverImage = null;
-            this.btnAbort.Location = new System.Drawing.Point(296, 97);
+            this.btnAbort.Location = new System.Drawing.Point(308, 97);
             this.btnAbort.Name = "btnAbort";
             this.btnAbort.NormalImage = global::iSprite.Resource.Img_button;
             this.btnAbort.Size = new System.Drawing.Size(75, 25);
@@ -120,8 +123,9 @@
             // 
             // picbox
             // 
-            this.picbox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.picbox.Location = new System.Drawing.Point(4, 21);
+            this.picbox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.picbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picbox.Location = new System.Drawing.Point(4, 12);
             this.picbox.Name = "picbox";
             this.picbox.Size = new System.Drawing.Size(32, 32);
             this.picbox.TabIndex = 1;
@@ -145,6 +149,7 @@
             this.pnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

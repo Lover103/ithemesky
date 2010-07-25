@@ -16,12 +16,6 @@ namespace iSprite
 
     internal partial class iProgress : iUserControl
     {
-
-        /// <summary>
-        /// 跨线程调用委托
-        /// </summary>
-        private delegate void ThreadInvokeDelegate();
-
         internal event CancelHandler OnCancel;
 
         private void RaiseCancelHandler(object sender, bool cancel)
@@ -68,18 +62,22 @@ namespace iSprite
             this.Maximum = Convert.ToInt32(totalSize);
             this.Value = Convert.ToInt32(completeSize);
             Application.DoEvents();
+            string title = string.Empty;
             switch (mode)
             {
                 case FileProgressMode.PC2iPhone:
-                    this.Title = string.Format("Copy file({0}) to #AppleDeviceType#...", Path.GetFileName(file));
+                    title = string.Format("Copy file({0}) to #AppleDeviceType#...", Path.GetFileName(file));
                     break;
                 case FileProgressMode.iPhone2PC:
-                    this.Title = string.Format("Copy file({0}) from #AppleDeviceType#...", Path.GetFileName(file));
+                    title = string.Format("Copy file({0}) from #AppleDeviceType#...", Path.GetFileName(file));
                     break;
                 case FileProgressMode.Internet2PC:
-                    this.Title = string.Format("Download file({0}) from Internet...", Path.GetFileName(file));
+                    title = string.Format("Download file({0}) from Internet...", Path.GetFileName(file));
                     break;
             }
+            this.Title = title.Replace("#AppleDeviceType#", iSpriteContext.Current.AppleDeviceType);
+            Application.DoEvents();
+
             if (perent > 0 && timeElapse > 0)
             {
                 int timeleft = (int)(timeElapse * ((1 - perent) / perent));
@@ -98,6 +96,7 @@ namespace iSprite
                     Utility.FormatFileSizeFloat((ulong)speed)
                     );
             }
+            Application.DoEvents();
         }
 
         public new bool Visible
@@ -110,12 +109,30 @@ namespace iSprite
                         delegate()
                         {
                             base.Visible = value;
+                            if (value)
+                            {
+                                this.BringToFront();
+                            }
+                            else
+                            {
+                                this.SendToBack();
+                            }
+                            Application.DoEvents();
                         }
                     ));
                 }
                 else
                 {
                     base.Visible = value;
+                    if (value)
+                    {
+                        this.BringToFront();
+                    }
+                    else
+                    {
+                        this.SendToBack();
+                    }
+                    Application.DoEvents();
                 }
             }
         }

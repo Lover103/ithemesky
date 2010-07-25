@@ -4,9 +4,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using Manzana;
+using System.Xml.Serialization;
 
 namespace iSprite
 {
+    [Serializable]
+    public class UserCfg
+    {
+        [XmlAttribute("SSHPWD")]
+        public string SSHPWD;
+    }
     internal class iSpriteContext
     {
         /// <summary>
@@ -105,6 +112,8 @@ namespace iSprite
         /// </summary>
         internal string iPhone_InstallationPath { private set; get; }
 
+        internal UserCfg iSpiritUserCfg { private set; get; }
+
         /// <summary>
         /// 静态构造器
         /// </summary>
@@ -120,12 +129,53 @@ namespace iSprite
             Reload();
         }
 
+        public void ReloadUserCfg()
+        {
+            string cfgpath = iSpriteApplicationDataPath + "iSpirit.cfg";
+            bool flag = false;
+            if (File.Exists(cfgpath))
+            {
+                try
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(UserCfg));
+                    using (FileStream fs = new FileStream(iSpriteApplicationDataPath + "iSpirit.cfg", FileMode.Open))
+                    {
+                        iSpiritUserCfg = (UserCfg)serializer.Deserialize(fs);
+                        flag = true;
+                    }
+                }
+                catch
+                { 
+                }
+            }
+            if (!flag)
+            {
+                iSpiritUserCfg = new UserCfg();
+                iSpiritUserCfg.SSHPWD = "alpine";
+                SaveUserCfg();
+            }
+        }
+        public void SaveUserCfg()
+        {
+            string cfgpath = iSpriteApplicationDataPath + "iSpirit.cfg";
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(UserCfg));
+                using (FileStream fs = new FileStream(cfgpath, FileMode.Create))
+                {
+                    serializer.Serialize(fs, iSpiritUserCfg);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
         /// <summary>
         /// 加载实例
         /// </summary>
         public void Reload()
         {
-            CurrentVersion = "1.0.2";
+            CurrentVersion = "1.0.5";
             AppleDeviceType = "iPhone";
             ThemeHomePage = Manzana.Utility.Decrypt("60A99C413E1F93068451A6E02805A1E0A306054C5C2C6E15001DC23B9551C12B");
             HelpUrl = "http://www.ithemesky.com/ispirit/help";
@@ -192,7 +242,7 @@ namespace iSprite
             #region 生成iTunnel.exe
             //生成iTunnel.exe
             FileStream fileStream = null;
-            string fileName = iSpriteApplicationDataPath + @"\SSHDevice.exe";
+            string fileName = iSpriteApplicationDataPath + @"\iTunnel.exe";
             if (!File.Exists(fileName))
             {
                 try
@@ -211,6 +261,8 @@ namespace iSprite
                 }
             }
             #endregion
+
+            ReloadUserCfg();
         }
 
         public void Clear()
@@ -251,6 +303,12 @@ namespace iSprite
             {
                 ver = ver + ".0";
             }
+
+            if (!iphone.IsJailbreak)
+            {
+                _context.iPhone_MyDocuments_Path = "/My Documents/";
+            }
+
             if (Convert.ToInt32(ver.Replace(".", "")) >= 113)
             {
                 //如果 iPhone 版本号大于等于 1.1.3 ，地址要改为 mobile 下
@@ -260,12 +318,13 @@ namespace iSprite
                 _context.iPhone_GlobalPreferences_Path = _context.iPhone_GlobalPreferences_Path.Replace("/root/", "/mobile/");
 
             }
+            if (!iphone.Exists(_context.iPhone_MyDocuments_Path))
+            {
+                iphone.CreateDirectory(_context.iPhone_MyDocuments_Path);
+            }
+
             if (iphone.IsJailbreak && iphone.DeviceType!="iPad")
             {
-                if (!iphone.Exists(_context.iPhone_MyDocuments_Path))
-                {
-                    iphone.CreateDirectory(_context.iPhone_MyDocuments_Path);
-                }
                 if (!iphone.Exists(_context.iPhone_CydiaAutoInstallPath))
                 {
                     iphone.CreateDirectory(_context.iPhone_CydiaAutoInstallPath);
@@ -283,7 +342,6 @@ namespace iSprite
 
             _context.AppleDeviceType = iphone.DeviceType;
             _context.iPhone_WinterBoardFile_Path = "/Library/Themes/";
-
 
         }
     }

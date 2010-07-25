@@ -17,7 +17,12 @@ namespace iSprite
         {
         }
 
-        static bool isdebug = true;
+        internal static void Move2Center(Control pCtrl, Control ctrl)
+        {
+            ctrl.Location = new System.Drawing.Point((pCtrl.Width - ctrl.Width) / 2, (pCtrl.Height - ctrl.Height) / 2);
+        }
+
+        static bool isdebug = false;
         internal static void WriteLog(string content)
         {
             if (isdebug)
@@ -36,8 +41,9 @@ namespace iSprite
             return sb.ToString().TrimEnd(',');
         }
 
-        public static string GetNotExistFileName(string newFileName)
+        public static string GetNotExistFileName(string dir, string newFileName)
         {
+            newFileName = dir + newFileName;
             FileInfo fileInfo = new FileInfo(newFileName);
             if (fileInfo.Exists)
             {
@@ -53,7 +59,7 @@ namespace iSprite
                 }
                 while (File.Exists(newFileName));
             }
-            return newFileName;
+            return Path.GetFileName(newFileName);
         }
 
         /// <summary>
@@ -156,6 +162,8 @@ namespace iSprite
                         }
 
                         progresshandler(FileProgressMode.Internet2PC, totalfileSize, finishSize, speed, timeElapse, Path.GetFileName(destFilePath), ref cancelDownload);
+
+                        Application.DoEvents();
                         if (cancelDownload)
                         {
                             break;

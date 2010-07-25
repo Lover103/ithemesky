@@ -22,6 +22,7 @@ namespace iSprite
         public string SaveDir = string.Empty;
         public string FileName = string.Empty;
         public InstallState State = InstallState.NoNeedInstall;
+        public string Hash = string.Empty;
     }
 
     /// <summary>

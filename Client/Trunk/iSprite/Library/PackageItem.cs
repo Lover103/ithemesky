@@ -15,7 +15,7 @@ namespace iSprite
         {
             get
             {
-                return Package + "-" + Version;
+                return Name + "-" + Package + "-" + Version;
             }
         }
 
@@ -133,14 +133,26 @@ namespace iSprite
         /// <summary>
         /// 最终的下载地址
         /// </summary>
-        public string FinalDownloadURL(string baseURL)
+        public string FinalDownloadURL(string baseDownloadURL)
         {
-            return string.Format("http://www.ithemesky.com/dl.aspx?url={0}{1}&name={2}&PID={3}",
-                                                  HttpUtility.UrlDecode(baseURL, Encoding.UTF8),
-                                                  HttpUtility.UrlDecode(DownloadURL, Encoding.UTF8),
-                                                  Path.GetFileName(DownloadURL),
-                                                  HttpUtility.UrlDecode(PackageID, Encoding.UTF8)
+            return string.Format("http://www.ithemesky.com/dl.aspx?url={0}{1}&PID={1}",
+                                                  HttpUtility.UrlEncode(baseDownloadURL, Encoding.UTF8),
+                                                  HttpUtility.UrlEncode(DownloadURL, Encoding.UTF8),
+                                                  HttpUtility.UrlEncode(PackageID, Encoding.UTF8)
                                                  );
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("Version: {0}\r\n", Version == null ? "" : Version);
+            sb.AppendFormat("Category: {0}\r\n", Category == null ? "" : Category);
+            sb.AppendFormat("Pre-Depends: {0}\r\n", string.IsNullOrEmpty(Pre_Depends) ? "none" : Pre_Depends);
+            sb.AppendFormat("Depends: {0}\r\n", string.IsNullOrEmpty(Dependencies) ? "none" : Dependencies);
+            sb.AppendFormat("Conflicts: {0}\r\n", string.IsNullOrEmpty(Conflicts) ? "none" : Conflicts);
+            sb.AppendFormat("Description: {0}\r\n", string.IsNullOrEmpty(Description) ? "none" : Description);
+
+            return sb.ToString();
         }
 
         public string PackageID
@@ -297,21 +309,10 @@ namespace iSprite
             }
         }
 
-        public string AdditionalInfoURL
+        public string RepositoryIdentifier
         {
-            get
-            {
-                return this._AdditionalInfoURL;
-            }
-            set
-            {
-                if (!string.Equals(this._AdditionalInfoURL, value))
-                {
-                    this.SendPropertyChanging();
-                    this._AdditionalInfoURL = value;
-                    this.SendPropertyChanged("AdditionalInfoURL");
-                }
-            }
+            get;
+            set;
         }
 
         public string Category

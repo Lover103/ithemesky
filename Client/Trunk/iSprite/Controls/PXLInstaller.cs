@@ -12,14 +12,14 @@ using Manzana;
 namespace iSprite
 {
 
-    internal partial class DebInstaller : iSpriteForm
+    internal partial class PXLInstaller : iSpriteForm
     {
-        static private DebInstaller InstallerBox;
+        static private PXLInstaller InstallerBox;
         iPhoneFileDevice m_iPhoneDevice;
         internal event MessageHandler OnMessage;
         internal FileProgressHandler m_OnProgressHandler;
 
-        public DebInstaller()
+        public PXLInstaller()
         {
             InitializeComponent();
             this.DialogResult = DialogResult.Cancel;
@@ -38,7 +38,7 @@ namespace iSprite
 
         public static DialogResult Show(iPhoneFileDevice filedevice, MessageHandler msgHandler, FileProgressHandler progressHandler)
         {
-            InstallerBox = new DebInstaller();
+            InstallerBox = new PXLInstaller();
             InstallerBox.m_iPhoneDevice = filedevice;
             InstallerBox.m_OnProgressHandler = progressHandler;
             InstallerBox.OnMessage += msgHandler;
@@ -75,33 +75,41 @@ namespace iSprite
             string fileName = txtFileName.Text;
             if (fileName == string.Empty)
             {
-                MessageHelper.ShowError("please choose .deb file !");
+                MessageHelper.ShowError("please choose .pxl file !");
                 this.ShowForm();
                 return;
             }
             if (!File.Exists(fileName))
             {
-                MessageHelper.ShowError("the .deb file is not exists!");
+                MessageHelper.ShowError("the .pxl file is not exists!");
                 this.ShowForm();
                 return;
             }
-            //this.Visible = false;
             string msg = string.Empty;
-            bool flag = SSHHelper.InstallDeb(m_iPhoneDevice, fileName, out msg);
-            if (flag)
-            {
-                RaiseMessageHandler(this,string.Empty, MessageTypeOption.SuccessInstalled);
-                MessageHelper.ShowInfo(msg);
-                this.ShowForm();
-            }
-            else if(!string.IsNullOrEmpty(msg))
-            {
-                MessageHelper.ShowError(msg);
-                this.ShowForm();
-            }
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            string tozippath = iSpriteContext.Current.iSpriteTempPath + Path.GetRandomFileName() + "\\";
+
+            RaiseMessageHandler(this, "Prepare to unzip .pxl", MessageTypeOption.SetStatusBar);
+
+            if (ZipHelper.UnZip(fileName, tozippath) > 0)
+            {
+                RaiseMessageHandler(this, "Prepare to Copy files to  iDevice...", MessageTypeOption.HiddenStatusBar);
+
+                bool flag = SSHHelper.InstallPXL(m_iPhoneDevice, tozippath, out msg);
+                if (flag)
+                {
+                    MessageHelper.ShowInfo(msg);
+                    this.ShowForm();
+                }
+                else if (!string.IsNullOrEmpty(msg))
+                {
+                    MessageHelper.ShowError(msg);
+                    this.ShowForm();
+                }
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }        
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -113,7 +121,7 @@ namespace iSprite
         private void btnSelect_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Deb Files(*.deb)|*.deb";
+            dialog.Filter = "PXL Files(*.pxl)|*.pxl";
             dialog.Multiselect = false;
             if (dialog.ShowDialog() == DialogResult.OK)
             {

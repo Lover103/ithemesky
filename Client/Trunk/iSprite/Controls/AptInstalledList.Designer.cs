@@ -69,9 +69,9 @@
             this.toolbtnRemove.Image = global::iSprite.Resource.Remove;
             this.toolbtnRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolbtnRemove.Name = "toolbtnRemove";
-            this.toolbtnRemove.Size = new System.Drawing.Size(61, 22);
-            this.toolbtnRemove.Text = "Remove";
-            this.toolbtnRemove.ToolTipText = "Remove";
+            this.toolbtnRemove.Size = new System.Drawing.Size(79, 22);
+            this.toolbtnRemove.Text = "UnInstall";
+            this.toolbtnRemove.ToolTipText = "UnInstall";
             // 
             // app_Panelbuttom
             // 

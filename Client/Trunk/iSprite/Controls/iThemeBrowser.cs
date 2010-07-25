@@ -137,8 +137,11 @@ namespace iSprite
                 (
                     delegate(object sender, EventArgs e)
                     {
-                        ShowThemesIniPhone();
-                        tsbtn_ThemesIniPhone.DropDown.Visible = true;
+                        if (!tsbtn_ThemesIniPhone.DropDown.Visible)
+                        {
+                            ShowThemesIniPhone();
+                            tsbtn_ThemesIniPhone.DropDown.Visible = true;
+                        }
                     }
                 );
 
@@ -749,11 +752,11 @@ namespace iSprite
         /// <returns></returns>
         bool CheckInstallWinterBoard()
         {
-            if (!m_iPhoneDevice.IsJailbreak)
+            if (!m_iPhoneDevice.CheckJailbreak())
             {
-                MessageHelper.ShowError("To use theme ,you must Jailbreak your " + m_iPhoneDevice.DeviceTypeName + " first !");
                 return false;
             }
+
             if (!m_iPhoneDevice.DirectoryExists(iSpriteContext.Current.iPhone_WinterBoardApp_Path))
             {
                 if (MessageHelper.ShowConfirm("WinterBoard has not been installed, Would you want to install?") == DialogResult.OK)
@@ -770,7 +773,8 @@ namespace iSprite
                 if (!content.Contains("<key>com.saurik.WinterBoard</key>"))
                 {
                     //如果没有显示，需要重启Springboard
-                    if (MessageHelper.ShowInfo("WinterBoard has been installed, ispirit will reboot #AppleDeviceType# SpringBoard to show WinterBoard in  home screen?") == DialogResult.OK)
+                    if (MessageHelper.ShowInfo("WinterBoard has been installed, ispirit will reboot #AppleDeviceType# SpringBoard to show WinterBoard in  home screen.") 
+                        == DialogResult.OK)
                     {
                         //重启Respring
                         m_iPhoneDevice.Respring();
@@ -835,35 +839,7 @@ namespace iSprite
         /// <returns></returns>
         bool InstallWinterBoard()
         {
-            string wbxmlpath = iSpriteContext.Current.iSpriteTempPath + "\\" + "update.xml";
-            if (Utility.DownloadFile(iSpriteContext.Current.WinterBoardXML, wbxmlpath, OnProgressHandler))
-            { 
-                DataSet ds = new DataSet();
-                ds.ReadXml(wbxmlpath);
-                if (ds.Tables.Count == 1 && ds.Tables[0].Rows.Count >= 1)
-                {
-                    DataRow[] rows = ds.Tables[0].Select("Ver='" + m_iPhoneDevice.DeviceVersion + "'");
-                    if (rows.Length == 0)
-                    {
-                        rows = ds.Tables[0].Select("Ver='all'");
-                    }
-                    if (rows.Length >0)
-                    {
-                        string wburl = rows[0]["downurl"].ToString();
-                        string wbfilepath = iSpriteContext.Current.iSpriteTempPath + "\\" + "winterboard.deb";
-                        if (Utility.DownloadFile(wburl, wbfilepath, OnProgressHandler))
-                        {
-                            if (m_iPhoneDevice.Copy2iPhone(wbfilepath,
-                                iSpriteContext.Current.iPhone_CydiaAutoInstallPath))
-                            {
-                                MessageHelper.ShowInfo("WinterBoard has been copied to #AppleDeviceType#, You must reboot your #AppleDeviceType# to finish Installation.");
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
+            return MyInstaller.Show(m_iPhoneDevice, InstallAppOption.Winterboard, OnProgressHandler) == DialogResult.OK;
         }
         #endregion        
 
@@ -1003,7 +979,12 @@ namespace iSprite
                 RaiseMessageHandler(this, "Begin to Delete Themes", MessageTypeOption.SetStatusBar);
                 foreach (string themeName in list)
                 {
-                    m_iPhoneDevice.DeleteDirectory(iSpriteContext.Current.iPhone_WinterBoardFile_Path + "/" + themeName);
+                    string dir = iSpriteContext.Current.iPhone_WinterBoardFile_Path + themeName + "/";
+                    m_iPhoneDevice.DeleteDirectory(dir, true);
+                    if (m_themesPanel.Controls.ContainsKey(dir))
+                    {
+                        m_themesPanel.Controls.RemoveByKey(dir);
+                    }
                 }
                 RaiseMessageHandler(this, "", MessageTypeOption.HiddenStatusBar);
             }

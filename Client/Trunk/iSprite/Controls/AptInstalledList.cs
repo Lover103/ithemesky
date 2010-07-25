@@ -8,48 +8,12 @@ using System.Windows.Forms;
 
 namespace iSprite
 {
-    internal partial class AptInstalledList : UserControl
+    internal partial class AptInstalledList : BaseUserControl
     {
         #region 变量定义
-        AppHelper m_appHelper;
-        internal event MessageHandler OnMessage;
-        public event SetNodeCountHandler OnSetNodeCount;
-        iPhoneFileDevice m_iPhoneDevice;
         ListView m_InstalledAppList;
         ListViewGroup m_UserGroup = new ListViewGroup();
         ListViewGroup m_SystemGroup = new ListViewGroup();
-        #endregion
-
-        #region 设置节点数量
-        /// <summary>
-        /// 设置节点数量
-        /// </summary>
-        /// <param name="nodeName"></param>
-        /// <param name="count"></param>
-        /// <param name="selectNode"></param>
-        void SetNodeCount(string nodeName, int count, bool selectNode)
-        {
-            if (null != OnSetNodeCount)
-            {
-                OnSetNodeCount(nodeName, count, selectNode);
-            }
-        }
-        #endregion
-
-        #region 消息处理
-        /// <summary>
-        /// 消息处理
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="Message"></param>
-        /// <param name="messageType"></param>
-        private void RaiseMessageHandler(object sender, string Message, MessageTypeOption messageType)
-        {
-            if (OnMessage != null)
-            {
-                OnMessage(sender, Message, messageType);
-            }
-        }
         #endregion
 
         #region 构造函数
@@ -78,13 +42,23 @@ namespace iSprite
         /// </summary>
         void InitControls()
         {
-            this.toolbtnRemove.Click += new EventHandler
-                (
-                    delegate(object sender, EventArgs e)
-                    {
+            AddContextMenu(m_InstalledAppList, toolapp, new EventHandler(ToolStripButton_Click));
+        }
+        void ToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripButton)
+            {
+                ToolStripButton btn = (ToolStripButton)sender;
+                switch (btn.Text)
+                {
+                    case "UnInstall":
                         RemoveApps();
-                    }
-                );
+                        break;
+                    case "Cancel":
+                        m_ctxTools.Hide();
+                        break;
+                }
+            }
         }
         #endregion
 
@@ -156,7 +130,7 @@ namespace iSprite
         {
             if (m_InstalledAppList.SelectedItems.Count > 0)
             {
-                if (MessageHelper.ShowConfirm("Are you sure you want to delete the selected apps ? ") == DialogResult.OK)
+                if (MessageHelper.ShowConfirm("Are you sure you want to UnInstall the selected apps ? ") == DialogResult.OK)
                 {
                     try
                     {
@@ -172,7 +146,10 @@ namespace iSprite
                                 string msg = string.Empty;
                                 if (!SSHHelper.UnInstallDeb(m_iPhoneDevice, debitem.Package, out msg))
                                 {
-                                    MessageHelper.ShowError(msg);
+                                    if (!string.IsNullOrEmpty(msg))
+                                    {
+                                        MessageHelper.ShowError(msg);
+                                    }
                                     break;
                                 }
                                 else
@@ -195,6 +172,10 @@ namespace iSprite
                     }
                 }
             }
+            else
+            {
+                RaiseMessageHandler(this, "No item to be UnInstalled.", MessageTypeOption.Warning);
+            }
         }
         #endregion
 
@@ -211,7 +192,7 @@ namespace iSprite
             foreach (KeyValuePair<string, InstalledDebItem> kv in InstalledList)
             {
                 InstalledDebItem item = kv.Value;
-                if (item.Installed_Size != string.Empty )
+                //if (item.Installed_Size != string.Empty )
                 {
                     ListViewItem rowitem = new ListViewItem();
                     rowitem.Name = item.DebID;

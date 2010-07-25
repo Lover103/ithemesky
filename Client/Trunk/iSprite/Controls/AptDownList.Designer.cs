@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AptDownList));
             this.app_Paneltop = new System.Windows.Forms.Panel();
             this.toolapp = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolbtnStart = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolbtnPause = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolbtnRemove = new System.Windows.Forms.ToolStripButton();
             this.app_Panelbuttom = new System.Windows.Forms.Panel();
+            this.toolbtnStart = new System.Windows.Forms.ToolStripButton();
+            this.toolbtnPause = new System.Windows.Forms.ToolStripButton();
+            this.toolbtnRemove = new System.Windows.Forms.ToolStripButton();
+            this.toolbtnRemoveInstall = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolbtnInstall = new System.Windows.Forms.ToolStripButton();
             this.app_Paneltop.SuspendLayout();
             this.toolapp.SuspendLayout();
             this.SuspendLayout();
@@ -61,7 +64,10 @@
             this.toolStripSeparator2,
             this.toolbtnPause,
             this.toolStripSeparator1,
-            this.toolbtnRemove});
+            this.toolbtnRemove,
+            this.toolbtnRemoveInstall,
+            this.toolStripSeparator3,
+            this.toolbtnInstall});
             this.toolapp.Location = new System.Drawing.Point(0, 0);
             this.toolapp.Name = "toolapp";
             this.toolapp.Size = new System.Drawing.Size(775, 25);
@@ -73,6 +79,24 @@
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // app_Panelbuttom
+            // 
+            this.app_Panelbuttom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.app_Panelbuttom.Location = new System.Drawing.Point(0, 520);
+            this.app_Panelbuttom.Name = "app_Panelbuttom";
+            this.app_Panelbuttom.Size = new System.Drawing.Size(775, 30);
+            this.app_Panelbuttom.TabIndex = 4;
+            // 
             // toolbtnStart
             // 
             this.toolbtnStart.Image = global::iSprite.Resource.btn_start;
@@ -81,11 +105,6 @@
             this.toolbtnStart.Size = new System.Drawing.Size(55, 22);
             this.toolbtnStart.Text = "Start";
             this.toolbtnStart.ToolTipText = "Start";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // toolbtnPause
             // 
@@ -96,27 +115,36 @@
             this.toolbtnPause.Text = "Pause";
             this.toolbtnPause.ToolTipText = "Pause";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolbtnRemove
             // 
             this.toolbtnRemove.Image = global::iSprite.Resource.Remove;
             this.toolbtnRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolbtnRemove.Name = "toolbtnRemove";
-            this.toolbtnRemove.Size = new System.Drawing.Size(61, 22);
-            this.toolbtnRemove.Text = "Remove";
-            this.toolbtnRemove.ToolTipText = "Remove";
+            this.toolbtnRemove.Size = new System.Drawing.Size(115, 22);
+            this.toolbtnRemove.Text = "Remove Selected";
+            this.toolbtnRemove.ToolTipText = "Remove Selected";
             // 
-            // app_Panelbuttom
+            // toolbtnRemoveInstall
             // 
-            this.app_Panelbuttom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.app_Panelbuttom.Location = new System.Drawing.Point(0, 520);
-            this.app_Panelbuttom.Name = "app_Panelbuttom";
-            this.app_Panelbuttom.Size = new System.Drawing.Size(775, 30);
-            this.app_Panelbuttom.TabIndex = 4;
+            this.toolbtnRemoveInstall.Image = global::iSprite.Resource.Remove;
+            this.toolbtnRemoveInstall.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolbtnRemoveInstall.Name = "toolbtnRemoveInstall";
+            this.toolbtnRemoveInstall.Size = new System.Drawing.Size(121, 22);
+            this.toolbtnRemoveInstall.Text = "Remove Installed";
+            this.toolbtnRemoveInstall.ToolTipText = "Remove";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolbtnInstall
+            // 
+            this.toolbtnInstall.Image = global::iSprite.Resource.btn_install;
+            this.toolbtnInstall.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolbtnInstall.Name = "toolbtnInstall";
+            this.toolbtnInstall.Size = new System.Drawing.Size(91, 22);
+            this.toolbtnInstall.Text = "Install App";
             // 
             // AptDownList
             // 
@@ -145,5 +173,8 @@
         private System.Windows.Forms.ToolStripButton toolbtnPause;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolbtnRemove;
+        private System.Windows.Forms.ToolStripButton toolbtnRemoveInstall;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton toolbtnInstall;
     }
 }
