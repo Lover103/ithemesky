@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	<title><%=ViewData.Model.CurrentTheme.Title %> iPhone theme - <%=ViewData.Model.CurrentTheme.CategoryName %> - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
-    <meta name="description" content="<%=ViewData.Model.CurrentTheme.CategoryName %> iPhone themes. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+    <meta name="description" content="<%=ViewData.Model.CurrentTheme.Title %> iPhone theme. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
     <meta name="keywords" content="<% foreach (string tag in ViewData.Model.Tags){ %><%=tag %>, <%} %> <%=ViewData.Model.CurrentTheme.CategoryName %>, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
     <link rel="stylesheet" href="/Content/css/fancybox.css" type="text/css" />
     <script type="text/javascript" src="/Content/js/fancybox.js"></script>
