@@ -17,6 +17,14 @@ a:hover,a:active{ color:#FF0;}
 </head>
 <body>
 	<h1 class="hide">iSpirit Release Notes</h1>
+		<!-- 1.0.5 -->
+		<div class="release">
+			<h2><a href="http://www.ithemesky.com/iSpirit/">iSpirit 1.0.5</a></h2>
+			<h3>Released on 7/12/2010</h3>
+			<ul>
+				<li>Support 64-bit versions of Windows</li>
+			</ul>
+		</div>
 		<!-- 1.0.3 -->
 		<div class="release">
 			<h2><a href="http://www.ithemesky.com/iSpirit/">iSpirit 1.0.3</a></h2>
