@@ -93,6 +93,7 @@
 						</dd>
 					</dl>
 					<div class="btnDownload"><a href="/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>" title="Download Now">Download Now</a></div>
+					<!--<a href="/themeeditor/ThemeEditor.aspx?themeId=<%=ViewData.Model.CurrentTheme.ThemeId %>&ThemeName=<%=ViewData.Model.CurrentTheme.Title %>">edit theme</a>-->
 					<div class="installIip">
 						<a href="/ispirit/help"><span class="orange">Tutorial of installing iphone themes!</span></a> Install the theme to iphone with ispirit, <a href="/ispirit/download" target="_blank">click here to download ispirit</a>. 
 					</div>
