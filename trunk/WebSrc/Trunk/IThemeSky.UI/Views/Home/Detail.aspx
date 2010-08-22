@@ -49,7 +49,7 @@
 					</ul>
 				</div>
 				<div class="detailInfo">
-					<h1 class="title"><%=ViewData.Model.CurrentTheme.Title %></h1>
+					<h1 class="title"><%=ViewData.Model.CurrentTheme.Title %> iPhone theme</h1>
 					<dl class="details clearfix">
 						<dt>Category:</dt>
 						<dd><%=ViewData.Model.CurrentTheme.CategoryName %></dd>
@@ -92,10 +92,12 @@
 							</ul>
 						</dd>
 					</dl>
-					<div class="btnDownload"><a href="/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>" title="Download Now">Download Now</a></div>
-					<!--<a href="/themeeditor/ThemeEditor.aspx?themeId=<%=ViewData.Model.CurrentTheme.ThemeId %>&ThemeName=<%=ViewData.Model.CurrentTheme.Title %>">edit theme</a>-->
+					<ul class="detailBtn clearfix">
+						<li class="btnDownload"><a href="/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>" title="Download">Download</a></li>
+						<li class="btnDiy"><a href="/Diy/<%=ViewData.Model.CurrentTheme.Title %>,<%=ViewData.Model.CurrentTheme.ThemeId %>" title="iPhone Theme DIY" target="_blank">iPhone Theme DIY</a></li>
+					</ul>
 					<div class="installIip">
-						<a href="/ispirit/help"><span class="orange">Tutorial of installing iphone themes!</span></a> Install the theme to iphone with ispirit, <a href="/ispirit/download" target="_blank">click here to download ispirit</a>. 
+						Click the button "Theme DIY" above to edit this theme by yourself. <a href="/ispirit/"><span class="orange">Install the theme to iphone with <span style=" text-decoration:underline;">iSpirit</span></span></a>. 
 					</div>
 					<dl class="themeShare">
 						<dt>Share this theme:</dt>
