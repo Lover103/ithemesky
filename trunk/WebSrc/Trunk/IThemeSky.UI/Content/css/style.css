@@ -229,9 +229,13 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .detailInfo .details dt{ float:left; color:#CCD2DC; font-weight:bold; text-align:right; width:85px; padding-right:5px;}
 .detailInfo .details dd{ float:left; width:270px;}
 .detailInfo .details dd a{ white-space:nowrap;}
-.detailInfo .btnDownload{ margin:15px 80px;}
-.detailInfo .btnDownload a{ display:block; width:190px; height:38px; background:url(../images/sprites_detail.png) no-repeat -210px 0; text-indent:-999em; overflow:hidden;}
+.detailInfo .detailBtn{ clear:both; padding:15px 0 15px 25px; height:38px;}
+.detailInfo .detailBtn li{ float:left; margin-left:12px; _display:inline;}
+.detailInfo .detailBtn li a{ display:block; height:38px; text-indent:-999em; overflow:hidden;}
+.detailInfo .btnDownload a{ width:145px; background:url(../images/sprites_detail.png) no-repeat -210px 0;}
 .detailInfo .btnDownload a:hover{ background:url(../images/sprites_detail.png) no-repeat -410px 0;}
+.detailInfo .btnDiy a{ width:155px; background:url(../images/sprites_detail.png) no-repeat -210px -240px;}
+.detailInfo .btnDiy a:hover{ background:url(../images/sprites_detail.png) no-repeat -410px -240px;}
 .detailRate{ position:relative; z-index:1; width:120px; height:22px; background:url(../images/sprites_detail.png) no-repeat -210px -50px;}
 .detailRate .rateResult{ display:block; width:118px; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
 .detailRate .star0{ background-position:-210px -50px;}
