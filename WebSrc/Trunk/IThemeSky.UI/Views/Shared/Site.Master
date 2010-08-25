@@ -20,12 +20,13 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 <a name="top"></a>
 <div id="headerWrapper">
 	<div id="header">
-		<h2 class="logo"><a href="/" title="ithemesky.com provided themes for iphone"><img src="/Content/images/logo.png" alt="ithemesky.com provided themes for iphone" width="200" height="62" /></a></h2>
+		<h2 class="logo"><a href="/" title="ithemesky.com provided iPhone themes"><img src="/Content/images/logo.png" alt="ithemesky.com provided iPhone themes" width="200" height="62" /></a></h2>
 		<ul class="nav">
 			<li class="s1"><a href="/" title="ithemesky.com Homepage">ithemesky.com Homepage</a></li>
 			<li class="s2"><a href="/list/new" title="All Categories">All Categories</a></li>
 			<li class="s3"><a href="/list/popular" title="Ranking">Ranking</a></li>
 			<li class="s5"><a href="/ispirit" title="iSpirit">iSpirit</a></li>
+			<li class="s8"><a href="/diy/Default,100" title="iPhone Theme DIY">iPhone Theme DIY</a></li>
 			<li class="s6"><a href="/help/faq" title="Help">Help</a></li>
 			<li class="s7 last"><a href="http://forum.ithemesky.com/" title="Forum">Forum</a></li>
 		</ul>
