@@ -59,14 +59,14 @@
 			    </ul>
 		    </div>
 		    <!--help end-->
-		    <!--I’m Feeling Lucky begin-->
+		    <!--I'm Feeling Lucky begin-->
 		    <div class="subCol">
-			    <h3 class="subColHead colTitle">I’m Feeling Lucky</h3>
+			    <h3 class="subColHead colTitle">I'm Feeling Lucky</h3>
 			    <div class="subColContent themeList">
 				    <% Html.RenderPartial("NormalThemeRepeater", ViewData.Model.LuckyThemes); %>
 			    </div>
 		    </div>
-		    <!--I’m Feeling Lucky end-->
+		    <!--I'm Feeling Lucky end-->
 	    </div>
     </div>
 </asp:Content>
