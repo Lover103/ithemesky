@@ -8,7 +8,6 @@ iphonetheme
 PW: y987654321
 
 http://modmyi.com/forums/
-http://www.talkiphone.com/forums/
 http://www.hackint0sh.org/
 http://www.sinfuliphone.com/
 http://planet-iphones.com/forums/
@@ -25,3 +24,5 @@ http://www.everythingicafe.com/forum/
 
 justsanvy
 y987654321
+
+http://www.talkiphone.com/forums/
