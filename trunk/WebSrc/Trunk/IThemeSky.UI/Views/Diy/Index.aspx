@@ -1,8 +1,8 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title><%=ViewData["ThemeName"] %> iPhone theme DIY - iPhone Themes, Winterboard Themes DIY Online</title>
-<meta name="description" content="<%=ViewData["ThemeName"] %> iPhone theme DIY. Make iPhone theme Online by yourself." />
-<meta name="keywords" content="<%=ViewData["ThemeName"] %> iPhone theme DIY, iPhone theme Maker, iPhone theme Editor, iPhone theme Modify, iPhone theme Creator, iPhone theme Create, iPhone theme Generator" />
+<title><%=ViewData["ThemeName"] %> iPhone theme DIY - Create iPhone Themes, Winterboard Themes Online</title>
+<meta name="description" content="<%=ViewData["ThemeName"] %> iPhone theme DIY. Create iPhone theme Online." />
+<meta name="keywords" content="<%=ViewData["ThemeName"] %> iPhone theme DIY, iPhone theme Maker, iPhone theme Editor, iPhone theme Creator, iPhone theme Generator, Create iPhone theme, Modify iPhone theme" />
 <!--  BEGIN Browser History required section -->
 <link rel="stylesheet" type="text/css" href="/Content/Diy/history/history.css" />
 <!--  END Browser History required section -->
