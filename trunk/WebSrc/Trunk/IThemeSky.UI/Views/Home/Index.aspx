@@ -34,9 +34,9 @@
 			    <div class="mainColHead">
 				    <h3 class="colTitle">Most Popular</h3>
 				    <ul class="mainColTab">
-					    <li><a href="javascript:;" sort="Rank_Of_Week">Week</a></li>
+					    <li class="selected"><a href="javascript:;" sort="Rank_Of_Week">Week</a></li>
 					    <li><a href="javascript:;" sort="Rank_Of_Month">Month</a></li>
-					    <li class="selected"><a href="javascript:;" sort="Popular">Total</a></li>
+					    <li><a href="javascript:;" sort="Popular">Total</a></li>
 				    </ul>
 				    <script type="text/javascript">BindSortEvent();</script>
 			    </div>

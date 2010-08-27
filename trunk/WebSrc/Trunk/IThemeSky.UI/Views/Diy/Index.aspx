@@ -1,8 +1,8 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title><%=ViewData["ThemeName"] %> iPhone theme DIY - iPhone Themes, Winterboard Themes Creator Online</title>
-<meta name="description" content="<%=ViewData["ThemeName"] %> iPhone theme DIY. Create Online your iPhone theme." />
-<meta name="keywords" content="<%=ViewData["ThemeName"] %> iPhone theme DIY, iPhone theme Maker, iPhone theme Editor, iPhone theme Creator, iPhone theme Generator, Create iPhone theme, Modify iPhone theme" />
+<title>Frequently Asked Questions - Help - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+<meta name="description" content="Frequently Asked Questions. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+<meta name="keywords" content="faq, Frequently Asked Questions, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 <!--  BEGIN Browser History required section -->
 <link rel="stylesheet" type="text/css" href="/Content/Diy/history/history.css" />
 <!--  END Browser History required section -->
@@ -25,7 +25,7 @@ var requiredRevision = 0;
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div id="wrapper" style="width:860px;">
+<div id="wrapper" class="clearfix">
 <script language="JavaScript" type="text/javascript">
 <!--
 // Version check for the Flash Player that has the ability to start Player Product Install (6.0r65)

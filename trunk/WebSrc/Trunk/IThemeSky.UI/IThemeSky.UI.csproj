@@ -69,6 +69,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DIYController.cs" />
     <Compile Include="Controllers\SoftController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -250,6 +251,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\DIY\Index.aspx" />
     <Content Include="Views\Help\how-to-jailbreak-iphone.aspx" />
     <Content Include="Views\Help\how-to-use-winterboard.aspx" />
     <Content Include="Views\Help\why-jailbreak-iphone.aspx" />
