@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title>Help - iSpirit - iPhone themes and files manager - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
-<meta name="description" content="iSpirit is a utility that will help you manage your files between PC and iPhone. It can help you change iPhone themes easily." />
+<title>Help - iSpirit - iPhone apps, themes and files manager - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+<meta name="description" content="iSpirit is a utility that help you manage files between PC and iPhone. Install deb files and change iPhone themes easily with it." />
 <meta name="keywords" content="iSpirit help, iSpirit download, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 </asp:Content>
 
@@ -37,7 +37,7 @@
 				</ul>
 			</div>
 			<div class="iSpiritMain">
-				<h3 class="supportSort s1">Frequently  Asked  Questions</h3>
+				<h3 class="supportSort s1">Frequently Asked Questions</h3>
 				<h4 class="iSpiritFaq"><a href="#">How to install the theme on jailbroken iPhone?</a></h4>
 				<div class="iSpiritFaqContent">
 					<p>
