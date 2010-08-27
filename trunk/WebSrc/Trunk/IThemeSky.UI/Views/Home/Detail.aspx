@@ -34,7 +34,7 @@
 				<li class="home"><a href="/" title="Homepage">ithemesky.com Homepage</a></li>
 				<li><a href="/list/new/">All Categories</a></li>
 				<li><a href="/list/new/<%=ViewData.Model.CurrentTheme.CategoryName.Replace(" ", "").Replace("&", "-") %>_<%=ViewData.Model.CurrentTheme.CategoryId %>/"><%=ViewData.Model.CurrentTheme.CategoryName %></a></li>
-				<li><a href="<%=ViewData.Model.CurrentTheme.ThemeDetailUrl %>"><%=ViewData.Model.CurrentTheme.Title %></a></li>
+				<li><%=ViewData.Model.CurrentTheme.Title %> iPhone theme</li>
 			</ul>
 		</div>
 		<!--breadcrumb end-->
@@ -57,14 +57,14 @@
 					<dl class="details clearfix"> 
            				<dt>Tags:</dt>
 						<dd>
-						    <% for (int i = 0; i < ViewData.Model.Tags.Count; i++)
-                            { %>
-                                <%= i > 0 ? ", " : ""%><a href="/list/new/1/<%=ViewData.Model.Tags[i] %>"><%=ViewData.Model.Tags[i] %></a>
-						    <%} %>
+							<% for (int i = 0; i < ViewData.Model.Tags.Count; i++)
+								{ %>
+								<%= i > 0 ? ", " : ""%><a href="/list/new/1/<%=ViewData.Model.Tags[i] %>"><%=ViewData.Model.Tags[i] %></a>
+							<%} %>
 						</dd>
 					</dl>
 					<dl class="details clearfix"> 
-           				<dt>Time:</dt>
+           				<dt>Update:</dt>
 						<dd><%=ViewData.Model.CurrentTheme.AddTime.ToString("D", ViewData.Model.USACultureInfo)%></dd>
 					</dl>
 					<dl class="details clearfix"> 
@@ -97,7 +97,7 @@
 						<li class="btnDiy"><a href="/Diy/<%=ViewData.Model.CurrentTheme.Title %>,<%=ViewData.Model.CurrentTheme.ThemeId %>" title="iPhone Theme DIY" target="_blank">iPhone Theme DIY</a></li>
 					</ul>
 					<div class="installIip">
-						Click the button "Theme DIY" above to edit this theme by yourself. <a href="/ispirit/"><span class="orange">Install the theme to iphone with <span style=" text-decoration:underline;">iSpirit</span></span></a>. 
+						Click the button "Theme DIY" above to modify this theme by yourself. <a href="/ispirit/"><span class="orange">Install theme to iPhone with <span style=" text-decoration:underline;">iSpirit</span></span></a>. 
 					</div>
 					<dl class="themeShare">
 						<dt>Share this theme:</dt>
@@ -111,16 +111,16 @@
 				</div>
 			</div>
 			<!--theme detail end-->
-			<!--I’m Feeling Lucky begin-->
+			<!--I'm Feeling Lucky begin-->
 			<div class="mainCol themeDetailCol">
 				<div class="mainColHead">
-					<h3 class="colTitle">I’m Feeling Lucky</h3>
+					<h3 class="colTitle">I'm Feeling Lucky</h3>
 				</div>
 				<div class="mainColContent themeList clearfix">
 					<% Html.RenderPartial("NormalThemeRepeater", ViewData.Model.LuckyThemes); %> 
 				</div>
 			</div>
-			<!--I’m Feeling Lucky end-->
+			<!--I'm Feeling Lucky end-->
 			<!--comment col begin-->
 			<div class="themeComment">
 				<div id="commentListContainer"></div>
