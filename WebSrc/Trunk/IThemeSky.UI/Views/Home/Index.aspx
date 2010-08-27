@@ -17,7 +17,7 @@
 		    <!--Tags end-->
 	    </div>
 	    <div id="mainContent">
-			<div class="banner"><a href="/ispirit"><img src="/Content/images/banner01.jpg" alt="iSpirit - iPhone themes and files manager" width="588" height="188" /></a></div>
+			<div class="banner"><a href="/ispirit"><img src="/Content/images/banner01.jpg" alt="iSpirit - iPhone apps, themes and files manager" width="588" height="188" /></a></div>
 		    <!--last update begin-->
 		    <div class="mainCol">
 			    <div class="mainColHead">
