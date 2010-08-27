@@ -1,1 +1,1 @@
-iThemesky.com provides free iPhone themes. We develop iSpirit that help you manage apps, themes and files between PC and iPhone.
+iThemesky.com provides free iPhone themes and iPhone themes creator. We develop iSpirit that help you manage apps, themes and files between PC and iPhone.

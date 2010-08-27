@@ -1,1 +1,1 @@
-iSpirit, iPhone theme, iPhone themes, jailbroken iPhone, install iPhone themes, free download, iPhone, WinterBoard, WinterBoard themes, jailbreak
+iPhone theme, iPhone themes, free iphone themes, WinterBoard themes, install iPhone theme, iSpirit, iPhone manager, iPhone themes creator
