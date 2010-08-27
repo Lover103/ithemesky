@@ -16,7 +16,7 @@ namespace IThemeSky.UI.Models
         {
             LastUpdateThemes = _themeRepository.GetThemes(ThemeSortOption.New, 8);
             RecommendedThemes = _themeRepository.GetThemes(ThemeSortOption.Recommended, 8);
-            PopularThemes = _themeRepository.GetThemes(ThemeSortOption.Popular, 8);
+            PopularThemes = _themeRepository.GetThemes(ThemeSortOption.Rank_Of_Week, 8);
             LuckyThemes = _themeRepository.GetRandomThemes(0, 0, 4);
         }
         /// <summary>

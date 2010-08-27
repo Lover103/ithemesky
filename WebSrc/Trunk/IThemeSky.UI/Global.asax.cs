@@ -109,6 +109,11 @@ namespace IThemeSky.UI
                 new { controller = "Service", action = "DownloadThemePic" } // Parameter defaults
             );
             routes.MapRoute(
+                "ParseThemeZipService", // Route name
+                "Service/ParseThemeZip/{themeId}", // URL with parameters
+                new { controller = "Service", action = "ParseThemeZip" } // Parameter defaults
+            );
+            routes.MapRoute(
                 "RateThemeService", // Route name
                 "Service/RateTheme/{themeId},{score}", // URL with parameters
                 new { controller = "Service", action = "RateTheme" } // Parameter defaults
@@ -131,6 +136,13 @@ namespace IThemeSky.UI
                 "Help", // Route name
                 "Help/{viewName}", // URL with parameters
                 new { controller = "Help", action = "Index", viewName = "faq" } // Parameter defaults
+            );
+
+            //DIY
+            routes.MapRoute(
+                "DIY", // Route name
+                "DIY/{themeName},{themeId}", // URL with parameters
+                new { controller = "DIY", action = "Index" } // Parameter defaults
             );
 
             //软件相关

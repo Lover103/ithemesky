@@ -52,6 +52,31 @@ namespace IThemeSky.UI.Controllers
                 return Redirect("/404.html");
             }
         }
+        public ActionResult ParseThemeZip(int themeId)
+        {
+            IpDefender.RemoveIp();
+            Theme theme = _themeRepository.GetTheme(themeId);
+            if (theme != null)
+            {
+                string path = Server.MapPath("/Cache/" + themeId);
+                if (System.IO.Directory.Exists(path))
+                {
+                    return Content(System.IO.File.ReadAllText(System.IO.Path.Combine(path, themeId + ".xml")));
+                }
+                else
+                {
+                    ThemeZipHelper.ExtractZip(Server.MapPath("/" + theme.DownloadUrl), path);
+                    string content = ThemeZipHelper.WriteXML(path);
+                    content = content.Replace(Server.MapPath("/"), "/");
+                    System.IO.File.WriteAllText(System.IO.Path.Combine(path, themeId + ".xml"), content);
+                    return Content(content);
+                }
+            }
+            else
+            {
+                return Redirect("/404.html");
+            }
+        }
         [OutputCache(Location = OutputCacheLocation.None)]
         public ActionResult RateTheme(int themeId, int score)
         {
