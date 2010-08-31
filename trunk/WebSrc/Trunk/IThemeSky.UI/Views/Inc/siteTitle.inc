@@ -1,1 +1,1 @@
-Best iPhone Themes, Best Winterboard Themes download
+iPhone Themes, Winterboard Themes download
