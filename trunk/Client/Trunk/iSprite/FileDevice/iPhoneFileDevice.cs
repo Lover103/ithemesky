@@ -9,6 +9,7 @@ using CE.iPhone.PList;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace iSprite
 {
@@ -117,8 +118,8 @@ namespace iSprite
         {
             if (iPhoneInterface.IsConnected)
             {
-                iPhoneInterface.DeleteFile(iSpriteContext.Current.iPhone_InstallationPath);
-                Thread.Sleep(TimeSpan.FromSeconds(1.5));
+                //iPhoneInterface.DeleteFile(iSpriteContext.Current.iPhone_InstallationPath);
+                //Thread.Sleep(TimeSpan.FromSeconds(1.5));
                 iPhoneInterface.Respring();
             }
             else
@@ -221,6 +222,35 @@ namespace iSprite
             else
             {
                 return string.Empty;
+            }
+        }
+
+        internal XmlDocument GetPlist2XML(string iPhonePlistPath)
+        {
+            string localpath = iSpriteContext.Current.iSpriteTempPath + Path.GetFileName(iPhonePlistPath);
+            if (Downlod2PC(iPhonePlistPath, localpath))
+            {
+                PListRoot root = PListRoot.Load(localpath);
+                root.Save(localpath, PListFormat.Xml);
+
+                XmlTextReader Reader;
+                try 
+                {
+                    Reader = new XmlTextReader(localpath);
+                    Reader.XmlResolver = null;
+                    XmlDocument XmlDoc = new XmlDocument();
+                    XmlDoc.Load(Reader);
+
+                    return XmlDoc;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
             }
         }
 

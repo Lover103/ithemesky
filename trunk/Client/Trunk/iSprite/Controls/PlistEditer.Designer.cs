@@ -38,6 +38,7 @@
             // txtContent
             // 
             this.txtContent.Location = new System.Drawing.Point(12, 31);
+            this.txtContent.MaxLength = 999999999;
             this.txtContent.Multiline = true;
             this.txtContent.Name = "txtContent";
             this.txtContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -83,9 +84,6 @@
             this.Controls.Add(this.txtContent);
             this.Name = "PlistEditer";
             this.Text = "PlistEditer";
-            this.Controls.SetChildIndex(this.txtContent, 0);
-            this.Controls.SetChildIndex(this.btnSave, 0);
-            this.Controls.SetChildIndex(this.btnCancel, 0);
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).EndInit();
             this.ResumeLayout(false);

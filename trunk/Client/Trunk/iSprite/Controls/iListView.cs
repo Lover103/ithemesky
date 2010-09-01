@@ -432,6 +432,23 @@ namespace iSprite
                 case ButtonCommandOption.EditName:
                     ItemBeginEdit();
                     break;
+
+                case ButtonCommandOption.PermissionsSetting:
+                    PermissionsSetting();
+                    break;
+            }
+        }
+        #endregion
+
+        #region ÉèÖÃÈ¨ÏÞ
+        void PermissionsSetting()
+        {
+            if (this.SelectedItems.Count >= 1)
+            {
+                ListViewItem item = this.SelectedItems[0];
+                ChmodEditer.Show((iPhoneFileDevice)m_FileDevice,
+                       new MessageHandler(RaiseMessageHandler), item.Name
+                       );
             }
         }
         #endregion
@@ -501,7 +518,7 @@ namespace iSprite
             }
             if (sb.Length > 0)
             {
-                Clipboard.SetDataObject(sb.ToString());
+                Clipboard.SetDataObject(sb.ToString().Trim());
             }
         }
         #endregion

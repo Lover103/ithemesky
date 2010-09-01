@@ -185,6 +185,18 @@
     <Compile Include="Controls\PXLInstaller.Designer.cs">
       <DependentUpon>PXLInstaller.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CommandLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\CommandLine.Designer.cs">
+      <DependentUpon>CommandLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChmodEditer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ChmodEditer.Designer.cs">
+      <DependentUpon>ChmodEditer.cs</DependentUpon>
+    </Compile>
     <Compile Include="DiffieHellman\DHKeyGeneration.cs" />
     <Compile Include="DiffieHellman\DHParameters.cs" />
     <Compile Include="DiffieHellman\DiffieHellman.cs" />
@@ -620,6 +632,14 @@
       <DependentUpon>PXLInstaller.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CommandLine.resx">
+      <DependentUpon>CommandLine.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ChmodEditer.resx">
+      <DependentUpon>ChmodEditer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ThirdControl\FATabStrip\FATabStrip.resx">
       <DependentUpon>FATabStrip.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -744,6 +764,7 @@
     <Content Include="Images\X Window.png" />
     <Content Include="iSprite_icon_32.ico" />
     <Content Include="CydiaSourceCfg.xml" />
+    <None Include="Resources\btn_cmd.png" />
     <None Include="Resources\btn_Shutdown.png" />
     <None Include="Resources\btn_install.png" />
     <None Include="Resources\Msg__Warning.png" />

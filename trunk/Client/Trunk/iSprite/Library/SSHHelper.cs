@@ -9,6 +9,9 @@ using Tamir.SharpSsh.jsch;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Collections;
+using CE.iPhone.PList;
 
 namespace iSprite
 {
@@ -16,10 +19,20 @@ namespace iSprite
     {
         static SshShell shell;
         static object SSHLock = new object();
+        public static string Prefix = string.Empty;
+        static string PhoneName = string.Empty;
         static SSHHelper()
         {
             shell = new SshShell("127.0.0.1", "root");
             shell.Password = iSpriteContext.Current.iSpiritUserCfg.SSHPWD;
+        }
+
+        public static SshShell Server
+        {
+            get
+            {
+                return shell;
+            }
         }
 
         #region 关闭
@@ -176,37 +189,165 @@ namespace iSprite
         public static bool InstallIPA(iPhoneFileDevice iphone, string localdir, out string msg)
         {
             msg = string.Empty;
-
             if (!Connect2SSH())
             {
                 return false;
             }
 
-            string destpath = "/private/var/mobile/iSpirit/Applications/";
+            string destpath = "/private/var/mobile/Applications/" + Guid.NewGuid().ToString() + "/";
             string mainAppName = Utility.GetDirName(localdir);
-            if (iphone.DirectoryExists(destpath + mainAppName))
+
+
+            Hashtable ht = new Hashtable();
+            XmlNodeList keys;
+
+            #region 从Info.plist获取当前软件信息
+            string infopath = localdir + "/Info.plist";
+            if (!File.Exists(infopath))
             {
-                iphone.DeleteDirectory(destpath + mainAppName, true);
+                msg = " The installation package is not legitimate.";
+                return false;
             }
-            iphone.CheckDirectoryExists(destpath);
-            iphone.Copy2iPhone(localdir, destpath);
-            destpath = destpath + mainAppName;
-            string errMsg = string.Empty;
-            bool flag = RunCmd(string.Format("ln -s \"{0}\" /Applications/", destpath), out errMsg);
-            if (flag)
+
+            PListRoot root = PListRoot.Load(infopath);
+            string templpath = iSpriteContext.Current.iSpriteTempPath + Path.GetFileName(infopath);
+            root.Save(templpath, PListFormat.Xml);
+            XmlDocument InfoXmlDoc = new XmlDocument();
+            InfoXmlDoc.Load(new XmlTextReader(templpath));
+            keys = InfoXmlDoc.SelectNodes("/plist/dict/key");
+            foreach (XmlNode node in keys)
             {
-                RunCmd(string.Format("chmod -R 777 \"{0}\"", destpath), out errMsg);
+                string key = node.InnerText;
+                if (!ht.Contains(key))
+                {
+                    ht.Add(key,node.NextSibling.OuterXml);
+                }
+            }
+            #endregion
+
+            XmlDocument XmlDoc = iphone.GetPlist2XML(iSpriteContext.Current.iPhone_InstallationPath);
+            keys = XmlDoc.SelectNodes("/plist/dict/key");
+            XmlNode currentnode = null;
+
+            if (keys.Count <= 0)
+            {
+                msg = "The  com.apple.mobile.installation.plist is Damaged.";
+                return false;
+            }
+
+            foreach (XmlNode node in keys)
+            {
+                if (node.InnerText == "User")
+                {
+                    currentnode = node.NextSibling;
+                }
+            }
+
+            XmlElement xe1, xe2;
+            if (currentnode == null)
+            {
+                xe1 = XmlDoc.CreateElement("key");
+                xe1.InnerText = "User";
+                xe2 = XmlDoc.CreateElement("dict");
+                xe2.InnerText = "";
+                keys[0].ParentNode.AppendChild(xe1);
+                keys[0].ParentNode.AppendChild(xe2);
+                currentnode = xe2;
+            }
+
+            string CFBundleIdentifier = GetValue(ht, "CFBundleIdentifier", "");
+            if (CFBundleIdentifier == string.Empty)
+            {
+                msg = " The installation package is not legitimate.";
+                return false;
+            }
+
+            #region 构建当前软件信息
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("<key>ApplicationType</key>\n{0}\n", "<string>User</string>");
+            sb.AppendFormat("<key>CFBundleDevelopmentRegion</key>\n{0}\n", GetValue(ht, "CFBundleDevelopmentRegion", "<string>en</string>"));
+            sb.AppendFormat("<key>CFBundleDisplayName</key>\n{0}\n", GetValue(ht, "CFBundleDisplayName", "<string>???</string>"));
+            sb.AppendFormat("<key>CFBundleExecutable</key>\n{0}\n", GetValue(ht, "CFBundleExecutable", "<string>???</string>"));
+            sb.AppendFormat("<key>CFBundleIconFile</key>\n{0}\n", GetValue(ht, "CFBundleIconFile", "<string>Icon.png</string>"));
+            sb.AppendFormat("<key>CFBundleIdentifier</key>\n{0}\n", CFBundleIdentifier);
+            sb.AppendFormat("<key>CFBundleInfoDictionaryVersion</key>\n{0}\n", GetValue(ht, "CFBundleInfoDictionaryVersion", "<string>6.0</string>"));
+            sb.AppendFormat("<key>CFBundleName</key>\n{0}\n", GetValue(ht, "CFBundleName", "<string>???</string>"));
+            sb.AppendFormat("<key>CFBundlePackageType</key>\n{0}\n", GetValue(ht, "CFBundlePackageType", "<string>APPL</string>"));
+            sb.AppendFormat("<key>CFBundleResourceSpecification</key>\n{0}\n", GetValue(ht, "CFBundleResourceSpecification", "<string>ResourceRules.plist</string>"));
+            sb.AppendFormat("<key>CFBundleSignature</key>\n{0}\n", GetValue(ht, "CFBundleSignature", "<string>???</string>"));
+            sb.AppendFormat("<key>CFBundleSupportedPlatforms</key>\n{0}\n", GetValue(ht, "CFBundleSupportedPlatforms", @"<string>iPhoneOS</string>"));
+            sb.AppendFormat("<key>CFBundleVersion</key>\n{0}\n", GetValue(ht, "CFBundleVersion", "<string>1.1</string>"));
+            sb.AppendFormat("<key>DTPlatformName</key>\n{0}\n", GetValue(ht, "DTPlatformName", "<string>iphoneos</string>"));
+            sb.AppendFormat("<key>DTSDKName</key>\n{0}\n", GetValue(ht, "DTSDKName", "<string>iphoneos3.0</string>"));
+            sb.AppendFormat("<key>LSRequiresIPhoneOS</key>\n{0}\n", GetValue(ht, "LSRequiresIPhoneOS", "<true />"));
+            sb.AppendFormat("<key>MinimumOSVersion</key>\n{0}\n", GetValue(ht, "MinimumOSVersion", "<string>3.0</string>"));
+            sb.AppendFormat("<key>Path</key>\n<string>{0}</string>\n", destpath + mainAppName);
+            sb.AppendFormat("<key>UIInterfaceOrientation</key>\n{0}\n", GetValue(ht, "UIInterfaceOrientation", "<string>UIInterfaceOrientationLandscapeRight</string>"));
+            sb.AppendFormat("<key>UIPrerenderedIcon</key>\n{0}\n", GetValue(ht, "UIPrerenderedIcon", "<true />"));
+            sb.AppendFormat("<key>UIRequiresPersistentWiFi</key>\n{0}\n", GetValue(ht, "UIRequiresPersistentWiFi", "<false />"));
+            sb.AppendFormat("<key>UIStatusBarHidden</key>\n{0}\n", GetValue(ht, "UIStatusBarHidden", "<false />"));
+            sb.AppendFormat("<key>UIStatusBarStyle</key>\n{0}\n", GetValue(ht, "UIStatusBarStyle", "<string>UIStatusBarStyleDefault</string>"));
+
+            foreach (DictionaryEntry item in ht)
+            {
+                sb.AppendFormat("<key>{0}</key>\n{1}\n", item.Key, item.Value);
+            }
+
+            #endregion
+
+            xe1 = XmlDoc.CreateElement("key");
+            xe1.InnerText = CFBundleIdentifier.Replace("<string>", "").Replace("</string>", "");
+            xe2 = XmlDoc.CreateElement("dict");
+            xe2.InnerXml = sb.ToString();
+            currentnode.AppendChild(xe1);
+            currentnode.AppendChild(xe2);
+
+            iphone.CheckDirectoryExists(destpath);
+            iphone.CheckDirectoryExists(destpath + "/Library/");
+            iphone.CheckDirectoryExists(destpath + "/Documents/");
+            iphone.CheckDirectoryExists(destpath + "/tmp/");
+
+            iphone.Copy2iPhone(localdir, destpath);
+
+            string cmd = "chmod -R 777 \"{0}\"";
+            cmd += ";chown -R mobile \"{0}\"";
+            cmd = string.Format(cmd, destpath);
+
+            string errMsg = string.Empty;
+            bool flag = SSHHelper.RunCmd(cmd, out errMsg);
+            if (!flag)
+            {
+                msg = ("Fail to install (Failing to set permissions(" + errMsg + ")) !");
+                return false;
+            }
+
+            if (iphone.SetFileText(XmlDoc.OuterXml, iSpriteContext.Current.iPhone_InstallationPath))
+            {
                 msg = mainAppName + " has been successfully Installed .";
                 iphone.RepairAppIcons();
                 return true;
             }
             else
             {
-                msg = " Fail to install " + mainAppName + " (" + errMsg + ").";
+                msg = "Fail to update com.apple.mobile.installation.plist.";
                 return false;
             }
         }
         #endregion
+
+        static string GetValue(Hashtable ht, string key, string defaultValue)
+        {
+            if (ht.Contains(key))
+            {
+                string v= ht[key].ToString();
+                ht.Remove(key);
+                return v;
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
 
         #region 安装PXL软件
         /// <summary>
@@ -251,7 +392,13 @@ namespace iSprite
                     mainAppPath = destination;
                 }
 
-                iphone.Copy2iPhone(localdir + source, destination);
+                try
+                {
+                    iphone.Copy2iPhone(localdir + source, destination);
+                }
+                catch
+                { 
+                }
 
                 match = match.NextMatch();
             }
@@ -262,11 +409,64 @@ namespace iSprite
                 return false;
             }
 
+            match = new Regex("<key>RDPxlPackageName</key>[\\s]+<string>(?<RDPxlPackageName>[\\S ]*?)</string>",
+                    RegexOptions.IgnoreCase | RegexOptions.Compiled).Match(PxlPkg);
+
+            string mainAppName = string.Empty;
+            if (match.Success)
+            {
+                mainAppName = match.Result("${RDPxlPackageName}");
+            }
+            else
+            {
+                mainAppName = Utility.GetDirName(mainAppPath); 
+            }
+
+            int index = PxlPkg.IndexOf("<key>RDPxlPackagePostflight</key>");
+            string errMsg = string.Empty;
+            string cmd = string.Empty;
+            if (index > -1)
+            {
+                //获取要执行的脚本
+                PxlPkg = PxlPkg.Substring(index);
+
+                match = new Regex("<array>[\\s]+<string>(?<p>[\\S\\s]*?)</string>[\\s]+</array>",
+                    RegexOptions.IgnoreCase | RegexOptions.Compiled).Match(PxlPkg);
+                while (match.Success)
+                {
+                    string p = match.Result("${p}").Replace("</string>", " ").Replace("<string>", "").Replace("\r", "").Replace("\n", "");
+                    cmd += p + ";";
+                    match = match.NextMatch();
+                }
+            }
+            bool flag = false;
+            if (string.IsNullOrEmpty(cmd))
+            {
+                cmd = string.Format("ln -s \"{0}\" /Applications/", mainAppPath);
+            }
+            else
+            {
+                cmd += string.Format("ln -s \"{0}\" /Applications/", mainAppPath);
+            }
+            flag = RunCmd(cmd, out errMsg);
+            if (flag)
+            {
+                msg = mainAppName + " has been successfully Installed .";
+                iphone.RepairAppIcons();
+                return true;
+            }
+            else
+            {
+                msg = " Fail to install " + mainAppName + " (" + errMsg + ").";
+                return false;
+            }
+
             //设置权限
+
+            /*
             match = new Regex("<array>[\\s]+<string>(?<p0>[\\S]*?)</string>[\\s]+<string>(?<p1>[\\S]*?)</string>[\\s]+<string>(?<p2>[\\S]*?)</string>[\\s]+<string>(?<p3>[\\S ]*?)</string>[\\s]+</array>",
                     RegexOptions.IgnoreCase | RegexOptions.Compiled).Match(PxlPkg);
 
-            string errMsg = string.Empty;
             while (match.Success)
             {
                 string p3 = match.Result("${p3}");
@@ -279,19 +479,49 @@ namespace iSprite
                 match = match.NextMatch();
             }
 
-            string mainAppName = Utility.GetDirName(mainAppPath);
+            */
+            
+        }
+        #endregion
 
-            bool flag = RunCmd(string.Format("ln -s \"{0}\" /Applications/", mainAppPath), out errMsg);
-            if (flag)
+        #region 获取权限属性
+        /// <summary>
+        /// 获取权限属性
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="userlist"></param>
+        /// <param name="owner"></param>
+        /// <returns></returns>
+        public static string GetPropertys(string path,List<string> userlist,out string owner)
+        {
+            owner = string.Empty;
+            if (!Connect2SSH())
             {
-                msg = mainAppName + " has been successfully Installed .";
-                iphone.RepairAppIcons();
-                return true;
+                return string.Empty;
             }
             else
             {
-                msg = " Fail to install " + mainAppName + " (" + errMsg + ").";
-                return false;
+                string cmd = "ls \"" + path + "\" -ld";
+                string msg = RunCmd(cmd);
+                int index = msg.IndexOf("-ld");
+                if (index != -1)
+                {
+                    msg = msg.Substring(index+3).Trim();
+
+                    foreach (string user in userlist)
+                    {
+                        if (msg.Contains(" " + user + " "))
+                        {
+                            owner = user;
+                            break;
+                        }
+                    }
+                    return msg.Substring(1, 9);
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
         #endregion
@@ -332,13 +562,13 @@ namespace iSprite
         /// </summary>
         /// <param name="cmd"></param>
         /// <returns></returns>
-        static bool RunCmd(string cmd, out string errMsg)
+        public static bool RunCmd(string cmd, out string errMsg)
         {
             try
             {
                 shell.WriteLine(cmd);
-                Thread.Sleep(TimeSpan.FromSeconds(2));
-                string s = shell.Expect();
+                //Thread.Sleep(TimeSpan.FromSeconds(2));
+                string s = GetResponse();
                 Utility.WriteLog(string.Format("cmd:{0}\r\nresult{1}", cmd, s));
                 if (s.Contains("error") || s.Contains("Error"))
                 {
@@ -359,12 +589,58 @@ namespace iSprite
         }
         #endregion
 
+        #region 运行指定的命令
+        /// <summary>
+        /// 运行指定的命令
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        public static string RunCmd(string cmd)
+        {
+            try
+            {
+                if (!Connect2SSH())
+                {
+                    return string.Empty;
+                }
+
+                shell.WriteLine(cmd);
+                string s = GetResponse();
+                return s;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        #endregion
+
+        static string GetResponse()
+        {
+            string s = string.Empty;
+            StringBuilder sb = new StringBuilder();
+            while ((s = shell.Expect()) != null && s != string.Empty)
+            {
+                if (s.StartsWith(PhoneName + ":"))
+                {
+                    sb.Append(s);
+                    Prefix = s;
+                    break;
+                }
+                else
+                {
+                    sb.Append(s);
+                }
+            }
+            return sb.ToString();
+        }
+
         #region 建立连接
         /// <summary>
         /// 建立连接
         /// </summary>
         /// <returns></returns>
-        static bool Connect2SSH()
+        public static bool Connect2SSH()
         {
             SshStatusOption status = SshStatusOption.UnknownError;
             string errMsg = string.Empty;
@@ -389,7 +665,11 @@ namespace iSprite
                         else
                         {
                             shell.Connect();
-                            string r = shell.Expect();
+                            Prefix = shell.Expect();
+                            if(Prefix.Contains(":"))
+                            {
+                                PhoneName = Prefix.Split(':')[0];
+                            }
                             if (shell.Connected && shell.ShellOpened)
                             {
                                 status = SshStatusOption.Connected;

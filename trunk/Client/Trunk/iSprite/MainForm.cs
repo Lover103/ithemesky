@@ -150,6 +150,14 @@ namespace iSprite
                 }
             }
 
+            foreach (ToolStripMenuItem item in tsbtnAPPS.DropDownItems)
+            {
+                if (item is ToolStripMenuItem)
+                {
+                    item.Click += new EventHandler(toolmenuitem_Click);
+                }
+            }
+
             foreach (ToolStripItem item in this.toolapp.Items)
             {
                 if (item is ToolStripButton)
@@ -332,7 +340,7 @@ namespace iSprite
                 }
                 m_themeManage.AfterDeviceFinishConnected(enable);
                 m_AppManage.AfterDeviceFinishConnected(enable);
-                tsbtnDeb.Enabled = tsbtnreSpring.Enabled = tsbtnReboot.Enabled = tsbtnShutdown.Enabled = enable;
+                tsbtnCMD.Enabled =tsbtnAPPS.Enabled = tsbtnreSpring.Enabled = tsbtnReboot.Enabled = tsbtnShutdown.Enabled = enable;
             }
             catch (Exception ex)
             {
@@ -465,6 +473,8 @@ namespace iSprite
             }
         }
 
+        #endregion
+
         #region 按钮事件处理
         /// <summary>
         /// 按钮事件处理
@@ -473,20 +483,20 @@ namespace iSprite
         /// <param name="e"></param>
         void toolmenuitem_Click(object sender, EventArgs e)
         {
-            ToolStripButton item = (ToolStripButton)sender;
+            ToolStripItem item = (ToolStripItem)sender;
             switch (item.Name)
             {
                 case "tsbtnTileVertical":
                     this.m_ViewMode = ViewModeOption.DUALVERTICAL;
-                    SetViewMode(item);
+                    SetViewMode((ToolStripButton)item);
                     break;
                 case "tsbtnTileHorizontal":
                     this.m_ViewMode = ViewModeOption.DUALHORIZONTAL;
-                    SetViewMode(item);
+                    SetViewMode((ToolStripButton)item);
                     break;
                 case "tsbtnSinglePane":
                     this.m_ViewMode = ViewModeOption.SINGLE;
-                    SetViewMode(item);
+                    SetViewMode((ToolStripButton)item);
                     break;
                 case "tsbtnFlipPanes":
                     SwapPanes();
@@ -498,18 +508,21 @@ namespace iSprite
                     System.Diagnostics.Process.Start(iSpriteContext.Current.HelpUrl);
                     break;
                 case "tsbtnDeb":
+                case "tsbtn_DEB":
                 case "tsbtnInstallDeb":
-                    DebInstaller.Show((iPhoneFileDevice)m_iPhoneDevice, 
+                    DebInstaller.Show((iPhoneFileDevice)m_iPhoneDevice,
                         new MessageHandler(ShowMessage),
                         new FileProgressHandler(DoProgressHandler)
                         );
                     break;
+                case "tsbtn_IPA":
                 case "tsbtnInstallIPA":
                     IPAInstaller.Show((iPhoneFileDevice)m_iPhoneDevice,
                         new MessageHandler(ShowMessage),
                         new FileProgressHandler(DoProgressHandler)
                         );
                     break;
+                case "tsbtn_PXL":
                 case "tsbtnInstallPXL":
                     PXLInstaller.Show((iPhoneFileDevice)m_iPhoneDevice,
                         new MessageHandler(ShowMessage),
@@ -522,10 +535,11 @@ namespace iSprite
                 case "tsbtnShutdown":
                     Shutdown();
                     break;
+                case "tsbtnCMD":
+                    CommandLine.Show((iPhoneFileDevice)m_iPhoneDevice);
+                    break;
             }
         }
-        #endregion
-
         #endregion
 
         #region  设置展示视图

@@ -113,7 +113,11 @@ namespace iSprite
         /// <summary>
         /// 编辑节点
         /// </summary>
-        EditName
+        EditName,
+        /// <summary>
+        /// PermissionsSetting
+        /// </summary>
+        PermissionsSetting
     }
     #endregion
 

@@ -66,6 +66,8 @@
             this.mnuLVNewFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuLVDeleteMarked = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuLVProperty = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuLVCancel = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbnNewFolder = new System.Windows.Forms.ToolStripButton();
@@ -153,6 +155,7 @@
             this.toolStripSeparator6,
             this.mnuTVCancel});
             this.ctxTVTools.Name = "ctxTools";
+            this.ctxTVTools.OwnerItem = this.tsbtnTVTools;
             this.ctxTVTools.Size = new System.Drawing.Size(190, 166);
             // 
             // mnuTVRefresh
@@ -330,10 +333,12 @@
             this.mnuLVNewFolder,
             this.toolStripMenuItem12,
             this.mnuLVDeleteMarked,
+            this.toolStripSeparator4,
+            this.mnuLVProperty,
             this.toolStripMenuItem13,
             this.mnuLVCancel});
             this.ctxLVTools.Name = "ctxTools";
-            this.ctxLVTools.Size = new System.Drawing.Size(190, 216);
+            this.ctxLVTools.Size = new System.Drawing.Size(190, 266);
             // 
             // mnuLVRefresh
             // 
@@ -414,6 +419,19 @@
             this.mnuLVDeleteMarked.Size = new System.Drawing.Size(189, 22);
             this.mnuLVDeleteMarked.Text = "Delete Marked";
             this.mnuLVDeleteMarked.ToolTipText = "Delete Marked";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(186, 6);
+            // 
+            // mnuLVProperty
+            // 
+            this.mnuLVProperty.Name = "mnuLVProperty";
+            this.mnuLVProperty.ShortcutKeyDisplayString = "";
+            this.mnuLVProperty.Size = new System.Drawing.Size(189, 22);
+            this.mnuLVProperty.Text = "Propertys";
+            this.mnuLVProperty.ToolTipText = "Property";
             // 
             // toolStripMenuItem13
             // 
@@ -496,6 +514,7 @@
             // ctxFavourites
             // 
             this.ctxFavourites.Name = "ctxFavourites";
+            this.ctxFavourites.OwnerItem = this.tsbtnFavourites;
             this.ctxFavourites.Size = new System.Drawing.Size(61, 4);
             // 
             // imlTLB
@@ -610,5 +629,7 @@
         private System.Windows.Forms.ToolStripButton tsbnDelete;
         private System.Windows.Forms.ToolStripButton tsbtnDelete;
         private System.Windows.Forms.ToolStripButton tsbtnNewFolder;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem mnuLVProperty;
     }
 }

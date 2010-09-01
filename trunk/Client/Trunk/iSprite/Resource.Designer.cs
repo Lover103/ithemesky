@@ -37,18 +37,9 @@ namespace iSprite {
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
-                    Type type = typeof(Resource);
-                    string baseName = type.Name;
-                    if (!string.IsNullOrEmpty(type.Namespace))
-                    {
-                        baseName = type.Namespace + "." + baseName;
-                    }
-
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager(baseName, type.Assembly);
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("iSprite.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -107,6 +98,13 @@ namespace iSprite {
         internal static System.Drawing.Bitmap btn_add {
             get {
                 object obj = ResourceManager.GetObject("btn_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btn_cmd {
+            get {
+                object obj = ResourceManager.GetObject("btn_cmd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
