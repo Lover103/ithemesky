@@ -42,11 +42,15 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnFlipPanes = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbtnDeb = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnAPPS = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsbtn_DEB = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbtn_IPA = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbtn_PXL = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnreSpring = new System.Windows.Forms.ToolStripButton();
             this.tsbtnShutdown = new System.Windows.Forms.ToolStripButton();
             this.tsbtnReboot = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnCMD = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnHelp = new System.Windows.Forms.ToolStripButton();
             this.tabTheme = new iSprite.ThirdControl.FarsiLibrary.FATabStripItem();
@@ -143,11 +147,12 @@
             this.toolStripSeparator1,
             this.tsbtnFlipPanes,
             this.toolStripSeparator4,
-            this.tsbtnDeb,
+            this.tsbtnAPPS,
             this.toolStripSeparator3,
             this.tsbtnreSpring,
             this.tsbtnShutdown,
             this.tsbtnReboot,
+            this.tsbtnCMD,
             this.toolStripSeparator2,
             this.tsbtnHelp});
             this.Filetoolmenu.Location = new System.Drawing.Point(0, 0);
@@ -204,15 +209,40 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
-            // tsbtnDeb
+            // tsbtnAPPS
             // 
-            this.tsbtnDeb.Enabled = false;
-            this.tsbtnDeb.Image = global::iSprite.Resource.file_deb;
-            this.tsbtnDeb.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtnDeb.Name = "tsbtnDeb";
-            this.tsbtnDeb.Size = new System.Drawing.Size(91, 22);
-            this.tsbtnDeb.Text = "Install Deb";
-            this.tsbtnDeb.ToolTipText = "Install Deb File";
+            this.tsbtnAPPS.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbtn_DEB,
+            this.tsbtn_IPA,
+            this.tsbtn_PXL});
+            this.tsbtnAPPS.Enabled = false;
+            this.tsbtnAPPS.Image = global::iSprite.Resource.pxl;
+            this.tsbtnAPPS.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnAPPS.Name = "tsbtnAPPS";
+            this.tsbtnAPPS.Size = new System.Drawing.Size(106, 22);
+            this.tsbtnAPPS.Text = "Install Apps";
+            this.tsbtnAPPS.ToolTipText = "Install Apps File";
+            // 
+            // tsbtn_DEB
+            // 
+            this.tsbtn_DEB.Image = global::iSprite.Resource.file_deb;
+            this.tsbtn_DEB.Name = "tsbtn_DEB";
+            this.tsbtn_DEB.Size = new System.Drawing.Size(152, 22);
+            this.tsbtn_DEB.Text = "Install Deb";
+            // 
+            // tsbtn_IPA
+            // 
+            this.tsbtn_IPA.Image = global::iSprite.Resource.ipa;
+            this.tsbtn_IPA.Name = "tsbtn_IPA";
+            this.tsbtn_IPA.Size = new System.Drawing.Size(152, 22);
+            this.tsbtn_IPA.Text = "Install IPA";
+            // 
+            // tsbtn_PXL
+            // 
+            this.tsbtn_PXL.Image = global::iSprite.Resource.pxl;
+            this.tsbtn_PXL.Name = "tsbtn_PXL";
+            this.tsbtn_PXL.Size = new System.Drawing.Size(152, 22);
+            this.tsbtn_PXL.Text = "Install PXL";
             // 
             // toolStripSeparator3
             // 
@@ -246,6 +276,15 @@
             this.tsbtnReboot.Name = "tsbtnReboot";
             this.tsbtnReboot.Size = new System.Drawing.Size(61, 22);
             this.tsbtnReboot.Text = "Reboot";
+            // 
+            // tsbtnCMD
+            // 
+            this.tsbtnCMD.Enabled = false;
+            this.tsbtnCMD.Image = global::iSprite.Resource.btn_cmd;
+            this.tsbtnCMD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnCMD.Name = "tsbtnCMD";
+            this.tsbtnCMD.Size = new System.Drawing.Size(91, 22);
+            this.tsbtnCMD.Text = "Run Command";
             // 
             // toolStripSeparator2
             // 
@@ -470,7 +509,6 @@
         private System.Windows.Forms.ToolStripButton tsbtnreSpring;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsbtnHelp;
-        private System.Windows.Forms.ToolStripButton tsbtnDeb;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private iSprite.ThirdControl.FarsiLibrary.FATabStripItem tabApp;
         private System.Windows.Forms.ToolStrip toolapp;
@@ -484,6 +522,11 @@
         internal System.Windows.Forms.TreeView tvCatalog;
         private System.Windows.Forms.ToolStripButton tsbtnReboot;
         private System.Windows.Forms.ToolStripButton tsbtnShutdown;
+        private System.Windows.Forms.ToolStripButton tsbtnCMD;
+        private System.Windows.Forms.ToolStripDropDownButton tsbtnAPPS;
+        private System.Windows.Forms.ToolStripMenuItem tsbtn_DEB;
+        private System.Windows.Forms.ToolStripMenuItem tsbtn_IPA;
+        private System.Windows.Forms.ToolStripMenuItem tsbtn_PXL;
 
 
     }

@@ -48,6 +48,7 @@ namespace iSprite
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            string msg = string.Empty;
             this.HiddenForm();
 
             if (!m_iPhoneDevice.CheckJailbreak())
@@ -85,7 +86,6 @@ namespace iSprite
                 this.ShowForm();
                 return;
             }
-            string msg = string.Empty;
 
             string tozippath = iSpriteContext.Current.iSpriteTempPath + "\\" + Path.GetRandomFileName() + "\\";
 

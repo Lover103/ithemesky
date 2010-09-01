@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.app_Paneltop = new System.Windows.Forms.Panel();
-            this.app_Panelbuttom = new System.Windows.Forms.Panel();
-            this.appPager = new iSprite.iPager();
-            this.appwb = new System.Windows.Forms.WebBrowser();
             this.txtKey = new System.Windows.Forms.TextBox();
             this.btnGo = new System.Windows.Forms.Button();
             this.chbCatalog = new System.Windows.Forms.ComboBox();
+            this.app_Panelbuttom = new System.Windows.Forms.Panel();
+            this.appPager = new iSprite.iPager();
+            this.appwb = new System.Windows.Forms.WebBrowser();
             this.app_Paneltop.SuspendLayout();
             this.app_Panelbuttom.SuspendLayout();
             this.SuspendLayout();
@@ -49,6 +49,33 @@
             this.app_Paneltop.Name = "app_Paneltop";
             this.app_Paneltop.Size = new System.Drawing.Size(775, 30);
             this.app_Paneltop.TabIndex = 1;
+            // 
+            // txtKey
+            // 
+            this.txtKey.Location = new System.Drawing.Point(1, 4);
+            this.txtKey.Name = "txtKey";
+            this.txtKey.Size = new System.Drawing.Size(471, 21);
+            this.txtKey.TabIndex = 8;
+            // 
+            // btnGo
+            // 
+            this.btnGo.Location = new System.Drawing.Point(698, 4);
+            this.btnGo.Name = "btnGo";
+            this.btnGo.Size = new System.Drawing.Size(75, 23);
+            this.btnGo.TabIndex = 6;
+            this.btnGo.Text = "Search";
+            this.btnGo.UseVisualStyleBackColor = true;
+            // 
+            // chbCatalog
+            // 
+            this.chbCatalog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.chbCatalog.FormattingEnabled = true;
+            this.chbCatalog.Items.AddRange(new object[] {
+            "All Packeges"});
+            this.chbCatalog.Location = new System.Drawing.Point(571, 5);
+            this.chbCatalog.Name = "chbCatalog";
+            this.chbCatalog.Size = new System.Drawing.Size(121, 20);
+            this.chbCatalog.TabIndex = 7;
             // 
             // app_Panelbuttom
             // 
@@ -80,40 +107,14 @@
             this.appwb.Size = new System.Drawing.Size(775, 490);
             this.appwb.TabIndex = 3;
             // 
-            // txtKey
-            // 
-            this.txtKey.Location = new System.Drawing.Point(1, 4);
-            this.txtKey.Name = "txtKey";
-            this.txtKey.Size = new System.Drawing.Size(471, 21);
-            this.txtKey.TabIndex = 8;
-            // 
-            // btnGo
-            // 
-            this.btnGo.Location = new System.Drawing.Point(698, 4);
-            this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(75, 23);
-            this.btnGo.TabIndex = 6;
-            this.btnGo.Text = "Search";
-            this.btnGo.UseVisualStyleBackColor = true;
-            // 
-            // chbCatalog
-            // 
-            this.chbCatalog.FormattingEnabled = true;
-            this.chbCatalog.Items.AddRange(new object[] {
-            "All Packeges"});
-            this.chbCatalog.Location = new System.Drawing.Point(571, 5);
-            this.chbCatalog.Name = "chbCatalog";
-            this.chbCatalog.Size = new System.Drawing.Size(121, 20);
-            this.chbCatalog.TabIndex = 7;
-            // 
-            // OnlineAppList
+            // AptOnlineList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.appwb);
             this.Controls.Add(this.app_Panelbuttom);
             this.Controls.Add(this.app_Paneltop);
-            this.Name = "OnlineAppList";
+            this.Name = "AptOnlineList";
             this.Size = new System.Drawing.Size(775, 550);
             this.app_Paneltop.ResumeLayout(false);
             this.app_Paneltop.PerformLayout();

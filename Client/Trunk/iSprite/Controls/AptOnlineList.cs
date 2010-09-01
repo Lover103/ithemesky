@@ -383,11 +383,12 @@ namespace iSprite
                 this.chbCatalog.Items.Add(name);
                 Application.DoEvents();
             }
-            chbCatalog.SelectedText = "All Packages";
+            chbCatalog.SelectedItem = "All Packages";
 
             txtKey.AutoCompleteCustomSource.AddRange(appNames.ToArray());  //搜索提示  
         }
         #endregion 
+
     }
 
 }

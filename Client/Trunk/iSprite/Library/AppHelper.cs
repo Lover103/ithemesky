@@ -9,6 +9,7 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Windows.Forms;
+using System.Collections.Specialized;
 
 namespace iSprite
 {
@@ -44,7 +45,7 @@ namespace iSprite
         #region html模板
         const string itemhtmltemplate = @"
         <li id=""{5}"">
-			<div class='appIcon' name='itemIcon'><img src='icons/normal_App.png' alt='{0}' width='32' height='32' /></div>
+			<div class='appIcon' name='itemIcon'><img src='icons/normal_App.png' alt=""{0}"" width='32' height='32' /></div>
 			<dl class='appIntro'>
 				<dt>{0}</dt>
 				<dd>{1} </dd>
@@ -872,14 +873,52 @@ function loadInfo()
         {
             key = key.ToLower();
             Dictionary<string, PackageItem> list = new Dictionary<string, PackageItem>();
+            Dictionary<string, PackageItem> listtemp = new Dictionary<string, PackageItem>();
+            NameValueCollection nc = new NameValueCollection();
+            List<double> listSimilarity = new List<double>();
+            
+            //先搜索标题
             foreach (KeyValuePair<string, PackageItem> item in packages)
             {
                 if (
                     (string.IsNullOrEmpty(catalogName) || catalogName == "All Packages" || item.Value.Category.Equals(catalogName, StringComparison.CurrentCultureIgnoreCase))
-                    && (item.Value.Name.ToLower().Contains(key) || item.Value.Description.ToLower().Contains(key))
+                    && (item.Value.Name.ToLower().Contains(key))
                     )
                 {
-                    list.Add(item.Key, item.Value);
+                    listtemp.Add(item.Key, item.Value);
+                    double k = key.Length * 1.0 / item.Value.Name.Length;
+                    if (!listSimilarity.Contains(k))
+                    {
+                        listSimilarity.Add(k);
+                    }
+                    nc.Add(k.ToString(), item.Key);
+                }
+            }
+            listSimilarity.Sort();
+            PackageItem tempitem;
+            for (int index = listSimilarity.Count - 1; index >= 0; index--)
+            {
+                double k = listSimilarity[index];
+                foreach (string PackageID in nc[k.ToString()].Split(','))
+                {
+                    if (listtemp.TryGetValue(PackageID, out tempitem))
+                    {
+                        list.Add(tempitem.PackageID, tempitem);
+                    }
+                }
+            }
+            //后搜索描述
+            foreach (KeyValuePair<string, PackageItem> item in packages)
+            {
+                if (
+                    (string.IsNullOrEmpty(catalogName) || catalogName == "All Packages" || item.Value.Category.Equals(catalogName, StringComparison.CurrentCultureIgnoreCase))
+                    && (item.Value.Description.ToLower().Contains(key))
+                    )
+                {
+                    if (!list.ContainsKey(item.Key))
+                    {
+                        list.Add(item.Key, item.Value);
+                    }
                 }
             }
             return list;
@@ -1692,7 +1731,7 @@ function loadInfo()
         /// <param name="pageindex"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public string Packages2Html(Dictionary<string, PackageItem> packagelist,int pagesize,int pageindex,string key)
+        public string Packages2Html(Dictionary<string, PackageItem> packagelist, int pagesize, int pageindex, string key)
         {
             if (pageindex < 1)
             {

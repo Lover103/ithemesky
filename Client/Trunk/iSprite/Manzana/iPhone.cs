@@ -974,7 +974,7 @@ namespace Manzana {
                 }
 
                 ulong finishSize = 0L;
-                bool cancalUpload = false;
+                bool cancelUpload = false;
                 using (FileStream stream = File.OpenRead(srcpath_Computer))
                 {
                     iPhoneFile file = iPhoneFile.OpenWrite(this, destpath_iPhone);
@@ -991,10 +991,10 @@ namespace Manzana {
                         {
                             if (progresshandler != null)
                             {
-                                progresshandler(FileProgressMode.PC2iPhone, totalfileSize, finishSize, speed, timeElapse, srcpath_Computer, ref cancalUpload);
+                                progresshandler(FileProgressMode.PC2iPhone, totalfileSize, finishSize, speed, timeElapse, srcpath_Computer, ref cancelUpload);
 
                                 Application.DoEvents();
-                                if (cancalUpload)
+                                if (cancelUpload)
                                 {
                                     break;
                                 }
@@ -1010,7 +1010,7 @@ namespace Manzana {
                             }
                         }
                         stream.Close();
-                        if (cancalUpload)
+                        if (cancelUpload)
                         { 
                             //删除已经完成部分的文件
                             this.DeleteFile(destpath_iPhone);
@@ -1020,9 +1020,9 @@ namespace Manzana {
                         if (completedhandler != null)
                         {
                             Application.DoEvents();
-                            completedhandler(!cancalUpload, srcpath_Computer, "");
+                            completedhandler(!cancelUpload, srcpath_Computer, "");
                         }
-                        returncode = !cancalUpload;
+                        returncode = !cancelUpload;
                         Application.DoEvents();
                     }
                     catch (Exception ex)

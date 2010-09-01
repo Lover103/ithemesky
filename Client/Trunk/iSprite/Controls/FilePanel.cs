@@ -119,6 +119,11 @@ namespace iSprite
 			m_DirectoryDetailList.Font = this.Font;
             m_DirectoryDetailList.OnPathChanged += new PathChanged(OnPathChanged);
 
+            if (m_FileDevice is iPhoneFileDevice)
+            {
+                m_DirectoryDetailList.ContextMenuStrip = ctxLVTools;
+            }
+
 			tsbtnLVFilter.ForeColor = Color.Black;
 
 			m_SplitDistance = (int)splitContainer1.Width / 3;
@@ -268,6 +273,10 @@ namespace iSprite
                     break;
                 case "mnuLVCancel":
                     this.ctxLVTools.Hide();
+                    break;
+
+                case "mnuLVProperty":
+                    this.m_DirectoryDetailList.DoByCommandOption(ButtonCommandOption.PermissionsSetting);
                     break;
             }
         }
