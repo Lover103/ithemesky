@@ -40,7 +40,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 /*header*/
 .logo{ float:left; width:225px; margin-top:8px; font:0/0 Arial;}
 .nav{ float:left; margin-top:25px; height:40px;}
-.nav li{ float:left; height:24px; padding:10px 12px 6px 10px; background:url(../images/sprites_header.png) no-repeat right 0;}
+.nav li{ float:left; height:24px; padding:10px 11px 6px 9px; background:url(../images/sprites_header.png) no-repeat right 0;}
 .nav li.last{ background:none;}
 .nav a{ display:block; padding:5px; height:14px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_header.png) no-repeat;}
 .nav li.s1 a:link,.nav li.s1 a:visited{ width:36px; background-position:0 -45px;}
@@ -57,7 +57,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .nav li.s6 a:hover,.nav li.s6 a:active{ background-position:-455px -70px;}
 .nav li.s7 a:link,.nav li.s7 a:visited{ width:39px; background-position:-515px -45px;}
 .nav li.s7 a:hover,.nav li.s7 a:active{ background-position:-515px -70px;}
-.nav li.s8 a:link,.nav li.s8 a:visited{ width:72px; background-position:-580px -45px;}
+.nav li.s8 a:link,.nav li.s8 a:visited{ width:99px; background-position:-580px -45px;}
 .nav li.s8 a:hover,.nav li.s8 a:active{ background-position:-580px -70px;}
 .searchPannel{ float:right; width:140px; height:20px; margin-top:35px; background:url(../images/sprites_header.png) no-repeat 0 -110px; position:relative; z-index:1;}
 .searchPannel .label{ float:left; display:block; width:24px; height:20px; text-indent:-999em; overflow:hidden;}
@@ -236,8 +236,8 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .detailInfo .detailBtn li a{ display:block; height:38px; text-indent:-999em; overflow:hidden;}
 .detailInfo .btnDownload a{ width:145px; background:url(../images/sprites_detail.png) no-repeat -210px 0;}
 .detailInfo .btnDownload a:hover{ background:url(../images/sprites_detail.png) no-repeat -410px 0;}
-.detailInfo .btnDiy a{ width:155px; background:url(../images/sprites_detail.png) no-repeat -210px -240px;}
-.detailInfo .btnDiy a:hover{ background:url(../images/sprites_detail.png) no-repeat -410px -240px;}
+.detailInfo .btnCreate a{ width:160px; background:url(../images/sprites_detail.png) no-repeat -210px -240px;}
+.detailInfo .btnCreate a:hover{ background:url(../images/sprites_detail.png) no-repeat -410px -240px;}
 .detailRate{ position:relative; z-index:1; width:120px; height:22px; background:url(../images/sprites_detail.png) no-repeat -210px -50px;}
 .detailRate .rateResult{ display:block; width:118px; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
 .detailRate .star0{ background-position:-210px -50px;}
