@@ -21,7 +21,7 @@
 		    <!--last update begin-->
 		    <div class="mainCol">
 			    <div class="mainColHead">
-				    <h3 class="colTitle">Last Update</h3>
+				    <h3 class="colTitle">Latest Updates</h3>
 				    <span class="colMore"><a href="/list/new">MORE</a></span>
 			    </div>
 			    <div class="mainColContent themeList clearfix">
