@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 <title>iSpirit - iPhone Manager, manage iPhone apps, iPhone themes and files easily.</title>
-<meta name="description" content="iSpirit help you manage files between PC and iPhone, install deb files and change iPhone themes easily." />
+<meta name="description" content="iSpirit is a iPhone Manager which help you manage files between PC and iPhone, install iPhone apps and change iPhone themes easily." />
 <meta name="keywords" content="iSpirit download, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 <link type="text/css" rel="stylesheet" media="screen" href="/Content/css/fancybox_normal.css">
 <script type="text/javascript" src="/Content/js/fancybox_normal.js"></script>
