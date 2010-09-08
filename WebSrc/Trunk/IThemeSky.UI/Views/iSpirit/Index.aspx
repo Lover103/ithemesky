@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title>iSpirit - iPhone apps, themes and files manager - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
-<meta name="description" content="iSpirit is a utility that help you manage files between PC and iPhone. Install deb files and change iPhone themes easily with it." />
+<title>iSpirit - iPhone Manager, manage iPhone apps, iPhone themes and files easily.</title>
+<meta name="description" content="iSpirit help you manage files between PC and iPhone, install deb files and change iPhone themes easily." />
 <meta name="keywords" content="iSpirit download, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 <link type="text/css" rel="stylesheet" media="screen" href="/Content/css/fancybox_normal.css">
 <script type="text/javascript" src="/Content/js/fancybox_normal.js"></script>
@@ -41,8 +41,8 @@ $(document).ready(function() {
 			<div class="iSpiritNav">
 				<ul>
 					<li class="s1"><% Html.RenderPartial("iSpiritDownload"); %></li>
-					<li class="s2"><a href="/ispirit" class="current" title="Features - Learn more about iSpirit"><span class="link">Features - Learn more about iSpirit</span></a></li>
-					<li class="s3"><a href="/ispirit/help" title="Get Help - FAQs and Support"><span class="link">Get Help - FAQs and Support</span></a></li>
+					<li class="s2"><a href="/ispirit" class="current" title="iSpirit Features - Learn more about iSpirit"><span class="link">iSpirit Features - Learn more about iSpirit</span></a></li>
+					<li class="s3"><a href="/ispirit/help" title="Get iSpirit Help - FAQs and Support"><span class="link">Get iSpirit Help - FAQs and Support</span></a></li>
 				</ul>
 			</div>
 			<div class="iSpiritMain">
