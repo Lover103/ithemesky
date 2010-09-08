@@ -41,8 +41,8 @@ $(document).ready(function() {
 			<div class="iSpiritNav">
 				<ul>
 					<li class="s1"><% Html.RenderPartial("iSpiritDownload"); %></li>
-					<li class="s2"><a href="/ispirit" class="current" title="iSpirit Features - Learn more about iSpirit"><span class="link">iSpirit Features - Learn more about iSpirit</span></a></li>
-					<li class="s3"><a href="/ispirit/help" title="Get iSpirit Help - FAQs and Support"><span class="link">Get iSpirit Help - FAQs and Support</span></a></li>
+					<li class="s2"><a href="/ispirit" class="current" title="Features - Learn more about iSpirit"><span class="link">Features - Learn more about iSpirit</span></a></li>
+					<li class="s3"><a href="/ispirit/help" title="Get Help - iSpirit FAQs and Support"><span class="link">Get Help - iSpirit FAQs and Support</span></a></li>
 				</ul>
 			</div>
 			<div class="iSpiritMain">
