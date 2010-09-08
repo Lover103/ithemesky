@@ -49,13 +49,13 @@
 						6. And also you could download from the website indicated in the iSpirit, iSpirit will help you install the theme automatically.
 					</p>
 				</div>
-				<h4 class="iSpiritFaq"><a href="#">How to install the .deb software via iSpirit?</a></h4>
+				<h4 class="iSpiritFaq"><a href="#">How to install the .deb software with iSpirit?</a></h4>
 				<div class="iSpiritFaqContent">
 					<p>
 						1. Run the iSpirit, and open the favorite folder and choose the "Cydia AutoInstall". (or search for /private/var/root/Media/Cydia/AutoInstall/ in the address)<br />
 						2. Copy the .deb file to this folder.<br />
 						3. Restart your iPhone.<br />
-						4. Then restart the Springboard via iSprite.<br />
+						4. Then restart the Springboard with iSpirit.<br />
 					</p>
 				</div>
 				<h4 class="iSpiritFaq"><a href="#">How to view and edit the .plist file?</a></h4>
