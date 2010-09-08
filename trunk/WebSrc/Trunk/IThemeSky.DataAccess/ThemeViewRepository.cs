@@ -282,7 +282,7 @@ namespace IThemeSky.DataAccess
             {
                 filter.CategoryIds.Add(categoryId);
             }
-            string searchCondition = filter.ToString();
+            string searchCondition = filter.ToString() + " AND CommendIndex>=4";
             string cmdText = "SELECT TOP " + displayNumber + " * FROM (SELECT NEWID() rndNumber," + SIMPLE_THEME_FIELDS + " FROM " + GetDataViewName(filter, ThemeSortOption.Default) + " WHERE " + searchCondition + ") t ORDER BY rndNumber";
             List<SimpleThemeView> themes = new List<SimpleThemeView>();
             using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))

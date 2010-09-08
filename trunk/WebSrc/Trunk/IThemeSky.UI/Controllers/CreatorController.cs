@@ -7,7 +7,7 @@ using IThemeSky.UI.Models;
 
 namespace IThemeSky.UI.Controllers
 {
-    public class DIYController : ThemeControllerBase
+    public class CreatorController : ThemeControllerBase
     {
         //
         // GET: /Help/

@@ -33,7 +33,7 @@ namespace IThemeSky.Library.Extensions
                 int endIndex = beginIndex + displayPageLinkNumber - 1;
                 if (endIndex > pageCount)
                 {
-                    endIndex = pageCount+1;
+                    endIndex = pageCount;
                 }
                 response.Write("<ul class=\"pageNumber\">");
                 //如果页码大于1才输出向前的按钮
@@ -42,7 +42,7 @@ namespace IThemeSky.Library.Extensions
                     response.Write(string.Format("<li class=\"previous\"><a href=\"{0}\">Previous</a></li>", string.Format(urlPattern, pageIndex - 1)));
                 }
                 //输出每页的页码
-                for (int i = beginIndex; i < endIndex; i++)
+                for (int i = beginIndex; i <= endIndex; i++)
                 {
                     response.Write(string.Format("<li{2}><a href=\"{0}\">{1}</a></li>", string.Format(urlPattern, i), i, i == pageIndex ? " class=\"current\"" : ""));
                 }

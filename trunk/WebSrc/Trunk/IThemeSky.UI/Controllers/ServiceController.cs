@@ -11,6 +11,7 @@ using System.Web.UI;
 using System.IO;
 using System.Text.RegularExpressions;
 using IThemeSky.Library.Util;
+using System.Text;
 
 namespace IThemeSky.UI.Controllers
 {
@@ -343,6 +344,44 @@ namespace IThemeSky.UI.Controllers
                 return Content("<script type=\"text/javascript\">parent.SubmitThemeSuccess()</script>");
             }
             return Content("<script type=\"text/javascript\">alert('post comment failure,please try again for a while.');</script>");
+        }
+
+        public ActionResult GetSiteMapXml()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(@"
+                <?xml version=""1.0"" encoding=""UTF-8""?>
+                <urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">
+            ");
+            sb.Append(BuildUrlNode("http://www.ithemesky.com", "1.0", "always"));
+            sb.Append(BuildUrlNode("http://www.ithemesky.com/ispirit", "1.0", "always"));
+            sb.Append(BuildUrlNode("http://www.ithemesky.com/ispirit/help", "1.0", "daily"));
+            sb.Append(BuildUrlNode("http://www.ithemesky.com/creator", "1.0", "always"));
+            sb.Append(BuildUrlNode("http://www.ithemesky.com/help/how-to-use-winterboard", "0.8", "daily"));
+
+            List<SimpleThemeView> themes = ThemeRepositoryFactory.Default.GetCachedThemeViewRepository().GetThemes(ThemeSortOption.Default, int.MaxValue);
+            foreach (SimpleThemeView theme in themes)
+            {
+                sb.Append(BuildUrlNode("http://www.ithemesky.com/iphone-themes/" + theme.Title.Replace("&", "-").Replace(" ", "-") + "/" + theme.ThemeId, "0.9", "daily"));
+            }
+            sb.Append("</urlset>");
+            return Content(sb.ToString());
+        }
+        private string BuildUrlNode(string url, string priority, string changefreq)
+        {
+            return string.Format(@"
+                <url>
+		            <loc>{0}</loc>
+		            <lastmod>{1}</lastmod>
+		            <changefreq>{3}</changefreq>
+		            <priority>{2}</priority>
+	            </url>                
+            "
+                , url
+                , DateTime.Now.ToString("yyyy-MM-dd")
+                , priority
+                , changefreq
+                );
         }
     }
 }
