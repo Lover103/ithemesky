@@ -65,7 +65,7 @@ namespace IThemeSky.ThemesRobot
                         _webClient.DownloadFile(currItem.SelectSingleNode("previewUrl").Value, Path.Combine(SAVE_PATH, theme.ThumbnailName));
                         ImageHelper.MakeThumbnail(Path.Combine(SAVE_PATH, theme.ThumbnailName), Path.Combine(SAVE_PATH, theme.ThumbnailName.Replace(".jpg", "_112x168.jpg")), 112, 168, "wh");
                         IThemeManageRepository repository = ThemeRepositoryFactory.Default.GetThemeManageRepository();
-                        //repository.AddTheme(theme);
+                        repository.AddTheme(theme);
                         Console.WriteLine("#" + index + ":" + theme.Title);
                         File.AppendAllText(SAVE_PATH + "Log.txt", index + "\r\n");
                         index++;

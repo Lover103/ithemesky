@@ -118,6 +118,11 @@ namespace IThemeSky.UI
                 "Service/RateTheme/{themeId},{score}", // URL with parameters
                 new { controller = "Service", action = "RateTheme" } // Parameter defaults
             );
+            routes.MapRoute(
+                "SiteMapService", // Route name
+                "sitemap.xml", // URL with parameters
+                new { controller = "Service", action = "GetSiteMapXml" } // Parameter defaults
+            );
 
             //ISpirit专用服务
             routes.MapRoute(
@@ -139,10 +144,20 @@ namespace IThemeSky.UI
             );
 
             //DIY
+            //routes.MapRoute(
+            //    "DIY", // Route name
+            //    "DIY/{themeName},{themeId}", // URL with parameters
+            //    new { controller = "DIY", action = "Index", themeId = "100", themeName = "iThemeSky" } // Parameter defaults
+            //);
             routes.MapRoute(
-                "DIY", // Route name
-                "DIY/{themeName},{themeId}", // URL with parameters
-                new { controller = "DIY", action = "Index" } // Parameter defaults
+                "CreatorDefalut", // Route name
+                "Creator", // URL with parameters
+                new { controller = "Creator", action = "Index", themeName = "", themeId = "" } // Parameter defaults
+            );
+            routes.MapRoute(
+                "Creator", // Route name
+                "Creator/{themeName},{themeId}", // URL with parameters
+                new { controller = "Creator", action = "Index", themeName = "", themeId = "" } // Parameter defaults
             );
 
             //软件相关
