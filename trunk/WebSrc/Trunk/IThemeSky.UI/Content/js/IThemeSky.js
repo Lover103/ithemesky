@@ -105,7 +105,7 @@ function LoadComments(pageIndex) {
 function PostCommentSuccess() {
     alert('post comment success.');
     $('#Content').html('');
-    LoadSoftComments(1);
+    LoadComments(1);
 }
 var _softIdentify = '';
 function LoadSoftComments(pageIndex) {
