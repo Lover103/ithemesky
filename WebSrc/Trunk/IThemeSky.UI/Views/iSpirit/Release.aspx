@@ -20,21 +20,15 @@ a:hover,a:active{ color:#FF0;}
 		<!-- 1.0.6 -->
 		<div class="release">
 			<h2><a href="http://www.ithemesky.com/iSpirit/">iSpirit 1.0.6</a></h2>
-			<h3>Released on 9/5/2010</h3>
+			<h3>Released on 9/9/2010</h3>
 			<ul>
-				<li>Added install/uninstall ipa flies. (Support iPad and IOS4.x, would not appear white icon)</li>
+				<li>Added all the features support for IOS4.x</li>
+				<li>Added install/uninstall ipa flies. (Support iphone 3.x, iPad and IOS4.x, would not appear white icon)</li>
 				<li>Added the Command-Line feature, can manage iPhone through the Command-Line</li>
-				<li>Added set file attributes</li>
-				<li>Added features support for IOS4.X
-					<ul>
-						<li>Set Winterboard theme</li>
-						<li>Install Deb files</li>
-						<LI>Reboot Springboard</li>
-					</ul>
-				</li>
+				<li>Added setting propertys for file/directory</li>
 				<li>Speeded up locating the folder</li>
-				<li>Improved online deb search</li>
-				<li>Added fixing blank or white application's icon</li>
+				<li>Improved online deb source search</li>
+				<li>Added repair blank or white application's icon</li>
 				<li>Fixed the condition that former ipa files are not available again after installing a deb file</li>
 				<li>Fixed the error occurs when loading list of themes from iPhone</li>
 			</ul>

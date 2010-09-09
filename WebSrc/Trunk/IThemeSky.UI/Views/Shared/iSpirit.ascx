@@ -1,9 +1,9 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 			<div class="iSpirit">
 				<dl>
-					<dt><img src="/Content/images/ispirit_title.png" width="345" height="72" alt="iSpirit - iPhone themes and files manager" /></dt>
+					<dt><img src="/Content/images/ispirit_title.png" height="72" alt="iSpirit - iPhone apps, themes and files manager" /></dt>
 					<dd>
-						<p>iSpirit is specially designed for iPhone. Used on your PC for installing Apps, themes and files mangement. With iSpirit, you could install apps, install themes and manage the files in your iPhone easily. iPhone themes for free from iSpirit. It works with iPod touch, iPhone, iPhone 3G, iPhone 3Gs in Firmware 1.x, 2.x and 3.x and iPad.</p>
+						<p>iSpirit is a iPhone manager developed for Windows. iSpirit help you install apps, install themes and manage files in your iPhone easily. It can also help you fix some errors which occured in using iPhone. It fully supports iPod touch, iPhone, iPhone 3G, iPhone 3Gs, <strong>iPhone 4</strong> and iPad.</p>
 						<p style="margin-top:5px;"><strong>System Requirement:</strong></p>
 						<p class="req">
 							<strong>&nbsp;&nbsp;&nbsp;OS:</strong> Windows XP / Windows Vista / Windows 7<br />
