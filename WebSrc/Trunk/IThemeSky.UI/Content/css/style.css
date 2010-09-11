@@ -184,7 +184,8 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .selectTags dd li{ float:left; background:url(../images/sprites_common.png) no-repeat right -500px; padding:0 12px; white-space:nowrap;}
 .selectTags dd a:link,.selectTags dd a:visited{ color:#91B1B5;}
 .selectTags dd a:hover,.selectTags dd a:active{ color:#FFF;}
-.selectTags dd a.selected{ background:url(../images/sprites_common.png) no-repeat 0 -647px; padding-left:16px; color:#FFF;}
+.selectTags dd a.selected:link,.selectTags dd a.selected:visited{ background:url(../images/sprites_common.png) no-repeat 0 -647px; padding-left:16px; color:#FFF;}
+.selectTags dd a.selected:hover,.selectTags dd a.selected:active{ background-position:0 -687px; text-decoration:underline;}
 
 /*themes list*/
 .lists{ margin-top:10px; width:770px; background:url(../images/sprites_box_wide.png) no-repeat -1540px 0;}
