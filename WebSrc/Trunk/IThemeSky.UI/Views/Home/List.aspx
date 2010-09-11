@@ -19,6 +19,7 @@
 		<!--Categories begin-->
 		<% Html.RenderPartial("ThemeCategories", ViewData.Model.ThemeCategories); %>
 		<!--Categories end-->
+		<a href="http://www.twitter.com/iThemesky/" title="Follow us on Twitter" class="sideTwitter" target="_blank">Follow us on Twitter</a>
 	</div>
 	<div id="main">
 		<!--breadcrumb begin-->
@@ -73,23 +74,33 @@
 					<dt>Hot Tags:</dt>
 					<dd>
 						<ul class="clearfix">
-							<li><a href="#">3D</a></li>
 							<li><a href="#">sexy</a></li>
-							<li><a href="#">lovely</a></li>
-							<li><a href="#">fire</a></li>
-							<li><a href="#">hot</a></li>
+							<li><a href="#">sweet</a></li>
+							<li><a href="#">3D</a></li>
 							<li><a href="#">Chinese</a></li>
-							<li><a href="#">beauty</a></li>
-							<li><a href="#">Japan</a></li>
-							<li><a href="#">man</a></li>
 							<li><a href="#">cute</a></li>
-							<li><a href="#">space</a></li>
-							<li><a href="#">Disney</a></li>
-							<li><a href="#">boy</a></li>
-							<li><a href="#">fun</a></li>
-							<li><a href="#">cool</a></li>
 							<li><a href="#">girl</a></li>
+							<li><a href="#">beauty</a></li>
+							<li><a href="#">boy</a></li>
+							<li><a href="#">cool</a></li>
+							<li><a href="#">glass</a></li>
+							<li><a href="#">dark</a></li>
+							<li><a href="#">Apple</a></li>
+							<li><a href="#">war</a></li>
+							<li><a href="#">hero</a></li>
+							<li><a href="#">lovely</a></li>
+							<li><a href="#">funny</a></li>
+							<li><a href="#">fun</a></li>
+							<li><a href="#">man</a></li>
+							<li><a href="#">legs</a></li>
+							<li><a href="#">Japan</a></li>
+							<li><a href="#">night</a></li>
+							<li><a href="#">gun</a></li>
+							<li><a href="#">fantasy</a></li>
+							<li><a href="#">WOW</a></li>
 							<li><a href="#">simple</a></li>
+							<li><a href="#">Disney</a></li>
+							<li><a href="#">pure</a></li>
 						</ul>
 					</dd>
 				</dl>
