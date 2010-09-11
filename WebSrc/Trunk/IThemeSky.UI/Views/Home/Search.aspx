@@ -12,6 +12,7 @@
 		<!--Categories begin-->
 		<% Html.RenderPartial("ThemeCategories", ViewData.Model.ThemeCategories); %>
 		<!--Categories end-->
+		<a href="http://www.twitter.com/iThemesky/" title="Follow us on Twitter" class="sideTwitter" target="_blank">Follow us on Twitter</a>
 	</div>
 	<div id="main">
 		<!--breadcrumb begin-->
