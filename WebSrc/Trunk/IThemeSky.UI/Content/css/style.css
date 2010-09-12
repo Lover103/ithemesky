@@ -119,7 +119,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 
 /*theme list layout*/
 .themeList dl{ width:138px; height:260px; background:url(../images/sprites_common.png) no-repeat 0 -80px;}
-.themeList dt{ height:22px; text-align:center; line-height:22px;}
+.themeList dt{ height:20px; text-align:center; line-height:20px; padding-top:2px;}
 .themeList .themeCut{ padding:10px 12px; width:114px; height:170px;}
 .themeList .themeCut a:link,.themeList .themeCut a:visited{ padding:1px; display:block; width:112px; height:168px; font:0/0 Arial;}
 .themeList .themeCut a:hover,.themeList .themeCut a:active{ padding:0; border:1px solid #2D494B;}
@@ -158,7 +158,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 
 /*sub content*/
 .subHelp{ padding:5px 10px; width:140px;}
-.subHelp li{ width:128px; background:url(../images/sprites_common.png) no-repeat -771px -340px; padding:5px 0 0 12px;}
+.subHelp li{ width:128px; background:url(../images/sprites_common.png) no-repeat -771px -340px; padding:5px 0 0 12px; line-height:1.3;}
 .subCol .themeList dl{ margin:0 auto; padding-bottom:7px;}
 .subCol .themeList{ padding:5px 0;}
 
