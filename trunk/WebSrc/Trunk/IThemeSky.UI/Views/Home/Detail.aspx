@@ -94,7 +94,7 @@
 					</dl>
 					<ul class="detailBtn clearfix">
 						<li class="btnDownload"><a href="/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>" title="Download">Download</a></li>
-						<li class="btnCreate"><a href="/Creator/<%=ViewData.Model.CurrentTheme.Title.Replace(" ", "-") %>,<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator" target="_blank">Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator</a></li>
+						<li class="btnCreate"><a href="/Creator/<%=ViewData.Model.CurrentTheme.Title.Replace(" ", "-") %>,<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator" target="_blank">Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator</a><!--<span class="off" title="Theme Creator for iPhone 4 comming soon">Can't be modified</span>--></li>
 					</ul>
 					<div class="installIip">
 						Click "Create Now" above to modify this theme in your mind with iPhone theme Creator Online and then download it. <a href="/ispirit/"><span class="orange">Install theme to iPhone with <span style=" text-decoration:underline;">iSpirit</span></span></a>. 
