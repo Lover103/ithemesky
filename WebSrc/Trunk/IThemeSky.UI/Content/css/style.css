@@ -120,10 +120,10 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 /*theme list layout*/
 .themeList dl{ width:138px; height:260px; background:url(../images/sprites_common.png) no-repeat 0 -80px;}
 .themeList dt{ height:20px; text-align:center; line-height:20px; padding-top:2px;}
-.themeList .themeCut{ padding:10px 12px; width:114px; height:170px;}
+.themeList .themeCut{ padding:10px 12px; width:114px; height:170px; position:relative; z-index:1;}
 .themeList .themeCut a:link,.themeList .themeCut a:visited{ padding:1px; display:block; width:112px; height:168px; font:0/0 Arial;}
 .themeList .themeCut a:hover,.themeList .themeCut a:active{ padding:0; border:1px solid #2D494B;}
-.themeList .rateResult{ display:block; width:92px; height:16px; margin:0 auto; text-indent:-999em; overflow:hidden; background:url(../images/sprites_common.png) no-repeat;}
+.themeList .themeCut .forIphone4{ position:absolute; z-index:1; left:12px; top:10px; display:block; width:40px; height:40px; text-indent:-999em; background:url(../images/sprites_common.png) no-repeat -460px -100px;}.themeList .rateResult{ display:block; width:92px; height:16px; margin:0 auto; text-indent:-999em; overflow:hidden; background:url(../images/sprites_common.png) no-repeat;}
 .themeList .star0{ background-position:-160px -100px;}
 .themeList .star1{ background-position:-160px -120px;}
 .themeList .star2{ background-position:-160px -140px;}
@@ -241,6 +241,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .detailInfo .btnDownload a:hover{ background:url(../images/sprites_detail.png) no-repeat -410px 0;}
 .detailInfo .btnCreate a{ width:160px; background:url(../images/sprites_detail.png) no-repeat -210px -240px;}
 .detailInfo .btnCreate a:hover{ background:url(../images/sprites_detail.png) no-repeat -410px -240px;}
+.detailInfo .btnCreate .off{ display:block; width:160px; height:38px; background:url(../images/sprites_detail.png) no-repeat -410px -290px; text-indent:-999em; overflow:hidden;}
 .detailRate{ position:relative; z-index:1; width:120px; height:22px; background:url(../images/sprites_detail.png) no-repeat -210px -50px;}
 .detailRate .rateResult{ display:block; width:118px; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
 .detailRate .star0{ background-position:-210px -50px;}
