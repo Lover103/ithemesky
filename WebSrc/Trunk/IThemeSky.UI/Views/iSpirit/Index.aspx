@@ -46,61 +46,59 @@ $(document).ready(function() {
 				</ul>
 			</div>
 			<div class="iSpiritMain">
-				<h3 class="featureTitle">
-					<span class="titleIco ico_6">8 </span>
-					<span class="titleEntry">Install <span class="orange">.DEB</span> software easily.<a href="http://forum.ithemesky.com/default.aspx?g=posts&m=5&#post5"   target=_blank> Get Help.</a><br /><br /></span>
-				</h3>
-				
-				<h3 class="featureTitle">
-					<span class="titleIco ico_8">4 </span>
-					<span class="titleEntry" style="padding-top:0;">Powerful Winterboard theme management, available to install theme via zip file, local folder or online, and manage the theme you got.</span>
-				</h3>
-				
-				<p class="featureContent">
-					<a href="/Content/images/ispirit/features/09.jpg" class="imgZoom"><img src="/Content/images/ispirit/features/09_thumb.png" alt="" width="178" height="120" /></a>&nbsp;&nbsp;&nbsp;
-					<a href="/Content/images/ispirit/features/10.jpg" class="imgZoom"><img src="/Content/images/ispirit/features/10_thumb.png" alt="" width="178" height="120" /></a>
-				</p>
-				<h3 class="featureTitle">
-					<span class="titleIco ico_1">1 </span>
-					<span class="titleEntry">Powerful file management, support for various file operation and drag.</span>
-				</h3>
-				<p class="featureContent">
-					<a href="/Content/images/ispirit/features/01.png" class="imgZoom"><img src="/Content/images/ispirit/features/01_thumb.png" alt="" width="178" height="120" /></a>
-				</p>
-				<h3 class="featureTitle">
-					<span class="titleIco ico_2">2 </span>
-					<span class="titleEntry">Various operation appearance.</span>
-				</h3>
-				<p class="featureContent">
-					<a href="/Content/images/ispirit/features/02.png" class="imgZoom"><img src="/Content/images/ispirit/features/02_thumb.png" alt="" width="178" height="120" /></a>&nbsp;&nbsp;&nbsp;<a href="/Content/images/ispirit/features/03.png" class="imgZoom"><img src="/Content/images/ispirit/features/03_thumb.png" alt="" width="178" height="120" /></a>&nbsp;&nbsp;&nbsp;<a href="/Content/images/ispirit/features/04.png" class="imgZoom"><img src="/Content/images/ispirit/features/04_thumb.png" alt="" width="178" height="120" /></a>
-				</p>
-				<h3 class="featureTitle">
-					<span class="titleIco ico_7">3 </span>
-					<span class="titleEntry">Restart the Springboard/Reboot/Shutdown via PC, no deamon install make you more comfortable.</span>
-				</h3>
-				<p class="featureContent">
-					<a href="/Content/images/ispirit/features/08.png" class="imgZoom"><img src="/Content/images/ispirit/features/08_thumb.png" alt="" width="178" height="120" /></a>
-				</p>
-				<h3 class="featureTitle">
-					<span class="titleIco ico_3">5 </span>
-					<span class="titleEntry">Transform and view <span class="orange">.PNG</span> file automatically.</span>
-				</h3>
-				<p class="featureContent">
-					<a href="/Content/images/ispirit/features/05.png" class="imgZoom"><img src="/Content/images/ispirit/features/05_thumb.png" alt="" width="178" height="120" /></a>
-				</p>
-				<h3 class="featureTitle">
-					<span class="titleIco ico_4">6 </span>
-					<span class="titleEntry">View and edit the <span class="orange">.PLIST</span> file.</span>
-				</h3>
-				<p class="featureContent">
-					<a href="/Content/images/ispirit/features/06.png" class="imgZoom"><img src="/Content/images/ispirit/features/06_thumb.png" alt="" width="178" height="120" /></a>
-				</p>
-				<h3 class="featureTitle">
-					<span class="titleIco ico_5">7 </span>
-					<span class="titleEntry">Adding files to favorite folders.</span>
-				</h3>
-				<p class="featureContent">
-					<a href="/Content/images/ispirit/features/07.png" class="imgZoom"><img src="/Content/images/ispirit/features/07_thumb.png" alt="" width="178" height="120" /></a>
+				<div class="featuresList clearfix">
+					<dl>
+						<dt>Powerful File Manager</dt>
+						<dd class="ico ico_1">Intro:</dd>
+						<dd class="entry">Explore any directory on idevice and drag "n" drop files or folders between PC and iPhone.</dd>
+					</dl>
+					<dl>
+						<dt>Winterboard Theme Manager</dt>
+						<dd class="ico ico_2">Intro:</dd>
+						<dd class="entry">Install theme via zip file, local folder or online. Shows the themes installed on idevice and manage them.</dd>
+					</dl>
+					<dl>
+						<dt>Install .DEB  and .IPA Files Easily</dt>
+						<dd class="ico ico_3">Intro:</dd>
+						<dd class="entry">Select a .DEB/.IPA file you want to install. Click the button "Install" then iSpirit will install it completly.</dd>
+					</dl>
+					<dl>
+						<dt>App Manager</dt>
+						<dd class="ico ico_4">Intro:</dd>
+						<dd class="entry">Shows Cydia sources, installed packages and list various categories to download apps.</dd>
+					</dl>
+					<dl>
+						<dt>Control and Set Smartly</dt>
+						<dd class="ico ico_5">Intro:</dd>
+						<dd class="entry">Restart Springboard, shutdown iPhone, reboot iPhone, support to manage iPhone through the Command-Line.</dd>
+					</dl>
+					<dl>
+						<dt>More cool Features</dt>
+						<dd class="ico ico_6">Intro:</dd>
+						<dd class="entry">Fix white/blank icon; Transform and view .PNG file; View and edit .PLIST file; Adding files to favorite folders. Etc.</dd>
+					</dl>
+				</div>
+				<dl class="featureScreen clearfix">
+					<dt>iSpirit Screenshots:</dt>
+					<dd><a href="/Content/images/ispirit/features/01.png" class="imgZoom"><img src="/Content/images/ispirit/features/01_thumb.png" alt="" width="178" height="120" /></a></dd>
+					<dd><a href="/Content/images/ispirit/features/02.png" class="imgZoom"><img src="/Content/images/ispirit/features/02_thumb.png" alt="" width="178" height="120" /></a></dd>
+					<dd><a href="/Content/images/ispirit/features/05.png" class="imgZoom"><img src="/Content/images/ispirit/features/05_thumb.png" alt="" width="178" height="120" /></a></dd>
+					<dd><a href="/Content/images/ispirit/features/06.png" class="imgZoom"><img src="/Content/images/ispirit/features/06_thumb.png" alt="" width="178" height="120" /></a></dd>
+					<dd><a href="/Content/images/ispirit/features/07.png" class="imgZoom"><img src="/Content/images/ispirit/features/07_thumb.png" alt="" width="178" height="120" /></a></dd>
+					<dd><a href="/Content/images/ispirit/features/08.png" class="imgZoom"><img src="/Content/images/ispirit/features/08_thumb.png" alt="" width="178" height="120" /></a></dd>
+				</dl>
+				<p class="featureContent clearfix">
+					<span style="float:left; width:550px;">If you would like to donate to help support the growing of our free software and service, you may do so with the button to the right.</span>
+					<span style="float:right; width:92px; margin-top:5px;">
+						<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+						<input type="hidden" name="cmd" value="_xclick">
+						<input type="hidden" name="business" value="ithemesky@gmail.com">
+						<input type="hidden" name="item_name" value="Donate to iThemeSky.com">
+						<input type="hidden" name="currency_code" value="USD">
+						<input type="hidden" name="amount" value="">
+						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+						</form>
+					</span>
 				</p>
 			</div>
 		</div>
