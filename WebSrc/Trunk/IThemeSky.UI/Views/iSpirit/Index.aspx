@@ -90,13 +90,13 @@ $(document).ready(function() {
 				<p class="featureContent clearfix">
 					<span style="float:left; width:550px;">If you would like to donate to help support the growing of our free software and service, you may do so with the button to the right.</span>
 					<span style="float:right; width:92px; margin-top:5px;">
-						<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-						<input type="hidden" name="cmd" value="_xclick">
-						<input type="hidden" name="business" value="ithemesky@gmail.com">
-						<input type="hidden" name="item_name" value="Donate to iThemeSky.com">
-						<input type="hidden" name="currency_code" value="USD">
-						<input type="hidden" name="amount" value="">
-						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+						<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" />
+						<input type="hidden" name="cmd" value="_xclick" />
+						<input type="hidden" name="business" value="ithemesky@gmail.com" />
+						<input type="hidden" name="item_name" value="Donate to iThemeSky.com" />
+						<input type="hidden" name="currency_code" value="USD" />
+						<input type="hidden" name="amount" value="" />
+						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="Donate to iThemeSky" />
 						</form>
 					</span>
 				</p>
