@@ -3,7 +3,7 @@
 				<dl>
 					<dt><img src="/Content/images/ispirit_title.png" height="72" alt="iSpirit - iPhone apps, themes and files manager" /></dt>
 					<dd>
-						<p>iSpirit is a iPhone manager developed for Windows. iSpirit help you install apps, install themes and manage files in your iPhone easily. It can also help you fix some errors which occured in using iPhone. It fully supports iPod touch, iPhone, iPhone 3G, iPhone 3Gs, <strong>iPhone 4</strong> and iPad.</p>
+						<p>iSpirit is a iPhone manager developed for Windows. iSpirit help you install apps, download &amp; install themes and manage files in your iPhone. It can also help you fix some errors which occured in using iPhone. It fully supports iPod touch, iPhone, iPhone 3G, iPhone 3Gs, <strong>iPhone 4</strong> and iPad even without jailbreak.</p>
 						<p style="margin-top:5px;"><strong>System Requirement:</strong></p>
 						<p class="req">
 							<strong>&nbsp;&nbsp;&nbsp;OS:</strong> Windows XP / Windows Vista / Windows 7<br />
