@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="canvas1_creationCompleteHandler(event)">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+
+			protected function canvas1_creationCompleteHandler(event:FlexEvent):void
+			{
+				setInterval(function():void{
+					signalMask.x = -((Math.random()*4)*4)
+				}, 2000);
+			}
+
+		]]>
+	</mx:Script>
+	
+	<mx:Image x="0" y="0" source="@Embed('Resources/Image/singleture.png')" mask="{signalMask}"/>
+	<mx:Canvas id="signalMask" x="0" y="0" width="25" height="20" backgroundColor="#0C0C0C">
+	</mx:Canvas>
+	
+</mx:Canvas>

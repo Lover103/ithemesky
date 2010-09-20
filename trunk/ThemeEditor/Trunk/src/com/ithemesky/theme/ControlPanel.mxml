@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="468" height="680" backgroundImage="Resources/Image/ControlPanelBg.png" xmlns:theme="com.ithemesky.theme.*">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="468" height="680" backgroundImage="@Embed('Resources/Image/ControlPanelBg.png')" xmlns:theme="com.ithemesky.theme.*">
 	
 </mx:Canvas>
