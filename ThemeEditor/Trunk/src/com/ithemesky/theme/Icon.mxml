@@ -1,30 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="75" height="92">
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="70" height="88" verticalGap="5" horizontalScrollPolicy="off" verticalScrollPolicy="off">
 	<mx:Script>
 		<![CDATA[
 			[Bindable]
-			protected var _image:String = "Resources/Image/Icons/App Store.png";
+			private var _bmp:Bitmap;
 			[Bindable]
 			protected var _text:String = "Icon Text";
-			public function set Image(value:String):void
+			public function set ImageUrl(value:String):void
 			{
-				_image = value;
+				if (value != null && value != "") {
+					var loader:Loader = new Loader();
+					loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler);
+					loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
+						_bmp = Bitmap(e.target.content);
+					});
+					loader.load(new URLRequest(value));
+				}
 			}
-			public function get Image():String
+			private function loadErrorHandler(event:IOErrorEvent):void
 			{
-				return _image;
+				trace("io error");
+			}
+			public function get ImageData():Bitmap
+			{
+				return _bmp;
+			}
+			public function set ImageData(value:Bitmap):void
+			{
+				_bmp = value;
 			}
 			public function set Text(value:String):void
 			{
 				_text = value;
 			}
-				
+			public function get Text():String
+			{
+				return _text;
+			}
+			public function Grow():void
+			{
+				overEffect.end();
+				overEffect.play();
+			}
 		]]>
 	</mx:Script>
-	<mx:HBox horizontalAlign="center" width="100%" mouseOver="this.alpha = 0.6" mouseOut="this.alpha=1">
-		<mx:Image source="{_image}" />
+	<mx:HBox id="img" buttonMode="true" useHandCursor="true" horizontalAlign="center" width="100%" mouseOver="clickEffect2.stop();clickEffect1.play()" mouseOut="clickEffect1.stop();clickEffect2.play()">
+		<mx:Image source="{_bmp}" id="imgControl" maxWidth="60" maxHeight="60" />
 	</mx:HBox>
 	<mx:HBox horizontalCenter="center" width="100%" horizontalAlign="center">
 		<mx:Label fontWeight="bold" color="#FCFEFE" fontFamily="Verdana" text="{_text}"/>
 	</mx:HBox>
+	<mx:Sequence id="clickEffect1">
+		<mx:Glow duration="300" color="#dce025" alphaFrom="0" alphaTo="1" target="{img}" blurXFrom="0" blurXTo="8"  blurYFrom="0" blurYTo="8" />
+	</mx:Sequence>
+	<mx:Sequence id="clickEffect2">
+		<mx:Glow duration="300" color="#dce025" alphaFrom="1" alphaTo="0" target="{img}" blurXFrom="8" blurXTo="0"  blurYFrom="8" blurYTo="0" />
+	</mx:Sequence>
+	<mx:Sequence id="overEffect" target="{img}">
+		<mx:Glow duration="600" color="#dce025" alphaFrom="0" alphaTo="1" blurXFrom="0" blurXTo="8"  blurYFrom="0" blurYTo="8" />
+		<mx:Glow duration="600" color="#dce025" alphaFrom="1" alphaTo="0" blurXFrom="8" blurXTo="0"  blurYFrom="8" blurYTo="0" />
+	</mx:Sequence>
 </mx:VBox>

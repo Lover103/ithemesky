@@ -35,7 +35,6 @@ package com.just.editor
 		//private var cWater:WaterImageWithTransferTool;
 		private var cRulerLine:Sprite;
 		private var cSelector:Selector;
-		private var cSelectorTip:TextField;
 		//private var cRuler:Ruler;
 		[Bindable]
 		public var cImage:Image;
@@ -71,22 +70,7 @@ package com.just.editor
 			this.cSelector=new Selector();
 			this.addChild(cSelector);
 
-			this.cSelectorTip=new TextField();
-			this.cSelectorTip.text="双击进行剪切操作";
-			this.cSelectorTip.visible=false;
-			this.cSelectorTip.border=true;
-			this.cSelectorTip.background=true;
-			this.cSelectorTip.backgroundColor=0xffffff;
-			this.cSelectorTip.autoSize=TextFieldAutoSize.LEFT;
-			this.cSelectorTip.selectable=false;
 			//this.cSelectorTip.height = 18;
-
-			var format:TextFormat=new TextFormat();
-			format.color=0x000000;
-			format.size=12;
-			this.cSelectorTip.setTextFormat(format);
-
-			this.addChild(cSelectorTip);
 
 			//绑定鼠标事件
 			this.cSelector.addEventListener(MouseEvent.MOUSE_DOWN, onSelectorMouse_Down);
@@ -155,7 +139,7 @@ package com.just.editor
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, function(e:Event):void
 				{
 					//LoadingControl.close();
-					Alert.show('图片加载失败');
+					Alert.show('Error Load Image');
 				});
 			loader.load(new URLRequest(url));
 		}
@@ -392,18 +376,7 @@ package com.just.editor
 		 */
 		private function onSelectorMouse_Over(e:MouseEvent):void
 		{
-			if (this._selectorTipTimer == 0)
-			{
-				this.cSelectorTip.x=this.cSelector.x + (this.cSelector.width - this.cSelectorTip.width) / 2;
-				this.cSelectorTip.y=this.cSelector.y + (this.cSelector.height - this.cSelectorTip.height) / 2;
-				this.cSelectorTip.visible=true;
-				this._selectorTipTimer=setTimeout(function():void
-					{
-						cSelectorTip.visible=false;
-						clearTimeout(_selectorTipTimer);
-						_selectorTipTimer=0;
-					}, 1200);
-			}
+			
 		}
 
 		/**

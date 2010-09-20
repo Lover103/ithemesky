@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Theme>
+	<Wallpaper Image="/Content/Diy/Resources/Image/Wallpaper.png" />
+	<Dock Image="/Content/Diy/Resources/Image/Dock.png" />
+	<StatusBar Image="/Content/Diy/Resources/Image/StatusBar.png" />
+	<Icons>
+		<Icon Text="iTunes" Image="/Content/Diy/Resources/Image/Icons/iTunes.png" />
+		<Icon Text="Calendar" Image="/Content/Diy/Resources/Image/Icons/Calendar.png" />
+		<Icon Text="SMS" Image="/Content/Diy/Resources/Image/Icons/Text.png" />
+		<Icon Text="Contacts" Image="/Content/Diy/Resources/Image/Icons/Contacts.png" />
+		<Icon Text="YouTube" Image="/Content/Diy/Resources/Image/Icons/YouTube.png" />
+		<Icon Text="Calculator" Image="/Content/Diy/Resources/Image/Icons/Calculator.png" />
+		<Icon Text="Notes" Image="/Content/Diy/Resources/Image/Icons/Notes.png" />
+		<Icon Text="Weather" Image="/Content/Diy/Resources/Image/Icons/Weather.png" />
+		<Icon Text="Stocks" Image="/Content/Diy/Resources/Image/Icons/Stocks.png" />
+		<Icon Text="Camera" Image="/Content/Diy/Resources/Image/Icons/Camera.png" />
+		<Icon Text="App Store" Image="/Content/Diy/Resources/Image/Icons/App Store.png" />
+		<Icon Text="Messages" Image="/Content/Diy/Resources/Image/Icons/Messages.png" />
+		<Icon Text="Clock" Image="/Content/Diy/Resources/Image/Icons/Clock.png" />
+		
+		<Icon Text="Maps" Image="Resources/Image/Icons/Maps.png" />
+		<Icon Text="Music" Image="Resources/Image/Icons/Music.png" />
+		
+			<Icon Text="Settings" Image="Resources/Image/Icons/Settings.png" />
+		<Icon Text="Calendar" Image="Resources/Image/Icons/Calendar.png" />
+		<Icon Text="Contacts" Image="Resources/Image/Icons/Contacts.png" />
+		<Icon Text="Facebook" Image="Resources/Image/Icons/Facebook.png" />
+		<Icon Text="Phone" Image="Resources/Image/Icons/Phone.png" />
+		<Icon Text="iPod" Image="Resources/Image/Icons/ipod.png" />
+		<Icon Text="Mail" Image="Resources/Image/Icons/Mail.png" />
+		<Icon Text="Safari" Image="Resources/Image/Icons/Safari.png" />
+	</Icons>
+</Theme>

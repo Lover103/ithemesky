@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="130" height="30" backgroundImage="@Embed('Resources/Image/ButtonBg.png')">
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+			private var _text:String = "Text";
+			public function get Text():String
+			{
+				return _text;
+			}
+			public function set Text(value:String):void
+			{
+				_text = value;
+			}
+		]]>
+	</mx:Script>
+	<mx:HBox width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+		<mx:Label x="42" y="6" text="{_text}" color="#FFFFFF" fontSize="12" fontWeight="bold"/>	
+	</mx:HBox>
+	<mx:Canvas width="100%" height="100%" backgroundColor="0x000000" alpha="0" buttonMode="true" useHandCursor="true">
+		
+	</mx:Canvas>
+</mx:Canvas>

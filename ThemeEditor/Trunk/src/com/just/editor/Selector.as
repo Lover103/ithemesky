@@ -29,7 +29,7 @@ package com.just.editor
 		public function ShowSelector(w:Number, h:Number):void
 		{
 			this.graphics.clear();
-			this.graphics.beginFill(0x000000, 0);
+			this.graphics.beginFill(0xff0000, 0);
 			this.graphics.drawRect(0, 0, w, h);
 			this.graphics.endFill();
 
