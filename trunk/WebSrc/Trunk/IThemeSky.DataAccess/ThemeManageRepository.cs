@@ -79,12 +79,13 @@ namespace IThemeSky.DataAccess
                 SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.NVarChar, 300, theme.DownloadUrl),
                 SqlParameterHelper.BuildInputParameter("@AuthorName", SqlDbType.NVarChar, 128, theme.AuthorName),
                 SqlParameterHelper.BuildInputParameter("@AuthorMail", SqlDbType.NVarChar, 128, theme.AuthorMail),
+                SqlParameterHelper.BuildInputParameter("@SupportIPhone4",SqlDbType.Int, 4, theme.SupportIPhone4 ? 1 : 0),
 			};
             string cmdText = @"
                 INSERT INTO Theme
-				    (CategoryId,ParentCategoryId,Title,FileSize,Description,DisplayState,CheckState,AuthorId,CheckerId,CommendIndex,ThumbnailName,AddTime,UpdateTime,RateScore,RateNumbers,Comments,Downloads,Views,LastWeekDownloads,LastMonthDownloads,Source,DownloadUrl,AuthorName,AuthorMail)
+				    (CategoryId,ParentCategoryId,Title,FileSize,Description,DisplayState,CheckState,AuthorId,CheckerId,CommendIndex,ThumbnailName,AddTime,UpdateTime,RateScore,RateNumbers,Comments,Downloads,Views,LastWeekDownloads,LastMonthDownloads,Source,DownloadUrl,AuthorName,AuthorMail,SupportIPhone4)
 			    VALUES
-				    (@CategoryId,@ParentCategoryId,@Title,@FileSize,@Description,@DisplayState,@CheckState,@AuthorId,@CheckerId,@CommendIndex,@ThumbnailName,@AddTime,@UpdateTime,@RateScore,@RateNumbers,@Comments,@Downloads,@Views,@LastWeekDownloads,@LastMonthDownloads,@Source,@DownloadUrl,@AuthorName,@AuthorMail);SELECT @@IDENTITY";
+				    (@CategoryId,@ParentCategoryId,@Title,@FileSize,@Description,@DisplayState,@CheckState,@AuthorId,@CheckerId,@CommendIndex,@ThumbnailName,@AddTime,@UpdateTime,@RateScore,@RateNumbers,@Comments,@Downloads,@Views,@LastWeekDownloads,@LastMonthDownloads,@Source,@DownloadUrl,@AuthorName,@AuthorMail,@SupportIPhone4);SELECT @@IDENTITY";
             int themeId = Convert.ToInt32(SqlHelper.ExecuteScalar(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters));
             if (themeId > 0)
             {
@@ -125,7 +126,8 @@ namespace IThemeSky.DataAccess
 				Source=@Source,
 				DownloadUrl=@DownloadUrl,
                 AuthorName=@AuthorName,
-                AuthorMail=@AuthorMail
+                AuthorMail=@AuthorMail,
+                SupportIPhone4=@SupportIPhone4
 			where 
 				ThemeId=@ThemeId 
 			";
@@ -156,6 +158,7 @@ namespace IThemeSky.DataAccess
 				SqlParameterHelper.BuildInputParameter("@DownloadUrl", SqlDbType.NVarChar, 300, theme.DownloadUrl),
                 SqlParameterHelper.BuildInputParameter("@AuthorName", SqlDbType.NVarChar, 128, theme.AuthorName),
                 SqlParameterHelper.BuildInputParameter("@AuthorMail", SqlDbType.NVarChar, 128, theme.AuthorMail),
+                SqlParameterHelper.BuildInputParameter("@SupportIPhone4",SqlDbType.Int, 4, theme.SupportIPhone4 ? 1 : 0),
 			};
             return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
         }

@@ -21,10 +21,12 @@ namespace IThemeSky.Management.Theme
             {
                 ddlCategoryId.DataSource = _repositoryView.GetThemeCategories();
                 ddlCategoryId.DataBind();
+                txtUpdateTime.Text = DateTime.Now.ToString();
+                txtAddTime.Text = DateTime.Now.ToString();
                 if (Request.QueryString["themeId"] != null && Request.QueryString["themeId"].ToInt32() > 0)
                 {
                     hidThemeId.Value = Request.QueryString["themeId"];
-                    IThemeSky.Model.Theme theme = _repositoryView.GetTheme(Request.QueryString["themeId"].ToInt32());
+                    IThemeSky.Model.Theme theme = _repositoryManage.GetTheme(Request.QueryString["themeId"].ToInt32());
                     txtThumbnailName.Text = theme.ThumbnailName;
                     txtTitle.Text = theme.Title;
                     txtAuthorMail.Text = theme.AuthorMail;
@@ -42,6 +44,8 @@ namespace IThemeSky.Management.Theme
                     txtRateScore.Text = theme.RateScore.ToString();
                     txtFileSize.Text = theme.FileSize.ToString();
                     txtViews.Text = theme.Views.ToString();
+                    txtAddTime.Text = theme.AddTime.ToString();
+                    chkSupportIPhone4.Checked = theme.SupportIPhone4;
                 }
             }
         }
@@ -71,8 +75,10 @@ namespace IThemeSky.Management.Theme
                 theme.RateNumbers = Convert.ToInt32(txtRateNumbers.Text);
                 theme.RateScore = Convert.ToInt32(txtRateScore.Text);
                 theme.FileSize = txtFileSize.Text.ToInt64();
-                theme.UpdateTime = DateTime.Now;
+                theme.UpdateTime = Convert.ToDateTime(txtUpdateTime.Text);
+                theme.AddTime = Convert.ToDateTime(txtAddTime.Text);
                 theme.Views = Convert.ToInt32(txtViews.Text);
+                theme.SupportIPhone4 = chkSupportIPhone4.Checked;
                 _repositoryManage.UpdateTheme(theme);
                 ltlMessage.Text = "修改主题成功";
             }
@@ -103,6 +109,7 @@ namespace IThemeSky.Management.Theme
                     UpdateTime = DateTime.Now,
                     Views = Convert.ToInt32(txtViews.Text),
                     Source = SourceOption.IThemeSky,
+                    SupportIPhone4 = chkSupportIPhone4.Checked,
                 };
                 _repositoryManage.AddTheme(theme);
                 ltlMessage.Text = "添加主题成功";

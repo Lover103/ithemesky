@@ -8,9 +8,15 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        <JT:AspNetPager ID="aa" runat="server"></JT:AspNetPager>
+    <div style="heigth:35px; font-weight:bold">
+        <a href="Theme/ThemeListManage.aspx" target="hideIframe">&gt;主题管理</a>&nbsp;
+        <a href="Theme/ThemeInfoManage.aspx" target="hideIframe">&gt;添加新主题</a>&nbsp;
+        <a href="Reports/iSpiritUsersReport.aspx" target="hideIframe">&gt;iSpirit用户报表</a>&nbsp;
+        <a href="Support/UserSupport.aspx" target="hideIframe">&gt;iSpirit用户反馈</a>&nbsp;
     </div>
+    <iframe width="100%" height="100%" name="hideIframe" scrolling="no" frameborder="0" src="Theme/ThemeListManage.aspx" onload="this.height=this.contentWindow.document.body.scrollHeight+30">
+    
+    </iframe>
     </form>
 </body>
 </html>

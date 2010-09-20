@@ -66,6 +66,13 @@
                 <td></td>
             </tr>
             <tr>
+                <td class="InputName">支持iPhone4</td>
+                <td>
+                    <asp:CheckBox ID="chkSupportIPhone4" runat="server" />
+                </td>
+                <td></td>
+            </tr>
+            <tr>
                 <td class="InputName">推荐指数</td>
                 <td>
                     <asp:DropDownList ID="ddlCommendIndex" runat="server">
@@ -86,7 +93,9 @@
             </tr>
             <tr>
                 <td class="InputName">主题文件</td>
-                <td><asp:TextBox ID="txtDownloadUrl" runat="server" CssClass="TextInput"></asp:TextBox></td>
+                <td>
+                    <asp:TextBox ID="txtDownloadUrl" runat="server" CssClass="TextInput"></asp:TextBox>
+                </td>
                 <td><span class="ImportantText">*</span></td>
             </tr>
             <tr>
@@ -120,6 +129,16 @@
             <tr>
                 <td class="InputName">作者邮箱</td>
                 <td><asp:TextBox ID="txtAuthorMail" runat="server" CssClass="TextInput"></asp:TextBox></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="InputName">修改时间</td>
+                <td><asp:TextBox ID="txtUpdateTime" runat="server" CssClass="TextInput"></asp:TextBox></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="InputName">添加时间</td>
+                <td><asp:TextBox ID="txtAddTime" runat="server" CssClass="TextInput"></asp:TextBox></td>
                 <td></td>
             </tr>
             <tr>

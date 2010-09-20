@@ -34,7 +34,8 @@ namespace IThemeSky.Management.Theme
             ltlMessage.Text = "";
             _categories = _repositoryView.GetThemeCategories();
             int recordCount = 0;
-            rptThemes.DataSource = _repositoryView.GetFullThemesByFilter(GetFilter(), ThemeSortOption.Default, pager.CurrentPageIndex, pager.PageSize, ref recordCount);
+            ThemeSortOption sort = rdoIdDesc.Checked ? ThemeSortOption.Default : ThemeSortOption.New;
+            rptThemes.DataSource = _repositoryView.GetFullThemesByFilter(GetFilter(), sort, pager.CurrentPageIndex, pager.PageSize, ref recordCount);
             rptThemes.DataBind();
             pager.RecordCount = recordCount;
         }
@@ -128,8 +129,14 @@ namespace IThemeSky.Management.Theme
             IThemeSky.Model.Theme theme = _repositoryManage.GetTheme(themeId);
             TextBox txtTitle = item.FindControl("txtTitle") as TextBox;
             TextBox txtTags = item.FindControl("txtTags") as TextBox;
+            CheckBox chkUpdateTime = item.FindControl("chkUpdateTime") as CheckBox;
+            CheckBox chkSupportIPhone4 = item.FindControl("chkSupportIPhone4") as CheckBox;
             theme.Title = txtTitle.Text;
-            theme.UpdateTime = DateTime.Now;
+            theme.SupportIPhone4 = chkSupportIPhone4.Checked;
+            if (chkUpdateTime.Checked)
+            {
+                theme.UpdateTime = DateTime.Now;
+            }
             if ((sender as Control).ID.Equals("btnSaveAndCheck"))
             {
                 theme.CheckState = CheckStateOption.CheckSuccess;
@@ -172,6 +179,11 @@ namespace IThemeSky.Management.Theme
                 return tags[0];
             }
             return "";
+        }
+
+        protected void rdoIdDesc_CheckedChanged(object sender, EventArgs e)
+        {
+            BindThemeList();
         }
     }
 }
