@@ -21,19 +21,19 @@ namespace IThemeSky.Management
             {
                 UserContext.UserId = 1;
                 Response.Cookies["UserLoginInfo"]["UserName"] = "兴柏";
-                Response.Redirect("/Theme/ThemeListManage.aspx");
+                Response.Redirect("/Default.aspx");
             }
             if (txtPassword.Text.Equals("在灼"))
             {
                 UserContext.UserId = 2;
                 Response.Cookies["UserLoginInfo"]["UserName"] = "在灼";
-                Response.Redirect("/Theme/ThemeListManage.aspx");
+                Response.Redirect("/Default.aspx");
             }
             if (txtPassword.Text.Equals("伟伟"))
             {
                 UserContext.UserId = 3;
                 Response.Cookies["UserLoginInfo"]["UserName"] = "伟伟";
-                Response.Redirect("/Theme/ThemeListManage.aspx");
+                Response.Redirect("/Default.aspx");
             }
         }
     }

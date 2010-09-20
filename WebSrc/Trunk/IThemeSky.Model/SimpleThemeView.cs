@@ -51,6 +51,11 @@ namespace IThemeSky.Model
         public int Downloads { get; set; }
 
         /// <summary>
+        /// 是否是IPhone4主题
+        /// </summary>
+        public bool SupportIPhone4 { get; set; }
+
+        /// <summary>
         /// 主题详细页地址
         /// </summary>
         public string ThemeDetailUrl

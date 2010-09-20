@@ -45,6 +45,9 @@
         </asp:DropDownList>
         &nbsp;&nbsp;
         标题: <asp:TextBox ID="txtTitleFilter" runat="server"></asp:TextBox> <asp:Button ID="btnSearchTitle" runat="server" Text="检索" OnClick="filter_Changed" />
+        &nbsp;&nbsp;
+        排序方式：<asp:RadioButton ID="rdoIdDesc" runat="server" GroupName="sort" 
+            Text="ID逆序（审核使用）" Checked="true" AutoPostBack="true" oncheckedchanged="rdoIdDesc_CheckedChanged" />&nbsp;<asp:RadioButton AutoPostBack="true" oncheckedchanged="rdoIdDesc_CheckedChanged" ID="rdoUpdateTimeDesc" runat="server" GroupName="sort" Text="更新时间逆序（与前台一致）" />
     </div>
     <div>
         <table width="100%" cellpadding="6" cellspacing="1" class="InputGrid">
@@ -66,7 +69,7 @@
                         <td>
                         <asp:TextBox ID="txtTitle" runat="server" value='<%#Eval("Title") %>'></asp:TextBox>
                         (id:<%#Eval("ThemeId") %>)(<a href="ThemeInfoManage.aspx?themeId=<%#Eval("ThemeId") %>" target="_blank">编辑</a>)(<a href="/<%#Eval("DownloadUrl") %>" target="_blank">下载</a>)(<a href="http://www.ithemesky.com/iphone-themes/<%#Eval("Title").ToString().Trim().Replace(" ", "-") %>/<%#Eval("ThemeId") %>" target="_blank">浏览</a>)<br />
-                        所属标签：<asp:TextBox ID="txtTags" runat="server" value='<%#GetThemeTags(Eval("ThemeId")) %>'></asp:TextBox>
+                        所属标签：<asp:TextBox ID="txtTags" runat="server" value='<%#GetThemeTags(Eval("ThemeId")) %>'></asp:TextBox> (iPhone4主题：<asp:CheckBox ID="chkSupportIPhone4" runat="server" Checked="false" />) (更新时间：<asp:CheckBox ID="chkUpdateTime" runat="server" Checked="true" />)
                         <asp:Button ID="btnSave" OnClick="propertyList_OnClick" Text="保存" runat="server" />&nbsp;<asp:Button ID="btnSaveAndCheck" OnClick="propertyList_OnClick" Text="保存并审核通过" runat="server" />
                         <br />
                         <a href="<%#Eval("ThumbnailName") %>" target="_blank"><img src="<%#Eval("ThumbnailName").ToString().Replace(".jpg", "_112x168.jpg") %>" border="0" /></a>

@@ -15,7 +15,7 @@ namespace IThemeSky.DataAccess
         /// <summary>
         /// 简单实体对应的查询字段列表
         /// </summary>
-        protected const string SIMPLE_THEME_FIELDS = "ThemeId,CategoryId,CategoryName,Title,ThumbnailName,CommendIndex,Downloads";
+        protected const string SIMPLE_THEME_FIELDS = "ThemeId,CategoryId,CategoryName,Title,ThumbnailName,CommendIndex,Downloads,SupportIPhone4";
         protected const string VIEW_TAGTHEME = "View_TagTheme";
         protected const string VIEW_THEME = "View_Theme";
         /// <summary>
@@ -200,7 +200,7 @@ namespace IThemeSky.DataAccess
                 case ThemeSortOption.Recommended:
                     return "CommendIndex DESC,AddTime DESC";
                 case ThemeSortOption.Rating:
-                    return "RateScore DESC,AddTime DESC";
+                    return "CommendIndex DESC,RateScore DESC";
                 default:
                     return "ThemeId DESC";
             }
@@ -240,6 +240,7 @@ namespace IThemeSky.DataAccess
                 AuthorName = dataReader["AuthorName"].ToString(),
                 AuthorMail = dataReader["AuthorMail"].ToString(),
                 DownloadUrl = dataReader["DownloadUrl"].ToString(),
+                SupportIPhone4 = Convert.ToInt32(dataReader["SupportIPhone4"]) == 1
             };
         }
         /// <summary>
@@ -255,6 +256,7 @@ namespace IThemeSky.DataAccess
                 CommendIndex = Convert.ToInt32(dataReader["CommendIndex"]),
                 Downloads = Convert.ToInt32(dataReader["Downloads"]),
                 CategoryName = dataReader["CategoryName"].ToString(),
+                SupportIPhone4 = Convert.ToInt32(dataReader["SupportIPhone4"]) == 1,
                 Thumbnail = "http://resource.ithemesky.com/" + dataReader["ThumbnailName"].ToString(),
                 Thumbnail_112x168 = "http://resource.ithemesky.com/" + dataReader["ThumbnailName"].ToString().Replace(".jpg", "_112x168.jpg"),
             };
@@ -293,6 +295,7 @@ namespace IThemeSky.DataAccess
                 AuthorName = dataReader["AuthorName"].ToString(),
                 AuthorMail = dataReader["AuthorMail"].ToString(),
                 DownloadUrl = dataReader["DownloadUrl"].ToString(),
+                SupportIPhone4 = Convert.ToInt32(dataReader["SupportIPhone4"]) == 1,
             };
         }
 

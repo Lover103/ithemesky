@@ -135,5 +135,10 @@ namespace IThemeSky.Model
         /// 作者联系邮件
         /// </summary>
         public string AuthorMail { get; set; }
+
+        /// <summary>
+        /// 是否是IPhone4主题
+        /// </summary>
+        public bool SupportIPhone4 { get; set; }
     }
 }
