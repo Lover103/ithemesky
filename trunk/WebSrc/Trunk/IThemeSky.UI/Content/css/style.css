@@ -59,13 +59,13 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .nav li.s7 a:hover,.nav li.s7 a:active{ background-position:-515px -70px;}
 .nav li.s8 a:link,.nav li.s8 a:visited{ width:99px; background-position:-580px -45px;}
 .nav li.s8 a:hover,.nav li.s8 a:active{ background-position:-580px -70px;}
-.searchPannel{ float:right; width:140px; height:20px; margin-top:35px; background:url(../images/sprites_header.png) no-repeat 0 -110px; position:relative; z-index:1;}
+.searchPannel{ float:right; width:140px; height:20px; margin-top:35px; background:url(../images/sprites_header.png) no-repeat 0 -110px; position:relative; z-index:2;}
 .searchPannel .label{ float:left; display:block; width:24px; height:20px; text-indent:-999em; overflow:hidden;}
 .searchPannel .input{ float:left; padding:2px 0; _padding:1px 0;}
 .searchPannel .input input{ border:none; background:none; width:96px; height:16px; line-height:16px; color:#000;}
 .searchPannel .reset{ margin:5px 0 0 122px; _margin:5px 0 0 119px; width:12px; height:12px; overflow:hidden;}
 .searchPannel .reset .btn{ display:block; width:12px; height:12px; background:url(../images/sprites_header.png) no-repeat -200px -110px; text-indent:-999em; overflow:hidden;}
-.searchResult{ position:absolute; top:44px; right:-4px; width:308px; background:url(../images/sprites_header.png) no-repeat -370px bottom; padding-bottom:7px;}
+.searchResult{ z-index:10; position:absolute; top:44px; right:-4px; width:308px; background:url(../images/sprites_header.png) no-repeat -370px bottom; padding-bottom:7px;}
 .searchResult .searchHead,.searchResult .searchTip{ position:relative; z-index:1; margin:-9px 5px 0 5px; height:25px; color:#CCD2DC; font-weight:bold; line-height:25px;}
 .searchResult .searchHead{ width:298px; text-indent:14px; background:url(../images/sprites_header.png) 0 -280px;}
 .searchResult .searchTip{ padding-right:32px; background:url(../images/sprites_header.png) no-repeat 0 -310px; text-align:right;}
