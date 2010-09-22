@@ -143,6 +143,13 @@ namespace IThemeSky.UI
                 new { controller = "Help", action = "Index", viewName = "faq" } // Parameter defaults
             );
 
+            //About
+            routes.MapRoute(
+                "About", // Route name
+                "About/{viewName}", // URL with parameters
+                new { controller = "About", action = "Index", viewName = "index" } // Parameter defaults
+            );
+
             //DIY
             //routes.MapRoute(
             //    "DIY", // Route name

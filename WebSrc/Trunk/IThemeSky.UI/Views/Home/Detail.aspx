@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<DetailModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	<title><%=ViewData.Model.CurrentTheme.Title %> iPhone theme - <%=ViewData.Model.CurrentTheme.CategoryName %> - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+	<title><%=ViewData.Model.CurrentTheme.Title %> iPhone<%=ViewData.Model.CurrentTheme.SupportIPhone4 ? " 4" : "" %> theme - <%=ViewData.Model.CurrentTheme.CategoryName %> - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
     <meta name="description" content="<%=ViewData.Model.CurrentTheme.Title %> iPhone theme. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
     <meta name="keywords" content="<% foreach (string tag in ViewData.Model.Tags){ %><%=tag %>, <%} %> <%=ViewData.Model.CurrentTheme.CategoryName %>, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
     <link rel="stylesheet" href="/Content/css/fancybox.css" type="text/css" />
@@ -34,7 +34,7 @@
 				<li class="home"><a href="/" title="Homepage">ithemesky.com Homepage</a></li>
 				<li><a href="/list/new/">All Categories</a></li>
 				<li><a href="/list/new/<%=ViewData.Model.CurrentTheme.CategoryName.Replace(" ", "").Replace("&", "-") %>_<%=ViewData.Model.CurrentTheme.CategoryId %>/"><%=ViewData.Model.CurrentTheme.CategoryName %></a></li>
-				<li><%=ViewData.Model.CurrentTheme.Title %> iPhone theme</li>
+				<li><%=ViewData.Model.CurrentTheme.Title %> iPhone<%=ViewData.Model.CurrentTheme.SupportIPhone4 ? " 4" : "" %> theme</li>
 			</ul>
 		</div>
 		<!--breadcrumb end-->
@@ -49,7 +49,11 @@
 					</ul>
 				</div>
 				<div class="detailInfo">
-					<h1 class="title"><%=ViewData.Model.CurrentTheme.Title %> iPhone theme</h1>
+					<h1 class="title"><%=ViewData.Model.CurrentTheme.Title %> iPhone<%=ViewData.Model.CurrentTheme.SupportIPhone4 ? " 4" : "" %> theme</h1>
+					<dl class="details clearfix">
+						<dt>Resolution:</dt>
+						<dd><%=ViewData.Model.CurrentTheme.SupportIPhone4 ? "480X960" : "320X480"%></dd>
+					</dl>
 					<dl class="details clearfix">
 						<dt>Category:</dt>
 						<dd><%=ViewData.Model.CurrentTheme.CategoryName %></dd>
@@ -94,7 +98,13 @@
 					</dl>
 					<ul class="detailBtn clearfix">
 						<li class="btnDownload"><a href="/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>" title="Download">Download</a></li>
-						<li class="btnCreate"><a href="/Creator/<%=ViewData.Model.CurrentTheme.Title.Replace(" ", "-") %>,<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator" target="_blank">Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator</a><!--<span class="off" title="Theme Creator for iPhone 4 comming soon">Can't be modified</span>--></li>
+						<li class="btnCreate">
+						<% if (ViewData.Model.CurrentTheme.SupportIPhone4){ %>
+						    <span class="off" title="Theme Creator for iPhone 4 comming soon">Can't be modified</span>
+						<%} else { %>
+						    <a href="/Creator/<%=ViewData.Model.CurrentTheme.Title.Replace(" ", "-") %>,<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator" target="_blank">Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator</a>
+						<%} %>
+						</li>
 					</ul>
 					<div class="installIip">
 						Click "Create Now" above to modify this theme in your mind with iPhone theme Creator Online and then download it. <a href="/ispirit/"><span class="orange">Install theme to iPhone with <span style=" text-decoration:underline;">iSpirit</span></span></a>. 

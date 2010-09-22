@@ -1,1 +1,108 @@
- 
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IThemeSky.DataAccess.CacheThemeViewRepository" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>UCAAAAAIABAAAECAABAAAAAAAAAEAAAABgAIAAEAAAA=</HashCode>
+      <FileName>CacheThemeViewRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IThemeSky.DataAccess.SoftCommentRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAIAAAAQAAAAAIAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>SoftCommentRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IThemeSky.DataAccess.ThemeCommentRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAIAAAAQAAAAAAAAAAAAAAAAAAAAAgAAAACAAA=</HashCode>
+      <FileName>ThemeCommentRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IThemeSky.DataAccess.ThemeManageRepository" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIIAABYAAAQAAAQAAAgAgAAQAAAAIAAAAAABAAg=</HashCode>
+      <FileName>ThemeManageRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IThemeSky.DataAccess.ThemeRepositoryBase" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAEAAAACAAQBAAAACCEAAAAAAABAAABIAAAAEAAAA=</HashCode>
+      <FileName>ThemeRepositoryBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IThemeSky.DataAccess.ThemeRepositoryFactory" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAIAAAQACAAAIAIAAAAAAgAJAAAEAEAAAAAAA=</HashCode>
+      <FileName>ThemeRepositoryFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IThemeSky.DataAccess.ThemeSupportRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAQAAAAQAAAAAAAAAQAAAEgAAAAAAAAAA=</HashCode>
+      <FileName>ThemeSupportRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IThemeSky.DataAccess.ThemeViewRepository" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ECAAAAAAABAAAAAAABAAEIAAABAFAIAgAASIIAAAAAA=</HashCode>
+      <FileName>ThemeViewRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="IThemeSky.DataAccess.ICacheThemeViewRepository" Collapsed="true">
+    <Position X="9" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>ICacheThemeViewRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IThemeSky.DataAccess.ISoftCommentRepository" Collapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>ISoftCommentRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IThemeSky.DataAccess.IThemeCommentRepository" Collapsed="true">
+    <Position X="7" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>IThemeCommentRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IThemeSky.DataAccess.IThemeManageRepository" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIIAABYAAAQAAAQAAAgAgAAQAAAAIAAAAAABAAg=</HashCode>
+      <FileName>IThemeManageRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IThemeSky.DataAccess.IThemeSupportRepository" Collapsed="true">
+    <Position X="7" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAEgAAAAAAAAAA=</HashCode>
+      <FileName>IThemeSupportRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IThemeSky.DataAccess.IThemeViewRepository" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ECAAAAAAABAAAAAAABAAEIAAABAFAAAgAASIIAAAAAA=</HashCode>
+      <FileName>IThemeViewRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Microsoft YaHei" Size="9" />
+</ClassDiagram>
