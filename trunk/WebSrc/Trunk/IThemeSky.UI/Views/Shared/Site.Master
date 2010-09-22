@@ -28,7 +28,7 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 			<li class="s5"><a href="/ispirit" title="iSpirit">iSpirit</a></li>
 			<li class="s8"><a href="/creator" title="iPhone Theme Creator">iPhone Theme Creator</a></li>
 			<li class="s6"><a href="/help/faq" title="Help">Help</a></li>
-			<li class="s7 last"><a href="http://forum.ithemesky.com/" title="Forum">Forum</a></li>
+			<li class="s7 last"><a href="/forum" title="Forum">Forum</a></li>
 		</ul>
 		<div class="searchPannel">
 			<label class="label">Search</label>
