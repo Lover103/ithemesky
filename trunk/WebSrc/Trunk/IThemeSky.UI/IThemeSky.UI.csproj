@@ -69,6 +69,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\CreatorController.cs" />
     <Compile Include="Controllers\SoftController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
