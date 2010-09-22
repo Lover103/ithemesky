@@ -29,7 +29,7 @@
 				<li><a href="/list/new">All Categories</a></li>
 				<% if (ViewData.Model.CategoryId > 0)
                    { %>
-				<li><a href="/list/new/<%=ViewData.Model.CategoryName%>_<%=ViewData.Model.CategoryId%>"><%=ViewData.Model.CategoryName.Replace("-", "&")%></a></li>
+				<li><a href="/list/new/<%=ViewData.Model.CategoryName%>_<%=ViewData.Model.CategoryId%>"><%=ViewData.Model.CategoryName.Replace("-", " & ")%></a></li>
 				<% } %>
 			</ul>
 		</div>
