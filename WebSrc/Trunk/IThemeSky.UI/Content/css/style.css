@@ -434,7 +434,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .iSpiritFaqContent p{ padding:10px 0;}
 .iSpiritForm{ padding:5px 20px 10px 30px;}
 
-.supportBtn{ height:120px; padding:10px 0 10px 12px;}
+.supportBtn{ height:120px; padding:8px 0 10px 12px;}
 .supportBtn li{ float:left; margin-left:20px; -display:inline; width:320px; height:120px; background:url(../images/bg_ispirit_help_btn.png) no-repeat;}
 .supportBtn .s1{ background-position:0 0;}
 .supportBtn .s2{ background-position:0 -140px;}
