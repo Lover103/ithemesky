@@ -82,10 +82,10 @@ $(document).ready(function() {
 					<dt>iSpirit Screenshots:</dt>
 					<dd><a href="/Content/images/ispirit/features/01.png" class="imgZoom"><img src="/Content/images/ispirit/features/01_thumb.png" alt="" width="178" height="120" /></a></dd>
 					<dd><a href="/Content/images/ispirit/features/02.png" class="imgZoom"><img src="/Content/images/ispirit/features/02_thumb.png" alt="" width="178" height="120" /></a></dd>
+					<dd><a href="/Content/images/ispirit/features/03.png" class="imgZoom"><img src="/Content/images/ispirit/features/03_thumb.png" alt="" width="178" height="120" /></a></dd>
+					<dd><a href="/Content/images/ispirit/features/04.png" class="imgZoom"><img src="/Content/images/ispirit/features/04_thumb.png" alt="" width="178" height="120" /></a></dd>
 					<dd><a href="/Content/images/ispirit/features/05.png" class="imgZoom"><img src="/Content/images/ispirit/features/05_thumb.png" alt="" width="178" height="120" /></a></dd>
 					<dd><a href="/Content/images/ispirit/features/06.png" class="imgZoom"><img src="/Content/images/ispirit/features/06_thumb.png" alt="" width="178" height="120" /></a></dd>
-					<dd><a href="/Content/images/ispirit/features/07.png" class="imgZoom"><img src="/Content/images/ispirit/features/07_thumb.png" alt="" width="178" height="120" /></a></dd>
-					<dd><a href="/Content/images/ispirit/features/08.png" class="imgZoom"><img src="/Content/images/ispirit/features/08_thumb.png" alt="" width="178" height="120" /></a></dd>
 				</dl>
 				<p class="featureContent clearfix">
 					<span style="float:left; width:550px;">If you would like to donate to help support the growing of our free software and service, you may do so with the button to the right.</span>
