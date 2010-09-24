@@ -51,8 +51,8 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 	<div id="footer">
 		<span class="copyright">Copyright &copy; 2010 iThemeSky.com All rights reserved.</span>
 		<ul class="footNav">
-			<li class="first"><a href="/contact" rel="nofollow">Contact Us</a></li>
-			<li><a href="sitemap.xml">Sitemap</a></li>
+			<li class="first"><a href="/sitemap.xml">Sitemap</a></li>
+			<li><a href="/contact" rel="nofollow">Contact Us</a></li>
 			<li><a href="/help">Help</a></li>
 			<li class="go2Top"><a href="#top" title="Go to top">TOP</a></li>
 		</ul>
