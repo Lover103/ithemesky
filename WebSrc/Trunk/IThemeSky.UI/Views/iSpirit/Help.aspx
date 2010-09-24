@@ -85,7 +85,7 @@
 				</div>
 				<h3 class="supportSort s2">Get Support</h3>
 				<ul class="supportBtn clearfix">
-					<li class="s1"><span>Send us suggestions, bug reports, talk <br />about cooperation or advertisment.</span><a href="/contact">Contact Us Now</a></li>
+					<li class="s1"><span>Send us suggestions, bug reports, talk <br />about cooperation or advertisment.</span><a href="/contact" rel="nofollow">Contact Us Now</a></li>
 					<li class="s2"><span>The quickest way to get help is by <br />visiting our Community Forum.</span><a href="/forum">Visit Community Forum</a></li>
 				</ul>
 			</div>
