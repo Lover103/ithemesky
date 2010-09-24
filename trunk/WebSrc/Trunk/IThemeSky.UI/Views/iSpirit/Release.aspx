@@ -17,9 +17,18 @@ a:hover,a:active{ color:#FF0;}
 </head>
 <body>
 	<h1 class="hide">iSpirit Release Notes</h1>
+		<!-- 1.0.8 -->
+		<div class="release">
+			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.0.8</a></h2>
+			<h3>Released on 9/23/2010</h3>
+			<ul>
+				<li>Fixed compatibility for Windows 7, no need to run iSpirit in compatibility mode manually</li>
+				<li>Added capture iPhone screen feature</li> 
+			</ul>
+		</div>
 		<!-- 1.0.6 -->
 		<div class="release">
-			<h2><a href="http://www.ithemesky.com/iSpirit/">iSpirit 1.0.6</a></h2>
+			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.0.6</a></h2>
 			<h3>Released on 9/9/2010</h3>
 			<ul>
 				<li>Added all the features support for IOS4.x</li>
@@ -35,7 +44,7 @@ a:hover,a:active{ color:#FF0;}
 		</div>
 		<!-- 1.0.5 -->
 		<div class="release">
-			<h2><a href="http://www.ithemesky.com/iSpirit/">iSpirit 1.0.5</a></h2>
+			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.0.5</a></h2>
 			<h3>Released on 7/12/2010</h3>
 			<ul>
 				<li>Added Support for Windows 64-bit versions</li>
@@ -43,7 +52,7 @@ a:hover,a:active{ color:#FF0;}
 		</div>
 		<!-- 1.0.3 -->
 		<div class="release">
-			<h2><a href="http://www.ithemesky.com/iSpirit/">iSpirit 1.0.3</a></h2>
+			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.0.3</a></h2>
 			<h3>Released on 7/4/2010</h3>
 			<ul>
 				<li>Improved installing third Application. now can manage cydia source; search anddownload app from cydia source; quickly install/uninstall app</li>
@@ -56,10 +65,10 @@ a:hover,a:active{ color:#FF0;}
 		</div>
 		<!-- 1.0.2 -->
 		<div class="release">
-			<h2><a href="http://www.ithemesky.com/iSpirit/">iSpirit 1.0.2</a></h2>
+			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.0.2</a></h2>
 			<h3>Released on 5/16/2010</h3>
 			<ul>
-				<li>Added Support ipod touch and iPad,even without JB (jailbreak)</li>
+				<li>Added Support ipod touch and iPad, even without JB (jailbreak)</li>
 				<li>Improved installing third Application (.deb)</li>
 				<li>Added help link</li>
 				<li>Fixed the error device name</li>
