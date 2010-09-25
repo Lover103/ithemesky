@@ -112,7 +112,11 @@
 						</li>
 					</ul>
 					<div class="installIip">
-						Click "Create Now" above to modify this theme in your mind with iPhone theme Creator Online and then download it. <a href="/ispirit/"><span class="orange">Install theme to iPhone with <span style=" text-decoration:underline;">iSpirit</span></span></a>. 
+						<% if (ViewData.Model.CurrentTheme.SupportIPhone4){ %>
+						    <a href="/ispirit/"><span class="orange">Install theme to iPhone 4 with <span style=" text-decoration:underline;">iSpirit</span></span></a>. Some iPhone 4 themes can also be used in former iPhones.
+						<%} else { %>
+						Click "Create Now" above to modify this theme in your mind with iPhone theme Creator Online and then download it. <a href="/ispirit/"><span class="orange">Install theme to iPhone with <span style=" text-decoration:underline;">iSpirit</span></span></a>.
+						<%} %>
 					</div>
 					<dl class="themeShare">
 						<dt>Share this theme:</dt>
