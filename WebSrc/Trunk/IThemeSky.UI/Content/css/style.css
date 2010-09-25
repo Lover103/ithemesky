@@ -123,7 +123,8 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .themeList .themeCut{ padding:10px 12px; width:114px; height:170px; position:relative; z-index:1;}
 .themeList .themeCut a:link,.themeList .themeCut a:visited{ padding:1px; display:block; width:112px; height:168px; font:0/0 Arial;}
 .themeList .themeCut a:hover,.themeList .themeCut a:active{ padding:0; border:1px solid #2D494B;}
-.themeList .themeCut .forIphone4{ position:absolute; z-index:1; left:12px; top:10px; display:block; width:40px; height:40px; text-indent:-999em; background:url(../images/sprites_common.png) no-repeat -460px -100px;}.themeList .rateResult{ display:block; width:92px; height:16px; margin:0 auto; text-indent:-999em; overflow:hidden; background:url(../images/sprites_common.png) no-repeat;}
+.themeList .themeCut .forIphone4{ position:absolute; z-index:1; left:12px; top:10px; display:block; width:40px; height:40px; text-indent:-999em; background:url(../images/sprites_common.png) no-repeat -460px -100px;}
+.themeList .rateResult{ display:block; width:92px; height:16px; margin:0 auto; text-indent:-999em; overflow:hidden; background:url(../images/sprites_common.png) no-repeat;}
 .themeList .star0{ background-position:-160px -100px;}
 .themeList .star1{ background-position:-160px -120px;}
 .themeList .star2{ background-position:-160px -140px;}
@@ -217,9 +218,10 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 /*theme detail*/
 .themeDetail{ margin-top:10px; background:url(../images/sprites_box.png) no-repeat -1920px 0;}
 .detailSide{ float:left; width:202px; margin:13px; _display:inline;}
-.detailSide .themeCut{ padding:15px; width:172px; height:257px; background:url(../images/sprites_detail.png) no-repeat 0 0;}
+.detailSide .themeCut{ padding:15px; width:172px; height:257px; background:url(../images/sprites_detail.png) no-repeat 0 0; position:relative; z-index:1;}
 .detailSide .themeCut a{ padding:1px; display:block; width:170px; height:255px; font:0/0 Arial;}
 .detailSide .themeCut a:hover{ padding:0; border:1px solid #2D494B;}
+.detailSide .themeCut .forIphone4{ position:absolute; z-index:1; left:15px; top:15px; display:block; width:40px; height:40px; text-indent:-999em; background:url(../images/sprites_common.png) no-repeat -460px -100px;}
 .detailSide .btn li{ float:left; margin:8px 0 0 10px; _display:inline; width:86px; height:22px;}
 .detailSide .btn a{ display:block; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
 .detailSide .btn .previous a{ background-position:0 -290px;}
