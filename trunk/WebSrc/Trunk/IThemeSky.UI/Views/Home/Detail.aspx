@@ -45,7 +45,7 @@
 					<div class="themeCut">
 					    <a href="<%=ViewData.Model.CurrentTheme.ThumbnailName %>"><img src="<%=ViewData.Model.CurrentTheme.ThumbnailName %>" width="170" height="255" alt="<%=ViewData.Model.CurrentTheme.Title %> iPhone theme" id="themeCut" /></a>
 					    <% if (ViewData.Model.CurrentTheme.SupportIPhone4) { %>
-					        <!--Here is iPhone4 identify icon-->
+					        <span title="<%=ViewData.Model.CurrentTheme.Title %> is a 480x960(HD) iphone 4 theme" class="forIphone4">iPhone 4 Theme</span>
 					    <%} %>
 					</div>
 					<ul class="btn">
