@@ -107,7 +107,7 @@
 						<% if (ViewData.Model.CurrentTheme.SupportIPhone4){ %>
 						    <span class="off" title="Theme Creator for iPhone 4 comming soon">Can't be modified</span>
 						<%} else { %>
-						    <a href="/Creator/<%=ViewData.Model.CurrentTheme.Title.Replace(" ", "-") %>,<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator" target="_blank">Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator</a>
+						    <a href="/Creator/<%=ViewData.Model.CurrentTheme.Title.Replace(" ", "-") %>,<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator" target="_blank" rel="nofollow">Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator</a>
 						<%} %>
 						</li>
 					</ul>
