@@ -441,5 +441,5 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .supportBtn .s1{ background-position:0 0;}
 .supportBtn .s2{ background-position:0 -140px;}
 .supportBtn li span{ display:block; padding:42px 0 0 82px; width:238px; height:48px; color:#DDD; line-height:1.4;}
-.supportBtn a:link,.supportBtn a:visited{ display:block; float:left; width:280px; height:30px; margin-top:-90px; text-align:right; padding:90px 40px 0 0; font:bold 12px/30px "Lucida Grande"; color:#9FBABF;}
+.supportBtn a:link,.supportBtn a:visited{ display:block; float:left; width:280px; height:30px; margin-top:-90px; text-align:right; padding:90px 40px 0 0; font-weight:bold; line-height:30px; font-size:13px; color:#9FBABF;}
 .supportBtn a:hover,.supportBtn a:active{ color:#FFf;}
