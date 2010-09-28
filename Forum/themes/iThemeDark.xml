@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Resources theme="iThemeDark" dir="ithemedark">
+  <page name="THEME">
+    <Resource tag="CREDIT">&lt;span style='color:#769FA3'&gt;Theme created by &lt;span&gt; &lt;a href='http://www.ithemesky.com/contact'&gt;iThemeSky&lt;/a&gt;</Resource>
+    <Resource tag="HEADER">&lt;script type="text/javascript" src="~/ithemedark.js"&gt;&lt;/script&gt;</Resource>
+  </page>
+  <page name="FORUM">
+    <Resource tag="BANNER">~/forum_banner.jpg</Resource>
+  </page>
+	<page name="ICONS">
+    <Resource tag="PM">~/icon_pm.png</Resource>
+    <Resource tag="EMAIL">~/icon_email.png</Resource>
+    <Resource tag="HOME">~/icon_home.png</Resource>
+    <Resource tag="BLOG">~/icon_blog.png</Resource>
+    <Resource tag="MSN">~/icon_msn.png</Resource>
+    <Resource tag="AIM">~/icon_aim.png</Resource>
+    <Resource tag="YIM">~/icon_yahoo.png</Resource>
+    <Resource tag="ICQ">~/icon_icq.png</Resource>
+	<Resource tag="XMPP">~/icon_xmpp.png</Resource>	
+    <Resource tag="SKYPE">~/icon_skype.png</Resource>
+	<Resource tag="SEARCH">~/icon_search.png</Resource>
+	<Resource tag="TOPIC_NEW">~/topic_new.png</Resource>
+	<Resource tag="TOPIC">~/topic.png</Resource>
+	<Resource tag="TOPIC_ANNOUNCEMENT">~/topic_announce.png</Resource>
+	<Resource tag="TOPIC_ANNOUNCEMENT_NEW">~/topic_announce_new.png</Resource>
+	<Resource tag="TOPIC_NEW_LOCKED">~/topic_lock_new.png</Resource>
+	<Resource tag="TOPIC_LOCKED">~/topic_lock.png</Resource>
+	<Resource tag="TOPIC_STICKY">~/topic_sticky.png</Resource>
+	<Resource tag="TOPIC_MOVED">~/topic_moved.png</Resource>
+	<Resource tag="TOPIC_POLL">~/topic_poll.png</Resource>
+	<Resource tag="TOPIC_POLL_NEW">~/topic_poll_new.png</Resource>
+	<Resource tag="SUBFORUM">~/icon_subforum.png</Resource>
+	<Resource tag="SUBFORUM_NEW">~/icon_subforum_new.png</Resource>
+	<Resource tag="FORUM">~/topic.png</Resource>
+	<Resource tag="FORUM_NEW">~/topic_new.png</Resource>
+	<Resource tag="FORUM_LOCKED">~/topic_lock.png</Resource>
+	<Resource tag="FORUM_STATS">~/folder_stats.png</Resource>
+	<Resource tag="FORUM_USERS">~/folder_who.png</Resource>
+	<Resource tag="ICON_NEWEST">~/icon_newest_reply.png</Resource>
+	<Resource tag="ICON_LATEST">~/icon_latest_reply.png</Resource>
+	<Resource tag="ATTACHED_FILE">~/icon_file.png</Resource>
+    <Resource tag="PANEL_EXPAND">~/expand.png</Resource>
+    <Resource tag="PANEL_COLLAPSE">~/collapse.png</Resource>
+	<Resource tag="USER_ONLINE">~/icon_useronline.png</Resource>
+	<Resource tag="USER_OFFLINE">~/icon_useroffline.png</Resource>
+	<Resource tag="GENDER_MALE">~/male.png</Resource>
+	<Resource tag="GENDER_FEMALE">~/female.png</Resource>
+    <Resource tag="RSSFEED">~/rssfeed.png</Resource>
+  </page>
+  <page name="SORT">
+	<Resource tag="ASCENDING">~/sort_up.png</Resource>
+	<Resource tag="DESCENDING">~/sort_down.png</Resource>
+  </page>
+  <page name="VOTE">
+	<Resource tag="LCAP">~/vote_lcap.png</Resource>
+	<Resource tag="RCAP">~/vote_rcap.png</Resource>
+	<Resource tag="BAR">~/voting_bar.png</Resource>
+  </page>
+</Resources>
