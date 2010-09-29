@@ -104,7 +104,7 @@
 						2. Your computer's 22 Port is used by another program may results in that.			
 					</p>
 				</div>
-				<h4 class="iSpiritFaq"><a href="#">How to delete a Winterboard theme?</a></h4>
+				<h4 class="iSpiritFaq"><a href="#">How to delete a theme?</a></h4>
 				<div class="iSpiritFaqContent">
 					<p>
 						1. Switch on Theme Manage.<br />
