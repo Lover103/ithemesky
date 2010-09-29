@@ -38,49 +38,78 @@
 			</div>
 			<div class="iSpiritMain">
 				<h3 class="supportSort s1">Frequently Asked Questions</h3>
-				<h4 class="iSpiritFaq"><a href="#">How to install the theme on jailbroken iPhone?</a></h4>
+				<h4 class="iSpiritFaq"><a href="#">What is the system requirement for iSpirit?</a></h4>
 				<div class="iSpiritFaqContent">
 					<p>
-						1. If you have wifi, you could install the winterboard via cydia directly.<br />
-						2. If no wifi there, will install automatically when you use the iSpirit, please step as instructed.<br />
-						3. Download and install iSpirit.<br />
-						4. In the theme management, you could install the theme from Zip directly or install from folder.<br />
-						5. If you need more theme, you could download from http://www.ithemesky.com<br />
-						6. And also you could download from the website indicated in the iSpirit, iSpirit will help you install the theme automatically.
+						iSpirit is only for Windows (Windows XP/ Windows Vista/ Windows 7). Please install both .net Framework 2.0 or higher and iTunes 7.5 or higher before you use iSpirit. The .net Framework 4.0 and iTunes 9.1 are been recommended.
 					</p>
 				</div>
-				<h4 class="iSpiritFaq"><a href="#">How to install the .deb software with iSpirit?</a></h4>
+				<h4 class="iSpiritFaq"><a href="#">How to install iSpirit?</a></h4>
 				<div class="iSpiritFaqContent">
 					<p>
-						1. Run the iSpirit, and open the favorite folder and choose the "Cydia AutoInstall". (or search for /private/var/root/Media/Cydia/AutoInstall/ in the address)<br />
-						2. Copy the .deb file to this folder.<br />
-						3. Restart your iPhone.<br />
-						4. Then restart the Springboard with iSpirit.<br />
+						iSpirit is a Free software installation (green software). Decompress the iSpirit  compressed package to your disk, then click it to run. Run iSpirit as Administrator is recommended if you use it in Windows 7.
 					</p>
 				</div>
-				<h4 class="iSpiritFaq"><a href="#">How to view and edit the .plist file?</a></h4>
+				<h4 class="iSpiritFaq"><a href="#">How to connect iPhone to computer?</a></h4>
 				<div class="iSpiritFaqContent">
 					<p>
-						1. Download and install the iSpirit<br />
-						2. Choose the .plist file you want to view via iSpirit, double click it.<br />
-						3. You could edit and save the file on the text editor lanuched.<br />						
+						1. Plug in your iPhone to your computer using the included universal serial bus (USB) cable.<br />
+						2. You must install iTunes to your computer first, and turn iPodService on.<br />
 					</p>
 				</div>
-				<h4 class="iSpiritFaq"><a href="#">How to manage your file in iPhone?</a></h4>
+				<h4 class="iSpiritFaq"><a href="#">How to install themes to iPhone with iSpirit?</a></h4>
 				<div class="iSpiritFaqContent">
 					<p>
-						1. Download and install iSpirit.<br />
-						2. With the help of iSpirit, it is easy for you to establish, amend or delete the folder. upload file or folder to your ipone. copy file or folder to PC.<br />
-						3. iSpirit support you to drag the file and folder which is useful for to you exchange the file between pc and your iPhone.<br />						
+						1. Switch on Theme Manage (Menu in Spirit)<br />
+						2. Click "Install from Zip" or "Install from folder" to select a theme from your disk then install it. Or find a theme on our site in iSpirit, click "Download" then click the "Apply" to install it.					
 					</p>
 				</div>
-				<h4 class="iSpiritFaq"><a href="#">When to use the Respring of iSpirit</a></h4>
+				<h4 class="iSpiritFaq"><a href="#">How to install DEB or IPA files?</a></h4>
 				<div class="iSpiritFaqContent">
 					<p>
-						You can use Respring On this condition as below:<br />
-						1. To restart the springboard.<br />
-						2. Installing certain soft, but no appearance on the screen.<br />
-						3. Updated the configuration files and want to make it work at once.<br />						
+						1. Click the button "Install DEB" or "Install IPA".<br />
+						2. Select the DEB or IPA file.<br />
+						3. Then click "Install" to finish installation.				
+					</p>
+				</div>
+				<h4 class="iSpiritFaq"><a href="#">Why iSpirit crashes sometimes?</a></h4>
+				<div class="iSpiritFaqContent">
+					<p>
+						1. Did not install .net framework would result in iSpirit crashes.<br />
+						2. If you don't know why it crashes, send us your iTunes and Windows OS version to us, We are glad to help you.			
+					</p>
+				</div>
+				<h4 class="iSpiritFaq"><a href="#">How to fix white/blank icons in my iPhone?</a></h4>
+				<div class="iSpiritFaqContent">
+					<p>
+						Click "Repair Icons" in iSpirit to fix them directly. Learn more about <a href="/help/why-do-winterboard-themes-not-work">Why do winterboard themes not work?</a>.			
+					</p>
+				</div>
+				<h4 class="iSpiritFaq"><a href="#">How to change iPhone files permissions with iSpirit?</a></h4>
+				<div class="iSpiritFaqContent">
+					<p>
+						Switch to File Manage, select a file, right click it then select Propertys, you can change the permission in the next interface.			
+					</p>
+				</div>
+				<h4 class="iSpiritFaq"><a href="#">Why I can't browse all the iPhone files in iSpirit?</a></h4>
+				<div class="iSpiritFaqContent">
+					<p>
+						Maybe you didn't install afc2add. <a href="/forum/default.aspx?g=posts&t=6">Learn more about afc2add here</a>.		
+					</p>
+				</div>
+				<h4 class="iSpiritFaq"><a href="#">Why it always remind me that Openssh did not install correctly?</a></h4>
+				<div class="iSpiritFaqContent">
+					<p>
+						1. If you use iSpirit 1.0.6 or former version in Windows 7, you should use Compatibility Mode for it.<br />
+						2. Your computer's 22 Port is used by another program may results in that.			
+					</p>
+				</div>
+				<h4 class="iSpiritFaq"><a href="#">How to delete a Winterboard theme?</a></h4>
+				<div class="iSpiritFaqContent">
+					<p>
+						1. Switch on Theme Manage.<br />
+						2. Click "Themes in iPhone"<br />
+						3. Select a theme then delete it directly.		
 					</p>
 				</div>
 				<h3 class="supportSort s2">Get Support</h3>
