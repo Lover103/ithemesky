@@ -26,25 +26,50 @@ namespace IThemeSky.UI
             routes.MapRoute(
                 "List4",
                 "list/{sort}/{categoryName}_{categoryId}/{pageIndex}/{tags}",
-                new { controller = "Home", action = "List", sort = "new", categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = 1 }
+                new { controller = "Home", action = "List", sort = "new", fw=0, categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = 1 }
             );
             //*/list/排序方式/分类名_分类id/页码
             routes.MapRoute(
                 "List2",
                 "list/{sort}/{categoryName}_{categoryId}/{pageIndex}",
-                new { controller = "Home", action = "List", sort = "new", categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = UrlParameter.Optional }
+                new { controller = "Home", action = "List", sort = "new", fw = 0, categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = UrlParameter.Optional }
             );
             //*/list/排序方式/页码/标签名称1,标签名称2+标签名称3,标签名称4+...
             routes.MapRoute(
                 "List3",
                 "list/{sort}/{pageIndex}/{tags}",
-                new { controller = "Home", action = "List", sort = "new", categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = 1 }
+                new { controller = "Home", action = "List", sort = "new", fw = 0, categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = 1 }
             );
             //*/list/排序方式/页码
             routes.MapRoute(
                 "List",
                 "list/{sort}/{pageIndex}",
-                new { controller = "Home", action = "List", sort = "new", categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = UrlParameter.Optional }
+                new { controller = "Home", action = "List", sort = "new", fw = 0, categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = UrlParameter.Optional }
+            );
+
+            //*/iphone4/排序方式/分类名_分类id/页码/标签名称1,标签名称2
+            routes.MapRoute(
+                "iphone4_1",
+                "iphone4/{sort}/{categoryName}_{categoryId}/{pageIndex}/{tags}",
+                new { controller = "Home", action = "List", sort = "new", fw = 4, categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = 1 }
+            );
+            //*/list/排序方式/分类名_分类id/页码
+            routes.MapRoute(
+                "iphone4_2",
+                "iphone4/{sort}/{categoryName}_{categoryId}/{pageIndex}",
+                new { controller = "Home", action = "List", sort = "new", fw = 4, categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = UrlParameter.Optional }
+            );
+            //*/list/排序方式/页码/标签名称1,标签名称2+标签名称3,标签名称4+...
+            routes.MapRoute(
+                "iphone4_3",
+                "iphone4/{sort}/{pageIndex}/{tags}",
+                new { controller = "Home", action = "List", sort = "new", fw = 4, categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = 1 }
+            );
+            //*/list/排序方式/页码
+            routes.MapRoute(
+                "iphone4_4",
+                "iphone4/{sort}/{pageIndex}",
+                new { controller = "Home", action = "List", sort = "new", fw = 4, categoryId = 0, categoryName = "", tags = UrlParameter.Optional, pageIndex = UrlParameter.Optional }
             );
 
             //*/search/排序方式/关键字/页码/
@@ -172,6 +197,13 @@ namespace IThemeSky.UI
                 "Soft", // Route name
                 "Soft/Comment/{softIdentify}/{softTitle}/{softDescription}", // URL with parameters
                 new { controller = "Soft", action = "Comment" } // Parameter defaults
+            );
+
+            //单页
+            routes.MapRoute(
+                "Contact", // Route name
+                "Contact", // URL with parameters
+                new { controller = "Home", action = "Contact" } // Parameter defaults
             );
 
             //默认

@@ -257,7 +257,10 @@
     <Content Include="Views\Help\how-to-jailbreak-iphone.aspx" />
     <Content Include="Views\Help\how-to-use-winterboard.aspx" />
     <Content Include="Views\Help\why-jailbreak-iphone.aspx" />
+    <Content Include="Views\Home\Contact.aspx" />
+    <Content Include="Views\Home\iPhone4.aspx" />
     <Content Include="Views\iSpirit\help.aspx" />
+    <Content Include="Views\Shared\iPhone4Categories.ascx" />
     <Content Include="Views\Shared\SoftCommentRepeater.ascx" />
     <Content Include="Views\Shared\PostSoftCommentForm.ascx" />
     <Content Include="Views\Soft\Comment.aspx" />

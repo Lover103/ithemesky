@@ -11,8 +11,9 @@ namespace IThemeSky.UI.Models
 {
     public class ListModel : ModelBase
     {
-        public ListModel(int categoryId, string categoryName, string tagNames, ThemeSortOption sort, int pageIndex, int pageSize)
+        public ListModel(int fw, int categoryId, string categoryName, string tagNames, ThemeSortOption sort, int pageIndex, int pageSize)
         {
+            FrameworkVersion = fw;
             CategoryId = categoryId;
             CategoryName = categoryName;
             TagNames = tagNames;
@@ -21,6 +22,10 @@ namespace IThemeSky.UI.Models
             PageSize = pageSize;
 
             ThemesFilter filter = _themeRepository.Filter;
+            if (fw > 0)
+            {
+                filter.SupportIPhone4 = true;
+            }
             if (CategoryId > 0)
             {
                 filter.CategoryIds.Add(categoryId);
@@ -50,7 +55,14 @@ namespace IThemeSky.UI.Models
 
             //计算当前的页面地址
             StringBuilder sbUrlPattern = new StringBuilder();
-            sbUrlPattern.Append("/list/");
+            if (this.FrameworkVersion == 4)
+            {
+                sbUrlPattern.Append("/iphone4/");
+            }
+            else
+            {
+                sbUrlPattern.Append("/list/");
+            }
             sbUrlPattern.Append("{1}");
             sbUrlPattern.Append("/");
             if (CategoryId > 0)
@@ -73,6 +85,8 @@ namespace IThemeSky.UI.Models
         public string UrlPatternWithoutSort { get; set; }
 
         public string UrlPatternWithouTags { get; set; }
+
+        public int FrameworkVersion { get; private set; }
 
         public int CategoryId { get; private set; }
 
