@@ -34,7 +34,7 @@ namespace IThemeSky.UI.Controllers
             return View(model);
         }
 
-        public ActionResult List(string sort, int categoryId, string categoryName, string tags, int? pageIndex)
+        public ActionResult List(string sort, int fw, int categoryId, string categoryName, string tags, int? pageIndex)
         {
             int currPageIndex = 1;
             if (pageIndex.HasValue)
@@ -42,8 +42,15 @@ namespace IThemeSky.UI.Controllers
                 currPageIndex = pageIndex.Value;
             }
             ThemeSortOption themeSort = sort.ToEnum<ThemeSortOption>(ThemeSortOption.New);
-            ListModel model = new ListModel(categoryId, categoryName, tags, themeSort, currPageIndex, 20); 
-            return View(model);
+            ListModel model = new ListModel(fw, categoryId, categoryName, tags, themeSort, currPageIndex, 20);
+            if (fw == 4)
+            {
+                return View("iphone4", model);
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         public ActionResult Search(string sort, string keyword, int? pageIndex)
@@ -81,6 +88,11 @@ namespace IThemeSky.UI.Controllers
         public ActionResult About()
         {
             return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View(new NormalPageModel());
         }
 
         public ActionResult Test()

@@ -72,6 +72,10 @@ namespace IThemeSky.Model
         /// </summary>
         public BooleanFilterOption IsCommend { get; set; }
         /// <summary>
+        /// 获取或设置是否支持iphone4
+        /// </summary>
+        public bool SupportIPhone4 { get; set; }
+        /// <summary>
         /// 获取或设置主题直属的分类id过滤器,如果集合为空，则不作分类过滤(该属性的集合已在内部初始化)
         /// </summary>
         public List<int> CategoryIds { get; private set; }
@@ -99,6 +103,10 @@ namespace IThemeSky.Model
         public override string ToString()
         {
             StringBuilder conditions = new StringBuilder("1=1");
+            if (this.SupportIPhone4)
+            {
+                conditions.Append(" AND SupportIPhone4 > 0");
+            }
             if (this.ParentCategoryIds.Count > 0)
             {
                 conditions.Append(SqlConditionBuilder.GetMultiQueryValues("ParentCategoryId", this.ParentCategoryIds));
