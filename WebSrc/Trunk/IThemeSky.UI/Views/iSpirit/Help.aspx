@@ -47,7 +47,7 @@
 				<h4 class="iSpiritFaq"><a href="#">How to install iSpirit?</a></h4>
 				<div class="iSpiritFaqContent">
 					<p>
-						iSpirit is a Free software installation (green software). Decompress the iSpirit  compressed package to your disk, then click it to run. Run iSpirit as Administrator is recommended if you use it in Windows 7.
+						iSpirit is a Free software installation (green software). Decompress the iSpirit compressed package to your disk, then click it to run. Run iSpirit as Administrator is recommended in Windows 7.
 					</p>
 				</div>
 				<h4 class="iSpiritFaq"><a href="#">How to connect iPhone to computer?</a></h4>
@@ -68,7 +68,7 @@
 				<div class="iSpiritFaqContent">
 					<p>
 						1. Click the button "Install DEB" or "Install IPA".<br />
-						2. Select the DEB or IPA file.<br />
+						2. Select a DEB or IPA file.<br />
 						3. Then click "Install" to finish installation.				
 					</p>
 				</div>
@@ -76,7 +76,7 @@
 				<div class="iSpiritFaqContent">
 					<p>
 						1. Did not install .net framework would result in iSpirit crashes.<br />
-						2. If you don't know why it crashes, send us your iTunes and Windows OS version to us, We are glad to help you.			
+						2. If you don't know why it crashes, send us your iTunes, Windows OS version and the error information to us. We are glad to help you.			
 					</p>
 				</div>
 				<h4 class="iSpiritFaq"><a href="#">How to fix white/blank icons in my iPhone?</a></h4>
@@ -100,7 +100,7 @@
 				<h4 class="iSpiritFaq"><a href="#">Why it always remind me that Openssh did not install correctly?</a></h4>
 				<div class="iSpiritFaqContent">
 					<p>
-						1. If you use iSpirit 1.0.6 or former version in Windows 7, you should use Compatibility Mode for it.<br />
+						1. If you use iSpirit 1.0.6 or former version in Windows 7, you had better use Compatibility Mode for it.<br />
 						2. Your computer's 22 Port is used by another program may results in that.			
 					</p>
 				</div>
