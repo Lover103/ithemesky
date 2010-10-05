@@ -30,22 +30,27 @@
 			<!--help content begin-->
 			<div class="commonContent">
 				<ul class="faqList">
+					<li><a href="#faqContent0">Get help for iSpirit?</a></li>
 					<li><a href="#faqContent1">How to install theme on jailbroken iPhone?</a></li>
 					<li><a href="#faqContent2">How to Use WinterBoard?</a></li>
 					<li><a href="#faqContent3">Why jailbreak iPhone?</a></li>
 					<li><a href="#faqContent4">How to jailbreak iPhone?</a></li>
-					<li><a href="#faqContent5">What is the system requirement for iSpirit?</a></li>
+					<li><a href="#faqContent5">Why do winterboard themes not work?</a></li>
 				</ul>
+				<dl class="faqContent">
+					<dt class="title"><span class="text">Get help for iSpirit?</span><a href="#top" name="faqContent0" class="goTop" title="TOP">TOP</a></dt>
+					<dd class="faqEntry">
+						<p>
+							If you have any questions about iSpirit, please read the <a href="/ispirit/help"><span style="color:#FFF;">iSpirit FAQ's documents</span></a> first. You can also get help by visiting our <a href="/forum"><span style="color:#FFF;">Community Forum</span></a>.
+						</p>
+					</dd>
+				</dl>
 				<dl class="faqContent">
 					<dt class="title"><span class="text">How to install theme on jailbroken iPhone?</span><a href="#top" name="faqContent1" class="goTop" title="TOP">TOP</a></dt>
 					<dd class="faqEntry">
 						<p>
-							1. If you have wifi, you could install the winterboard via cydia directly.<br />
-							2. If no wifi there, will install automatically when you use the iSpirit, please step as instructed.<br />
-							3. Download and install iSpirit.<br />
-							4. In the theme management, you could install the theme from Zip directly or install from folder.<br />
-							5. If you need more theme, you could download from our website.<br />
-							6. And also you could download from the website indicated in the iSpirit, iSpirit will help you install the theme automatically.
+							1. The easiest way to install theme on iPhone is by using iSpirit. <a href="/ispirit/help"><span style="color:#FFF;">Learn more about it</span></a>.</p>
+							2. If you have wifi, you could install the winterboard theme via cydia directly.<br />
 						</p>
 					</dd>
 				</dl>
@@ -68,9 +73,10 @@
 					</dd>
 				</dl>
 				<dl class="faqContent">
-					<dt class="title"><span class="text">What is the system requirement for iSpirit?</span><a href="#top" name="faqContent5" class="goTop" title="TOP">TOP</a></dt>
+					<dt class="title"><span class="text">Why do winterboard themes not work?</span><a href="#top" name="faqContent5" class="goTop" title="TOP">TOP</a></dt>
 					<dd class="faqEntry">
-						<p>iSpirit is only for Windows (Windows XP/ Windows Vista/ Windows 7). Please install both .net Framework 2.0 or higher and iTunes 7.5 or higher before you use iSpirit. The .net Framework 4.0 and iTunes9.1 are been recommended.</p>
+						<p>Ever since the winterboard update someone had trouble in applying a new winterboard theme. For example, winterboard themes could not work, some icons do not dim. Now, <a href="/help/why-do-winterboard-themes-not-work"><span style="color:#FFF;">here</span> is the way to fix them</a>. If you install themes with iSpirit, do not have to do these.
+</p>
 					</dd>
 				</dl>
 			</div>
