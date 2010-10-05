@@ -38,7 +38,7 @@
 				<p>We appreciate your feedback. All suggestions, comments, talking about cooperation/advertisment/link exchange, iSpirit bug reports, praise or harsh criticism are welcome. If something's bugging you then we'll do what we can to help. We'll try to reply as soon as possible.</p>
 				<p>Don't forget to check our <a href="/ispirit/help">Help documents</a> before sending us a message about iSpirit as there's a good chance we already have an answer to your question. And the quickest way to get iSpirit help is by <a href="/forum">visiting our Community Forum.</a></p>
 				<p>Follow us on Twitter: <a href="http://www.twitter.com/iThemesky" target="_blank">www.twitter.com/ithemesky</a><br />
-				Add us to MSN: ithemesky@hotmail.com (Not for live support)</p>
+				Add us to MSN: ithemesky@gmail.com (Not a Live Support)</p>
 				<div class="iSpiritForm">
 					<iframe id="hiddenIframe" name="hiddenIframe" src="#" style="display:none"></iframe>
                     <% using (Html.BeginForm("AddThemeSupport", "Service", FormMethod.Post, new { target = "hiddenIframe" }))
