@@ -4,7 +4,7 @@
     <ul class="sideColContent sideMenu">
 	    <% foreach (ThemeCategory category in ViewData.Model)
         { %>
-	    <li><a href="/iphone4/new/<%=category.CategoryName.Replace(" ", "").Replace("&", "-")%>_<%=category.CategoryId%>"><%=category.CategoryName%></a></li>
+	    <li><a href="/iphone-4-themes/new/<%=category.CategoryName.Replace(" ", "").Replace("&", "-")%>_<%=category.CategoryId%>"><%=category.CategoryName%></a></li>
 	    <%} %>
     </ul>
 </div>
