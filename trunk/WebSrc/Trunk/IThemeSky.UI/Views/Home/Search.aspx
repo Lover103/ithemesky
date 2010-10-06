@@ -18,7 +18,7 @@
 		<div class="pageGuide">
 			<ul class="breadcrumb">
 				<li class="home"><a href="/" title="Homepage">ithemesky.com Homepage</a></li>
-				<li><a href="/list/new">All Categories</a></li>
+				<li><a href="/list/new">All iPhone Themes</a></li>
 				<li><a href="#">Search: <%=ViewData.Model.Keyword%></a></li>
 			</ul>
 		</div>
