@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<ListModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	<title><%=ViewData.Model.CategoryId > 0 ? ViewData.Model.CategoryName.Replace("-", " & ") : "All Categories"%> iPhone themes - <%=ViewData.Model.Sort%> - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
-    <meta name="description" content="<%=ViewData.Model.CategoryId > 0 ? ViewData.Model.CategoryName.Replace("-", " & ") : "All Categories"%> iPhone themes, <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
+	<title><%=ViewData.Model.CategoryId > 0 ? ViewData.Model.CategoryName.Replace("-", " & ") : "All"%> iPhone themes - <%=ViewData.Model.Sort%> - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+    <meta name="description" content="<%=ViewData.Model.CategoryId > 0 ? ViewData.Model.CategoryName.Replace("-", " & ") : "All"%> iPhone themes, <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
     <meta name="keywords" content="<!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
     <script type="text/javascript">
         $(document).ready(
@@ -25,7 +25,7 @@
 		<div class="pageGuide">
 			<ul class="breadcrumb">
 				<li class="home"><a href="/" title="Homepage">ithemesky.com Homepage</a></li>
-				<li><a href="/list/new">All Categories</a></li>
+				<li><a href="/list/new">All iPhone Themes</a></li>
 				<% if (ViewData.Model.CategoryId > 0)
                    { %>
 				<li><a href="/list/new/<%=ViewData.Model.CategoryName%>_<%=ViewData.Model.CategoryId%>"><%=ViewData.Model.CategoryName.Replace("-", " & ")%></a></li>
@@ -38,8 +38,8 @@
 			<!--tips begin-->
 			<div class="selectedTips">
 				<p class="clearfix">
-					<span class="tips">Please choose anyone of the tags or any tags together below. (e.g. Blue, Red, and cool.)</span>
-					<a href="#" class="close" onclick="createCookie('GotTagsHelp', '1', 365);$('div.selectedTips').hide();">I got it</a>
+					<span class="tips">Please select any tag or select multiple tags together as following to find your favorite themes.</span>
+					<a href="#" class="close" onclick="createCookie('GotTagsHelp', '1', 365);$('div.selectedTips').hide();">Don't remind me again</a>
 				</p>
 			</div>
 			<script type="text/javascript">

@@ -32,7 +32,7 @@
 		<div class="pageGuide">
 			<ul class="breadcrumb">
 				<li class="home"><a href="/" title="Homepage">ithemesky.com Homepage</a></li>
-				<li><a href="/list/new/">All Categories</a></li>
+				<li><a href="/list/new/">All iPhone Themes</a></li>
 				<li><a href="/list/new/<%=ViewData.Model.CurrentTheme.CategoryName.Replace(" ", "").Replace("&", "-") %>_<%=ViewData.Model.CurrentTheme.CategoryId %>/"><%=ViewData.Model.CurrentTheme.CategoryName %></a></li>
 				<li><%=ViewData.Model.CurrentTheme.Title %> iPhone<%=ViewData.Model.CurrentTheme.SupportIPhone4 ? " 4" : "" %> theme</li>
 			</ul>
