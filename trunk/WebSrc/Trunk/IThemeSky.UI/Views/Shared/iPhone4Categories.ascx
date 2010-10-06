@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<List<ThemeCategory>>" %>
 <div class="sideCol">
-    <h3 class="sideColHead colTitle">iPhone4 Categories</h3>
+    <h3 class="sideColHead colTitle">iPhone 4 Categories</h3>
     <ul class="sideColContent sideMenu">
 	    <% foreach (ThemeCategory category in ViewData.Model)
         { %>
