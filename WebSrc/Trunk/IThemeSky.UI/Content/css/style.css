@@ -185,7 +185,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .selectedTips{ width:770px; background:url(../images/sprites_box_wide.png) no-repeat -770px 0; color:#CCD2DC;}
 .selectedTips p{ width:736px; padding:4px 0 9px 20px; background:url(../images/sprites_box_wide.png) no-repeat 0 bottom;}
 .selectedTips .tips{ font-size:12px; float:left; padding-right:10px;}
-.selectedTips .close{ float:right; width:70px; height:18px; text-indent:8px; background:url(../images/sprites_common.png) no-repeat -710px -650px; line-height:16px; font-size:13px;}
+.selectedTips .close{ float:right; width:160px; height:18px; text-indent:10px; background:url(../images/sprites_common.png) no-repeat -620px -650px; line-height:16px;}
 .selectTags{ width:756px; background:url(../images/sprites_box_wide.png) no-repeat -770px bottom; padding:0 7px 8px 7px;}
 .selectTags dl{ width:756px; padding:9px 0; background:url(../images/sprites_box_wide.png) no-repeat 0 bottom; line-height:20px;}
 .selectTags dl.last{ background:none;}
