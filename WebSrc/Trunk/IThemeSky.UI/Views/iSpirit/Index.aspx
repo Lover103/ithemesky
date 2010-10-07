@@ -75,7 +75,7 @@ $(document).ready(function() {
 					<dl>
 						<dt>More cool Features</dt>
 						<dd class="ico ico_6">Intro:</dd>
-						<dd class="entry">Fix white/blank icon; Transform and view .PNG file; View and edit .PLIST file; Adding files to favorite folders. Etc.</dd>
+						<dd class="entry">Connect via WIFI or USB; Fix white/blank icon; View and edit .PLIST file; Adding files to favorite folders. Etc.</dd>
 					</dl>
 				</div>
 				<dl class="featureScreen clearfix">

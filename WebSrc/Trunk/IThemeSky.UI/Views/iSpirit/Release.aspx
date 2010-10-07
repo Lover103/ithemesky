@@ -17,6 +17,18 @@ a:hover,a:active{ color:#FF0;}
 </head>
 <body>
 	<h1 class="hide">iSpirit Release Notes</h1>
+		<!-- 1.0.9 -->
+		<div class="release">
+			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.0.9</a></h2>
+			<h3>Released on 10/6/2010</h3>
+			<ul>
+				<li>Added support for WIFI (WLAN) connection. ( You can use all iSpirit's features via WIFI as via USB)</li>
+				<li>Added buttons to copy files between PC and iPhone in File Management.</li>
+				<li>Fixed some Theme Management's bugs, support for automatically converting summerboard theme to winterboard theme. No more need to turn on Summerboard Mode to use a winterboard theme.</li>
+				<li>Added Recommended Sources feature in Cydia source Management.</li>
+				<li>Increased performance by 30 percent.</li>
+			</ul>
+		</div>
 		<!-- 1.0.8 -->
 		<div class="release">
 			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.0.8</a></h2>
