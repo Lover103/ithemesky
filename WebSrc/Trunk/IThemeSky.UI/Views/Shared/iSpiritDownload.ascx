@@ -10,9 +10,9 @@
 					<a href="/iSpirit/download/" title="Download - Click here to get iSpirit"><span class="link">Download - Click here to get iSpirit</span><table><tr><td>
 					<![endif]-->
 					<p class="dlPopup">
-						<span class="label">Ver:</span><span class="entry">iSpirit 1.0.8</span>
-						<span class="label">Date:</span><span class="entry">23/9/2010</span>
-						<span class="label">Size:</span><span class="entry">649KB</span>
+						<span class="label">Ver:</span><span class="entry">iSpirit 1.0.9</span>
+						<span class="label">Date:</span><span class="entry">10/6/2010</span>
+						<span class="label">Size:</span><span class="entry">436KB</span>
 						<span class="label"><img src="/Content/images/ico_release_note.gif" alt="" class="noteIco" /></span><span class="entry"><a href="/ispirit/release" target="_blank">Release notes</a></span>
 					</p>
 					<!--[if lte IE 6]>
