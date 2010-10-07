@@ -25,7 +25,7 @@
 		<div class="pageGuide">
 			<ul class="breadcrumb">
 				<li class="home"><a href="/" title="Homepage">ithemesky.com Homepage</a></li>
-				<li><a href="/iphone-4-themes/new">iPhone 4 themes</a></li>
+				<li><a href="/iphone-4-themes/new">iPhone 4 Themes</a></li>
 				<% if (ViewData.Model.CategoryId > 0)
                    { %>
 				<li><a href="/iphone-4-themes/new/<%=ViewData.Model.CategoryName%>_<%=ViewData.Model.CategoryId%>"><%=ViewData.Model.CategoryName.Replace("-", " & ")%></a></li>
