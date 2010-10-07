@@ -45,20 +45,18 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .nav a{ display:block; padding:5px; height:14px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_header.png) no-repeat;}
 .nav li.s1 a:link,.nav li.s1 a:visited{ width:36px; background-position:0 -45px;}
 .nav li.s1 a:hover,.nav li.s1 a:active{ background-position:0 -70px;}
-.nav li.s2 a:link,.nav li.s2 a:visited{ width:92px; background-position:-60px -45px;}
+.nav li.s2 a:link,.nav li.s2 a:visited{ width:73px; background-position:-60px -45px;}
 .nav li.s2 a:hover,.nav li.s2 a:active{ background-position:-60px -70px;}
-.nav li.s3 a:link,.nav li.s3 a:visited{ width:52px; background-position:-175px -45px;}
-.nav li.s3 a:hover,.nav li.s3 a:active{ background-position:-175px -70px;}
-.nav li.s4 a:link,.nav li.s4 a:visited{ width:101px; background-position:-255px -45px;}
-.nav li.s4 a:hover,.nav li.s4 a:active{ background-position:-255px -70px;}
-.nav li.s5 a:link,.nav li.s5 a:visited{ width:41px; background-position:-385px -45px;}
-.nav li.s5 a:hover,.nav li.s5 a:active{ background-position:-385px -70px;}
-.nav li.s6 a:link,.nav li.s6 a:visited{ width:29px; background-position:-455px -45px;}
-.nav li.s6 a:hover,.nav li.s6 a:active{ background-position:-455px -70px;}
-.nav li.s7 a:link,.nav li.s7 a:visited{ width:39px; background-position:-515px -45px;}
-.nav li.s7 a:hover,.nav li.s7 a:active{ background-position:-515px -70px;}
-.nav li.s8 a:link,.nav li.s8 a:visited{ width:99px; background-position:-580px -45px;}
-.nav li.s8 a:hover,.nav li.s8 a:active{ background-position:-580px -70px;}
+.nav li.s3 a:link,.nav li.s3 a:visited{ width:112px; background-position:-160px -45px;}
+.nav li.s3 a:hover,.nav li.s3 a:active{ background-position:-160px -70px;}
+.nav li.s4 a:link,.nav li.s4 a:visited{ width:38px; background-position:-300px -45px;}
+.nav li.s4 a:hover,.nav li.s4 a:active{ background-position:-300px -70px;}
+.nav li.s5 a:link,.nav li.s5 a:visited{ width:99px; background-position:-365px -45px;}
+.nav li.s5 a:hover,.nav li.s5 a:active{ background-position:-365px -70px;}
+.nav li.s6 a:link,.nav li.s6 a:visited{ width:29px; background-position:-495px -45px;}
+.nav li.s6 a:hover,.nav li.s6 a:active{ background-position:-495px -70px;}
+.nav li.s7 a:link,.nav li.s7 a:visited{ width:39px; background-position:-555px -45px;}
+.nav li.s7 a:hover,.nav li.s7 a:active{ background-position:-555px -70px;}
 .searchPannel{ float:right; width:140px; height:20px; margin-top:35px; background:url(../images/sprites_header.png) no-repeat 0 -110px; position:relative; z-index:2;}
 .searchPannel .label{ float:left; display:block; width:24px; height:20px; text-indent:-999em; overflow:hidden;}
 .searchPannel .input{ float:left; padding:2px 0; _padding:1px 0;}
