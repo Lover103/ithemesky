@@ -41,20 +41,18 @@ body{ background:url(/Content/images/bg_body.jpg) no-repeat center 0 #000807; co
 .nav a{ display:block; padding:5px; height:14px; text-indent:-999em; overflow:hidden; background:url(/Content/images/sprites_header.png) no-repeat;}
 .nav li.s1 a:link,.nav li.s1 a:visited{ width:36px; background-position:0 -45px;}
 .nav li.s1 a:hover,.nav li.s1 a:active{ background-position:0 -70px;}
-.nav li.s2 a:link,.nav li.s2 a:visited{ width:92px; background-position:-60px -45px;}
+.nav li.s2 a:link,.nav li.s2 a:visited{ width:73px; background-position:-60px -45px;}
 .nav li.s2 a:hover,.nav li.s2 a:active{ background-position:-60px -70px;}
-.nav li.s3 a:link,.nav li.s3 a:visited{ width:52px; background-position:-175px -45px;}
-.nav li.s3 a:hover,.nav li.s3 a:active{ background-position:-175px -70px;}
-.nav li.s4 a:link,.nav li.s4 a:visited{ width:101px; background-position:-255px -45px;}
-.nav li.s4 a:hover,.nav li.s4 a:active{ background-position:-255px -70px;}
-.nav li.s5 a:link,.nav li.s5 a:visited{ width:41px; background-position:-385px -45px;}
-.nav li.s5 a:hover,.nav li.s5 a:active{ background-position:-385px -70px;}
-.nav li.s6 a:link,.nav li.s6 a:visited{ width:29px; background-position:-455px -45px;}
-.nav li.s6 a:hover,.nav li.s6 a:active{ background-position:-455px -70px;}
-.nav li.s7 a:link,.nav li.s7 a:visited{ width:39px; background-position:-515px -45px;}
-.nav li.s7 a:hover,.nav li.s7 a:active{ background-position:-515px -70px;}
-.nav li.s8 a:link,.nav li.s8 a:visited{ width:99px; background-position:-580px -45px;}
-.nav li.s8 a:hover,.nav li.s8 a:active{ background-position:-580px -70px;}
+.nav li.s3 a:link,.nav li.s3 a:visited{ width:112px; background-position:-160px -45px;}
+.nav li.s3 a:hover,.nav li.s3 a:active{ background-position:-160px -70px;}
+.nav li.s4 a:link,.nav li.s4 a:visited{ width:38px; background-position:-300px -45px;}
+.nav li.s4 a:hover,.nav li.s4 a:active{ background-position:-300px -70px;}
+.nav li.s5 a:link,.nav li.s5 a:visited{ width:99px; background-position:-365px -45px;}
+.nav li.s5 a:hover,.nav li.s5 a:active{ background-position:-365px -70px;}
+.nav li.s6 a:link,.nav li.s6 a:visited{ width:29px; background-position:-495px -45px;}
+.nav li.s6 a:hover,.nav li.s6 a:active{ background-position:-495px -70px;}
+.nav li.s7 a:link,.nav li.s7 a:visited{ width:39px; background-position:-555px -45px;}
+.nav li.s7 a:hover,.nav li.s7 a:active{ background-position:-555px -70px;}
 /*footer*/
 #footer{ padding-top:35px; text-align:center; color:#527679; font:normal 12px/1.5 "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif; }
 #footer a:link,#footer a:visited{ color:#527679; text-decoration:none;}
@@ -84,11 +82,10 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 		<h2 class="logo"><a href="/" title="ithemesky.com provided iPhone themes"><img src="/Content/images/logo.png" alt="ithemesky.com provided iPhone themes" width="200" height="62" /></a></h2>
 		<ul class="nav">
 			<li class="s1"><a href="/" title="ithemesky.com Homepage">ithemesky.com Homepage</a></li>
-			<li class="s2"><a href="/list/new" title="All Categories">All Categories</a></li>
-			<li class="s3"><a href="/list/popular" title="Ranking">Ranking</a></li>
-			<li class="s5"><a href="/ispirit" title="iSpirit">iSpirit</a></li>
-			<li class="s8"><a href="/creator" title="iPhone Theme Creator">iPhone Theme Creator</a></li>
-			<li class="s6"><a href="/help/faq" title="Help">Help</a></li>
+			<li class="s2"><a href="/list" title="All iPhone Themes">All iPhone Themes</a></li>
+			<li class="s3"><a href="/iphone-4-themes" title="iPhone 4 Themes">iPhone 4 Themes</a></li>
+			<li class="s4"><a href="/ispirit" title="iSpirit">iSpirit</a></li>
+			<li class="s5"><a href="/creator" title="iPhone Theme Creator">iPhone Theme Creator</a></li>
 			<li class="s7 last"><a href="/forum" title="Forum">Forum</a></li>
 		</ul>
 	</div>
