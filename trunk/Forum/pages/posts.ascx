@@ -129,6 +129,35 @@
         </td>
     </tr>
 </table>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.postdiv').autoResize({height:750});
+});   jQuery.fn.autoResize = function(options)
+{
+    var opts = {
+        'width' : 750,
+        'height': 750
+    }
+    var opt = $.extend(true, {},opts,options || {});
+    width = opt.width;
+    height = opt.height;
+    $('img',this).each(function(){
+        var image = new Image();
+        image.src = $(this).attr('src');   if(image.width > 0 && image.height > 0 ){
+            var image_rate = 1;
+            if( (width / image.width) < (height / image.height)){
+                image_rate = width / image.width ;
+            }else{
+                image_rate = height / image.height ;
+            }
+            if ( image_rate <= 1){
+                $(this).width(image.width * image_rate);
+                $(this).height(image.height * image_rate);
+            }
+        }
+    });
+}
+</script>
 <asp:Repeater ID="MessageList" runat="server" OnItemCreated="MessageList_OnItemCreated">
     <ItemTemplate>
         <table class="content postContainer" width="100%">
