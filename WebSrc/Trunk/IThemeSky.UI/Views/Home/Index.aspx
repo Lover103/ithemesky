@@ -20,7 +20,7 @@
 			<div class="banner">
 				<dl>
 					<dt><img src="/Content/images/banner01.jpg" title="" alt="iSpirit - iPhone apps, themes and files manager" /></dt>
-					<dd class="text">One click to install DEB and IPA files. Download and install themes. Manage files between PC and iPhone. Fully supports iPhone4.<p>One click to install DEB and IPA files. Download and install themes. Manage files between PC and iPhone. Fully supports <span style="color:#FF9;">iPhone4</span>.</p></dd>
+					<dd class="text">One-Click install DEB/IPA file. Download and install iPhone theme. Manage files between PC and iPhone. Fully supports iPhone 4.<p>One-Click install DEB/IPA file. Download and install iPhone theme. Manage files between PC and iPhone. Fully supports <span style="color:#FF9;">iPhone 4</span>.</p></dd>
 					<dd class="btn">
 						<a href="/ispirit/download" class="s1">Download</a>
 						<a href="/ispirit" class="s2">Learn More</a>
