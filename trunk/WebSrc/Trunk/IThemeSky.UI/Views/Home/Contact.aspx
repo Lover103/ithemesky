@@ -2,6 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 <title>Contact Us - iThemeSky.com</title>
+<meta name="robots" content="noindex" />
+<meta name="robots" content="nofollow" />
 <meta name="description" content="Contact Us, <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
 <meta name="keywords" content="<!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 </asp:Content>
