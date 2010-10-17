@@ -17,6 +17,18 @@ a:hover,a:active{ color:#FF0;}
 </head>
 <body>
 	<h1 class="hide">iSpirit Release Notes</h1>
+		<!-- 1.1 -->
+		<div class="release">
+			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.1</a></h2>
+			<h3>Released on 10/17/2010</h3>
+			<ul>
+				<li>Resolved the issue that screenshot function not work in iOS 4.x</li>
+				<li>Fixed a bug in which the icons not changed after a theme installed in iOS 4.1 (Latest Winterboard doesn't support for this in iOS 4.1), iSpirit will convert the theme into Summerboard format and enable Summerboard mode when finish installing a theme by iSpirit.</li>
+				<li>Added "Add to Favorites" in right-click menu.</li>
+				<li>Increased file transfer speed by 10 percent.</li>
+				<li>Fixed some compatibility issues under some operating system.</li>
+			</ul>
+		</div>
 		<!-- 1.0.9 -->
 		<div class="release">
 			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.0.9</a></h2>
