@@ -19,6 +19,7 @@
 		<!--Categories begin-->
 		<% Html.RenderPartial("ThemeCategories", ViewData.Model.ThemeCategories); %>
 		<!--Categories end-->
+		<% Html.RenderPartial("gSenseSidebar", ViewData.Model.ThemeCategories); %>
 	</div>
 	<div id="main">
 		<!--breadcrumb begin-->

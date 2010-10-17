@@ -19,6 +19,7 @@
 		<!--Categories begin-->
 		<% Html.RenderPartial("iPhone4Categories", ViewData.Model.ThemeCategories); %>
 		<!--Categories end-->
+		<% Html.RenderPartial("gSenseSidebar", ViewData.Model.ThemeCategories); %>
 	</div>
 	<div id="main">
 		<!--breadcrumb begin-->

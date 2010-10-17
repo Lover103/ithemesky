@@ -16,6 +16,20 @@
 		    <% Html.RenderPartial("HotTags"); %>
 		    <!--Tags end-->
 	    </div>
+		<div class="gsenseIndex">
+			<p>
+<script type="text/javascript">
+<!--
+google_ad_client = "pub-6585346932275782";
+/* index */
+google_ad_slot = "7885602006";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+			</p>
+		</div>
 	    <div id="mainContent">
 			<div class="banner">
 				<dl>
