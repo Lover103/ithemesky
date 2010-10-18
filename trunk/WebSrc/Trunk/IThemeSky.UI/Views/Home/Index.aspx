@@ -16,6 +16,7 @@
 		    <% Html.RenderPartial("HotTags"); %>
 		    <!--Tags end-->
 	    </div>
+	    <% if (!ViewData.Model.ComeFromISpirit){ %>
 		<div class="gsenseIndex">
 			<p>
 <script type="text/javascript">
@@ -30,6 +31,7 @@ google_ad_height = 15;
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 			</p>
 		</div>
+		<%} %>
 	    <div id="mainContent">
 			<div class="banner">
 				<dl>

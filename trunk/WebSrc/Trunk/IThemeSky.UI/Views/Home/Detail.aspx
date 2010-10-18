@@ -128,6 +128,7 @@
 						<dd class="shareDelicious"><a rel="nofollow" target="_blank" href="http://del.icio.us/post?url=<%=Request.Url.ToString()%>&amp;title=<%=ViewData.Model.CurrentTheme.Title %>" title="Bookmark on Delicious.">Bookmark on Delicious.</a></dd>
 					</dl>
 				</div>
+				<% if (!ViewData.Model.ComeFromISpirit){ %>
 				<div class="gsenseDetail">
 <script type="text/javascript">
 <!--
@@ -140,6 +141,7 @@ google_ad_height = 15;
 </script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>				
 				</div>
+				<%} %>
 			</div>
 			<!--theme detail end-->
 			<!--I'm Feeling Lucky begin-->
