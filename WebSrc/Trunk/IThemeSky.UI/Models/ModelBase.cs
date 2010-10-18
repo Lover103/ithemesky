@@ -19,6 +19,14 @@ namespace IThemeSky.UI.Models
             }
         }
 
+        public bool ComeFromISpirit
+        {
+            get
+            {
+                return HttpContext.Current.Request.Cookies["ComeFromISpirit"] != null && HttpContext.Current.Request.Cookies["ComeFromISpirit"].Value.Equals("true");
+            }
+        }
+
         public CultureInfo USACultureInfo
         {
             get

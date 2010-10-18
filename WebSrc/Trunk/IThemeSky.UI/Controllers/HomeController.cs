@@ -29,6 +29,7 @@ namespace IThemeSky.UI.Controllers
                         UserAgent = Request.UserAgent,
                         UserIP = Request.UserHostAddress,
                     });
+                Response.Cookies.Add(new HttpCookie("ComeFromISpirit", "true"));
             }
             IndexModel model = new IndexModel();
             return View(model);

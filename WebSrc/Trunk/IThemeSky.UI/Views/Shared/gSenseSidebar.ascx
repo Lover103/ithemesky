@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+<% if (!(Request.Cookies["ComeFromISpirit"] != null && Request.Cookies["ComeFromISpirit"].Value.Equals("true"))) { %>
 		<div class="sideCol gsenseSide">
 			<h3 class="sideColHead colTitle">Sponsors</h3>
 			<p>
@@ -14,3 +15,4 @@ google_ad_height = 200;
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 			</p>
 		</div>
+<%} %>
