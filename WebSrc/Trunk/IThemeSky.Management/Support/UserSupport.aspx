@@ -19,6 +19,7 @@
               <th>描述</th>
               <th width="120">上传时间</th>
               <th width="120">用户ip</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -32,6 +33,7 @@
                         <td><%#Eval("Description")%></td>
                         <td><%#Eval("AddTime")%></td>
                         <td><%#Eval("UserIp")%></td>
+                        <td><asp:HiddenField ID="hidSupportId" Value='<%#Eval("SupportId") %>' runat="server" /><asp:Button ID="btnReply" OnClick="btnReply_OnClick" Text="标记为已回复" runat="server" /></td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>

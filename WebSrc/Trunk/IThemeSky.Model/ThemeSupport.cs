@@ -24,5 +24,11 @@ namespace IThemeSky.Model
         public DateTime AddTime { get; set; }
 
         public string UserIp { get; set; }
+
+        public bool IsReply { get; set; }
+
+        public string ReplyContent { get; set; }
+
+        public DateTime ReplyTime { get; set; }
     }
 }

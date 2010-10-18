@@ -57,7 +57,7 @@ namespace IThemeSky.UI.Models
             StringBuilder sbUrlPattern = new StringBuilder();
             if (this.FrameworkVersion == 4)
             {
-                sbUrlPattern.Append("/iphone4/");
+                sbUrlPattern.Append("/iphone-4-themes/");
             }
             else
             {

@@ -18,6 +18,13 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         bool AddSupport(ThemeSupport support);
         /// <summary>
+        /// 回复反馈问题
+        /// </summary>
+        /// <param name="supportId"></param>
+        /// <param name="replyContent"></param>
+        /// <returns></returns>
+        bool ReplySupport(int supportId, string replyContent);
+        /// <summary>
         /// 删除评论
         /// </summary>
         /// <param name="supportId">反馈问题Id</param>
