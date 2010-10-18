@@ -46,7 +46,22 @@ namespace IThemeSky.DataAccess
 			};
             return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
         }
-
+        /// <summary>
+        /// 回复反馈问题
+        /// </summary>
+        /// <param name="supportId"></param>
+        /// <param name="replyContent"></param>
+        /// <returns></returns>
+        public bool ReplySupport(int supportId, string replyContent)
+        {
+            string cmdText = "UPDATE ThemeSupport SET IsReply=1,ReplyContent=@ReplyContent,ReplyTime=getdate() where SupportId=@SupportId ";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				SqlParameterHelper.BuildInputParameter("@SupportId",SqlDbType.Int, 4, supportId),
+                SqlParameterHelper.BuildInputParameter("@ReplyContent",SqlDbType.Text, 4, replyContent),
+			};
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
+        }
         public bool DeleteSupport(int supportId)
         {
             string cmdText = "delete from ThemeSupport where SupportId=@SupportId ";
@@ -80,6 +95,7 @@ namespace IThemeSky.DataAccess
             recordCount = Convert.ToInt32(parameters[0].Value);
             return list;
         }
+
         /// <summary>
         /// 添加iSpirit用户信息
         /// </summary>
@@ -123,6 +139,9 @@ namespace IThemeSky.DataAccess
                 Name = dataReader["Name"].ToString(),
                 Subject = dataReader["Subject"].ToString(),
                 SupportType = dataReader["SupportType"].ToString().ToEnum<SupportTypeOption>(SupportTypeOption.Theme),
+                IsReply = dataReader["IsReply"] != DBNull.Value ? Convert.ToInt16(dataReader["IsReply"]) > 0 : false,
+                ReplyContent = dataReader["ReplyContent"] != DBNull.Value ? dataReader["ReplyContent"].ToString() : "",
+                ReplyTime = dataReader["ReplyTime"] != DBNull.Value ? Convert.ToDateTime(dataReader["ReplyTime"]) : DateTime.Now,
             };
         }
     }

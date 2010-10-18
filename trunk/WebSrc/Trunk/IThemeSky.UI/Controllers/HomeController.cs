@@ -45,7 +45,7 @@ namespace IThemeSky.UI.Controllers
             ListModel model = new ListModel(fw, categoryId, categoryName, tags, themeSort, currPageIndex, 20);
             if (fw == 4)
             {
-                return View("iphone4", model);
+                return View("iphone-4-themes", model);
             }
             else
             {
