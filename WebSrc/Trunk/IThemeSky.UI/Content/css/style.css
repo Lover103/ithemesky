@@ -454,7 +454,15 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 /*google sense*/
 .gsenseIndex{ float:left; width:760px; height:25px; padding:5px; margin-bottom:8px; background:url(../images/bg_gsense_index.png) no-repeat;}
 .gsenseIndex p{ display:block; background:#00282B; width:728px; height:15px; padding:5px 27px 5px 5px; overflow:hidden;}
-.gsenseSide{ padding-bottom:0;}
-.gsenseSide .sideColHead{ height:34px; overflow:hidden;}
-.gsenseSide p{ width:200px; height:200px; background:#0A1819; display:block;}
-.gsenseDetail{ clear:both; width:468px; height:15px; background:#001415; overflow:hidden; margin:0 0 10px 20px; line-height:15px; border:1px solid #102529; padding:5px 50px;}
+.gsenseSide p{ border:1px solid #333E41; border-top:0; border-bottom:0; background:#0B1717; padding:10px 4px 10px 14px; width:180px;}
+
+/*quick contact*/
+.quickContact{ width:160px; height:45px; margin-bottom:8px; background:url(../images/bg_quick_contact.png) no-repeat 0 -45px;}
+.quickContact a{ background:url(../images/bg_quick_contact.png) no-repeat; display:block; width:24px; height:24px; text-indent:-999em; overflow:hidden;}
+.quickContact a:link,.quickContact a:visited{ filter:Alpha(opacity=80); -moz-opacity:.80; opacity:0.80;}
+.quickContact a:hover,.quickContact a:active{ filter:Alpha(opacity=100); -moz-opacity:1.0; opacity:1.0;}
+.quickContact li{ float:left; margin:10px 3px 0 11px; -display:inline;}
+.quickContact li.s1 a{ background-position:-11px -10px;}
+.quickContact li.s2 a{ background-position:-49px -10px;}
+.quickContact li.s3 a{ background-position:-87px -10px;}
+.quickContact li.s4 a{ background-position:-125px -10px;}
