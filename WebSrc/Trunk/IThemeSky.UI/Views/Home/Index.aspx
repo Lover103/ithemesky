@@ -74,7 +74,7 @@
 			<div class="quickContact">
 				<ul>
 					<li class="s1"><a href="http://www.twitter.com/iThemesky" title="Follow us on Twitter">Follow us on Twitter</a></li>
-					<li class="s2"><a href="http://www.facebook.com/profile.php?id=100001719707699" title="Find us on Facebook" target="_blank">Find us on Facebook</a></li>
+					<li class="s2"><a href="http://www.facebook.com/profile.php?id=100001719707699" title="Find us on Facebook">Find us on Facebook</a></li>
 					<li class="s3"><a href="/contact" title="Contact us">Contact us</a></li>
 					<li class="s4">
 						<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" />
