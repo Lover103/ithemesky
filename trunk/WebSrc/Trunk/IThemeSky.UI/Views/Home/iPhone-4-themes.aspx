@@ -19,7 +19,6 @@
 		<!--Categories begin-->
 		<% Html.RenderPartial("iPhone4Categories", ViewData.Model.ThemeCategories); %>
 		<!--Categories end-->
-		<% Html.RenderPartial("gSenseSidebar", ViewData.Model.ThemeCategories); %>
 	</div>
 	<div id="main">
 		<!--breadcrumb begin-->
@@ -118,6 +117,20 @@
 				<dd>-</dd>
 				<dd <%=ViewData.Model.Sort == ThemeSortOption.Rating ? "class=\"selected\"" : "" %>><a href="<%=String.Format(ViewData.Model.UrlPatternWithoutSort, 1, "rating") %>">Rating</a></dd>
 			</dl>
+			<% if (!ViewData.Model.ComeFromISpirit){ %>
+			<div style="width:728px; height:90px; margin:10px auto 0 auto;">
+				<script type="text/javascript">
+				<!--
+				google_ad_client = "pub-6585346932275782";
+				/* list */
+				google_ad_slot = "4391673020";
+				google_ad_width = 728;
+				google_ad_height = 90;
+				//-->
+				</script>
+				<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>			
+			</div>
+			<%} %>
 			<!--theme list begin-->
 			<div class="themeList clearfix">
 				<% Html.RenderPartial("NormalThemeRepeater", ViewData.Model.Themes); %> 

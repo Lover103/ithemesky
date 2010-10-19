@@ -12,26 +12,13 @@
 		    <!--Categories begin-->
 		    <% Html.RenderPartial("ThemeCategories", ViewData.Model.ThemeCategories); %>
 		    <!--Categories end-->
+			<% if (!ViewData.Model.ComeFromISpirit){ %>
+			<% Html.RenderPartial("gSenseSidebar", ViewData.Model.ThemeCategories); %>
+			<%} %>
 		    <!--Tags begin-->
 		    <% Html.RenderPartial("HotTags"); %>
 		    <!--Tags end-->
 	    </div>
-	    <% if (!ViewData.Model.ComeFromISpirit){ %>
-		<div class="gsenseIndex">
-			<p>
-<script type="text/javascript">
-<!--
-google_ad_client = "pub-6585346932275782";
-/* index */
-google_ad_slot = "7885602006";
-google_ad_width = 728;
-google_ad_height = 15;
-//-->
-</script>
-<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-			</p>
-		</div>
-		<%} %>
 	    <div id="mainContent">
 			<div class="banner">
 				<dl>
@@ -79,12 +66,28 @@ google_ad_height = 15;
 				    <li><a href="/ispirit/help"><span class="orange">How to install theme on jailbroken iPhone?</span></a></li>
 				    <li><a href="/help/how-to-use-winterboard">How to Use WinterBoard?</a></li>
 					<li><a href="/help/why-do-winterboard-themes-not-work">Why do winterboard themes not work?</a></li>
-				    <li><a href="/help/why-jailbreak-iphone">Why jailbreak iPhone?</a></li>
 				    <li><a href="/help/how-to-jailbreak-iphone">How to jailbreak iPhone?</a></li>
 					<li><a href="/help/faq">Get more help in FAQ.</a></li>
 			    </ul>
 		    </div>
 		    <!--help end-->
+			<div class="quickContact">
+				<ul>
+					<li class="s1"><a href="http://www.twitter.com/iThemesky" title="Follow us on Twitter">Follow us on Twitter</a></li>
+					<li class="s2"><a href="http://www.facebook.com/profile.php?id=100001719707699" title="Find us on Facebook" target="_blank">Find us on Facebook</a></li>
+					<li class="s3"><a href="/contact" title="Contact us">Contact us</a></li>
+					<li class="s4">
+						<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" />
+							<input type="hidden" name="cmd" value="_xclick" />
+							<input type="hidden" name="business" value="ithemesky@gmail.com" />
+							<input type="hidden" name="item_name" value="Donate to iThemeSky.com" />
+							<input type="hidden" name="currency_code" value="USD" />
+							<input type="hidden" name="amount" value="" />
+							<input type="image" src="/Content/images/btn_donate.png" title="Donate to iThemeSky" border="0" name="submit" alt="Donate to iThemeSky" />
+						</form>
+					</li>
+				</ul>
+			</div>
 		    <!--I'm Feeling Lucky begin-->
 		    <div class="subCol">
 			    <h3 class="subColHead colTitle">I'm Feeling Lucky</h3>

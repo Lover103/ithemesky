@@ -101,6 +101,23 @@
 							</ul>
 						</dd>
 					</dl>
+					<% if (!ViewData.Model.ComeFromISpirit){ %>
+					<dl class="details clearfix"> 
+						<dt>Sponsors:</dt>
+						<dd>
+<script type="text/javascript">
+<!--
+google_ad_client = "pub-6585346932275782";
+/* Detail */
+google_ad_slot = "5252106121";
+google_ad_width = 120;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+						</dd>
+					</dl>
+					<%} %>
 					<ul class="detailBtn clearfix">
 						<li class="btnDownload"><a href="/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>" title="Download">Download</a></li>
 						<li class="btnCreate">
@@ -128,20 +145,6 @@
 						<dd class="shareDelicious"><a rel="nofollow" target="_blank" href="http://del.icio.us/post?url=<%=Request.Url.ToString()%>&amp;title=<%=ViewData.Model.CurrentTheme.Title %>" title="Bookmark on Delicious.">Bookmark on Delicious.</a></dd>
 					</dl>
 				</div>
-				<% if (!ViewData.Model.ComeFromISpirit){ %>
-				<div class="gsenseDetail">
-<script type="text/javascript">
-<!--
-google_ad_client = "pub-6585346932275782";
-/* detail */
-google_ad_slot = "7812228141";
-google_ad_width = 468;
-google_ad_height = 15;
-//-->
-</script>
-<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>				
-				</div>
-				<%} %>
 			</div>
 			<!--theme detail end-->
 			<!--I'm Feeling Lucky begin-->
