@@ -462,7 +462,8 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .quickContact a:link,.quickContact a:visited{ filter:Alpha(opacity=80); -moz-opacity:.80; opacity:0.80;}
 .quickContact a:hover,.quickContact a:active{ filter:Alpha(opacity=100); -moz-opacity:1.0; opacity:1.0;}
 .quickContact li{ float:left; margin:10px 3px 0 11px; -display:inline;}
-.quickContact li.s1 a{ background-position:-11px -10px;}
-.quickContact li.s2 a{ background-position:-49px -10px;}
-.quickContact li.s3 a{ background-position:-87px -10px;}
-.quickContact li.s4 a{ background-position:-125px -10px;}
+.quickContact .s1 a{ background-position:-11px -10px;}
+.quickContact .s2 a{ background-position:-49px -10px;}
+.quickContact .s3 a{ background-position:-87px -10px;}
+.quickContact .s3 a:link,.quickContact .s3 a:visited{ filter:Alpha(opacity=90); -moz-opacity:.90; opacity:0.90;}
+.quickContact .s3 a:hover,.quickContact .s3 a:active{ filter:Alpha(opacity=100); -moz-opacity:1.0; opacity:1.0;}
