@@ -48,12 +48,28 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 <!--footer begin-->
 <div id="footerWrapper">
 	<div id="footer">
-		<span class="copyright">Copyright &copy; 2010 iThemeSky.com All rights reserved.</span>
+		<p class="copyright">Copyright &copy; 2010 <a href="/">iThemeSky</a></p>
 		<ul class="footNav">
-			<li class="first"><a href="/contact" rel="nofollow">Contact Us</a></li>
-			<li><a href="/help">Help</a></li>
+			<li class="first"><a href="/list">All Themes</a></li>
+			<li><a href="/iphone-4-themes">iPhone 4 Themes</a></li>
+			<li><a href="/ispirit">iSpirit</a></li>
+			<li><a href="/creator">iPhone Theme Creator</a></li>
+			<li><a href="/forum">Forum</a></li>
+			<li><a href="/help">Tutorials</a></li>
+			<li><a href="/contact">Contact Us</a></li>
 			<li class="go2Top"><a href="#top" title="Go to top">TOP</a></li>
 		</ul>
+		<p class="copyrightTip">Iphone Themes are copyrighted to their respective authors. Other product may be trademarks of their respective owners.</p>
+		<dl class="friendLinks clearfix">
+			<dt>Partners:</dt>
+			<dd>
+				<ul>
+					<li><a href="http://www.iphoneblogr.com" target="_blank">iPhoneBlogr</a></li>
+					<li>-</li>
+					<li>Korea iPhone Cafe</li>
+				</ul>
+			</dd>
+		</dl>
 	</div>
 </div>
 <!--footer end-->
