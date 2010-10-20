@@ -85,6 +85,5 @@ var pageTracker = _gat._getTracker("UA-15561763-1");
 pageTracker._trackPageview();
 } catch (err) { }
 </script>
-<div style="margin:0 auto;width:1px;height:1px;overflow:hidden;font:normal 0/0 Arial;"><script src="http://s16.cnzz.com/stat.php?id=2375370&web_id=2375370" language="JavaScript"></script></div>
 </body>
 </html>
