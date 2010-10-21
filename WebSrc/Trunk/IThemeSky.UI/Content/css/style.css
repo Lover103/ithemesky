@@ -23,7 +23,7 @@ a:hover,a:active{ text-decoration:none; color:#FFF;}
 
 #header,#wrapper,#footer{ width:980px; margin:0 auto;}
 #headerWrapper{ background:url(../images/bg_header.jpg) no-repeat center top; min-width:980px;}
-#footerWrapper{ background:url(../images/bg_footer.png) no-repeat center top; min-width:980px; height:110px;}
+#footerWrapper{ background:url(../images/bg_footer.png) no-repeat center top; min-width:980px;}
 #header{ height:100px;}
 #sidebar{ float:left; width:200px; margin-right:10px; _display:inline;}
 #mainContent{ float:left; width:600px;}
@@ -83,21 +83,22 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .searchResult .btnDownload:hover,.searchResult .btnDownload:active{ background:url(../images/sprites_header.png) no-repeat 0 -380px;}
 
 /*footer*/
-#footer{ padding:35px 0 20px 0; color:#527679;}
+#footer{ padding:35px 0 20px 0; color:#3C5C60;}
 #footer a:link,#footer a:visited{ color:#527679;}
 #footer a:hover,#footer a:active{ color:#769FA3;}
 .copyright{ float:left; padding:0 10px; width:180px;}
-.copyrightTip{ clear:both; font-size:11px; padding:8px 0 0 212px; line-height:1.4;}
 .footNav{ float:right; width:780px;}
 .footNav li{ float:left; padding:0 12px 0 13px; background:url(../images/sprites_header.png) no-repeat 0 -485px;}
 .footNav li.first{ background:none;}
 .footNav li.go2Top{ float:right; padding:0 30px 0 0; background:none; font-size:11px; line-height:18px; overflow:hidden;}
 .footNav li.go2Top a{ float:left; display:block; padding-left:18px; height:18px; overflow:hidden; background:url(../images/sprites_header.png) no-repeat -260px -453px;}
 .footNav li.go2Top a:hover{ background-position:-260px -473px;}
-.friendLinks{ clear:both; width:620px; margin:6px 0 0 212px; font-size:11px;}
-.friendLinks dt{ float:left; font-weight:bold; width:65px;}
-.friendLinks dd{ float:left; width:550px;}
-.friendLinks li{ float:left; padding:0 4px;}
+.disclaimer{ clear:both; width:760px; padding:8px 0 0 212px; font-size:11px; line-height:1.4;}
+.footPartners{ clear:both; width:620px; margin:6px 0 0 212px; font-size:11px;}
+.footPartners dt{ float:left; font-weight:bold; width:65px;}
+.footPartners dd{ float:left; width:550px;}
+.footPartners li{ float:left; padding:0 4px;}
+
 /*sidebar*/
 #sidebar a:link,#sidebar a:visited{ color:#9FBCBF;}
 #sidebar a:hover,#sidebar a:active{ color:#FFF;}
