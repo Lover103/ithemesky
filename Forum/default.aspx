@@ -54,16 +54,17 @@ body{ background:url(/Content/images/bg_body.jpg) no-repeat center 0 #000807; co
 .nav li.s7 a:link,.nav li.s7 a:visited{ width:39px; background-position:-555px -45px;}
 .nav li.s7 a:hover,.nav li.s7 a:active{ background-position:-555px -70px;}
 /*footer*/
-#footer{ padding-top:35px; text-align:center; color:#527679; font:normal 12px/1.5 "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif; }
+#footer{ padding-top:35px; color:#3C5C60; font:normal 12px/1.5 "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;}
 #footer a:link,#footer a:visited{ color:#527679; text-decoration:none;}
 #footer a:hover,#footer a:active{ color:#769FA3;}
-.copyright{ float:left; padding-left:10px;}
-.footNav{ float:right; padding:0; margin:0; list-style:none;}
-.footNav li{ float:left; padding:0 14px 0 15px; margin:0; background:url(/Content/images/sprites_header.png) no-repeat 0 -485px;}
+.copyright{ float:left; padding:0 10px; width:180px; margin:0;}
+.footNav{ float:right; width:780px; padding:0; margin:0; list-style:none;}
+.footNav li{ float:left; padding:0 12px 0 13px; margin:0; background:url(/Content/images/sprites_header.png) no-repeat 0 -484px;}
 .footNav li.first{ background:none;}
-.footNav li.go2Top{ padding:0 30px; background:none; font-size:11px; line-height:18px; overflow:hidden;}
+.footNav li.go2Top{ float:right; padding:0 30px 0 0; background:none; font-size:11px; line-height:18px; overflow:hidden;}
 .footNav li.go2Top a{ float:left; display:block; padding-left:18px; height:18px; overflow:hidden; background:url(/Content/images/sprites_header.png) no-repeat -260px -453px;}
 .footNav li.go2Top a:hover{ background-position:-260px -473px;}
+.disclaimer{ clear:both; width:760px; padding:8px 0 0 212px; font-size:11px; line-height:1.4; margin:0;}
 .content #themecredit{ display:none;}
 -->
 </style>
@@ -99,12 +100,18 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 <!--footer begin-->
 <div id="footerWrapper">
 	<div id="footer">
-		<span class="copyright">Copyright &copy; 2010 iThemeSky.com All rights reserved. | Forum powered by YAF
-		</span>
+		<p class="copyright">Copyright &copy; 2010 <a href="/">iThemeSky</a></p>
 		<ul class="footNav">
-			<li class="first"><a href="/contact" rel="nofollow">Contact Us</a></li>
+			<li class="first"><a href="/list">All Themes</a></li>
+			<li><a href="/iphone-4-themes">iPhone 4 Themes</a></li>
+			<li><a href="/ispirit">iSpirit</a></li>
+			<li><a href="/creator">iPhone Theme Creator</a></li>
+			<li><a href="/forum">Forum</a></li>
+			<li><a href="/help/tutorials">Tutorials</a></li>
+			<li><a href="/contact">Contact Us</a></li>
 			<li class="go2Top"><a href="#top" title="Go to top">TOP</a></li>
 		</ul>
+		<p class="disclaimer">Forum powered by YAF. Other product may be trademarks of their respective owners.</p>
 	</div>
 </div>
 <!--footer end-->
