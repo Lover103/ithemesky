@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title>Why do winterboard themes not work - Help - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+<title>Why do winterboard themes not work - Tutorials - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
 <meta name="description" content="Why do winterboard themes not work. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
 <meta name="keywords" content="dim icon, white icon, blank icon, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 </asp:Content>
@@ -21,7 +21,7 @@
 		<div class="pageGuide">
 			<ul class="breadcrumb">
 				<li class="home"><a href="/" title="Homepage">ithemesky.com Homepage</a></li>
-				<li>Help</li>
+				<li><a href="/help/tutorials">Tutorials</a></li>
 				<li>Why do winterboard themes not work</li>
 			</ul>
 		</div>

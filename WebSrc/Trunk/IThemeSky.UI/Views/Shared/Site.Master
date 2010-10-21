@@ -55,12 +55,12 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 			<li><a href="/ispirit">iSpirit</a></li>
 			<li><a href="/creator">iPhone Theme Creator</a></li>
 			<li><a href="/forum">Forum</a></li>
-			<li><a href="/help">Tutorials</a></li>
+			<li><a href="/help/tutorials">Tutorials</a></li>
 			<li><a href="/contact">Contact Us</a></li>
 			<li class="go2Top"><a href="#top" title="Go to top">TOP</a></li>
 		</ul>
-		<p class="copyrightTip">Iphone Themes are copyrighted to their respective authors. Other product may be trademarks of their respective owners.</p>
-		<dl class="friendLinks clearfix">
+		<p class="disclaimer">Iphone Themes are copyrighted to their respective authors. Other product may be trademarks of their respective owners.</p>
+		<dl class="footPartners clearfix">
 			<dt>Partners:</dt>
 			<dd>
 				<ul>
