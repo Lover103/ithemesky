@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NormalPageModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<title>How to Use WinterBoard: A Walkthrough - Help - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
+<title>How to Use WinterBoard: A Walkthrough - Tutorials - <!-- #include file="/Views/Inc/siteTitle.inc" --></title>
 <meta name="description" content="How to Use WinterBoard. <!-- #include file="/Views/Inc/siteDescription.inc" -->" />
 <meta name="keywords" content="How to Use WinterBoard, <!-- #include file="/Views/Inc/siteKeyword.inc" -->" />
 <link type="text/css" rel="stylesheet" media="screen" href="/Content/css/fancybox_normal.css">
@@ -32,7 +32,7 @@ $(document).ready(function() {
 		<div class="pageGuide">
 			<ul class="breadcrumb">
 				<li class="home"><a href="/" title="Homepage">ithemesky.com Homepage</a></li>
-				<li>Help</li>
+				<li><a href="/help/tutorials">Tutorials</a></li>
 				<li>How to Use WinterBoard: A Walkthrough</li>
 			</ul>
 		</div>

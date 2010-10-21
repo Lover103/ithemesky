@@ -61,13 +61,12 @@
 	    <div id="subContent">
 		    <!--help begin-->
 		    <div class="subCol">
-			    <h3 class="subColHead colTitle">Help</h3>
+			    <h3 class="subColHead colTitle">Tutorials</h3>
 			    <ul class="subColContent subHelp">
 				    <li><a href="/ispirit/help"><span class="orange">How to install theme on jailbroken iPhone?</span></a></li>
 				    <li><a href="/help/how-to-use-winterboard">How to Use WinterBoard?</a></li>
 					<li><a href="/help/why-do-winterboard-themes-not-work">Why do winterboard themes not work?</a></li>
 				    <li><a href="/help/how-to-jailbreak-iphone">How to jailbreak iPhone?</a></li>
-					<li><a href="/help/faq">Get more help in FAQ.</a></li>
 			    </ul>
 		    </div>
 		    <!--help end-->
