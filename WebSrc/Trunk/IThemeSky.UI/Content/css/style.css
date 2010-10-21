@@ -88,7 +88,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 #footer a:hover,#footer a:active{ color:#769FA3;}
 .copyright{ float:left; padding:0 10px; width:180px;}
 .footNav{ float:right; width:780px;}
-.footNav li{ float:left; padding:0 12px 0 13px; background:url(../images/sprites_header.png) no-repeat 0 -485px;}
+.footNav li{ float:left; padding:0 12px 0 13px; background:url(../images/sprites_header.png) no-repeat 0 -484px;}
 .footNav li.first{ background:none;}
 .footNav li.go2Top{ float:right; padding:0 30px 0 0; background:none; font-size:11px; line-height:18px; overflow:hidden;}
 .footNav li.go2Top a{ float:left; display:block; padding-left:18px; height:18px; overflow:hidden; background:url(../images/sprites_header.png) no-repeat -260px -453px;}
