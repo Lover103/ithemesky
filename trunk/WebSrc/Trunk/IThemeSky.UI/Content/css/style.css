@@ -311,7 +311,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .commentForm .inputFocus,.commentForm .textareaFocus{background:#001313; border:1px solid #304543;}
 .commentForm .textarea{ float:left; width:450px;}
 .commentForm textarea{ width:446px; height:96px; line-height:1.5; padding:1px; scrollbar-base-color:#000B0B; scrollbar-face-color:none; scrollbar-arrow-color:#9FBABF; scrollbar-track-color:#000B0B; scrollbar-3dlight-color:#000B0B; scrollbar-darkshadow-color:#000B0B; scrollbar-highlight-color:#304543; scrollbar-shadow-color:#253634;}
-.commentBtn{ clear:both; padding-top:10px; text-align:right;}
+.commentBtn{ clear:both; padding:10px 120px;}
 .commentBtn button{ width:100px; height:24px; background:url(../images/sprites_detail.png) no-repeat 0 -400px; color:#D9DCDD; border:none; padding:0; margin:0;}
 
 /*detail page side*/
