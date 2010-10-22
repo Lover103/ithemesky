@@ -97,7 +97,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .footPartners{ clear:both; width:620px; margin:6px 0 0 212px; font-size:11px;}
 .footPartners dt{ float:left; font-weight:bold; width:65px;}
 .footPartners dd{ float:left; width:550px;}
-.footPartners li{ float:left; padding:0 4px;}
+.footPartners li{ float:left; padding:0 3px;}
 
 /*sidebar*/
 #sidebar a:link,#sidebar a:visited{ color:#9FBCBF;}
