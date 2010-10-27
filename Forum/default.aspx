@@ -111,7 +111,7 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 			<li><a href="/contact">Contact Us</a></li>
 			<li class="go2Top"><a href="#top" title="Go to top">TOP</a></li>
 		</ul>
-		<p class="disclaimer">Forum powered by YAF. Other product may be trademarks of their respective owners.</p>
+		<p class="disclaimer">Forum powered by YAF. Other product names may be trademarks of their respective owners.</p>
 	</div>
 </div>
 <!--footer end-->
