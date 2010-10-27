@@ -59,14 +59,16 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 			<li><a href="/contact">Contact Us</a></li>
 			<li class="go2Top"><a href="#top" title="Go to top">TOP</a></li>
 		</ul>
-		<p class="disclaimer">Iphone Themes are copyrighted to their respective authors. Other product may be trademarks of their respective owners.</p>
+		<p class="disclaimer">iPhone Themes are copyrighted by their respective authors. Other product names may be trademarks of their respective owners.</p>
 		<dl class="footPartners clearfix">
 			<dt>Partners:</dt>
 			<dd>
 				<ul>
-					<li><a href="http://www.iphoneblogr.com" target="_blank">iPhoneBlogr</a></li>
+					<li><a href="http://www.iphoneblogr.com/" title="iPhoneBlogr" title target="_blank">iPhoneBlogr</a></li>
 					<li>-</li>
-					<li>Korea iPhone Cafe</li>
+					<li><a href="http://www.allaboutiphone.net/" title="All about iPhone" target="_blank">All about iPhone</a></li>
+					<li>-</li>
+					<li><a href="http://www.iphoneappindex.com/" title="iPhone App Index" target="_blank">iPhone App Index</a></li>
 				</ul>
 			</dd>
 		</dl>
