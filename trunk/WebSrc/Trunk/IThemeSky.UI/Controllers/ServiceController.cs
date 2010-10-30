@@ -12,6 +12,8 @@ using System.IO;
 using System.Text.RegularExpressions;
 using IThemeSky.Library.Util;
 using System.Text;
+using System.Net;
+using System.Collections.Specialized;
 
 namespace IThemeSky.UI.Controllers
 {
@@ -26,15 +28,38 @@ namespace IThemeSky.UI.Controllers
             return Redirect("/Content/css/style.css");
         }
 
-        public ActionResult DownloadTheme(int themeId, string themeName)
+        public ActionResult DownloadTheme(int themeId, string themeName, string downloadCode)
         {
-            Theme theme = _themeRepository.GetTheme(themeId);
+            FullThemeView theme = _themeRepository.GetTheme(themeId);
             if (theme != null)
             {
-                theme.Downloads++;
-                _themeManageRepository.IncreaseDownloads(themeId, 1);
-                _themeManageRepository.InsertDownloadHistory(themeId, Request.UserHostAddress);
-                return Redirect("http://resource.ithemesky.com/" + theme.DownloadUrl);
+                if (theme.Price > 0)
+                {
+                    IOrderRepository orderRepository = ThemeRepositoryFactory.Default.GetOrderRepository();
+                    UserOrder order = orderRepository.GetOrder(themeId, downloadCode);
+                    if (order != null)
+                    {
+                        _themeManageRepository.IncreaseDownloads(themeId, 1);
+                        _themeManageRepository.InsertDownloadHistory(themeId, Request.UserHostAddress, downloadCode);
+                        HttpWebRequest request = HttpWebRequest.Create("http://resource.ithemesky.com/" + theme.DownloadUrl) as HttpWebRequest;
+                        WebResponse response = request.GetResponse();
+                        string fileName = theme.Title + ".zip";
+                        this.Response.AddHeader("Content-Disposition", "attachment;  filename=" + HttpUtility.UrlEncode(fileName, System.Text.Encoding.UTF8));
+                        return new FileStreamResult(response.GetResponseStream(), "application/zip");
+                    }
+                    else
+                    {
+                        //return View("Store/Fail", new PayResultModel() { Theme = theme, Description="Invaild Download Code:" + downloadCode });                    
+                        throw new ApplicationException(theme.Title + " is a paid theme,<br />But you typed the invalid download code:" + downloadCode);
+                    }
+                }
+                else
+                {
+                    theme.Downloads++;
+                    _themeManageRepository.IncreaseDownloads(themeId, 1);
+                    _themeManageRepository.InsertDownloadHistory(themeId, Request.UserHostAddress, "");
+                    return Redirect("http://resource.ithemesky.com/" + theme.DownloadUrl);
+                }
             }
             else
             {
@@ -117,7 +142,7 @@ namespace IThemeSky.UI.Controllers
             return this.PartialView("SuggestThemeRepeater", themes);
         }
 
-        [OutputCache(Location=OutputCacheLocation.None)]
+        [OutputCache(Location = OutputCacheLocation.None)]
         public ActionResult GetThemeComments(int themeId, int pageIndex, int pageSize)
         {
             CommentListModel model = new CommentListModel(themeId, pageIndex, pageSize);
@@ -144,8 +169,8 @@ namespace IThemeSky.UI.Controllers
             }
             IThemeCommentRepository commentRespository = ThemeRepositoryFactory.Default.GetThemeCommentRepository();
             bool result = commentRespository.AddComment(
-                new ThemeComment() 
-                { 
+                new ThemeComment()
+                {
                     AddTime = DateTime.Now,
                     BuryNumber = 0,
                     CommentId = 0,
@@ -382,6 +407,87 @@ namespace IThemeSky.UI.Controllers
                 , priority
                 , changefreq
                 );
+        }
+
+        public ActionResult GetPayReturnUrl(int themeId, string mail, string userName)
+        {
+            double price = 1;
+            string checksum = CryptoHelper.MD5_Encrypt(string.Format("{0}|{1}|{2}|{3}|{4}"
+                , themeId
+                , price
+                , mail
+                , userName
+                , ORDER_CHECKSUM_KEY
+                ), "utf-8");
+            string result = string.Format("themeId={0}&price={1}&mail={2}&userName={3}&checksum={4}"
+                , themeId
+                , price
+                , mail
+                , userName
+                , checksum
+                );
+            return Content(result);
+        }
+
+        public ActionResult CheckIPN(int themeId)
+        {
+            string strFormValues;
+            string strNewValue;
+            string strResponse;
+            //创建回复的 request
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(PAYPAY_GATEWAY);
+            //设置 request 的属性
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+            byte[] param = Request.BinaryRead(Request.ContentLength);
+            strFormValues = Encoding.ASCII.GetString(param);
+            //建议在此将接受到的信息记录到日志文件中以确认是否收到 IPN 信息
+            logger.Info("<p>#" + DateTime.Now + "：IPN:" + strFormValues + "</p>");
+            strNewValue = strFormValues + "&cmd=_notify-validate";
+            req.ContentLength = strNewValue.Length;
+            //发送 request
+            StreamWriter stOut = new StreamWriter(req.GetRequestStream(),
+            System.Text.Encoding.ASCII);
+            stOut.Write(strNewValue);
+            stOut.Close();
+            //回复 IPN 并接受反馈信息
+            StreamReader stIn = new StreamReader(req.GetResponse().GetResponseStream());
+            strResponse = stIn.ReadToEnd();
+            stIn.Close();
+            //确认 IPN 是否合法
+            if (strResponse == "VERIFIED")
+            {
+                /*
+                mc_gross=1.00&protection_eligibility=Eligible&address_status=confirmed&payer_id=AMZ4SJNSZN2HL&tax=0.00&address_street=1+Main+St&payment_date=18%3A45%3A08+Oct+29%2C+2010+PDT&payment_status=Completed&charset=windows-1252&address_zip=95131&first_name=Test&mc_fee=0.33&address_country_code=US&address_name=Test+User¬ify_version=3.0&custom=&payer_status=verified&business=sanvy_1287488194_biz%40gmail.com&address_country=United+States&address_city=San+Jose&quantity=1&verify_sign=Aa8KFr.XMFu5pAvposAYvnw8fk1IAlYmeNvGug168f-KE73i6y9KrLpz&payer_email=tooqy_1287487314_per%40gmail.com&txn_id=4WY9900120299182X&payment_type=instant&last_name=User&address_state=CA&receiver_email=sanvy_1287488194_biz%40gmail.com&payment_fee=0.33&receiver_id=8PHX32KJJPZBW&txn_type=web_accept&item_name=Chess&mc_currency=USD&item_number=&residence_country=US&test_ipn=1&handling_amount=0.00&transaction_subject=Chess&payment_gross=1.00&shipping=0.00
+                */
+
+                //检查付款状态
+                //检查 txn_id 是否已经处理过
+                //检查 receiver_email 是否是您的 PayPal 账户中的 EMAIL 地址
+                //检查付款金额和货币单位是否正确
+                //处理这次付款，包括写数据库
+                if (Request.Form["payment_status"].Equals("Completed", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    IOrderRepository repository = ThemeRepositoryFactory.Default.GetOrderRepository();
+                    repository.UpdateOrderFromIPN(new UserOrder() 
+                    {
+                        AddTime = DateTime.Now,
+                        Checksum = "FROM IPN",
+                        Description = strFormValues,
+                        OrderNumber = Request.Form["txn_id"],
+                        PayerMail = Request.Form["payer_email"],
+                        Price = Convert.ToDouble(Request.Form["mc_gross"]),
+                        Status = 1,
+                        ThemeId = themeId,
+                        UpdateTime = DateTime.Now,
+                        UserMail = Request.Form["payer_email"],
+                        UserName = Request.Form["first_name"] + " " + Request.Form["last_name"]
+                    });
+                    logger.Info("<p>#" + DateTime.Now + "：IPN UPDATE SUCCESS:</p>");
+                }
+
+            }
+            return Content(strResponse);
         }
     }
 }
