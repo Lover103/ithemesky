@@ -125,8 +125,13 @@ namespace IThemeSky.UI
             );
             routes.MapRoute(
                 "DownloadThemeService", // Route name
+                "Service/Download/{themeId},{themeName},{downloadCode}", // URL with parameters
+                new { controller = "Service", action = "DownloadTheme", downloadCode = "" } // Parameter defaults
+            );
+            routes.MapRoute(
+                "DownloadFreeThemeService", // Route name
                 "Service/Download/{themeId},{themeName}", // URL with parameters
-                new { controller = "Service", action = "DownloadTheme" } // Parameter defaults
+                new { controller = "Service", action = "DownloadTheme", downloadCode = "" } // Parameter defaults
             );
             routes.MapRoute(
                 "DownloadThemePicService", // Route name
@@ -148,7 +153,16 @@ namespace IThemeSky.UI
                 "sitemap.xml", // URL with parameters
                 new { controller = "Service", action = "GetSiteMapXml" } // Parameter defaults
             );
-
+            routes.MapRoute(
+                "GetPayReturnUrlService", // Route name
+                "Service/GetPayReturnUrl/{themeId},{mail},{userName}", // URL with parameters
+                new { controller = "Service", action = "GetPayReturnUrl" } // Parameter defaults
+            );
+            routes.MapRoute(
+                "CheckIPN", // Route name
+                "Service/CheckIPN/{themeId}", // URL with parameters
+                new { controller = "Service", action = "CheckIPN" } // Parameter defaults
+            );
             //ISpirit专用服务
             routes.MapRoute(
                 "iSpiritService", // Route name
@@ -173,6 +187,13 @@ namespace IThemeSky.UI
                 "About", // Route name
                 "About/{viewName}", // URL with parameters
                 new { controller = "About", action = "Index", viewName = "index" } // Parameter defaults
+            );
+
+            //Store
+            routes.MapRoute(
+                "Store", // Route name
+                "Store/{action}/{themeId}", // URL with parameters
+                new { controller = "Store", action = "SubmitOrder", themeId = UrlParameter.Optional } // Parameter defaults
             );
 
             //DIY
