@@ -117,7 +117,7 @@
 				<dd>-</dd>
 				<dd <%=ViewData.Model.Sort == ThemeSortOption.Rating ? "class=\"selected\"" : "" %>><a href="<%=String.Format(ViewData.Model.UrlPatternWithoutSort, 1, "rating") %>">Rating</a></dd>
 			</dl>
-			<% if (!ViewData.Model.ComeFromISpirit){ %>
+			<% if (!ViewData.Model.ComeFromISpirit || true){ %>
 			<div style="width:728px; height:90px; margin:10px auto 0 auto;">
 				<script type="text/javascript">
 				<!--

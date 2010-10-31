@@ -71,6 +71,11 @@
                         runat="server" ErrorMessage="主题名称不能为空" ControlToValidate="txtTitle"></asp:RequiredFieldValidator></td>
             </tr>
             <tr>
+                <td class="InputName">主题价格</td>
+                <td><asp:TextBox ID="txtPrice" runat="server" CssClass="TextInput"></asp:TextBox></td>
+                <td><span class="ImportantText">*填 0 就是免费</span></td>
+            </tr>
+            <tr>
                 <td class="InputName">主题分类</td>
                 <td>
                     <asp:DropDownList ID="ddlCategoryId" runat="server" AppendDataBoundItems="true" DataTextField="CategoryName" DataValueField="CategoryId">

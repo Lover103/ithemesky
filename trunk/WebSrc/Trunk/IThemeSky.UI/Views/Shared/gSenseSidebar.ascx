@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
-<% if (!(Request.Cookies["ComeFromISpirit"] != null && Request.Cookies["ComeFromISpirit"].Value.Equals("true"))) { %>
+<% if (true || !(Request.Cookies["ComeFromISpirit"] != null && Request.Cookies["ComeFromISpirit"].Value.Equals("true"))) { %>
 		<div class="sideCol gsenseSide">
 			<h3 class="sideColHead colTitle">Sponsors</h3>
 			<p>
