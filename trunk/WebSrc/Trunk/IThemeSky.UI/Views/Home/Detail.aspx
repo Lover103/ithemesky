@@ -12,13 +12,6 @@
             function() {
                 LoadComments(1);
                 BindRateEvent();
-                timer = null;
-                $('#carousel-inner').infiniteCarousel();
-                if ('<%=ViewData.Model.ThemeImages.Count %>' * 1 > 1) {
-                    timer = setTimeout(function() {
-                        $('#carousel-inner').trigger("gotonext");
-                    }, 3000);
-                }
                 $(".themeCutList a").fancybox({
                     'overlayColor': '#000',
                     'overlayOpacity': .8,
@@ -80,23 +73,23 @@
 		<!--theme detail begin-->
 		<div class="themeDetail clearfix">
 			<div class="detailSide">
-				<div class="themeCut" id="carousel-inner">
+				<div class="themeCut">
 					<% if (ViewData.Model.CurrentTheme.SupportIPhone4) { %>
 						<span title="<%=ViewData.Model.CurrentTheme.Title %> is a 480x960(HD) iphone 4 theme" class="forIphone4">iPhone 4 Theme</span>
 					<%} %>
 					<div class="themeCutList">
-						<ul>
+						<ul id="slides">
 						    <% foreach (ThemeImage image in ViewData.Model.ThemeImages) { %>
-						        <li><a href="http://resource.ithemesky.com<%=image.ImageUrl %>" rel="preview"><img src="http://resource.ithemesky.com<%=image.ImageUrl%>" width="200" height="300" alt="<%=ViewData.Model.CurrentTheme.Title %> iPhone theme" /></a></li>
+						        <li class="slide"><a href="http://resource.ithemesky.com<%=image.ImageUrl %>" rel="preview"><img src="http://resource.ithemesky.com<%=image.ImageUrl%>" width="200" height="300" alt="<%=ViewData.Model.CurrentTheme.Title %> iPhone theme" /></a></li>
 						    <%} %>
 						</ul>
 					</div>
 				</div>
-				<div class="<%=ViewData.Model.ThemeImages.Count > 1 ? "hasMultiple" : "noMultiple"%>">
+				<div class="<%=ViewData.Model.ThemeImages.Count > 1 ? "hasMultiple" : "noMultiple"%>" id="menu">
 				    <% if (ViewData.Model.ThemeImages.Count > 1) { %>
 					<ul>
 					    <% for (int i = 1; i <= ViewData.Model.ThemeImages.Count; i++) { %>
-						<li><span class="load-img<%=i==1 ? " selected" : "" %>" rel="<%=i %>"></span></li>
+						<li class=""></li>
 						<%} %>
 					</ul>
 					<%} %>
