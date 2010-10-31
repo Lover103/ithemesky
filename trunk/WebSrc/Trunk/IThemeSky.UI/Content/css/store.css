@@ -70,6 +70,7 @@ a:hover,a:active{ text-decoration:underline; color:#FFF;}
 .btnPurchase{ margin:0; padding:0; border:none; width:130px; height:36px; background:url(/Content/images/store/sprites_store.png) no-repeat -160px -40px; color:#6BA21C; font:0/0 Arial; cursor:pointer;}
 .btnPurchase:hover{ background-position:-310px -40px; color:#7BAE2E;}
 .tips{ position:absolute; z-index:1; width:240px; padding-top:3px; font-size:11px; line-height:1.3; left:340px; color:#FF9; font-weight:normal;}
+.tipsPayment{ position:absolute; z-index:1; left:310px; top:15px; width:150px;}
 
 /*result*/
 .result{ width:620px; padding:50px 0 40px 100px;}
