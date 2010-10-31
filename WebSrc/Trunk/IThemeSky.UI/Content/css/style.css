@@ -257,7 +257,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .detailInfo .detailBtn li a{ display:block; height:38px; text-indent:-999em; overflow:hidden;}
 .detailInfo .btnBuy a{ width:185px; background:url(../images/sprites_detail.png) no-repeat 0 0;}
 .detailInfo .btnBuy a:hover{ background:url(../images/sprites_detail.png) no-repeat 0 -50px;}
-.detailInfo .detailBtn .btnBuyTip{ clear:both; padding:10px 0;}
+.detailInfo .detailBtn .btnBuyTip{ clear:both; padding-top:10px;}
 .detailInfo .detailBtn .btnBuyTip a{ display:inline; text-decoration:underline;}
 .detailInfo .btnBuyTip .form{ padding-top:5px; clear:both;}
 .detailInfo .btnDownload a{ width:145px; background:url(../images/sprites_detail.png) no-repeat -210px 0;}
@@ -322,7 +322,6 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .commentPage li{ float:left; margin:0 3px; _display:inline;}
 .commentPage li a{ background:#001B28; height:14px; line-height:14px; border:1px solid #224548; padding:0 3px;}
 .commentPage li a:hover{ background:#002437; border-color:#295457; color:#C9D8DA;}
-
 .commentPage li.current a{ border:none; background:none; font-weight:bold; color:#CCD3DC; line-height:16px;}
 .commentAdd{ width:740px; padding:15px; background:url(../images/sprites_box_wide.png) no-repeat -2310px bottom;}
 .commentForm{ clear:both; width:570px; padding-top:8px;}
@@ -334,11 +333,11 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .commentForm .textarea{ float:left; width:450px;}
 .commentForm textarea{ width:446px; height:96px; line-height:1.5; padding:1px; scrollbar-base-color:#000B0B; scrollbar-face-color:none; scrollbar-arrow-color:#9FBABF; scrollbar-track-color:#000B0B; scrollbar-3dlight-color:#000B0B; scrollbar-darkshadow-color:#000B0B; scrollbar-highlight-color:#304543; scrollbar-shadow-color:#253634;}
 .commentBtn{ clear:both; padding:10px 120px;}
-.commentBtn button,.btnBuyTip button{ width:100px; height:24px; background:url(../images/sprites_detail.png) no-repeat 0 -400px; color:#D9DCDD; border:none; padding:0; margin:0;}
+.commentBtn button,.btnBuyTip button{ width:100px; height:24px; background:url(../images/sprites_detail.png) no-repeat 0 -400px; color:#D9DCDD; border:none; padding:0; margin:0; cursor:pointer;}
 
 /*detail page side*/
 .subTopDownload{ padding:5px 10px; width:180px;}
-.subTopDownload .downloadNum{ float:right; color:#CCD2DC; font-size:11px; letter-spacing:-1px; line-height:18px;}
+.themeDetailSub .downloadNum,.subTopDownload .downloadNum{ float:right; color:#CCD2DC; font-size:11px; letter-spacing:-1px; line-height:18px;}
 .subTopDownload li{ clear:both;}
 .subTopDownload .normal{ float:left; width:180px; padding-top:4px; height:20px;}
 .subTopDownload .rankNum{ float:left; width:15px; height:13px; font-size:11px; line-height:13px; text-align:center; color:#CCD2DC; background:url(../images/sprites_detail.png) no-repeat -785px -440px; margin:3px 6px 0 0; _margin:3px 3px 0 0;}
@@ -357,6 +356,10 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .subTopDownload .star3{ background-position:-150px -210px;}
 .subTopDownload .star4{ background-position:-150px -230px;}
 .subTopDownload .star5{ background-position:-150px -250px;}
+.subRecommended{ padding:5px 10px;}
+.subRecommended li{ height:20px; background:url(../images/sprites_detail.png) no-repeat -791px -470px; padding:4px 0 0 15px;}
+.subCol .champion,.subCol .normal{ width:140px;}
+.subCol .champion dd{ width:98px;}
 
 /*common page*/
 .commonPage{  background:url(../images/sprites_box.png) no-repeat -1920px 0; margin-top:10px;}
