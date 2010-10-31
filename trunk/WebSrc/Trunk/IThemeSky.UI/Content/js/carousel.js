@@ -1,89 +1,77 @@
-$.fn.infiniteCarousel = function () {
+$(document).ready(function(){
+	/* This code is executed after the DOM has been completely loaded */
+	
+	var totWidth=0;
+	var positions = new Array();
+	
+	$('#slides .slide').each(function(i){
+		
+		/* Traverse through all the slides and store their accumulative widths in totWidth */
+		
+		positions[i]= totWidth;
+		totWidth += $(this).width();
+		
+		/* The positions array contains each slide's commulutative offset from the left part of the container */
+		
+		if(!$(this).width())
+		{
+			alert("Please, fill in width & height for all your images!");
+			return false;
+		}
+		
+	});
+	
+	$('#slides').width(totWidth);
 
-    function repeat(str, num) {
-        return new Array( num + 1 ).join( str );
-    }
-  
-    return this.each(function () {
+	/* Change the cotnainer div's width to the exact width of all the slides combined */
 
-            
-        var $wrapper = $('> div', this).css('overflow', 'hidden'),
-            $slider = $wrapper.find('> ul'),
-            $items = $slider.find('> li'),
-            $single = $items.filter(':first'),
-            
-            singleWidth = $single.outerWidth(), 
-            visible = Math.ceil($wrapper.innerWidth() / singleWidth),
-            currentPage = 1,
-            pages = Math.ceil($items.length / visible);            
+	$('#menu ul li').click(function(e,keepScroll){
 
-        // 1. Pad so that 'visible' number will always be seen, otherwise create empty items
-        if (($items.length % visible) != 0) {
-            $slider.append(repeat('<li class="empty" />', visible - ($items.length % visible)));
-            $items = $slider.find('> li');
-        }
+			/* On a thumbnail click */
 
-        // 2. Top and tail the list with 'visible' number of items, top has the last section, and tail has the first
-        $items.filter(':first').before($items.slice(- visible).clone().addClass('cloned'));
-        $items.filter(':last').after($items.slice(0, visible).clone().addClass('cloned'));
-        $items = $slider.find('> li'); // reselect
-        // 3. Set the left position to the first 'real' item
-        $wrapper.scrollLeft(singleWidth * visible);
-        
-        // 4. paging function
-        function gotoPage(page) {
-            var dir = page < currentPage ? -1 : 1,
-                n = Math.abs(currentPage - page),
-                left = singleWidth * dir * visible * n;
-            
-            $wrapper.filter(':not(:animated)').animate({
-                scrollLeft : '+=' + left
-            }, 500, function () {
-                if (page == 0) {
-                    $wrapper.scrollLeft(singleWidth * visible * pages);
-                    page = pages;
-                } else if (page > pages) {
-                    $wrapper.scrollLeft(singleWidth * visible);
-                    // reset back to start position
-                    page = 1;
-                } 
+			$('li.menuItem').removeClass('act').addClass('inact');
+			$(this).addClass('act');
+			
+			
+			
+			var pos = $(this).prevAll('.menuItem').length;
+			
+			$('#slides').stop().animate({marginLeft:-positions[pos]+'px'},202);
+			/* Start the sliding animation */
+			
+			e.preventDefault();
+			/* Prevent the default action of the link */
+			
+			
+			// Stopping the auto-advance if an icon has been clicked:
+			if(!keepScroll) clearInterval(itvl);
+	});
+	
+	$('#menu ul li.menuItem:first').addClass('act').siblings().addClass('inact');
+	/* On page load, mark the first thumbnail as active */
+	
+	
+	
+	/*****
+	 *
+	 *	Enabling auto-advance.
+	 *
+	 ****/
+	 
+	var current=1;
+	function autoAdvance()
+	{
+		if(current==-1) return false;
+		
+		$('#menu ul li').eq(current%$('#menu ul li').length).trigger('click',[true]);	// [true] will be passed as the keepScroll parameter of the click function on line 28
+		current++;
+	}
 
-                currentPage = page;
-            });                
-            
-            return false;
-        }
-        
-        // 5. Bind to the forward and back buttons
-        $('.back', this).click(function () {
-          return gotoPage(currentPage - 1);                
-        });
-        
-        $('.forward', this).click(function () {
-            return gotoPage(currentPage + 1);
-        });
-        
-        $('.load-img').click(function () {
-            $(".load-img").removeClass("selected");
-            $(this).addClass("selected");
-            //clearTimeout(timer);
-            return gotoPage($(this).attr("rel"));
-        });
-        
-        // create a public interface to move to a specific page
-        $(this).bind('goto', function (event, page) {   
-            gotoPage(page*1);
-        });
-        
-        $(this).bind('gotonext', function (event) {
-            clearTimeout(timer);
-            timer = setTimeout(function(){$('#carousel-inner').trigger("gotonext")}, 3000);
-            $(".load-img").removeClass("selected");
-            var page = (currentPage*1+1);
-            if (page == 6) page = 1;
+	// The number of seconds that the slider will auto-advance in:
+	
+	var changeEvery = 3;
 
-            $(".load-img[rel="+page+"]").addClass("selected");
-            gotoPage(currentPage*1 + 1);
-        });
-    });  
-};
+	var itvl = setInterval(function(){autoAdvance()},changeEvery*1000);
+
+	/* End of customizations */
+});
