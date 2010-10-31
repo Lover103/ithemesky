@@ -222,12 +222,23 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .pageInfo .btnGo{ margin-top:1px; width:26px; height:16px; border:none; background:url(../images/sprites_common.png) no-repeat -390px -590px; color:#769FA3; font-size:11px; line-height:16px;}
 
 /*theme detail*/
-.themeDetail{ margin-top:10px; background:url(../images/sprites_box.png) no-repeat -1920px 0;}
-.detailSide{ float:left; width:202px; margin:13px; _display:inline;}
-.detailSide .themeCut{ padding:15px; width:172px; height:257px; background:url(../images/sprites_detail.png) no-repeat 0 0; position:relative; z-index:1;}
-.detailSide .themeCut a{ padding:1px; display:block; width:170px; height:255px; font:0/0 Arial;}
+.themeDetail{ margin-top:10px; width:770px; background:url(../images/sprites_box_wide.png) no-repeat -1540px 0;}
+.detailSide{ float:left; width:232px; margin:13px; _display:inline;}
+.detailSide .themeCut{ padding:15px 15px 0 15px; width:202px; height:302px; background:url(../images/bg_detail_thumb.png) no-repeat 0 0; position:relative; z-index:1; overflow:hidden;}
+.detailSide .themeCut a{ padding:1px; display:block; width:200px; height:300px; font:0/0 Arial;}
 .detailSide .themeCut a:hover{ padding:0; border:1px solid #2D494B;}
 .detailSide .themeCut .forIphone4{ position:absolute; z-index:1; left:15px; top:15px; display:block; width:40px; height:40px; text-indent:-999em; background:url(../images/sprites_common.png) no-repeat -460px -100px;}
+.detailSide .hasMultiple{ padding:0 15px 10px 15px; height:15px; width:202px; background:url(../images/bg_detail_thumb.png) no-repeat -240px -317px;}
+.detailSide .noMultiple{ width:232px; height:15px; overflow:hidden; background:url(../images/bg_detail_thumb.png) no-repeat 0 -317px;}
+.themeCutList {width:202px; height:302px; overflow:auto; position:absolute; top:15px; left:15px;}
+.themeCutList ul { width:9999em; overflow:hidden; position:absolute; top:0;}
+.themeCutList li { float:left; width:202px; height:302px;}
+.hasMultiple ul { margin:0 auto; width:98px; height:10px; padding-top:4px; font-family:Verdana, Geneva, sans-serif}
+.hasMultiple ul li { float:left; height:6px; width:6px; margin:0 4px; -display:inline; overflow:hidden;}
+.hasMultiple ul li span{ background:url(../images/sprites_detail.png) no-repeat 0 -100px; height:6px; width:6px; overflow:hidden; display:block; cursor:pointer; }
+.hasMultiple ul li span.selected,.hasMultiple ul li span:hover{ background:url(../images/sprites_detail.png) no-repeat -20px -100px; height:6px; width:6px; overflow:hidden;}
+
+.detailSide .btn{ margin-left:15px;}
 .detailSide .btn li{ float:left; margin:8px 0 0 10px; _display:inline; width:86px; height:22px;}
 .detailSide .btn a{ display:block; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
 .detailSide .btn .previous a{ background-position:0 -290px;}
@@ -236,20 +247,27 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .detailSide .btn .next a{ background-position:-90px -290px;}
 .detailSide .btn .next a:hover{ background-position:-90px -315px;}
 .detailSide .btn .next a.none{ background-position:-285px -290px;}
-.detailInfo{ float:left; width:360px;}
+.detailInfo{ float:left; width:500px;}
 .detailInfo .title{ font-size:14px; font-weight:bold; color:#CCD3DC; margin:20px 0 5px 0;}
-.detailInfo .details{ padding-top:5px; width:360px;}
+.detailInfo .details{ padding-top:5px; width:500px;}
 .detailInfo .details dt{ float:left; color:#CCD2DC; font-weight:bold; text-align:right; width:85px; padding-right:5px;}
-.detailInfo .details dd{ float:left; width:270px;}
+.detailInfo .details dd{ float:left; width:410px;}
 .detailInfo .details dd a{ white-space:nowrap;}
-.detailInfo .detailBtn{ clear:both; padding:15px 0 15px 25px; height:38px;}
+.detailInfo .detailBtn{ clear:both; padding:15px 0 15px 75px; width:410px;}
 .detailInfo .detailBtn li{ float:left; margin-left:12px; _display:inline;}
 .detailInfo .detailBtn li a{ display:block; height:38px; text-indent:-999em; overflow:hidden;}
+.detailInfo .btnBuy a{ width:185px; background:url(../images/sprites_detail.png) no-repeat 0 0;}
+.detailInfo .btnBuy a:hover{ background:url(../images/sprites_detail.png) no-repeat 0 -50px;}
+.detailInfo .detailBtn .btnBuyTip{ clear:both; padding:10px 0;}
+.detailInfo .detailBtn .btnBuyTip a{ display:inline; text-decoration:underline;}
+.detailInfo .btnBuyTip .form{ padding-top:5px; clear:both;}
 .detailInfo .btnDownload a{ width:145px; background:url(../images/sprites_detail.png) no-repeat -210px 0;}
 .detailInfo .btnDownload a:hover{ background:url(../images/sprites_detail.png) no-repeat -410px 0;}
 .detailInfo .btnCreate a{ width:160px; background:url(../images/sprites_detail.png) no-repeat -210px -240px;}
 .detailInfo .btnCreate a:hover{ background:url(../images/sprites_detail.png) no-repeat -410px -240px;}
 .detailInfo .btnCreate .off{ display:block; width:160px; height:38px; background:url(../images/sprites_detail.png) no-repeat -410px -290px; text-indent:-999em; overflow:hidden;}
+.detailInclude{ width:410px;}
+.detailInclude li{ float:left; padding-left:18px; background:url(../images/sprites_detail.png) no-repeat -785px -198px; margin-bottom:2px; width:80px;}
 .detailRate{ position:relative; z-index:1; width:120px; height:22px; background:url(../images/sprites_detail.png) no-repeat -210px -50px;}
 .detailRate .rateResult{ display:block; width:118px; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
 .detailRate .star0{ background-position:-210px -50px;}
@@ -271,8 +289,8 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .detailRate a.rateS4:hover{ width:96px;}
 .detailRate a.rateS5{ left:96px;}
 .detailRate a.rateS5:hover{ width:118px;}
-.detailInfo .installIip{ padding-left:24px; background:url(../images/sprites_detail.png) no-repeat -580px -60px;}
-.themeShare{ margin:10px 0; width:350px; height:20px; padding:5px; border:1px solid #102529;}
+.detailInfo .installIip{ clear:both; padding-left:24px; background:url(../images/sprites_detail.png) no-repeat -780px -60px;}
+.themeShare{ margin:10px 0; width:490px; height:20px; padding:5px; border:1px solid #102529;}
 .themeShare dt{ float:left; color:#CCD2DC; font-weight:bold; text-align:right; width:120px;}
 .themeShare dd{ float:left; margin-left:5px; _display:inline; width:20px; height:20px;}
 .themeShare dd a{ display:block; height:20px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat; filter:Alpha(opacity=70); -moz-opacity:.70; opacity:0.70;}
@@ -283,52 +301,54 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .themeShare .shareStumbleUpon a{ background-position:-435px -100px;}
 .themeShare .shareReddit a{ background-position:-460px -100px;}
 .themeShare .shareDelicious a{ background-position:-485px -100px;}
+.themeDetailCol{ width:770px; background:url(../images/sprites_box_wide.png) no-repeat -1540px 0;}
+.themeDetailCol .mainColContent{ background:url(../images/sprites_box_wide.png) no-repeat -2310px bottom;}
 .themeDetailCol .mainColHead{ margin:0 2px; background:url(../images/sprites_detail.png) no-repeat 0 -350px; height:31px;}
 .themeDetailCol .colTitle{ line-height:30px; padding:0 16px;}
+.themeDetailCol .themeList{ padding:0 15px 20px 15px;}
+.themeDetailCol .themeList dl{ margin:10px 5px 0 5px;}
 
 /*theme comments*/
-.themeComment{ clear:both; margin-top:10px; width:600px; background:url(../images/sprites_box.png) no-repeat -400px 0;}
-.commentHead{ padding:10px 0 0 20px; width:560px; font-weight:bold; font-size:13px; color:#CCD3DC;}
-.commentList{ width:570px; margin:0 auto;}
-.commentList .commentContent{ padding:15px 5px; width:560px; border-bottom:1px solid #283533;}
-.commentData{ padding-left:25px; height:36px; background:url(../images/sprites_detail.png) no-repeat -585px -387px;}
+.themeComment{ clear:both; margin-top:10px; width:770px; background:url(../images/sprites_box_wide.png) no-repeat -1540px 0;}
+.commentHead{ padding:10px 0 0 20px; width:730px; font-weight:bold; font-size:13px; color:#CCD3DC;}
+.commentList{ width:740px; margin:0 auto;}
+.commentList .commentContent{ padding:15px 5px; width:730px; border-bottom:1px solid #283533;}
+.commentData{ padding-left:25px; height:36px; background:url(../images/sprites_detail.png) no-repeat -785px -387px;}
 .commentData cite{ float:left; font-weight:bold; color:#9FBCBF;}
 .commentMeta{ float:left; clear:left; font-size:11px; color:#4A6D71;}
 .commentNumber{ float:right; height:36px; color:#527679;}
-.commentEntry{ padding:5px 0 0 25px; width:535px;}
-.commentPage{ width:570px; margin:10px auto 0 auto;}
+.commentEntry{ padding:5px 0 0 25px; width:705px;}
+.commentPage{ width:740px; margin:10px auto 0 auto;}
 .commentPage ul{ float:right;}
 .commentPage li{ float:left; margin:0 3px; _display:inline;}
 .commentPage li a{ background:#001B28; height:14px; line-height:14px; border:1px solid #224548; padding:0 3px;}
 .commentPage li a:hover{ background:#002437; border-color:#295457; color:#C9D8DA;}
+
 .commentPage li.current a{ border:none; background:none; font-weight:bold; color:#CCD3DC; line-height:16px;}
-.commentAdd{ width:570px; padding:15px; background:url(../images/sprites_box.png) no-repeat -1000px bottom;}
+.commentAdd{ width:740px; padding:15px; background:url(../images/sprites_box_wide.png) no-repeat -2310px bottom;}
 .commentForm{ clear:both; width:570px; padding-top:8px;}
 .commentForm .label{ float:left; width:115px; font-weight:bold; padding-right:5px; text-align:right; line-height:20px; color:#9FBABF;}
 .commentForm small{ font-size:11px; padding-left:5px;}
 .commentForm input{ float:left; padding:1px; height:16px; line-height:16px; width:160px;}
-.commentForm .inputNormal,.commentForm .textareaNormal{background:#000B0B; border:1px solid #253634;}
+.commentForm .inputNormal,.commentForm .textareaNormal,.btnBuyTip .inputNormal{background:#000B0B; border:1px solid #253634;}
 .commentForm .inputFocus,.commentForm .textareaFocus{background:#001313; border:1px solid #304543;}
 .commentForm .textarea{ float:left; width:450px;}
 .commentForm textarea{ width:446px; height:96px; line-height:1.5; padding:1px; scrollbar-base-color:#000B0B; scrollbar-face-color:none; scrollbar-arrow-color:#9FBABF; scrollbar-track-color:#000B0B; scrollbar-3dlight-color:#000B0B; scrollbar-darkshadow-color:#000B0B; scrollbar-highlight-color:#304543; scrollbar-shadow-color:#253634;}
 .commentBtn{ clear:both; padding:10px 120px;}
-.commentBtn button{ width:100px; height:24px; background:url(../images/sprites_detail.png) no-repeat 0 -400px; color:#D9DCDD; border:none; padding:0; margin:0;}
+.commentBtn button,.btnBuyTip button{ width:100px; height:24px; background:url(../images/sprites_detail.png) no-repeat 0 -400px; color:#D9DCDD; border:none; padding:0; margin:0;}
 
 /*detail page side*/
-.themeDetailSub{ margin-bottom:0;}
-.themeDetailSub .subColHead{ margin-top:10px; height:33px; background:url(../images/sprites_detail.png) no-repeat 0 -440px; text-indent:15px; line-height:32px;}
-.subRecommended,.subTopDownload{ padding:5px 10px;}
-.subRecommended li{ height:20px; background:url(../images/sprites_detail.png) no-repeat -591px -470px; padding:4px 0 0 15px;}
-.themeDetailSub .downloadNum{ float:right; color:#CCD2DC; font-size:11px; letter-spacing:-1px; line-height:18px;}
+.subTopDownload{ padding:5px 10px; width:180px;}
+.subTopDownload .downloadNum{ float:right; color:#CCD2DC; font-size:11px; letter-spacing:-1px; line-height:18px;}
 .subTopDownload li{ clear:both;}
-.subTopDownload .normal{ float:left; width:140px; padding-top:4px; height:20px;}
-.subTopDownload .rankNum{ float:left; width:15px; height:13px; font-size:11px; line-height:13px; text-align:center; color:#CCD2DC; background:url(../images/sprites_detail.png) no-repeat -585px -440px; margin:3px 6px 0 0; _margin:3px 3px 0 0;}
+.subTopDownload .normal{ float:left; width:180px; padding-top:4px; height:20px;}
+.subTopDownload .rankNum{ float:left; width:15px; height:13px; font-size:11px; line-height:13px; text-align:center; color:#CCD2DC; background:url(../images/sprites_detail.png) no-repeat -785px -440px; margin:3px 6px 0 0; _margin:3px 3px 0 0;}
 .subTopDownload .title{ float:left;}
-.subTopDownload .champion{ border-bottom:1px solid #2A3C39; padding:7px 0; width:140px;}
+.subTopDownload .champion{ border-bottom:1px solid #2A3C39; padding:7px 0; width:180px;}
 .subTopDownload .champion dt{ float:left; width:36px; height:52px;}
 .subTopDownload .champion dt a{ display:block; width:34px; height:50px; border:1px solid #394848;}
 .subTopDownload .champion dt img{ display:block; border:1px solid #081C1D; width:32px; height:48px;}
-.subTopDownload .champion dd{ float:right; width:98px; line-height:16px;}
+.subTopDownload .champion dd{ float:right; width:138px; line-height:16px;}
 .subTopDownload .champion small{ font-size:10px; font-weight:bold;}
 .subTopDownload .champion .downloadNum{ float:none; display:inline;}
 .subTopDownload .rateResult{ display:block; margin:5px 0 3px 0; height:11px; width:75px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_header.png) no-repeat;}
