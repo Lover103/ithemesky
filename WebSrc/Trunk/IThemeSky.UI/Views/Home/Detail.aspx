@@ -13,8 +13,8 @@
                 LoadComments(1);
                 BindRateEvent();
                 $(".themeCutList a").fancybox({
-                    'overlayColor': '#000',
-                    'overlayOpacity': .8,
+                    'transitionIn'	: 'elastic',
+					'transitionOut'	: 'elastic',
                     'titleShow': false
                 });
             });
