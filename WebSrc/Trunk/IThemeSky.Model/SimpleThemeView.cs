@@ -56,6 +56,11 @@ namespace IThemeSky.Model
         public bool SupportIPhone4 { get; set; }
 
         /// <summary>
+        /// 价格
+        /// </summary>
+        public double Price { get; set; }
+
+        /// <summary>
         /// 主题详细页地址
         /// </summary>
         public string ThemeDetailUrl

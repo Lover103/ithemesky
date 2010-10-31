@@ -1,8 +1,19 @@
-﻿function BindSortEvent() {
+﻿var __SortThemesCache = {};
+function BindSortEvent() {
     $('ul.mainColTab a').click(
         function() {
-            $('#divSortThemes').html('loading...');
-            $('#divSortThemes').load('/Service/GetSortThemes/' + $(this).attr('sort') + ',8');
+            var sort = $(this).attr('sort');
+            if (__SortThemesCache.hasOwnProperty(sort)) {
+                $('#divSortThemes').html(__SortThemesCache[sort]);
+            }
+            else {
+                $('#divSortThemes').html('loading...');
+                $('#divSortThemes').load('/Service/GetSortThemes/' + sort + ',8', function(response, status, xhr) {
+                    if (status == 'success') {
+                        __SortThemesCache[sort] = response;
+                    }
+                });
+            }
             $('ul.mainColTab li').removeClass();
             $(this).parent('li').addClass('selected');
             $(this).blur();

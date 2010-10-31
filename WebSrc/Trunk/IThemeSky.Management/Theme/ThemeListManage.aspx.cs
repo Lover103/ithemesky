@@ -16,6 +16,7 @@ namespace IThemeSky.Management.Theme
         private IThemeViewRepository _repositoryView = ThemeRepositoryFactory.Default.GetThemeViewRepository();
         private IThemeManageRepository _repositoryManage = ThemeRepositoryFactory.Default.GetThemeManageRepository();
         private List<ThemeCategory> _categories;
+        private List<string> _themeTypeTags = new List<string>() { "apps", "lockscreen", "sbsettings", "sms", "sounds", "widgets", "dialer" };
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -59,6 +60,19 @@ namespace IThemeSky.Management.Theme
 
             DropDownList ddlDisplayState = e.Item.FindControl("ddlDisplayState") as DropDownList;
             ddlDisplayState.SelectedValue = theme.DisplayState.ToInt32().ToString();
+
+            List<string> tags = _repositoryView.GetTagsByThemeId(theme.ThemeId).Select(s => s.ToLower()).ToList();
+            foreach (Control control in e.Item.Controls)
+            {
+                if (control is CheckBox && control.ID.StartsWith("chkTag", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    CheckBox chk = control as CheckBox;
+                    if (tags.Contains(chk.Text.ToLower()))
+                    {
+                        chk.Checked = true;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -149,6 +163,18 @@ namespace IThemeSky.Management.Theme
             {
                 _repositoryManage.MappingThemeTag(themeId, tag);
             }
+            foreach (Control control in item.Controls)
+            {
+                if (control is CheckBox && control.ID.StartsWith("chkTag", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    CheckBox chk = control as CheckBox;
+                    if (chk.Checked)
+                    {
+                        _repositoryManage.MappingThemeTag(themeId, chk.Text);
+                    }
+                }
+            }
+            BindThemeList();
             ltlMessage.Text = "修改主题基本信息成功";
         }
         protected void filter_Changed(object sender, EventArgs e)
@@ -169,7 +195,7 @@ namespace IThemeSky.Management.Theme
 
         protected string GetThemeTags(object themeId)
         {
-            List<string> tags = _repositoryView.GetTagsByThemeId(themeId.ToString().ToInt32());
+            List<string> tags = _repositoryView.GetTagsByThemeId(themeId.ToString().ToInt32()).Where(tag => !_themeTypeTags.Contains(tag.ToLower())).ToList();
             if (tags.Count > 1)
             {
                 return tags.Aggregate((s1, s2) => s1 + "," + s2);

@@ -140,5 +140,10 @@ namespace IThemeSky.Model
         /// 是否是IPhone4主题
         /// </summary>
         public bool SupportIPhone4 { get; set; }
+
+        /// <summary>
+        /// 价格
+        /// </summary>
+        public double Price { get; set; }
     }
 }

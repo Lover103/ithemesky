@@ -6,7 +6,9 @@
 <head runat="server">
     <title></title>
     <link href="../Resources/Css/Content.css" rel="Stylesheet" />
+    <link href="../Resources/Css/fileuploader.css" rel="Stylesheet" />
     <script type="text/javascript" src="../Resources/js/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript" src="../Resources/js/fileuploader.js"></script>
     <script type="text/javascript">
         $(document).ready(
             function() {
@@ -18,8 +20,32 @@
                 else {
                     $('.message').hide();
                 }
+                var uploader = new qq.FileUploader({
+                    // pass the dom node (ex. $(selector)[0] for jQuery users)
+                    element: document.getElementById('file-uploader'),
+                    // path to server-side upload script
+                    action: '/Services/Upload.ashx',
+                    onComplete: function(id, fileName, responseJSON) {
+                        $('#ulThemeImages').append('<li style="float:left"><input type="hidden" value="' + responseJSON.fileName + '" name="hidThemeImages" /><img src="' + responseJSON.thumbnail + '" width="112" height="168" onclick="setDefault(\'' + responseJSON.fileName + '\')" /><br /><a href="javascript:;" onclick="deleteImage(this.parentNode, \'' + responseJSON.fileName + '\')">[删]</a></li>');
+                    }
+                });
             }
         );
+            function deleteImage(li, url) {
+                var themeId = $('#hidThemeId').val();
+                $.get('/Services/DeleteFile.ashx?themeId=' + themeId + '&fileName=' + url, function(data) {
+                    if (data == 'ok') {
+                        li.parentNode.removeChild(li);
+                        alert('删除成功');
+                    }
+                    else {
+                        alert('删除失败');
+                    }
+                });                
+            }
+            function setDefault(url) {
+                $('#txtThumbnailName').val(url);
+            }
     </script>
 </head>
 <body>
@@ -89,6 +115,21 @@
             <tr>
                 <td class="InputName">缩略图设置</td>
                 <td><asp:TextBox ID="txtThumbnailName" runat="server" CssClass="TextInput"></asp:TextBox></td>
+                <td><span class="ImportantText">*</span></td>
+            </tr>
+            <tr>
+                <td class="InputName">主题图片</td>
+                <td>
+                    <ul id="ulThemeImages">
+                        <asp:Repeater ID="rptThemeImages" runat="server">
+                            <ItemTemplate>
+                                <li style="float:left"><input type="hidden" value="<%#Eval("ImageUrl") %>" name="hidThemeImages" /><img src="<%#Eval("ImageUrl").ToString().Replace(".jpg", "_112x168.jpg") %>" width="112" height="168" onclick="setDefault('<%#Eval("ImageUrl") %>')" /><br /><a href="javascript:;" onclick="deleteImage(this.parentNode, '<%#Eval("ImageUrl") %>')">[删]</a></li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </ul>
+                    <div id="file-uploader" style="clear:both"> 
+                    </div>
+                </td>
                 <td><span class="ImportantText">*</span></td>
             </tr>
             <tr>

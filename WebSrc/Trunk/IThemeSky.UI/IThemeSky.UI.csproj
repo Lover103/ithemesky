@@ -263,9 +263,6 @@
     <Content Include="Views\Home\iPhone-4-themes.aspx" />
     <Content Include="Views\iSpirit\help.aspx" />
     <Content Include="Views\Store\Fail.aspx" />
-    <Content Include="Views\Store\fail.html" />
-    <Content Include="Views\Store\index.html" />
-    <Content Include="Views\Store\Result.aspx" />
     <Content Include="Views\Store\SubmitOrder.aspx" />
     <Content Include="Views\Shared\gSenseSidebar.ascx" />
     <Content Include="Views\Shared\iPhone4Categories.ascx" />
@@ -273,7 +270,6 @@
     <Content Include="Views\Shared\PostSoftCommentForm.ascx" />
     <Content Include="Views\Soft\Comment.aspx" />
     <Content Include="Views\Store\Success.aspx" />
-    <Content Include="Views\Store\success.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

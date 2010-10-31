@@ -125,6 +125,7 @@ namespace IThemeSky.UI.Controllers
                 return Content("-2");
             }
         }
+
         public ActionResult GetSortThemes(string sort, int displayNumber)
         {
             ThemeSortOption themeSort = sort.ToEnum<ThemeSortOption>(ThemeSortOption.New);
@@ -442,7 +443,7 @@ namespace IThemeSky.UI.Controllers
             byte[] param = Request.BinaryRead(Request.ContentLength);
             strFormValues = Encoding.ASCII.GetString(param);
             //建议在此将接受到的信息记录到日志文件中以确认是否收到 IPN 信息
-            logger.Info("<p>#" + DateTime.Now + "：IPN:" + strFormValues + "</p>");
+            logger.Debug("<p>#" + DateTime.Now + "：IPN:" + strFormValues + "</p>");
             strNewValue = strFormValues + "&cmd=_notify-validate";
             req.ContentLength = strNewValue.Length;
             //发送 request
@@ -483,7 +484,7 @@ namespace IThemeSky.UI.Controllers
                         UserMail = Request.Form["payer_email"],
                         UserName = Request.Form["first_name"] + " " + Request.Form["last_name"]
                     });
-                    logger.Info("<p>#" + DateTime.Now + "：IPN UPDATE SUCCESS:</p>");
+                    logger.Debug("<p>#" + DateTime.Now + "：IPN UPDATE SUCCESS:</p>");
                 }
 
             }

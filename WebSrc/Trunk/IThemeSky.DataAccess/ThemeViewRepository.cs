@@ -391,6 +391,30 @@ namespace IThemeSky.DataAccess
                 while (reader.Read())
                 {
                     categories.Add(BindThemeCategory(reader));                }            }
-            return categories;        }        #endregion
+            return categories;        }
+
+        /// <summary>
+        /// 获取主题的图片列表
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <returns></returns>
+        public virtual List<ThemeImage> GetThemeImages(int themeId)
+        {
+            List<ThemeImage> images = new List<ThemeImage>();
+            string cmdText = "SELECT * FROM ThemeImages WHERE ThemeId=" + themeId;
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                while (reader.Read())
+                {
+                    images.Add(new ThemeImage() 
+                    { 
+                        AddTime = Convert.ToDateTime(reader["AddTime"]),
+                        ImageId = Convert.ToInt32(reader["ImageId"]),
+                        ImageUrl = reader["ImageUrl"].ToString(),
+                        ThemeId = Convert.ToInt32(reader["ThemeId"]),
+                    });
+                }
+            }
+            return images;        }        #endregion
     }
 }

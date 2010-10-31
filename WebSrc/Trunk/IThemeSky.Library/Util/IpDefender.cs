@@ -12,6 +12,7 @@ namespace IThemeSky.Library.Util
     public static class IpDefender
     {
         private const string IPDEFENDER_CACHE_KEY = "IpDefender";
+        private static HashSet<string> dicWhiteAgent = new HashSet<string>() { "ia_archiver", "googlebot", "mediapartners-google", "baidubot", "sosobot", "sogou", "msnbot", "slurp" };
         /// <summary>
         /// 判断是否机器访问
         /// </summary>
@@ -27,7 +28,7 @@ namespace IThemeSky.Library.Util
                 {
                     return false;
                 }
-                if (userAgent.Contains("googlebot") || userAgent.Contains("baidubot") || userAgent.Contains("sosobot") || userAgent.Contains("sogou") || userAgent.Contains("msnbot") || userAgent.Contains("slurp"))
+                if (dicWhiteAgent.Count(a => userAgent.Contains(a)) > 0)
                 {
                     return false;
                 }

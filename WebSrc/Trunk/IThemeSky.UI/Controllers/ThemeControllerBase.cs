@@ -12,7 +12,7 @@ namespace IThemeSky.UI.Controllers
     public class ThemeControllerBase : Controller
     {
         protected static readonly string ORDER_CHECKSUM_KEY = "ITHEMESKY_ORDER_CHECKSUM";
-        protected static readonly string PAYPAY_GATEWAY = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+        protected static readonly string PAYPAY_GATEWAY = "https://www.paypal.com/cgi-bin/webscr";
         protected static Logger logger = LogManager.GetCurrentClassLogger();
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
@@ -21,9 +21,9 @@ namespace IThemeSky.UI.Controllers
                 logger.Info(string.Format("<p>Time:{3}, UserIp:{0}, Agent:{1}, Url:{2} </p>"
                     , filterContext.RequestContext.HttpContext.Request.UserHostAddress
                     , filterContext.RequestContext.HttpContext.Request.UserAgent
-                    , filterContext.RequestContext.HttpContext.Request.Url)
+                    , filterContext.RequestContext.HttpContext.Request.Url
                     , DateTime.Now
-                    );
+                    ));
                 filterContext.Result = new RedirectResult("/Defender.html");
             }
             base.OnActionExecuted(filterContext);

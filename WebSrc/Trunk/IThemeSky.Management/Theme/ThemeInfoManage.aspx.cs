@@ -46,6 +46,9 @@ namespace IThemeSky.Management.Theme
                     txtViews.Text = theme.Views.ToString();
                     txtAddTime.Text = theme.AddTime.ToString();
                     chkSupportIPhone4.Checked = theme.SupportIPhone4;
+
+                    rptThemeImages.DataSource = _repositoryView.GetThemeImages(Request.QueryString["themeId"].ToInt32());
+                    rptThemeImages.DataBind();
                 }
             }
         }
@@ -56,7 +59,7 @@ namespace IThemeSky.Management.Theme
             {
                 IThemeSky.Model.Theme theme = _repositoryView.GetTheme(hidThemeId.Value.ToInt32());
                 theme.ThemeId = hidThemeId.Value.ToInt32();
-                theme.ThumbnailName = txtThumbnailName.Text;
+                theme.ThumbnailName = txtThumbnailName.Text.StartsWith("/") ? txtThumbnailName.Text.Substring(1) : txtThumbnailName.Text;
                 theme.Title = txtTitle.Text;
                 theme.AuthorId = 0;
                 theme.AuthorMail = txtAuthorMail.Text;
@@ -80,13 +83,24 @@ namespace IThemeSky.Management.Theme
                 theme.Views = Convert.ToInt32(txtViews.Text);
                 theme.SupportIPhone4 = chkSupportIPhone4.Checked;
                 _repositoryManage.UpdateTheme(theme);
+
+                //增加主题图片
+                string images = Request.Form["hidThemeImages"];
+                if (!string.IsNullOrEmpty(images))
+                {
+                    string[] arrImages = images.Split(',');
+                    foreach (string image in arrImages)
+                    {
+                        _repositoryManage.AddThemeImage(hidThemeId.Value.ToInt32(), image);
+                    }
+                }
                 ltlMessage.Text = "修改主题成功";
             }
             else
             {
                 IThemeSky.Model.Theme theme = new IThemeSky.Model.Theme()
                 {
-                    ThumbnailName = txtThumbnailName.Text,
+                    ThumbnailName = txtThumbnailName.Text.StartsWith("/") ? txtThumbnailName.Text.Substring(1) : txtThumbnailName.Text,
                     Title = txtTitle.Text,
                     AddTime = DateTime.Now,
                     AuthorId = 0,
@@ -112,8 +126,20 @@ namespace IThemeSky.Management.Theme
                     SupportIPhone4 = chkSupportIPhone4.Checked,
                 };
                 _repositoryManage.AddTheme(theme);
+                //增加主题图片
+                string images = Request.Form["hidThemeImages"];
+                if (!string.IsNullOrEmpty(images))
+                {
+                    string[] arrImages = images.Split(',');
+                    foreach (string image in arrImages)
+                    {
+                        _repositoryManage.AddThemeImage(theme.ThemeId, image);
+                    }
+                }
                 ltlMessage.Text = "添加主题成功";
             }
+            rptThemeImages.DataSource = _repositoryView.GetThemeImages(Request.QueryString["themeId"].ToInt32());
+            rptThemeImages.DataBind();
         }
     }
 }

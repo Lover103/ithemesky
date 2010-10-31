@@ -9,6 +9,7 @@ using System.Net;
 using IThemeSky.DataAccess;
 using IThemeSky.Model;
 using IThemeSky.Library.Util;
+using System.Net.Mail;
 
 namespace IThemeSky.UI.Controllers
 {
@@ -26,7 +27,7 @@ namespace IThemeSky.UI.Controllers
         public ActionResult Result()
         {
             //定义您的身份标记
-            string authToken = "WkNr55q-JIZRjIOuvSMlEargEe72x_slxR2a7pSpn1dAn1jKg7OXdaTugfi";
+            string authToken = "TrF5HMvwegFS_zBrIeRTr-X3la4dskqkm1CeN45tIea8jGoSNz4v8pRdmQS";
             string txToken = Request.QueryString["tx"];
             int themeId = Request.QueryString["themeid"].ToInt32();
             double price = Request.QueryString["price"].ToDouble();
@@ -65,14 +66,21 @@ namespace IThemeSky.UI.Controllers
                 //提交paypal作二次验证
                 WebClient client = new WebClient();
                 string content = client.UploadString(PAYPAY_GATEWAY, "POST", query);
-                logger.Info("<p>#" + DateTime.Now + ":PDT[" + themeId + "][" + mail + "]" + content + "</p>");
+                logger.Debug("<p>#" + DateTime.Now + ":PDT[" + themeId + "][" + mail + "]" + content + "</p>");
                 PayResultModel model = new PayResultModel();
                 string[] arrParams = content.Split('\n');
                 for (int i = 0; i < arrParams.Length; i++)
                 {
-                    if (i == 0 && arrParams[i].Equals("success", StringComparison.CurrentCultureIgnoreCase))
+                    if (i == 0)
                     {
-                        model.Success = true;
+                        if (arrParams[0].Equals("success", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            model.Success = true;
+                        }
+                        else
+                        {
+                            return View("Fail", new PayResultModel() { Description = "Waitting..." });
+                        }
                     }
                     string[] arr = arrParams[i].Split('=');
                     if (arr.Length > 1)
@@ -96,11 +104,46 @@ namespace IThemeSky.UI.Controllers
                 model.UserMail = mail;
                 model.Theme = ThemeRepositoryFactory.Default.GetThemeViewRepository().GetTheme(themeId);
                 ViewData["content"] = content;
+                SendMail(mail
+                    , "Purchase Success.ithemesky download code of theme " + model.Theme.Title
+                    , string.Format("The downlod code [{0}] of the theme {1}.http://www.ithemesky.com/{2}", model.txn_id, model.Theme.Title, model.Theme.ThemeDetailUrl));
                 return View("Success", model);
             }
             else
             {
                 return View("Fail", new PayResultModel() { Description  = "Invaild checksum" });
+            }
+        }
+
+        private void SendMail(string mailTo, string subject, string body)
+        {
+            try
+            {
+                string mailServerName = "smtp.gmail.com";
+                string mailFrom = "ithemesky@gmail.com";
+
+                using (MailMessage message = new MailMessage(mailFrom, mailTo, subject, body))
+                {
+                    //SmtpClient是发送邮件的主体，这个构造函数是告知SmtpClient发送邮件时使用哪个SMTP服务器
+                    SmtpClient mailClient = new SmtpClient(mailServerName);
+                    //将认证实例赋予mailClient,也就是访问SMTP服务器的用户名和密码
+                    mailClient.Credentials = new NetworkCredential("ithemesky@gmail.com", "itheme2010");
+                    mailClient.EnableSsl = true;
+                    mailClient.Port = 587;
+                    //最终的发送方法
+                    mailClient.Send(message);
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("<fieldset><legend>Time:{3}</legend><div>Url:{0}<br />UserIp:{1}<br />UrlReferer:{2}<hr /><pre>{4}</pre></div></fieldset>"
+                , Request.Url
+                , Request.UserHostAddress
+                , Request.UrlReferrer ?? Request.UrlReferrer
+                , DateTime.Now
+                , ex
+                );
+                logger.ErrorException("Send mail error[" + mailTo + "][" + body + "]", ex);
             }
         }
     }

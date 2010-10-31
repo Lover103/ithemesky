@@ -15,7 +15,7 @@ namespace IThemeSky.DataAccess
         /// <summary>
         /// 简单实体对应的查询字段列表
         /// </summary>
-        protected const string SIMPLE_THEME_FIELDS = "ThemeId,CategoryId,CategoryName,Title,ThumbnailName,CommendIndex,Downloads,SupportIPhone4";
+        protected const string SIMPLE_THEME_FIELDS = "ThemeId,CategoryId,CategoryName,Title,ThumbnailName,CommendIndex,Downloads,SupportIPhone4,Price";
         protected const string VIEW_TAGTHEME = "View_TagTheme";
         protected const string VIEW_THEME = "View_Theme";
         /// <summary>
@@ -240,7 +240,8 @@ namespace IThemeSky.DataAccess
                 AuthorName = dataReader["AuthorName"].ToString(),
                 AuthorMail = dataReader["AuthorMail"].ToString(),
                 DownloadUrl = dataReader["DownloadUrl"].ToString(),
-                SupportIPhone4 = Convert.ToInt32(dataReader["SupportIPhone4"]) == 1
+                SupportIPhone4 = Convert.ToInt32(dataReader["SupportIPhone4"]) == 1,
+                Price = Convert.ToDouble(dataReader["Price"]),
             };
         }
         /// <summary>
@@ -259,6 +260,7 @@ namespace IThemeSky.DataAccess
                 SupportIPhone4 = Convert.ToInt32(dataReader["SupportIPhone4"]) == 1,
                 Thumbnail = "http://resource.ithemesky.com/" + dataReader["ThumbnailName"].ToString(),
                 Thumbnail_112x168 = "http://resource.ithemesky.com/" + dataReader["ThumbnailName"].ToString().Replace(".jpg", "_112x168.jpg"),
+                Price = Convert.ToDouble(dataReader["Price"]),
             };
         }
 
@@ -296,6 +298,7 @@ namespace IThemeSky.DataAccess
                 AuthorMail = dataReader["AuthorMail"].ToString(),
                 DownloadUrl = dataReader["DownloadUrl"].ToString(),
                 SupportIPhone4 = Convert.ToInt32(dataReader["SupportIPhone4"]) == 1,
+                Price = Convert.ToDouble(dataReader["Price"]),
             };
         }
 

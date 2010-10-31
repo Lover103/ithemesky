@@ -377,6 +377,35 @@ namespace IThemeSky.DataAccess
             }
             return categories;
         }
+
+        /// <summary>
+        /// 获取主题的图片列表
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <returns></returns>
+        public override List<ThemeImage> GetThemeImages(int themeId)
+        {
+            List<ThemeImage> images;
+            string cacheKey = BuildCacheKey("GetThemeImages", themeId);
+            if (_enableCache == false)
+            {
+                images = base.GetThemeImages(themeId);
+                _enableCache = true;
+            }
+            else
+            {
+                if (CacheHelper.Contains(cacheKey))
+                {
+                    images = CacheHelper.Get<List<ThemeImage>>(cacheKey);
+                }
+                else
+                {
+                    images = base.GetThemeImages(themeId);
+                    CacheHelper.Set<List<ThemeImage>>(cacheKey, images, _cacheTime);
+                }
+            }
+            return images;
+        }
         #endregion
 
 

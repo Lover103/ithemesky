@@ -14,8 +14,8 @@
         var themeId = '<%=ViewData.Model.ThemeId %>';
         var url = '/Service/GetPayReturnUrl/' + themeId + ',' + mail + ',' + userName;
         $.get(url, function(data) {
-            $('#hidReturnUrl').val('http://beta.ithemesky.com/Store/Result/?' + data);
-            $('#hidNotifyUrl').val('http://beta.ithemesky.com/service/checkipn/' + themeId);
+            $('#hidReturnUrl').val('http://www.ithemesky.com/Store/Result/?' + data);
+            $('#hidNotifyUrl').val('http://www.ithemesky.com/service/checkipn/' + themeId);
             $('#frmOrder').submit();
         });
     }
@@ -63,9 +63,9 @@
 		</li>
 	</ul>
 	<div style="display:none">
-        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="frmOrder">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="frmOrder">
             <input type="hidden" name="cmd" value="_xclick">
-            <input type="hidden" name="business" value="sanvy_1287488194_biz@gmail.com">
+            <input type="hidden" name="business" value="X2RHYJF7J2U64">
             <input type="hidden" name="item_name" value="<%=ViewData.Model.Title %>">
             <input type="hidden" name="amount" value="<%=ViewData.Model.Price.ToString("0.00") %>">
             <input type="hidden" name="currency_code" value="USD">

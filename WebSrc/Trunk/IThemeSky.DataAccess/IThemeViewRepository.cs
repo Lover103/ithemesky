@@ -163,5 +163,12 @@ namespace IThemeSky.DataAccess
         /// </summary>
         /// <returns></returns>
         List<ThemeCategory> GetThemeCategories();
+
+        /// <summary>
+        /// 获取主题的图片列表
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <returns></returns>
+        List<ThemeImage> GetThemeImages(int themeId);
     }
 }
