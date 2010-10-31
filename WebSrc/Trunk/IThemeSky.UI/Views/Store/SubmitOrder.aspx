@@ -50,16 +50,17 @@
 		</li>
 		<li class="clearfix">
 			<label class="label">Your Full Name:</label>
-			<div class="input"><input id="txtUserName" type="text" class="inputNormal" onblur="this.className='inputNormal'" onfocus="this.className='inputFocus'" /></div>
-			<div class="tips" style="display:none">Please fill in your real name here, it never be published.</div>
+			<div class="input"><input id="txtUserName" type="text" class="inputNormal" onblur="this.className='inputNormal';$('#nameTips').hide()" onfocus="this.className='inputFocus';$('#nameTips').show()" /></div>
+			<div class="tips" id="nameTips" style="display:none">Please fill in your real name here, it never be published.</div>
 		</li>
 		<li class="clearfix">
 			<label class="label">Your Email Adress:</label>
-			<div class="input"><input id="txtMail" type="text" class="inputNormal" onblur="this.className='inputNormal'" onfocus="this.className='inputFocus'" /></div>
-			<p class="tips" style="display:none">It's important, we will send you the order information and a Download Code via Email.</p>
+			<div class="input"><input id="txtMail" type="text" class="inputNormal" onblur="this.className='inputNormal';$('#mailTips').hide()" onfocus="this.className='inputFocus';$('#mailTips').show()" /></div>
+			<p class="tips" id="mailTips" style="display:none">It's important, we will send you the order information and a Download Code via Email.</p>
 		</li>
 		<li class="btnBg">
 			<input type="button" class="btnPurchase" onclick="PostOrder()" />
+			<div class="tipsPayment"><img src="/Content/images/icon_payment.png" alt="Payments" /></div>
 		</li>
 	</ul>
 	<div style="display:none">
@@ -83,23 +84,23 @@
 			<dd>You will receive a mail includes the Download Code after you purchased a theme. Use the Download Code, you would not be charged again while you downloading a theme you have purchased. If you lose it, please send us the theme's name via the Email address you used when you purchased. We will send you the Download Code within 2 business days.</dd>
 		</dl>
 		<dl class="sr">
-			<dt>Payments by PayPal</dt>
-			<dd>PayPal provides an easy and secure checkout for your purchases. You do not need to have an account to purchase, and all major credit cards are accepted.<br /><img src="/Content/images/store/ico_credit_card.png" alt="Credit Cards" style="margin-top:10px;" /></dd>
+			<dt>Terms and Conditions</dt>
+			<dd>All the paid themes are permitted to install for personal and non-profit, non-commercial use. All themes are protected by copyright. It is not allowed to post the paid theme's copy or Download Code on other third websites.</dd>
 		</dl>
 		<dl>
-			<dt>Permission and Rules</dt>
-			<dd>All the paid themes are permitted to install for personal and non-profit, non-commercial use. All themes are protected by copyright. It is not allowed to post the paid theme's copy or Download Code on other third websites.</dd>
+			<dt>Payments by PayPal</dt>
+			<dd>PayPal provides an easy and secure checkout for your purchases. You do not need to have an account to purchase, and all major credit cards are accepted.<br /><img src="/Content/images/icon_payment.png" alt="Payments" style="margin-top:8px;" /></dd>
 		</dl>
 		<dl class="sr">
 			<dt>Install Theme</dt>
-			<dd>We have checked that every paid theme can be installed on iPhone successfully before selling. If you don't know how to install a theme, please read the <a href="#">tutorial</a>. If you find something wrong with the theme, please contact us.</dd>
+			<dd>We have checked that every paid theme can be installed on iPhone successfully before selling. If you don't know how to install a theme, please read the <a href="/help/tutorials">tutorial</a>. If you find something wrong with the theme, please contact us.</dd>
 		</dl>
 	</div>
 </div>
 <div id="footer">
 	<ul>
 		<li class="copyright">Copyright &copy; 2010 iThemeSky&nbsp;&nbsp;|&nbsp;&nbsp; All iPhone Themes are copyrighted by their respective authors.</li>
-		<li class="siteNav"><a href="#">Contact Us</a></li>
+		<li class="siteNav"><a href="/contact">Contact Us</a></li>
 	</ul>
 </div>
 </body>
