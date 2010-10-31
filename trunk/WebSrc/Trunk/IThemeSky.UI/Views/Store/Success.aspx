@@ -37,7 +37,7 @@
 <div id="footer">
 	<ul>
 		<li class="copyright">Copyright &copy; 2010 iThemeSky&nbsp;&nbsp;|&nbsp;&nbsp; All iPhone Themes are copyrighted by their respective authors.</li>
-		<li class="siteNav"><a href="#">Contact Us</a></li>
+		<li class="siteNav"><a href="/contact">Contact Us</a></li>
 	</ul>
 </div>
 </body>
