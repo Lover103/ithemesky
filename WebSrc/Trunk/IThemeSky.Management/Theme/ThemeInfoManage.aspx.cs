@@ -29,6 +29,7 @@ namespace IThemeSky.Management.Theme
                     IThemeSky.Model.Theme theme = _repositoryManage.GetTheme(Request.QueryString["themeId"].ToInt32());
                     txtThumbnailName.Text = theme.ThumbnailName;
                     txtTitle.Text = theme.Title;
+                    txtPrice.Text = theme.Price.ToString("0.00");
                     txtAuthorMail.Text = theme.AuthorMail;
                     txtAuthorName.Text = theme.AuthorName;
                     ddlCategoryId.SelectedValue = theme.CategoryId.ToString();
@@ -61,6 +62,7 @@ namespace IThemeSky.Management.Theme
                 theme.ThemeId = hidThemeId.Value.ToInt32();
                 theme.ThumbnailName = txtThumbnailName.Text.StartsWith("/") ? txtThumbnailName.Text.Substring(1) : txtThumbnailName.Text;
                 theme.Title = txtTitle.Text;
+                theme.Price = Convert.ToDouble(txtPrice.Text);
                 theme.AuthorId = 0;
                 theme.AuthorMail = txtAuthorMail.Text;
                 theme.AuthorName = txtAuthorName.Text;
@@ -102,6 +104,7 @@ namespace IThemeSky.Management.Theme
                 {
                     ThumbnailName = txtThumbnailName.Text.StartsWith("/") ? txtThumbnailName.Text.Substring(1) : txtThumbnailName.Text,
                     Title = txtTitle.Text,
+                    Price = Convert.ToDouble(txtPrice.Text),
                     AddTime = DateTime.Now,
                     AuthorId = 0,
                     AuthorMail = txtAuthorMail.Text,
