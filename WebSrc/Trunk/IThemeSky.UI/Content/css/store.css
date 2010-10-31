@@ -83,7 +83,7 @@ a:hover,a:active{ text-decoration:underline; color:#FFF;}
 .resultInfo .titleFail{ color:#F00;}
 .resultInfo dd{ margin:3px 0 0 5px;}
 .resultInfo .list{ font-size:13px; color:#9FB8BF; line-height:28px;}
-.resultInfo .downloadCode{ padding:6px 12px; background:url(/Content/images/store/sprites_store.png) no-repeat -700px -40px; font-weight:bold; color:#FF0;}
+.resultInfo .downloadCode{ padding:6px 8px; background:url(/Content/images/store/sprites_store.png) no-repeat -640px -40px; font-weight:bold; color:#FF0;}
 .resultInfo .note{ margin-top:12px; background:#00242A; border:1px solid #123237; padding:8px 12px;}
 .resultInfo .btnDownload{ margin-top:12px; width:130px; height:36px; padding:5px 6px; background:url(/Content/images/store/sprites_store.png) 0 -40px;}
 .btnDownload a:link,.btnDownload a:visited{ display:block; width:130px; height:36px; text-indent:-999em; overflow:hidden; background:url(/Content/images/store/sprites_store.png) no-repeat -160px -100px;}
