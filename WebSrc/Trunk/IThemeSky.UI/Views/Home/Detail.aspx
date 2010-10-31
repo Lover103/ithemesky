@@ -107,7 +107,7 @@
 				</dl>
 				<dl class="details clearfix">
 					<dt>Author:</dt>
-					<dd><%=ViewData.Model.CurrentTheme.CategoryName %></dd>
+					<dd><%=ViewData.Model.CurrentTheme.AuthorName %>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/contact" title="It is not the real author? Contact us to update it." style="font-size:11px;">[Author Report?]</a></dd>
 				</dl>
 				<dl class="details clearfix"> 
 					<dt>Tags:</dt>
@@ -135,7 +135,11 @@
 					<dd><%=ViewData.Model.CurrentTheme.FileSize.ToFileSize() %></dd>
 				</dl>
 				<dl class="details clearfix"> 
-					<dt>Includes:</dt>
+					<dt>Price:</dt>
+					<dd style="font-weight:bold; color:#FF0;"><%=ViewData.Model.CurrentTheme.Price > 0 ? "$" + ViewData.Model.CurrentTheme.Price.ToString("0.00") : "Free"%></dd>
+				</dl>
+				<dl class="details clearfix"> 
+					<dt>Supports:</dt>
 					<dd class="detailInclude">
 						<ul class="clearfix">
 						    <% for (int i = 0; i < ViewData.Model.ThemeTypeTags.Count; i++) { %>
@@ -157,16 +161,13 @@
 						</ul>
 					</dd>
 				</dl>
-				<dl class="details clearfix"> 
-					<dt>Price:</dt>
-					<dd><%=ViewData.Model.CurrentTheme.Price > 0 ? "$" + ViewData.Model.CurrentTheme.Price.ToString("0.00") : "Free"%></dd>
-				</dl>
 				<ul class="detailBtn clearfix">
 				    <% /*paid theme*/ %>
 				    <% if (ViewData.Model.CurrentTheme.Price > 0) { %>
 					    
 					    <li class="btnBuy"><a href="/Store/SubmitOrder/<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Buy Download via Paypal">Buy Download</a></li>
-					    <li class="btnBuyTip">If you have bought this theme before, <a href="javascript:$('#divDownloadCode').show()">Click here</a> to enter the Download Code to download it, you would not be charged again.
+						<li><img src="/Content/images/icon_payment.png" alt="Credit Cards" style="margin-top:10px;" /></li>
+					    <li class="btnBuyTip">If you have bought this theme before, <a onclick="$('#divDownloadCode').show()" style="cursor:pointer">Click here</a> to enter the Download Code to download it, you would not be charged again.
 						    <div id="divDownloadCode" style="display:none" class="form"><input id="txtDownloadCode" type="text" class="inputNormal" /> 
 						        <button type="button" onclick="location.href='/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>,' + $('#txtDownloadCode').val()">Apply Now</button>
 						    </div>
@@ -183,10 +184,14 @@
 					<%} %>
 				</ul>
 				<div class="installIip">
-					<% if (ViewData.Model.CurrentTheme.SupportIPhone4){ %>
-						<a href="/ispirit/"><span class="orange">Install theme to iPhone 4 with <span style=" text-decoration:underline;">iSpirit</span></span></a>. Some iPhone 4 themes can also be used in former iPhones.
+					<% if (ViewData.Model.CurrentTheme.Price > 0) { %>
+					We have checked that every paid theme can be installed on iPhone successfully before selling. If you don't know how to install a theme, please read the <a href="/help/tutorials">tutorial</a>.
 					<%} else { %>
-					Click "Create Now" above to modify this theme in your mind with iPhone theme Creator Online and then download it. <a href="/ispirit/"><span class="orange">Install theme to iPhone with <span style=" text-decoration:underline;">iSpirit</span></span></a>.
+						<% if (ViewData.Model.CurrentTheme.SupportIPhone4){ %>
+							<a href="/ispirit/"><span class="orange">Install theme to iPhone 4 with <span style=" text-decoration:underline;">iSpirit</span></span></a>. Some iPhone 4 themes can also be used in former iPhones.
+						<%} else { %>
+						Click "Create Now" above to modify this theme in your mind with iPhone theme Creator Online and then download it. <a href="/ispirit/"><span class="orange">Install theme to iPhone with <span style=" text-decoration:underline;">iSpirit</span></span></a>.
+						<%} %>
 					<%} %>
 				</div>
 				<dl class="themeShare">
