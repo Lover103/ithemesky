@@ -135,10 +135,6 @@
 					<dd><%=ViewData.Model.CurrentTheme.FileSize.ToFileSize() %></dd>
 				</dl>
 				<dl class="details clearfix"> 
-					<dt>Price:</dt>
-					<dd style="font-weight:bold; color:#FF0;"><%=ViewData.Model.CurrentTheme.Price > 0 ? "$" + ViewData.Model.CurrentTheme.Price.ToString("0.00") : "Free"%></dd>
-				</dl>
-				<dl class="details clearfix"> 
 					<dt>Supports:</dt>
 					<dd class="detailInclude">
 						<ul class="clearfix">
@@ -160,6 +156,10 @@
 							<li><a href="javascript:;" class="rateS5" value="5" title="5 Stars">5 Stars</a></li>
 						</ul>
 					</dd>
+				</dl>
+				<dl class="details clearfix"> 
+					<dt>Price:</dt>
+					<dd style="font-weight:bold; color:#FF0;"><%=ViewData.Model.CurrentTheme.Price > 0 ? "$" + ViewData.Model.CurrentTheme.Price.ToString("0.00") : "Free!"%></dd>
 				</dl>
 				<ul class="detailBtn clearfix">
 				    <% /*paid theme*/ %>
