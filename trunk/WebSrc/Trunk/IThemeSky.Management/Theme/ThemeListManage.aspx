@@ -72,6 +72,14 @@
                         所属标签：<asp:TextBox ID="txtTags" runat="server" value='<%#GetThemeTags(Eval("ThemeId")) %>'></asp:TextBox> (iPhone4主题：<asp:CheckBox ID="chkSupportIPhone4" runat="server" Checked="false" />) (更新时间：<asp:CheckBox ID="chkUpdateTime" runat="server" Checked="true" />)
                         <asp:Button ID="btnSave" OnClick="propertyList_OnClick" Text="保存" runat="server" />&nbsp;<asp:Button ID="btnSaveAndCheck" OnClick="propertyList_OnClick" Text="保存并审核通过" runat="server" />
                         <br />
+                        <asp:CheckBox runat="server" ID="chkTagApps" Text="Apps" />
+                        <asp:CheckBox runat="server" ID="chkTagLockscreen" Text="Lockscreen" />
+                        <asp:CheckBox runat="server" ID="chkTagSBSettings" Text="SBSettings" />
+                        <asp:CheckBox runat="server" ID="chkTagSMS" Text="SMS" />
+                        <asp:CheckBox runat="server" ID="chkTagSounds" Text="Sounds" />
+                        <asp:CheckBox runat="server" ID="chkTagWidgets" Text="Widgets" />
+                        <asp:CheckBox runat="server" ID="chkTagDialer" Text="Dialer" />
+                        <br />
                         <a href="<%#Eval("ThumbnailName") %>" target="_blank"><img src="<%#Eval("ThumbnailName").ToString().Replace(".jpg", "_112x168.jpg") %>" border="0" /></a>
                         <asp:HiddenField ID="hidThemeId" runat="server" />
                         </td>

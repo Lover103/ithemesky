@@ -93,6 +93,22 @@ namespace IThemeSky.DataAccess
         /// <param name="themeId">主题id</param>
         /// <param name="userIp">用户ip</param>
         /// <returns></returns>
-        bool InsertDownloadHistory(int themeId, string userIp);
+        bool InsertDownloadHistory(int themeId, string userIp, string downloadCode);
+
+        /// <summary>
+        /// 添加主题图片地址
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        bool AddThemeImage(int themeId, string url);
+
+        /// <summary>
+        /// 删除主题图片地址
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        bool DeleteThemeImage(int themeId, string url);
     }
 }

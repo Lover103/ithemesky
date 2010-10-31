@@ -107,6 +107,12 @@
     <Compile Include="Reports\test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Services\DeleteFile.ashx.cs">
+      <DependentUpon>DeleteFile.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Upload.ashx.cs">
+      <DependentUpon>Upload.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Support\UserSupport.aspx.cs">
       <DependentUpon>UserSupport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -201,7 +207,16 @@
     <Content Include="Resources\Charts\StackedColumn2D.swf" />
     <Content Include="Resources\Charts\StackedColumn3D.swf" />
     <Content Include="Resources\Charts\StackedColumn3DLineDY.swf" />
+    <Content Include="Resources\Js\fileuploader.js" />
     <Content Include="Resources\Js\FusionCharts.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Css\fileuploader.css" />
+    <Content Include="Services\Upload.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Css\loading.gif" />
+    <Content Include="Services\DeleteFile.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

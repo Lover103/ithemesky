@@ -12,16 +12,18 @@
             function() {
                 LoadComments(1);
                 BindRateEvent();
-				timer = null;
-				$('#carousel-inner').infiniteCarousel();
-				timer = setTimeout(function(){
-					$('#carousel-inner').trigger("gotonext");                   
-				}, 3000);
-				$(".themeCutList a").fancybox({
-					'overlayColor': '#000',
-					'overlayOpacity': .8,
-					'titleShow': false
-				});
+                timer = null;
+                $('#carousel-inner').infiniteCarousel();
+                if ('<%=ViewData.Model.ThemeImages.Count %>' * 1 > 1) {
+                    timer = setTimeout(function() {
+                        $('#carousel-inner').trigger("gotonext");
+                    }, 3000);
+                }
+                $(".themeCutList a").fancybox({
+                    'overlayColor': '#000',
+                    'overlayOpacity': .8,
+                    'titleShow': false
+                });
             });
         _themeId = '<%=ViewData.Model.CurrentTheme.ThemeId %>';
     </script>
@@ -84,22 +86,20 @@
 					<%} %>
 					<div class="themeCutList">
 						<ul>
-							<li><a href="<%=ViewData.Model.CurrentTheme.ThumbnailName %>" rel="preview"><img src="<%=ViewData.Model.CurrentTheme.ThumbnailName %>" width="200" height="300" alt="<%=ViewData.Model.CurrentTheme.Title %> iPhone theme" /></a></li>
-							<li><a href="http://resource.ithemesky.com/ThemeThumbnails/201004/ITheme_4569.jpg" rel="preview"><img src="http://resource.ithemesky.com/ThemeThumbnails/201004/ITheme_4569.jpg" width="200" height="300" alt="" /></a></li>
-							<li><a href="http://resource.ithemesky.com/ThemeThumbnails/201010/Fifty-foot-shadows-HD.jpg" rel="preview"><img src="http://resource.ithemesky.com/ThemeThumbnails/201010/Fifty-foot-shadows-HD.jpg" width="200" height="300" /></a></li>
-							<li><a href="http://resource.ithemesky.com/ThemeThumbnails/201004/ITheme_15583.jpg" rel="preview"><img src="http://resource.ithemesky.com/ThemeThumbnails/201004/ITheme_15583.jpg" width="200" height="300" /></a></li>
-							<li><a href="http://resource.ithemesky.com/ThemeThumbnails/201007/Neon-Sunnyside.jpg" rel="preview"><img src="http://resource.ithemesky.com/ThemeThumbnails/201007/Neon-Sunnyside.jpg" width="200" height="300" /></a></li>
+						    <% foreach (ThemeImage image in ViewData.Model.ThemeImages) { %>
+						        <li><a href="http://resource.ithemesky.com<%=image.ImageUrl %>" rel="preview"><img src="http://resource.ithemesky.com<%=image.ImageUrl%>" width="200" height="300" alt="<%=ViewData.Model.CurrentTheme.Title %> iPhone theme" /></a></li>
+						    <%} %>
 						</ul>
 					</div>
 				</div>
-				<div class="hasMultiple">
+				<div class="<%=ViewData.Model.ThemeImages.Count > 1 ? "hasMultiple" : "noMultiple"%>">
+				    <% if (ViewData.Model.ThemeImages.Count > 1) { %>
 					<ul>
-						<li><span class="load-img selected" rel="1"></span></li>
-						<li><span class="load-img" rel="2"></span></li>
-						<li><span class="load-img" rel="3"></span></li>
-						<li><span class="load-img" rel="4"></span></li>
-						<li><span class="load-img" rel="5"></span></li>
+					    <% for (int i = 1; i <= ViewData.Model.ThemeImages.Count; i++) { %>
+						<li><span class="load-img<%=i==1 ? " selected" : "" %>" rel="<%=i %>"></span></li>
+						<%} %>
 					</ul>
+					<%} %>
 				</div>
 				<ul class="btn">
 					<li class="previous"><a <%=ViewData.Model.PrevThemeId <=0 ? "class=\"none\" onclick=\"return false;\"" : "" %> href="/iphone-themes/<%=ViewData.Model.PrevThemeName.Trim().Replace(" ", "-") %>/<%=ViewData.Model.PrevThemeId %>" title="Previous theme: <%=ViewData.Model.PrevThemeName %> iPhone theme">Previous</a></li>
@@ -145,13 +145,9 @@
 					<dt>Includes:</dt>
 					<dd class="detailInclude">
 						<ul class="clearfix">
-							<li>APPS</li>
-							<li>LockScreen</li>
-							<li>SBSettings</li>
-							<li>Dialer</li>
-							<li>SMS</li>
-							<li>Widgets</li>
-							<li>Sounds</li>
+						    <% for (int i = 0; i < ViewData.Model.ThemeTypeTags.Count; i++) { %>
+							    <li><a href="/list/new/1/<%=ViewData.Model.ThemeTypeTags[i] %>"><%=ViewData.Model.ThemeTypeTags[i]%></a></li>
+							<%} %>
 						</ul>
 					</dd>
 				</dl>
@@ -168,19 +164,30 @@
 						</ul>
 					</dd>
 				</dl>
+				<dl class="details clearfix"> 
+					<dt>Price:</dt>
+					<dd><%=ViewData.Model.CurrentTheme.Price > 0 ? "$" + ViewData.Model.CurrentTheme.Price.ToString("0.00") : "Free"%></dd>
+				</dl>
 				<ul class="detailBtn clearfix">
-					<li class="btnBuy"><a href="#" title="Buy Download via Paypal">Buy Download</a></li>
-					<li class="btnBuyTip">If you have bought this theme before, <a href="#">Click here</a> to enter the Download Code to download it, you would not be charged again.
-						<div class="form"><input type="text" class="inputNormal" /> <button type="submit">Apply Now</button></div>
-					</li>
-					<li class="btnDownload"><a href="/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>" title="Download">Download</a></li>
-					<li class="btnCreate">
-					<% if (ViewData.Model.CurrentTheme.SupportIPhone4){ %>
-						<span class="off" title="Theme Creator for iPhone 4 comming soon">Can't be modified</span>
+				    <% /*paid theme*/ %>
+				    <% if (ViewData.Model.CurrentTheme.Price > 0) { %>
+					    
+					    <li class="btnBuy"><a href="/Store/SubmitOrder/<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Buy Download via Paypal">Buy Download</a></li>
+					    <li class="btnBuyTip">If you have bought this theme before, <a href="javascript:$('#divDownloadCode').show()">Click here</a> to enter the Download Code to download it, you would not be charged again.
+						    <div id="divDownloadCode" style="display:none" class="form"><input id="txtDownloadCode" type="text" class="inputNormal" /> 
+						        <button type="button" onclick="location.href='/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>,' + $('#txtDownloadCode').val()">Apply Now</button>
+						    </div>
+					    </li>
 					<%} else { %>
-						<a href="/Creator/<%=ViewData.Model.CurrentTheme.Title.Replace(" ", "-") %>,<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator" target="_blank" rel="nofollow">Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator</a>
+					    <li class="btnDownload"><a href="/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>" title="Download">Download</a></li>
+					    <li class="btnCreate">
+					    <% if (ViewData.Model.CurrentTheme.SupportIPhone4){ %>
+						    <span class="off" title="Theme Creator for iPhone 4 comming soon">Can't be modified</span>
+					    <%} else { %>
+						    <a href="/Creator/<%=ViewData.Model.CurrentTheme.Title.Replace(" ", "-") %>,<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator" target="_blank" rel="nofollow">Modify <%=ViewData.Model.CurrentTheme.Title %> iPhone theme with Theme Creator</a>
+					    <%} %>
+					    </li>
 					<%} %>
-					</li>
 				</ul>
 				<div class="installIip">
 					<% if (ViewData.Model.CurrentTheme.SupportIPhone4){ %>

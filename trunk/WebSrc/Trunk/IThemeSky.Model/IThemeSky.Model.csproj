@@ -58,9 +58,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThemeCategory.cs" />
     <Compile Include="ThemeComment.cs" />
+    <Compile Include="ThemeImage.cs" />
     <Compile Include="ThemesFilter.cs" />
     <Compile Include="ThemeSortOption.cs" />
     <Compile Include="ThemeSupport.cs" />
+    <Compile Include="UserOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IThemeSky.Library\IThemeSky.Library.csproj">

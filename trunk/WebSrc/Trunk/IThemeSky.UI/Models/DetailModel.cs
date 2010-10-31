@@ -9,13 +9,18 @@ namespace IThemeSky.UI.Models
 {
     public class DetailModel : ModelBase
     {
-
+        private List<string> _themeTypeTags = new List<string>() { "apps", "lockscreen", "sbsettings", "sms", "sounds", "widgets", "dialer" };
         public DetailModel(int themeId)
         {
             ThemeRepositoryFactory.Default.GetThemeManageRepository().IncreaseViews(themeId, 1);
             CurrentTheme = _themeRepository.GetTheme(themeId);
             CurrentTheme.Views++;
-            Tags = _themeRepository.GetTagsByThemeId(themeId);
+
+            List<string> tags = _themeRepository.GetTagsByThemeId(themeId);
+            Tags = tags.Where(tag => !_themeTypeTags.Contains(tag.ToLower())).ToList();
+            ThemeTypeTags = tags.Where(tag => _themeTypeTags.Contains(tag.ToLower())).ToList();
+
+
             string themeName;
             PrevThemeId = _themeRepository.GetPrevThemeId(CurrentTheme.CategoryId, themeId, out themeName);
             PrevThemeName = themeName;
@@ -26,6 +31,8 @@ namespace IThemeSky.UI.Models
             TopDownloadThemes = _themeRepository.GetThemesByCategoryId(CurrentTheme.CategoryId, ThemeSortOption.Popular, 10);
             CommendThemes = _themeRepository.GetThemesByCategoryId(CurrentTheme.CategoryId, ThemeSortOption.Recommended, 10);
 
+            ThemeImages = _themeRepository.GetThemeImages(themeId);
+
             PostComment = new PostCommentModel() 
             { 
                 ThemeId = themeId,
@@ -33,6 +40,7 @@ namespace IThemeSky.UI.Models
         }
         public FullThemeView CurrentTheme { get; private set; }
         public List<string> Tags { get; private set; }
+        public List<string> ThemeTypeTags { get; set; }
         public int PrevThemeId { get; private set; }
         public string PrevThemeName { get; private set; }
         public int NextThemeId { get; private set; }
@@ -52,5 +60,9 @@ namespace IThemeSky.UI.Models
         /// 推荐的主题
         /// </summary>
         public List<SimpleThemeView> CommendThemes { get; set; }
+        /// <summary>
+        /// 获取主题的图片列表
+        /// </summary>
+        public List<ThemeImage> ThemeImages { get; set; }
     }
 }

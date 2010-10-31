@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="/Content/css/site.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="/Content/js/IThemeSky.js"></script>
+<script type="text/javascript" src="/Content/js/IThemeSky.js?v=20101031"></script>
 <asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder>
 <!--[if lte IE 6]>
 <style type="text/css">  
@@ -67,8 +67,6 @@ img,div,input,ul,li,dl,dt,dd,a:link,a:visited,a:hover,a:active,h1,h2,h3,h4,h5,h6
 					<li><a href="http://www.iphoneblogr.com/" title="iPhoneBlogr" title target="_blank">iPhoneBlogr</a></li>
 					<li>-</li>
 					<li><a href="http://www.allaboutiphone.net/" title="All about iPhone" target="_blank">All about iPhone</a></li>
-					<li>-</li>
-					<li><a href="http://www.iphoneappindex.com/" title="iPhone App Index" target="_blank">iPhone App Index</a></li>
 				</ul>
 			</dd>
 		</dl>

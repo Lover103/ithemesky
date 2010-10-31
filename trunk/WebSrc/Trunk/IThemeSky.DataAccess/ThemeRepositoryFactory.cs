@@ -106,5 +106,10 @@ namespace IThemeSky.DataAccess
         {
             return new SoftCommentRepository(_connectionProvider);
         }
+
+        public IOrderRepository GetOrderRepository()
+        {
+            return new OrderRepository(_connectionProvider);
+        }
     }
 }

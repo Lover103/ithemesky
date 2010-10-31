@@ -80,12 +80,13 @@ namespace IThemeSky.DataAccess
                 SqlParameterHelper.BuildInputParameter("@AuthorName", SqlDbType.NVarChar, 128, theme.AuthorName),
                 SqlParameterHelper.BuildInputParameter("@AuthorMail", SqlDbType.NVarChar, 128, theme.AuthorMail),
                 SqlParameterHelper.BuildInputParameter("@SupportIPhone4",SqlDbType.Int, 4, theme.SupportIPhone4 ? 1 : 0),
+                SqlParameterHelper.BuildInputParameter("@Price",SqlDbType.Decimal, 16, theme.Price),
 			};
             string cmdText = @"
                 INSERT INTO Theme
-				    (CategoryId,ParentCategoryId,Title,FileSize,Description,DisplayState,CheckState,AuthorId,CheckerId,CommendIndex,ThumbnailName,AddTime,UpdateTime,RateScore,RateNumbers,Comments,Downloads,Views,LastWeekDownloads,LastMonthDownloads,Source,DownloadUrl,AuthorName,AuthorMail,SupportIPhone4)
+				    (CategoryId,ParentCategoryId,Title,FileSize,Description,DisplayState,CheckState,AuthorId,CheckerId,CommendIndex,ThumbnailName,AddTime,UpdateTime,RateScore,RateNumbers,Comments,Downloads,Views,LastWeekDownloads,LastMonthDownloads,Source,DownloadUrl,AuthorName,AuthorMail,SupportIPhone4,Price)
 			    VALUES
-				    (@CategoryId,@ParentCategoryId,@Title,@FileSize,@Description,@DisplayState,@CheckState,@AuthorId,@CheckerId,@CommendIndex,@ThumbnailName,@AddTime,@UpdateTime,@RateScore,@RateNumbers,@Comments,@Downloads,@Views,@LastWeekDownloads,@LastMonthDownloads,@Source,@DownloadUrl,@AuthorName,@AuthorMail,@SupportIPhone4);SELECT @@IDENTITY";
+				    (@CategoryId,@ParentCategoryId,@Title,@FileSize,@Description,@DisplayState,@CheckState,@AuthorId,@CheckerId,@CommendIndex,@ThumbnailName,@AddTime,@UpdateTime,@RateScore,@RateNumbers,@Comments,@Downloads,@Views,@LastWeekDownloads,@LastMonthDownloads,@Source,@DownloadUrl,@AuthorName,@AuthorMail,@SupportIPhone4,@Price);SELECT @@IDENTITY";
             int themeId = Convert.ToInt32(SqlHelper.ExecuteScalar(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters));
             if (themeId > 0)
             {
@@ -127,7 +128,8 @@ namespace IThemeSky.DataAccess
 				DownloadUrl=@DownloadUrl,
                 AuthorName=@AuthorName,
                 AuthorMail=@AuthorMail,
-                SupportIPhone4=@SupportIPhone4
+                SupportIPhone4=@SupportIPhone4,
+                Price=@Price
 			where 
 				ThemeId=@ThemeId 
 			";
@@ -159,6 +161,7 @@ namespace IThemeSky.DataAccess
                 SqlParameterHelper.BuildInputParameter("@AuthorName", SqlDbType.NVarChar, 128, theme.AuthorName),
                 SqlParameterHelper.BuildInputParameter("@AuthorMail", SqlDbType.NVarChar, 128, theme.AuthorMail),
                 SqlParameterHelper.BuildInputParameter("@SupportIPhone4",SqlDbType.Int, 4, theme.SupportIPhone4 ? 1 : 0),
+                SqlParameterHelper.BuildInputParameter("@Price",SqlDbType.Decimal, 16, theme.Price),
 			};
             return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
         }
@@ -313,7 +316,10 @@ namespace IThemeSky.DataAccess
         /// <returns></returns>
         public bool IncreaseDownloads(int themeId, int number)
         {
-            string cmdText = string.Format("UPDATE Theme SET Downloads = Downloads + {1} WHERE ThemeId={0}", themeId, number);
+            string cmdText = string.Format("UPDATE Theme SET Downloads = Downloads + {1} WHERE ThemeId={0}"
+                , themeId
+                , number
+                );
             return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText) > 0;
         }
         /// <summary>
@@ -356,24 +362,66 @@ namespace IThemeSky.DataAccess
         /// <param name="themeId">主题id</param>
         /// <param name="userIp">用户ip</param>
         /// <returns></returns>
-        public bool InsertDownloadHistory(int themeId, string userIp)
+        public bool InsertDownloadHistory(int themeId, string userIp, string downloadCode)
         {
             string cmdText = @"                INSERT INTO [ThemeDownloadHistory]
                        ([ThemeId]
                        ,[AddTime]
                        ,[UserId]
                        ,[UserIp]
+                       ,[DownloadCode]
+                       ,[PaidTheme]
                        )
                  VALUES
                        (@ThemeId
                        ,getdate()
                        ,0
                        ,@UserIp
+                       ,@DownloadCode
+                       ,@PaidTheme
                        )            ";
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				SqlParameterHelper.BuildInputParameter("@ThemeId",SqlDbType.Int, 4, themeId),
                 SqlParameterHelper.BuildInputParameter("@UserIp",SqlDbType.VarChar, 40, userIp),
+                SqlParameterHelper.BuildInputParameter("@DownloadCode",SqlDbType.VarChar, 300, downloadCode),
+                SqlParameterHelper.BuildInputParameter("@PaidTheme",SqlDbType.SmallInt, 2, string.IsNullOrEmpty(downloadCode) ? 0 : 1),
+			};
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;        }
+
+        /// <summary>
+        /// 添加主题图片地址
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public bool AddThemeImage(int themeId, string url)
+        {
+            string cmdText = @"
+            IF NOT EXISTS (SELECT 1 FROM ThemeImages WHERE ThemeId=@ThemeId AND ImageUrl=@ImageUrl)
+                INSERT INTO ThemeImages (ThemeId,ImageUrl,AddTime) VALUES (@ThemeId,@ImageUrl,getdate())
+            ";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				SqlParameterHelper.BuildInputParameter("@ThemeId",SqlDbType.Int, 4, themeId),
+                SqlParameterHelper.BuildInputParameter("@ImageUrl",SqlDbType.VarChar, 300, url),
+			};
+            return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;
+        }
+
+        /// <summary>
+        /// 删除主题图片地址
+        /// </summary>
+        /// <param name="themeId"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public bool DeleteThemeImage(int themeId, string url)
+        {
+            string cmdText = "DELETE FROM ThemeImages WHERE ThemeId=@ThemeId AND ImageUrl=@ImageUrl";
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				SqlParameterHelper.BuildInputParameter("@ThemeId",SqlDbType.Int, 4, themeId),
+                SqlParameterHelper.BuildInputParameter("@ImageUrl",SqlDbType.VarChar, 300, url),
 			};
             return SqlHelper.ExecuteNonQuery(_connectionProvider.GetWriteConnectionString(), CommandType.Text, cmdText, parameters) > 0;        }        #endregion
     }

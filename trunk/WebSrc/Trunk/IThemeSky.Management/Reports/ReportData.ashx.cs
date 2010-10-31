@@ -49,7 +49,7 @@ namespace IThemeSky.Management.Reports
 
             System.IO.StreamWriter writter = new System.IO.StreamWriter(System.Web.HttpContext.Current.Response.OutputStream, System.Text.Encoding.UTF8);
 
-            writter.Write("<?xml version=\"1.0\" encoding=\"utf-8\" ?><chart palette='1' caption='iSprit使用趋势图' showLabels='1' shownames='1' showvalues='1' decimals='0'  xAxisName='访问日期' yAxisName='用户数' useRoundEdges='1' legendBorderAlpha='0'>\r\n");
+            writter.Write("<?xml version=\"1.0\" encoding=\"utf-8\" ?><chart formatNumberScale='0' palette='1' caption='iSprit使用趋势图' showLabels='1' shownames='1' showvalues='1' decimals='0'  xAxisName='访问日期' yAxisName='用户数' useRoundEdges='1' legendBorderAlpha='0'>\r\n");
             writter.Write(sbCategories.ToString());
             writter.Write(sbAllUsers.ToString());
             writter.Write(sbOldUsers.ToString());
