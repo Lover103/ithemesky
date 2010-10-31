@@ -223,21 +223,20 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 
 /*theme detail*/
 .themeDetail{ margin-top:10px; width:770px; background:url(../images/sprites_box_wide.png) no-repeat -1540px 0;}
-.detailSide{ float:left; width:232px; margin:13px; _display:inline;}
+.detailSide{ float:left; width:232px; margin:13px; -display:inline;}
 .detailSide .themeCut{ padding:15px 15px 0 15px; width:202px; height:302px; background:url(../images/bg_detail_thumb.png) no-repeat 0 0; position:relative; z-index:1; overflow:hidden;}
 .detailSide .themeCut a{ padding:1px; display:block; width:200px; height:300px; font:0/0 Arial;}
 .detailSide .themeCut a:hover{ padding:0; border:1px solid #2D494B;}
 .detailSide .themeCut .forIphone4{ position:absolute; z-index:1; left:15px; top:15px; display:block; width:40px; height:40px; text-indent:-999em; background:url(../images/sprites_common.png) no-repeat -460px -100px;}
 .detailSide .hasMultiple{ padding:0 15px 10px 15px; height:15px; width:202px; background:url(../images/bg_detail_thumb.png) no-repeat -240px -317px;}
 .detailSide .noMultiple{ width:232px; height:15px; overflow:hidden; background:url(../images/bg_detail_thumb.png) no-repeat 0 -317px;}
-.themeCutList {width:202px; height:302px; overflow:auto; position:absolute; top:15px; left:15px;}
-.themeCutList ul { width:9999em; overflow:hidden; position:absolute; top:0;}
+.themeCutList {width:202px; height:302px; overflow:hidden;}
+.themeCutList ul { overflow:hidden;}
 .themeCutList li { float:left; width:202px; height:302px;}
-.hasMultiple ul { margin:0 auto; width:98px; height:10px; padding-top:4px; font-family:Verdana, Geneva, sans-serif}
-.hasMultiple ul li { float:left; height:6px; width:6px; margin:0 4px; -display:inline; overflow:hidden;}
-.hasMultiple ul li span{ background:url(../images/sprites_detail.png) no-repeat 0 -100px; height:6px; width:6px; overflow:hidden; display:block; cursor:pointer; }
-.hasMultiple ul li span.selected,.hasMultiple ul li span:hover{ background:url(../images/sprites_detail.png) no-repeat -20px -100px; height:6px; width:6px; overflow:hidden;}
-
+.hasMultiple ul { width:202px; height:10px; text-align:center; font:0/0 Arial; padding-top:4px;}
+.hasMultiple li { width:6px; height:6px; margin:0 4px; display:inline-block; -display:inline; overflow:hidden; font:0/0 Arial; cursor:pointer;}
+.hasMultiple li.inact{ background:url(../images/sprites_detail.png) no-repeat 0 -100px;}
+.hasMultiple li.inact:hover,.hasMultiple li.act,.hasMultiple li.act:hover{ background:url(../images/sprites_detail.png) no-repeat -20px -100px;}
 .detailSide .btn{ margin-left:15px;}
 .detailSide .btn li{ float:left; margin:8px 0 0 10px; _display:inline; width:86px; height:22px;}
 .detailSide .btn a{ display:block; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
