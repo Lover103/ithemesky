@@ -135,7 +135,7 @@
 					<dd><%=ViewData.Model.CurrentTheme.FileSize.ToFileSize() %></dd>
 				</dl>
 				<dl class="details clearfix"> 
-					<dt>Supports:</dt>
+					<dt>Features:</dt>
 					<dd class="detailInclude">
 						<ul class="clearfix">
 						    <% for (int i = 0; i < ViewData.Model.ThemeTypeTags.Count; i++) { %>
@@ -168,8 +168,9 @@
 					    <li class="btnBuy"><a href="/Store/SubmitOrder/<%=ViewData.Model.CurrentTheme.ThemeId %>" title="Buy Download via Paypal">Buy Download</a></li>
 						<li><img src="/Content/images/icon_payment.png" alt="Credit Cards" style="margin-top:10px;" /></li>
 					    <li class="btnBuyTip">If you have bought this theme before, <a onclick="$('#divDownloadCode').show()" style="cursor:pointer">Click here</a> to enter the Download Code to download it, you would not be charged again.
-						    <div id="divDownloadCode" style="display:none" class="form"><input id="txtDownloadCode" type="text" class="inputNormal" /> 
-						        <button type="button" onclick="location.href='/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>,' + $('#txtDownloadCode').val()">Apply Now</button>
+						    <div id="divDownloadCode" style="display:none" class="form">
+								<input id="txtDownloadCode" type="text" class="inputNormal" />&nbsp;
+								<button type="button" onclick="location.href='/Service/Download/<%=ViewData.Model.CurrentTheme.ThemeId %>,<%=ViewData.Model.CurrentTheme.Title %>,' + $('#txtDownloadCode').val()">Apply Now</button>
 						    </div>
 					    </li>
 					<%} else { %>
@@ -185,7 +186,7 @@
 				</ul>
 				<div class="installIip">
 					<% if (ViewData.Model.CurrentTheme.Price > 0) { %>
-					We have checked that every paid theme can be installed on iPhone successfully before selling. If you don't know how to install a theme, please read the <a href="/help/tutorials">tutorial</a>.
+					We have checked that every paid theme can be installed on iPhone successfully before selling. If you don't know how to install a theme, please read the <a href="/help/tutorials#faqContent1">tutorial</a>.
 					<%} else { %>
 						<% if (ViewData.Model.CurrentTheme.SupportIPhone4){ %>
 							<a href="/ispirit/"><span class="orange">Install theme to iPhone 4 with <span style=" text-decoration:underline;">iSpirit</span></span></a>. Some iPhone 4 themes can also be used in former iPhones.

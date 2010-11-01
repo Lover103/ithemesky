@@ -93,7 +93,7 @@
 		</dl>
 		<dl class="sr">
 			<dt>Install Theme</dt>
-			<dd>We have checked that every paid theme can be installed on iPhone successfully before selling. If you don't know how to install a theme, please read the <a href="/help/tutorials">tutorial</a>. If you find something wrong with the theme, please contact us.</dd>
+			<dd>We have checked that every paid theme can be installed on iPhone successfully before selling. If you don't know how to install a theme, please read the <a href="/help/tutorials#faqContent1">tutorial</a>. If you find something wrong with the theme, please contact us.</dd>
 		</dl>
 	</div>
 </div>

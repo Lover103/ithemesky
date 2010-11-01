@@ -257,7 +257,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .detailInfo .detailBtn li a{ display:block; height:38px; text-indent:-999em; overflow:hidden;}
 .detailInfo .btnBuy a{ width:185px; background:url(../images/sprites_detail.png) no-repeat 0 0;}
 .detailInfo .btnBuy a:hover{ background:url(../images/sprites_detail.png) no-repeat 0 -50px;}
-.detailInfo .detailBtn .btnBuyTip{ clear:both; padding-top:10px;}
+.detailInfo .detailBtn .btnBuyTip{ clear:both; padding-top:10px; width:400px;}
 .detailInfo .detailBtn .btnBuyTip a{ display:inline; text-decoration:underline;}
 .detailInfo .btnBuyTip .form{ padding-top:5px; clear:both;}
 .detailInfo .btnDownload a{ width:145px; background:url(../images/sprites_detail.png) no-repeat -210px 0;}
@@ -288,7 +288,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .detailRate a.rateS4:hover{ width:96px;}
 .detailRate a.rateS5{ left:96px;}
 .detailRate a.rateS5:hover{ width:118px;}
-.detailInfo .installIip{ clear:both; padding-left:24px; background:url(../images/sprites_detail.png) no-repeat -780px -60px;}
+.detailInfo .installIip{ clear:both; width:475px; padding-left:24px; background:url(../images/sprites_detail.png) no-repeat -778px -58px;}
 .themeShare{ margin:10px 0; width:490px; height:20px; padding:5px; border:1px solid #102529;}
 .themeShare dt{ float:left; color:#CCD2DC; font-weight:bold; text-align:right; width:120px;}
 .themeShare dd{ float:left; margin-left:5px; _display:inline; width:20px; height:20px;}
