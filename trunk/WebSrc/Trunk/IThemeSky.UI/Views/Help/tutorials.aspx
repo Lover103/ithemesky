@@ -47,9 +47,12 @@
 				<dl class="faqContent">
 					<dt class="title"><span class="text">How to install theme on jailbroken iPhone?</span><a href="#top" name="faqContent1" class="goTop" title="TOP">TOP</a></dt>
 					<dd class="faqEntry">
-						<p>
-							1. The easiest way to install theme on iPhone is by using iSpirit. <a href="/ispirit/help"><span style="color:#FFF;">Learn more about it</span></a>.</p>
-							2. If you have wifi, you could install the winterboard theme via cydia directly.<br />
+						<p>1. The easiest way to install theme on iPhone is by using iSpirit. <a href="/ispirit/help"><span style="color:#FFF;">Learn more about it</span></a>.</p>
+						<p>2. If you have wifi, you could install the winterboard theme via cydia directly.</p>
+						<p>3. Manually Install<br />
+							&nbsp;&nbsp;&nbsp;(1). Connect to your iPhone (with iSpirit or other way)<br />
+							&nbsp;&nbsp;&nbsp;(2). Drag &amp; drop the theme folder to "<strong>/Library/Themes</strong>" – alternatively, you can copy the theme to "<strong>/private/var/stash/Themes…</strong>" or "<strong>/var/stash/Themes…</strong>"<br />
+							&nbsp;&nbsp;&nbsp;(3). Launch Winterboard and apply the new theme as usual. done!
 						</p>
 					</dd>
 				</dl>
