@@ -17,6 +17,17 @@ a:hover,a:active{ color:#FF0;}
 </head>
 <body>
 	<h1 class="hide">iSpirit Release Notes</h1>
+		<!-- 1.1.1 -->
+		<div class="release">
+			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.1.1</a></h2>
+			<h3>Released on 11/1/2010</h3>
+			<ul>
+				<li>Added support wallpaper management, you can set your iDevice wallpaper from computer or online. Additionally, you can edit the wallpaper in iSpirit.</li>
+				<li>Added support multi-language, iSpirit will download the language pack automatically if there is a language pack in your native language on server.</li>
+				<li>Fixed the issue that screenshot function not work on some iDevice.</li>
+				<li>Fixed the issue that could not install theme when use WIFI mode.</li>
+			</ul>
+		</div>
 		<!-- 1.1 -->
 		<div class="release">
 			<h2><a href="http://www.ithemesky.com/ispirit/">iSpirit 1.1</a></h2>
