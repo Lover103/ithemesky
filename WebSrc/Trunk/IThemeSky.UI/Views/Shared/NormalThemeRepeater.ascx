@@ -10,7 +10,6 @@
 	    <%} %>
 	    </dd>
 	    <dd><span class="rateResult star<%=theme.CommendIndex %>" title="<%=theme.CommendIndex %>/5 stars"><%=theme.CommendIndex %>/5 stars</span></dd>
-	    <dd class="btnDownload"><a href="<%=theme.ThemeDetailUrl %>" title="Free Download">Free Download</a></dd>
     </dl>
 <%} %>
 <% if (ViewData.Model.Count < 1) { %>

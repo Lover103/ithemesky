@@ -186,7 +186,7 @@
 				</ul>
 				<div class="installIip">
 					<% if (ViewData.Model.CurrentTheme.Price > 0) { %>
-					We have checked that every paid theme can be installed on iPhone successfully before selling. If you don't know how to install a theme, please read the <a href="/help/tutorials#faqContent1">tutorial</a>.
+					All the paid themes are permitted to upload or uploaded by the authors. We have checked it can be installed perfectly on iPhone before selling. If you don't know how to install a theme, please read the <a href="/help/tutorials#faqContent1">tutorial</a>.
 					<%} else { %>
 						<% if (ViewData.Model.CurrentTheme.SupportIPhone4){ %>
 							<a href="/ispirit/"><span class="orange">Install theme to iPhone 4 with <span style=" text-decoration:underline;">iSpirit</span></span></a>. Some iPhone 4 themes can also be used in former iPhones.
