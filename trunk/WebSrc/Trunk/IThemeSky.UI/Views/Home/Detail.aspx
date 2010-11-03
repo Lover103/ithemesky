@@ -89,7 +89,7 @@
 				    <% if (ViewData.Model.ThemeImages.Count > 1) { %>
 					<ul>
 					    <% for (int i = 1; i <= ViewData.Model.ThemeImages.Count; i++) { %>
-						<li class="menuItem"></li>
+						<li class="menuItem"><span>&nbsp;</span></li>
 						<%} %>
 					</ul>
 					<%} %>
