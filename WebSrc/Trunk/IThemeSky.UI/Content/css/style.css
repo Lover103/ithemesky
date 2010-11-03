@@ -234,9 +234,10 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .themeCutList ul { overflow:hidden;}
 .themeCutList li { float:left; width:202px; height:302px;}
 .hasMultiple ul { width:202px; height:10px; text-align:center; font:0/0 Arial; padding-top:4px;}
-.hasMultiple li { width:6px; height:6px; margin:0 4px; display:inline-block; -display:inline; overflow:hidden; font:0/0 Arial; cursor:pointer;}
+.hasMultiple li { width:6px; height:6px; margin:0 4px; display:inline-block; +display:inline; overflow:hidden; font:0/0 Arial; cursor:pointer;}
 .hasMultiple li.inact{ background:url(../images/sprites_detail.png) no-repeat 0 -100px;}
 .hasMultiple li.inact:hover,.hasMultiple li.act,.hasMultiple li.act:hover{ background:url(../images/sprites_detail.png) no-repeat -20px -100px;}
+.hasMultiple li span{ display:inline-block; width:6px; height:6px; font:6/6px Arial; cursor:pointer; overflow:hidden;}
 .detailSide .btn{ margin-left:15px;}
 .detailSide .btn li{ float:left; margin:8px 0 0 10px; _display:inline; width:86px; height:22px;}
 .detailSide .btn a{ display:block; height:22px; text-indent:-999em; overflow:hidden; background:url(../images/sprites_detail.png) no-repeat;}
