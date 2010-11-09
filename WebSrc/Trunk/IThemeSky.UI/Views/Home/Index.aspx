@@ -53,9 +53,9 @@
 			</div>
 			<div class="bannerNav">
 				<ul id="tabs">
-					<li><a href="#" class="s1" onfocus="this.blur();"><span>Total 82568 downloads</span></a></li>
-					<li><a href="#" class="s2" onfocus="this.blur();"><span>iFlat HD complete theme</span></a></li>
-					<li><a href="#" class="s3" onfocus="this.blur();"><span>Buy &amp; Sell iPhone theme</span></a></li>
+					<li><a href="javascript:void(0)" class="s1" onfocus="this.blur();"><span>Total 82568 downloads</span></a></li>
+					<li><a href="javascript:void(0)" class="s2" onfocus="this.blur();"><span>iFlat HD complete theme</span></a></li>
+					<li><a href="javascript:void(0)" class="s3" onfocus="this.blur();"><span>Buy &amp; Sell iPhone theme</span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -120,7 +120,7 @@
 <script type="text/javascript">
 $("#scrollable").scrollable({
 	easing: 'swing',
-	interval: '5000',
+	interval: '10000',
 	size: '1',
 	loop: 'true',
 	navi:'#tabs',
