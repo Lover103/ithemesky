@@ -483,7 +483,7 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .banner{ margin-left:210px; width:770px; height:220px; background:url(../images/sprites_banner.png) no-repeat; clear:right;}
 .bannerNav{ float:left; width:150px; margin-top:10px;}
 .bannerNav li{ height:60px; width:145px; position:relative; z-index:2;}
-.bannerNav a:link,.bannerNav a:visited{ display:block; width:145px; height:60px; color:#6A9699;}
+.bannerNav a:link,.bannerNav a:visited{ display:block; width:145px; height:60px; color:#6A9699; cursor:pointer;}
 .bannerNav a:hover,.bannerNav a:active{ color:#9FBCBF;}
 .bannerNav .active a:link,.bannerNav .active a:visited,.bannerNav .active a:hover,.bannerNav .active a:active{ position:absolute; width:185px; height:57px; z-index:3; right:-14px; top:-4px; background:url(../images/sprites_banner.png) no-repeat -600px -240px; color:#6A9699;}
 .bannerNav a span{ display:block; width:138px; padding-top:30px; font-size:11px; background:url(../images/sprites_banner.png) no-repeat; margin-left:5px;}
@@ -494,7 +494,6 @@ a.linkEct:hover,a.linkEct:active{ background-position:right -716px;}
 .bannerMain{ float:left; width:608px; height:198px; margin:6px; -display:inline; overflow:hidden; position:relative;}
 .bannerMain .items{ width:2000em; height:198px; overflow:hidden; position:absolute; top:0;}
 .bannerMain dl{ float:left; position:relative; z-index:1; width:608px; height:198px; overflow:hidden;}
-.bannerMain dt{ font:0/0 Arial;}
 .bannerMain dt img{ display:block;}
 .banner1 .text{ width:390px; height:36px; position:absolute; z-index:1; left:188px; top:96px; line-height:1.4; color:#0C5A76;}
 .banner1 .text p{ position:absolute; z-index:1; display:block; width:390px; height:36px; left:-1px; top:-1px; color:#D3E8EF;}
