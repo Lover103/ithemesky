@@ -18,18 +18,48 @@
 		    <!--Tags begin-->
 		    <% Html.RenderPartial("HotTags"); %>
 		    <!--Tags end-->
+			<!--help begin-->
+		    <div class="sideCol">
+			    <h3 class="sideColHead colTitle">Tutorials</h3>
+			    <ul class="sideColContent sideHelp">
+				    <li><a href="/help/tutorials#faqContent1"><span class="orange">How to install theme on jailbroken iPhone?</span></a></li>
+				    <li><a href="/help/how-to-use-winterboard">How to Use WinterBoard?</a></li>
+					<li><a href="/help/why-do-winterboard-themes-not-work">Why do winterboard themes not work?</a></li>
+				    <li><a href="/help/how-to-jailbreak-iphone">How to jailbreak iPhone?</a></li>
+			    </ul>
+		    </div>
+		    <!--help end-->
 	    </div>
-	    <div id="mainContent">
-			<div class="banner">
-				<dl>
-					<dt><img src="/Content/images/banner01.jpg" title="" alt="iSpirit - iPhone apps, themes and files manager" /></dt>
-					<dd class="text">One-click install DEB/IPA file. Download and install iPhone theme. Manage files between PC and iPhone. Fully supports iPhone 4.<p>One-click install DEB/IPA file. Download and install iPhone theme. Manage files between PC and iPhone. Fully supports <span style="color:#FF9;">iPhone 4</span>.</p></dd>
-					<dd class="btn">
-						<a href="/ispirit/download" class="s1">Download</a>
-						<a href="/ispirit" class="s2">Learn More</a>
-					</dd>
-				</dl>
+		<div class="banner">
+			<div class="bannerMain" id="scrollable">
+				<div class="items">
+					<dl class="banner1">
+						<dt><img src="/Content/images/banner01.jpg" title="" alt="iSpirit - iPhone apps, themes and files manager" /></dt>
+						<dd class="text">One-click install DEB/IPA file. Download and install iPhone theme. Manage files between PC and iPhone. Fully supports iPhone 4.<p>One-click install DEB/IPA file. Download and install iPhone theme. Manage files between PC and iPhone. Fully supports <span style="color:#FF9;">iPhone 4</span>.</p></dd>
+						<dd class="btn">
+							<a href="/ispirit/download" class="s1">Download</a>
+							<a href="/ispirit" class="s2">Learn More</a>
+						</dd>
+					</dl>
+					<dl class="banner2">
+						<dt><a href="/iphone-themes/iFlat-HD/3391"><img src="/Content/images/banner02.jpg" title="" alt="Theme of the week" /></a></dt>
+						<dd></dd>
+					</dl>
+					<dl class="banner3">
+						<dt><img src="/Content/images/banner03.jpg" title="" alt="Theme Store - Buy and Sell iPhone theme" /></dt>
+						<dd class="text">We would like to provide more and more iPhone themes for free. But we notice that there are some cool &amp; wonderful themes which are paid. So we contacted the authors and got permission to sell their themes on iThemeSky. If you like a paid theme, please buy and download it. If you want to sell your themes on iThemeSky, Click here to contact us now.<p>We would like to provide more and more iPhone themes for free. But we notice that there are some cool &amp; wonderful themes which are paid. So we contacted the authors and got permission to sell their themes on iThemeSky. If you like a paid theme, please buy and download it. If you want to sell your themes on iThemeSky, <a href="/contact">Click here to contact us now</a>.</p></dd>
+					</dl>
+				</div>
 			</div>
+			<div class="bannerNav">
+				<ul id="tabs">
+					<li><a href="#" class="s1" onfocus="this.blur();"><span>Total 82568 downloads</span></a></li>
+					<li><a href="#" class="s2" onfocus="this.blur();"><span>iFlat HD complete theme</span></a></li>
+					<li><a href="#" class="s3" onfocus="this.blur();"><span>Buy &amp; Sell iPhone theme</span></a></li>
+				</ul>
+			</div>
+		</div>
+	    <div id="mainContent">
 		    <!--last update begin-->
 		    <div class="mainCol">
 			    <div class="mainColHead">
@@ -59,17 +89,6 @@
 		    <!--Most Popular end-->
 	    </div>
 	    <div id="subContent">
-		    <!--help begin-->
-		    <div class="subCol">
-			    <h3 class="subColHead colTitle">Tutorials</h3>
-			    <ul class="subColContent subHelp">
-				    <li><a href="/help/tutorials#faqContent1"><span class="orange">How to install theme on jailbroken iPhone?</span></a></li>
-				    <li><a href="/help/how-to-use-winterboard">How to Use WinterBoard?</a></li>
-					<li><a href="/help/why-do-winterboard-themes-not-work">Why do winterboard themes not work?</a></li>
-				    <li><a href="/help/how-to-jailbreak-iphone">How to jailbreak iPhone?</a></li>
-			    </ul>
-		    </div>
-		    <!--help end-->
 			<div class="quickContact">
 				<ul>
 					<li class="s1"><a href="http://www.twitter.com/iThemesky" title="Follow us on Twitter">Follow us on Twitter</a></li>
@@ -97,4 +116,16 @@
 		    <!--I'm Feeling Lucky end-->
 	    </div>
     </div>
+<script type="text/javascript" src="/content/js/scrollable.js"></script>
+<script type="text/javascript">
+$("#scrollable").scrollable({
+	easing: 'swing',
+	interval: '5000',
+	size: '1',
+	loop: 'true',
+	navi:'#tabs',
+	keyboard: true,
+	speed: '800'
+});
+</script>
 </asp:Content>
