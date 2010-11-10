@@ -101,7 +101,12 @@ namespace IThemeSky.UI
             routes.MapRoute(
                 "GetSuggestThemesService", // Route name
                 "Service/GetSuggestThemes/{keyword},{displayNumber}", // URL with parameters
-                new { controller = "Service", action = "GetSuggestThemes", keyword = "new", displayNumber = 3 } // Parameter defaults
+                new { controller = "Service", action = "GetSuggestThemes", keyword = "sexy", displayNumber = 3 } // Parameter defaults
+            );
+            routes.MapRoute(
+                "GetSuggestThemesService2", // Route name
+                "Service/GetSuggestThemes/{keyword}", // URL with parameters
+                new { controller = "Service", action = "GetSuggestThemes", keyword = "sexy", displayNumber = 3 } // Parameter defaults
             );
             routes.MapRoute(
                 "GetThemeCommentsService", // Route name

@@ -69,7 +69,7 @@
                         <td>
                         <asp:TextBox ID="txtTitle" runat="server" value='<%#Eval("Title") %>'></asp:TextBox>
                         (id:<%#Eval("ThemeId") %>)(<a href="ThemeInfoManage.aspx?themeId=<%#Eval("ThemeId") %>" target="_blank">编辑</a>)(<a href="/<%#Eval("DownloadUrl") %>" target="_blank">下载</a>)(<a href="http://www.ithemesky.com/iphone-themes/<%#Eval("Title").ToString().Trim().Replace(" ", "-") %>/<%#Eval("ThemeId") %>" target="_blank">浏览</a>)<br />
-                        所属标签：<asp:TextBox ID="txtTags" runat="server" value='<%#GetThemeTags(Eval("ThemeId")) %>'></asp:TextBox> (iPhone4主题：<asp:CheckBox ID="chkSupportIPhone4" runat="server" Checked="false" />) (更新时间：<asp:CheckBox ID="chkUpdateTime" runat="server" Checked="true" />)
+                        所属标签：<asp:TextBox ID="txtTags" runat="server" value='<%#GetThemeTags(Eval("ThemeId")) %>'></asp:TextBox> (iPhone4主题：<asp:CheckBox ID="chkSupportIPhone4" runat="server" Checked='<%#System.Convert.ToBoolean(Eval("SupportIPhone4")) %>' />) (更新时间：<asp:CheckBox ID="chkUpdateTime" runat="server" Checked="true" />)
                         <asp:Button ID="btnSave" OnClick="propertyList_OnClick" Text="保存" runat="server" />&nbsp;<asp:Button ID="btnSaveAndCheck" OnClick="propertyList_OnClick" Text="保存并审核通过" runat="server" />
                         <br />
                         <asp:CheckBox runat="server" ID="chkTagApps" Text="Apps" />

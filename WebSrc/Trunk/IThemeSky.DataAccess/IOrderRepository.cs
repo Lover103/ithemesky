@@ -8,6 +8,8 @@ namespace IThemeSky.DataAccess
 {
     public interface IOrderRepository
     {
+        List<ThemeDownloadHistory> GetPaidThemeDownloadHistory(int themeId);
+
         bool AddOrder(UserOrder order);
 
         bool UpdateOrderFromIPN(IThemeSky.Model.UserOrder order);

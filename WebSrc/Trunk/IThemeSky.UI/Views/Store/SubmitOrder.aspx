@@ -66,7 +66,7 @@
 	<div style="display:none">
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="frmOrder">
             <input type="hidden" name="cmd" value="_xclick">
-            <input type="hidden" name="business" value="X2RHYJF7J2U64">
+            <input type="hidden" name="business" value="DK6YRC494PA4L">
             <input type="hidden" name="item_name" value="<%=ViewData.Model.Title %>">
             <input type="hidden" name="amount" value="<%=ViewData.Model.Price.ToString("0.00") %>">
             <input type="hidden" name="currency_code" value="USD">

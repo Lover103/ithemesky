@@ -27,7 +27,7 @@ namespace IThemeSky.UI.Models
             NextThemeId = _themeRepository.GetNextThemeId(CurrentTheme.CategoryId, themeId, out themeName);
             NextThemeName = themeName;
 
-            LuckyThemes = _themeRepository.GetRandomThemes(themeId, CurrentTheme.CategoryId, 5).Where(theme => theme.ThemeId != themeId).Take(4).ToList();
+            LuckyThemes = _themeRepository.GetRandomThemes(themeId, CurrentTheme.CategoryId, 6).Where(theme => theme.ThemeId != themeId).Take(5).ToList();
             TopDownloadThemes = _themeRepository.GetThemesByCategoryId(CurrentTheme.CategoryId, ThemeSortOption.Popular, 10);
             CommendThemes = _themeRepository.GetThemesByCategoryId(CurrentTheme.CategoryId, ThemeSortOption.Recommended, 10);
 

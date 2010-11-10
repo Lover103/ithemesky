@@ -15,8 +15,17 @@ namespace IThemeSky.UI.Controllers
 {
     public class StoreController : ThemeControllerBase
     {
-        //
-        // GET: /Help/
+        public ActionResult QueryDownloadHistory(int themeId)
+        {
+            IOrderRepository repository2 = ThemeRepositoryFactory.Default.GetOrderRepository();
+            List<ThemeDownloadHistory> list = repository2.GetPaidThemeDownloadHistory(themeId);
+            ViewData["History"] = list;
+
+            IThemeViewRepository repository = ThemeRepositoryFactory.Default.GetThemeViewRepository();
+            FullThemeView theme = repository.GetTheme(themeId);
+            return View(theme);
+        }
+
         public ActionResult SubmitOrder(int themeId)
         {
             IThemeViewRepository repository = ThemeRepositoryFactory.Default.GetThemeViewRepository();
@@ -27,7 +36,7 @@ namespace IThemeSky.UI.Controllers
         public ActionResult Result()
         {
             //定义您的身份标记
-            string authToken = "TrF5HMvwegFS_zBrIeRTr-X3la4dskqkm1CeN45tIea8jGoSNz4v8pRdmQS";
+            string authToken = "3C3GQgRHwYNQOpxiaJPlkyi5YPtBtpL7RlAmCN2rgFib04hH8xV9LDKKyHm";
             string txToken = Request.QueryString["tx"];
             int themeId = Request.QueryString["themeid"].ToInt32();
             double price = Request.QueryString["price"].ToDouble();
@@ -104,9 +113,28 @@ namespace IThemeSky.UI.Controllers
                 model.UserMail = mail;
                 model.Theme = ThemeRepositoryFactory.Default.GetThemeViewRepository().GetTheme(themeId);
                 ViewData["content"] = content;
+                string mailContent = string.Format(@"
+                    <table width=""640"" cellpadding=""0"" cellspacing=""0"" border=""0"">
+	                    <tr>
+		                    <td style="" padding:20px; font-family:Verdana, Geneva, sans-serif; font-size:12PX; line-height:1.5; color:#333;"">
+			                    <h1 style=""font-size:14px;"">Dear {0},</h1>
+			                    <p>
+			                    Thanks for your purchase.
+			                    </p>
+			                    <p>Your purchased theme: <a href=""http://www.ithemesky.com{2}"">http://www.ithemesky.com{2}</a><br />
+				                    Your Download Code for this theme: <strong style=""color:#F30;"">{1}</strong>
+			                    </p><p>Download this theme with the Download Code, you would not be charged again. Please keep this message. If you miss it, send a Download Code request to us via your current Email address. We will reply you within 2 business days.</p>
+			                    <p>This theme is permitted to install for personal and non-profit, non-commercial use. It is protected by copyright. It is not allowed to post this theme's copy or Download Code on other third websites. </p>
+			                    <p>Sincerely,<br />
+			                    <strong>iThemeSky.Com</strong>
+			                    </p>
+		                    </td>
+	                    </tr>
+                    </table>
+                ", userName, model.txn_id, model.Theme.ThemeDetailUrl);
                 SendMail(mail
-                    , "Purchase Success.ithemesky download code of theme " + model.Theme.Title
-                    , string.Format("The downlod code [{0}] of the theme {1}.http://www.ithemesky.com/{2}", model.txn_id, model.Theme.Title, model.Theme.ThemeDetailUrl));
+                    , "Thanks for purchasing " + model.Theme.Title + " iPhone theme on iThemesky"
+                    , mailContent);
                 return View("Success", model);
             }
             else
@@ -124,6 +152,7 @@ namespace IThemeSky.UI.Controllers
 
                 using (MailMessage message = new MailMessage(mailFrom, mailTo, subject, body))
                 {
+                    message.IsBodyHtml = true;
                     //SmtpClient是发送邮件的主体，这个构造函数是告知SmtpClient发送邮件时使用哪个SMTP服务器
                     SmtpClient mailClient = new SmtpClient(mailServerName);
                     //将认证实例赋予mailClient,也就是访问SMTP服务器的用户名和密码
