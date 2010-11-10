@@ -11,6 +11,16 @@
     function PostOrder() {
         var mail = $('#txtMail').val();
         var userName = $('#txtUserName').val();
+        if (userName == '') {
+            alert('Your Full Name is required.');
+            $('#txtUserName').focus();
+            return;
+        }
+        if (mail == '') {
+            alert('Your Email Adress is required.');
+            $('#txtMail').focus();
+            return;
+        }
         var themeId = '<%=ViewData.Model.ThemeId %>';
         var url = '/Service/GetPayReturnUrl/' + themeId + ',' + mail + ',' + userName;
         $.get(url, function(data) {

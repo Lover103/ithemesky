@@ -424,8 +424,8 @@ namespace IThemeSky.UI.Controllers
             string result = string.Format("themeId={0}&price={1}&mail={2}&userName={3}&checksum={4}"
                 , themeId
                 , price
-                , mail
-                , userName
+                , HttpUtility.UrlEncode(mail, Encoding.UTF8)
+                , HttpUtility.UrlEncode(userName, Encoding.UTF8)
                 , checksum
                 );
             return Content(result);
