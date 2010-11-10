@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace IThemeSky.Library.Util
 {
@@ -65,8 +66,10 @@ namespace IThemeSky.Library.Util
             //新建一个画板
             Graphics g = System.Drawing.Graphics.FromImage(bitmap);
 
+            g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+
             //设置高质量插值法
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
             //设置高质量,低速度呈现平滑程度
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
@@ -81,8 +84,32 @@ namespace IThemeSky.Library.Util
 
             try
             {
-                //以jpg格式保存缩略图
-                bitmap.Save(thumbnailPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                // 以下代码为保存图片时，设置压缩质量
+                EncoderParameters encoderParams = new EncoderParameters();
+                long[] quality = new long[1];
+                quality[0] = 100;
+                EncoderParameter encoderParam = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+                encoderParams.Param[0] = encoderParam;
+                //获得包含有关内置图像编码解码器的信息的ImageCodecInfo 对象。
+                ImageCodecInfo[] arrayICI = ImageCodecInfo.GetImageEncoders();
+                ImageCodecInfo jpegICI = null;
+                for (int i = 0; i < arrayICI.Length; i++)
+                {
+                    if (arrayICI[i].FormatDescription.Equals("JPEG"))
+                    {
+                        jpegICI = arrayICI[i];//设置JPEG编码
+                        break;
+                    }
+                }
+                if (jpegICI != null)
+                {
+                    bitmap.Save(thumbnailPath, jpegICI, encoderParams);
+                }
+                else
+                {
+                    //以jpg格式保存缩略图
+                    bitmap.Save(thumbnailPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                }
             }
             catch (System.Exception e)
             {

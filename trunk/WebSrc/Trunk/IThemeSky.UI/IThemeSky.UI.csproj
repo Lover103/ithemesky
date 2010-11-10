@@ -262,6 +262,7 @@
     <Content Include="Views\Home\Contact.aspx" />
     <Content Include="Views\Home\iPhone-4-themes.aspx" />
     <Content Include="Views\iSpirit\help.aspx" />
+    <Content Include="Views\Store\QueryDownloadHistory.aspx" />
     <Content Include="Views\Store\Fail.aspx" />
     <Content Include="Views\Store\SubmitOrder.aspx" />
     <Content Include="Views\Shared\gSenseSidebar.ascx" />

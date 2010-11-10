@@ -5,6 +5,7 @@ using System.Text;
 using IThemeSky.Library.Data;
 using System.Data.SqlClient;
 using System.Data;
+using IThemeSky.Model;
 
 namespace IThemeSky.DataAccess
 {
@@ -18,6 +19,28 @@ namespace IThemeSky.DataAccess
         }
 
         #region IOrderRepository Members
+
+        public List<ThemeDownloadHistory> GetPaidThemeDownloadHistory(int themeId)
+        {
+            List<ThemeDownloadHistory> list = new List<ThemeDownloadHistory>();
+            string cmdText = "SELECT * FROM ThemeDownloadHistory WHERE ThemeId=" + themeId + " AND PaidTheme=1";
+            using (IDataReader reader = SqlHelper.ExecuteReader(_connectionProvider.GetReadConnectionString(), CommandType.Text, cmdText))
+            {
+                while (reader.Read())
+                {
+                    list.Add(new ThemeDownloadHistory() 
+                    { 
+                        AddTime = Convert.ToDateTime(reader["AddTime"]),
+                        DownloadCode = reader["DownloadCode"].ToString(),
+                        HistoryId = Convert.ToInt32(reader["HistoryId"]),
+                        PaidTheme = Convert.ToInt32(reader["PaidTheme"]) == 1,
+                        ThemeId = Convert.ToInt32(reader["ThemeId"]),
+                        UserIp = reader["UserIp"].ToString(),
+                    });
+                }
+            }
+            return list;
+        }
 
         public bool AddOrder(IThemeSky.Model.UserOrder order)
         {

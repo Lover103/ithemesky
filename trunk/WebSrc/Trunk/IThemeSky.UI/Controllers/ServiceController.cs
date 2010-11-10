@@ -39,6 +39,7 @@ namespace IThemeSky.UI.Controllers
                     UserOrder order = orderRepository.GetOrder(themeId, downloadCode);
                     if (order != null)
                     {
+                        theme.Downloads++;
                         _themeManageRepository.IncreaseDownloads(themeId, 1);
                         _themeManageRepository.InsertDownloadHistory(themeId, Request.UserHostAddress, downloadCode);
                         HttpWebRequest request = HttpWebRequest.Create("http://resource.ithemesky.com/" + theme.DownloadUrl) as HttpWebRequest;
