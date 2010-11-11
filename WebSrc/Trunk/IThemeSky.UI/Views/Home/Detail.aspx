@@ -161,6 +161,24 @@
 					<dt>Price:</dt>
 					<dd style="font-weight:bold; color:#FF0;"><%=ViewData.Model.CurrentTheme.Price > 0 ? "$" + ViewData.Model.CurrentTheme.Price.ToString("0.00") : "Free!"%></dd>
 				</dl>
+				<% if (ViewData.Model.CurrentTheme.Price > 0) { %>
+				<%} else { %>
+				<dl class="details clearfix"> 
+					<dt>Sponsors:</dt>
+					<dd>
+						<script type="text/javascript">
+						<!--
+						google_ad_client = "pub-6585346932275782";
+						/* Detail */
+						google_ad_slot = "5252106121";
+						google_ad_width = 120;
+						google_ad_height = 90;
+						//-->
+						</script>
+						<script type="text/javascript"src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+					</dd>
+				</dl>
+				<%} %>
 				<ul class="detailBtn clearfix">
 				    <% /*paid theme*/ %>
 				    <% if (ViewData.Model.CurrentTheme.Price > 0) { %>
